@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@color/white">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.ui.fragments.onBoarding.LoginFragment">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineLogin1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.10" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineLogin2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.90" />
+
+        <TextView
+            android:id="@+id/textWelcomeLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/welcome_message_login"
+            android:textColor="@color/black"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guidelineLogin2"
+            app:layout_constraintStart_toStartOf="@+id/guidelineLogin1" />
+
+        <TextView
+            android:id="@+id/textSignIn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sign_in"
+            android:textColor="@color/black"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/textWelcomeLogin"
+            app:layout_constraintEnd_toStartOf="@+id/guidelineLogin2"
+            app:layout_constraintStart_toStartOf="@+id/guidelineLogin1" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputEmailLogin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            app:boxCornerRadiusBottomEnd="14dp"
+            app:boxCornerRadiusBottomStart="14dp"
+            app:boxCornerRadiusTopEnd="14dp"
+            app:boxCornerRadiusTopStart="14dp"
+            app:boxStrokeColor="#F44336"
+            app:boxStrokeWidth="1dp"
+            app:boxStrokeWidthFocused="2dp"
+            app:hintTextColor="#F44336"
+            app:layout_constraintEnd_toEndOf="@id/guidelineLogin2"
+            app:layout_constraintStart_toStartOf="@id/guidelineLogin1"
+            app:layout_constraintTop_toBottomOf="@id/textSignIn">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/emailLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
+                android:textSize="18sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputPasswordLogin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            app:boxCornerRadiusBottomEnd="14dp"
+            app:boxCornerRadiusBottomStart="14dp"
+            app:boxCornerRadiusTopEnd="14dp"
+            app:boxCornerRadiusTopStart="14dp"
+            app:boxStrokeColor="#F44336"
+            app:boxStrokeWidth="1dp"
+            app:boxStrokeWidthFocused="2dp"
+            app:endIconMode="password_toggle"
+            app:hintTextColor="#F44336"
+            app:layout_constraintEnd_toEndOf="@+id/guidelineLogin2"
+            app:layout_constraintStart_toStartOf="@+id/guidelineLogin1"
+            app:layout_constraintTop_toBottomOf="@id/textInputEmailLogin">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/passwordLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:textSize="18sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/textForgotPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/forgot_password"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/guidelineLogin2"
+            app:layout_constraintTop_toBottomOf="@+id/textInputPasswordLogin" />
+
+        <Button
+            android:id="@+id/buttonLogin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="24dp"
+            android:backgroundTint="#F44336"
+            android:minHeight="60dp"
+            android:text="@string/login"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/guidelineLogin2"
+            app:layout_constraintStart_toStartOf="@id/guidelineLogin1"
+            app:layout_constraintTop_toBottomOf="@+id/textForgotPassword" />
+
+        <ProgressBar
+            android:id="@+id/progressBarLogin"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/buttonLogin"
+            app:layout_constraintEnd_toEndOf="@+id/buttonLogin"
+            app:layout_constraintStart_toStartOf="@+id/buttonLogin"
+            app:layout_constraintTop_toTopOf="@+id/buttonLogin" />
+
+        <TextView
+            android:id="@+id/textViewOr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/or"
+            app:layout_constraintEnd_toEndOf="@+id/buttonLogin"
+            app:layout_constraintStart_toStartOf="@+id/buttonLogin"
+            app:layout_constraintTop_toBottomOf="@+id/buttonLogin" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Continue with Google"
+            app:layout_constraintEnd_toEndOf="@+id/textViewOr"
+            app:layout_constraintStart_toStartOf="@+id/textViewOr"
+            app:layout_constraintTop_toBottomOf="@+id/textViewOr" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Continue with Facebook"
+            app:layout_constraintEnd_toEndOf="@id/textView5"
+            app:layout_constraintStart_toStartOf="@+id/textView5"
+            app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+        <TextView
+            android:id="@+id/textDontHaveAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/don_t_have_an_account_register"
+            app:layout_constraintEnd_toEndOf="@+id/buttonLogin"
+            app:layout_constraintStart_toStartOf="@+id/buttonLogin"
+            app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

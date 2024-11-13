@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="let_s_go">Başlayaq</string>
+    <string name="welcome_to">Xoş gəlmisiniz</string>
+    <string name="finish">Bitir</string>
+    <string name="next">Növbəti</string>
+    <string name="skip">Təqdimatı ötür</string>
+    <string name="email">E-poçt ünvanınız</string>
+    <string name="password">Şifrəniz</string>
+    <string name="or">və ya</string>
+    <string name="login">Daxil olun</string>
+    <string name="sign_in">Daxil olun</string>
+    <string name="don_t_have_an_account_register">Hesabınız yoxdur? <font color="#882DFF">Qeydiyyatdan keçin</font></string>
+    <string name="sign_up">Qeydiyyatdan keçin</string>
+    <string name="username">İstifadəçi adınız</string>
+    <string name="forgot_password">Şifrəni unutdunuz?</string>
+    <string name="first_name">Adınız</string>
+    <string name="last_name">Soyadınız</string>
+</resources>

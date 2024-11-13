@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name" translatable="false">Eventify</string>
+    <string name="let_s_go">Let\'s Go</string>
+    <string name="welcome_to">Welcome to</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="finish">Finish</string>
+    <string name="next">Next</string>
+    <string name="skip">Skip</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="or">or</string>
+    <string name="login">Login</string>
+    <string name="sign_in">Sign in</string>
+    <string name="don_t_have_an_account_register">Don\'t have an account? <font color='#882DFF'>Register</font></string>
+    <string name="sign_up">Sign Up</string>
+    <string name="username">Username</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="accept_terms">I accept Terms and Conditions</string>
+    <string name="register">Register</string>
+    <string name="welcome_message_login">Welcome to eventify.az\nSlogan</string>
+</resources>
