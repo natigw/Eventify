@@ -1,4 +1,4 @@
-package com.example.eventify.presentation.ui.fragments
+package com.example.eventify.presentation.ui.fragments.map
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -32,8 +32,7 @@ import org.json.JSONObject
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate),
-    OnMapReadyCallback {
+class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate), OnMapReadyCallback {
 
     @Inject
     lateinit var api: EventifyAPI
@@ -59,47 +58,45 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     override fun onMapReady(map: GoogleMap) {
         googleMap = map
 
-//        lifecycleScope.launch {
-//            // Adding markers
-//            val venues = api.getAllVenues()
-//            if (venues.size >= 2) {
-//                val firstVenue = venues[0]
-//                val secondVenue = venues[1]
-//
-//                val firstMarker = googleMap.addMarker(
-//                    MarkerOptions()
-//                        .position(LatLng(firstVenue.lat.toDouble(), firstVenue.lng.toDouble()))
-//                        .title("First Venue")
-//                        .snippet("Description for the first venue")
-//                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
-//                )
-//
-//                val secondMarker = googleMap.addMarker(
-//                    MarkerOptions()
-//                        .position(LatLng(secondVenue.lat.toDouble(), secondVenue.lng.toDouble()))
-//                        .title("Second Venue")
-//                        .snippet("Description for the second venue")
-//                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
-//                )
-//
-//                secondMarker?.tag = "second_marker"
-//
-//                // Marker click listener
-//                googleMap.setOnMarkerClickListener { marker ->
-//                    marker.showInfoWindow()
-//                    true
-//                }
-//
-//                // Fetch and display route
-//                fetchRoute(
-//                    LatLng(firstVenue.lat.toDouble(), firstVenue.lng.toDouble()),
-//                    LatLng(secondVenue.lat.toDouble(), secondVenue.lng.toDouble())
-//                )
-//            }
+        lifecycleScope.launch {
+            // Adding markers
+            val venues = api.getAllVenues()
+            if (venues.size >= 2) {
+                val firstVenue = venues[0]
+                val secondVenue = venues[1]
+
+                val firstMarker = googleMap.addMarker(
+                    MarkerOptions()
+                        .position(LatLng(firstVenue.lat.toDouble(), firstVenue.lng.toDouble()))
+                        .title("First Venue")
+                        .snippet("Description for the first venue")
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
+                )
+
+                val secondMarker = googleMap.addMarker(
+                    MarkerOptions()
+                        .position(LatLng(secondVenue.lat.toDouble(), secondVenue.lng.toDouble()))
+                        .title("Second Venue")
+                        .snippet("Description for the second venue")
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
+                )
+
+                // Marker click listener
+                googleMap.setOnMarkerClickListener { marker ->
+                    marker.showInfoWindow()
+                    true
+                }
+
+                // Fetch and display route
+                fetchRoute(
+                    LatLng(firstVenue.lat.toDouble(), firstVenue.lng.toDouble()),
+                    LatLng(secondVenue.lat.toDouble(), secondVenue.lng.toDouble())
+                )
+            }
 
             // Show user's current location
             getMyLocation()
-//        }
+        }
     }
 
     private suspend fun fetchRoute(origin: LatLng, destination: LatLng) {

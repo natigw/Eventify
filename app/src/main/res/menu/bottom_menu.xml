@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/mapsFragment"
+        android:id="@+id/testMapFragment"
         android:icon="@drawable/location_rounded"
         android:title="@string/map" />
     <item
