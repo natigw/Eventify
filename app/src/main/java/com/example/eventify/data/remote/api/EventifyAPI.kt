@@ -41,7 +41,7 @@ interface EventifyAPI {
 //
 //
     @GET("/venues")
-    suspend fun getAllVenues() : ResponseAllVenues
+    suspend fun getAllVenues() : List<ResponseAllVenues>
 
 //    @GET("/venues/{venue_id}")
 //    suspend fun getVenueDetails(

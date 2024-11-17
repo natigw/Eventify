@@ -21,4 +21,8 @@
     <string name="accept_terms">I accept Terms and Conditions</string>
     <string name="register">Register</string>
     <string name="welcome_message_login">Welcome to eventify.az\nSlogan</string>
+    <string name="home">Home</string>
+    <string name="venues">Venues</string>
+    <string name="profile">Profile</string>
+    <string name="map">Map</string>
 </resources>

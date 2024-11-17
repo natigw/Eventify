@@ -3,6 +3,8 @@ plugins {
     alias(libs.plugins.kotlin.android)
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
+    id("kotlin-parcelize")
+    alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin)
 }
 
 android {
@@ -47,14 +49,21 @@ dependencies {
 
     //hilt
     implementation(libs.hilt.android)
+    implementation(libs.play.services.maps)
+    implementation(libs.play.services.location)
     kapt(libs.hilt.android.compiler)
 
     //fancy toast
     implementation(libs.github.fancytoast)
 
+    //glide
+    implementation(libs.github.glide)
+
     //retrofit
     implementation(libs.retrofit2.retrofit)
     implementation(libs.converter.gson)
+
+    implementation("com.google.maps.android:android-maps-utils:2.4.0")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

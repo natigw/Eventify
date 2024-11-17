@@ -3,11 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/mapsFragment">
 
     <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.example.eventify.presentation.ui.fragments.home.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/venuesFragment"
+        android:name="com.example.eventify.presentation.ui.fragments.venues.VenuesFragment"
+        android:label="fragment_venues"
+        tools:layout="@layout/fragment_venues" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.eventify.presentation.ui.fragments.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="com.example.eventify.presentation.ui.fragments.MapFragment"
+        android:label="fragment_maps"
+        tools:layout="@layout/fragment_map" />
 </navigation>
