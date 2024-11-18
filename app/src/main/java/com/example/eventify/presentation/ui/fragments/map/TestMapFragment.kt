@@ -3,7 +3,7 @@ package com.example.eventify.presentation.ui.fragments.map
 import android.Manifest
 import android.content.pm.PackageManager
 import android.graphics.Color
-import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
@@ -12,11 +12,12 @@ import com.example.eventify.R
 import com.example.eventify.common.base.BaseFragment
 import com.example.eventify.common.utils.NancyToast
 import com.example.eventify.data.remote.api.EventifyAPI
-import com.example.eventify.databinding.FragmentMapBinding
+import com.example.eventify.databinding.FragmentTestMapBinding
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
@@ -32,75 +33,70 @@ import org.json.JSONObject
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate), OnMapReadyCallback {
+class TestMapFragment : BaseFragment<FragmentTestMapBinding>(FragmentTestMapBinding::inflate) {
 
     @Inject
     lateinit var api: EventifyAPI
 
-    private lateinit var googleMap: GoogleMap
-
     private val locationPermissionRequestCode = 1
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    private lateinit var googleMap: GoogleMap
 
-        binding.mapView.onCreate(savedInstanceState)
-        binding.mapView.getMapAsync(this)
+    private val callback = OnMapReadyCallback { googleMap ->
 
-        binding.mapView.post {
-            val bottomNavHeight = requireActivity().findViewById<View>(R.id.bottomNavigationView).height / 2
-            val params = binding.mapView.layoutParams as ConstraintLayout.LayoutParams
-            params.bottomMargin = bottomNavHeight
-            binding.mapView.layoutParams = params
-        }
-    }
-
-    override fun onMapReady(map: GoogleMap) {
-        googleMap = map
+        this.googleMap = googleMap
 
         lifecycleScope.launch {
             // Adding markers
             val venues = api.getAllVenues()
-            if (venues.size >= 2) {
-                val firstVenue = venues[0]
-                val secondVenue = venues[1]
-
-                val firstMarker = googleMap.addMarker(
-                    MarkerOptions()
-                        .position(LatLng(firstVenue.lat.toDouble(), firstVenue.lng.toDouble()))
-                        .title("First Venue")
-                        .snippet("Description for the first venue")
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
-                )
-
-                val secondMarker = googleMap.addMarker(
-                    MarkerOptions()
-                        .position(LatLng(secondVenue.lat.toDouble(), secondVenue.lng.toDouble()))
-                        .title("Second Venue")
-                        .snippet("Description for the second venue")
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
-                )
-
-                // Marker click listener
-                googleMap.setOnMarkerClickListener { marker ->
-                    marker.showInfoWindow()
-                    true
+            venues.forEach {
+                if (it.lat != "string") {
+                    googleMap.addMarker(
+                        MarkerOptions()
+                            .position(LatLng(it.lat.toDouble(), it.lng.toDouble()))
+                            .title(it.name)
+                            .snippet(it.description)
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
+                    )
                 }
-
-                // Fetch and display route
-                fetchRoute(
-                    LatLng(firstVenue.lat.toDouble(), firstVenue.lng.toDouble()),
-                    LatLng(secondVenue.lat.toDouble(), secondVenue.lng.toDouble())
-                )
             }
 
-            // Show user's current location
-            getMyLocation()
+            // Marker click listener
+            googleMap.setOnMarkerClickListener { marker ->
+                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(marker.position, 15f))
+                marker.showInfoWindow()
+                true
+            }
+
+//            // Fetch and display route
+//            fetchRoute(
+//                LatLng(firstVenue.lat.toDouble(), firstVenue.lng.toDouble()),
+//                LatLng(secondVenue.lat.toDouble(), secondVenue.lng.toDouble())
+//            )
+        }
+
+        googleMap.uiSettings.setAllGesturesEnabled(true)
+//        googleMap.uiSettings.isMyLocationButtonEnabled = false
+        getMyLocation()  //show user's current location
+    }
+
+    override fun onViewCreatedLight() {
+
+        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
+        mapFragment?.getMapAsync(callback)
+
+        binding.map.post {
+            val bottomNavHeight =
+                requireActivity().findViewById<View>(R.id.bottomNavigationView).height
+            val params = binding.map.layoutParams as ConstraintLayout.LayoutParams
+            params.bottomMargin = bottomNavHeight
+            binding.map.layoutParams = params
         }
     }
 
     private suspend fun fetchRoute(origin: LatLng, destination: LatLng) {
-        val directionsApiKey = "AIzaSyDov61U_ntrpE8N7dfJ5ARWbKIeMwqFIjw" // Replace with your API key
+        val directionsApiKey =
+            "AIzaSyDov61U_ntrpE8N7dfJ5ARWbKIeMwqFIjw"  //TODO -> bunu local.propertiesden gotur
         val url = "https://maps.googleapis.com/maps/api/directions/json?" +
                 "origin=${origin.latitude},${origin.longitude}" +
                 "&destination=${destination.latitude},${destination.longitude}" +
@@ -168,12 +164,22 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
         googleMap.isMyLocationEnabled = true
 
-        val fusedLocationProviderClient =
-            LocationServices.getFusedLocationProviderClient(requireContext())
+        val fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext())
         fusedLocationProviderClient.lastLocation.addOnSuccessListener { location ->
             if (location != null) {
                 val currentLatLng = LatLng(location.latitude, location.longitude)
-                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 12f))
+//                googleMap.addMarker(   //oldugun yere pin de qoysun? deqiqlesdir
+//                    MarkerOptions()
+//                        .position(currentLatLng)
+//                        .title("Your current location")
+//                        .snippet("You are here")
+//                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
+//                )
+                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 15f))
+            }
+            else {
+                val bakuCityCenter = LatLng(40.3791, 49.8468)
+                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(bakuCityCenter, 12f))
             }
         }
     }
@@ -199,41 +205,38 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-        binding.mapView.onStart()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        binding.mapView.onResume()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        binding.mapView.onPause()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        binding.mapView.onStop()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        binding.mapView.onDestroy()
-    }
-
-    override fun onLowMemory() {
-        super.onLowMemory()
-        binding.mapView.onLowMemory()
-    }
+//    override fun onStart() {
+//        super.onStart()
+//        mapFragment?.onStart()  // Forward onStart to the map fragment
+//    }
+//
+//    override fun onResume() {
+//        super.onResume()
+//        mapFragment?.onResume()
+//    }
+//
+//    override fun onPause() {
+//        super.onPause()
+//        mapFragment?.onPause()
+//    }
+//
+//    override fun onStop() {
+//        super.onStop()
+//        mapFragment?.onStop()
+//    }
+//
+//    override fun onDestroy() {
+//        super.onDestroy()
+//        mapFragment?.onDestroy()
+//    }
+//
+//    override fun onLowMemory() {    //TODO -> Deprecated, replace with onTrimMemory
+//        super.onLowMemory()
+//        mapFragment?.onLowMemory()
+//    }
 
     override fun observeChanges() {
-        // Observe LiveData or other changes if needed
+
     }
 
-    override fun onViewCreatedLight() {
-        // Initialize light-specific views or features if needed
-    }
 }
