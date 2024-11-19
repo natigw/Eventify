@@ -17,8 +17,6 @@ class SecondFragment : BaseFragment<FragmentWelcomeSecondBinding>(FragmentWelcom
     @Named("OnBoardingWelcome")
     lateinit var sharedPrefOnBoard: SharedPreferences
 
-    override fun observeChanges() {}
-
     override fun onViewCreatedLight() {
         binding.buttonSkipSecond.setOnClickListener {
             sharedPrefOnBoard.edit().putBoolean("finished", true).apply()

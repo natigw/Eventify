@@ -50,8 +50,4 @@ class VenuesFragment : BaseFragment<FragmentVenuesBinding>(FragmentVenuesBinding
     private fun setUI() {
 
     }
-
-    override fun observeChanges() {
-
-    }
 }

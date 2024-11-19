@@ -31,4 +31,10 @@
     <string name="bill_monthly">Bill Monthly</string>
     <string name="bill_annually">Bill Annually</string>
     <string name="try_1_month">Try 1 month</string>
+    <string name="referral_program">Referral Program</string>
+    <string name="get_a_free_ticket">Get a free ticket!</string>
+    <string name="referral_note">Note that to access and enjoy our exclusive rewards, an active subscription is mandatory.</string>
+    <string name="share_invite_link">Share your invite link</string>
+    <string name="copy_link">Copy link</string>
+    <string name="share">Share</string>
 </resources>

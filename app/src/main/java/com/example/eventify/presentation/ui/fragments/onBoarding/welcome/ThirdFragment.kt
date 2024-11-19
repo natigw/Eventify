@@ -17,8 +17,6 @@ class ThirdFragment : BaseFragment<FragmentWelcomeThirdBinding>(FragmentWelcomeT
     @Named("OnBoardingWelcome")
     lateinit var sharedPrefOnBoard : SharedPreferences
 
-    override fun observeChanges() { }
-
     override fun onViewCreatedLight() {
         initViews()
     }

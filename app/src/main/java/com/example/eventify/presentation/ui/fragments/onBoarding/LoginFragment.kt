@@ -49,9 +49,11 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         binding.textSignIn.layoutParams = params
 
         loginButton()
+
+        observeChanges()
     }
 
-    override fun observeChanges() {
+    fun observeChanges() {
         binding.textForgotPassword.setOnClickListener {
             NancyToast.makeText(requireContext(), "[navigating to help page]", NancyToast.LENGTH_SHORT, NancyToast.INFO, false).show()
         }

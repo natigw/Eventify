@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/green_light_eventify"
+        tools:context=".presentation.ui.fragments.referral.ReferralFragment">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineReferral1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.06" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineReferral2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.94" />
+
+        <Button
+            android:id="@+id/buttonBackReferral"
+            style="?attr/materialIconButtonFilledTonalStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="-16dp"
+            android:backgroundTint="@color/green_light_eventify"
+            app:icon="@drawable/back_arrow"
+            app:iconTint="@color/purple_eventify"
+            app:iconSize="24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textHeadingReferral"
+            app:layout_constraintStart_toStartOf="@id/guidelineReferral1"
+            app:layout_constraintTop_toTopOf="@id/textHeadingReferral" />
+
+        <TextView
+            android:id="@+id/textHeadingReferral"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/referral_program"
+            android:textAlignment="center"
+            android:textColor="@color/purple_dark_eventify"
+            android:textSize="32sp"
+            app:layout_constraintEnd_toStartOf="@+id/guidelineReferral2"
+            app:layout_constraintStart_toStartOf="@+id/guidelineReferral1"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card1Referral"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="36dp"
+            android:backgroundTint="@color/white"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="8dp"
+            app:layout_constraintEnd_toEndOf="@id/guidelineReferral2"
+            app:layout_constraintStart_toStartOf="@id/guidelineReferral1"
+            app:layout_constraintTop_toBottomOf="@id/textHeadingReferral"
+            app:strokeColor="@color/transparent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guidelineCard1Referral1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.06" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guidelineCard1Referral2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.94" />
+
+                <com.google.android.material.progressindicator.LinearProgressIndicator
+                    android:id="@+id/progressReferral"
+                    android:layout_width="52dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:max="100"
+                    android:progress="66"
+                    app:trackThickness="7dp"
+                    app:indicatorColor="@color/green_eventify"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:trackColor="@color/gray_light"
+                    app:trackCornerRadius="16dp"
+                    app:trackStopIndicatorSize="0dp" />
+
+                <TextView
+                    android:id="@+id/textGetTicketReferral"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/outfit_semibold"
+                    android:text="@string/get_a_free_ticket"
+                    android:textAlignment="center"
+                    android:textColor="@color/purple_dark_eventify"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toEndOf="@id/guidelineCard1Referral2"
+                    app:layout_constraintStart_toStartOf="@id/guidelineCard1Referral1"
+                    app:layout_constraintTop_toBottomOf="@id/progressReferral" />
+
+                <TextView
+                    android:id="@+id/textGetTicketDescriptionReferral"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/outfit_regular"
+                    android:textAlignment="center"
+                    android:textColor="@color/purple_light_eventify"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="@+id/guidelineCard1Referral2"
+                    app:layout_constraintStart_toStartOf="@+id/guidelineCard1Referral1"
+                    app:layout_constraintTop_toBottomOf="@id/textGetTicketReferral"
+                    tools:text="Almost there! Refer x more friend to get a free ticket for xxx event." />
+
+                <ImageView
+                    android:id="@+id/imageRewards"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="-16dp"
+                    android:layout_marginTop="-24dp"
+                    android:layout_marginBottom="-32dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/referral_reward_progress"
+                    app:layout_constraintBottom_toTopOf="@id/textGetTicketNoteReferral"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/textGetTicketDescriptionReferral" />
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="36dp"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/round_success"
+                    app:tint="@color/green_eventify"
+                    tools:layout_editor_absoluteX="91dp"
+                    tools:layout_editor_absoluteY="230dp" />
+
+                <TextView
+                    android:id="@+id/textGetTicketNoteReferral"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="12dp"
+                    android:fontFamily="@font/outfit_regular"
+                    android:text="@string/referral_note"
+                    android:textColor="@color/gray"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/guidelineCard1Referral2"
+                    app:layout_constraintStart_toStartOf="@+id/guidelineCard1Referral1"
+                    app:layout_constraintVertical_bias="0.0" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card2Referral"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="32dp"
+            android:backgroundTint="@color/white"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guidelineReferral2"
+            app:layout_constraintStart_toStartOf="@id/guidelineReferral1"
+            app:layout_constraintTop_toBottomOf="@id/card1Referral"
+            app:layout_constraintVertical_bias="0.0"
+            app:strokeColor="@color/transparent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guidelineCard2Referral1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.06" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guidelineCard2Referral2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.94" />
+
+                <TextView
+                    android:id="@+id/textShareLinkReferral"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:fontFamily="@font/outfit_semibold"
+                    android:text="@string/share_invite_link"
+                    android:textAlignment="center"
+                    android:textColor="@color/purple_dark_eventify"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toEndOf="@id/guidelineCard2Referral2"
+                    app:layout_constraintStart_toStartOf="@id/guidelineCard2Referral1"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/imageShareLinkReferral"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/share_link_referral"
+                    app:layout_constraintEnd_toEndOf="@id/guidelineCard2Referral2"
+                    app:layout_constraintStart_toStartOf="@id/guidelineCard2Referral1"
+                    app:layout_constraintTop_toBottomOf="@id/textShareLinkReferral"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Large" />
+
+                <Button
+                    android:id="@+id/buttonCopyLink"
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="16dp"
+                    android:fontFamily="@font/outfit_semibold"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:text="@string/copy_link"
+                    android:textColor="@color/purple_eventify"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/buttonShareLink"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/imageShareLinkReferral"
+                    app:layout_constraintVertical_bias="0.0"
+                    app:strokeColor="@color/purple_eventify"
+                    app:strokeWidth="3dp" />
+
+                <Button
+                    android:id="@+id/buttonShareLink"
+                    style="@style/Widget.Material3.Button.TonalButton.Icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/green_eventify"
+                    android:fontFamily="@font/outfit_semibold"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:text="@string/share"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    app:icon="@drawable/rounded_up_arrow_circle"
+                    app:iconSize="28dp"
+                    app:iconTint="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/buttonCopyLink"
+                    app:layout_constraintTop_toTopOf="@id/buttonCopyLink" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

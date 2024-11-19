@@ -9,7 +9,4 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
 
     }
 
-    override fun observeChanges() {
-
-    }
 }

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav"
-    app:startDestination="@id/subscriptionFragment">
+    app:startDestination="@id/testMapFragment">
 
     <fragment
         android:id="@+id/venuesFragment"
@@ -25,4 +25,9 @@
         android:name="com.example.eventify.presentation.ui.fragments.subscription.SubscriptionFragment"
         android:label="SubscriptionFragment"
         tools:layout="@layout/fragment_subscription" />
+    <fragment
+        android:id="@+id/referralFragment"
+        android:name="com.example.eventify.presentation.ui.fragments.referral.ReferralFragment"
+        android:label="ReferralFragment"
+        tools:layout="@layout/fragment_referral" />
 </navigation>

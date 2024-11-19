@@ -61,9 +61,11 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
                 }
             }
         }
+
+        observeChanges()
     }
 
-    override fun observeChanges() {
+    fun observeChanges() {
         binding.imageBackToLogin.setOnClickListener {
             findNavController().popBackStack()
         }

@@ -27,12 +27,31 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.94" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineSubs3"
+<!--    <Button-->
+<!--        style="?attr/materialIconButtonFilledTonalStyle"-->
+<!--        android:id="@+id/buttonBackSubs"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="-12dp"-->
+<!--        app:layout_constraintStart_toStartOf="@id/guidelineSubs1"-->
+<!--        app:layout_constraintTop_toTopOf="@id/guidelineSubs3"-->
+<!--        app:layout_constraintBottom_toBottomOf="@id/guidelineSubs3"app:icon="@drawable/back_arrow"-->
+<!--        app:iconTint="@color/green_light_eventify"-->
+<!--        android:backgroundTint="@color/purple_light_eventify" />-->
+
+    <Button
+        style="?attr/materialIconButtonFilledTonalStyle"
+        android:id="@+id/buttonBackSubs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.08" />
+        android:layout_marginStart="-16dp"
+        android:layout_marginBottom="-8dp"
+        app:layout_constraintStart_toStartOf="@id/guidelineSubs1"
+        app:layout_constraintTop_toTopOf="@id/textHeadingSubs"
+        app:icon="@drawable/back_arrow"
+        app:iconTint="@color/purple_eventify"
+        app:iconSize="24dp"
+        android:backgroundTint="@color/green_light_eventify" />
 
     <TextView
         android:id="@+id/textHeadingSubs"
@@ -47,7 +66,7 @@
         android:fontFamily="@font/inter_bold"
         app:layout_constraintEnd_toStartOf="@+id/guidelineSubs2"
         app:layout_constraintStart_toStartOf="@+id/guidelineSubs1"
-        app:layout_constraintTop_toTopOf="@+id/guidelineSubs3" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textHeading2Subs"

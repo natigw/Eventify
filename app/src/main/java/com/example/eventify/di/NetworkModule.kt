@@ -18,7 +18,7 @@ class NetworkModule {
     fun provideRetrofitClient(): Retrofit {
         return Retrofit
             .Builder()
-            .baseUrl("https://83f8-62-217-156-0.ngrok-free.app/")
+            .baseUrl("https://d6cf-62-217-156-0.ngrok-free.app")
             //.baseUrl("http://10.0.2.2:8000")  //TODO -> bunu duzelt
             .addConverterFactory(GsonConverterFactory.create())
             .build()

@@ -2,6 +2,7 @@ package com.example.eventify.presentation.ui.fragments.map
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.content.res.Resources
 import android.graphics.Color
 import android.util.Log
 import android.view.View
@@ -20,6 +21,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.PolylineOptions
 import com.google.maps.android.PolyUtil
@@ -46,7 +48,24 @@ class TestMapFragment : BaseFragment<FragmentTestMapBinding>(FragmentTestMapBind
 
         this.googleMap = googleMap
 
+//        // Load the custom style (dark mode)
+//        try {
+//            val success = googleMap.setMapStyle(
+//                MapStyleOptions.loadRawResourceStyle(
+//                    requireContext(),
+//                    R.raw.map_dark_mode // Replace with your actual file name
+//                )
+//            )
+//            if (!success) {
+//                Log.e("MapStyle", "Style parsing failed.")
+//            }
+//        } catch (e: Resources.NotFoundException) {
+//            Log.e("MapStyle", "Can't find style. Error: ", e)
+//        }
+
+
         lifecycleScope.launch {
+            try {
             // Adding markers
             val venues = api.getAllVenues()
             venues.forEach {
@@ -60,7 +79,9 @@ class TestMapFragment : BaseFragment<FragmentTestMapBinding>(FragmentTestMapBind
                     )
                 }
             }
-
+            } catch (e: Exception) {
+                NancyToast.makeText(requireContext(), "$e", NancyToast.LENGTH_SHORT, NancyToast.ERROR, false).show()
+            }
             // Marker click listener
             googleMap.setOnMarkerClickListener { marker ->
                 googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(marker.position, 15f))
@@ -75,9 +96,13 @@ class TestMapFragment : BaseFragment<FragmentTestMapBinding>(FragmentTestMapBind
 //            )
         }
 
+        binding.buttonSwitchMode.setOnClickListener {
+            googleMap.mapType = if (googleMap.mapType == GoogleMap.MAP_TYPE_HYBRID) GoogleMap.MAP_TYPE_NORMAL else GoogleMap.MAP_TYPE_HYBRID
+        }
         googleMap.uiSettings.setAllGesturesEnabled(true)
 //        googleMap.uiSettings.isMyLocationButtonEnabled = false
         getMyLocation()  //show user's current location
+
     }
 
     override fun onViewCreatedLight() {
@@ -85,13 +110,12 @@ class TestMapFragment : BaseFragment<FragmentTestMapBinding>(FragmentTestMapBind
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
 
-        binding.map.post {
-            val bottomNavHeight =
-                requireActivity().findViewById<View>(R.id.bottomNavigationView).height
-            val params = binding.map.layoutParams as ConstraintLayout.LayoutParams
-            params.bottomMargin = bottomNavHeight
-            binding.map.layoutParams = params
-        }
+//        binding.map.post {  //no need anymore
+//            val bottomNavHeight = requireActivity().findViewById<View>(R.id.bottomNavigationView).height
+//            val params = binding.map.layoutParams as ConstraintLayout.LayoutParams
+//            params.bottomMargin = bottomNavHeight
+//            binding.map.layoutParams = params
+//        }
     }
 
     private suspend fun fetchRoute(origin: LatLng, destination: LatLng) {
@@ -234,9 +258,5 @@ class TestMapFragment : BaseFragment<FragmentTestMapBinding>(FragmentTestMapBind
 //        super.onLowMemory()
 //        mapFragment?.onLowMemory()
 //    }
-
-    override fun observeChanges() {
-
-    }
 
 }
