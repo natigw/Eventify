@@ -22,7 +22,7 @@ class SubscriptionFragment : BaseFragment<FragmentSubscriptionBinding>(FragmentS
 
     private val adapter = SubscriptionAdapter(
         currentPackage = "Base",
-        isAnnualBilling = false, //viewmodel.switchStateFlow.value
+        isAnnualBilling = true, //viewmodel.switchStateFlow.value
         onClick = {
             NancyToast.makeText(requireContext(), "[navigating payment screen]", NancyToast.LENGTH_SHORT, NancyToast.SUCCESS, false).show()
         }

@@ -4,14 +4,14 @@
 
     <item
         android:id="@+id/testMapFragment"
-        android:icon="@drawable/location_rounded"
+        android:icon="@drawable/location_icon_dynamic"
         android:title="@string/map" />
     <item
         android:id="@+id/venuesFragment"
-        android:icon="@drawable/venue_rounded"
-        android:title="@string/venues" />
+        android:icon="@drawable/venue_icon_dynamic"
+        android:title="@string/places" />
     <item
         android:id="@+id/profileFragment"
-        android:icon="@drawable/profile_rounded"
+        android:icon="@drawable/profile_icon_dynamic"
         android:title="@string/profile" />
 </menu>

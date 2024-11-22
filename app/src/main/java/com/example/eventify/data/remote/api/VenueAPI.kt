@@ -1,45 +1,10 @@
 package com.example.eventify.data.remote.api
 
-import com.example.eventify.data.remote.model.register.RequestUserRegistration
-import com.example.eventify.data.remote.model.register.ResponseUserRegistration
-import com.example.eventify.data.remote.model.userToken.RequestUserToken
-import com.example.eventify.data.remote.model.userToken.ResponseSuccessfulUserToken
-import com.example.eventify.data.remote.model.userToken.ResponseVerifyToken
 import com.example.eventify.data.remote.model.venues.ResponseAllVenues
-import com.example.eventify.data.remote.model.venues.addComment.RequestAddCommentVenue
-import com.example.eventify.data.remote.model.venues.createVenue.RequestCreateVenue
-import com.example.eventify.data.remote.model.venues.likeDislike.RequestLikeDislikeVenue
-import com.example.eventify.data.remote.model.venues.deleteComment.RequestDeleteCommentVenue
-import retrofit2.http.Body
-import retrofit2.http.DELETE
 import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
 
-interface EventifyAPI {
+interface VenueAPI {
 
-    @POST("/auth")
-    suspend fun registerUser(
-        @Body requestUserRegistration : RequestUserRegistration
-    ) : ResponseUserRegistration
-
-    @POST("/auth/token")
-    suspend fun requestUserToken(
-        @Body requestUserToken: RequestUserToken
-    ) : ResponseSuccessfulUserToken
-
-    @GET("/auth/verify-token/{token}")
-    suspend fun verifyUserToken(
-        @Path("token") token: String,
-    ) : ResponseVerifyToken
-
-//    @GET("/social_auth/google/login")
-//    suspend fun authGoogleLogin() : ResponseGoogleLogin
-//
-//    @GET("/social_auth/google/callback")
-//    suspend fun authGoogleCallback() : ResponseGoogleCallback
-//
-//
     @GET("/venues")
     suspend fun getAllVenues() : List<ResponseAllVenues>
 
@@ -94,5 +59,4 @@ interface EventifyAPI {
 //    suspend fun searchVenue(
 //        @Path("query") query: String
 //    ) : ResponseVenueSearch
-
 }

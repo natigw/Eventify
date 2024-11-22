@@ -34,12 +34,13 @@
         android:id="@+id/textVenueTypeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginStart="16dp"
         android:fontFamily="@font/inter_regular"
         android:text="@string/venue_type"
         android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@+id/buttonReadMoreVenues"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/textVenueOpenHoursText"
+        app:layout_constraintStart_toEndOf="@id/imageVenue"
+        app:layout_constraintTop_toTopOf="@id/imageVenue" />
 
     <TextView
         android:id="@+id/textVenueType"
@@ -56,10 +57,10 @@
         android:id="@+id/textVenueOpenHoursText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
         android:fontFamily="@font/inter_regular"
         android:text="@string/open_hours"
         android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/textVenueLikesText"
         app:layout_constraintStart_toStartOf="@id/textVenueTypeText"
         app:layout_constraintTop_toBottomOf="@+id/textVenueTypeText" />
 
@@ -78,10 +79,10 @@
         android:id="@+id/textVenueLikesText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
         android:fontFamily="@font/inter_regular"
         android:text="@string/likes"
         android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonVenueShowLocation"
         app:layout_constraintStart_toStartOf="@id/textVenueOpenHoursText"
         app:layout_constraintTop_toBottomOf="@+id/textVenueOpenHoursText" />
 
@@ -98,10 +99,9 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonVenueShowLocation"
-        style="?attr/materialIconButtonFilledTonalStyle"
+        style="@style/Widget.Material3.Button.IconButton.Filled.Tonal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
         android:layout_marginStart="-4dp"
         android:backgroundTint="@color/green_light_eventify"
         android:fontFamily="@font/inter_italic"
@@ -116,7 +116,8 @@
         app:iconPadding="6dp"
         app:iconSize="18dp"
         app:iconTint="@color/purple_eventify"
-        app:layout_constraintStart_toStartOf="@id/textVenueLikesText"
+        app:layout_constraintBottom_toBottomOf="@id/imageVenue"
+        app:layout_constraintStart_toStartOf="@+id/textVenueTypeText"
         app:layout_constraintTop_toBottomOf="@+id/textVenueLikesText" />
 
     <com.google.android.material.button.MaterialButton
@@ -170,6 +171,6 @@
         app:lastItemDecorated="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/buttonVenueShowLocation" />
+        app:layout_constraintTop_toBottomOf="@id/buttonReadMoreVenues" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,7 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.eventify.R
 import com.example.eventify.common.base.BaseFragment
 import com.example.eventify.common.utils.NancyToast
-import com.example.eventify.data.remote.api.EventifyAPI
+import com.example.eventify.data.remote.api.AuthAPI
 import com.example.eventify.data.remote.model.userToken.RequestUserToken
 import com.example.eventify.databinding.FragmentLoginBinding
 import com.example.eventify.presentation.ui.activities.MainActivity
@@ -32,7 +32,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     lateinit var sharedPrefLoggedIn: SharedPreferences
 
     @Inject
-    lateinit var api: EventifyAPI
+    lateinit var api: AuthAPI
 
     override fun onViewCreatedLight() {
 
@@ -53,12 +53,15 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         observeChanges()
     }
 
-    fun observeChanges() {
+    private fun observeChanges() {
         binding.textForgotPassword.setOnClickListener {
             NancyToast.makeText(requireContext(), "[navigating to help page]", NancyToast.LENGTH_SHORT, NancyToast.INFO, false).show()
         }
         binding.textDontHaveAccount.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
+        }
+        binding.button4.setOnClickListener {
+            navigateToMainActivity()
         }
     }
 

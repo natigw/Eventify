@@ -1,6 +1,8 @@
 package com.example.eventify.di
 
-import com.example.eventify.data.remote.api.EventifyAPI
+import com.example.eventify.data.remote.api.AuthAPI
+import com.example.eventify.data.remote.api.EventAPI
+import com.example.eventify.data.remote.api.VenueAPI
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,16 +20,27 @@ class NetworkModule {
     fun provideRetrofitClient(): Retrofit {
         return Retrofit
             .Builder()
-            .baseUrl("https://d6cf-62-217-156-0.ngrok-free.app")
-            //.baseUrl("http://10.0.2.2:8000")  //TODO -> bunu duzelt
+            .baseUrl("https://eventify-az.onrender.com")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
 
     @Singleton
     @Provides
-    fun provideEventifyApi(client: Retrofit): EventifyAPI {
-        return client.create(EventifyAPI::class.java)
+    fun provideAuthApi(client: Retrofit): AuthAPI {
+        return client.create(AuthAPI::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideVenueApi(client: Retrofit): VenueAPI {
+        return client.create(VenueAPI::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideEventApi(client: Retrofit): EventAPI {
+        return client.create(EventAPI::class.java)
     }
 
 }

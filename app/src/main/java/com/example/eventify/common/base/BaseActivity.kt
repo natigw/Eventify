@@ -27,7 +27,7 @@ abstract class BaseActivity<VB : ViewBinding>(private val bindingInflater: (Layo
                 left = systemBars.left,
                 top = systemBars.top,
                 right = systemBars.right,
-                bottom = systemBars.bottom
+                bottom = 0
             )
             insets
         }

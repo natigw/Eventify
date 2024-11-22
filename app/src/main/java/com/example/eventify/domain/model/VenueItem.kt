@@ -9,6 +9,10 @@ data class VenueItem(
     val name : String,
     val imageLink : String?,
     val description : String,
+    val venueType: String,
+    val openHour: String,
+    val closeHour: String,
+    val likeCount: Int,
     val latCoordinate : String,
     val lngCoordinate : String
 ) : Parcelable

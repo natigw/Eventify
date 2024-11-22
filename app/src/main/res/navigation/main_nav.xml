@@ -9,17 +9,34 @@
         android:id="@+id/venuesFragment"
         android:name="com.example.eventify.presentation.ui.fragments.venues.VenuesFragment"
         android:label="fragment_venues"
-        tools:layout="@layout/fragment_venues" />
+        tools:layout="@layout/fragment_venues" >
+        <action
+            android:id="@+id/action_venuesFragment_to_testMapFragment"
+            app:destination="@id/testMapFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.eventify.presentation.ui.fragments.profile.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_subscriptionFragment"
+            app:destination="@id/subscriptionFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_referralFragment"
+            app:destination="@id/referralFragment" />
+    </fragment>
     <fragment
         android:id="@+id/testMapFragment"
-        android:name="com.example.eventify.presentation.ui.fragments.map.TestMapFragment"
+        android:name="com.example.eventify.presentation.ui.fragments.map.MapFragment"
         android:label="fragment_test_map"
-        tools:layout="@layout/fragment_test_map" />
+        tools:layout="@layout/fragment_map" >
+        <argument
+            android:name="coordinates"
+            app:argType="com.example.eventify.domain.model.PlaceCoordinates"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
     <fragment
         android:id="@+id/subscriptionFragment"
         android:name="com.example.eventify.presentation.ui.fragments.subscription.SubscriptionFragment"

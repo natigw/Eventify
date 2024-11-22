@@ -2,18 +2,18 @@ package com.example.eventify.presentation.ui.fragments.map
 
 import android.Manifest
 import android.content.pm.PackageManager
-import android.content.res.Resources
 import android.graphics.Color
 import android.util.Log
-import android.view.View
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.eventify.R
 import com.example.eventify.common.base.BaseFragment
 import com.example.eventify.common.utils.NancyToast
-import com.example.eventify.data.remote.api.EventifyAPI
-import com.example.eventify.databinding.FragmentTestMapBinding
+import com.example.eventify.data.remote.api.EventAPI
+import com.example.eventify.data.remote.api.VenueAPI
+import com.example.eventify.databinding.FragmentMapBinding
+import com.example.eventify.presentation.viewmodels.SharedViewModel
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -21,7 +21,6 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.PolylineOptions
 import com.google.maps.android.PolyUtil
@@ -35,18 +34,40 @@ import org.json.JSONObject
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class TestMapFragment : BaseFragment<FragmentTestMapBinding>(FragmentTestMapBinding::inflate) {
+class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate) {
 
     @Inject
-    lateinit var api: EventifyAPI
+    lateinit var venueApi: VenueAPI
+
+    @Inject
+    lateinit var eventApi: EventAPI
 
     private val locationPermissionRequestCode = 1
+
+    private val sharedViewModel by activityViewModels<SharedViewModel>()
+
+//    private val args by navArgs<TestMapFragmentArgs>()
 
     private lateinit var googleMap: GoogleMap
 
     private val callback = OnMapReadyCallback { googleMap ->
 
         this.googleMap = googleMap
+
+        sharedViewModel.sharedCoordinates?.let {
+            googleMap.addMarker(
+                MarkerOptions()
+                    .position(
+                        LatLng(
+                            it.lat.toDouble(),
+                            it.long.toDouble()
+                        )
+                    )
+                    .title(it.name)
+                    .snippet(it.name)
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA))
+            )
+        }
 
 //        // Load the custom style (dark mode)
 //        try {
@@ -66,21 +87,40 @@ class TestMapFragment : BaseFragment<FragmentTestMapBinding>(FragmentTestMapBind
 
         lifecycleScope.launch {
             try {
-            // Adding markers
-            val venues = api.getAllVenues()
-            venues.forEach {
-                if (it.lat != "string") {
-                    googleMap.addMarker(
-                        MarkerOptions()
-                            .position(LatLng(it.lat.toDouble(), it.lng.toDouble()))
-                            .title(it.name)
-                            .snippet(it.description)
-                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
-                    )
+                // Adding markers
+                val venues = this@MapFragment.venueApi.getAllVenues()
+                val events = this@MapFragment.eventApi.getAllEvents()
+                venues.forEach {
+                    if (it.lat != "string") {
+                        googleMap.addMarker(
+                            MarkerOptions()
+                                .position(LatLng(it.lat.toDouble(), it.lng.toDouble()))
+                                .title(it.name)
+                                .snippet(it.description)
+                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
+                        )
+                        events.forEach { event ->
+                            if (event.title.trim().toLowerCase() == it.name.trim().toLowerCase()) {
+                                googleMap.addMarker(
+                                    MarkerOptions()
+                                        .position(LatLng(it.lat.toDouble(), it.lng.toDouble()))
+                                        .title(it.name)
+                                        .snippet(it.description)
+                                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
+                                )
+                            }
+                        }
+                    }
                 }
-            }
             } catch (e: Exception) {
-                NancyToast.makeText(requireContext(), "$e", NancyToast.LENGTH_SHORT, NancyToast.ERROR, false).show()
+                NancyToast.makeText(
+                    requireContext(),
+                    "$e",
+                    NancyToast.LENGTH_SHORT,
+                    NancyToast.ERROR,
+                    false
+                ).show()
+                Log.e("exceptiona", e.toString())
             }
             // Marker click listener
             googleMap.setOnMarkerClickListener { marker ->
@@ -89,15 +129,16 @@ class TestMapFragment : BaseFragment<FragmentTestMapBinding>(FragmentTestMapBind
                 true
             }
 
-//            // Fetch and display route
-//            fetchRoute(
-//                LatLng(firstVenue.lat.toDouble(), firstVenue.lng.toDouble()),
-//                LatLng(secondVenue.lat.toDouble(), secondVenue.lng.toDouble())
-//            )
+            // Fetch and display route
+            fetchRoute(
+                LatLng(40.39367150806999, 49.86140788246094),
+                LatLng(40.369909540241444, 49.8397321274377)
+            )
         }
 
         binding.buttonSwitchMode.setOnClickListener {
-            googleMap.mapType = if (googleMap.mapType == GoogleMap.MAP_TYPE_HYBRID) GoogleMap.MAP_TYPE_NORMAL else GoogleMap.MAP_TYPE_HYBRID
+            googleMap.mapType =
+                if (googleMap.mapType == GoogleMap.MAP_TYPE_HYBRID) GoogleMap.MAP_TYPE_NORMAL else GoogleMap.MAP_TYPE_HYBRID
         }
         googleMap.uiSettings.setAllGesturesEnabled(true)
 //        googleMap.uiSettings.isMyLocationButtonEnabled = false
@@ -116,6 +157,7 @@ class TestMapFragment : BaseFragment<FragmentTestMapBinding>(FragmentTestMapBind
 //            params.bottomMargin = bottomNavHeight
 //            binding.map.layoutParams = params
 //        }
+
     }
 
     private suspend fun fetchRoute(origin: LatLng, destination: LatLng) {
@@ -162,6 +204,7 @@ class TestMapFragment : BaseFragment<FragmentTestMapBinding>(FragmentTestMapBind
                         NancyToast.ERROR,
                         false
                     )
+                    Log.e("exceptiona", e.toString())
                 }
             }
         }
@@ -188,7 +231,8 @@ class TestMapFragment : BaseFragment<FragmentTestMapBinding>(FragmentTestMapBind
 
         googleMap.isMyLocationEnabled = true
 
-        val fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext())
+        val fusedLocationProviderClient =
+            LocationServices.getFusedLocationProviderClient(requireContext())
         fusedLocationProviderClient.lastLocation.addOnSuccessListener { location ->
             if (location != null) {
                 val currentLatLng = LatLng(location.latitude, location.longitude)
@@ -200,8 +244,7 @@ class TestMapFragment : BaseFragment<FragmentTestMapBinding>(FragmentTestMapBind
 //                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
 //                )
                 googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 15f))
-            }
-            else {
+            } else {
                 val bakuCityCenter = LatLng(40.3791, 49.8468)
                 googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(bakuCityCenter, 12f))
             }

@@ -11,7 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.eventify.common.base.BaseFragment
 import com.example.eventify.common.utils.NancyToast
 import com.example.eventify.common.utils.isValidEmail
-import com.example.eventify.data.remote.api.EventifyAPI
+import com.example.eventify.data.remote.api.AuthAPI
 import com.example.eventify.data.remote.model.register.RequestUserRegistration
 import com.example.eventify.databinding.FragmentRegisterBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,7 +22,7 @@ import javax.inject.Inject
 class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterBinding::inflate) {
 
     @Inject
-    lateinit var api : EventifyAPI
+    lateinit var api : AuthAPI
 
     override fun onViewCreatedLight() {
         setScrollViewConstraints()
