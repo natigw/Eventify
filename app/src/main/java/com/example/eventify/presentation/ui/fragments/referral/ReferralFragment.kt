@@ -24,8 +24,10 @@ class ReferralFragment : BaseFragment<FragmentReferralBinding>(FragmentReferralB
 
         val screenHeight = resources.displayMetrics.heightPixels
         val topMargin = (0.04 * screenHeight).toInt()
-        val params = binding.textHeadingReferral.layoutParams as ConstraintLayout.LayoutParams
-        params.topMargin = topMargin
-        binding.textHeadingReferral.layoutParams = params
+        binding.textHeadingReferral.post {
+            val params = binding.textHeadingReferral.layoutParams as ConstraintLayout.LayoutParams
+            params.topMargin = topMargin
+            binding.textHeadingReferral.layoutParams = params
+        }
     }
 }

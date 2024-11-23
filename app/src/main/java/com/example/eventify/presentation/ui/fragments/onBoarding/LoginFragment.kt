@@ -44,9 +44,15 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
 
         val screenHeight = resources.displayMetrics.heightPixels
         val topMargin = (0.2 * screenHeight).toInt()
-        val params = binding.textSignIn.layoutParams as ConstraintLayout.LayoutParams
-        params.topMargin = topMargin
-        binding.textSignIn.layoutParams = params
+
+        binding.textSignIn.post {
+            val params = binding.textSignIn.layoutParams as ConstraintLayout.LayoutParams
+            params.topMargin = topMargin
+            binding.textSignIn.layoutParams = params
+
+        }
+
+
 
         loginButton()
 

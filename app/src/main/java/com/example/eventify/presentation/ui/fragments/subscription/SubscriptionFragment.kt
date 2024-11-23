@@ -50,11 +50,14 @@ class SubscriptionFragment : BaseFragment<FragmentSubscriptionBinding>(FragmentS
             findNavController().popBackStack()
         }
 
+
         val screenHeight = resources.displayMetrics.heightPixels
         val topMargin = (0.04 * screenHeight).toInt()
-        val params = binding.textHeadingSubs.layoutParams as ConstraintLayout.LayoutParams
-        params.topMargin = topMargin
-        binding.textHeadingSubs.layoutParams = params
+        binding.textHeadingSubs.post {
+            val params = binding.textHeadingSubs.layoutParams as ConstraintLayout.LayoutParams
+            params.topMargin = topMargin
+            binding.textHeadingSubs.layoutParams = params
+        }
 
     }
 

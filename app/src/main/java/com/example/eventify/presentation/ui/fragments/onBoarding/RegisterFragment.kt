@@ -74,9 +74,12 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
     private fun setScrollViewConstraints() {
         val screenHeight = resources.displayMetrics.heightPixels
         val topMargin = (0.2 * screenHeight).toInt()
-        val params = binding.textSignUp.layoutParams as ConstraintLayout.LayoutParams
-        params.topMargin = topMargin
-        binding.textSignUp.layoutParams = params
+
+        binding.textSignUp.post {
+            val params = binding.textSignUp.layoutParams as ConstraintLayout.LayoutParams
+            params.topMargin = topMargin
+            binding.textSignUp.layoutParams = params
+        }
 
         val topMarginArrow = (0.04 * screenHeight).toInt()
         val paramsArrow = binding.imageBackToLogin.layoutParams as ConstraintLayout.LayoutParams
