@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/textEventName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/inter_bold"
+        android:textSize="20sp"
+        android:textColor="@color/purple_dark_eventify"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Event name" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/imageEvent"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:layout_marginTop="12dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textEventName"
+        app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Medium"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/textEventTypeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/inter_regular"
+        android:text="@string/event_type"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@+id/buttonReadMoreEvents"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textEventType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:fontFamily="@font/inter_light_italic"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@id/textEventTypeText"
+        app:layout_constraintTop_toTopOf="@id/textEventTypeText"
+        tools:text="cinema" />
+
+    <TextView
+        android:id="@+id/textEventOrganizerText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/inter_regular"
+        android:text="@string/organizer"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@id/textEventTypeText"
+        app:layout_constraintTop_toBottomOf="@+id/textEventTypeText" />
+
+    <TextView
+        android:id="@+id/textEventOrganizer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:fontFamily="@font/inter_light_italic"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@id/textEventOrganizerText"
+        app:layout_constraintTop_toTopOf="@id/textEventOrganizerText"
+        tools:text="Eventify Group" />
+
+
+    <TextView
+        android:id="@+id/textEventDateText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/inter_regular"
+        android:text="@string/date"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@id/textEventOrganizerText"
+        app:layout_constraintTop_toBottomOf="@+id/textEventOrganizerText" />
+
+    <TextView
+        android:id="@+id/textEventDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:fontFamily="@font/inter_light_italic"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@id/textEventDateText"
+        app:layout_constraintTop_toTopOf="@id/textEventDateText"
+        tools:text="12 October 2024" />
+
+    <TextView
+        android:id="@+id/textEventDurationHoursText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/inter_regular"
+        android:text="@string/duration"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@id/textEventDateText"
+        app:layout_constraintTop_toBottomOf="@+id/textEventDateText" />
+
+    <TextView
+        android:id="@+id/textEventDurationHours"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:fontFamily="@font/inter_light_italic"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@id/textEventDurationHoursText"
+        app:layout_constraintTop_toTopOf="@id/textEventDurationHoursText"
+        tools:text="09:00 - 23:00" />
+
+    <TextView
+        android:id="@+id/textEventPublishedText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/inter_regular"
+        android:text="@string/published"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@id/textEventDurationHoursText"
+        app:layout_constraintTop_toBottomOf="@+id/textEventDurationHoursText" />
+
+    <TextView
+        android:id="@+id/textEventPublished"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:fontFamily="@font/inter_light_italic"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@id/textEventPublishedText"
+        app:layout_constraintTop_toTopOf="@id/textEventPublishedText"
+        tools:text="4 October, 13:29" />
+
+    <TextView
+        android:id="@+id/textEventLikesText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/inter_regular"
+        android:text="@string/likes"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@id/textEventPublishedText"
+        app:layout_constraintTop_toBottomOf="@+id/textEventPublishedText" />
+
+    <TextView
+        android:id="@+id/textEventLikeCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:fontFamily="@font/inter_light_italic"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@id/textEventLikesText"
+        app:layout_constraintTop_toTopOf="@id/textEventLikesText"
+        tools:text="12" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonEventShowLocation"
+        style="?attr/materialIconButtonFilledTonalStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="-4dp"
+        android:backgroundTint="@color/green_light_eventify"
+        android:fontFamily="@font/inter_italic"
+        android:minHeight="24dp"
+        android:paddingStart="8dp"
+        android:paddingTop="1dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="3dp"
+        android:text="@string/show_location_on_map"
+        android:textColor="@color/purple_eventify"
+        app:icon="@drawable/location_icon_unselected"
+        app:iconPadding="6dp"
+        app:iconSize="18dp"
+        app:iconTint="@color/purple_eventify"
+        app:layout_constraintStart_toStartOf="@id/textEventLikesText"
+        app:layout_constraintTop_toBottomOf="@+id/textEventLikesText" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonLikeEvent"
+        style="?attr/materialIconButtonFilledTonalStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:tag="not_liked"
+        app:icon="@drawable/like_fav_border"
+        app:iconTint="@color/purple_dark_eventify"
+        android:backgroundTint="@color/gray_light"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageEvent" />
+
+    <TextView
+        android:id="@+id/textEventDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/inter_regular"
+        android:maxLines="5"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageEvent"
+        tools:text="Event description" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonReadMoreEvents"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/gray_light"
+        android:fontFamily="@font/inter_regular"
+        android:minHeight="24dp"
+        android:minWidth="24dp"
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="2dp"
+        android:text="@string/read_more"
+        android:textSize="12sp"
+        android:textColor="@color/purple_dark_eventify"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textEventDescription" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="24dp"
+        app:lastItemDecorated="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/buttonEventShowLocation" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

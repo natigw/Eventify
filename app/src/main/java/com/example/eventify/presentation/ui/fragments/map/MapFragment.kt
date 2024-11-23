@@ -65,7 +65,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     )
                     .title(it.name)
                     .snippet(it.name)
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA))
+                    .icon(BitmapDescriptorFactory.defaultMarker(if (it.placeType == "venue") BitmapDescriptorFactory.HUE_MAGENTA else BitmapDescriptorFactory.HUE_ORANGE))
             )
         }
 
@@ -99,17 +99,17 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                                 .snippet(it.description)
                                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
                         )
-                        events.forEach { event ->
-                            if (event.title.trim().toLowerCase() == it.name.trim().toLowerCase()) {
-                                googleMap.addMarker(
-                                    MarkerOptions()
-                                        .position(LatLng(it.lat.toDouble(), it.lng.toDouble()))
-                                        .title(it.name)
-                                        .snippet(it.description)
-                                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
-                                )
-                            }
-                        }
+                    }
+                }
+                events.forEach {
+                    if (it.location.lat != "string") {
+                        googleMap.addMarker(
+                            MarkerOptions()
+                                .position(LatLng(it.location.lat.toDouble(), it.location.lng.toDouble()))
+                                .title(it.event.title)
+                                .snippet(it.event.description)
+                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
+                        )
                     }
                 }
             } catch (e: Exception) {
@@ -120,7 +120,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     NancyToast.ERROR,
                     false
                 ).show()
-                Log.e("exceptiona", e.toString())
+                Log.e("exception", e.toString())
             }
             // Marker click listener
             googleMap.setOnMarkerClickListener { marker ->
@@ -204,7 +204,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                         NancyToast.ERROR,
                         false
                     )
-                    Log.e("exceptiona", e.toString())
+                    Log.e("exception", e.toString())
                 }
             }
         }

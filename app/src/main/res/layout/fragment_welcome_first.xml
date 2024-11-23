@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="@color/green_light_eventify"
     tools:context=".presentation.ui.fragments.onBoarding.welcome.FirstFragment">
 
     <TextView
@@ -29,20 +29,32 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonSkipFirst"
         style="?attr/materialButtonOutlinedStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:minWidth="0dp"
+        android:paddingHorizontal="12dp"
+        app:cornerRadius="20dp"
         android:text="@string/skip"
+        android:textSize="16sp"
+        android:textColor="@color/purple_eventify"
+        android:fontFamily="@font/outfit_regular"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonLetsGoFirst"
+        style="@style/Widget.Material3.Button.IconButton.Filled.Tonal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:cornerRadius="20dp"
         android:text="@string/let_s_go"
+        android:textSize="18sp"
+        android:textColor="@color/purple_eventify"
+        android:fontFamily="@font/outfit_semibold"
+        android:backgroundTint="@color/gray_light"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

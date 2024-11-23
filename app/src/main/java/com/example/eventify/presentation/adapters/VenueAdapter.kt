@@ -70,8 +70,8 @@ class VenueAdapter(
 //        return position
 //    }
 
-    fun updateAdapter(newMovies: List<VenueItem>) {
-        venues = newMovies
+    fun updateAdapter(newVenues: List<VenueItem>) {
+        venues = newVenues
         notifyDataSetChanged()
     }
 }

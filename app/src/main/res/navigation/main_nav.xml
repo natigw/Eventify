@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/venuesFragment"
-        android:name="com.example.eventify.presentation.ui.fragments.venues.VenuesFragment"
+        android:name="com.example.eventify.presentation.ui.fragments.places.VenuesFragment"
         android:label="fragment_venues"
         tools:layout="@layout/fragment_venues" >
         <action
@@ -47,4 +47,25 @@
         android:name="com.example.eventify.presentation.ui.fragments.referral.ReferralFragment"
         android:label="ReferralFragment"
         tools:layout="@layout/fragment_referral" />
+    <fragment
+        android:id="@+id/eventsFragment"
+        android:name="com.example.eventify.presentation.ui.fragments.places.EventsFragment"
+        android:label="fragment_events"
+        tools:layout="@layout/fragment_events" >
+        <action
+            android:id="@+id/action_eventsFragment_to_testMapFragment"
+            app:destination="@id/testMapFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/placesFragment"
+        android:name="com.example.eventify.presentation.ui.fragments.places.PlacesFragment"
+        android:label="fragment_places"
+        tools:layout="@layout/fragment_places" >
+        <action
+            android:id="@+id/action_placesFragment_to_eventsFragment"
+            app:destination="@id/eventsFragment" />
+        <action
+            android:id="@+id/action_placesFragment_to_venuesFragment"
+            app:destination="@id/venuesFragment" />
+    </fragment>
 </navigation>

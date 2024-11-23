@@ -44,4 +44,9 @@
     <string name="likes">Likes:</string>
     <string name="show_location_on_map">show location on map</string>
     <string name="places">Places</string>
+    <string name="event_type">Event type:</string>
+    <string name="duration">Duration:</string>
+    <string name="date">Date:</string>
+    <string name="organizer">Organizer:</string>
+    <string name="published">Published:</string>
 </resources>

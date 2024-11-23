@@ -7,7 +7,7 @@
         android:icon="@drawable/location_icon_dynamic"
         android:title="@string/map" />
     <item
-        android:id="@+id/venuesFragment"
+        android:id="@+id/placesFragment"
         android:icon="@drawable/venue_icon_dynamic"
         android:title="@string/places" />
     <item

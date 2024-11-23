@@ -4,32 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.ui.fragments.places.VenuesFragment">
+    tools:context=".presentation.ui.fragments.places.EventsFragment">
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineVenues1"
+        android:id="@+id/guidelineEvents1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.06" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineVenues2"
+        android:id="@+id/guidelineEvents2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.94" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvVenues"
+        android:id="@+id/rvEvents"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:itemCount="10"
-        tools:listitem="@layout/sample_venue"
-        app:layout_constraintStart_toStartOf="@id/guidelineVenues1"
-        app:layout_constraintEnd_toEndOf="@id/guidelineVenues2"
+        tools:listitem="@layout/sample_event"
+        app:layout_constraintStart_toStartOf="@id/guidelineEvents1"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEvents2"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
