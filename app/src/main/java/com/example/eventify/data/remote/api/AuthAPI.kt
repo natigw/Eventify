@@ -5,6 +5,7 @@ import com.example.eventify.data.remote.model.register.ResponseUserRegistration
 import com.example.eventify.data.remote.model.userToken.RequestUserToken
 import com.example.eventify.data.remote.model.userToken.ResponseSuccessfulUserToken
 import com.example.eventify.data.remote.model.userToken.ResponseVerifyToken
+import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -14,7 +15,7 @@ interface AuthAPI {
     @POST("/auth")
     suspend fun registerUser(
         @Body requestUserRegistration: RequestUserRegistration
-    ): ResponseUserRegistration
+    ): Response<ResponseUserRegistration>
 
     @POST("/auth/token")
     suspend fun requestUserToken(

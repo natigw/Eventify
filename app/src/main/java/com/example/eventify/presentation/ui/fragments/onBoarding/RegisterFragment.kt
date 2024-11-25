@@ -6,14 +6,18 @@ import android.text.TextWatcher
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.text.isDigitsOnly
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.example.eventify.R
 import com.example.eventify.common.base.BaseFragment
 import com.example.eventify.common.utils.NancyToast
 import com.example.eventify.common.utils.isValidEmail
 import com.example.eventify.data.remote.api.AuthAPI
 import com.example.eventify.data.remote.model.register.RequestUserRegistration
 import com.example.eventify.databinding.FragmentRegisterBinding
+import com.example.eventify.presentation.viewmodels.RegisterViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -21,8 +25,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterBinding::inflate) {
 
-    @Inject
-    lateinit var api : AuthAPI
+    private val viewmodel by viewModels<RegisterViewModel>()
 
     override fun onViewCreatedLight() {
         setScrollViewConstraints()
@@ -41,6 +44,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
                 lifecycleScope.launch {
 
                     blockSignupButton()
+
 //                    if (checkIfUserExists(email)) {
 //                        NancyToast.makeText(requireContext(), "User already exists!", NancyToast.LENGTH_SHORT, NancyToast.ERROR, false).show()
 //                        resetSignupButton()
@@ -65,7 +69,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
         observeChanges()
     }
 
-    fun observeChanges() {
+    private fun observeChanges() {
         binding.imageBackToLogin.setOnClickListener {
             findNavController().popBackStack()
         }
@@ -87,27 +91,6 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
         binding.imageBackToLogin.layoutParams = paramsArrow
     }
 
-    private fun registerUser (
-        firstname: String,
-        lastname: String,
-        username: String,
-        email: String,
-        password: String
-    ) {
-        lifecycleScope.launch {
-            api.registerUser(
-                RequestUserRegistration(
-                    username = username,
-                    email = email,
-                    password = password,
-                    firstName = firstname,
-                    lastName = lastname,
-                    isOrganizer = 0
-                )
-            )
-        }
-    }
-
     private fun checkInputFields(firstname: String, lastname: String, username: String, email: String, password: String) : Boolean {
         if (firstname.isEmpty() || lastname.isEmpty() || username.isEmpty() || email.isEmpty() || password.isEmpty()) {
             NancyToast.makeText(requireContext(), "Please fill the input fields!", NancyToast.LENGTH_SHORT, NancyToast.WARNING, false).show()
@@ -117,12 +100,26 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
             NancyToast.makeText(requireContext(), "Please enter a valid e-mail address!", NancyToast.LENGTH_SHORT, NancyToast.ERROR, false).show()
             return false
         }
-        if (password.length < 6) {
-            NancyToast.makeText(requireContext(), "Minimum password length is 6!", NancyToast.LENGTH_SHORT, NancyToast.WARNING, false).show()
+
+        if (!password.contains("[a-z]".toRegex())) {
+            NancyToast.makeText(requireContext(), "Password should contain lowercase letter(s)!", NancyToast.LENGTH_SHORT, NancyToast.WARNING, false).show()
             return false
         }
-        if (password.isDigitsOnly()) {
-            NancyToast.makeText(requireContext(), "Password should contain letter(s)!", NancyToast.LENGTH_SHORT, NancyToast.WARNING, false).show()
+        if (!password.contains("[A-Z]".toRegex())) {
+            NancyToast.makeText(requireContext(), "Password should contain uppercase letter(s)!", NancyToast.LENGTH_SHORT, NancyToast.WARNING, false).show()
+            return false
+        }
+        if (!password.contains("[0-9]".toRegex())) {
+            NancyToast.makeText(requireContext(), "Password should contain digit(s)!", NancyToast.LENGTH_SHORT, NancyToast.WARNING, false).show()
+            return false
+        }
+        if (!password.contains("[!\"#$%&'()*+,-./:;\\\\<=>?@\\[\\]^_`{|}~]".toRegex())) {
+            NancyToast.makeText(requireContext(), "Password should contain special character(s)!", NancyToast.LENGTH_SHORT, NancyToast.WARNING, false).show()
+            return false
+        }
+
+        if (password.length < 8) {
+            NancyToast.makeText(requireContext(), "Minimum password length is 8!", NancyToast.LENGTH_SHORT, NancyToast.WARNING, false).show()
             return false
         }
         if (!binding.checkboxTerms.isChecked) {
