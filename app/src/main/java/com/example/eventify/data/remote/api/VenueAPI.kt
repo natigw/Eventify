@@ -1,12 +1,15 @@
 package com.example.eventify.data.remote.api
 
 import com.example.eventify.data.remote.model.venues.ResponseAllVenues
+import retrofit2.Response
 import retrofit2.http.GET
 
-interface VenueAPI {
 
+
+
+interface VenueAPI {
     @GET("/venues")
-    suspend fun getAllVenues() : List<ResponseAllVenues>
+    suspend fun getAllVenues() : Response<List<ResponseAllVenues>>
 
 //    @GET("/venues/{venue_id}")
 //    suspend fun getVenueDetails(

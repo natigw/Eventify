@@ -36,9 +36,9 @@
             android:textSize="32sp"
             android:textStyle="bold"
             android:visibility="gone"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guidelineLogin2"
-            app:layout_constraintStart_toStartOf="@+id/guidelineLogin1" />
+            app:layout_constraintStart_toStartOf="@+id/guidelineLogin1"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textSignIn"

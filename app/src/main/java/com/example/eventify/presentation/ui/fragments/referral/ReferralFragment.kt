@@ -1,16 +1,21 @@
 package com.example.eventify.presentation.ui.fragments.referral
 
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.eventify.common.base.BaseFragment
 import com.example.eventify.common.utils.NancyToast
 import com.example.eventify.databinding.FragmentReferralBinding
+import com.example.eventify.presentation.viewmodels.ReferralViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ReferralFragment : BaseFragment<FragmentReferralBinding>(FragmentReferralBinding::inflate) {
 
+    val referalViewModel by viewModels<ReferralViewModel>()
+
     override fun onViewCreatedLight() {
+
         binding.buttonBackReferral.setOnClickListener {
             findNavController().popBackStack()
         }
