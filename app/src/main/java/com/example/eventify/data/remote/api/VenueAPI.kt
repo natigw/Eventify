@@ -1,21 +1,21 @@
 package com.example.eventify.data.remote.api
 
 import com.example.eventify.data.remote.model.venues.ResponseAllVenues
+import com.example.eventify.data.remote.model.venues.venueDetails.ResponseVenueDetails
 import retrofit2.Response
 import retrofit2.http.GET
-
-
+import retrofit2.http.Path
 
 
 interface VenueAPI {
     @GET("/venues")
     suspend fun getAllVenues() : Response<List<ResponseAllVenues>>
 
-//    @GET("/venues/{venue_id}")
-//    suspend fun getVenueDetails(
-//        @Path("venue_id") venue_id: Int
-//    ) : ResponseVenueDetails
-//
+    @GET("/venues/{venue_id}")
+    suspend fun getVenueDetails(
+        @Path("venue_id") venueId: Int
+    ) : Response<ResponseVenueDetails>
+
 //    @POST("/venues")
 //    suspend fun createVenue(
 //        //@Header("Authentication") bearer : "salam",

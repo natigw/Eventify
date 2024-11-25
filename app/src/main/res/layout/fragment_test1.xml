@@ -9,6 +9,8 @@
         android:id="@+id/tvTest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        />
+        android:text="salam"
+        tools:layout_editor_absoluteX="167dp"
+        tools:layout_editor_absoluteY="285dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
