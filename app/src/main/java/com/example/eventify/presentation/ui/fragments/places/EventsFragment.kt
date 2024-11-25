@@ -27,7 +27,7 @@ class EventsFragment : BaseFragment<FragmentEventsBinding>(FragmentEventsBinding
     private val viewmodel: EventViewModel by viewModels()
     private val sharedViewModel: SharedViewModel by activityViewModels()
 
-    private val EventAdapter = EventAdapter(
+    private val eventAdapter = EventAdapter(
         onClick = {
             NancyToast.makeText(requireContext(), "[location data...]", NancyToast.LENGTH_SHORT, NancyToast.SUCCESS, false).show()
 //            findNavController().navigate(
@@ -57,14 +57,14 @@ class EventsFragment : BaseFragment<FragmentEventsBinding>(FragmentEventsBinding
 
     private fun updateAdapters() {
         lifecycleScope.launch {
-            viewmodel.Events.collect {
-                EventAdapter.updateAdapter(it)
+            viewmodel.events.collect {
+                eventAdapter.updateAdapter(it)
                 Log.e("salam", it.toString())
             }
         }
     }
 
     private fun setAdapters() {
-        binding.rvEvents.adapter = EventAdapter
+        binding.rvEvents.adapter = eventAdapter
     }
 }

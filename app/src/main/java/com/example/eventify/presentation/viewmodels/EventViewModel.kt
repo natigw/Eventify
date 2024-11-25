@@ -11,10 +11,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class EventViewModel @Inject constructor(
-    private val EventRepository: EventRepository
+    private val eventRepository: EventRepository
 ) : ViewModel() {
 
-    val Events = MutableStateFlow<List<EventItem>>(emptyList())
+    val events = MutableStateFlow<List<EventItem>>(emptyList())
 
     init {
         getEvents()
@@ -22,8 +22,8 @@ class EventViewModel @Inject constructor(
 
     private fun getEvents() {
         viewModelScope.launch {
-            val response = EventRepository.getEvents()
-            Events.emit(response)
+            val response = eventRepository.getEvents()
+            events.emit(response)
         }
     }
 }
