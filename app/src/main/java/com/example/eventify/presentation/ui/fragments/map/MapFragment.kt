@@ -27,6 +27,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.PolylineOptions
+import com.google.maps.android.BuildConfig
 import com.google.maps.android.PolyUtil
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -59,17 +60,13 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         this.googleMap = googleMap
 
         sharedViewModel.sharedCoordinates?.let {
-            googleMap.addMarker(
-                MarkerOptions()
-                    .position(
-                        LatLng(
-                            it.lat.toDouble(),
-                            it.long.toDouble()
-                        )
-                    )
-                    .title(it.name)
-                    .snippet(it.name)
-                    .icon(BitmapDescriptorFactory.defaultMarker(if (it.placeType == "venue") BitmapDescriptorFactory.HUE_MAGENTA else BitmapDescriptorFactory.HUE_ORANGE))
+            addMarker(
+                googleMap = googleMap,
+                lat = it.lat.toDouble(),
+                lng = it.long.toDouble(),
+                title = it.name,
+                description = it.name,
+                hue = if (it.placeType == "venue") BitmapDescriptorFactory.HUE_MAGENTA else BitmapDescriptorFactory.HUE_ORANGE
             )
         }
 
@@ -80,23 +77,25 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 val events = this@MapFragment.eventApi.getAllEvents()
                 venues?.forEach {
                     if (it.lat != "string") {
-                        googleMap.addMarker(
-                            MarkerOptions()
-                                .position(LatLng(it.lat.toDouble(), it.lng.toDouble()))
-                                .title(it.name)
-                                .snippet(it.description)
-                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
+                        addMarker(
+                            googleMap = googleMap,
+                            lat = it.lat.toDouble(),
+                            lng = it.lng.toDouble(),
+                            title = it.name,
+                            description = it.description,
+                            hue = BitmapDescriptorFactory.HUE_AZURE
                         )
                     }
                 }
                 events.forEach {
                     if (it.location.lat != "string") {
-                        googleMap.addMarker(
-                            MarkerOptions()
-                                .position(LatLng(it.location.lat.toDouble(), it.location.lng.toDouble()))
-                                .title(it.event.title)
-                                .snippet(it.event.description)
-                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
+                        addMarker(
+                            googleMap = googleMap,
+                            lat = it.location.lat.toDouble(),
+                            lng = it.location.lng.toDouble(),
+                            title = it.event.title,
+                            description = it.event.description,
+                            hue = BitmapDescriptorFactory.HUE_RED
                         )
                     }
                 }
@@ -158,6 +157,22 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         }
     }
 
+    private fun addMarker(
+        googleMap: GoogleMap,
+        lat: Double,
+        lng: Double,
+        title: String,
+        description: String,
+        hue: Float
+    ) {
+        googleMap.addMarker(
+            MarkerOptions()
+                .position(LatLng(lat, lng))
+                .title(title)
+                .snippet(description)
+                .icon(BitmapDescriptorFactory.defaultMarker(hue))
+        )
+    }
 
 
     override fun onViewCreatedLight() {
@@ -168,8 +183,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     }
 
     private suspend fun fetchRoute(origin: LatLng, destination: LatLng) {
-        val directionsApiKey =
-            "AIzaSyDov61U_ntrpE8N7dfJ5ARWbKIeMwqFIjw"  //TODO -> bunu local.propertiesden gotur
+        val directionsApiKey = com.example.eventify.BuildConfig.MAPS_API_KEY
         val url = "https://maps.googleapis.com/maps/api/directions/json?" +
                 "origin=${origin.latitude},${origin.longitude}" +
                 "&destination=${destination.latitude},${destination.longitude}" +
@@ -243,13 +257,8 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         fusedLocationProviderClient.lastLocation.addOnSuccessListener { location ->
             if (location != null) {
                 val currentLatLng = LatLng(location.latitude, location.longitude)
-//                googleMap.addMarker(   //oldugun yere pin de qoysun? deqiqlesdir
-//                    MarkerOptions()
-//                        .position(currentLatLng)
-//                        .title("Your current location")
-//                        .snippet("You are here")
-//                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
-//                )
+                //oldugun yere pin de qoysun? deqiqlesdir
+                addMarker(googleMap, location.latitude, location.longitude, "Your current location", "You are here", BitmapDescriptorFactory.HUE_RED)
                 googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 15f))
             } else {
                 val bakuCityCenter = LatLng(40.3791, 49.8468)
