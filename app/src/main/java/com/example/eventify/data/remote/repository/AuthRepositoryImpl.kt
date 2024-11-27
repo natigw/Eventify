@@ -11,29 +11,22 @@ class AuthRepositoryImpl @Inject constructor(
 ) : AuthRepository {
 
     override suspend fun registerUser(
-
-    ): ResponseUserRegistration {
-
-    }
-
-    private fun registerUser (
         firstname: String,
         lastname: String,
         username: String,
         email: String,
         password: String
-    ) {
-        lifecycleScope.launch {
-            api.registerUser(
-                RequestUserRegistration(
-                    username = username,
-                    email = email,
-                    password = password,
-                    firstName = firstname,
-                    lastName = lastname,
-                    isOrganizer = 0
-                )
+    ): ResponseUserRegistration {
+        val response = api.registerUser(
+            RequestUserRegistration(
+                username = username,
+                email = email,
+                password = password,
+                firstName = firstname,
+                lastName = lastname,
+                isOrganizer = 0
             )
-        }
+        )
+        return response.body()!!
     }
 }

@@ -10,4 +10,7 @@
     <color name="purple_eventify">#6823EA</color>
     <color name="purple_light_eventify">#9A72F3</color>
     <color name="transparent">@android:color/transparent</color>
+
+    <color name="textColor">#ffffff</color>
+    <color name="appBackground">#9C27B0</color>
 </resources>

@@ -52,7 +52,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
 //                    }
 
                     try {
-                        registerUser(firstname, lastname, username, email, password)
+//                        registerUser(firstname, lastname, username, email, password)
                         clearInputFields()
                         NancyToast.makeText(requireContext(), "Registration successful!", NancyToast.LENGTH_SHORT, NancyToast.SUCCESS, false).show()
                         findNavController().popBackStack()

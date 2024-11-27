@@ -1,7 +1,10 @@
 package com.example.eventify.presentation.ui.fragments.map
 
 import android.Manifest
+import android.content.Context
 import android.content.pm.PackageManager
+import android.content.res.Configuration
+import android.content.res.Resources
 import android.graphics.Color
 import android.util.Log
 import androidx.core.app.ActivityCompat
@@ -21,6 +24,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.PolylineOptions
 import com.google.maps.android.PolyUtil
@@ -68,22 +72,6 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     .icon(BitmapDescriptorFactory.defaultMarker(if (it.placeType == "venue") BitmapDescriptorFactory.HUE_MAGENTA else BitmapDescriptorFactory.HUE_ORANGE))
             )
         }
-
-//        // Load the custom style (dark mode)
-//        try {
-//            val success = googleMap.setMapStyle(
-//                MapStyleOptions.loadRawResourceStyle(
-//                    requireContext(),
-//                    R.raw.map_dark_mode // Replace with your actual file name
-//                )
-//            )
-//            if (!success) {
-//                Log.e("MapStyle", "Style parsing failed.")
-//            }
-//        } catch (e: Resources.NotFoundException) {
-//            Log.e("MapStyle", "Can't find style. Error: ", e)
-//        }
-
 
         lifecycleScope.launch {
             try {
@@ -146,17 +134,36 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
     }
 
+    //TODO -> burda nese sehv olub
+    private fun isDarkModeEnabled(context: Context): Boolean {
+        val currentNightMode = context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+        return currentNightMode == Configuration.UI_MODE_NIGHT_YES
+    }
+
+
+    private fun applyDynamicMapStyle(googleMap: GoogleMap) {
+        val isDarkMode = isDarkModeEnabled(requireContext())
+        val styleRes = if (isDarkMode) R.raw.map_aubergine else GoogleMap.MAP_TYPE_NORMAL
+        try {
+            googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(requireContext(), styleRes))
+        } catch (e: Resources.NotFoundException) {
+            Log.e("MapStyle", "Error loading map style: ${e.message}")
+        }
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        if (::googleMap.isInitialized) {
+            applyDynamicMapStyle(googleMap)
+        }
+    }
+
+
+
     override fun onViewCreatedLight() {
 
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
-
-//        binding.map.post {  //no need anymore
-//            val bottomNavHeight = requireActivity().findViewById<View>(R.id.bottomNavigationView).height
-//            val params = binding.map.layoutParams as ConstraintLayout.LayoutParams
-//            params.bottomMargin = bottomNavHeight
-//            binding.map.layoutParams = params
-//        }
 
     }
 

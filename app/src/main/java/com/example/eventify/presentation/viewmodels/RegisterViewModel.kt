@@ -13,24 +13,24 @@ class RegisterViewModel @Inject constructor(
     private val api: AuthAPI
 ) : ViewModel() {
 
-    private fun registerUser (
-        firstname: String,
-        lastname: String,
-        username: String,
-        email: String,
-        password: String
-    ) {
-        lifecycleScope.launch {
-            api.registerUser(
-                RequestUserRegistration(
-                    username = username,
-                    email = email,
-                    password = password,
-                    firstName = firstname,
-                    lastName = lastname,
-                    isOrganizer = 0
-                )
-            )
-        }
-    }
+//    private fun registerUser (
+//        firstname: String,
+//        lastname: String,
+//        username: String,
+//        email: String,
+//        password: String
+//    ) {
+//        lifecycleScope.launch {
+//            api.registerUser(
+//                RequestUserRegistration(
+//                    username = username,
+//                    email = email,
+//                    password = password,
+//                    firstName = firstname,
+//                    lastName = lastname,
+//                    isOrganizer = 0
+//                )
+//            )
+//        }
+//    }
 }
