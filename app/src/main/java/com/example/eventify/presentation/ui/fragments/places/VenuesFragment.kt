@@ -1,6 +1,7 @@
 package com.example.eventify.presentation.ui.fragments.places
 
 import android.util.Log
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -15,6 +16,7 @@ import com.example.eventify.presentation.viewmodels.SharedViewModel
 import com.example.eventify.presentation.viewmodels.VenueViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -64,6 +66,12 @@ class VenuesFragment : BaseFragment<FragmentVenuesBinding>(FragmentVenuesBinding
     }
 
     private fun updateAdapters() {
+        lifecycleScope.launch {
+            viewmodel.isLoading.collectLatest {
+                binding.progressIndicator.isVisible = it
+            }
+        }
+
         lifecycleScope.launch {
             viewmodel.venues.collect {
                 venueAdapter.updateAdapter(it)

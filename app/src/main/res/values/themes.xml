@@ -6,4 +6,6 @@
     </style>
 
     <style name="Theme.Eventify" parent="Base.Theme.Eventify" />
+
+
 </resources>

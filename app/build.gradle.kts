@@ -40,9 +40,6 @@ android {
         buildConfig = true
     }
     buildTypes {
-//        debug {
-//            buildConfigField("String", "MAPS_API_KEY", "\"${project.properties['MAPS_API_KEY']}\"")
-//        }
         release {
             isMinifyEnabled = false
             proguardFiles(
@@ -97,5 +94,5 @@ dependencies {
 }
 
 kapt {
-    correctErrorTypes = true
+    correctErrorTypes=true
 }

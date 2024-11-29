@@ -8,16 +8,16 @@
     android:background="@color/green_light_eventify">
 
     <Button
-        style="?attr/materialIconButtonFilledTonalStyle"
         android:id="@+id/iconButton"
+        style="?attr/materialIconButtonFilledTonalStyle"
         android:layout_width="60dp"
         android:layout_height="60dp"
+        android:layout_marginStart="12dp"
         app:icon="@drawable/profile_icon_unselected"
         app:iconSize="32dp"
-        android:layout_marginStart="12dp"
+        app:layout_constraintBottom_toBottomOf="@id/searchBarMap"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/searchBarMap"
-        app:layout_constraintBottom_toBottomOf="@id/searchBarMap" />
+        app:layout_constraintTop_toTopOf="@id/searchBarMap" />
 
     <com.google.android.material.search.SearchBar
         android:id="@+id/searchBarMap"
