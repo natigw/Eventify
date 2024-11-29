@@ -22,14 +22,16 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="24dp"
+        android:backgroundTint="@color/green_light_eventify"
         app:cardCornerRadius="24dp"
-        app:strokeColor="@color/transparent"
         app:cardElevation="8dp"
-        android:backgroundTint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/guidelineSampleSubs2"
-        app:layout_constraintStart_toStartOf="@id/guidelineSampleSubs1">
+        app:layout_constraintStart_toStartOf="@id/guidelineSampleSubs1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="@color/transparent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -41,19 +43,19 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
+                android:fontFamily="@font/inter_bold"
+                android:textColor="@color/purple_dark_eventify"
+                android:textSize="26sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="Base"
-                android:textColor="@color/purple_dark_eventify"
-                android:fontFamily="@font/inter_bold"
-                android:textSize="26sp"/>
+                tools:text="Base" />
 
             <Button
                 android:id="@+id/textSaveMoneySubscription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="24dp"
-                android:backgroundTint="@color/gray_light"
+                android:backgroundTint="@color/eventify_background"
                 android:clickable="false"
                 android:fontFamily="@font/inter_bold"
                 android:minWidth="64dp"
@@ -62,12 +64,12 @@
                 android:paddingEnd="10dp"
                 android:textColor="@color/purple_eventify"
                 android:textSize="12sp"
+                android:visibility="visible"
                 app:cornerRadius="10dp"
                 app:layout_constraintBottom_toBottomOf="@+id/textPackageNameSubscription"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/textPackageNameSubscription"
-                tools:text="Save $80"
-                android:visibility="invisible"/>
+                tools:text="Save $80" />
 
             <TextView
                 android:id="@+id/textFeaturesSubscription"
@@ -87,12 +89,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
+                android:fontFamily="@font/inter_bold"
+                android:textColor="@color/purple_eventify"
+                android:textSize="24sp"
                 app:layout_constraintStart_toStartOf="@+id/textFeaturesSubscription"
                 app:layout_constraintTop_toBottomOf="@id/textFeaturesSubscription"
-                tools:text="Free"
-                android:fontFamily="@font/inter_bold"
-                android:textSize="24sp"
-                android:textColor="@color/purple_eventify"/>
+                tools:text="Free" />
 
             <TextView
                 android:id="@+id/textMonthlyAnnuallySubscription"
@@ -100,15 +102,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="2dp"
-                app:layout_constraintStart_toEndOf="@id/textPriceSubscription"
-                app:layout_constraintBottom_toBottomOf="@id/textPriceSubscription"
-                tools:text="/month"
                 android:fontFamily="@font/inter_regular"
-                android:textSize="16sp"
                 android:textColor="#BF181059"
-                android:visibility="visible" />
+                android:textSize="16sp"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="@id/textPriceSubscription"
+                app:layout_constraintStart_toEndOf="@id/textPriceSubscription"
+                tools:text="/month" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/buttonChoosePackageSubscription"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -118,13 +120,13 @@
                 android:fontFamily="@font/inter_bold"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
+                android:text="@string/try_1_month"
                 android:textSize="20sp"
                 app:cornerRadius="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/textFeaturesSubscription"
                 app:layout_constraintStart_toStartOf="@+id/textFeaturesSubscription"
-                app:layout_constraintTop_toBottomOf="@id/textPriceSubscription"
-                android:text="@string/try_1_month" />
+                app:layout_constraintTop_toBottomOf="@id/textPriceSubscription" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>

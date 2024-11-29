@@ -1,6 +1,8 @@
 package com.example.eventify.presentation.adapters
 
+import android.annotation.SuppressLint
 import android.view.View
+import com.example.eventify.R
 import com.example.eventify.common.base.BaseAdapter
 import com.example.eventify.databinding.SampleSubscriptionBinding
 import com.example.eventify.domain.model.SubscriptionData
@@ -36,6 +38,7 @@ class SubscriptionAdapter(
         return packages.size
     }
 
+    @SuppressLint("ResourceAsColor")
     override fun onBindLight(binding: SampleSubscriptionBinding, position: Int) {
         val item = packages[position]
         with(binding) {
@@ -57,6 +60,7 @@ class SubscriptionAdapter(
             if (item.name == currentPackage) {
                 buttonChoosePackageSubscription.text = "Current plan"
                 buttonChoosePackageSubscription.isEnabled = false
+//                buttonChoosePackageSubscription.setBackgroundColor(R.color.gray_light)  //TODO -> disable olanda gray olsun
             }
             buttonChoosePackageSubscription.setOnClickListener {
                 onClick(item.name)

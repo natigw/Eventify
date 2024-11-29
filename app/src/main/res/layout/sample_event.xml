@@ -205,7 +205,7 @@
         android:layout_marginTop="8dp"
         android:ellipsize="end"
         android:fontFamily="@font/inter_regular"
-        android:maxLines="5"
+        android:maxLines="3"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

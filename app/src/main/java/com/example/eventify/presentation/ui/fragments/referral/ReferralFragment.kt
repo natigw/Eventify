@@ -3,15 +3,23 @@ package com.example.eventify.presentation.ui.fragments.referral
 import android.content.Intent
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.example.eventify.R
 import com.example.eventify.common.base.BaseFragment
 import com.example.eventify.common.utils.copyToClipboard
+import com.example.eventify.data.remote.api.EventAPI
 import com.example.eventify.databinding.FragmentReferralBinding
 import com.example.eventify.presentation.viewmodels.ReferralViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class ReferralFragment : BaseFragment<FragmentReferralBinding>(FragmentReferralBinding::inflate) {
+
+    @Inject
+    lateinit var api: EventAPI
 
     val referralViewModel by viewModels<ReferralViewModel>()
 
@@ -19,14 +27,40 @@ class ReferralFragment : BaseFragment<FragmentReferralBinding>(FragmentReferralB
 
         val link = "https://picsum.photos/id/237/200/300"  //TODO -> backendden iste
 
-        binding.buttonBackReferral.setOnClickListener {
-            findNavController().popBackStack()
-        }
         binding.buttonCopyLink.setOnClickListener {
             copyToClipboard(requireContext(), link)
         }
         binding.buttonShareLink.setOnClickListener {
             shareLink(link)
+        }
+
+
+        val numberOfLinkSent = 2 //TODO -> backendden iste
+        lifecycleScope.launch {
+            val chosenEvent = api.getAllEvents().random().event.title   //TODO -> bunu bilmirem backendden yoxsa nece biznes logici danis
+
+            binding.textGetTicketDescriptionReferral.text = "Almost there! Refer ${3 - numberOfLinkSent} more friend to get a free ticket for \"$chosenEvent\" event."
+            binding.progressReferral.progress = 33 * numberOfLinkSent
+            when (numberOfLinkSent) {
+                1 -> {
+                    binding.imageProgress1.setImageResource(R.drawable.check_progress_green)
+                }
+                2 -> {
+                    binding.imageProgress1.setImageResource(R.drawable.check_progress_green)
+                    binding.imageProgress2.setImageResource(R.drawable.check_progress_green)
+                }
+                3 -> {
+                    binding.imageProgress1.setImageResource(R.drawable.check_progress_green)
+                    binding.imageProgress2.setImageResource(R.drawable.check_progress_green)
+                    binding.imageProgress3.setImageResource(R.drawable.check_progress_green)
+                    binding.textGetTicketDescriptionReferral.text = "Congratulations! You got a ticket for \"$chosenEvent\" event. Please check your ticket box!"
+                }
+            }
+        }
+
+
+        binding.buttonBackReferral.setOnClickListener {
+            findNavController().popBackStack()
         }
 
         setConstraints()

@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/green_light_eventify"
+        android:background="@color/eventify_background"
         tools:context=".presentation.ui.fragments.referral.ReferralFragment">
 
         <androidx.constraintlayout.widget.Guideline
@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="-16dp"
-            android:backgroundTint="@color/green_light_eventify"
+            android:backgroundTint="@color/eventify_background"
             app:icon="@drawable/back_arrow"
             app:iconTint="@color/purple_eventify"
             app:iconSize="24dp"
@@ -60,7 +60,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="36dp"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="@color/green_light_eventify"
             app:cardCornerRadius="24dp"
             app:cardElevation="8dp"
             app:layout_constraintEnd_toEndOf="@id/guidelineReferral2"
@@ -92,15 +92,15 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
                     android:max="100"
-                    android:progress="66"
-                    app:trackThickness="7dp"
                     app:indicatorColor="@color/green_eventify"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:trackColor="@color/gray_light"
                     app:trackCornerRadius="16dp"
-                    app:trackStopIndicatorSize="0dp" />
+                    app:trackStopIndicatorSize="0dp"
+                    app:trackThickness="7dp"
+                    tools:progress="66" />
 
                 <TextView
                     android:id="@+id/textGetTicketReferral"
@@ -134,7 +134,7 @@
                     android:id="@+id/imageRewards"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="-16dp"
+                    android:layout_marginStart="-20dp"
                     android:layout_marginTop="-24dp"
                     android:layout_marginBottom="-32dp"
                     android:adjustViewBounds="true"
@@ -145,14 +145,40 @@
                     app:layout_constraintTop_toBottomOf="@id/textGetTicketDescriptionReferral" />
 
                 <ImageView
-                    android:id="@+id/imageView2"
+                    android:id="@+id/imageProgress1"
+                    android:layout_width="36dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/check_progress_gray"
+                    app:layout_constraintBottom_toTopOf="@+id/textGetTicketNoteReferral"
+                    app:layout_constraintEnd_toStartOf="@+id/imageProgress2"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imageProgress2"
+                    android:layout_width="36dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/check_progress_gray"
+                    app:layout_constraintEnd_toStartOf="@+id/imageProgress3"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/imageProgress1"
+                    app:layout_constraintTop_toTopOf="@+id/imageProgress1" />
+
+                <ImageView
+                    android:id="@+id/imageProgress3"
                     android:layout_width="36dp"
                     android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
-                    android:src="@drawable/round_success"
-                    app:tint="@color/green_eventify"
-                    tools:layout_editor_absoluteX="91dp"
-                    tools:layout_editor_absoluteY="230dp" />
+                    android:src="@drawable/check_progress_gray"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/imageProgress2"
+                    app:layout_constraintTop_toTopOf="@+id/imageProgress2" />
 
                 <TextView
                     android:id="@+id/textGetTicketNoteReferral"
@@ -166,8 +192,7 @@
                     android:textColor="@color/gray"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/guidelineCard1Referral2"
-                    app:layout_constraintStart_toStartOf="@+id/guidelineCard1Referral1"
-                    app:layout_constraintVertical_bias="0.0" />
+                    app:layout_constraintStart_toStartOf="@+id/guidelineCard1Referral1" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
@@ -178,7 +203,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:layout_marginBottom="32dp"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="@color/green_light_eventify"
             app:cardCornerRadius="24dp"
             app:cardElevation="8dp"
             app:layout_constraintBottom_toBottomOf="parent"

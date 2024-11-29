@@ -1,139 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true" >
+    android:fillViewport="true">
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/green_light_eventify"
-    tools:context=".presentation.ui.fragments.subscription.SubscriptionFragment">
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineSubs1"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.06" />
+        android:background="@color/eventify_background"
+        tools:context=".presentation.ui.fragments.subscription.SubscriptionFragment">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineSubs2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.94" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineSubs1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.06" />
 
-<!--    <Button-->
-<!--        style="?attr/materialIconButtonFilledTonalStyle"-->
-<!--        android:id="@+id/buttonBackSubs"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginStart="-12dp"-->
-<!--        app:layout_constraintStart_toStartOf="@id/guidelineSubs1"-->
-<!--        app:layout_constraintTop_toTopOf="@id/guidelineSubs3"-->
-<!--        app:layout_constraintBottom_toBottomOf="@id/guidelineSubs3"app:icon="@drawable/back_arrow"-->
-<!--        app:iconTint="@color/green_light_eventify"-->
-<!--        android:backgroundTint="@color/purple_light_eventify" />-->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineSubs2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.94" />
 
-    <Button
-        style="?attr/materialIconButtonFilledTonalStyle"
-        android:id="@+id/buttonBackSubs"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="-16dp"
-        android:layout_marginBottom="-8dp"
-        app:layout_constraintStart_toStartOf="@id/guidelineSubs1"
-        app:layout_constraintTop_toTopOf="@id/textHeadingSubs"
-        app:icon="@drawable/back_arrow"
-        app:iconTint="@color/purple_eventify"
-        app:iconSize="24dp"
-        android:backgroundTint="@color/green_light_eventify" />
+        <Button
+            android:id="@+id/buttonBackSubs"
+            style="?attr/materialIconButtonFilledTonalStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="-16dp"
+            android:layout_marginBottom="-8dp"
+            android:backgroundTint="@color/eventify_background"
+            app:icon="@drawable/back_arrow"
+            app:iconSize="24dp"
+            app:iconTint="@color/purple_eventify"
+            app:layout_constraintStart_toStartOf="@id/guidelineSubs1"
+            app:layout_constraintTop_toTopOf="@id/textHeadingSubs" />
 
-    <TextView
-        android:id="@+id/textHeadingSubs"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:text="@string/subs_heading"
-        android:textAlignment="center"
-        android:textColor="@color/purple_dark_eventify"
-        android:textSize="32sp"
-        android:fontFamily="@font/inter_bold"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineSubs2"
-        app:layout_constraintStart_toStartOf="@+id/guidelineSubs1"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/textHeadingSubs"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/subs_heading"
+            android:textAlignment="center"
+            android:textColor="@color/purple_dark_eventify"
+            android:textSize="32sp"
+            app:layout_constraintEnd_toStartOf="@+id/guidelineSubs2"
+            app:layout_constraintStart_toStartOf="@+id/guidelineSubs1"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textHeading2Subs"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="@string/subs_heading2"
-        android:fontFamily="@font/inter_regular"
-        android:textAlignment="center"
-        android:textColor="#BF181059"
-        app:layout_constraintEnd_toEndOf="@+id/textHeadingSubs"
-        app:layout_constraintStart_toStartOf="@+id/textHeadingSubs"
-        app:layout_constraintTop_toBottomOf="@+id/textHeadingSubs" />
+        <TextView
+            android:id="@+id/textHeading2Subs"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/inter_regular"
+            android:text="@string/subs_heading2"
+            android:textAlignment="center"
+            android:textColor="#BF181059"
+            app:layout_constraintEnd_toEndOf="@+id/textHeadingSubs"
+            app:layout_constraintStart_toStartOf="@+id/textHeadingSubs"
+            app:layout_constraintTop_toBottomOf="@+id/textHeadingSubs" />
 
-    <TextView
-        android:id="@+id/textBillMonthly"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="16dp"
-        android:fontFamily="@font/inter_bold"
-        android:text="@string/bill_monthly"
-        android:textColor="@color/purple_dark_eventify"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@+id/materialSwitch"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintTop_toBottomOf="@id/textHeading2Subs" />
+        <TextView
+            android:id="@+id/textBillMonthly"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/bill_monthly"
+            android:textColor="@color/purple_dark_eventify"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/materialSwitch"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintTop_toBottomOf="@id/textHeading2Subs" />
 
-    <com.google.android.material.materialswitch.MaterialSwitch
-        android:id="@+id/materialSwitch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/textBillMonthly"
-        app:layout_constraintEnd_toEndOf="@+id/textHeading2Subs"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/textHeading2Subs"
-        app:layout_constraintTop_toTopOf="@+id/textBillMonthly"
-        app:thumbTint="@color/switch_thumb_selector"
-        app:trackTint="@color/switch_track_selector" />
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/materialSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/textBillMonthly"
+            app:layout_constraintEnd_toEndOf="@+id/textHeading2Subs"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/textHeading2Subs"
+            app:layout_constraintTop_toTopOf="@+id/textBillMonthly"
+            app:thumbTint="@color/switch_thumb_selector"
+            app:trackTint="@color/switch_track_selector" />
 
-    <TextView
-        android:id="@+id/textBillAnnually"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="@string/bill_annually"
-        android:fontFamily="@font/inter_light"
-        android:textSize="16sp"
-        android:textColor="@color/purple_dark_eventify"
-        app:layout_constraintBottom_toBottomOf="@+id/textBillMonthly"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/materialSwitch"
-        app:layout_constraintTop_toTopOf="@+id/textBillMonthly" />
+        <TextView
+            android:id="@+id/textBillAnnually"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/inter_light"
+            android:text="@string/bill_annually"
+            android:textColor="@color/purple_dark_eventify"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/textBillMonthly"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/materialSwitch"
+            app:layout_constraintTop_toTopOf="@+id/textBillMonthly" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvSubscriptions"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:orientation="vertical"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/materialSwitch"
-        tools:itemCount="3"
-        tools:listitem="@layout/sample_subscription" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvSubscriptions"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/materialSwitch"
+            tools:itemCount="3"
+            tools:listitem="@layout/sample_subscription" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

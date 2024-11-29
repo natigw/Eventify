@@ -8,7 +8,6 @@ import androidx.lifecycle.lifecycleScope
 import com.example.eventify.R
 import com.example.eventify.common.base.BaseFragment
 import com.example.eventify.common.utils.NancyToast
-import com.example.eventify.data.remote.api.VenueAPI
 import com.example.eventify.databinding.FragmentVenuesBinding
 import com.example.eventify.domain.model.PlaceCoordinates
 import com.example.eventify.presentation.adapters.VenueAdapter
@@ -18,13 +17,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class VenuesFragment : BaseFragment<FragmentVenuesBinding>(FragmentVenuesBinding::inflate) {
-
-    @Inject
-    lateinit var api: VenueAPI
 
     private val viewmodel: VenueViewModel by viewModels()
     private val sharedViewModel: SharedViewModel by activityViewModels()
