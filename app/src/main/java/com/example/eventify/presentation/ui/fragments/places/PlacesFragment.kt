@@ -20,8 +20,8 @@ class PlacesFragment : BaseFragment<FragmentPlacesBinding>(FragmentPlacesBinding
             EventsFragment()
         )
         val placesViewPagerAdapter = PlacesViewPagerAdapter(fragmentList, requireActivity().supportFragmentManager,lifecycle)
-        binding.viewPager.adapter = placesViewPagerAdapter
-        TabLayoutMediator(binding.tabLayout,binding.viewPager) {tab,position->
+        binding.viewPagerPlaces.adapter = placesViewPagerAdapter
+        TabLayoutMediator(binding.tabLayout,binding.viewPagerPlaces) {tab,position->
             tab.text = tabTitles[position]
         }.attach()
     }

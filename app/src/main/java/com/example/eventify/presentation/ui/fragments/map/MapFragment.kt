@@ -74,7 +74,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             try {
                 // Adding markers
                 val venues = this@MapFragment.venueApi.getAllVenues().body()
-                val events = this@MapFragment.eventApi.getAllEvents()
+                val events = this@MapFragment.eventApi.getAllEvents().body()
                 venues?.forEach {
                     if (it.lat != "string") {
                         addMarker(
@@ -87,7 +87,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                         )
                     }
                 }
-                events.forEach {
+                events?.forEach {
                     if (it.location.lat != "string") {
                         addMarker(
                             googleMap = googleMap,
