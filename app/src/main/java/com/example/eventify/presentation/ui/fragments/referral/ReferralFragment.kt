@@ -12,6 +12,7 @@ import com.example.eventify.data.remote.api.EventAPI
 import com.example.eventify.databinding.FragmentReferralBinding
 import com.example.eventify.presentation.viewmodels.ReferralViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -19,7 +20,8 @@ import javax.inject.Inject
 class ReferralFragment : BaseFragment<FragmentReferralBinding>(FragmentReferralBinding::inflate) {
 
     @Inject
-    lateinit var api: EventAPI
+    lateinit var eventApi: EventAPI
+
 
     val referralViewModel by viewModels<ReferralViewModel>()
 
@@ -37,9 +39,12 @@ class ReferralFragment : BaseFragment<FragmentReferralBinding>(FragmentReferralB
 
         val numberOfLinkSent = 2 //TODO -> backendden iste
         lifecycleScope.launch {
-            val chosenEvent = api.getAllEvents().random().event.title   //TODO -> bunu bilmirem backendden yoxsa nece biznes logici danis
+            referralViewModel.eventsState.collectLatest {
+                val chosenEvent = it.random().name
+                binding.textGetTicketDescriptionReferral.text = "Almost there! Refer ${3 - numberOfLinkSent} more friend to get a free ticket for \"$chosenEvent\" event."
+                binding.textGetTicketDescriptionReferral.text = "Congratulations! You got a ticket for \"$chosenEvent\" event. Please check your ticket box!"
+            }
 
-            binding.textGetTicketDescriptionReferral.text = "Almost there! Refer ${3 - numberOfLinkSent} more friend to get a free ticket for \"$chosenEvent\" event."
             binding.progressReferral.progress = 33 * numberOfLinkSent
             when (numberOfLinkSent) {
                 1 -> {
@@ -53,7 +58,6 @@ class ReferralFragment : BaseFragment<FragmentReferralBinding>(FragmentReferralB
                     binding.imageProgress1.setImageResource(R.drawable.check_progress_green)
                     binding.imageProgress2.setImageResource(R.drawable.check_progress_green)
                     binding.imageProgress3.setImageResource(R.drawable.check_progress_green)
-                    binding.textGetTicketDescriptionReferral.text = "Congratulations! You got a ticket for \"$chosenEvent\" event. Please check your ticket box!"
                 }
             }
         }
