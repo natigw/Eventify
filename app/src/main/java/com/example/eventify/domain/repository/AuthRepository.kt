@@ -10,4 +10,6 @@ interface AuthRepository {
         email: String,
         password: String
     ): ResponseUserRegistration
+
+    suspend fun loginUser()
 }

@@ -1,5 +1,6 @@
 package com.example.eventify.data.remote.repository
 
+
 import com.example.eventify.data.remote.api.AuthAPI
 import com.example.eventify.data.remote.model.register.RequestUserRegistration
 import com.example.eventify.data.remote.model.register.ResponseUserRegistration
@@ -17,16 +18,33 @@ class AuthRepositoryImpl @Inject constructor(
         email: String,
         password: String
     ): ResponseUserRegistration {
-        val response = api.registerUser(
-            RequestUserRegistration(
-                username = username,
-                email = email,
-                password = password,
-                firstName = firstname,
-                lastName = lastname,
-                isOrganizer = 0
+
+        try {
+            val response = api.registerUser(
+                RequestUserRegistration(
+                    username = username,
+                    email = email,
+                    password = password,
+                    firstName = firstname,
+                    lastName = lastname,
+                    isOrganizer = 0
+                )
             )
-        )
-        return response.body()!!
+            if(response.isSuccessful && response.body() != null){
+                return response.body()!!
+            }
+            else{
+                throw Exception("Error ${response.code()}: ${response.errorBody()?.string()}")
+            }
+
+        }
+        catch (e: Exception){
+            throw e
+        }
+
+    }
+
+    override suspend fun loginUser() {
+        //TODO("Not yet implemented")
     }
 }

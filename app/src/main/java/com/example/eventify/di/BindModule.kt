@@ -1,7 +1,9 @@
 package com.example.eventify.di
 
+import com.example.eventify.data.remote.repository.AuthRepositoryImpl
 import com.example.eventify.data.remote.repository.EventRepositoryImpl
 import com.example.eventify.data.remote.repository.VenueRepositoryImpl
+import com.example.eventify.domain.repository.AuthRepository
 import com.example.eventify.domain.repository.EventRepository
 import com.example.eventify.domain.repository.VenueRepository
 import dagger.Binds
@@ -18,5 +20,8 @@ abstract class BindModule {
 
     @Binds
     abstract fun bindEventRepository(impl: EventRepositoryImpl): EventRepository
+
+    @Binds
+    abstract fun bindAuthRepository(impl : AuthRepositoryImpl) : AuthRepository
 
 }

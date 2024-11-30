@@ -25,7 +25,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterBinding::inflate) {
 
-    private val viewmodel by viewModels<RegisterViewModel>()
+    private val viewModel by viewModels<RegisterViewModel>()
 
     override fun onViewCreatedLight() {
         setScrollViewConstraints()
@@ -41,6 +41,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
 
                 if (!checkInputFields(firstname, lastname, username, email, password)) return@setOnClickListener
 
+
                 lifecycleScope.launch {
 
                     blockSignupButton()
@@ -51,17 +52,31 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
 //                        return@launch
 //                    }
 
-                    try {
-//                        registerUser(firstname, lastname, username, email, password)
-                        clearInputFields()
+                    if(viewModel.registerUser(
+                            firstname,
+                            lastname,
+                            username,
+                            email,
+                            password
+                    )){
                         NancyToast.makeText(requireContext(), "Registration successful!", NancyToast.LENGTH_SHORT, NancyToast.SUCCESS, false).show()
-                        findNavController().popBackStack()
-                    } catch (e: Exception) {
-                        //TODO -> handle error response here
-                        NancyToast.makeText(requireContext(), "Registration failed!", NancyToast.LENGTH_SHORT, NancyToast.ERROR, false).show()
-                    } finally {
-                        resetSignupButton()
                     }
+                    else{
+                        NancyToast.makeText(requireContext(), "Registration failed!", NancyToast.LENGTH_SHORT, NancyToast.ERROR, false).show()
+                    }
+
+//                    try {
+////                        registerUser(firstname, lastname, username, email, password)
+//
+//                        clearInputFields()
+//                        NancyToast.makeText(requireContext(), "Registration successful!", NancyToast.LENGTH_SHORT, NancyToast.SUCCESS, false).show()
+////                        findNavController().popBackStack()
+//                    } catch (e: Exception) {
+//                        //TODO -> handle error response here
+//                        NancyToast.makeText(requireContext(), "Registration failed!", NancyToast.LENGTH_SHORT, NancyToast.ERROR, false).show()
+//                    } finally {
+//                        resetSignupButton()
+//                    }
                 }
             }
         }
