@@ -4,8 +4,14 @@ package com.example.eventify.data.remote.repository
 import com.example.eventify.data.remote.api.AuthAPI
 import com.example.eventify.data.remote.model.register.RequestUserRegistration
 import com.example.eventify.data.remote.model.register.ResponseUserRegistration
+import com.example.eventify.data.remote.model.userToken.ResponseSuccessfulUserToken
 import com.example.eventify.domain.repository.AuthRepository
 import javax.inject.Inject
+
+
+
+const val GRANT_TYPE_PASSWORD = "password"
+const val GRANT_TYPE_REFRESH_TOKEN = "refresh_token"
 
 class AuthRepositoryImpl @Inject constructor(
     val api: AuthAPI
@@ -44,7 +50,25 @@ class AuthRepositoryImpl @Inject constructor(
 
     }
 
-    override suspend fun loginUser() {
-        //TODO("Not yet implemented")
+    override suspend fun loginUser(
+        grantType : String,
+        username: String,
+        password: String
+    ) : ResponseSuccessfulUserToken {
+        try {
+            val response = api.requestUserToken(
+                grantType = grantType,
+                username = username,
+                password = password)
+            if(response.isSuccessful && response.body() != null){
+                return response.body()!!
+            }
+            else{
+                throw Exception("Error ${response.code()}: ${response.errorBody()?.string()}")
+            }
+        }
+        catch (e : Exception){
+            throw e
+        }
     }
 }

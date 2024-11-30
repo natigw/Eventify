@@ -13,6 +13,7 @@ import com.example.eventify.databinding.FragmentReferralBinding
 import com.example.eventify.presentation.viewmodels.ReferralViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -39,7 +40,9 @@ class ReferralFragment : BaseFragment<FragmentReferralBinding>(FragmentReferralB
 
         val numberOfLinkSent = 2 //TODO -> backendden iste
         lifecycleScope.launch {
-            referralViewModel.eventsState.collectLatest {
+            referralViewModel.eventsState
+                .filter { it.isNotEmpty() }
+                .collectLatest {
                 val chosenEvent = it.random().name
                 binding.textGetTicketDescriptionReferral.text = "Almost there! Refer ${3 - numberOfLinkSent} more friend to get a free ticket for \"$chosenEvent\" event."
                 binding.textGetTicketDescriptionReferral.text = "Congratulations! You got a ticket for \"$chosenEvent\" event. Please check your ticket box!"

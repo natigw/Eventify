@@ -19,6 +19,7 @@ import com.example.eventify.data.remote.model.register.RequestUserRegistration
 import com.example.eventify.databinding.FragmentRegisterBinding
 import com.example.eventify.presentation.viewmodels.RegisterViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -28,9 +29,16 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
     private val viewModel by viewModels<RegisterViewModel>()
 
     override fun onViewCreatedLight() {
+
         setScrollViewConstraints()
         setInputFieldListeners()
+        registerButton()
+        observeChanges()
 
+    }
+
+
+    private fun registerButton(){
         with(binding) {
             buttonRegister.setOnClickListener {
                 val firstname = firstnameRegister.text.toString().trim()
@@ -43,56 +51,45 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
 
 
                 lifecycleScope.launch {
-
-                    blockSignupButton()
-
-//                    if (checkIfUserExists(email)) {
-//                        NancyToast.makeText(requireContext(), "User already exists!", NancyToast.LENGTH_SHORT, NancyToast.ERROR, false).show()
-//                        resetSignupButton()
-//                        return@launch
-//                    }
-
                     if(viewModel.registerUser(
                             firstname,
                             lastname,
                             username,
                             email,
                             password
-                    )){
+                        )){
                         NancyToast.makeText(requireContext(), "Registration successful!", NancyToast.LENGTH_SHORT, NancyToast.SUCCESS, false).show()
+                        clearInputFields()
+                        findNavController().popBackStack()
                     }
                     else{
                         NancyToast.makeText(requireContext(), "Registration failed!", NancyToast.LENGTH_SHORT, NancyToast.ERROR, false).show()
                     }
 
-//                    try {
-////                        registerUser(firstname, lastname, username, email, password)
-//
-//                        clearInputFields()
-//                        NancyToast.makeText(requireContext(), "Registration successful!", NancyToast.LENGTH_SHORT, NancyToast.SUCCESS, false).show()
-////                        findNavController().popBackStack()
-//                    } catch (e: Exception) {
-//                        //TODO -> handle error response here
-//                        NancyToast.makeText(requireContext(), "Registration failed!", NancyToast.LENGTH_SHORT, NancyToast.ERROR, false).show()
-//                    } finally {
-//                        resetSignupButton()
-//                    }
                 }
             }
         }
-
-        observeChanges()
     }
-
     private fun observeChanges() {
         binding.imageBackToLogin.setOnClickListener {
             findNavController().popBackStack()
+        }
+
+        lifecycleScope.launch {
+            viewModel.isLoading.collectLatest {
+                if(it){
+                    blockSignupButton()
+                }
+                else{
+                    resetSignupButton()
+                }
+            }
         }
     }
 
     private fun setScrollViewConstraints() {
         val screenHeight = resources.displayMetrics.heightPixels
-        val topMargin = (0.2 * screenHeight).toInt()
+        val topMargin = (0.08 * screenHeight).toInt()
 
         binding.textSignUp.post {
             val params = binding.textSignUp.layoutParams as ConstraintLayout.LayoutParams
@@ -202,7 +199,6 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
             passwordRegister.text!!.isNotBlank() &&
             checkboxTerms.isChecked
         }
-
         binding.buttonRegister.isEnabled = isAllFilled
     }
 }

@@ -16,6 +16,7 @@ import com.example.eventify.presentation.viewmodels.VenueViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -68,7 +69,9 @@ class VenuesFragment : BaseFragment<FragmentVenuesBinding>(FragmentVenuesBinding
         }
 
         lifecycleScope.launch {
-            viewmodel.venues.collect {
+            viewmodel.venues
+                .filter { it.isNotEmpty() }
+                .collect {
                 venueAdapter.updateAdapter(it)
                 Log.e("salam", it.toString())
             }

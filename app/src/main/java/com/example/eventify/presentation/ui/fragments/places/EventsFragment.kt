@@ -17,6 +17,7 @@ import com.example.eventify.presentation.viewmodels.EventViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -65,7 +66,9 @@ class EventsFragment : BaseFragment<FragmentEventsBinding>(FragmentEventsBinding
         }
 
         lifecycleScope.launch {
-            viewmodel.events.collect {
+            viewmodel.events
+                .filter { it.isNotEmpty() }
+                .collect {
                 eventAdapter.updateAdapter(it)
                 Log.e("salam", it.toString())
             }

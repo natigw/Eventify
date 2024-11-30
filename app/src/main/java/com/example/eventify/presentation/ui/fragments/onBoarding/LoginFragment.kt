@@ -5,7 +5,10 @@ import android.content.SharedPreferences
 import android.graphics.Color.parseColor
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.createViewModelLazy
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.eventify.R
@@ -13,9 +16,12 @@ import com.example.eventify.common.base.BaseFragment
 import com.example.eventify.common.utils.NancyToast
 import com.example.eventify.data.remote.api.AuthAPI
 import com.example.eventify.data.remote.model.userToken.RequestUserToken
+import com.example.eventify.data.remote.repository.GRANT_TYPE_PASSWORD
 import com.example.eventify.databinding.FragmentLoginBinding
 import com.example.eventify.presentation.ui.activities.MainActivity
+import com.example.eventify.presentation.viewmodels.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Named
@@ -23,6 +29,8 @@ import javax.inject.Named
 @AndroidEntryPoint
 class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::inflate) {
 
+
+    val viewModel by viewModels<LoginViewModel>()
     @Inject
     @Named("OnBoardingWelcome")
     lateinit var sharedPrefOnBoard: SharedPreferences
@@ -36,14 +44,24 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
 
     override fun onViewCreatedLight() {
 
+        ////??????????????????
         if (sharedPrefOnBoard.getBoolean("finished", false)) binding.textWelcomeLogin.visibility = View.VISIBLE
+
 
         binding.textDontHaveAccount.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
 
+        observer()
+        loginButton()
+        setConstraints()
+        observeChanges()
+    }
+
+
+    private fun setConstraints(){
         val screenHeight = resources.displayMetrics.heightPixels
-        val topMargin = (0.2 * screenHeight).toInt()
+        val topMargin = (0.08 * screenHeight).toInt()
 
         binding.textSignIn.post {
             val params = binding.textSignIn.layoutParams as ConstraintLayout.LayoutParams
@@ -51,14 +69,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             binding.textSignIn.layoutParams = params
 
         }
-
-
-
-        loginButton()
-
-        observeChanges()
     }
-
     private fun observeChanges() {
         binding.textForgotPassword.setOnClickListener {
             NancyToast.makeText(requireContext(), "[navigating to help page]", NancyToast.LENGTH_SHORT, NancyToast.INFO, false).show()
@@ -83,37 +94,31 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             }
 
             lifecycleScope.launch {
-                blockLoginButton()
-                try {
-                    lifecycleScope.launch {
-                        val tokenResponse = api.requestUserToken(
-                            RequestUserToken(
-                                username = username,
-                                password = password
-                            )
-                        )
-                        if (api.verifyUserToken(tokenResponse.accessToken).message == "Token is valid") {
-                            NancyToast.makeText(requireContext(), "ok", NancyToast.LENGTH_SHORT, NancyToast.SUCCESS, false).show()
-                            //userAuthentication(email, password)
-//                            val editor = sharedPrefLoggedIn.edit()                //bu hisse userAuthentication icerisindedi
-//                            editor.putString("username", username)
-//                            editor.putString("email", email)
-//                            editor.putBoolean("status_login", true)
-//                            editor.apply()
-                        }
-                        else {
-                            NancyToast.makeText(requireContext(), "invalid", NancyToast.LENGTH_SHORT, NancyToast.ERROR, false).show()
-                        }
-                    }
+                if(viewModel.loginUser(GRANT_TYPE_PASSWORD,username,password)){
+                    clearInputFields()
+                    NancyToast.makeText(requireContext(), "Login Successful", NancyToast.LENGTH_SHORT,NancyToast.SUCCESS,false).show()
                 }
-                catch (e: Exception) {
-                    Log.e("Network exception", "login error")
+                else{
+
+                    NancyToast.makeText(requireContext(), "Login Unsuccessful", NancyToast.LENGTH_SHORT,NancyToast.WARNING,false).show()
                 }
-                finally {
+
+
+            }
+
+        }
+    }
+
+    private fun observer(){
+        lifecycleScope.launch {
+            viewModel.isLoading.collectLatest {
+                if(it){
+                    blockLoginButton()
+                }
+                else{
                     resetLoginButton()
                 }
             }
-
         }
     }
 
