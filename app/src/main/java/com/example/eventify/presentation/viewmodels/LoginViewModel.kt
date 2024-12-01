@@ -2,13 +2,16 @@ package com.example.eventify.presentation.viewmodels
 
 import android.content.SharedPreferences
 import android.util.Log
+import androidx.core.content.edit
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.Navigator
 import com.example.eventify.domain.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -25,6 +28,10 @@ class LoginViewModel @Inject constructor(
     @Named("UserLoggedIn")
     lateinit var sharedPrefLoggedIn: SharedPreferences
 
+    @Inject
+    @Named("UserDetails")
+    lateinit var sharedPrefUserDetails: SharedPreferences
+
     val isLoading = MutableStateFlow(false)
 
 
@@ -33,11 +40,17 @@ class LoginViewModel @Inject constructor(
         val loginChecker = viewModelScope.async {
             try {
                 isLoading.update { true }
-                // TODO token handle ele
-                authRepository.loginUser(
+                val response = authRepository.loginUser(
                     username = username,
                     password = password
                 )
+
+                sharedPrefUserDetails.edit {
+                    putString("token", "${response.tokenType} ${response.accessToken}")
+                    putString("username", username)
+                    putString("password", password)
+                }
+
                 true
             }
             catch (e : Exception){
@@ -51,5 +64,6 @@ class LoginViewModel @Inject constructor(
         }
         return loginChecker.await()
     }
+
 
 }

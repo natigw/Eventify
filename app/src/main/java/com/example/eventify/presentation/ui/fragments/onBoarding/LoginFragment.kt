@@ -1,13 +1,10 @@
 package com.example.eventify.presentation.ui.fragments.onBoarding
 
 import android.content.Intent
-import android.content.SharedPreferences
 import android.graphics.Color.parseColor
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.fragment.app.createViewModelLazy
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -20,8 +17,6 @@ import com.example.eventify.presentation.viewmodels.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import javax.inject.Inject
-import javax.inject.Named
 
 @AndroidEntryPoint
 class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::inflate) {
@@ -45,7 +40,13 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         loginButton()
         setConstraints()
         observeChanges()
+
+
+
     }
+
+
+
 
 
     private fun setConstraints(){

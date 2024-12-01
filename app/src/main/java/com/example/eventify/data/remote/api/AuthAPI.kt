@@ -35,10 +35,11 @@ interface AuthAPI {
     ): Response<ResponseSuccessfulUserToken>
 
 
-    @GET("/auth/verify-token/{token}")
+    @GET("/auth/verify-token")
     suspend fun verifyUserToken(
-        @Path("token") token: String,
-    ): ResponseVerifyToken
+        @Header("Authorization") token : String
+    ): Response<ResponseVerifyToken>
+
 
 //    @GET("/social_auth/google/login")
 //    suspend fun authGoogleLogin() : ResponseGoogleLogin
