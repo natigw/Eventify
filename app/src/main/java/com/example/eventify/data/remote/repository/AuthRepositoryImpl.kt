@@ -10,9 +10,6 @@ import javax.inject.Inject
 
 
 
-const val GRANT_TYPE_PASSWORD = "password"
-const val GRANT_TYPE_REFRESH_TOKEN = "refresh_token"
-
 class AuthRepositoryImpl @Inject constructor(
     val api: AuthAPI
 ) : AuthRepository {
@@ -51,13 +48,11 @@ class AuthRepositoryImpl @Inject constructor(
     }
 
     override suspend fun loginUser(
-        grantType : String,
         username: String,
         password: String
     ) : ResponseSuccessfulUserToken {
         try {
             val response = api.requestUserToken(
-                grantType = grantType,
                 username = username,
                 password = password)
             if(response.isSuccessful && response.body() != null){

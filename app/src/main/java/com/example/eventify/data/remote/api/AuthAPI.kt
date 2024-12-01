@@ -22,11 +22,11 @@ interface AuthAPI {
 
 
 
-    // sorus aqsinden
+
     @FormUrlEncoded
     @POST("/auth/token")
     suspend fun requestUserToken(
-        @Field("grant_type") grantType: String,
+        @Field("grant_type") grantType: String? = null,
         @Field("username") username: String,
         @Field("password") password: String,
         @Field("scope") scope: String? = null,

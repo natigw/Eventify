@@ -14,9 +14,6 @@ import androidx.navigation.fragment.findNavController
 import com.example.eventify.R
 import com.example.eventify.common.base.BaseFragment
 import com.example.eventify.common.utils.NancyToast
-import com.example.eventify.data.remote.api.AuthAPI
-import com.example.eventify.data.remote.model.userToken.RequestUserToken
-import com.example.eventify.data.remote.repository.GRANT_TYPE_PASSWORD
 import com.example.eventify.databinding.FragmentLoginBinding
 import com.example.eventify.presentation.ui.activities.MainActivity
 import com.example.eventify.presentation.viewmodels.LoginViewModel
@@ -31,21 +28,13 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
 
 
     val viewModel by viewModels<LoginViewModel>()
-    @Inject
-    @Named("OnBoardingWelcome")
-    lateinit var sharedPrefOnBoard: SharedPreferences
 
-    @Inject
-    @Named("UserLoggedIn")
-    lateinit var sharedPrefLoggedIn: SharedPreferences
 
-    @Inject
-    lateinit var api: AuthAPI
 
     override fun onViewCreatedLight() {
 
         ////??????????????????
-        if (sharedPrefOnBoard.getBoolean("finished", false)) binding.textWelcomeLogin.visibility = View.VISIBLE
+        if (viewModel.sharedPrefOnBoard.getBoolean("finished", false)) binding.textWelcomeLogin.visibility = View.VISIBLE
 
 
         binding.textDontHaveAccount.setOnClickListener {
@@ -94,7 +83,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             }
 
             lifecycleScope.launch {
-                if(viewModel.loginUser(GRANT_TYPE_PASSWORD,username,password)){
+                if(viewModel.loginUser(username = username,password = password)){
                     clearInputFields()
                     NancyToast.makeText(requireContext(), "Login Successful", NancyToast.LENGTH_SHORT,NancyToast.SUCCESS,false).show()
                 }

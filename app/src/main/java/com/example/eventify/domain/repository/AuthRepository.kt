@@ -13,7 +13,6 @@ interface AuthRepository {
     ): ResponseUserRegistration
 
     suspend fun loginUser(
-        grantType : String,
         username: String,
         password: String
     ) : ResponseSuccessfulUserToken
