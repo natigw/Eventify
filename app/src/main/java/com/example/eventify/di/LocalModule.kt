@@ -30,10 +30,10 @@ class LocalModule {
         return context.getSharedPreferences("userLoggedIn", Context.MODE_PRIVATE)
     }
 
-    @Named("UserDetails")
+    @Named("UserTokens")
     @Provides
-    fun provideSharedPrefAccessToken(context : Context) : SharedPreferences {
-        return context.getSharedPreferences("userDetails",Context.MODE_PRIVATE)
+    fun provideSharedPrefTokens(context : Context) : SharedPreferences {
+        return context.getSharedPreferences("userTokens",Context.MODE_PRIVATE)
     }
 
 

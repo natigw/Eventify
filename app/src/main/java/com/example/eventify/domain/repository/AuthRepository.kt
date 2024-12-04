@@ -22,5 +22,8 @@ interface AuthRepository {
         token : String
     ) : Boolean
 
+    suspend fun refreshAccessToken(
+        refreshToken : String
+    ) : ResponseSuccessfulUserToken
 
 }

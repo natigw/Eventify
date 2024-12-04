@@ -53,7 +53,7 @@ class AuthRepositoryImpl @Inject constructor(
         password: String
     ) : ResponseSuccessfulUserToken {
         try {
-            val response = api.requestUserToken(
+            val response = api.loginUser(
                 username = username,
                 password = password)
             if(response.isSuccessful && response.body() != null){
@@ -76,6 +76,24 @@ class AuthRepositoryImpl @Inject constructor(
                    return response.body()!!.isAuthenticated
             }
             return false
+        }
+        catch (e : Exception){
+            throw e
+        }
+    }
+
+    override suspend fun refreshAccessToken(
+        refreshToken: String
+    ): ResponseSuccessfulUserToken {
+        try {
+            val response = api.refreshAccessToken(refreshToken)
+
+            if(response.isSuccessful && response.body() != null){
+                return response.body()!!
+            }
+            else{
+                throw Exception()
+            }
         }
         catch (e : Exception){
             throw e

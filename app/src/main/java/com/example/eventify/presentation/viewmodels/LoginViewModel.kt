@@ -29,8 +29,8 @@ class LoginViewModel @Inject constructor(
     lateinit var sharedPrefLoggedIn: SharedPreferences
 
     @Inject
-    @Named("UserDetails")
-    lateinit var sharedPrefUserDetails: SharedPreferences
+    @Named("UserTokens")
+    lateinit var sharedPrefUserTokens: SharedPreferences
 
     val isLoading = MutableStateFlow(false)
 
@@ -45,11 +45,11 @@ class LoginViewModel @Inject constructor(
                     password = password
                 )
 
-                sharedPrefUserDetails.edit {
-                    putString("token", "${response.tokenType} ${response.accessToken}")
-                    putString("username", username)
-                    putString("password", password)
-                }
+
+//                sharedPrefUserTokens.edit {
+//                    putString("access_token", "${response.tokenType} ${response.accessToken}")
+//
+//                }
 
                 true
             }
