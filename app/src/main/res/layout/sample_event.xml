@@ -9,24 +9,24 @@
         android:id="@+id/textEventName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="12dp"
         android:fontFamily="@font/inter_bold"
-        android:textSize="20sp"
         android:textColor="@color/purple_dark_eventify"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageEvent"
         tools:text="Event name" />
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imageEvent"
         android:layout_width="wrap_content"
         android:layout_height="150dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="24dp"
         android:adjustViewBounds="true"
         android:scaleType="fitCenter"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textEventName"
+        app:layout_constraintTop_toTopOf="parent"
         app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Medium"
         tools:srcCompat="@tools:sample/avatars" />
 
@@ -198,6 +198,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageEvent" />
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonChat"
+        style="?attr/materialIconButtonFilledTonalStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:tag="not_liked"
+        app:icon="@drawable/chat_icon_dif"
+        app:iconTint="@color/purple_dark_eventify"
+        android:backgroundTint="@color/gray_light"
+        app:layout_constraintTop_toBottomOf="@id/buttonLikeEvent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
     <TextView
         android:id="@+id/textEventDescription"
         android:layout_width="0dp"
@@ -209,7 +221,7 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageEvent"
+        app:layout_constraintTop_toBottomOf="@+id/textEventName"
         tools:text="Event description" />
 
     <com.google.android.material.button.MaterialButton
