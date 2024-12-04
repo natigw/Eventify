@@ -1,5 +1,6 @@
 package com.example.eventify.data.remote.interceptor
 
+import android.content.Intent
 import android.content.SharedPreferences
 import androidx.core.content.edit
 import com.example.eventify.domain.repository.AuthRepository
@@ -35,4 +36,9 @@ class TokenManager @Inject constructor(
             null
         }
     }
+
+    fun clearTokens(){
+        sharedPrefUserTokens.edit().clear().apply()
+    }
+
 }

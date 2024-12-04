@@ -10,6 +10,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Named
@@ -18,12 +19,12 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 @Module
 class NetworkModule {
-
     @Singleton
     @Provides
-    fun provideRetrofitClient(): Retrofit {
+    fun provideRetrofitClient(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit
             .Builder()
+            .client(okHttpClient)
             .baseUrl("https://eventify-az.onrender.com")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
@@ -48,17 +49,6 @@ class NetworkModule {
     }
 
 
-    @Singleton
-    @Provides
-    fun provideTokenManager(
-        authRepository: AuthRepository,
-        @Named("UserTokens")
-        sharedPreferences: SharedPreferences
-    ) : TokenManager{
-        return TokenManager(
-            authRepository = authRepository,
-            sharedPrefUserTokens = sharedPreferences
-        )
-    }
+
 
 }

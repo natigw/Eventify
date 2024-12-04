@@ -14,9 +14,7 @@ import javax.inject.Singleton
 @Module
 class LocalModule {
 
-    @Provides
-    @Singleton
-    fun provideContext(@ApplicationContext context : Context) : Context = context
+
 
     @Named("OnBoardingWelcome")
     @Provides
