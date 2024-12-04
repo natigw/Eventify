@@ -43,6 +43,7 @@ class VenuesFragment : BaseFragment<FragmentVenuesBinding>(FragmentVenuesBinding
 //            )
             sharedViewModel.setCoordinates(
                 PlaceCoordinates(
+                    id = it.id,
                     name = it.name,
                     placeType = "venue",
                     long = it.lngCoordinate,

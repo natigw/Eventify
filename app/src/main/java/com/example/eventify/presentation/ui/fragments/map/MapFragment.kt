@@ -10,12 +10,14 @@ import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.example.eventify.R
 import com.example.eventify.common.base.BaseFragment
 import com.example.eventify.common.utils.NancyToast
 import com.example.eventify.data.remote.api.EventAPI
 import com.example.eventify.data.remote.api.VenueAPI
 import com.example.eventify.databinding.FragmentMapBinding
+import com.example.eventify.domain.model.VenueItem
 import com.example.eventify.presentation.viewmodels.SharedViewModel
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -65,7 +67,8 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 lat = it.lat.toDouble(),
                 lng = it.long.toDouble(),
                 title = it.name,
-                description = it.name,
+                description = it.placeType,
+                eventId = it.id,
                 hue = if (it.placeType == "venue") BitmapDescriptorFactory.HUE_MAGENTA else BitmapDescriptorFactory.HUE_ORANGE
             )
         }
@@ -113,6 +116,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             googleMap.setOnMarkerClickListener { marker ->
                 googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(marker.position, 15f))
                 marker.showInfoWindow()
+                findNavController().navigate(MapFragmentDirections.actionTestMapFragmentToMarkerDetailsBottomSheet(marker.id.toInt()))
                 true
             }
 
@@ -163,7 +167,8 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         lng: Double,
         title: String,
         description: String,
-        hue: Float
+        hue: Float,
+        eventId: Int? = null
     ) {
         googleMap.addMarker(
             MarkerOptions()

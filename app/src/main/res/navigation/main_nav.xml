@@ -36,6 +36,9 @@
             app:argType="com.example.eventify.domain.model.PlaceCoordinates"
             app:nullable="true"
             android:defaultValue="@null" />
+        <action
+            android:id="@+id/action_testMapFragment_to_markerDetailsBottomSheet"
+            app:destination="@id/markerDetailsBottomSheet" />
     </fragment>
     <fragment
         android:id="@+id/subscriptionFragment"
@@ -68,4 +71,13 @@
             android:id="@+id/action_placesFragment_to_venuesFragment"
             app:destination="@id/venuesFragment" />
     </fragment>
+    <dialog
+        android:id="@+id/markerDetailsBottomSheet"
+        android:name="com.example.eventify.presentation.ui.fragments.map.MarkerDetailsBottomSheet"
+        android:label="bottomsheet_marker_details"
+        tools:layout="@layout/bottomsheet_marker_details" >
+        <argument
+            android:name="markerId"
+            app:argType="integer" />
+    </dialog>
 </navigation>

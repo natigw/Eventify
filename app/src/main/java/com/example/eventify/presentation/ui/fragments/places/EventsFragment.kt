@@ -42,6 +42,7 @@ class EventsFragment : BaseFragment<FragmentEventsBinding>(FragmentEventsBinding
 //            )
             sharedViewModel.setCoordinates(
                 PlaceCoordinates(
+                    id = it.id,
                     name = it.name,
                     placeType = "event",
                     long = it.lngCoordinate,

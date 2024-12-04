@@ -35,9 +35,9 @@ class ReferralFragment : BaseFragment<FragmentReferralBinding>(FragmentReferralB
         }
 
 
-        val numberOfLinkSent = 2 //TODO -> backendden iste
+        val numberOfLinkSent = 2  //TODO -> backendden iste
         lifecycleScope.launch {
-            val chosenEvent = api.getAllEvents().random().event.title   //TODO -> bunu bilmirem backendden yoxsa nece biznes logici danis
+            val chosenEvent = api.getAllEvents().body()?.random()?.event?.title   //TODO -> bunu bilmirem backendden yoxsa nece biznes logici danis
 
             binding.textGetTicketDescriptionReferral.text = "Almost there! Refer ${3 - numberOfLinkSent} more friend to get a free ticket for \"$chosenEvent\" event."
             binding.progressReferral.progress = 33 * numberOfLinkSent
