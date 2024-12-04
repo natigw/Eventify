@@ -5,6 +5,8 @@ import okhttp3.Interceptor
 import okhttp3.Response
 import javax.inject.Inject
 
+
+//lazimsiz gorsenir cunki refresh token authorization istemir !!!!!!!!!!!!!!!!!!!!!!!
 class AuthInterceptor @Inject constructor(
     private val sharedPrefUserTokens: SharedPreferences,
     private val onUnAuthorized : ()-> Unit
