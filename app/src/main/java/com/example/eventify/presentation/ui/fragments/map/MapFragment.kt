@@ -1,11 +1,13 @@
 package com.example.eventify.presentation.ui.fragments.map
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.graphics.Color
+import android.os.Bundle
 import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.activityViewModels
@@ -17,7 +19,6 @@ import com.example.eventify.common.utils.NancyToast
 import com.example.eventify.data.remote.api.EventAPI
 import com.example.eventify.data.remote.api.VenueAPI
 import com.example.eventify.databinding.FragmentMapBinding
-import com.example.eventify.domain.model.VenueItem
 import com.example.eventify.presentation.viewmodels.SharedViewModel
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -29,7 +30,6 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.PolylineOptions
-import com.google.maps.android.BuildConfig
 import com.google.maps.android.PolyUtil
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -57,6 +57,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
     private lateinit var googleMap: GoogleMap
 
+    @SuppressLint("PotentialBehaviorOverride")
     private val callback = OnMapReadyCallback { googleMap ->
 
         this.googleMap = googleMap
@@ -68,7 +69,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 lng = it.long.toDouble(),
                 title = it.name,
                 description = it.placeType,
-                eventId = it.id,
+                placeId = it.id,
                 hue = if (it.placeType == "venue") BitmapDescriptorFactory.HUE_MAGENTA else BitmapDescriptorFactory.HUE_ORANGE
             )
         }
@@ -86,7 +87,8 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                             lng = it.lng.toDouble(),
                             title = it.name,
                             description = it.description,
-                            hue = BitmapDescriptorFactory.HUE_AZURE
+                            hue = BitmapDescriptorFactory.HUE_AZURE,
+                            placeId = it.id
                         )
                     }
                 }
@@ -116,7 +118,12 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             googleMap.setOnMarkerClickListener { marker ->
                 googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(marker.position, 15f))
                 marker.showInfoWindow()
-                findNavController().navigate(MapFragmentDirections.actionTestMapFragmentToMarkerDetailsBottomSheet(marker.id.toInt()))
+                val bundle = Bundle()
+                bundle.putString("id", marker.id)
+                val markerDetailsBottomSheet = MarkerDetailsBottomSheet()
+                markerDetailsBottomSheet.arguments = bundle
+                markerDetailsBottomSheet.show(requireActivity().supportFragmentManager, "cart")
+//                findNavController().navigate(R.id.action_mapFragment_to_markerDetailsBottomSheet)
                 true
             }
 
@@ -154,6 +161,11 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         }
     }
 
+    override fun onViewCreatedLight() {
+        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
+        mapFragment?.getMapAsync(callback)
+    }
+
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
         if (::googleMap.isInitialized) {
@@ -168,7 +180,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         title: String,
         description: String,
         hue: Float,
-        eventId: Int? = null
+        placeId: Int? = null
     ) {
         googleMap.addMarker(
             MarkerOptions()
@@ -177,14 +189,6 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 .snippet(description)
                 .icon(BitmapDescriptorFactory.defaultMarker(hue))
         )
-    }
-
-
-    override fun onViewCreatedLight() {
-
-        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
-        mapFragment?.getMapAsync(callback)
-
     }
 
     private suspend fun fetchRoute(origin: LatLng, destination: LatLng) {

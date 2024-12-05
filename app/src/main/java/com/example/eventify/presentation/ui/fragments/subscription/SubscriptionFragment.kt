@@ -17,7 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.NonCancellable.start
 
 @AndroidEntryPoint
-class SubscriptionFragment  : BaseFragment<FragmentSubscriptionBinding>(FragmentSubscriptionBinding::inflate) {
+class SubscriptionFragment : BaseFragment<FragmentSubscriptionBinding>(FragmentSubscriptionBinding::inflate) {
 
 //    private val viewmodel by viewModels<SubscriptionViewModel>()
 

@@ -2,6 +2,7 @@
 <resources>
     <string name="let_s_go">Başlayaq</string>
     <string name="welcome_to">Xoş gəlmisiniz</string>
+    <string name="hello_blank_fragment">Salam boş fragment</string>
     <string name="finish">Bitir</string>
     <string name="next">Növbəti</string>
     <string name="skip">Təqdimatı ötür</string>
@@ -28,4 +29,28 @@
     <string name="bill_monthly">Aylıq abunəlik</string>
     <string name="bill_annually">İllik abunəlik</string>
     <string name="try_1_month">1 ay pulsuz yoxla</string>
+    <string name="referral_program">Tövsiyyə Proqramı</string>
+    <string name="get_a_free_ticket">Pulsuz bilet əldə et!</string>
+    <string name="referral_note">Nəzərə alın ki, mükafatlardan istifadə etmək üçün aktiv abunəlik mütləqdir.</string>
+    <string name="share_invite_link">Dəvət linkini paylaşın</string>
+    <string name="copy_link">Linki kopyalayın</string>
+    <string name="share">Paylaşın</string>
+    <string name="type_your_message">Mesaj yazın...</string>
+    <string name="read_more">Daha çox</string>
+    <string name="read_less">Daha az</string>
+    <string name="venue_type">Məkanın tipi:</string>
+    <string name="open_hours">Xidmət göstərir:</string>
+    <string name="likes">Bəyənilər:</string>
+    <string name="show_location_on_map">xəritədə göstər</string>
+    <string name="places">Yerlər</string>
+    <string name="event_type">Tədbirin tipi:</string>
+    <string name="duration">Müddəti:</string>
+    <string name="date">Tarixi:</string>
+    <string name="organizer">Təşkilatçı:</string>
+    <string name="published">Dərc olunub:</string>
+    <string name="events">Tədbirlər</string>
+    <string name="venue_details">Məkan haqqında</string>
+    <string name="buy_ticket">Bilet al</string>
+    <string name="register_failed">Qeydiyyat uğursuzdur!</string>
+    <string name="register_successful">Qeydiyyat uğurludur!</string>
 </resources>

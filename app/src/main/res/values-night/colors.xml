@@ -3,4 +3,5 @@
     <color name="green_eventify">#E70707</color>
     <color name="textColor">#000000</color>
     <color name="appBackground">#03A9F4</color>
+    <color name="bottomNavBackground">#FF9800</color>
 </resources>

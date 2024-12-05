@@ -29,14 +29,11 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
     private val viewModel by viewModels<RegisterViewModel>()
 
     override fun onViewCreatedLight() {
-
         setScrollViewConstraints()
         setInputFieldListeners()
         registerButton()
         observeChanges()
-
     }
-
 
     private fun registerButton(){
         with(binding) {
@@ -49,7 +46,6 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
 
                 if (!checkInputFields(firstname, lastname, username, email, password)) return@setOnClickListener
 
-
                 lifecycleScope.launch {
                     if(viewModel.registerUser(
                             firstname,
@@ -58,12 +54,12 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
                             email,
                             password
                         )){
-                        NancyToast.makeText(requireContext(), "Registration successful!", NancyToast.LENGTH_SHORT, NancyToast.SUCCESS, false).show()
+                        NancyToast.makeText(requireContext(), requireContext().getString(R.string.register_successful), NancyToast.LENGTH_SHORT, NancyToast.SUCCESS, false).show()
                         clearInputFields()
                         findNavController().popBackStack()
                     }
                     else{
-                        NancyToast.makeText(requireContext(), "Registration failed!", NancyToast.LENGTH_SHORT, NancyToast.ERROR, false).show()
+                        NancyToast.makeText(requireContext(), requireContext().getString(R.string.register_failed), NancyToast.LENGTH_SHORT, NancyToast.ERROR, false).show()
                     }
 
                 }
