@@ -36,10 +36,10 @@ class AuthModule {
     fun provideAuthInterceptor(
         context : Context,
         @Named("UserTokens") sharedPreferences: SharedPreferences,
-        tokenManager: TokenManager,
+//        tokenManager: TokenManager,
     ) : AuthInterceptor {
         return AuthInterceptor(sharedPrefUserTokens = sharedPreferences){
-            AppUtils.handleLogout(context,tokenManager)
+//            AppUtils.handleLogout(context,tokenManager)
         }
     }
 
