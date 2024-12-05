@@ -1,6 +1,7 @@
 package com.example.eventify.presentation.adapters
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.view.View
 import com.example.eventify.R
 import com.example.eventify.common.base.BaseAdapter
@@ -8,6 +9,7 @@ import com.example.eventify.databinding.SampleSubscriptionBinding
 import com.example.eventify.domain.model.SubscriptionData
 
 class SubscriptionAdapter(
+    val context: Context,
     val currentPackage: String,
     val isAnnualBilling: Boolean,
     val onClick: (packageName: String) -> Unit  //TODO -> bundan emin olmadin

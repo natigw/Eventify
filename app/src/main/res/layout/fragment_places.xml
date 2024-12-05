@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/eventify_background_primary"
     tools:context=".presentation.ui.fragments.places.PlacesFragment">
 
     <com.google.android.material.tabs.TabLayout

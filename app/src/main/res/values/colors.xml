@@ -2,7 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="eventify_background">#F6F6F6</color>
+    <color name="eventify_background_primary">#F6F6F6</color>    <!--gray-->
+    <color name="eventify_background_secondary">#FFFFFF</color>  <!--white-->
     <color name="gray_light">#EBEBEB</color>
     <color name="gray">#CCCCCC</color>
     <color name="green_eventify">#2ED47B</color>
@@ -14,4 +15,5 @@
 
     <color name="textColor">#ffffff</color>
     <color name="appBackground">#9C27B0</color>
+    <color name="bottomNavBackground">#DBDBDB</color>
 </resources>

@@ -30,15 +30,71 @@
         app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Medium"
         tools:srcCompat="@tools:sample/avatars" />
 
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonLikeEvent"
+        style="?attr/materialIconButtonFilledTonalStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:tag="not_liked"
+        app:icon="@drawable/like_fav_border"
+        app:iconTint="@color/purple_dark_eventify"
+        android:backgroundTint="@color/gray_light"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageEvent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonChat"
+        style="?attr/materialIconButtonFilledTonalStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:tag="not_liked"
+        app:icon="@drawable/chat_icon_dif"
+        app:iconTint="@color/purple_dark_eventify"
+        android:backgroundTint="@color/gray_light"
+        app:layout_constraintTop_toBottomOf="@id/buttonLikeEvent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/textEventDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/inter_regular"
+        android:maxLines="3"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textEventName"
+        tools:text="Event description" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonReadMoreEvents"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/gray_light"
+        android:fontFamily="@font/inter_regular"
+        android:minHeight="24dp"
+        android:minWidth="24dp"
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="2dp"
+        android:text="@string/read_more"
+        android:textSize="12sp"
+        android:textColor="@color/purple_dark_eventify"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textEventDescription" />
+
     <TextView
         android:id="@+id/textEventTypeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/inter_regular"
         android:text="@string/event_type"
         android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@+id/buttonReadMoreEvents"
+        app:layout_constraintTop_toBottomOf="@+id/textEventDescription"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -164,13 +220,32 @@
         tools:text="12" />
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonEventSeeComments"
+        style="?attr/materialIconButtonFilledTonalStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:backgroundTint="@color/eventify_background_primary"
+        android:fontFamily="@font/inter_italic"
+        android:minHeight="24dp"
+        android:paddingStart="8dp"
+        android:paddingTop="1dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="3dp"
+        android:text="see comments"
+        android:textColor="@color/purple_eventify"
+        app:layout_constraintStart_toEndOf="@id/textEventLikeCount"
+        app:layout_constraintTop_toTopOf="@id/textEventLikesText"
+        app:layout_constraintBottom_toBottomOf="@id/textEventLikesText" />
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonEventShowLocation"
         style="?attr/materialIconButtonFilledTonalStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:layout_marginStart="-4dp"
-        android:backgroundTint="@color/green_light_eventify"
+        android:backgroundTint="@color/eventify_background_primary"
         android:fontFamily="@font/inter_italic"
         android:minHeight="24dp"
         android:paddingStart="8dp"
@@ -187,68 +262,27 @@
         app:layout_constraintTop_toBottomOf="@+id/textEventLikesText" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/buttonLikeEvent"
-        style="?attr/materialIconButtonFilledTonalStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:tag="not_liked"
-        app:icon="@drawable/like_fav_border"
-        app:iconTint="@color/purple_dark_eventify"
-        android:backgroundTint="@color/gray_light"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageEvent" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/buttonChat"
-        style="?attr/materialIconButtonFilledTonalStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:tag="not_liked"
-        app:icon="@drawable/chat_icon_dif"
-        app:iconTint="@color/purple_dark_eventify"
-        android:backgroundTint="@color/gray_light"
-        app:layout_constraintTop_toBottomOf="@id/buttonLikeEvent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-    <TextView
-        android:id="@+id/textEventDescription"
+        android:id="@+id/buttonBuyTicketEvents"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:ellipsize="end"
-        android:fontFamily="@font/inter_regular"
-        android:maxLines="3"
-        android:textSize="16sp"
+        android:layout_marginTop="4dp"
+        android:backgroundTint="@color/green_light_eventify"
+        android:fontFamily="@font/inter_bold"
+        android:text="@string/buy_ticket"
+        android:textColor="@color/purple_eventify"
+        android:textSize="18sp"
+        app:cornerRadius="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textEventName"
-        tools:text="Event description" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/buttonReadMoreEvents"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/gray_light"
-        android:fontFamily="@font/inter_regular"
-        android:minHeight="24dp"
-        android:minWidth="24dp"
-        android:paddingHorizontal="8dp"
-        android:paddingVertical="2dp"
-        android:text="@string/read_more"
-        android:textSize="12sp"
-        android:textColor="@color/purple_dark_eventify"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textEventDescription" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonEventShowLocation" />
 
     <com.google.android.material.divider.MaterialDivider
         android:layout_width="0dp"
         android:layout_height="1dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         app:lastItemDecorated="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/buttonEventShowLocation" />
+        app:layout_constraintTop_toBottomOf="@id/buttonBuyTicketEvents" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

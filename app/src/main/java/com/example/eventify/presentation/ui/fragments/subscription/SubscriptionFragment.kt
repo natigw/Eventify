@@ -1,6 +1,7 @@
 package com.example.eventify.presentation.ui.fragments.subscription
 
 import android.animation.ObjectAnimator
+import android.content.Context
 import android.graphics.Typeface
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -16,11 +17,12 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.NonCancellable.start
 
 @AndroidEntryPoint
-class SubscriptionFragment : BaseFragment<FragmentSubscriptionBinding>(FragmentSubscriptionBinding::inflate) {
+class SubscriptionFragment  : BaseFragment<FragmentSubscriptionBinding>(FragmentSubscriptionBinding::inflate) {
 
 //    private val viewmodel by viewModels<SubscriptionViewModel>()
 
     private val adapter = SubscriptionAdapter(
+        context = requireContext(),
         currentPackage = "Base",
         isAnnualBilling = true, //viewmodel.switchStateFlow.value
         onClick = {

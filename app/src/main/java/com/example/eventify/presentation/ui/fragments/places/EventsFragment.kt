@@ -5,6 +5,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.example.eventify.R
 import com.example.eventify.common.base.BaseFragment
 import com.example.eventify.common.utils.NancyToast
@@ -31,16 +32,10 @@ class EventsFragment : BaseFragment<FragmentEventsBinding>(FragmentEventsBinding
     private val sharedViewModel: SharedViewModel by activityViewModels()
 
     private val eventAdapter = EventAdapter(
-        onClick = {
-            NancyToast.makeText(requireContext(), "[location data...]", NancyToast.LENGTH_SHORT, NancyToast.SUCCESS, false).show()
-//            findNavController().navigate(
-//                EventsFragmentDirections.actionEventsFragmentToTestMapFragment(
-//                    PlaceCoordinates(
-//                        it.name,
-//                        it.lngCoordinate,
-//                        it.latCoordinate)
-//                )
-//            )
+        onClickSeeComments = {
+            findNavController().navigate(EventsFragmentDirections.actionEventsFragmentToPlacesCommentsBottomSheet())
+        },
+        onClickShowInMap = {
             sharedViewModel.setCoordinates(
                 PlaceCoordinates(
                     id = it.id,
@@ -51,6 +46,10 @@ class EventsFragment : BaseFragment<FragmentEventsBinding>(FragmentEventsBinding
                 ))
             val bottomNavigationView = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
             bottomNavigationView.selectedItemId = R.id.testMapFragment
+        },
+        onClickBuyTicket = {
+            NancyToast.makeText(requireContext(), "[buying ticket...]", NancyToast.LENGTH_SHORT, NancyToast.SUCCESS, false).show()
+            //TODO -> backendden mentiq
         }
     )
 

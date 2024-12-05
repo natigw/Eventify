@@ -7,38 +7,37 @@
     tools:context=".presentation.ui.fragments.map.MapFragment"
     android:background="@color/green_light_eventify">
 
-    <Button
-        android:id="@+id/iconButton"
-        style="?attr/materialIconButtonFilledTonalStyle"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="12dp"
-        app:icon="@drawable/profile_icon_unselected"
-        app:iconSize="32dp"
-        app:layout_constraintBottom_toBottomOf="@id/searchBarMap"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/searchBarMap" />
+<!--    <Button-->
+<!--        android:id="@+id/iconButton"-->
+<!--        style="?attr/materialIconButtonFilledTonalStyle"-->
+<!--        android:layout_width="60dp"-->
+<!--        android:layout_height="60dp"-->
+<!--        android:layout_marginStart="12dp"-->
+<!--        app:icon="@drawable/menu_lines"-->
+<!--        app:iconSize="32dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="@id/searchBarMap"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="@id/searchBarMap" />-->
 
-    <com.google.android.material.search.SearchBar
-        android:id="@+id/searchBarMap"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/search_here"
-        android:layout_marginStart="8dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@id/iconButton"
-        app:layout_constraintEnd_toEndOf="parent" />
+<!--    <com.google.android.material.search.SearchBar-->
+<!--        android:id="@+id/searchBarMap"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:hint="@string/search_here"-->
+<!--        android:layout_marginStart="8dp"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintStart_toEndOf="@id/iconButton"-->
+<!--        app:layout_constraintEnd_toEndOf="parent" />-->
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/searchBarMap" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonSwitchMode"

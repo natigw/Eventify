@@ -37,16 +37,17 @@ class ReferralFragment : BaseFragment<FragmentReferralBinding>(FragmentReferralB
             shareLink(link)
         }
 
+        lateinit var chosenEvent: String
 
         val numberOfLinkSent = 2  //TODO -> backendden iste
         lifecycleScope.launch {
-            var chosenEvent = ""
+//            val chosenEvent = eventApi.getAllEvents().body()?.random()?.event?.title   //TODO -> backendden
             referralViewModel.eventsState
                 .filter { it.isNotEmpty() }
                 .collectLatest {
                 chosenEvent = it.random().name
-                binding.textGetTicketDescriptionReferral.text = "Almost there! Refer ${3 - numberOfLinkSent} more friend to get a free ticket for \"$chosenEvent\" event."
-                binding.textGetTicketDescriptionReferral.text = "Congratulations! You got a ticket for \"$chosenEvent\" event. Please check your ticket box!"
+                binding.textGetTicketDescriptionReferral.text = "Almost there! Refer ${3 - numberOfLinkSent} more friend to get a free ticket for $chosenEvent event."
+                binding.textGetTicketDescriptionReferral.text = "Congratulations! You got a ticket for $chosenEvent event. Please check your ticket box!"
             }
 
             binding.progressReferral.progress = 33 * numberOfLinkSent
@@ -62,7 +63,7 @@ class ReferralFragment : BaseFragment<FragmentReferralBinding>(FragmentReferralB
                     binding.imageProgress1.setImageResource(R.drawable.check_progress_green)
                     binding.imageProgress2.setImageResource(R.drawable.check_progress_green)
                     binding.imageProgress3.setImageResource(R.drawable.check_progress_green)
-                    binding.textGetTicketDescriptionReferral.text = "Congratulations! You got a ticket for \"$chosenEvent\" event. Please check your ticket box!"
+                    binding.textGetTicketDescriptionReferral.text = "Congratulations! You got a ticket for $chosenEvent event. Please check your ticket box!"
                 }
             }
         }

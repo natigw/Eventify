@@ -4,9 +4,10 @@ import com.example.eventify.R
 import com.example.eventify.common.base.BaseFragment
 import com.example.eventify.databinding.FragmentPlacesBinding
 import com.google.android.material.tabs.TabLayoutMediator
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class PlacesFragment : BaseFragment<FragmentPlacesBinding>(FragmentPlacesBinding::inflate) {
-
 
     override fun onViewCreatedLight() {
         setTabLayoutMediator()

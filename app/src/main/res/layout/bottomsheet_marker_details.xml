@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/rounded_bottom_sheet_background"
+    android:background="@drawable/rounded_bottom_sheet_background_primary"
     tools:context=".presentation.ui.fragments.map.MarkerDetailsBottomSheet">
 
     <androidx.constraintlayout.widget.Guideline
@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:elevation="4dp"
-        android:src="@drawable/bottomsheet_drawer_element"
+        android:src="@drawable/bottomsheet_drawer_element_on_primary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

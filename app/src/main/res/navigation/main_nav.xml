@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_venuesFragment_to_testMapFragment"
             app:destination="@id/testMapFragment" />
+        <action
+            android:id="@+id/action_venuesFragment_to_placesCommentsBottomSheet"
+            app:destination="@id/placesCommentsBottomSheet" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -58,6 +61,9 @@
         <action
             android:id="@+id/action_eventsFragment_to_testMapFragment"
             app:destination="@id/testMapFragment" />
+        <action
+            android:id="@+id/action_eventsFragment_to_placesCommentsBottomSheet"
+            app:destination="@id/placesCommentsBottomSheet" />
     </fragment>
     <fragment
         android:id="@+id/placesFragment"
@@ -80,4 +86,9 @@
             android:name="markerId"
             app:argType="integer" />
     </dialog>
+    <dialog
+        android:id="@+id/placesCommentsBottomSheet"
+        android:name="com.example.eventify.presentation.ui.fragments.places.PlacesCommentsBottomSheet"
+        android:label="bottomsheet_places_comments"
+        tools:layout="@layout/bottomsheet_places_comments" />
 </navigation>

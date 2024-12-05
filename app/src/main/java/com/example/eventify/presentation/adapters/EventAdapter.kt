@@ -1,5 +1,6 @@
 package com.example.eventify.presentation.adapters
 
+import android.view.View
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.eventify.R
@@ -8,7 +9,9 @@ import com.example.eventify.databinding.SampleEventBinding
 import com.example.eventify.domain.model.EventItem
 
 class EventAdapter(
-    val onClick: (EventItem) -> Unit
+    val onClickSeeComments: (EventItem) -> Unit,
+    val onClickShowInMap: (EventItem) -> Unit,
+    val onClickBuyTicket: (EventItem) -> Unit
 ) : BaseAdapter<SampleEventBinding>(SampleEventBinding::inflate) {
 
     var events: List<EventItem> = emptyList()
@@ -24,14 +27,14 @@ class EventAdapter(
             textEventDescription.text = event.description
             textEventType.text = event.eventType
             textEventOrganizer.text = if (event.organizerId == 1) "Eventify Group" else event.organizerId.toString()
-            textEventDate.text = event.eventDate
-            textEventPublished.text = event.publishingDate
+            textEventDate.text = "${event.eventDate.substring(0,10)}"
+            textEventPublished.text = "${event.publishingDate.substring(0,10)}, ${event.publishingDate.substring(12)}"
             textEventDurationHours.text = "${event.startHour.substring(0, 5)} - ${event.endHour.substring(0, 5)}"
             textEventLikeCount.text = event.likeCount.toString()
             Glide.with(imageEvent)
                 .load(event.imageLink)
                 .placeholder(R.drawable.placeholder_event)
-                .error(R.drawable.ic_launcher_foreground)
+                .error(R.drawable.placeholder_event)
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(imageEvent)
 
@@ -54,23 +57,51 @@ class EventAdapter(
                 textEventName.text = "Like olundu ama bunu duzzeltt"
                 //TODO -> like olsun request atsin, icon qirmizi urek olsun, like count text bir dene artsin
             }
+
+            buttonReadMoreEvents.post {
+                val layout = textEventDescription.layout
+                val lines = layout.lineCount
+                if(lines > 0) {
+                    if(layout.getEllipsisCount(lines - 1) > 0){
+                        buttonReadMoreEvents.visibility = View.VISIBLE
+                    }
+                    else{
+                        buttonReadMoreEvents.visibility = View.GONE
+                    }
+                }
+            }
+            var flagRead = true
             buttonReadMoreEvents.setOnClickListener {
-                //TODO -> button more duzelt next 5 lines, show less
+                if(flagRead){
+                    textEventDescription.maxLines = Integer.MAX_VALUE
+                    buttonReadMoreEvents.text = "Read less"
+                    flagRead = false
+                }
+                else{
+                    buttonReadMoreEvents.text = "Read more"
+                    textEventDescription.maxLines = 3
+                    flagRead = true
+                }
+            }
+            buttonEventSeeComments.setOnClickListener {
+                onClickSeeComments(event)
             }
             buttonEventShowLocation.setOnClickListener {
-                //TODO -> button more duzelt next 5 lines, show less
-                onClick(event)
+                onClickShowInMap(event)
+            }
+            buttonBuyTicketEvents.setOnClickListener {
+                onClickBuyTicket(event)
             }
         }
     }
 
-//    override fun getItemId(position: Int): Long {
-//        return position.toLong()
-//    }
-//
-//    override fun getItemViewType(position: Int): Int {
-//        return position
-//    }
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return position
+    }
 
     fun updateAdapter(newEvents: List<EventItem>) {
         events = newEvents
