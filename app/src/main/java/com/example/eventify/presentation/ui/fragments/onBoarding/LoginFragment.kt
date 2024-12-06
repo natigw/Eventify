@@ -5,6 +5,7 @@ import android.graphics.Color.parseColor
 import android.util.Log
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.edit
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -41,10 +42,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         setConstraints()
         observeChanges()
 
-
-
     }
-
 
 
 
@@ -87,6 +85,11 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                 if(viewModel.loginUser(username = username,password = password)){
                     clearInputFields()
                     NancyToast.makeText(requireContext(), "Login Successful", NancyToast.LENGTH_SHORT,NancyToast.SUCCESS,false).show()
+
+                    Intent(requireContext(), MainActivity::class.java).also {
+                        startActivity(it)
+                    }
+
                 }
                 else{
 

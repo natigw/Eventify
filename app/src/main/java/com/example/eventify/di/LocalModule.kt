@@ -13,9 +13,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 @Module
 class LocalModule {
-
-
-
     @Named("OnBoardingWelcome")
     @Provides
     fun provideSharedPrefOnBoardWelcome(context: Context) : SharedPreferences {
@@ -33,7 +30,5 @@ class LocalModule {
     fun provideSharedPrefTokens(context : Context) : SharedPreferences {
         return context.getSharedPreferences("userTokens",Context.MODE_PRIVATE)
     }
-
-
 
 }

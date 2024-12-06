@@ -20,32 +20,6 @@ import javax.inject.Singleton
 class AuthModule {
     @Singleton
     @Provides
-    fun provideTokenManager(
-        authRepository: AuthRepository,
-        @Named("UserTokens")
-        sharedPreferences: SharedPreferences
-    ) : TokenManager {
-        return TokenManager(
-            authRepository = authRepository,
-            sharedPrefUserTokens = sharedPreferences
-        )
-    }
-
-    @Singleton
-    @Provides
-    fun provideAuthInterceptor(
-        context : Context,
-        @Named("UserTokens") sharedPreferences: SharedPreferences,
-//        tokenManager: TokenManager,
-    ) : AuthInterceptor {
-        return AuthInterceptor(sharedPrefUserTokens = sharedPreferences){
-//            AppUtils.handleLogout(context,tokenManager)
-        }
-    }
-
-
-    @Singleton
-    @Provides
     fun provideOkHttpClient(authInterceptor: AuthInterceptor) : OkHttpClient{
         return OkHttpClient
             .Builder()

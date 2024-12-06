@@ -17,7 +17,7 @@ import javax.inject.Named
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val authRepository: AuthRepository
+    val authRepository: AuthRepository
 ): ViewModel() {
 
     @Inject
@@ -44,13 +44,11 @@ class LoginViewModel @Inject constructor(
                     username = username,
                     password = password
                 )
-
-
-//                sharedPrefUserTokens.edit {
-//                    putString("access_token", "${response.tokenType} ${response.accessToken}")
-//
-//                }
-
+                sharedPrefUserTokens.edit {
+                    putString("access_token",response.accessToken)
+                    putString("refresh_token",response.refreshToken)
+                    putString("token_type",response.tokenType)
+                }
                 true
             }
             catch (e : Exception){

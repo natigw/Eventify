@@ -42,10 +42,11 @@ interface AuthAPI {
     ): Response<ResponseVerifyToken>
 
 
-    @GET("/auth/token/refresh")
+    @POST("/auth/token/refresh") // qardasimsan bu niye postdu
     suspend fun refreshAccessToken(
         @Query("refresh_token") refreshToken : String
     ) : Response<ResponseSuccessfulUserToken>
+
 
     @GET("/auth/confirm-email/{access_token}")
     suspend fun confirmEmail(
