@@ -34,7 +34,7 @@ class LoginViewModel @Inject constructor(
 
     val isLoading = MutableStateFlow(false)
 
-
+    val errorMessagesState = MutableStateFlow<String?>(null)
     suspend fun loginUser(username : String, password : String) : Boolean {
 
         val loginChecker = viewModelScope.async {
@@ -52,6 +52,7 @@ class LoginViewModel @Inject constructor(
                 true
             }
             catch (e : Exception){
+                errorMessagesState.update { e.message }
                 Log.e("errorLogin",e.message.toString())
                  false
             }

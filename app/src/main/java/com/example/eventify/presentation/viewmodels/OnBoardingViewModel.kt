@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.eventify.domain.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Named
@@ -16,6 +17,7 @@ class OnBoardingViewModel @Inject constructor(
     @Named("UserTokens") val sharedPreferences: SharedPreferences,
     val authRepository: AuthRepository
 ): ViewModel() {
+
 
     fun checkRefreshTokenIsValid(refreshToken : String) : Boolean{
         return try {
@@ -28,6 +30,7 @@ class OnBoardingViewModel @Inject constructor(
             true
         }
         catch (e:Exception){
+
             false
         }
     }

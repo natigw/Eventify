@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.Color.parseColor
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.edit
 import androidx.fragment.app.viewModels
@@ -15,8 +16,10 @@ import com.example.eventify.common.utils.NancyToast
 import com.example.eventify.databinding.FragmentLoginBinding
 import com.example.eventify.presentation.ui.activities.MainActivity
 import com.example.eventify.presentation.viewmodels.LoginViewModel
+import com.shashank.sony.fancytoastlib.FancyToast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -41,6 +44,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         loginButton()
         setConstraints()
         observeChanges()
+
 
     }
 
@@ -99,6 +103,16 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
 
             }
 
+        }
+    }
+
+    fun toastLoginErrors(){
+        lifecycleScope.launch {
+            viewModel.errorMessagesState
+                .filter { it != null }
+                .collectLatest {
+                    NancyToast.makeText(requireContext(), it, NancyToast.LENGTH_SHORT, NancyToast.WARNING,false).show()
+            }
         }
     }
 

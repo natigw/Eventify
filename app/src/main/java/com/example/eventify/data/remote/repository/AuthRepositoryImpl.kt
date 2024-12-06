@@ -57,7 +57,7 @@ class AuthRepositoryImpl @Inject constructor(
                 return response.body()!!
             }
             else{
-                throw Exception("Error ${response.code()}: ${response.errorBody()?.string()}")
+                throw Exception(response.errorBody()?.string())
             }
         }
         catch (e : Exception){
