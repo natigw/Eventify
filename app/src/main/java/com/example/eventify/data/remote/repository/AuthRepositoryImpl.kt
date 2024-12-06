@@ -4,7 +4,6 @@ import com.example.eventify.data.remote.api.AuthAPI
 import com.example.eventify.data.remote.model.register.RequestUserRegistration
 import com.example.eventify.data.remote.model.register.ResponseUserRegistration
 import com.example.eventify.data.remote.model.userToken.ResponseSuccessfulUserToken
-import com.example.eventify.data.remote.model.userToken.ResponseVerifyToken
 import com.example.eventify.domain.repository.AuthRepository
 import javax.inject.Inject
 
@@ -66,6 +65,7 @@ class AuthRepositoryImpl @Inject constructor(
     }
 
     override suspend fun verifyUserToken(token: String): Boolean {
+
         try {
             val response = api.verifyUserToken(token)
 

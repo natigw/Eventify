@@ -2,6 +2,7 @@ package com.example.eventify.di
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.media.session.MediaSession.Token
 import com.example.eventify.common.utils.AppUtils
 import com.example.eventify.data.remote.interceptor.AuthInterceptor
 import com.example.eventify.data.remote.interceptor.TokenManager
@@ -25,6 +26,19 @@ class AuthModule {
             .Builder()
             .addInterceptor(authInterceptor)
             .build()
+    }
+
+    @Singleton
+    @Provides
+    fun provideTokenManager(
+        @Named("UserTokens")
+        sharedPreferences: SharedPreferences,
+        authRepository: AuthRepository
+    ) : TokenManager{
+        return TokenManager(
+            sharedPreferences,
+            authRepository
+        )
     }
 
 }

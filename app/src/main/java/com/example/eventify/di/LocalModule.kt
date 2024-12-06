@@ -19,12 +19,6 @@ class LocalModule {
         return context.getSharedPreferences("onBoardingWelcome", Context.MODE_PRIVATE)
     }
 
-    @Named("UserLoggedIn")
-    @Provides
-    fun provideSharedPrefUserLoggedIn(context: Context) : SharedPreferences {
-        return context.getSharedPreferences("userLoggedIn", Context.MODE_PRIVATE)
-    }
-
     @Named("UserTokens")
     @Provides
     fun provideSharedPrefTokens(context : Context) : SharedPreferences {
