@@ -62,7 +62,11 @@
         android:id="@+id/markerDetailsBottomSheet"
         android:name="com.example.eventify.presentation.ui.fragments.map.MarkerDetailsBottomSheet"
         android:label="bottomsheet_marker_details"
-        tools:layout="@layout/bottomsheet_marker_details" />
+        tools:layout="@layout/bottomsheet_marker_details" >
+        <argument
+            android:name="placeId"
+            app:argType="integer" />
+    </dialog>
     <dialog
         android:id="@+id/placesCommentsBottomSheet"
         android:name="com.example.eventify.presentation.ui.fragments.places.PlacesCommentsBottomSheet"

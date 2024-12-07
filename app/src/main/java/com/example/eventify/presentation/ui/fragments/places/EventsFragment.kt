@@ -38,7 +38,7 @@ class EventsFragment : BaseFragment<FragmentEventsBinding>(FragmentEventsBinding
         onClickShowInMap = {
             sharedViewModel.setCoordinates(
                 PlaceCoordinates(
-                    id = it.id,
+                    placeId = it.placeId,
                     name = it.name,
                     placeType = "event",
                     long = it.lngCoordinate,

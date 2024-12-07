@@ -17,7 +17,7 @@ class EventRepositoryImpl @Inject constructor(
                     val event = it.event
                     val location = it.location
                     EventItem(
-                        id = event.id,
+                        placeId = event.id,
                         name = event.title,
                         imageLink = event.posterImageLink,
                         description = event.description,

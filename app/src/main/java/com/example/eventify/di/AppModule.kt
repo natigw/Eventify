@@ -1,6 +1,7 @@
 package com.example.eventify.di
 
 import android.content.Context
+import com.example.eventify.common.utils.NetworkConnection
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,6 +18,10 @@ class AppModule {
     @Singleton
     fun provideContext(@ApplicationContext context : Context) : Context = context
 
-
+    @Provides
+    @Singleton
+    fun provideNetworkConnection(@ApplicationContext context: Context): NetworkConnection {
+        return NetworkConnection(context)
+    }
 
 }

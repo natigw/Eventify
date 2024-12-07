@@ -7,7 +7,6 @@ import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.graphics.Color
-import android.os.Bundle
 import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.activityViewModels
@@ -68,8 +67,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 lat = it.lat.toDouble(),
                 lng = it.long.toDouble(),
                 title = it.name,
-                description = it.placeType,
-                placeId = it.id,
+                placeId = it.placeId,
                 hue = if (it.placeType == "venue") BitmapDescriptorFactory.HUE_MAGENTA else BitmapDescriptorFactory.HUE_ORANGE
             )
         }
@@ -86,7 +84,6 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                             lat = it.lat.toDouble(),
                             lng = it.lng.toDouble(),
                             title = it.name,
-                            description = it.description,
                             hue = BitmapDescriptorFactory.HUE_AZURE,
                             placeId = it.id
                         )
@@ -99,8 +96,8 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                             lat = it.location.lat.toDouble(),
                             lng = it.location.lng.toDouble(),
                             title = it.event.title,
-                            description = it.event.description,
-                            hue = BitmapDescriptorFactory.HUE_RED
+                            hue = BitmapDescriptorFactory.HUE_RED,
+                            placeId = it.event.venueId
                         )
                     }
                 }
@@ -118,12 +115,11 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             googleMap.setOnMarkerClickListener { marker ->
                 googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(marker.position, 15f))
                 marker.showInfoWindow()
-                val bundle = Bundle()
-                bundle.putString("id", marker.id)
-                val markerDetailsBottomSheet = MarkerDetailsBottomSheet()
-                markerDetailsBottomSheet.arguments = bundle
-                markerDetailsBottomSheet.show(requireActivity().supportFragmentManager, "cart")
-//                findNavController().navigate(R.id.action_mapFragment_to_markerDetailsBottomSheet)
+
+                val placeId = marker.tag as Int
+                placeId.let {
+                    findNavController().navigate(MapFragmentDirections.actionMapFragmentToMarkerDetailsBottomSheet(placeId))
+                }
                 true
             }
 
@@ -178,17 +174,16 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         lat: Double,
         lng: Double,
         title: String,
-        description: String,
         hue: Float,
-        placeId: Int? = null
+        placeId: Int
     ) {
-        googleMap.addMarker(
+        val marker = googleMap.addMarker(
             MarkerOptions()
                 .position(LatLng(lat, lng))
                 .title(title)
-                .snippet(description)
                 .icon(BitmapDescriptorFactory.defaultMarker(hue))
         )
+        marker?.tag = placeId
     }
 
     private suspend fun fetchRoute(origin: LatLng, destination: LatLng) {
@@ -267,7 +262,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             if (location != null) {
                 val currentLatLng = LatLng(location.latitude, location.longitude)
                 //oldugun yere pin de qoysun? deqiqlesdir
-                addMarker(googleMap, location.latitude, location.longitude, "Your current location", "You are here", BitmapDescriptorFactory.HUE_RED)
+                addMarker(googleMap, location.latitude, location.longitude, "You are here", BitmapDescriptorFactory.HUE_RED, 0)
                 googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 15f))
             } else {
                 val bakuCityCenter = LatLng(40.3791, 49.8468)
@@ -296,35 +291,4 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             }
         }
     }
-
-//    override fun onStart() {
-//        super.onStart()
-//        mapFragment?.onStart()  // Forward onStart to the map fragment
-//    }
-//
-//    override fun onResume() {
-//        super.onResume()
-//        mapFragment?.onResume()
-//    }
-//
-//    override fun onPause() {
-//        super.onPause()
-//        mapFragment?.onPause()
-//    }
-//
-//    override fun onStop() {
-//        super.onStop()
-//        mapFragment?.onStop()
-//    }
-//
-//    override fun onDestroy() {
-//        super.onDestroy()
-//        mapFragment?.onDestroy()
-//    }
-//
-//    override fun onLowMemory() {    //TODO -> Deprecated, replace with onTrimMemory
-//        super.onLowMemory()
-//        mapFragment?.onLowMemory()
-//    }
-
 }

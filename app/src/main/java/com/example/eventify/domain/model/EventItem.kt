@@ -5,7 +5,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class EventItem(
-    val id : Int,
+    val placeId : Int,
     val name : String,
     val imageLink : String?,
     val description : String,

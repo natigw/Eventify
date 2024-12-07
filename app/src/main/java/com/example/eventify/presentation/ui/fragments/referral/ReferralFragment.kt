@@ -1,6 +1,7 @@
 package com.example.eventify.presentation.ui.fragments.referral
 
 import android.content.Intent
+import android.util.Log
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -40,32 +41,41 @@ class ReferralFragment : BaseFragment<FragmentReferralBinding>(FragmentReferralB
         lateinit var chosenEvent: String
 
         val numberOfLinkSent = 2  //TODO -> backendden iste
-        lifecycleScope.launch {
+        try {
+            lifecycleScope.launch {
 //            val chosenEvent = eventApi.getAllEvents().body()?.random()?.event?.title   //TODO -> backendden
-            referralViewModel.eventsState
-                .filter { it.isNotEmpty() }
-                .collectLatest {
-                chosenEvent = it.random().name
-                binding.textGetTicketDescriptionReferral.text = "Almost there! Refer ${3 - numberOfLinkSent} more friend to get a free ticket for $chosenEvent event."
-                binding.textGetTicketDescriptionReferral.text = "Congratulations! You got a ticket for $chosenEvent event. Please check your ticket box!"
-            }
+                referralViewModel.eventsState
+                    .filter { it.isNotEmpty() }
+                    .collectLatest {
+                        chosenEvent = it.random().name
+                        binding.textGetTicketDescriptionReferral.text =
+                            "Almost there! Refer ${3 - numberOfLinkSent} more friend to get a free ticket for $chosenEvent event."
+                        binding.textGetTicketDescriptionReferral.text =
+                            "Congratulations! You got a ticket for $chosenEvent event. Please check your ticket box!"
+                    }
 
-            binding.progressReferral.progress = 33 * numberOfLinkSent
-            when (numberOfLinkSent) {
-                1 -> {
-                    binding.imageProgress1.setImageResource(R.drawable.check_progress_green)
-                }
-                2 -> {
-                    binding.imageProgress1.setImageResource(R.drawable.check_progress_green)
-                    binding.imageProgress2.setImageResource(R.drawable.check_progress_green)
-                }
-                3 -> {
-                    binding.imageProgress1.setImageResource(R.drawable.check_progress_green)
-                    binding.imageProgress2.setImageResource(R.drawable.check_progress_green)
-                    binding.imageProgress3.setImageResource(R.drawable.check_progress_green)
-                    binding.textGetTicketDescriptionReferral.text = "Congratulations! You got a ticket for $chosenEvent event. Please check your ticket box!"
+                binding.progressReferral.progress = 33 * numberOfLinkSent
+                when (numberOfLinkSent) {
+                    1 -> {
+                        binding.imageProgress1.setImageResource(R.drawable.check_progress_green)
+                    }
+
+                    2 -> {
+                        binding.imageProgress1.setImageResource(R.drawable.check_progress_green)
+                        binding.imageProgress2.setImageResource(R.drawable.check_progress_green)
+                    }
+
+                    3 -> {
+                        binding.imageProgress1.setImageResource(R.drawable.check_progress_green)
+                        binding.imageProgress2.setImageResource(R.drawable.check_progress_green)
+                        binding.imageProgress3.setImageResource(R.drawable.check_progress_green)
+                        binding.textGetTicketDescriptionReferral.text =
+                            "Congratulations! You got a ticket for $chosenEvent event. Please check your ticket box!"
+                    }
                 }
             }
+        } catch (e: Exception) {
+            Log.e("network", e.toString(), )
         }
 
 
