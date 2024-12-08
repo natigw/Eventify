@@ -22,12 +22,13 @@ class VenueAdapter(
 
     override fun onBindLight(binding: SampleVenueBinding, position: Int) {
         val venue = venues[position]
+//        binding.venues = venue  // Bind the data
+//        binding.executePendingBindings()  // Ensure immediate binding updates
         with(binding) {
             textVenueName.text = venue.name
             textVenueDescription.text = venue.description
             textVenueType.text = venue.venueType
-            textVenueOpenHours.text =
-                "${venue.openHour.substring(0, 5)} - ${venue.closeHour.substring(0, 5)}"
+            textVenueOpenHours.text = venue.openHours
             textVenueLikeCount.text = venue.likeCount.toString()
             Glide.with(imageVenue)
                 .load(venue.imageLink)

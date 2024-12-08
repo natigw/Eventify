@@ -22,14 +22,13 @@ class EventRepositoryImpl @Inject constructor(
                         imageLink = event.posterImageLink,
                         description = event.description,
                         eventType = event.eventType,
-                        organizerId = event.organizerId,
-                        eventDate = event.date,
-                        publishingDate = event.createdAt,
-                        startHour = event.start,
-                        endHour = event.finish,
+                        organizer = if (event.organizerId == 1) "Eventify Group" else "Organizer${event.organizerId}", //TODO -> backend
+                        eventDate = event.date.substring(0,10),
+                        publishingDate = "${event.createdAt.substring(0,10)}, ${event.createdAt.substring(12)}",
+                        eventDurationHours = "${event.start.substring(0, 5)} - ${event.finish.substring(0, 5)}",
                         likeCount = event.numLikes,
-                        latCoordinate = if (location.lat != "string") location.lat.toDouble() else 0.0,
-                        lngCoordinate = if (location.lng != "string") location.lng.toDouble() else 0.0
+                        lat = if (location.lat != "string") location.lat.toDouble() else 0.0,
+                        lng = if (location.lng != "string") location.lng.toDouble() else 0.0
                     )
                 }
             }

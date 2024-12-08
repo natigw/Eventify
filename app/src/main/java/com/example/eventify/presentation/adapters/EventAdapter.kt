@@ -7,6 +7,7 @@ import com.example.eventify.R
 import com.example.eventify.common.base.BaseAdapter
 import com.example.eventify.databinding.SampleEventBinding
 import com.example.eventify.domain.model.EventItem
+import java.util.Locale
 
 class EventAdapter(
     val onClickSeeComments: (EventItem) -> Unit,
@@ -26,11 +27,11 @@ class EventAdapter(
             textEventName.text = event.name
             textEventDescription.text = event.description
             textEventType.text = event.eventType
-            textEventOrganizer.text = if (event.organizerId == 1) "Eventify Group" else event.organizerId.toString()
-            textEventDate.text = "${event.eventDate.substring(0,10)}"
-            textEventPublished.text = "${event.publishingDate.substring(0,10)}, ${event.publishingDate.substring(12)}"
-            textEventDurationHours.text = "${event.startHour.substring(0, 5)} - ${event.endHour.substring(0, 5)}"
-            textEventLikeCount.text = event.likeCount.toString()
+            textEventOrganizer.text = event.organizer
+            textEventDate.text = event.eventDate
+            textEventPublished.text = event.publishingDate
+            textEventDurationHours.text = event.eventDurationHours
+            textEventLikeCount.text = String.format(event.likeCount.toString())
             Glide.with(imageEvent)
                 .load(event.imageLink)
                 .placeholder(R.drawable.placeholder_event)

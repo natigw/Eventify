@@ -10,8 +10,7 @@ data class VenueItem(
     val imageLink : String?,
     val description : String,
     val venueType: String,
-    val openHour: String,
-    val closeHour: String,
+    val openHours: String,
     val likeCount: Int,
     val latCoordinate : Double,
     val lngCoordinate : Double

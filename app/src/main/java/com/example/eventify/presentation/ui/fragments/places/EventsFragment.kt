@@ -41,8 +41,8 @@ class EventsFragment : BaseFragment<FragmentEventsBinding>(FragmentEventsBinding
                     placeId = it.placeId,
                     name = it.name,
                     placeType = "event",
-                    long = it.lngCoordinate,
-                    lat = it.latCoordinate
+                    long = it.lng,
+                    lat = it.lat
                 ))
             val bottomNavigationView = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
             bottomNavigationView.selectedItemId = R.id.testMapFragment

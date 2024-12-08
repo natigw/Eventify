@@ -67,7 +67,6 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         sharedViewModel.sharedCoordinates?.let {
             removeMarkersAtLocation(it.lat, it.long)
             addMarker(
-                googleMap = googleMap,
                 lat = it.lat,
                 lng = it.long,
                 title = it.name,
@@ -82,9 +81,8 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 val venues = this@MapFragment.venueApi.getAllVenues().body()
                 val events = this@MapFragment.eventApi.getAllEvents().body()
                 venues?.forEach {
-                    if (it.lat != "string") {
+                    if (it.lat != "string") {  //it.lat != 0.0   //viewmodeli qosandan sonra bele olmalidi
                         addMarker(
-                            googleMap = googleMap,
                             lat = it.lat.toDouble(),
                             lng = it.lng.toDouble(),
                             title = it.name,
@@ -96,7 +94,6 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 events?.forEach {
                     if (it.location.lat != "string") {
                         addMarker(
-                            googleMap = googleMap,
                             lat = it.location.lat.toDouble(),
                             lng = it.location.lng.toDouble(),
                             title = it.event.title,
@@ -174,7 +171,6 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     }
 
     private fun addMarker(
-        googleMap: GoogleMap,
         lat: Double,
         lng: Double,
         title: String,
@@ -191,7 +187,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         marker?.let { markers.add(it) }
     }
 
-    fun removeMarkersAtLocation(lat: Double, lng: Double) {
+    private fun removeMarkersAtLocation(lat: Double, lng: Double) {
         // Use iterator to avoid ConcurrentModificationException
         val iterator = markers.iterator()
         while (iterator.hasNext()) {
@@ -279,7 +275,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             if (location != null) {
                 val currentLatLng = LatLng(location.latitude, location.longitude)
                 //oldugun yere pin de qoysun? deqiqlesdir
-                addMarker(googleMap, location.latitude, location.longitude, "You are here", BitmapDescriptorFactory.HUE_RED, 0)
+                addMarker(location.latitude, location.longitude, "You are here", BitmapDescriptorFactory.HUE_RED, 0)
                 googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 15f))
             } else {
                 val bakuCityCenter = LatLng(40.3791, 49.8468)

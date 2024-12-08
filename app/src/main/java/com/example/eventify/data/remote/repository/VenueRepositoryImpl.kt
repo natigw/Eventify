@@ -2,7 +2,6 @@ package com.example.eventify.data.remote.repository
 
 import android.util.Log
 import com.example.eventify.common.utils.randomDouble
-import com.example.eventify.common.utils.randomInteger
 import com.example.eventify.common.utils.roundDouble
 import com.example.eventify.data.remote.api.VenueAPI
 import com.example.eventify.domain.model.VenueDetailsItem
@@ -25,8 +24,7 @@ class VenueRepositoryImpl @Inject constructor(
                         imageLink = it.image1Link,
                         description = it.description,
                         venueType = it.venueType,
-                        openHour = it.workHoursOpen,
-                        closeHour = it.workHoursClose,
+                        openHours = "${it.workHoursOpen.substring(0, 5)} - ${it.workHoursClose.substring(0, 5)}",
                         likeCount = it.numLikes,
                         latCoordinate = if (it.lat != "string") it.lat.toDouble() else 0.0,
                         lngCoordinate = if (it.lng != "string") it.lng.toDouble() else 0.0

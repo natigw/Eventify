@@ -10,12 +10,11 @@ data class EventItem(
     val imageLink : String?,
     val description : String,
     val eventType: String,
-    val organizerId: Int,
+    val organizer: String,
     val publishingDate: String,
     val eventDate: String,
-    val startHour: String,
-    val endHour: String,
+    val eventDurationHours: String,
     val likeCount: Int,
-    val latCoordinate : Double,
-    val lngCoordinate : Double
+    val lat : Double,
+    val lng : Double
 ) : Parcelable
