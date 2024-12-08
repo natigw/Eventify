@@ -2,6 +2,7 @@ package com.example.eventify.data.remote.interceptor
 
 import android.content.SharedPreferences
 import com.example.eventify.common.utils.AppUtils
+import com.example.eventify.common.utils.RequestChannel
 import okhttp3.Interceptor
 import okhttp3.Response
 import javax.inject.Inject
@@ -27,7 +28,7 @@ class AuthInterceptor @Inject constructor(
         val response = chain.proceed(request)
 
         if(response.code() == 401){
-            AppUtils.authChannel.trySend(Unit)
+            AppUtils.authChannel.trySend(RequestChannel.ON_401_ERROR)
         }
 
         return response
