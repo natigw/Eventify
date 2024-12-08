@@ -66,6 +66,9 @@
         <argument
             android:name="placeId"
             app:argType="integer" />
+        <argument
+            android:name="placeType"
+            app:argType="string" />
     </dialog>
     <dialog
         android:id="@+id/placesCommentsBottomSheet"

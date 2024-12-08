@@ -37,12 +37,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:textAlignment="center"
         android:fontFamily="@font/inter_bold"
+        android:textAlignment="center"
         android:textColor="@color/purple_dark_eventify"
         android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="@+id/guidelineMarkerDetails1"
         app:layout_constraintEnd_toEndOf="@+id/guidelineMarkerDetails2"
+        app:layout_constraintStart_toStartOf="@+id/guidelineMarkerDetails1"
         app:layout_constraintTop_toBottomOf="@+id/imageDrawerMarkerDetails"
         tools:text="Venue name" />
 
@@ -53,10 +53,10 @@
         android:layout_marginTop="12dp"
         android:adjustViewBounds="true"
         android:scaleType="fitCenter"
+        android:src="@drawable/placeholder_venue"
         app:layout_constraintStart_toStartOf="@+id/guidelineMarkerDetails1"
         app:layout_constraintTop_toBottomOf="@+id/textVenueNameMarkerDetails"
-        app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Medium"
-        android:src="@drawable/placeholder_venue"/>
+        app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Medium" />
 
     <TextView
         android:id="@+id/VenueDetailsMarkerDetailsText"
@@ -83,7 +83,7 @@
         tools:text="Description" />
 
     <TextView
-        android:id="@+id/textVenueTypeTextMarkerDetails"
+        android:id="@+id/VenueTypeMarkerDetailsText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -102,20 +102,20 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/guidelineMarkerDetails2"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@id/textVenueTypeTextMarkerDetails"
-        app:layout_constraintTop_toTopOf="@id/textVenueTypeTextMarkerDetails"
+        app:layout_constraintStart_toEndOf="@id/VenueTypeMarkerDetailsText"
+        app:layout_constraintTop_toTopOf="@id/VenueTypeMarkerDetailsText"
         tools:text="cinema" />
 
     <TextView
-        android:id="@+id/textVenueOpenHoursTextMarkerDetails"
+        android:id="@+id/VenueOpenHoursMarkerDetailsText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:fontFamily="@font/inter_regular"
         android:text="@string/open_hours"
         android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@id/textVenueTypeTextMarkerDetails"
-        app:layout_constraintTop_toBottomOf="@+id/textVenueTypeTextMarkerDetails" />
+        app:layout_constraintStart_toStartOf="@id/VenueTypeMarkerDetailsText"
+        app:layout_constraintTop_toBottomOf="@+id/VenueTypeMarkerDetailsText" />
 
     <TextView
         android:id="@+id/textVenueOpenHoursMarkerDetails"
@@ -124,8 +124,8 @@
         android:layout_marginStart="6dp"
         android:fontFamily="@font/inter_light_italic"
         android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@id/textVenueOpenHoursTextMarkerDetails"
-        app:layout_constraintTop_toTopOf="@id/textVenueOpenHoursTextMarkerDetails"
+        app:layout_constraintStart_toEndOf="@id/VenueOpenHoursMarkerDetailsText"
+        app:layout_constraintTop_toTopOf="@id/VenueOpenHoursMarkerDetailsText"
         tools:text="09:00 - 23:00" />
 
     <TextView
@@ -136,8 +136,8 @@
         android:fontFamily="@font/inter_regular"
         android:text="@string/likes"
         android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@id/textVenueTypeTextMarkerDetails"
-        app:layout_constraintTop_toBottomOf="@+id/textVenueOpenHoursTextMarkerDetails" />
+        app:layout_constraintStart_toStartOf="@id/VenueTypeMarkerDetailsText"
+        app:layout_constraintTop_toBottomOf="@+id/VenueOpenHoursMarkerDetailsText" />
 
     <TextView
         android:id="@+id/textVenueLikeCountMarkerDetails"
@@ -146,8 +146,8 @@
         android:layout_marginStart="6dp"
         android:fontFamily="@font/inter_light_italic"
         android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@id/VenueLikesMarkerDetailsText"
         app:layout_constraintBottom_toBottomOf="@id/VenueLikesMarkerDetailsText"
+        app:layout_constraintStart_toEndOf="@id/VenueLikesMarkerDetailsText"
         tools:text="12 Likes" />
 
     <RatingBar
@@ -161,7 +161,7 @@
         android:scaleX="1.25"
         android:scaleY="1.25"
         android:stepSize="0.1"
-        app:layout_constraintStart_toStartOf="@+id/textVenueOpenHoursTextMarkerDetails"
+        app:layout_constraintStart_toStartOf="@+id/VenueOpenHoursMarkerDetailsText"
         app:layout_constraintTop_toBottomOf="@+id/VenueLikesMarkerDetailsText"
         tools:rating="3.5" />
 
@@ -173,13 +173,34 @@
         android:layout_marginBottom="12dp"
         android:backgroundTint="@color/green_light_eventify"
         android:fontFamily="@font/inter_bold"
-        android:text="Get shortest route"
+        android:text="@string/get_shortest_route"
         android:textColor="@color/purple_eventify"
         android:textSize="18sp"
         app:cornerRadius="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineMarkerDetails2"
+        app:layout_constraintEnd_toStartOf="@+id/buttonBuyTicketMarkerDetails"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/guidelineMarkerDetails1"
+        app:layout_constraintTop_toBottomOf="@+id/ratingBarMarkerDetails" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonBuyTicketMarkerDetails"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:backgroundTint="@color/green_light_eventify"
+        android:fontFamily="@font/inter_bold"
+        android:text="@string/buy_ticket"
+        android:textColor="@color/purple_eventify"
+        android:textSize="18sp"
+        app:cornerRadius="16dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineMarkerDetails2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/buttonShortestRouteMarkerDetails"
         app:layout_constraintTop_toBottomOf="@+id/ratingBarMarkerDetails" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,8 +1,11 @@
 package com.example.eventify.data.remote.repository
 
+import com.example.eventify.common.utils.randomDouble
 import com.example.eventify.data.remote.api.EventAPI
+import com.example.eventify.domain.model.EventDetailsItem
 import com.example.eventify.domain.model.EventItem
 import com.example.eventify.domain.repository.EventRepository
+import com.google.android.gms.maps.model.LatLng
 import javax.inject.Inject
 
 class EventRepositoryImpl @Inject constructor(
@@ -12,8 +15,8 @@ class EventRepositoryImpl @Inject constructor(
     override suspend fun getEvents(): List<EventItem> {
         val response = api.getAllEvents()
         if(response.isSuccessful){
-            response.body()?.let { data->
-                return data.map {
+            response.body()?.let { rawData->
+                return rawData.map {
                     val event = it.event
                     val location = it.location
                     EventItem(
@@ -35,6 +38,26 @@ class EventRepositoryImpl @Inject constructor(
         }
         return emptyList()
 
+    }
+
+    override suspend fun getEventDetails(eventId: Int): EventDetailsItem? {
+        val response = api.getEventDetails(eventId)
+        if (response.isSuccessful) {
+            response.body()?.let { rawData ->
+                return EventDetailsItem(
+                    venueId = rawData.event.id,
+                    title = rawData.event.title,
+                    description = rawData.event.description,
+                    imageLinks = listOf(rawData.event.posterImageLink),
+                    eventType = rawData.event.eventType,
+                    eventDuration = "${rawData.event.start.substring(0, 5)} - ${rawData.event.finish.substring(0, 5)}",
+                    likeCount = rawData.event.numLikes,
+                    rating = randomDouble(max = 5.0),
+                    coordinates = if (rawData.location.lat != "string") LatLng(rawData.location.lat.toDouble(), rawData.location.lng.toDouble()) else LatLng(0.0, 0.0)
+                )
+            }
+        }
+        return null
     }
 
 }
