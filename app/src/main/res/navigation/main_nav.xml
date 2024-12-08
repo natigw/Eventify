@@ -10,12 +10,13 @@
         android:name="com.example.eventify.presentation.ui.fragments.places.VenuesFragment"
         android:label="fragment_venues"
         tools:layout="@layout/fragment_venues" >
-        <action
-            android:id="@+id/action_venuesFragment_to_testMapFragment"
-            app:destination="@id/testMapFragment" />
+
         <action
             android:id="@+id/action_venuesFragment_to_placesCommentsBottomSheet"
             app:destination="@id/placesCommentsBottomSheet" />
+        <action
+            android:id="@+id/action_venuesFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -40,11 +41,11 @@
         android:label="fragment_events"
         tools:layout="@layout/fragment_events" >
         <action
-            android:id="@+id/action_eventsFragment_to_testMapFragment"
-            app:destination="@id/testMapFragment" />
-        <action
             android:id="@+id/action_eventsFragment_to_placesCommentsBottomSheet"
             app:destination="@id/placesCommentsBottomSheet" />
+        <action
+            android:id="@+id/action_eventsFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
     </fragment>
     <fragment
         android:id="@+id/placesFragment"
