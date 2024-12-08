@@ -7,6 +7,7 @@ import com.example.eventify.data.remote.api.VenueAPI
 import com.example.eventify.domain.model.VenueDetailsItem
 import com.example.eventify.domain.model.VenueItem
 import com.example.eventify.domain.repository.VenueRepository
+import com.google.android.gms.maps.model.LatLng
 import javax.inject.Inject
 
 class VenueRepositoryImpl @Inject constructor(
@@ -50,7 +51,8 @@ class VenueRepositoryImpl @Inject constructor(
                     venueType = rawData.venueType,
                     openHours = "${rawData.workHoursOpen.substring(0, 5)} - ${rawData.workHoursClose.substring(0, 5)}",
                     likeCount = rawData.numLikes,
-                    rating = roundDouble(randomDouble(max = 5.0))
+                    rating = roundDouble(randomDouble(max = 5.0)),
+                    coordinates = if (rawData.lat != "string") LatLng(rawData.lat.toDouble(), rawData.lng.toDouble()) else LatLng(0.0, 0.0)
                 )
             }
         }

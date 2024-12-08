@@ -57,4 +57,5 @@
     <string name="register_successful">Registration successful!</string>
     <string name="retry">Retry</string>
     <string name="network_connection_lost">Network connection lost!</string>
+    <string name="get_shortest_route">Get shortest route</string>
 </resources>

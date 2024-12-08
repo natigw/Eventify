@@ -33,6 +33,7 @@ import com.google.android.gms.maps.model.PolylineOptions
 import com.google.maps.android.PolyUtil
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
@@ -57,6 +58,8 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
     private lateinit var googleMap: GoogleMap
 
+    private var currentLatLng: LatLng? = null
+
     private val markers = mutableListOf<Marker>()
 
     @SuppressLint("PotentialBehaviorOverride")
@@ -73,6 +76,24 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 placeId = it.placeId,
                 hue = if (it.placeType == "venue") BitmapDescriptorFactory.HUE_MAGENTA else BitmapDescriptorFactory.HUE_ORANGE
             )
+        }
+
+        lifecycleScope.launch {
+            sharedViewModel.sharedRouteDestinationCoordinates.collect { destinationCoordinates ->
+                destinationCoordinates?.let {
+                    if (currentLatLng != null) {
+                        fetchRoute(currentLatLng!!, LatLng(it.latitude, it.longitude))
+                    } else {
+                        NancyToast.makeText(
+                            requireContext(),
+                            "Please enable location service!",
+                            NancyToast.LENGTH_SHORT,
+                            NancyToast.WARNING,
+                            false
+                        ).show()
+                    }
+                }
+            }
         }
 
         lifecycleScope.launch {
@@ -98,7 +119,8 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                             lng = it.location.lng.toDouble(),
                             title = it.event.title,
                             hue = BitmapDescriptorFactory.HUE_RED,
-                            placeId = it.event.venueId
+                            placeId = it.event.venueId,
+                            placeType = "event"
                         )
                     }
                 }
@@ -112,23 +134,29 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 ).show()
                 Log.e("exception", e.toString())
             }
+
+            addMarker(
+                40.38,
+                49.85,
+                "natig's custom event",
+                BitmapDescriptorFactory.HUE_GREEN,
+                12,
+                "event"
+            )
+
             // Marker click listener
             googleMap.setOnMarkerClickListener { marker ->
-                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(marker.position, 15f))
+                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(marker.position.latitude-0.005, marker.position.longitude), 15f))
                 marker.showInfoWindow()
 
-                val placeId = marker.tag as Int
+                val tags = marker.tag as List<*>
+                val placeId = tags[0] as Int
+                val placeType = tags[1] as String
                 placeId.let {
-                    findNavController().navigate(MapFragmentDirections.actionMapFragmentToMarkerDetailsBottomSheet(placeId))
+                    findNavController().navigate(MapFragmentDirections.actionMapFragmentToMarkerDetailsBottomSheet(placeId, placeType))
                 }
                 true
             }
-
-            // Fetch and display route
-            fetchRoute(
-                LatLng(40.39367150806999, 49.86140788246094),
-                LatLng(40.369909540241444, 49.8397321274377)
-            )
         }
 
         binding.buttonSwitchMode.setOnClickListener {
@@ -175,7 +203,8 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         lng: Double,
         title: String,
         hue: Float,
-        placeId: Int
+        placeId: Int,
+        placeType: String = "venue"
     ) {
         val marker = googleMap.addMarker(
             MarkerOptions()
@@ -183,7 +212,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 .title(title)
                 .icon(BitmapDescriptorFactory.defaultMarker(hue))
         )
-        marker?.tag = placeId
+        marker?.tag = listOf(placeId, placeType)
         marker?.let { markers.add(it) }
     }
 
@@ -273,10 +302,10 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             LocationServices.getFusedLocationProviderClient(requireContext())
         fusedLocationProviderClient.lastLocation.addOnSuccessListener { location ->
             if (location != null) {
-                val currentLatLng = LatLng(location.latitude, location.longitude)
+                currentLatLng = LatLng(location.latitude, location.longitude)
                 //oldugun yere pin de qoysun? deqiqlesdir
                 addMarker(location.latitude, location.longitude, "You are here", BitmapDescriptorFactory.HUE_RED, 0)
-                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 15f))
+                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng!!, 15f))
             } else {
                 val bakuCityCenter = LatLng(40.3791, 49.8468)
                 googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(bakuCityCenter, 12f))
