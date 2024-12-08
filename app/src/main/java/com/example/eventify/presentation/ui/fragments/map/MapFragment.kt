@@ -27,6 +27,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MapStyleOptions
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.PolylineOptions
 import com.google.maps.android.PolyUtil
@@ -56,16 +57,19 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
     private lateinit var googleMap: GoogleMap
 
+    private val markers = mutableListOf<Marker>()
+
     @SuppressLint("PotentialBehaviorOverride")
     private val callback = OnMapReadyCallback { googleMap ->
 
         this.googleMap = googleMap
 
         sharedViewModel.sharedCoordinates?.let {
+            removeMarkersAtLocation(it.lat, it.long)
             addMarker(
                 googleMap = googleMap,
-                lat = it.lat.toDouble(),
-                lng = it.long.toDouble(),
+                lat = it.lat,
+                lng = it.long,
                 title = it.name,
                 placeId = it.placeId,
                 hue = if (it.placeType == "venue") BitmapDescriptorFactory.HUE_MAGENTA else BitmapDescriptorFactory.HUE_ORANGE
@@ -184,6 +188,19 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 .icon(BitmapDescriptorFactory.defaultMarker(hue))
         )
         marker?.tag = placeId
+        marker?.let { markers.add(it) }
+    }
+
+    fun removeMarkersAtLocation(lat: Double, lng: Double) {
+        // Use iterator to avoid ConcurrentModificationException
+        val iterator = markers.iterator()
+        while (iterator.hasNext()) {
+            val marker = iterator.next()
+            if (marker.position == LatLng(lat, lng)) {
+                marker.remove()   // Remove marker from the map
+                iterator.remove() // Remove marker from the list
+            }
+        }
     }
 
     private suspend fun fetchRoute(origin: LatLng, destination: LatLng) {

@@ -28,8 +28,8 @@ class EventRepositoryImpl @Inject constructor(
                         startHour = event.start,
                         endHour = event.finish,
                         likeCount = event.numLikes,
-                        latCoordinate = location.lat,
-                        lngCoordinate = location.lng
+                        latCoordinate = if (location.lat != "string") location.lat.toDouble() else 0.0,
+                        lngCoordinate = if (location.lng != "string") location.lng.toDouble() else 0.0
                     )
                 }
             }

@@ -25,7 +25,7 @@
         android:id="@+id/imageDrawerMarkerDetails"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
         android:elevation="4dp"
         android:src="@drawable/bottomsheet_drawer_element_on_secondary"
         app:layout_constraintEnd_toEndOf="parent"
@@ -56,7 +56,7 @@
         app:layout_constraintStart_toStartOf="@+id/guidelineMarkerDetails1"
         app:layout_constraintTop_toBottomOf="@+id/textVenueNameMarkerDetails"
         app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Medium"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:src="@drawable/placeholder_venue"/>
 
     <TextView
         android:id="@+id/VenueDetailsMarkerDetailsText"
@@ -157,14 +157,29 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="12dp"
         android:progressTint="@color/purple_dark_eventify"
         android:scaleX="1.25"
         android:scaleY="1.25"
         android:stepSize="0.1"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/textVenueOpenHoursTextMarkerDetails"
         app:layout_constraintTop_toBottomOf="@+id/VenueLikesMarkerDetailsText"
         tools:rating="3.5" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonShortestRouteMarkerDetails"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:backgroundTint="@color/green_light_eventify"
+        android:fontFamily="@font/inter_bold"
+        android:text="Get shortest route"
+        android:textColor="@color/purple_eventify"
+        android:textSize="18sp"
+        app:cornerRadius="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineMarkerDetails2"
+        app:layout_constraintStart_toStartOf="@+id/guidelineMarkerDetails1"
+        app:layout_constraintTop_toBottomOf="@+id/ratingBarMarkerDetails" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

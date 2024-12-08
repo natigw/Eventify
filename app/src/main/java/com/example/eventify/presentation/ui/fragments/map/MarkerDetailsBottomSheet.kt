@@ -1,18 +1,13 @@
 package com.example.eventify.presentation.ui.fragments.map
 
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.eventify.R
 import com.example.eventify.common.base.BaseBottomSheetFragment
-import com.example.eventify.common.utils.NancyToast
-import com.example.eventify.data.remote.api.VenueAPI
 import com.example.eventify.databinding.BottomsheetMarkerDetailsBinding
-import com.example.eventify.domain.model.VenueDetailsItem
 import com.example.eventify.domain.repository.VenueRepository
-import com.example.eventify.presentation.viewmodels.MarkerDetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -41,6 +36,9 @@ class MarkerDetailsBottomSheet : BaseBottomSheetFragment<BottomsheetMarkerDetail
                         .placeholder(R.drawable.placeholder_venue)
                         .transition(DrawableTransitionOptions.withCrossFade())
                         .into(imageVenueMarkerDetails)
+                    buttonShortestRouteMarkerDetails.setOnClickListener {
+                        
+                    }
                 }
             }
         }

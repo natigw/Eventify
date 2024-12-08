@@ -28,8 +28,8 @@ class VenueRepositoryImpl @Inject constructor(
                         openHour = it.workHoursOpen,
                         closeHour = it.workHoursClose,
                         likeCount = it.numLikes,
-                        latCoordinate = it.lat,
-                        lngCoordinate = it.lng
+                        latCoordinate = if (it.lat != "string") it.lat.toDouble() else 0.0,
+                        lngCoordinate = if (it.lng != "string") it.lng.toDouble() else 0.0
                     )
                 }
             }

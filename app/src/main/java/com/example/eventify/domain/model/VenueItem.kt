@@ -13,6 +13,6 @@ data class VenueItem(
     val openHour: String,
     val closeHour: String,
     val likeCount: Int,
-    val latCoordinate : String,
-    val lngCoordinate : String
+    val latCoordinate : Double,
+    val lngCoordinate : Double
 ) : Parcelable
