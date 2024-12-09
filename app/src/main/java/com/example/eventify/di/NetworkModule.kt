@@ -17,9 +17,10 @@ import javax.inject.Singleton
 class NetworkModule {
     @Singleton
     @Provides
-    fun provideRetrofitClient(): Retrofit {
+    fun provideRetrofitClient(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit
             .Builder()
+            .client(okHttpClient)
             .baseUrl("https://eventify-az.onrender.com")
             .addConverterFactory(GsonConverterFactory.create())
             .build()

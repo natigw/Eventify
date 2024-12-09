@@ -1,5 +1,6 @@
 package com.example.eventify.test
 
+import android.util.Log
 import androidx.lifecycle.lifecycleScope
 import com.example.eventify.common.base.BaseFragment
 import com.example.eventify.data.remote.api.VenueAPI
@@ -18,12 +19,12 @@ class Test1Fragment : BaseFragment<FragmentTest1Binding>(FragmentTest1Binding::i
     override fun onViewCreatedLight() {
         lifecycleScope.launch {
             api.addVenueComment(
-                token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJibHVlc3RlZWwyIiwiaWQiOjM0LCJleHAiOjE3MzM3NjAzNjN9.yA4sWGPmJ4LuqspxkmUrTgyxJslNvM9Wg2f4RA82vV8",
                 RequestAddVenueComment(
                     content = "sadfjsbjkfbasl",
                     venue = 5
                 )
             )
+
         }
     }
 }

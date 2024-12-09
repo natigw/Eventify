@@ -37,8 +37,6 @@ interface VenueAPI {
 //
     @POST("/venues/like")
     suspend fun likeVenue(
-        @Header("Authorization")
-        token : String,
         @Body
         requestLikeVenue: RequestLikeDislikeVenue
     )
@@ -64,16 +62,12 @@ interface VenueAPI {
 
     @POST("/venues/comment")
     suspend fun addVenueComment(
-        @Header("Authorization")
-        token: String,
         @Body
         requestAddVenueComment: RequestAddVenueComment
     )
 
     @DELETE("/venues/comment")
     suspend fun deleteVenueComment(
-        @Header("Authorization")
-        token: String,
         @Body
         requestDeleteVenueComment: RequestDeleteVenueComment
     )
