@@ -24,21 +24,16 @@ class TokenManager @Inject constructor(
             val response = authRepository.refreshAccessToken(refreshToken.toString())
 
             val newAccessToken = response.accessToken
-            val newRefreshToken = response.refreshToken
-
-            sharedPrefUserTokens.edit {
-                putString("access_token", newAccessToken)
-                putString("refresh_token", newRefreshToken)
-                putString("token_type",response.tokenType)
-            }
 
             return newAccessToken
         } catch (e: Exception) {
-            AppUtils.authChannel.trySend(Unit)
-            sharedPrefUserTokens.edit {
-                clear()
-            }
             null
+        }
+    }
+
+    fun setNewAccessToken(accessToken : String){
+        sharedPrefUserTokens.edit{
+            putString("access_token",accessToken)
         }
     }
 

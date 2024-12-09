@@ -13,6 +13,8 @@ import com.example.eventify.R
 import com.example.eventify.common.base.BaseActivity
 import com.example.eventify.common.utils.AppUtils
 import com.example.eventify.common.utils.NetworkConnection
+import com.example.eventify.common.utils.NetworkUtils
+import com.example.eventify.common.utils.RequestChannel
 import com.example.eventify.data.remote.interceptor.TokenManager
 import com.example.eventify.databinding.ActivityMainBinding
 import com.google.android.material.snackbar.Snackbar
@@ -57,9 +59,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
 
         setUpBottomNavigation()
 
+
+        NetworkUtils.initializeTokenManager(tokenManager)
         lifecycleScope.launch {
             AppUtils.authChannel.receiveAsFlow().collectLatest {
-                AppUtils.handleLogout(this@MainActivity, tokenManager)
+                if(it == RequestChannel.LOG_OUT){
+                    NetworkUtils.handleLogout(this@MainActivity)
+                }
             }
         }
 

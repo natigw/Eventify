@@ -28,7 +28,7 @@ class VenuesFragment : BaseFragment<FragmentVenuesBinding>(FragmentVenuesBinding
 
     private val venueAdapter = VenueAdapter(
         onClickSeeComments = {
-            findNavController().navigate(VenuesFragmentDirections.actionVenuesFragmentToTestMapFragment())
+            findNavController().navigate(VenuesFragmentDirections.actionVenuesFragmentToMapFragment())
         },
         onClickShowInMap = {
             sharedViewModel.setCoordinates(
@@ -41,7 +41,7 @@ class VenuesFragment : BaseFragment<FragmentVenuesBinding>(FragmentVenuesBinding
                 )
             )
             val bottomNavigationView = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
-            bottomNavigationView.selectedItemId = R.id.testMapFragment
+            bottomNavigationView.selectedItemId = R.id.mapFragment
         }
     )
 

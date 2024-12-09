@@ -45,7 +45,7 @@ class EventsFragment : BaseFragment<FragmentEventsBinding>(FragmentEventsBinding
                     lat = it.lat
                 ))
             val bottomNavigationView = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
-            bottomNavigationView.selectedItemId = R.id.testMapFragment
+            bottomNavigationView.selectedItemId = R.id.mapFragment
         },
         onClickBuyTicket = {
             NancyToast.makeText(requireContext(), "[buying ticket...]", NancyToast.LENGTH_SHORT, NancyToast.SUCCESS, false).show()
