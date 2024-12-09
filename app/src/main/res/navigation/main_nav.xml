@@ -58,6 +58,9 @@
         <action
             android:id="@+id/action_placesFragment_to_venuesFragment"
             app:destination="@id/venuesFragment" />
+        <action
+            android:id="@+id/action_placesFragment_to_placesCommentsBottomSheet"
+            app:destination="@id/placesCommentsBottomSheet" />
     </fragment>
     <dialog
         android:id="@+id/markerDetailsBottomSheet"

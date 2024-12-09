@@ -1,4 +1,4 @@
-package com.example.eventify.data.remote.model.venues.comment
+package com.example.eventify.data.remote.model.venues.comment.venueComments
 
 
 import com.google.gson.annotations.SerializedName

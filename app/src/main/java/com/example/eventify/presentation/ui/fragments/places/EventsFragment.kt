@@ -33,7 +33,7 @@ class EventsFragment : BaseFragment<FragmentEventsBinding>(FragmentEventsBinding
 
     private val eventAdapter = EventAdapter(
         onClickSeeComments = {
-            findNavController().navigate(EventsFragmentDirections.actionEventsFragmentToPlacesCommentsBottomSheet())
+            findNavController().navigate(PlacesFragmentDirections.actionPlacesFragmentToPlacesCommentsBottomSheet())
         },
         onClickShowInMap = {
             sharedViewModel.setCoordinates(

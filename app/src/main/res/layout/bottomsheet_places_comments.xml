@@ -35,16 +35,32 @@
 
     <TextView
         android:id="@+id/textPlaceNameComments"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
         android:fontFamily="@font/inter_bold"
         android:textColor="@color/purple_dark_eventify"
         android:textSize="24sp"
-        android:layout_marginTop="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toStartOf="@+id/guidelinePlacesComments2"
+        app:layout_constraintStart_toStartOf="@+id/guidelinePlacesComments1"
         app:layout_constraintTop_toBottomOf="@+id/imageDrawerPlacesComments"
         tools:text="Venue name" />
+
+    <TextView
+        android:id="@+id/NoCommentsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        android:fontFamily="@font/inter_italic"
+        android:text="@string/no_comments"
+        android:textColor="@color/purple_dark_eventify"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textPlaceNameComments" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvPlaceComments"
@@ -54,9 +70,19 @@
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:itemCount="10"
-        tools:listitem="@layout/sample_comments"
+        tools:listitem="@layout/sample_comment"
         app:layout_constraintEnd_toStartOf="@+id/guidelinePlacesComments2"
         app:layout_constraintStart_toStartOf="@+id/guidelinePlacesComments1"
         app:layout_constraintTop_toBottomOf="@+id/textPlaceNameComments" />
+
+    <ProgressBar
+        android:id="@+id/progressBarCommentBSH"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/NoCommentsText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/NoCommentsText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
