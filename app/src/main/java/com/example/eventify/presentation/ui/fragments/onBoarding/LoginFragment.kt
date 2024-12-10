@@ -16,6 +16,7 @@ import com.example.eventify.common.utils.NancyToast
 import com.example.eventify.databinding.FragmentLoginBinding
 import com.example.eventify.presentation.ui.activities.MainActivity
 import com.example.eventify.presentation.viewmodels.LoginViewModel
+import com.example.eventify.test.TestActivity
 import com.shashank.sony.fancytoastlib.FancyToast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -71,6 +72,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         }
         binding.button4.setOnClickListener {
             navigateToMainActivity()
+        }
+        binding.buttonTEsts.setOnClickListener {
+            navigateToTestActivity()
         }
     }
 
@@ -183,6 +187,11 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
 
     private fun navigateToMainActivity() {
         val intent = Intent(requireContext(), MainActivity::class.java)
+        startActivity(intent)
+        requireActivity().finish()
+    }
+    private fun navigateToTestActivity() {
+        val intent = Intent(requireContext(), TestActivity::class.java)
         startActivity(intent)
         requireActivity().finish()
     }

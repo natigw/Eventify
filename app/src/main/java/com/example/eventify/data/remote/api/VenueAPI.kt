@@ -5,6 +5,7 @@ import com.example.eventify.data.remote.model.venues.comment.venueComments.Respo
 import com.example.eventify.data.remote.model.venues.comment.addComment.RequestAddVenueComment
 import com.example.eventify.data.remote.model.venues.comment.commentDetails.ResponseVenueCommentDetails
 import com.example.eventify.data.remote.model.venues.comment.deleteComment.RequestDeleteVenueComment
+import com.example.eventify.data.remote.model.venues.createVenue.RequestCreateVenue
 import com.example.eventify.data.remote.model.venues.likeDislike.RequestLikeDislikeVenue
 import com.example.eventify.data.remote.model.venues.venueDetails.ResponseVenueDetails
 import retrofit2.Response
@@ -28,13 +29,11 @@ interface VenueAPI {
         venueId: Int
     ): Response<ResponseVenueDetails>
 
-//    @POST("/venues")
-//    suspend fun createVenue(
-//        @Header("Authorization")
-//        token : String,
-//        @Body requestCreateVenue: RequestCreateVenue
-//    ) : ResponseCreateVenue
-//
+    @POST("/venues")
+    suspend fun createVenue(
+        @Body requestCreateVenue: RequestCreateVenue
+    )
+
     @POST("/venues/like")
     suspend fun likeVenue(
         @Body
