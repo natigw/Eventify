@@ -20,17 +20,19 @@ class Test1Fragment : BaseFragment<FragmentTest1Binding>(FragmentTest1Binding::i
 
     override fun onViewCreatedLight() {
         lifecycleScope.launch {
-            api.createVenue(
-                RequestCreateVenue(
-                    description = "yeni mekan",
-                    lat = "40.3360106",
-                    lng = "49.8363917",
-                    name = "Suraxanı Gəmi Muzeyi",
-                    venueType = "museum",
-                    workHoursOpen = "10:00",
-                    workHoursClose = "17:002"
-                )
-            )
+//            api.createVenue(
+//                RequestCreateVenue(
+//                    description = "yeni mekan",
+//                    lat = "40.3360106",
+//                    lng = "49.8363917",
+//                    name = "Suraxanı Gəmi Muzeyi",
+//                    venueType = "museum",
+//                    workHoursOpen = "10:00",
+//                    workHoursClose = "17:002"
+//                )
+//            )
+
+            binding.tvTest.text = api.searchVenue("banM").body().toString()
 
         }
     }

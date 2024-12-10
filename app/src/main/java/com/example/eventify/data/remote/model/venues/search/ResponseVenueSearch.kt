@@ -1,9 +1,9 @@
-package com.example.eventify.data.remote.model.venues
+package com.example.eventify.data.remote.model.venues.search
 
 
 import com.google.gson.annotations.SerializedName
 
-data class ResponseAllVenues(
+data class ResponseVenueSearch(
     @SerializedName("description")
     val description: String,
     @SerializedName("id")

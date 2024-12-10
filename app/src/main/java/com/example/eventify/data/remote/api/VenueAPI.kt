@@ -1,21 +1,20 @@
 package com.example.eventify.data.remote.api
 
-import com.example.eventify.data.remote.model.venues.ResponseAllVenues
+import com.example.eventify.data.remote.model.venues.allVenues.ResponseAllVenues
 import com.example.eventify.data.remote.model.venues.comment.venueComments.ResponseVenueComments
 import com.example.eventify.data.remote.model.venues.comment.addComment.RequestAddVenueComment
 import com.example.eventify.data.remote.model.venues.comment.commentDetails.ResponseVenueCommentDetails
 import com.example.eventify.data.remote.model.venues.comment.deleteComment.RequestDeleteVenueComment
 import com.example.eventify.data.remote.model.venues.createVenue.RequestCreateVenue
 import com.example.eventify.data.remote.model.venues.likeDislike.RequestLikeDislikeVenue
+import com.example.eventify.data.remote.model.venues.search.ResponseVenueSearch
 import com.example.eventify.data.remote.model.venues.venueDetails.ResponseVenueDetails
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
-import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.Path
-import retrofit2.http.Query
 
 
 interface VenueAPI {
@@ -72,8 +71,9 @@ interface VenueAPI {
     )
 
 
-//    @GET("/venues/search/{query}")
-//    suspend fun searchVenue(
-//        @Path("query") query: String
-//    ) : ResponseVenueSearch
+    @GET("/venues/search/{query}")
+    suspend fun searchVenue(
+        @Path("query")
+        query: String
+    ) : Response<List<ResponseVenueSearch>>
 }

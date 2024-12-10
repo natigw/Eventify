@@ -1,4 +1,4 @@
-package com.example.eventify.data.remote.model.events
+package com.example.eventify.data.remote.model.events.allEvents
 
 
 import com.google.gson.annotations.SerializedName
