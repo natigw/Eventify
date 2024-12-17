@@ -3,7 +3,7 @@ package com.example.eventify.presentation.ui.fragments.places
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.example.eventify.common.base.BaseBottomSheetFragment
+import com.example.common.base.BaseBottomSheetFragment
 import com.example.eventify.databinding.BottomsheetPlacesCommentsBinding
 import com.example.eventify.presentation.adapters.CommentAdapter
 import com.example.eventify.presentation.viewmodels.VenueCommentsViewModel

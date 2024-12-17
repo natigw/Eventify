@@ -4,7 +4,7 @@ import android.content.SharedPreferences
 import androidx.core.content.edit
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.eventify.domain.repository.AuthRepository
+import com.example.domain.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
@@ -15,7 +15,7 @@ import javax.inject.Named
 @HiltViewModel
 class OnBoardingViewModel @Inject constructor(
     @Named("UserTokens") val sharedPreferences: SharedPreferences,
-    val authRepository: AuthRepository
+    val authRepository: com.example.domain.repository.AuthRepository
 ): ViewModel() {
 
 

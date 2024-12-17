@@ -7,10 +7,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.eventify.R
-import com.example.eventify.common.base.BaseFragment
-import com.example.eventify.common.utils.NancyToast
+import com.example.common.base.BaseFragment
 import com.example.eventify.databinding.FragmentVenuesBinding
-import com.example.eventify.domain.model.PlaceCoordinates
+import com.example.domain.model.PlaceCoordinates
 import com.example.eventify.presentation.adapters.VenueAdapter
 import com.example.eventify.presentation.viewmodels.SharedViewModel
 import com.example.eventify.presentation.viewmodels.VenueViewModel
@@ -32,7 +31,7 @@ class VenuesFragment : BaseFragment<FragmentVenuesBinding>(FragmentVenuesBinding
         },
         onClickShowInMap = {
             sharedViewModel.setCoordinates(
-                PlaceCoordinates(
+                com.example.domain.model.PlaceCoordinates(
                     placeId = it.placeId,
                     name = it.name,
                     placeType = "venue",

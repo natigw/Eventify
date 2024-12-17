@@ -2,8 +2,8 @@ package com.example.eventify.presentation.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.eventify.domain.model.VenueItem
-import com.example.eventify.domain.repository.VenueRepository
+import com.example.domain.model.VenueItem
+import com.example.domain.repository.VenueRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
@@ -12,11 +12,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class VenueViewModel @Inject constructor(
-    private val venueRepository: VenueRepository
+    private val venueRepository: com.example.domain.repository.VenueRepository
 ) : ViewModel() {
 
     val isLoading = MutableStateFlow(true)
-    val venues = MutableStateFlow<List<VenueItem>>(emptyList())
+    val venues = MutableStateFlow<List<com.example.domain.model.VenueItem>>(emptyList())
 
     init {
         getVenues()

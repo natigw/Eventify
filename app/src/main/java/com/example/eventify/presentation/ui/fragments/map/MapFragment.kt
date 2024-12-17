@@ -12,11 +12,11 @@ import androidx.core.app.ActivityCompat
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.example.common.base.BaseFragment
 import com.example.eventify.R
-import com.example.eventify.common.base.BaseFragment
-import com.example.eventify.common.utils.NancyToast
-import com.example.eventify.data.remote.api.EventAPI
-import com.example.eventify.data.remote.api.VenueAPI
+import com.example.common.utils.NancyToast
+import com.example.data.remote.api.EventAPI
+import com.example.data.remote.api.VenueAPI
 import com.example.eventify.databinding.FragmentMapBinding
 import com.example.eventify.presentation.viewmodels.SharedViewModel
 import com.google.android.gms.location.LocationServices
@@ -33,7 +33,6 @@ import com.google.android.gms.maps.model.PolylineOptions
 import com.google.maps.android.PolyUtil
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient

@@ -7,9 +7,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.eventify.R
-import com.example.eventify.common.base.BaseFragment
-import com.example.eventify.common.utils.copyToClipboard
-import com.example.eventify.data.remote.api.EventAPI
+import com.example.common.base.BaseFragment
+import com.example.common.utils.copyToClipboard
+import com.example.data.remote.api.EventAPI
 import com.example.eventify.databinding.FragmentReferralBinding
 import com.example.eventify.presentation.viewmodels.ReferralViewModel
 import dagger.hilt.android.AndroidEntryPoint

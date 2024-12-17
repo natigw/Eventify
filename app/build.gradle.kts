@@ -68,10 +68,8 @@ dependencies {
     implementation(libs.play.services.maps)
     implementation(libs.play.services.location)
     implementation(libs.androidx.legacy.support.v4)
+    implementation(project(":data"))
     kapt(libs.hilt.android.compiler)
-
-    //fancy toast
-    implementation(libs.github.fancytoast)
 
     //glide
     implementation(libs.github.glide)
@@ -80,7 +78,12 @@ dependencies {
     implementation(libs.retrofit2.retrofit)
     implementation(libs.converter.gson)
 
-    implementation("com.google.maps.android:android-maps-utils:2.4.0")
+    implementation(libs.android.maps.utils)
+
+
+    implementation(project(":common"))
+    implementation(project(":domain"))
+    implementation(project(":features:test"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

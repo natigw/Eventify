@@ -1,20 +1,14 @@
 package com.example.eventify.presentation.ui.fragments.subscription
 
-import android.animation.ObjectAnimator
-import android.content.Context
-import android.graphics.Typeface
-import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.res.ResourcesCompat
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.eventify.R
-import com.example.eventify.common.base.BaseFragment
-import com.example.eventify.common.utils.NancyToast
+import com.example.common.base.BaseFragment
+import com.example.common.utils.NancyToast
 import com.example.eventify.databinding.FragmentSubscriptionBinding
 import com.example.eventify.presentation.adapters.SubscriptionAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.NonCancellable.start
 
 @AndroidEntryPoint
 class SubscriptionFragment : BaseFragment<FragmentSubscriptionBinding>(FragmentSubscriptionBinding::inflate) {

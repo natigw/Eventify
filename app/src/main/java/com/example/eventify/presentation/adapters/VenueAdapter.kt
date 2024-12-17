@@ -5,16 +5,16 @@ import android.view.View
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.eventify.R
-import com.example.eventify.common.base.BaseAdapter
+import com.example.common.base.BaseAdapter
 import com.example.eventify.databinding.SampleVenueBinding
-import com.example.eventify.domain.model.VenueItem
+import com.example.domain.model.VenueItem
 
 class VenueAdapter(
-    val onClickSeeComments: (VenueItem) -> Unit,
-    val onClickShowInMap: (VenueItem) -> Unit
+    val onClickSeeComments: (com.example.domain.model.VenueItem) -> Unit,
+    val onClickShowInMap: (com.example.domain.model.VenueItem) -> Unit
 ) : BaseAdapter<SampleVenueBinding>(SampleVenueBinding::inflate) {
 
-    var venues: List<VenueItem> = emptyList()
+    var venues: List<com.example.domain.model.VenueItem> = emptyList()
 
     override fun getItemCount(): Int {
         return venues.size
@@ -113,7 +113,7 @@ class VenueAdapter(
         return position
     }
 
-    fun updateAdapter(newVenues: List<VenueItem>) {
+    fun updateAdapter(newVenues: List<com.example.domain.model.VenueItem>) {
         venues = newVenues
         notifyDataSetChanged()
     }

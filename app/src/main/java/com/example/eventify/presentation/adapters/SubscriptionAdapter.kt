@@ -4,9 +4,9 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.view.View
 import com.example.eventify.R
-import com.example.eventify.common.base.BaseAdapter
+import com.example.common.base.BaseAdapter
 import com.example.eventify.databinding.SampleSubscriptionBinding
-import com.example.eventify.domain.model.SubscriptionData
+import com.example.domain.model.SubscriptionData
 
 class SubscriptionAdapter(
     val context: Context,
@@ -16,19 +16,19 @@ class SubscriptionAdapter(
 ) : BaseAdapter<SampleSubscriptionBinding>(SampleSubscriptionBinding::inflate) {
 
     private var packages = arrayOf(   //TODO -> bu basqa layerde olmalidi? static ve inapp bir seydi
-        SubscriptionData(
+        com.example.domain.model.SubscriptionData(
             name = "Base",
             features = "Access to cultural events list\n\nCommunity contributions",    //[Feature1, Feature2, ..]
             priceMonthly = 0.0,
             priceAnnually = 0.0
         ),
-        SubscriptionData(
+        com.example.domain.model.SubscriptionData(
             name = "Pro",
             features = "Access to full map functionalities\n\nCommunity Contributions\n\nExclusive Deals\n\nPriority Support",
             priceMonthly = 40.0,
             priceAnnually = 40.0 * 12 - 80
         ),
-        SubscriptionData(
+        com.example.domain.model.SubscriptionData(
             name = "Enterprise",
             features = "Access to full map functionalities\n\nCommunity Contributions\n\nExclusive Deals and Offers\n\nPriority Support\n\nEnterprise Event Offers\n\nAdvanced Statistics",
             priceMonthly = 99.0,

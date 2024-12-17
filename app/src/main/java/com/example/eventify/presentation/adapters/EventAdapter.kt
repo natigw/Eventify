@@ -4,18 +4,18 @@ import android.view.View
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.eventify.R
-import com.example.eventify.common.base.BaseAdapter
+import com.example.common.base.BaseAdapter
 import com.example.eventify.databinding.SampleEventBinding
-import com.example.eventify.domain.model.EventItem
+import com.example.domain.model.EventItem
 import java.util.Locale
 
 class EventAdapter(
-    val onClickSeeComments: (EventItem) -> Unit,
-    val onClickShowInMap: (EventItem) -> Unit,
-    val onClickBuyTicket: (EventItem) -> Unit
+    val onClickSeeComments: (com.example.domain.model.EventItem) -> Unit,
+    val onClickShowInMap: (com.example.domain.model.EventItem) -> Unit,
+    val onClickBuyTicket: (com.example.domain.model.EventItem) -> Unit
 ) : BaseAdapter<SampleEventBinding>(SampleEventBinding::inflate) {
 
-    var events: List<EventItem> = emptyList()
+    var events: List<com.example.domain.model.EventItem> = emptyList()
 
     override fun getItemCount(): Int {
         return events.size
@@ -104,7 +104,7 @@ class EventAdapter(
         return position
     }
 
-    fun updateAdapter(newEvents: List<EventItem>) {
+    fun updateAdapter(newEvents: List<com.example.domain.model.EventItem>) {
         events = newEvents
         notifyDataSetChanged()
     }

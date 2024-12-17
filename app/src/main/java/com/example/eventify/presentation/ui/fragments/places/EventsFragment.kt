@@ -6,12 +6,12 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.example.common.base.BaseFragment
 import com.example.eventify.R
-import com.example.eventify.common.base.BaseFragment
-import com.example.eventify.common.utils.NancyToast
-import com.example.eventify.data.remote.api.EventAPI
+import com.example.common.utils.NancyToast
+import com.example.data.remote.api.EventAPI
 import com.example.eventify.databinding.FragmentEventsBinding
-import com.example.eventify.domain.model.PlaceCoordinates
+import com.example.domain.model.PlaceCoordinates
 import com.example.eventify.presentation.adapters.EventAdapter
 import com.example.eventify.presentation.viewmodels.SharedViewModel
 import com.example.eventify.presentation.viewmodels.EventViewModel
@@ -37,13 +37,14 @@ class EventsFragment : BaseFragment<FragmentEventsBinding>(FragmentEventsBinding
         },
         onClickShowInMap = {
             sharedViewModel.setCoordinates(
-                PlaceCoordinates(
+                com.example.domain.model.PlaceCoordinates(
                     placeId = it.placeId,
                     name = it.name,
                     placeType = "event",
                     long = it.lng,
                     lat = it.lat
-                ))
+                )
+            )
             val bottomNavigationView = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
             bottomNavigationView.selectedItemId = R.id.mapFragment
         },

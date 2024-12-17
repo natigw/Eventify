@@ -1,7 +1,7 @@
 package com.example.eventify.di
 
 import android.content.Context
-import com.example.eventify.common.utils.NetworkConnection
+import com.example.common.utils.NetworkConnection
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

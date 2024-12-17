@@ -7,10 +7,10 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.eventify.R
-import com.example.eventify.common.base.BaseBottomSheetFragment
+import com.example.common.base.BaseBottomSheetFragment
 import com.example.eventify.databinding.BottomsheetMarkerDetailsBinding
-import com.example.eventify.domain.repository.EventRepository
-import com.example.eventify.domain.repository.VenueRepository
+import com.example.domain.repository.EventRepository
+import com.example.domain.repository.VenueRepository
 import com.example.eventify.presentation.viewmodels.SharedViewModel
 import com.google.android.gms.maps.model.LatLng
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,9 +25,9 @@ class MarkerDetailsBottomSheet : BaseBottomSheetFragment<BottomsheetMarkerDetail
     private val sharedViewModel by activityViewModels<SharedViewModel>()
 
     @Inject
-    lateinit var venueDetailsRepository: VenueRepository
+    lateinit var venueDetailsRepository: com.example.domain.repository.VenueRepository
     @Inject
-    lateinit var eventDetailsRepository: EventRepository
+    lateinit var eventDetailsRepository: com.example.domain.repository.EventRepository
 
     override fun onViewCreatedLight() {
         val placeId = args.placeId

@@ -5,7 +5,7 @@ import android.util.Log
 import androidx.core.content.edit
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.eventify.domain.repository.AuthRepository
+import com.example.domain.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,7 +15,7 @@ import javax.inject.Named
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    val authRepository: AuthRepository
+    val authRepository: com.example.domain.repository.AuthRepository
 ): ViewModel() {
 
     @Inject

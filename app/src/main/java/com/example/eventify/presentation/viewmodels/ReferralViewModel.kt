@@ -2,8 +2,8 @@ package com.example.eventify.presentation.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.eventify.domain.model.EventItem
-import com.example.eventify.domain.repository.EventRepository
+import com.example.domain.model.EventItem
+import com.example.domain.repository.EventRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
@@ -13,9 +13,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ReferralViewModel @Inject constructor(
-    private val eventsRepositoryImpl: EventRepository
+    private val eventsRepositoryImpl: com.example.domain.repository.EventRepository
 ): ViewModel(){
-    val eventsState = MutableStateFlow<List<EventItem>>(emptyList())
+    val eventsState = MutableStateFlow<List<com.example.domain.model.EventItem>>(emptyList())
 
     init {
         viewModelScope.launch {

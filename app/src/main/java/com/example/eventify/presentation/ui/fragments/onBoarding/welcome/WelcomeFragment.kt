@@ -3,7 +3,7 @@ package com.example.eventify.presentation.ui.fragments.onBoarding.welcome
 import android.content.SharedPreferences
 import androidx.navigation.fragment.findNavController
 import com.example.eventify.R
-import com.example.eventify.common.base.BaseFragment
+import com.example.common.base.BaseFragment
 import com.example.eventify.databinding.FragmentWelcomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject

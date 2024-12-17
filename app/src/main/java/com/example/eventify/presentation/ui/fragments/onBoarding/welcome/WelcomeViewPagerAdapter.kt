@@ -5,7 +5,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewbinding.ViewBinding
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.eventify.common.base.BaseFragment
+import com.example.common.base.BaseFragment
 
 class WelcomeViewPagerAdapter(
     list: ArrayList<BaseFragment<out ViewBinding>>,

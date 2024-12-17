@@ -7,7 +7,7 @@ import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.edit
 import androidx.lifecycle.lifecycleScope
 import com.example.eventify.EventifyApplication
-import com.example.eventify.common.base.BaseActivity
+import com.example.common.base.BaseActivity
 import com.example.eventify.databinding.ActivityOnBoardingBinding
 import com.example.eventify.presentation.viewmodels.OnBoardingViewModel
 import com.google.android.material.snackbar.Snackbar

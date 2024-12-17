@@ -5,23 +5,18 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.text.isDigitsOnly
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.eventify.R
-import com.example.eventify.common.base.BaseFragment
-import com.example.eventify.common.utils.NancyToast
-import com.example.eventify.common.utils.isValidEmail
-import com.example.eventify.data.remote.api.AuthAPI
-import com.example.eventify.data.remote.model.register.RequestUserRegistration
+import com.example.common.base.BaseFragment
+import com.example.common.utils.NancyToast
+import com.example.common.utils.isValidEmail
 import com.example.eventify.databinding.FragmentRegisterBinding
 import com.example.eventify.presentation.viewmodels.RegisterViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterBinding::inflate) {

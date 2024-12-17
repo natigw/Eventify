@@ -6,7 +6,7 @@ import androidx.core.content.edit
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.eventify.R
-import com.example.eventify.common.base.BaseFragment
+import com.example.common.base.BaseFragment
 import com.example.eventify.databinding.FragmentProfileBinding
 import com.example.eventify.presentation.ui.activities.OnBoardingActivity
 import dagger.hilt.android.AndroidEntryPoint

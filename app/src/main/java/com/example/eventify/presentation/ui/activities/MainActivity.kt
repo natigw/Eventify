@@ -1,26 +1,18 @@
 package com.example.eventify.presentation.ui.activities
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.View
 import androidx.core.view.forEach
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
+import com.example.common.base.BaseActivity
+import com.example.data.remote.interceptor.TokenManager
 import com.example.eventify.EventifyApplication
 import com.example.eventify.R
-import com.example.eventify.common.base.BaseActivity
-import com.example.eventify.common.utils.AppUtils
-import com.example.eventify.common.utils.NetworkConnection
-import com.example.eventify.common.utils.NetworkUtils
-import com.example.eventify.common.utils.RequestChannel
-import com.example.eventify.data.remote.interceptor.TokenManager
 import com.example.eventify.databinding.ActivityMainBinding
-import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -58,16 +50,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         }
 
         setUpBottomNavigation()
-
-
-        NetworkUtils.initializeTokenManager(tokenManager)
-        lifecycleScope.launch {
-            AppUtils.authChannel.receiveAsFlow().collectLatest {
-                if(it == RequestChannel.LOG_OUT){
-                    NetworkUtils.handleLogout(this@MainActivity)
-                }
-            }
-        }
 
     }
 

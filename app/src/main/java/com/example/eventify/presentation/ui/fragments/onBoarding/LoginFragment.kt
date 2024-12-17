@@ -2,22 +2,18 @@ package com.example.eventify.presentation.ui.fragments.onBoarding
 
 import android.content.Intent
 import android.graphics.Color.parseColor
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.edit
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.eventify.R
-import com.example.eventify.common.base.BaseFragment
-import com.example.eventify.common.utils.NancyToast
+import com.example.common.base.BaseFragment
+import com.example.common.utils.NancyToast
 import com.example.eventify.databinding.FragmentLoginBinding
 import com.example.eventify.presentation.ui.activities.MainActivity
 import com.example.eventify.presentation.viewmodels.LoginViewModel
-import com.example.eventify.test.TestActivity
-import com.shashank.sony.fancytoastlib.FancyToast
+import com.example.test.TestActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.filter

@@ -4,7 +4,7 @@ import android.content.SharedPreferences
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.example.eventify.R
-import com.example.eventify.common.base.BaseFragment
+import com.example.common.base.BaseFragment
 import com.example.eventify.databinding.FragmentWelcomeFirstBinding
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
