@@ -386,6 +386,16 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     //TODO -> profile info and edit screen
                     true
                 }
+                R.id.drawer_referral -> {
+                    drawerLayout.closeDrawer(GravityCompat.START)
+                    findNavController().navigate(R.id.referralFragment)
+                    true
+                }
+                R.id.drawer_subscription -> {
+                    drawerLayout.closeDrawer(GravityCompat.START)
+                    findNavController().navigate(R.id.subscriptionFragment)
+                    true
+                }
                 R.id.drawer_tickets -> {
                     drawerLayout.closeDrawer(GravityCompat.START)
                     //findNavController().navigate(R.id.)

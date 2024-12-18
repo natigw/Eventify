@@ -10,8 +10,16 @@
             android:icon="@drawable/profile_icon_selected"
             android:title="@string/profile"/>
         <item
+            android:id="@+id/drawer_referral"
+            android:icon="@drawable/ic_referral"
+            android:title="@string/referral_program"/>
+        <item
+            android:id="@+id/drawer_subscription"
+            android:icon="@drawable/ic_subscription"
+            android:title="@string/subscription"/>
+        <item
             android:id="@+id/drawer_tickets"
-            android:icon="@drawable/ic_payment"
+            android:icon="@drawable/ic_ticket"
             android:title="@string/tickets"/>
         <item
             android:id="@+id/drawer_payment_history"
