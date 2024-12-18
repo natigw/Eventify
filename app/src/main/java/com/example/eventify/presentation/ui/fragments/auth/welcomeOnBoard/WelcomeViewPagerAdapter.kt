@@ -1,4 +1,4 @@
-package com.example.eventify.presentation.ui.fragments.onBoarding.welcome
+package com.example.eventify.presentation.ui.fragments.auth.welcomeOnBoard
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

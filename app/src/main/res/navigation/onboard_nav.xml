@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/welcomeFragment"
-        android:name="com.example.eventify.presentation.ui.fragments.onBoarding.welcome.WelcomeFragment"
+        android:name="com.example.eventify.presentation.ui.fragments.auth.welcomeOnBoard.WelcomeFragment"
         android:label="fragment_welcome"
         tools:layout="@layout/fragment_welcome" >
         <action
@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.eventify.presentation.ui.fragments.onBoarding.LoginFragment"
+        android:name="com.example.eventify.presentation.ui.fragments.auth.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -27,7 +27,7 @@
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.example.eventify.presentation.ui.fragments.onBoarding.RegisterFragment"
+        android:name="com.example.eventify.presentation.ui.fragments.auth.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" />
 </navigation>

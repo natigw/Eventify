@@ -3,21 +3,30 @@ package com.example.eventify.presentation.ui.fragments.map
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.graphics.Color
+import android.net.Uri
 import android.util.Log
+import android.view.Gravity
+import android.widget.Button
+import android.widget.TextView
 import androidx.core.app.ActivityCompat
+import androidx.core.view.GravityCompat
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.common.base.BaseFragment
 import com.example.eventify.R
 import com.example.common.utils.NancyToast
 import com.example.data.remote.api.EventAPI
 import com.example.data.remote.api.VenueAPI
 import com.example.eventify.databinding.FragmentMapBinding
+import com.example.eventify.presentation.ui.activities.OnBoardingActivity
 import com.example.eventify.presentation.viewmodels.SharedViewModel
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -30,6 +39,8 @@ import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.PolylineOptions
+import com.google.android.material.imageview.ShapeableImageView
+import com.google.android.material.navigation.NavigationView
 import com.google.maps.android.PolyUtil
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -186,6 +197,8 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     }
 
     override fun onViewCreatedLight() {
+        setDrawer()
+
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
     }
@@ -331,5 +344,97 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 )
             }
         }
+    }
+
+    private fun setDrawer() {
+
+        binding.buttonDrawer.setOnClickListener {
+            binding.myDrawerLayout.openDrawer(Gravity.LEFT, true)
+        }
+
+        val drawerLayout = binding.myDrawerLayout
+        val navigationView: NavigationView = requireActivity().findViewById(R.id.drawerNavigationHome)
+
+        val username = "username temp" //shprefLoggedin.getString("username", null)
+        val useremail = "email temp" //shprefLoggedin.getString("email", null)
+
+        val headerView = navigationView.getHeaderView(0)
+        val userProfilePicture = headerView.findViewById<ShapeableImageView>(R.id.imageUserProfilePictureDrawer)
+        val usernameDrawer = headerView.findViewById<TextView>(R.id.textUsernameDrawer)
+        val userEmailDrawer = headerView.findViewById<TextView>(R.id.textUserEmailDrawer)
+        val editProfileDrawer = headerView.findViewById<Button>(R.id.buttonEditProfileDrawer)
+
+
+        usernameDrawer.text = username
+        userEmailDrawer.text = useremail
+
+        Glide.with(userProfilePicture)
+            .load(getProfilePictureUri())
+            .placeholder(R.drawable.usersample)
+            .transition(DrawableTransitionOptions.withCrossFade())
+            .into(userProfilePicture)
+
+        editProfileDrawer.setOnClickListener {
+            NancyToast.makeText(requireContext(), "edit", NancyToast.LENGTH_SHORT, NancyToast.SUCCESS, false).show()
+            //TODO -> edit screen
+        }
+
+        navigationView.setNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.drawer_profile -> {
+                    drawerLayout.closeDrawer(GravityCompat.START)
+                    //TODO -> profile info and edit screen
+                    true
+                }
+                R.id.drawer_referral -> {
+                    drawerLayout.closeDrawer(GravityCompat.START)
+                    findNavController().navigate(R.id.referralFragment)
+                    true
+                }
+                R.id.drawer_subscription -> {
+                    drawerLayout.closeDrawer(GravityCompat.START)
+                    findNavController().navigate(R.id.subscriptionFragment)
+                    true
+                }
+                R.id.drawer_tickets -> {
+                    drawerLayout.closeDrawer(GravityCompat.START)
+                    //findNavController().navigate(R.id.)
+                    //TODO -> current tickets
+                    true
+                }
+                R.id.drawer_payment_history -> {
+                    drawerLayout.closeDrawer(GravityCompat.START)
+                    //findNavController().navigate(R.id.)
+                    //TODO -> all previous payments and active tickets
+                    true
+                }
+                R.id.drawer_settings -> {
+                    drawerLayout.closeDrawer(GravityCompat.START)
+                    //findNavController().navigate(R.id.)
+                    //TODO -> profile info and edit screen
+                    true
+                }
+                R.id.drawer_logout -> {
+                    drawerLayout.closeDrawer(GravityCompat.START)
+                    //shprefLoggedin.edit().putBoolean("status", false).apply()
+                    NancyToast.makeText(requireContext(), "You have been logged out!", NancyToast.LENGTH_SHORT, NancyToast.INFO, false).show()
+                    navigateToAuthActivity()
+                    true
+                }
+                else -> false
+            }
+        }
+    }
+
+    private fun getProfilePictureUri(): Uri {
+        val uriImage = null//shprefProfilePicture.getString("profile_image_uri", null)
+        return if (uriImage == null) Uri.parse("android.resource://${requireActivity().packageName}/${R.drawable.usersample}")
+        else Uri.parse(uriImage)
+    }
+
+    private fun navigateToAuthActivity() {
+        val intent = Intent(requireContext(), OnBoardingActivity::class.java)
+        startActivity(intent)
+        requireActivity().finish()
     }
 }

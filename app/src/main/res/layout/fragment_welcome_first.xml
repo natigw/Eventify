@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/green_light_eventify"
-    tools:context=".presentation.ui.fragments.onBoarding.welcome.FirstFragment">
+    tools:context=".presentation.ui.fragments.auth.welcomeOnBoard.FirstFragment">
 
     <TextView
         android:id="@+id/textViewWelcomeFirst"

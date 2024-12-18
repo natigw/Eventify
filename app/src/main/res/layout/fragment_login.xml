@@ -11,7 +11,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.ui.fragments.onBoarding.LoginFragment">
+        tools:context=".presentation.ui.fragments.auth.LoginFragment">
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guidelineLogin1"
