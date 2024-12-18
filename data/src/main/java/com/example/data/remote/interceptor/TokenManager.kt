@@ -19,6 +19,7 @@ class TokenManager @Inject constructor(
 
     suspend fun refreshToken(): String? {
         val refreshToken = sharedPrefUserTokens.getString("refresh_token", null)
+
         return try {
             val response = authRepository.refreshAccessToken(refreshToken.toString())
 

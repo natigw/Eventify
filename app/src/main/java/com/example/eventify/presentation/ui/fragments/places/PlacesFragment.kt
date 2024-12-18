@@ -1,16 +1,50 @@
 package com.example.eventify.presentation.ui.fragments.places
 
+import androidx.lifecycle.lifecycleScope
 import com.example.eventify.R
 import com.example.common.base.BaseFragment
+import com.example.data.remote.api.AuthAPI
+import com.example.data.remote.api.VenueAPI
+import com.example.data.remote.interceptor.TokenManager
+import com.example.data.remote.model.venues.comment.addComment.RequestAddVenueComment
+import com.example.domain.repository.AuthRepository
+import com.example.eventify.NetworkUtils
 import com.example.eventify.databinding.FragmentPlacesBinding
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class PlacesFragment : BaseFragment<FragmentPlacesBinding>(FragmentPlacesBinding::inflate) {
 
+
+    @Inject
+    lateinit var venueAPI: VenueAPI
+
+    @Inject
+    lateinit var authAPI: AuthRepository
+
+    @Inject
+    lateinit var tokenManager: TokenManager
+
     override fun onViewCreatedLight() {
         setTabLayoutMediator()
+
+        binding.button5.setOnClickListener {
+            lifecycleScope.launch {
+                try {
+                    authAPI.verifyUserToken("")
+                }
+                catch (e : Exception) {
+
+                }
+
+
+            }
+
+        }
+
     }
 
     private fun setTabLayoutMediator(){

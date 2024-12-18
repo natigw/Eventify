@@ -22,60 +22,31 @@ class RetryInterceptor @Inject constructor() : Interceptor {
         var response: Response? = null
         val delay = 1000L
         val maxRetries = 3
-        var msg = ""
 
-        val mediaType = MediaType.parse("application/json")
+
 
         while (attempt < maxRetries) {
             try {
-                AppUtils.authChannel.trySend(RequestChannel.LOG_OUT)
                 response = chain.proceed(request)
 
-                // Check if the response is successful before proceeding
                 if (response.isSuccessful) {
                     return response
                 }
 
+
+
             } catch (e: Exception) {
-                attempt++
-                Thread.sleep(delay)
                 e.printStackTrace()
 
-                when (e) {
-                    is SocketTimeoutException -> {
-                        msg = "Timeout - Please check your internet connection"
-                    }
-                    is UnknownHostException -> {
-                        msg = "Unable to make a connection. Please check your internet"
-                    }
-                    is ConnectionShutdownException -> {
-                        msg = "Connection shutdown. Please check your internet"
-                    }
-                    is IOException -> {
-                        msg = "Server is unreachable, please try again later."
-                    }
-                    is IllegalStateException -> {
-                        msg = "${e.message}"
-                    }
-                    else -> {
-                        msg = "${e.message}"
-                    }
-                }
-            } finally {
-                response?.close()
             }
+            attempt++
+            Thread.sleep(delay*attempt)
+
         }
+        response?.close()
+        AppUtils.authChannel.trySend(RequestChannel.ON_401_ERROR)
 
-        val errorContent = "{ \"error\": \"$msg\" }"
-        val responseBody: ResponseBody = ResponseBody.create(mediaType, errorContent)
+        return response!!
 
-        // Return a custom response after retry attempts are exhausted
-        return Response.Builder()
-            .request(request)
-            .protocol(Protocol.HTTP_1_1)
-            .code(999) // Custom error code
-            .message(msg)
-            .body(responseBody)
-            .build()
     }
 }

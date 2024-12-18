@@ -26,7 +26,7 @@ class AuthModule {
         return OkHttpClient
             .Builder()
             .addInterceptor(authInterceptor)
-//            .addInterceptor(retryInterceptor)
+            .addInterceptor(retryInterceptor)
             .build()
     }
 

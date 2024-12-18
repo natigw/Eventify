@@ -59,4 +59,6 @@
     <string name="network_connection_lost">Network connection lost!</string>
     <string name="get_shortest_route">Get shortest route</string>
     <string name="no_comments">There is no comments for now!</string>
+    <string name="retry_snack">Something went wrong. Try again later.</string>
+
 </resources>

@@ -1,6 +1,8 @@
 package com.example.eventify
 
 import android.app.Application
+import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.common.utils.AppUtils
@@ -25,17 +27,12 @@ class EventifyApplication : Application() {
     private val _isNetworkConnected = MutableLiveData<Boolean>()
     val isNetworkConnected: LiveData<Boolean> get() = _isNetworkConnected
 
-    // Manually define applicationScope for the lifecycle of the Application
-    private val applicationScope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
-
     override fun onCreate() {
         super.onCreate()
 
         // Observe network changes
         observeNetworkConnection()
 
-        // Initialize token manager and auth channel
-        initializeTokenManager()
     }
 
     private fun observeNetworkConnection() {
@@ -44,26 +41,9 @@ class EventifyApplication : Application() {
         }
     }
 
-    private fun initializeTokenManager() {
-        // Token manager initialization
-        NetworkUtils.initializeTokenManager(tokenManager)
 
-        // Launch a coroutine for observing auth channel safely
-        applicationScope.launch {
-            try {
-                AppUtils.authChannel.receiveAsFlow().collectLatest { request ->
-                    if (request == RequestChannel.LOG_OUT) {
-                        NetworkUtils.handleLogout(this@EventifyApplication)
-                    }
-                }
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
-    }
 
     override fun onTerminate() {
         super.onTerminate()
-        applicationScope.cancel() // Cancel coroutines when the app is terminated
     }
 }
