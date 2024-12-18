@@ -406,7 +406,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:tag="not_liked"
-        app:icon="@drawable/chat_icon_dif"
+        app:icon="@drawable/ic_chat_outlined"
         app:iconTint="@color/purple_dark_eventify"
         android:backgroundTint="@color/gray_light"
         app:layout_constraintTop_toBottomOf="@id/buttonLikeVenue"

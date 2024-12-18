@@ -1,4 +1,4 @@
-package com.example.eventify.presentation.ui.fragments.onBoarding
+package com.example.eventify.presentation.ui.fragments.auth
 
 import android.graphics.Color.parseColor
 import android.text.Editable

@@ -1,4 +1,4 @@
-package com.example.eventify.presentation.ui.fragments.onBoarding.welcome
+package com.example.eventify.presentation.ui.fragments.auth.welcomeOnBoard
 
 import android.content.SharedPreferences
 import androidx.navigation.fragment.findNavController

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="bottom"
+    android:background="@color/green_light_eventify">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineDrawer1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.02" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineDrawer2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.98" />
+
+    <TextView
+        android:id="@+id/textUsernameDrawer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/inter_bold"
+        android:textColor="@color/purple_eventify"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineDrawer2"
+        app:layout_constraintStart_toStartOf="@+id/guidelineDrawer1"
+        app:layout_constraintTop_toBottomOf="@+id/imageUserProfilePictureDrawer"
+        tools:text="User name" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/imageUserProfilePictureDrawer"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="50dp"
+        android:adjustViewBounds="true"
+        android:background="@color/purple_eventify"
+        android:elevation="3dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full"
+        tools:srcCompat="@drawable/usersample" />
+
+    <TextView
+        android:id="@+id/textUserEmailDrawer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_light"
+        android:textColor="@color/purple_light_eventify"
+        android:textSize="12sp"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/textUsernameDrawer"
+        app:layout_constraintStart_toStartOf="@+id/textUsernameDrawer"
+        app:layout_constraintTop_toBottomOf="@+id/textUsernameDrawer"
+        tools:text="username" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonEditProfileDrawer"
+        style="?attr/materialIconButtonFilledTonalStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="4dp"
+        android:backgroundTint="@color/eventify_background_secondary"
+        android:fontFamily="@font/outfit_regular"
+        android:minHeight="24dp"
+        android:paddingStart="6dp"
+        android:paddingTop="2dp"
+        android:paddingEnd="8dp"
+        android:paddingBottom="2dp"
+        android:text="@string/edit"
+        android:textColor="@color/purple_eventify"
+        app:icon="@drawable/ic_edit"
+        app:iconPadding="6dp"
+        app:iconSize="16dp"
+        app:iconTint="@color/purple_eventify"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineDrawer2"
+        app:layout_constraintTop_toBottomOf="@id/textUserEmailDrawer" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
