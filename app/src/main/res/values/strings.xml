@@ -55,7 +55,7 @@
     <string name="buy_ticket">Buy ticket</string>
     <string name="register_failed">Register failed!</string>
     <string name="register_successful">Registration successful!</string>
-    <string name="retry">Retry</string>
+    <string name="retry_snack">Something went wrong. Try again later.</string>
     <string name="network_connection_lost">Network connection lost!</string>
     <string name="get_shortest_route">Get shortest route</string>
     <string name="no_comments">There is no comments for now!</string>
@@ -68,4 +68,6 @@
     <string name="tickets">Tickets</string>
     <string name="chat">Chat</string>
     <string name="subscription">Subscription</string>
+
+
 </resources>
