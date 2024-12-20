@@ -24,9 +24,15 @@ class EventViewModel @Inject constructor(
 
     private fun getEvents() {
         viewModelScope.launch {
-            val response = eventRepository.getEvents()
-            events.emit(response)
-            isLoading.update { false }
+            try {
+                val response = eventRepository.getEvents()
+                events.emit(response)
+                isLoading.update { false }
+
+            }
+            catch (e : Exception){
+
+            }
         }
     }
 }

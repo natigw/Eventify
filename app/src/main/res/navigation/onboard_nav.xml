@@ -24,10 +24,18 @@
         <action
             android:id="@+id/action_loginFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_resetPasswordFragment"
+            app:destination="@id/resetPasswordFragment" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.example.eventify.presentation.ui.fragments.auth.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" />
+    <fragment
+        android:id="@+id/resetPasswordFragment"
+        android:name="com.example.eventify.presentation.ui.fragments.auth.ResetPasswordFragment"
+        android:label="password_reset"
+        tools:layout="@layout/password_reset" />
 </navigation>

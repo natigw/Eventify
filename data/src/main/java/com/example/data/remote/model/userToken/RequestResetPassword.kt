@@ -1,8 +1,7 @@
 package com.example.data.remote.model.userToken
 
 import com.google.gson.annotations.SerializedName
-import java.io.Serial
 
-data class RequestPasswordReset(
+data class RequestResetPassword (
     @SerializedName("email") val userEmail : String
 )

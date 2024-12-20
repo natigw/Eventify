@@ -72,6 +72,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         binding.buttonTEsts.setOnClickListener {
             navigateToTestActivity()
         }
+        binding.textForgotPassword.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_resetPasswordFragment)
+        }
+
     }
 
     private fun loginButton() {

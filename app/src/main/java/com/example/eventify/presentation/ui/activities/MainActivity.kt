@@ -67,7 +67,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
             try {
                 AppUtils.authChannel.receiveAsFlow().collectLatest { request ->
                     if(request == RequestChannel.ON_401_ERROR){
-                        Snackbar.make(binding.root, getString(R.string.retry_snack), Snackbar.LENGTH_SHORT).show()
+                        Snackbar.make(binding.root, getString(R.string.error_request), Snackbar.LENGTH_SHORT).show()
                     }
 
                     if (request == RequestChannel.LOG_OUT) {

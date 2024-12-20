@@ -2,6 +2,7 @@ package com.example.data.remote.repository
 
 import com.example.data.remote.api.AuthAPI
 import com.example.data.remote.model.register.RequestUserRegistration
+import com.example.data.remote.model.userToken.RequestResetPassword
 import com.example.domain.model.SuccessfulUserTokenItem
 import com.example.domain.model.UserRegistrationItem
 import com.example.domain.repository.AuthRepository
@@ -105,6 +106,16 @@ class AuthRepositoryImpl @Inject constructor(
         }
         catch (e : Exception){
             throw e
+        }
+    }
+
+    override suspend fun resetUserPassword(userEmail: String): Boolean {
+        return try {
+            api.resetUserPassword(RequestResetPassword(userEmail))
+            true
+        }
+        catch (e : Exception){
+            false
         }
     }
 

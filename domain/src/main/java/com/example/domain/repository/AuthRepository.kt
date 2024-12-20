@@ -26,4 +26,8 @@ interface AuthRepository {
         refreshToken: String
     ): SuccessfulUserTokenItem
 
+    suspend fun resetUserPassword(
+        userEmail : String
+    ) : Boolean
+
 }
