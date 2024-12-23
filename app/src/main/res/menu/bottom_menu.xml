@@ -10,11 +10,8 @@
         android:id="@+id/placesFragment"
         android:icon="@drawable/venue_icon_dynamic"
         android:title="@string/places" />
-
-
-    <!-- TODO profili chat screen ele-->
     <item
-        android:id="@+id/profileFragment"
+        android:id="@+id/chatFragment"
         android:icon="@drawable/ic_chat_dynamic"
         android:title="@string/chat" />
 </menu>

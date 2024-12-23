@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.model.AddCommentItem
 import com.example.domain.model.CommentItem
-import com.example.domain.repository.VenueRepository
+import com.example.domain.repository.EventRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
@@ -12,34 +12,34 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class VenueCommentsViewModel @Inject constructor(
-    private val venueRepository: VenueRepository
+class EventCommentsViewModel @Inject constructor(
+    private val eventRepository: EventRepository
 ) : ViewModel() {
 
     var noComments = false
     val isLoading = MutableStateFlow(true)
-    private val venueTitle = MutableStateFlow<String?>(null)
+    private val eventTitle = MutableStateFlow<String?>(null)
     val comments = MutableStateFlow<List<CommentItem>>(emptyList())
 
-    fun getComments(venueId: Int) {
+    fun getComments(eventId: Int) {
         viewModelScope.launch {
-            val response = venueRepository.getVenueComments(venueId)
+            val response = eventRepository.getEventComments(eventId)
             comments.emit(response)
             isLoading.update { false }
             if (response.isEmpty()) noComments = true
         }
     }
 
-    fun getVenueName(venueId: Int) {
+    fun getEventName(eventId: Int) {
         viewModelScope.launch {
-            val response = venueRepository.getVenueDetails(venueId)?.title
-            venueTitle.emit(response)
+            val response = eventRepository.getEventDetails(eventId)?.title
+            eventTitle.emit(response)
         }
     }
 
     fun addComment(comment: AddCommentItem) {
         viewModelScope.launch {
-            venueRepository.addVenueComment(comment)
+            eventRepository.addEventComment(comment)
         }
     }
 }

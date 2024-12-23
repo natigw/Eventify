@@ -31,6 +31,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="7dp"
             app:icon="@drawable/menu_lines"
+            app:iconTint="@color/purple_dark_eventify"
+            android:backgroundTint="@color/green_light_eventify"
             app:layout_constraintBottom_toBottomOf="@id/buttonSwitchMode"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/buttonSwitchMode" />
@@ -43,6 +45,8 @@
             android:layout_marginTop="64dp"
             android:layout_marginEnd="7dp"
             app:icon="@drawable/ic_map_texture"
+            app:iconTint="@color/purple_dark_eventify"
+            android:backgroundTint="@color/green_light_eventify"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/map" />
 

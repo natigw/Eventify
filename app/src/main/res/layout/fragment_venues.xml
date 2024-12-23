@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/eventify_background_primary"
-    tools:context=".presentation.ui.fragments.places.VenuesFragment">
+    tools:context=".presentation.ui.fragments.places.venue.VenuesFragment">
 
     <com.google.android.material.progressindicator.CircularProgressIndicator
         android:id="@+id/progressIndicator"

@@ -5,8 +5,7 @@ import com.example.common.utils.randomDouble
 import com.example.common.utils.roundDouble
 import com.example.data.remote.api.VenueAPI
 import com.example.data.remote.model.venues.comment.addComment.RequestAddVenueComment
-import com.example.data.remote.model.venues.comment.commentDetails.ResponseVenueCommentDetails
-import com.example.data.remote.model.venues.comment.deleteComment.RequestDeleteVenueComment
+import com.example.domain.model.AddCommentItem
 import com.example.domain.model.CommentItem
 import com.example.domain.model.VenueDetailsItem
 import com.example.domain.model.VenueItem
@@ -84,17 +83,18 @@ class VenueRepositoryImpl @Inject constructor(
         return emptyList()
     }
 
-//    override suspend fun getVenueCommentDetails(commentId: Int): ResponseVenueCommentDetails {
+//        override suspend fun getVenueCommentDetails(commentId: Int): ResponseVenueCommentDetails {
 //        TODO("Not yet implemented")
 //    }
-//
-//    override suspend fun addVenueComment(
-//        token: String,
-//        requestAddVenueComment: RequestAddVenueComment
-//    ) {
-//        TODO("Not yet implemented")
-//    }
-//
+
+    override suspend fun addVenueComment(requestAddVenueComment: AddCommentItem) {
+        api.addVenueComment(RequestAddVenueComment(
+            content = requestAddVenueComment.content,
+            venue = requestAddVenueComment.placeId
+        ))
+        //TODO -> successful olub olmadigini check ele
+    }
+
 //    override suspend fun deleteVenueComment(
 //        token: String,
 //        requestDeleteVenueComment: RequestDeleteVenueComment

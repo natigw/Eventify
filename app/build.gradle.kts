@@ -74,6 +74,9 @@ dependencies {
     //glide
     implementation(libs.github.glide)
 
+    //palette
+    implementation(libs.androidx.palette)
+
     //retrofit
     implementation(libs.retrofit2.retrofit)
     implementation(libs.converter.gson)

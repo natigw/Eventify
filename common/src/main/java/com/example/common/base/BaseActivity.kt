@@ -18,7 +18,7 @@ abstract class BaseActivity<VB : ViewBinding>(private val bindingInflater: (Layo
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+//        enableEdgeToEdge()
         _binding = bindingInflater(layoutInflater)
         setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { view, insets ->

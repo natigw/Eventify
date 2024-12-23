@@ -4,6 +4,9 @@
     <color name="white">#FFFFFFFF</color>
     <color name="eventify_background_primary">#F6F6F6</color>    <!--gray-->
     <color name="eventify_background_secondary">#FFFFFF</color>  <!--white-->
+    <color name="eventify_on_primary">#FFFFFF</color>  <!--white textColor on primary color (purple)-->
+    <color name="eventify_on_background_primary">#000000</color>  <!--black text on light background-->
+    <color name="eventify_primary">#6823EA</color>  <!--purple-->
     <color name="gray_light">#EBEBEB</color>
     <color name="gray">#CCCCCC</color>
     <color name="green_eventify">#2ED47B</color>
@@ -13,7 +16,6 @@
     <color name="purple_light_eventify">#9A72F3</color>
     <color name="transparent">@android:color/transparent</color>
 
-    <color name="textColor">#ffffff</color>
     <color name="appBackground">#9C27B0</color>
     <color name="bottomNavBackground">#DBDBDB</color>
 </resources>

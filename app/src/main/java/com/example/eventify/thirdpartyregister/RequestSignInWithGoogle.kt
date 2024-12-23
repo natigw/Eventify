@@ -1,4 +1,4 @@
-package com.example.eventify.data.remote.model.thirdpartyregister
+package com.example.eventify.thirdpartyregister
 
 
 import com.google.gson.annotations.SerializedName

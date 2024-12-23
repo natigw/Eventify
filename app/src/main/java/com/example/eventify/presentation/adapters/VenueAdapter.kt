@@ -1,20 +1,19 @@
 package com.example.eventify.presentation.adapters
 
-import android.util.Log
 import android.view.View
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.example.eventify.R
 import com.example.common.base.BaseAdapter
-import com.example.eventify.databinding.SampleVenueBinding
 import com.example.domain.model.VenueItem
+import com.example.eventify.R
+import com.example.eventify.databinding.SampleVenueBinding
 
 class VenueAdapter(
-    val onClickSeeComments: (com.example.domain.model.VenueItem) -> Unit,
-    val onClickShowInMap: (com.example.domain.model.VenueItem) -> Unit
+    val onClickSeeComments: (VenueItem) -> Unit,
+    val onClickShowInMap: (VenueItem) -> Unit
 ) : BaseAdapter<SampleVenueBinding>(SampleVenueBinding::inflate) {
 
-    var venues: List<com.example.domain.model.VenueItem> = emptyList()
+    var venues: List<VenueItem> = emptyList()
 
     override fun getItemCount(): Int {
         return venues.size
@@ -52,30 +51,27 @@ class VenueAdapter(
 //                flag = !flag
 //                buttonLikeVenue.setIconTintResource(R.color.purple_light_eventify)
 //                textVenueLikeCount.text = if (flag) (venue.likeCount + 1).toString() else venue.likeCount.toString()
-                textVenueName.text = "Like olundu ama bunu duzzeltt"
-                //TODO -> like olsun request atsin, icon qirmizi urek olsun, like count text bir dene artsin
+                //TODO -> like olsun request atsin, icon fill olsun, like count text bir dene artsin
             }
 
             buttonReadMoreVenues.post {
                 val layout = textVenueDescription.layout
                 val lines = layout.lineCount
-                if(lines > 0) {
-                    if(layout.getEllipsisCount(lines - 1) > 0){
+                if (lines > 0) {
+                    if (layout.getEllipsisCount(lines - 1) > 0) {
                         buttonReadMoreVenues.visibility = View.VISIBLE
-                    }
-                    else{
+                    } else {
                         buttonReadMoreVenues.visibility = View.GONE
                     }
                 }
             }
             var flagRead = true
             buttonReadMoreVenues.setOnClickListener {
-                if(flagRead){
+                if (flagRead) {
                     textVenueDescription.maxLines = Integer.MAX_VALUE
                     buttonReadMoreVenues.text = "Read less"
                     flagRead = false
-                }
-                else{
+                } else {
                     buttonReadMoreVenues.text = "Read more"
                     textVenueDescription.maxLines = 3
                     flagRead = true
@@ -113,7 +109,7 @@ class VenueAdapter(
         return position
     }
 
-    fun updateAdapter(newVenues: List<com.example.domain.model.VenueItem>) {
+    fun updateAdapter(newVenues: List<VenueItem>) {
         venues = newVenues
         notifyDataSetChanged()
     }

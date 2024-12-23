@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/venuesFragment"
-        android:name="com.example.eventify.presentation.ui.fragments.places.VenuesFragment"
+        android:name="com.example.eventify.presentation.ui.fragments.places.venue.VenuesFragment"
         android:label="fragment_venues"
         tools:layout="@layout/fragment_venues" >
 
@@ -22,14 +22,7 @@
         android:id="@+id/profileFragment"
         android:name="com.example.eventify.presentation.ui.fragments.profile.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" >
-        <action
-            android:id="@+id/action_profileFragment_to_referralFragment"
-            app:destination="@id/referralFragment" />
-        <action
-            android:id="@+id/action_profileFragment_to_subscriptionFragment"
-            app:destination="@id/subscriptionFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/referralFragment"
         android:name="com.example.eventify.presentation.ui.fragments.referral.ReferralFragment"
@@ -37,7 +30,7 @@
         tools:layout="@layout/fragment_referral" />
     <fragment
         android:id="@+id/eventsFragment"
-        android:name="com.example.eventify.presentation.ui.fragments.places.EventsFragment"
+        android:name="com.example.eventify.presentation.ui.fragments.places.event.EventsFragment"
         android:label="fragment_events"
         tools:layout="@layout/fragment_events" >
         <action
@@ -76,7 +69,7 @@
     </dialog>
     <dialog
         android:id="@+id/placesCommentsBottomSheet"
-        android:name="com.example.eventify.presentation.ui.fragments.places.PlacesCommentsBottomSheet"
+        android:name="com.example.eventify.presentation.ui.fragments.places.venue.VenueCommentsBottomSheet"
         android:label="bottomsheet_places_comments"
         tools:layout="@layout/bottomsheet_places_comments" />
     <fragment
@@ -87,10 +80,24 @@
         <action
             android:id="@+id/action_mapFragment_to_markerDetailsBottomSheet"
             app:destination="@id/markerDetailsBottomSheet" />
+        <action
+            android:id="@+id/action_mapFragment_to_referralFragment"
+            app:destination="@id/referralFragment" />
+        <action
+            android:id="@+id/action_mapFragment_to_subscriptionFragment"
+            app:destination="@id/subscriptionFragment" />
+        <action
+            android:id="@+id/action_mapFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/subscriptionFragment"
         android:name="com.example.eventify.presentation.ui.fragments.subscription.SubscriptionFragment"
         android:label="SubscriptionFragment"
         tools:layout="@layout/fragment_subscription" />
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.example.eventify.presentation.ui.fragments.chat.ChatFragment"
+        android:label="fragment_chat"
+        tools:layout="@layout/fragment_chat" />
 </navigation>

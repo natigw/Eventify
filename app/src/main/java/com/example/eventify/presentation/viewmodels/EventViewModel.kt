@@ -1,5 +1,6 @@
 package com.example.eventify.presentation.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.model.EventItem
@@ -28,10 +29,8 @@ class EventViewModel @Inject constructor(
                 val response = eventRepository.getEvents()
                 events.emit(response)
                 isLoading.update { false }
-
-            }
-            catch (e : Exception){
-
+            } catch(e: Exception) {
+                Log.e("network event", e.toString())
             }
         }
     }

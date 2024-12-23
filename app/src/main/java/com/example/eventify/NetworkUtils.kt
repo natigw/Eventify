@@ -52,5 +52,4 @@ object NetworkUtils {
         context.startActivity(intent)
     }
 
-
 }

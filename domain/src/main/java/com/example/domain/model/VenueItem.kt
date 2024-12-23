@@ -11,6 +11,7 @@ data class VenueItem(
     val description : String,
     val venueType: String,
     val openHours: String,
+    //val isLiked: Boolean,
     val likeCount: Int,
     val latCoordinate : Double,
     val lngCoordinate : Double

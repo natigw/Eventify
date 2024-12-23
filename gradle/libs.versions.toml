@@ -17,6 +17,7 @@ constraintlayout = "2.2.0"
 navigationFragmentKtx = "2.8.3"
 navigationSafeArgsGradlePlugin = "2.8.4"
 navigationUiKtx = "2.8.3"
+palette = "1.0.0"
 retrofitVersion = "2.9.0"
 googleAndroidLibrariesMapsplatformSecretsGradlePlugin = "2.0.1"
 playServicesMaps = "19.0.0"
@@ -27,6 +28,7 @@ legacySupportV4 = "1.0.0"
 android-maps-utils = { module = "com.google.maps.android:android-maps-utils", version.ref = "androidMapsUtils" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-navigation-safe-args-gradle-plugin = { module = "androidx.navigation:navigation-safe-args-gradle-plugin", version.ref = "navigationSafeArgsGradlePlugin" }
+androidx-palette = { module = "androidx.palette:palette", version.ref = "palette" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofitVersion" }
 dotsindicator = { module = "com.tbuonomo:dotsindicator", version.ref = "dotsindicator" }
 github-fancytoast = { module = "io.github.shashank02051997:FancyToast", version.ref = "githubFancytoast" }

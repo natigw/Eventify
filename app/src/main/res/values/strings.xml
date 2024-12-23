@@ -62,7 +62,7 @@
     <string name="retry">Retry</string>
     <string name="network_connection_lost">Network connection lost!</string>
     <string name="get_shortest_route">Get shortest route</string>
-    <string name="no_comments">There is no comments for now!</string>
+    <string name="no_comments">No comments yet!</string>
     <string name="logout">Logout</string>
     <string name="history">History</string>
     <string name="payment">Payment</string>
@@ -73,5 +73,6 @@
     <string name="chat">Chat</string>
     <string name="subscription">Subscription</string>
     <string name="error_request">Something went wrong. Try again later.</string>
+    <string name="add_comment">Add a comment...</string>
 
 </resources>

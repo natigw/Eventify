@@ -1,10 +1,12 @@
 package com.example.data.remote.api
 
 import com.example.data.remote.model.events.allEvents.ResponseAllEvents
+import com.example.data.remote.model.events.comment.addComment.RequestAddEventComment
 import com.example.data.remote.model.events.comment.commentDetails.ResponseEventCommentDetails
 import com.example.data.remote.model.events.comment.eventComments.ResponseEventComments
 import com.example.data.remote.model.events.eventDetails.ResponseEventDetails
 import com.example.data.remote.model.events.likeDislike.RequestLikeDislikeEvent
+import com.example.data.remote.model.venues.comment.addComment.RequestAddVenueComment
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -51,12 +53,12 @@ interface EventAPI {
         commentId: Int
     ): ResponseEventCommentDetails
 
-//    @POST("/events/comment")
-//    suspend fun addEventComment(
-//        @Body
-//        requestAddEventComment: RequestAddEventComment
-//    )
-//
+    @POST("/events/comment")
+    suspend fun addEventComment(
+        @Body
+        requestAddEventComment: RequestAddEventComment
+    )
+
 //    @DELETE("/events/comment")
 //    suspend fun deleteEventComment(
 //        @Body

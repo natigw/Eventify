@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.content.res.Resources
@@ -14,6 +15,7 @@ import android.view.Gravity
 import android.widget.Button
 import android.widget.TextView
 import androidx.core.app.ActivityCompat
+import androidx.core.content.edit
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -50,6 +52,7 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.json.JSONObject
 import javax.inject.Inject
+import javax.inject.Named
 
 @AndroidEntryPoint
 class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate) {
@@ -59,6 +62,10 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
     @Inject
     lateinit var eventApi: EventAPI
+
+    @Named("UserTokens")
+    @Inject
+    lateinit var sharedPreferences: SharedPreferences
 
     private val locationPermissionRequestCode = 1
 
@@ -123,13 +130,13 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     }
                 }
                 events?.forEach {
-                    if (it.location.lat != "string") {
+                    if (it.lat != "string") {
                         addMarker(
-                            lat = it.location.lat.toDouble(),
-                            lng = it.location.lng.toDouble(),
-                            title = it.event.title,
+                            lat = it.lat.toDouble(),
+                            lng = it.lng.toDouble(),
+                            title = it.title,
                             hue = BitmapDescriptorFactory.HUE_RED,
-                            placeId = it.event.venueId,
+                            placeId = it.venueId,
                             placeType = "event"
                         )
                     }
@@ -383,7 +390,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             when (menuItem.itemId) {
                 R.id.drawer_profile -> {
                     drawerLayout.closeDrawer(GravityCompat.START)
-                    //TODO -> profile info and edit screen
+                    findNavController().navigate(R.id.profileFragment)
                     true
                 }
                 R.id.drawer_referral -> {
@@ -416,7 +423,9 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 }
                 R.id.drawer_logout -> {
                     drawerLayout.closeDrawer(GravityCompat.START)
-                    //shprefLoggedin.edit().putBoolean("status", false).apply()
+                    sharedPreferences.edit{
+                        clear()
+                    }
                     NancyToast.makeText(requireContext(), "You have been logged out!", NancyToast.LENGTH_SHORT, NancyToast.INFO, false).show()
                     navigateToAuthActivity()
                     true
