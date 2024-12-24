@@ -120,7 +120,7 @@
         android:paddingTop="1dp"
         android:paddingEnd="10dp"
         android:paddingBottom="3dp"
-        android:text="@string/show_location_on_map"
+        android:text="@string/show_location"
         android:textColor="@color/purple_eventify"
         app:icon="@drawable/location_icon_unselected"
         app:iconPadding="6dp"

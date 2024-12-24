@@ -41,7 +41,7 @@
     <string name="venue_type">Məkanın tipi:</string>
     <string name="open_hours">Xidmət göstərir:</string>
     <string name="likes">Bəyənilər:</string>
-    <string name="show_location_on_map">xəritədə göstər</string>
+    <string name="show_location">xəritədə göstər</string>
     <string name="places">Yerlər</string>
     <string name="event_type">Tədbirin tipi:</string>
     <string name="duration">Müddəti:</string>

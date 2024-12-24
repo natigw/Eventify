@@ -47,7 +47,7 @@
     <string name="venue_type">Venue type:</string>
     <string name="open_hours">Open hours:</string>
     <string name="likes">Likes:</string>
-    <string name="show_location_on_map">show location on map</string>
+    <string name="show_location">show location</string>
     <string name="places">Places</string>
     <string name="event_type">Event type:</string>
     <string name="duration">Duration:</string>
@@ -74,5 +74,6 @@
     <string name="subscription">Subscription</string>
     <string name="error_request">Something went wrong. Try again later.</string>
     <string name="add_comment">Add a comment...</string>
+    <string name="comments">comments</string>
 
 </resources>
