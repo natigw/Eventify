@@ -1,5 +1,6 @@
 package com.example.data.remote.interceptor
 
+import android.util.Log
 import com.example.common.utils.AppUtils
 import com.example.common.utils.RequestChannel
 import okhttp3.Interceptor
@@ -45,6 +46,8 @@ class RetryInterceptor @Inject constructor() : Interceptor {
         }
         response?.close()
         AppUtils.authChannel.trySend(RequestChannel.ON_401_ERROR)
+
+        Log.e("main",response.toString())
 
         return response!!
 

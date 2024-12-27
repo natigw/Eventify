@@ -56,11 +56,16 @@ class AuthRepositoryImpl @Inject constructor(
             val response = api.loginUser(
                 username = username,
                 password = password)
+
             if(response.isSuccessful && response.body() != null){
+                val accessToken = response.body()!!.accessToken
+                val refreshToken =response.body()!!.refreshToken
+                val tokenType = response.body()!!.tokenType
+
                 return SuccessfulUserTokenItem(
-                    accessToken = response.body()!!.accessToken,
-                    refreshToken = response.body()!!.refreshToken,
-                    tokenType = response.body()!!.tokenType
+                    accessToken = accessToken,
+                    refreshToken = refreshToken,
+                    tokenType = tokenType
                 )
             }
             else{

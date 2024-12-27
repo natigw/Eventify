@@ -8,6 +8,8 @@ plugins {
     id("kotlin-parcelize")
     alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin)
     id("androidx.navigation.safeargs.kotlin")
+
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -59,6 +61,14 @@ android {
 }
 
 dependencies {
+    implementation(platform("com.google.firebase:firebase-bom:33.7.0"))
+    implementation("com.google.firebase:firebase-auth")
+    implementation("com.google.android.gms:play-services-auth:21.2.0")
+
+    //credentials
+    implementation (libs.androidx.credentials)
+    implementation (libs.credentials.play.services.auth)
+    implementation (libs.googleid)
 
     //dots indicator
     implementation(libs.dotsindicator)
@@ -82,6 +92,9 @@ dependencies {
     implementation(libs.converter.gson)
 
     implementation(libs.android.maps.utils)
+
+
+
 
 
     implementation(project(":common"))

@@ -1,9 +1,11 @@
 [versions]
 agp = "8.7.2"
 androidMapsUtils = "2.4.0"
+credentialsPlayServicesAuthVersion = "<latest version>"
 dotsindicator = "5.0"
 githubFancytoast = "2.0.2"
 glideVersion = "4.16.0"
+googleid = "<latest version>"
 hiltAndroidCompiler = "2.51.1"
 kotlin = "1.9.24"
 coreKtx = "1.15.0"
@@ -27,12 +29,15 @@ legacySupportV4 = "1.0.0"
 [libraries]
 android-maps-utils = { module = "com.google.maps.android:android-maps-utils", version.ref = "androidMapsUtils" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-credentials = { module = "androidx.credentials:credentials", version.ref = "credentialsPlayServicesAuthVersion" }
 androidx-navigation-safe-args-gradle-plugin = { module = "androidx.navigation:navigation-safe-args-gradle-plugin", version.ref = "navigationSafeArgsGradlePlugin" }
 androidx-palette = { module = "androidx.palette:palette", version.ref = "palette" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofitVersion" }
+credentials-play-services-auth = { module = "androidx.credentials:credentials-play-services-auth", version.ref = "credentialsPlayServicesAuthVersion" }
 dotsindicator = { module = "com.tbuonomo:dotsindicator", version.ref = "dotsindicator" }
 github-fancytoast = { module = "io.github.shashank02051997:FancyToast", version.ref = "githubFancytoast" }
 github-glide = { module = "com.github.bumptech.glide:glide", version.ref = "glideVersion" }
+googleid = { module = "com.google.android.libraries.identity.googleid:googleid", version.ref = "googleid" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroidCompiler" }
 hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltAndroidCompiler" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }

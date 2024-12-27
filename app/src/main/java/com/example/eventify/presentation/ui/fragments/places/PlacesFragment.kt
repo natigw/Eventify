@@ -9,6 +9,7 @@ import com.example.domain.repository.AuthRepository
 import com.example.eventify.databinding.FragmentPlacesBinding
 import com.example.eventify.presentation.ui.fragments.places.event.EventsFragment
 import com.example.eventify.presentation.ui.fragments.places.venue.VenuesFragment
+import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
