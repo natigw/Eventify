@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/venuesFragment"
-        android:name="com.example.eventify.presentation.ui.fragments.places.venue.VenuesFragment"
+        android:name="com.example.eventify.presentation.ui.fragments.venue.VenuesFragment"
         android:label="fragment_venues"
         tools:layout="@layout/fragment_venues" >
 
@@ -17,6 +17,9 @@
         <action
             android:id="@+id/action_venuesFragment_to_mapFragment"
             app:destination="@id/mapFragment" />
+        <action
+            android:id="@+id/action_venuesFragment_to_venueDetailsFragment"
+            app:destination="@id/venueDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -69,7 +72,7 @@
     </dialog>
     <dialog
         android:id="@+id/placesCommentsBottomSheet"
-        android:name="com.example.eventify.presentation.ui.fragments.places.venue.VenueCommentsBottomSheet"
+        android:name="com.example.eventify.presentation.ui.fragments.venue.VenueCommentsBottomSheet"
         android:label="bottomsheet_places_comments"
         tools:layout="@layout/bottomsheet_places_comments" />
     <fragment
@@ -100,4 +103,16 @@
         android:name="com.example.eventify.presentation.ui.fragments.chat.ChatFragment"
         android:label="fragment_chat"
         tools:layout="@layout/fragment_chat" />
+    <fragment
+        android:id="@+id/venueDetailsFragment"
+        android:name="com.example.eventify.presentation.ui.fragments.venue.VenueDetailsFragment"
+        android:label="VenueDetailsFragment"
+        tools:layout="@layout/fragment_venue_details">
+        <argument
+            android:name="venueId"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_venueDetailsFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
+    </fragment>
 </navigation>

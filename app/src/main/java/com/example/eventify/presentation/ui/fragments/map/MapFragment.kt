@@ -204,7 +204,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     }
 
     override fun onViewCreatedLight() {
-        setDrawer()
+//        setDrawer()
 
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
@@ -353,87 +353,87 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         }
     }
 
-    private fun setDrawer() {
-
-        binding.buttonDrawer.setOnClickListener {
-            binding.myDrawerLayout.openDrawer(Gravity.LEFT, true)
-        }
-
-        val drawerLayout = binding.myDrawerLayout
-        val navigationView: NavigationView = requireActivity().findViewById(R.id.drawerNavigationHome)
-
-        val username = "username temp" //shprefLoggedin.getString("username", null)
-        val useremail = "email temp" //shprefLoggedin.getString("email", null)
-
-        val headerView = navigationView.getHeaderView(0)
-        val userProfilePicture = headerView.findViewById<ShapeableImageView>(R.id.imageUserProfilePictureDrawer)
-        val usernameDrawer = headerView.findViewById<TextView>(R.id.textUsernameDrawer)
-        val userEmailDrawer = headerView.findViewById<TextView>(R.id.textUserEmailDrawer)
-        val editProfileDrawer = headerView.findViewById<Button>(R.id.buttonEditProfileDrawer)
-
-
-        usernameDrawer.text = username
-        userEmailDrawer.text = useremail
-
-        Glide.with(userProfilePicture)
-            .load(getProfilePictureUri())
-            .placeholder(R.drawable.usersample)
-            .transition(DrawableTransitionOptions.withCrossFade())
-            .into(userProfilePicture)
-
-        editProfileDrawer.setOnClickListener {
-            NancyToast.makeText(requireContext(), "edit", NancyToast.LENGTH_SHORT, NancyToast.SUCCESS, false).show()
-            //TODO -> edit screen
-        }
-
-        navigationView.setNavigationItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.drawer_profile -> {
-                    drawerLayout.closeDrawer(GravityCompat.START)
-                    findNavController().navigate(R.id.profileFragment)
-                    true
-                }
-                R.id.drawer_referral -> {
-                    drawerLayout.closeDrawer(GravityCompat.START)
-                    findNavController().navigate(R.id.referralFragment)
-                    true
-                }
-                R.id.drawer_subscription -> {
-                    drawerLayout.closeDrawer(GravityCompat.START)
-                    findNavController().navigate(R.id.subscriptionFragment)
-                    true
-                }
-                R.id.drawer_tickets -> {
-                    drawerLayout.closeDrawer(GravityCompat.START)
-                    //findNavController().navigate(R.id.)
-                    //TODO -> current tickets
-                    true
-                }
-                R.id.drawer_payment_history -> {
-                    drawerLayout.closeDrawer(GravityCompat.START)
-                    //findNavController().navigate(R.id.)
-                    //TODO -> all previous payments and active tickets
-                    true
-                }
-                R.id.drawer_settings -> {
-                    drawerLayout.closeDrawer(GravityCompat.START)
-                    //findNavController().navigate(R.id.)
-                    //TODO -> profile info and edit screen
-                    true
-                }
-                R.id.drawer_logout -> {
-                    drawerLayout.closeDrawer(GravityCompat.START)
-                    sharedPreferences.edit{
-                        clear()
-                    }
-                    NancyToast.makeText(requireContext(), "You have been logged out!", NancyToast.LENGTH_SHORT, NancyToast.INFO, false).show()
-                    navigateToAuthActivity()
-                    true
-                }
-                else -> false
-            }
-        }
-    }
+//    private fun setDrawer() {
+//
+//        binding.buttonDrawer.setOnClickListener {
+//            binding.myDrawerLayout.openDrawer(Gravity.LEFT, true)
+//        }
+//
+//        val drawerLayout = binding.myDrawerLayout
+//        val navigationView: NavigationView = requireActivity().findViewById(R.id.drawerNavigationHome)
+//
+//        val username = "username temp" //shprefLoggedin.getString("username", null)
+//        val useremail = "email temp" //shprefLoggedin.getString("email", null)
+//
+//        val headerView = navigationView.getHeaderView(0)
+//        val userProfilePicture = headerView.findViewById<ShapeableImageView>(R.id.imageUserProfilePictureDrawer)
+//        val usernameDrawer = headerView.findViewById<TextView>(R.id.textUsernameDrawer)
+//        val userEmailDrawer = headerView.findViewById<TextView>(R.id.textUserEmailDrawer)
+//        val editProfileDrawer = headerView.findViewById<Button>(R.id.buttonEditProfileDrawer)
+//
+//
+//        usernameDrawer.text = username
+//        userEmailDrawer.text = useremail
+//
+//        Glide.with(userProfilePicture)
+//            .load(getProfilePictureUri())
+//            .placeholder(R.drawable.usersample)
+//            .transition(DrawableTransitionOptions.withCrossFade())
+//            .into(userProfilePicture)
+//
+//        editProfileDrawer.setOnClickListener {
+//            NancyToast.makeText(requireContext(), "edit", NancyToast.LENGTH_SHORT, NancyToast.SUCCESS, false).show()
+//            //TODO -> edit screen
+//        }
+//
+//        navigationView.setNavigationItemSelectedListener { menuItem ->
+//            when (menuItem.itemId) {
+//                R.id.drawer_profile -> {
+//                    drawerLayout.closeDrawer(GravityCompat.START)
+//                    findNavController().navigate(R.id.profileFragment)
+//                    true
+//                }
+//                R.id.drawer_referral -> {
+//                    drawerLayout.closeDrawer(GravityCompat.START)
+//                    findNavController().navigate(R.id.referralFragment)
+//                    true
+//                }
+//                R.id.drawer_subscription -> {
+//                    drawerLayout.closeDrawer(GravityCompat.START)
+//                    findNavController().navigate(R.id.subscriptionFragment)
+//                    true
+//                }
+//                R.id.drawer_tickets -> {
+//                    drawerLayout.closeDrawer(GravityCompat.START)
+//                    //findNavController().navigate(R.id.)
+//                    //TODO -> current tickets
+//                    true
+//                }
+//                R.id.drawer_payment_history -> {
+//                    drawerLayout.closeDrawer(GravityCompat.START)
+//                    //findNavController().navigate(R.id.)
+//                    //TODO -> all previous payments and active tickets
+//                    true
+//                }
+//                R.id.drawer_settings -> {
+//                    drawerLayout.closeDrawer(GravityCompat.START)
+//                    //findNavController().navigate(R.id.)
+//                    //TODO -> profile info and edit screen
+//                    true
+//                }
+//                R.id.drawer_logout -> {
+//                    drawerLayout.closeDrawer(GravityCompat.START)
+//                    sharedPreferences.edit{
+//                        clear()
+//                    }
+//                    NancyToast.makeText(requireContext(), "You have been logged out!", NancyToast.LENGTH_SHORT, NancyToast.INFO, false).show()
+//                    navigateToAuthActivity()
+//                    true
+//                }
+//                else -> false
+//            }
+//        }
+//    }
 
     private fun getProfilePictureUri(): Uri {
         val uriImage = null//shprefProfilePicture.getString("profile_image_uri", null)

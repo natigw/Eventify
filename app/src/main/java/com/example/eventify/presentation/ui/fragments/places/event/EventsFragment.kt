@@ -14,7 +14,7 @@ import com.example.data.remote.api.EventAPI
 import com.example.domain.model.PlaceCoordinates
 import com.example.eventify.databinding.FragmentEventsBinding
 import com.example.eventify.presentation.adapters.EventAdapter
-import com.example.eventify.presentation.ui.fragments.places.venue.VenueCommentsBottomSheet
+import com.example.eventify.presentation.ui.fragments.venue.VenueCommentsBottomSheet
 import com.example.eventify.presentation.viewmodels.SharedViewModel
 import com.example.eventify.presentation.viewmodels.EventViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView

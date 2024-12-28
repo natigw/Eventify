@@ -10,9 +10,9 @@ import com.example.domain.model.EventItem
 import java.util.Locale
 
 class EventAdapter(
-    val onClickSeeComments: (com.example.domain.model.EventItem) -> Unit,
-    val onClickShowInMap: (com.example.domain.model.EventItem) -> Unit,
-    val onClickBuyTicket: (com.example.domain.model.EventItem) -> Unit
+    val onClickSeeComments: (EventItem) -> Unit,
+    val onClickShowInMap: (EventItem) -> Unit,
+    val onClickBuyTicket: (EventItem) -> Unit
 ) : BaseAdapter<SampleEventBinding>(SampleEventBinding::inflate) {
 
     var events: List<com.example.domain.model.EventItem> = emptyList()

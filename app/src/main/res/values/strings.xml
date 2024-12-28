@@ -55,6 +55,7 @@
     <string name="organizer">Organizer:</string>
     <string name="published">Published:</string>
     <string name="events">Events</string>
+    <string name="custom_events">Custom events</string>
     <string name="venue_details">Venue details</string>
     <string name="buy_ticket">Buy ticket</string>
     <string name="register_failed">Register failed!</string>

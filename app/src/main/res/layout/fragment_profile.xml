@@ -10,7 +10,37 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:text="@string/profile"
-        tools:layout_editor_absoluteX="47dp"
-        tools:layout_editor_absoluteY="47dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnReferral"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/referral_program"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"/>
+
+    <Button
+        android:id="@+id/btnSubs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/subscription"
+        app:layout_constraintEnd_toEndOf="@+id/btnReferral"
+        app:layout_constraintStart_toStartOf="@+id/btnReferral"
+        app:layout_constraintTop_toBottomOf="@+id/btnReferral" />
+
+    <Button
+        android:id="@+id/btnLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/logout"
+        app:layout_constraintEnd_toEndOf="@+id/btnSubs"
+        app:layout_constraintStart_toStartOf="@+id/btnSubs"
+        app:layout_constraintTop_toBottomOf="@+id/btnSubs" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

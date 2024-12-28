@@ -1,4 +1,4 @@
-package com.example.eventify.presentation.ui.fragments.places.venue
+package com.example.eventify.presentation.ui.fragments.places.event
 
 import android.os.Bundle
 import android.util.Log
@@ -6,32 +6,40 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.example.eventify.R
+import androidx.navigation.fragment.findNavController
 import com.example.common.base.BaseFragment
-import com.example.eventify.databinding.FragmentVenuesBinding
+import com.example.eventify.R
+import com.example.common.utils.NancyToast
+import com.example.data.remote.api.EventAPI
 import com.example.domain.model.PlaceCoordinates
-import com.example.eventify.presentation.adapters.VenueAdapter
+import com.example.eventify.databinding.FragmentEventsBinding
+import com.example.eventify.presentation.adapters.EventAdapter
+import com.example.eventify.presentation.ui.fragments.venue.VenueCommentsBottomSheet
 import com.example.eventify.presentation.viewmodels.SharedViewModel
-import com.example.eventify.presentation.viewmodels.VenueViewModel
+import com.example.eventify.presentation.viewmodels.EventViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class VenuesFragment : BaseFragment<FragmentVenuesBinding>(FragmentVenuesBinding::inflate) {
+class CustomEventFragment : BaseFragment<FragmentEventsBinding>(FragmentEventsBinding::inflate) {
 
-    private val viewmodel: VenueViewModel by viewModels()
+    @Inject
+    lateinit var api: EventAPI
+
+    private val viewmodel: EventViewModel by viewModels()
     private val sharedViewModel: SharedViewModel by activityViewModels()
 
-    private val venueAdapter = VenueAdapter(
+    private val eventAdapter = EventAdapter(
         onClickSeeComments = {
             val bundle = Bundle().apply {
                 putInt("place_id", it.placeId)
                 putString("place_title", it.name)
             }
-            val bottomSheet = VenueCommentsBottomSheet()
+            val bottomSheet = EventCommentsBottomSheet()
             bottomSheet.arguments = bundle
             bottomSheet.show(parentFragmentManager, bottomSheet.tag)
         },
@@ -40,13 +48,17 @@ class VenuesFragment : BaseFragment<FragmentVenuesBinding>(FragmentVenuesBinding
                 PlaceCoordinates(
                     placeId = it.placeId,
                     name = it.name,
-                    placeType = "venue",
-                    long = it.lngCoordinate,
-                    lat = it.latCoordinate
+                    placeType = "event",
+                    long = it.lng,
+                    lat = it.lat
                 )
             )
             val bottomNavigationView = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
             bottomNavigationView.selectedItemId = R.id.mapFragment
+        },
+        onClickBuyTicket = {
+            NancyToast.makeText(requireContext(), "[buying ticket...]", NancyToast.LENGTH_SHORT, NancyToast.SUCCESS, false).show()
+            //TODO -> backendden mentiq
         }
     )
 
@@ -63,16 +75,16 @@ class VenuesFragment : BaseFragment<FragmentVenuesBinding>(FragmentVenuesBinding
         }
 
         lifecycleScope.launch {
-            viewmodel.venues
+            viewmodel.events
                 .filter { it.isNotEmpty() }
                 .collect {
-                venueAdapter.updateAdapter(it)
-                Log.e("salam", it.toString())
-            }
+                    eventAdapter.updateAdapter(it)
+                    Log.e("salam", it.toString())
+                }
         }
     }
 
     private fun setAdapters() {
-        binding.rvVenues.adapter = venueAdapter
+        binding.rvEvents.adapter = eventAdapter
     }
 }

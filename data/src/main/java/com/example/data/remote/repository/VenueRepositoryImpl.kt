@@ -23,15 +23,10 @@ class VenueRepositoryImpl @Inject constructor(
             response.body()?.let { rawData ->
                 return rawData.map {
                     VenueItem(
-                        placeId = it.id,
-                        name = it.name,
+                        venueId = it.id,
+                        title = it.name,
                         imageLink = it.image1Link,
-                        description = it.description,
-                        venueType = it.venueType,
-                        openHours = "${it.workHoursOpen.substring(0, 5)} - ${it.workHoursClose.substring(0, 5)}",
-                        likeCount = it.numLikes,
-                        latCoordinate = if (it.lat != "string") it.lat.toDouble() else 0.0,
-                        lngCoordinate = if (it.lng != "string") it.lng.toDouble() else 0.0
+                        description = it.description
                     )
                 }
             }
@@ -51,7 +46,7 @@ class VenueRepositoryImpl @Inject constructor(
                     title = rawData.name,
                     description = rawData.description,
                     imageLinks = listOf(rawData.image1Link, rawData.image2Link, rawData.image3Link),
-                    venueType = rawData.venueType,
+                    venueType = rawData.venueType.replace('_', ' ').replaceFirstChar { it.uppercaseChar() },
                     openHours = "${rawData.workHoursOpen.substring(0, 5)} - ${rawData.workHoursClose.substring(0, 5)}",
                     likeCount = rawData.numLikes,
                     rating = roundDouble(randomDouble(max = 5.0)),

@@ -43,13 +43,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
 
-    <Button
-        android:id="@+id/button5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        android:visibility="visible"
-        tools:layout_editor_absoluteX="3dp"
-        tools:layout_editor_absoluteY="4dp" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

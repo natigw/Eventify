@@ -7,11 +7,22 @@
         android:icon="@drawable/location_icon_dynamic"
         android:title="@string/map" />
     <item
-        android:id="@+id/placesFragment"
+        android:id="@+id/venuesFragment"
         android:icon="@drawable/venue_icon_dynamic"
-        android:title="@string/places" />
+        android:title="@string/venues" />
     <item
-        android:id="@+id/chatFragment"
-        android:icon="@drawable/ic_chat_dynamic"
-        android:title="@string/chat" />
+        android:id="@+id/placesFragment"
+        android:icon="@drawable/ic_map_texture"
+        android:title="@string/events" />
+<!--    <item-->
+<!--        android:id="@+id/chatFragment"-->
+<!--        android:icon="@drawable/ic_chat_dynamic"-->
+<!--        android:title="@string/chat" />-->
+
+
+<!--    temporary items -> will be located in drawer when the app fully functions-->
+    <item
+        android:id="@+id/profileFragment"
+        android:icon="@drawable/ic_profile_dynamic"
+        android:title="@string/profile" />
 </menu>

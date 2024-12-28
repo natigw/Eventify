@@ -26,7 +26,7 @@ class EventRepositoryImpl @Inject constructor(
                         name = event.title,
                         imageLink = event.posterImageLink,
                         description = event.description,
-                        eventType = event.eventType,
+                        eventType = event.eventType.replace('_', ' ').replaceFirstChar { it.uppercaseChar() },
                         organizer = if (event.organizerId == 1) "Eventify Group" else "Organizer${event.organizerId}", //TODO -> backend
                         eventDate = event.date.substring(0,10),
                         publishingDate = "${event.createdAt.substring(0,10)}, ${event.createdAt.substring(12)}",
@@ -51,7 +51,7 @@ class EventRepositoryImpl @Inject constructor(
                     title = rawData.event.title,
                     description = rawData.event.description,
                     imageLinks = listOf(rawData.event.posterImageLink),
-                    eventType = rawData.event.eventType,
+                    eventType = rawData.event.eventType.replace('_', ' ').replaceFirstChar { it.uppercaseChar() },
                     eventDuration = "${rawData.event.start.substring(0, 5)} - ${rawData.event.finish.substring(0, 5)}",
                     likeCount = rawData.event.numLikes,
                     rating = randomDouble(max = 5.0),
