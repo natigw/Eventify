@@ -3,8 +3,7 @@ package com.example.eventify.presentation.viewmodels
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.domain.model.EventItem
-import com.example.domain.repository.EventRepository
+import com.example.domain.model.places.event.EventItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
@@ -17,7 +16,7 @@ class EventViewModel @Inject constructor(
 ) : ViewModel() {
 
     val isLoading = MutableStateFlow(true)
-    val events = MutableStateFlow<List<com.example.domain.model.EventItem>>(emptyList())
+    val events = MutableStateFlow<List<EventItem>>(emptyList())
 
     init {
         getEvents()

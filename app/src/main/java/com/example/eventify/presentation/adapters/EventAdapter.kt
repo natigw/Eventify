@@ -3,11 +3,9 @@ package com.example.eventify.presentation.adapters
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.common.base.BaseAdapter
-import com.example.domain.model.EventItem
+import com.example.domain.model.places.event.EventItem
 import com.example.eventify.R
 import com.example.eventify.databinding.SampleEventBinding
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 
 class EventAdapter(
     val onClick: (EventItem) -> Unit

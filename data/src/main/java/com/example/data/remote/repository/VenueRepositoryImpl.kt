@@ -5,10 +5,11 @@ import com.example.common.utils.functions.randomDouble
 import com.example.common.utils.functions.roundDouble
 import com.example.data.remote.api.VenueAPI
 import com.example.data.remote.model.venues.comment.addComment.RequestAddVenueComment
-import com.example.domain.model.AddCommentItem
-import com.example.domain.model.CommentItem
-import com.example.domain.model.VenueDetailsItem
-import com.example.domain.model.VenueItem
+import com.example.data.remote.model.venues.likeDislike.RequestLikeDislikeVenue
+import com.example.domain.model.places.AddCommentItem
+import com.example.domain.model.places.CommentItem
+import com.example.domain.model.places.venue.VenueDetailsItem
+import com.example.domain.model.places.venue.VenueItem
 import com.example.domain.repository.VenueRepository
 import com.google.android.gms.maps.model.LatLng
 import javax.inject.Inject
@@ -96,4 +97,11 @@ class VenueRepositoryImpl @Inject constructor(
 //        TODO("Not yet implemented")
 //    }
 
+    override suspend fun likeVenue(venueId: Int) {
+        api.likeVenue(
+            RequestLikeDislikeVenue(
+                venue = venueId
+            )
+        )
+    }
 }

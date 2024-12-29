@@ -2,7 +2,7 @@ package com.example.eventify.presentation.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.domain.model.VenueItem
+import com.example.domain.model.places.venue.VenueItem
 import com.example.domain.repository.VenueRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -27,6 +27,12 @@ class VenueViewModel @Inject constructor(
             val response = venueRepository.getVenues()
             venues.emit(response)
             isLoading.update { false }
+        }
+    }
+
+    fun likeVenue(venueId) {
+        viewModelScope.launch {
+            venueRepository.
         }
     }
 }

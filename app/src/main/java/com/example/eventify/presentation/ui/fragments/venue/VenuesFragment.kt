@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class VenuesFragment : BaseFragment<FragmentVenuesBinding>(FragmentVenuesBinding::inflate) {
 
-    private val viewmodel: VenueViewModel by viewModels()
+    private val viewmodel by viewModels<VenueViewModel>()
 
     private val venueAdapter = VenueAdapter(
         onClick = {

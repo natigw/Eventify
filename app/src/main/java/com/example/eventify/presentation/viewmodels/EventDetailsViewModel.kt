@@ -2,9 +2,9 @@ package com.example.eventify.presentation.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.domain.model.AddCommentItem
-import com.example.domain.model.CommentItem
-import com.example.domain.model.EventDetailsItem
+import com.example.domain.model.places.AddCommentItem
+import com.example.domain.model.places.CommentItem
+import com.example.domain.model.places.event.EventDetailsItem
 import com.example.domain.repository.EventRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -20,6 +20,8 @@ class EventDetailsViewModel @Inject constructor(
     val isLoadingMain = MutableStateFlow(true)
     val eventDetails = MutableStateFlow<EventDetailsItem?>(null)
 
+    val isLiked = MutableStateFlow(false)
+
     var noComments = false
     val isLoadingComments = MutableStateFlow(true)
     val comments = MutableStateFlow<List<CommentItem>>(emptyList())
@@ -29,6 +31,16 @@ class EventDetailsViewModel @Inject constructor(
             val response = eventRepository.getEventDetails(eventId)
             eventDetails.emit(response)
             isLoadingMain.update { false }
+        }
+    }
+
+    fun getEventLikeInfo(eventId: Int) {
+        viewModelScope.launch {
+            val response = eventRepository.getFavEvents()
+            val like = response.any {
+                it.eventId == eventId
+            }
+            isLiked.update { like }
         }
     }
 

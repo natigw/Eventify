@@ -1,7 +1,7 @@
 package com.example.domain.repository
 
-import com.example.domain.model.SuccessfulUserTokenItem
-import com.example.domain.model.UserRegistrationItem
+import com.example.domain.model.auth.SuccessfulUserTokenItem
+import com.example.domain.model.auth.UserRegistrationItem
 
 interface AuthRepository {
 

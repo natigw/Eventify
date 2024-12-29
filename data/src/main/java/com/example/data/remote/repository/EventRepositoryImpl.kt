@@ -5,10 +5,12 @@ import com.example.common.utils.functions.dateFormatterYMDtoDMY
 import com.example.common.utils.functions.randomDouble
 import com.example.data.remote.api.EventAPI
 import com.example.data.remote.model.events.comment.addComment.RequestAddEventComment
-import com.example.domain.model.AddCommentItem
-import com.example.domain.model.CommentItem
-import com.example.domain.model.EventDetailsItem
-import com.example.domain.model.EventItem
+import com.example.data.remote.model.events.likeDislike.RequestLikeDislikeEvent
+import com.example.domain.model.places.AddCommentItem
+import com.example.domain.model.places.CommentItem
+import com.example.domain.model.places.event.EventDetailsItem
+import com.example.domain.model.places.event.EventItem
+import com.example.domain.model.places.event.FavEventItem
 import com.example.domain.repository.EventRepository
 import com.google.android.gms.maps.model.LatLng
 import javax.inject.Inject
@@ -84,5 +86,27 @@ class EventRepositoryImpl @Inject constructor(
             )
         )
         //TODO -> successful olub olmadigini check ele
+    }
+
+    override suspend fun getFavEvents(): List<FavEventItem> {
+        val response = api.getFavEvents()
+        if (response.isSuccessful) {
+            response.body()?.let { rawFavEvents ->
+                return rawFavEvents.map {
+                    FavEventItem(
+                        eventId = it.event.id
+                    )
+                }
+            }
+        }
+        return emptyList()
+    }
+
+    override suspend fun likeEvent(eventId: Int) {
+        api.likeEvent (
+            RequestLikeDislikeEvent(
+                event = eventId
+            )
+        )
     }
 }

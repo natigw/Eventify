@@ -3,8 +3,8 @@ package com.example.data.remote.repository
 import com.example.data.remote.api.AuthAPI
 import com.example.data.remote.model.register.RequestUserRegistration
 import com.example.data.remote.model.userToken.RequestResetPassword
-import com.example.domain.model.SuccessfulUserTokenItem
-import com.example.domain.model.UserRegistrationItem
+import com.example.domain.model.auth.SuccessfulUserTokenItem
+import com.example.domain.model.auth.UserRegistrationItem
 import com.example.domain.repository.AuthRepository
 import javax.inject.Inject
 

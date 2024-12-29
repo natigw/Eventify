@@ -10,9 +10,9 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.common.base.BaseFragment
 import com.example.common.utils.NancyToast
-import com.example.domain.model.AddCommentItem
-import com.example.domain.model.PlaceCoordinates
-import com.example.domain.model.VenueDetailsItem
+import com.example.domain.model.places.AddCommentItem
+import com.example.domain.model.places.PlaceCoordinates
+import com.example.domain.model.places.venue.VenueDetailsItem
 import com.example.eventify.R
 import com.example.eventify.databinding.FragmentVenueDetailsBinding
 import com.example.eventify.presentation.adapters.CommentAdapter

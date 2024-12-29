@@ -4,7 +4,7 @@ import android.util.Log
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.common.base.BaseAdapter
-import com.example.domain.model.VenueItem
+import com.example.domain.model.places.venue.VenueItem
 import com.example.eventify.R
 import com.example.eventify.databinding.SampleVenueBinding
 

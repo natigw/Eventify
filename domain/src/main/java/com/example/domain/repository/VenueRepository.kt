@@ -1,9 +1,9 @@
 package com.example.domain.repository
 
-import com.example.domain.model.AddCommentItem
-import com.example.domain.model.CommentItem
-import com.example.domain.model.VenueDetailsItem
-import com.example.domain.model.VenueItem
+import com.example.domain.model.places.AddCommentItem
+import com.example.domain.model.places.CommentItem
+import com.example.domain.model.places.venue.VenueDetailsItem
+import com.example.domain.model.places.venue.VenueItem
 
 interface VenueRepository {
 
@@ -24,4 +24,5 @@ interface VenueRepository {
 //        requestDeleteVenueComment: RequestDeleteVenueComment
 //    )
 
+    suspend fun likeVenue(venueId: Int)
 }

@@ -11,9 +11,9 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.common.base.BaseFragment
 import com.example.common.utils.NancyToast
-import com.example.domain.model.AddCommentItem
-import com.example.domain.model.PlaceCoordinates
-import com.example.domain.model.EventDetailsItem
+import com.example.domain.model.places.AddCommentItem
+import com.example.domain.model.places.PlaceCoordinates
+import com.example.domain.model.places.event.EventDetailsItem
 import com.example.eventify.R
 import com.example.eventify.databinding.FragmentEventDetailsBinding
 import com.example.eventify.presentation.adapters.CommentAdapter
@@ -41,6 +41,9 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
             viewmodel.isLoadingMain.collectLatest {
                 binding.progressBarEvents.isVisible = it
             }
+        }
+        lifecycleScope.launch {
+            viewmodel.getEventLikeInfo(args.eventId)
         }
 
         lifecycleScope.launch {
@@ -93,24 +96,6 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(imageEvent)
 
-            var flag = true
-            buttonLikeEvent.setOnClickListener {
-                if (buttonLikeEvent.tag == "not_liked") {
-                    buttonLikeEvent.setIconResource(R.drawable.like_fav)
-                    textEventLikeCount.text = (eventDetailsItem.likeCount + 1).toString()
-                    buttonLikeEvent.tag = "liked"
-                } else {
-                    buttonLikeEvent.setIconResource(R.drawable.like_fav_border)
-                    textEventLikeCount.text = eventDetailsItem.likeCount.toString()
-                    buttonLikeEvent.tag = "not_liked"
-                }
-//                buttonLikeEvent.setIconResource(if (flag) R.drawable.like_fav else R.drawable.like_fav_border)
-//                flag = !flag
-//                buttonLikeEvent.setIconTintResource(R.color.purple_light_eventify)
-//                textEventLikeCount.text = if (flag) (Event.likeCount + 1).toString() else Event.likeCount.toString()
-                //TODO -> like olsun request atsin, icon fill olsun, like count text bir dene artsin
-            }
-
             buttonReadMoreEvents.post {
                 val layout = textEventDescription.layout
                 val lines = layout.lineCount
@@ -151,6 +136,28 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
             buttonBuyTicketEventDetails.setOnClickListener {
                 NancyToast.makeText(requireContext(), "[buying ticket...]", NancyToast.LENGTH_SHORT, NancyToast.SUCCESS, false).show()
                 //TODO -> backendden
+            }
+        }
+    }
+
+    private fun setLikeUI(eventDetailsItem: EventDetailsItem) {
+        var like = viewmodel.isLiked
+        with(binding) {
+            buttonLikeEvent.setOnClickListener {
+                if (buttonLikeEvent.tag == "not_liked") {
+                    buttonLikeEvent.setIconResource(R.drawable.like_fav)
+                    textEventLikeCount.text = (eventDetailsItem.likeCount + 1).toString()
+                    buttonLikeEvent.tag = "liked"
+                } else {
+                    buttonLikeEvent.setIconResource(R.drawable.like_fav_border)
+                    textEventLikeCount.text = eventDetailsItem.likeCount.toString()
+                    buttonLikeEvent.tag = "not_liked"
+                }
+//                buttonLikeEvent.setIconResource(if (flag) R.drawable.like_fav else R.drawable.like_fav_border)
+//                flag = !flag
+//                buttonLikeEvent.setIconTintResource(R.color.purple_light_eventify)
+//                textEventLikeCount.text = if (flag) (Event.likeCount + 1).toString() else Event.likeCount.toString()
+                //TODO -> like olsun request atsin, icon fill olsun, like count text bir dene artsin
             }
         }
     }

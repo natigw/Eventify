@@ -1,11 +1,13 @@
 package com.example.domain.repository
 
-import com.example.domain.model.AddCommentItem
-import com.example.domain.model.CommentItem
-import com.example.domain.model.EventDetailsItem
-import com.example.domain.model.EventItem
+import com.example.domain.model.places.AddCommentItem
+import com.example.domain.model.places.CommentItem
+import com.example.domain.model.places.event.EventDetailsItem
+import com.example.domain.model.places.event.EventItem
+import com.example.domain.model.places.event.FavEventItem
 
 interface EventRepository {
+
     suspend fun getEvents(): List<EventItem>
     suspend fun getEventDetails(eventId: Int): EventDetailsItem?
     suspend fun getEventComments(eventId: Int): List<CommentItem>
@@ -15,4 +17,8 @@ interface EventRepository {
     suspend fun addEventComment(
         requestAddEventComment: AddCommentItem
     )
+
+    suspend fun getFavEvents(): List<FavEventItem>
+
+    suspend fun likeEvent(eventId: Int)
 }

@@ -6,7 +6,7 @@ import com.example.data.remote.model.events.comment.commentDetails.ResponseEvent
 import com.example.data.remote.model.events.comment.eventComments.ResponseEventComments
 import com.example.data.remote.model.events.eventDetails.ResponseEventDetails
 import com.example.data.remote.model.events.likeDislike.RequestLikeDislikeEvent
-import com.example.data.remote.model.venues.comment.addComment.RequestAddVenueComment
+import com.example.data.remote.model.events.likeDislike.favEvents.ResponseFavEvents
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -27,6 +27,9 @@ interface EventAPI {
 //    suspend fun createEvent(
 //        @Body requestCreateEvent: RequestCreateEvent
 //    )
+
+    @GET("/events/favorites")
+    suspend fun getFavEvents() : Response<List<ResponseFavEvents>>
 
     @POST("/events/like")
     suspend fun likeEvent(

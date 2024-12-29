@@ -2,8 +2,8 @@ package com.example.eventify.presentation.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.domain.model.AddCommentItem
-import com.example.domain.model.CommentItem
+import com.example.domain.model.places.AddCommentItem
+import com.example.domain.model.places.CommentItem
 import com.example.domain.repository.EventRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

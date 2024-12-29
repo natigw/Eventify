@@ -1,7 +1,7 @@
 package com.example.eventify.presentation.adapters
 
 import com.example.common.base.BaseAdapter
-import com.example.domain.model.CommentItem
+import com.example.domain.model.places.CommentItem
 import com.example.eventify.databinding.SampleCommentBinding
 
 class CommentAdapter (

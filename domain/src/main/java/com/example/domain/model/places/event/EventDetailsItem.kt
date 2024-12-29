@@ -1,4 +1,4 @@
-package com.example.domain.model
+package com.example.domain.model.places.event
 
 import com.google.android.gms.maps.model.LatLng
 
