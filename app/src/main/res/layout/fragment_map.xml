@@ -35,6 +35,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/textMapHeading"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/inter_bold"
+        android:text="@string/eventify_az"
+        android:textAlignment="center"
+        android:textColor="@color/purple_dark_eventify"
+        android:textSize="28sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 <!--    <com.google.android.material.button.MaterialButton-->
 <!--        android:id="@+id/buttonDrawer"-->
 <!--        style="?attr/materialIconButtonFilledTonalStyle"-->

@@ -76,5 +76,9 @@
     <string name="error_request">Something went wrong. Try again later.</string>
     <string name="add_comment">Add a comment...</string>
     <string name="comments">comments</string>
+    <string name="all_details">all details</string>
+    <string name="venue_details_colon">Venue details:</string>
+    <string name="venue_comments_colon">Venue comments:</string>
+    <string name="eventify_az">eventify.az</string>
 
 </resources>

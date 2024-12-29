@@ -1,4 +1,4 @@
-package com.example.eventify.presentation.ui.fragments.places
+package com.example.eventify.presentation.ui.fragments.events
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

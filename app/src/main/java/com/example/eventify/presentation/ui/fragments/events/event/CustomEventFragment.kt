@@ -1,4 +1,4 @@
-package com.example.eventify.presentation.ui.fragments.places.event
+package com.example.eventify.presentation.ui.fragments.events.event
 
 import android.os.Bundle
 import android.util.Log
@@ -6,7 +6,6 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import com.example.common.base.BaseFragment
 import com.example.eventify.R
 import com.example.common.utils.NancyToast
@@ -14,7 +13,6 @@ import com.example.data.remote.api.EventAPI
 import com.example.domain.model.PlaceCoordinates
 import com.example.eventify.databinding.FragmentEventsBinding
 import com.example.eventify.presentation.adapters.EventAdapter
-import com.example.eventify.presentation.ui.fragments.venue.VenueCommentsBottomSheet
 import com.example.eventify.presentation.viewmodels.SharedViewModel
 import com.example.eventify.presentation.viewmodels.EventViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -25,7 +23,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class EventsFragment : BaseFragment<FragmentEventsBinding>(FragmentEventsBinding::inflate) {
+class CustomEventFragment : BaseFragment<FragmentEventsBinding>(FragmentEventsBinding::inflate) {
 
     @Inject
     lateinit var api: EventAPI
@@ -78,9 +76,9 @@ class EventsFragment : BaseFragment<FragmentEventsBinding>(FragmentEventsBinding
             viewmodel.events
                 .filter { it.isNotEmpty() }
                 .collect {
-                eventAdapter.updateAdapter(it)
-                Log.e("salam", it.toString())
-            }
+                    eventAdapter.updateAdapter(it)
+                    Log.e("salam", it.toString())
+                }
         }
     }
 

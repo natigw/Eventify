@@ -1,4 +1,4 @@
-package com.example.eventify.presentation.ui.fragments.places.event
+package com.example.eventify.presentation.ui.fragments.events.event
 
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible

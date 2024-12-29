@@ -33,7 +33,7 @@
         tools:layout="@layout/fragment_referral" />
     <fragment
         android:id="@+id/eventsFragment"
-        android:name="com.example.eventify.presentation.ui.fragments.places.event.EventsFragment"
+        android:name="com.example.eventify.presentation.ui.fragments.events.event.EventsFragment"
         android:label="fragment_events"
         tools:layout="@layout/fragment_events" >
         <action
@@ -45,7 +45,7 @@
     </fragment>
     <fragment
         android:id="@+id/placesFragment"
-        android:name="com.example.eventify.presentation.ui.fragments.places.PlacesFragment"
+        android:name="com.example.eventify.presentation.ui.fragments.events.PlacesFragment"
         android:label="fragment_places"
         tools:layout="@layout/fragment_places" >
         <action

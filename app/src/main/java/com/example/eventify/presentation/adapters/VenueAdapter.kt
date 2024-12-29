@@ -157,7 +157,9 @@ class VenueAdapter(
             root.setOnClickListener{
                 onClick(venue)
             }
-
+            buttonVenueAllDetails.setOnClickListener {
+                onClick(venue)
+            }
         }
     }
 

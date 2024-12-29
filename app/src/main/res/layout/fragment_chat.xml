@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:backgroundTint="@color/green_light_eventify"
-                app:icon="@drawable/back_arrow"
+                app:icon="@drawable/ic_back_arrow"
                 app:iconSize="24dp"
                 app:iconTint="@color/purple_eventify"
                 app:layout_constraintStart_toStartOf="parent"

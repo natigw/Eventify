@@ -46,6 +46,8 @@ import com.google.android.material.navigation.NavigationView
 import com.google.maps.android.PolyUtil
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
@@ -183,7 +185,6 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         googleMap.uiSettings.setAllGesturesEnabled(true)
 //        googleMap.uiSettings.isMyLocationButtonEnabled = false
         getMyLocation()  //show user's current location
-
     }
 
     //TODO -> burda nese sehv olub
@@ -205,7 +206,14 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
     override fun onViewCreatedLight() {
 //        setDrawer()
-
+        lifecycleScope.launch {
+            sharedViewModel.testStateFlow
+                .filter { it!=null }
+                .collectLatest {
+                    Log.e("nagiq",it.toString())
+                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(it!!.lat, it.long), 6f))
+            }
+        }
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
     }
@@ -324,7 +332,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 currentLatLng = LatLng(location.latitude, location.longitude)
                 //oldugun yere pin de qoysun? deqiqlesdir
                 addMarker(location.latitude, location.longitude, "You are here", BitmapDescriptorFactory.HUE_RED, 0)
-                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng!!, 15f))
+                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng!!, 12f))
             } else {
                 val bakuCityCenter = LatLng(40.3791, 49.8468)
                 googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(bakuCityCenter, 12f))

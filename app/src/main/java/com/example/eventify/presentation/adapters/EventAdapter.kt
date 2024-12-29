@@ -23,6 +23,7 @@ class EventAdapter(
 
     override fun onBindLight(binding: SampleEventBinding, position: Int) {
         val event = events[position]
+
         with(binding) {
             textEventName.text = event.name
             textEventDescription.text = event.description

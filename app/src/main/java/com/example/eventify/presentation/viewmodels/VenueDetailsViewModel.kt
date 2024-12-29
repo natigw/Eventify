@@ -2,8 +2,9 @@ package com.example.eventify.presentation.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.domain.model.AddCommentItem
+import com.example.domain.model.CommentItem
 import com.example.domain.model.VenueDetailsItem
-import com.example.domain.model.VenueItem
 import com.example.domain.repository.VenueRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,14 +17,33 @@ class VenueDetailsViewModel @Inject constructor(
     private val venueRepository: VenueRepository
 ) : ViewModel() {
 
-    val isLoading = MutableStateFlow(true)
+    val isLoadingMain = MutableStateFlow(true)
     val venueDetails = MutableStateFlow<VenueDetailsItem?>(null)
+
+    var noComments = false
+    val isLoadingComments = MutableStateFlow(true)
+    val comments = MutableStateFlow<List<CommentItem>>(emptyList())
 
     fun getVenueDetails(venueId: Int) {
         viewModelScope.launch {
             val response = venueRepository.getVenueDetails(venueId)
             venueDetails.emit(response)
-            isLoading.update { false }
+            isLoadingMain.update { false }
+        }
+    }
+
+    fun getComments(venueId: Int) {
+        viewModelScope.launch {
+            val response = venueRepository.getVenueComments(venueId)
+            comments.emit(response)
+            isLoadingComments.update { false }
+            if (response.isEmpty()) noComments = true
+        }
+    }
+
+    fun addComment(comment: AddCommentItem) {
+        viewModelScope.launch {
+            venueRepository.addVenueComment(comment)
         }
     }
 }

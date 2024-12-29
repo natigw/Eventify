@@ -55,7 +55,7 @@ class EventRepositoryImpl @Inject constructor(
                     eventDuration = "${rawData.event.start.substring(0, 5)} - ${rawData.event.finish.substring(0, 5)}",
                     likeCount = rawData.event.numLikes,
                     rating = randomDouble(max = 5.0),
-                    coordinates = if (rawData.location.lat != "string") LatLng(rawData.location.lat.toDouble(), rawData.location.lng.toDouble()) else LatLng(0.0, 0.0)
+                    coordinates = if (rawData.location.lat != "string") LatLng(rawData.location.lat.toDouble(), rawData.location.lng.toDouble()) else LatLng(40.3791, 49.8468) //baku
                 )
             }
         }

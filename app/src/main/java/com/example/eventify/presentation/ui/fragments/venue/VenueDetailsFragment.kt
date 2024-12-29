@@ -1,31 +1,28 @@
 package com.example.eventify.presentation.ui.fragments.venue
 
-import android.util.Log
-import android.view.View
+import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.viewmodel.viewModelFactory
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.common.base.BaseFragment
-import com.example.data.remote.api.VenueAPI
+import com.example.common.utils.NancyToast
+import com.example.domain.model.AddCommentItem
 import com.example.domain.model.PlaceCoordinates
 import com.example.domain.model.VenueDetailsItem
 import com.example.eventify.R
 import com.example.eventify.databinding.FragmentVenueDetailsBinding
+import com.example.eventify.presentation.adapters.CommentAdapter
 import com.example.eventify.presentation.viewmodels.SharedViewModel
 import com.example.eventify.presentation.viewmodels.VenueDetailsViewModel
-import com.example.eventify.presentation.viewmodels.VenueViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class VenueDetailsFragment :
@@ -35,6 +32,8 @@ class VenueDetailsFragment :
     private val sharedViewModel: SharedViewModel by activityViewModels()
     private val args by navArgs<VenueDetailsFragmentArgs>()
 
+    private val commentAdapter = CommentAdapter()
+
     override fun onViewCreatedLight() {
 
         lifecycleScope.launch {
@@ -43,11 +42,35 @@ class VenueDetailsFragment :
 
         lifecycleScope.launch {
             viewmodel.venueDetails
-                .filter { it!=null }
+                .filter { it != null }
                 .collectLatest {
-                setUI(it!!)
+                    setUI(it!!)
+                }
+        }
+
+        lifecycleScope.launch {
+            viewmodel.isLoadingMain.collectLatest {
+                binding.progressIndicator.isVisible = it
             }
         }
+
+        binding.buttonSendCommentVenueDetails.setOnClickListener {
+            if (binding.addCommentVenue.text.isNullOrEmpty()) {
+                NancyToast.makeText(requireContext(),"Type main text first!", NancyToast.LENGTH_SHORT, NancyToast.WARNING, false).show()
+                return@setOnClickListener
+            }
+            viewmodel.addComment(
+                AddCommentItem(
+                    content = binding.addCommentVenue.text.toString().trim(),
+                    placeId = args.venueId
+                )
+            )
+            binding.addCommentVenue.text = null
+        }
+
+        viewmodel.getComments(args.venueId)
+        setAdapters()
+        updateAdapters()
     }
 
     private fun setUI(venueDetailsItem: VenueDetailsItem) {
@@ -58,7 +81,7 @@ class VenueDetailsFragment :
             textVenueOpenHours.text = venueDetailsItem.openHours
             textVenueLikeCount.text = venueDetailsItem.likeCount.toString()
             Glide.with(imageVenue)
-                .load(venueDetailsItem.imageLinks)
+                .load(venueDetailsItem.imageLinks[0])
                 .placeholder(R.drawable.placeholder_venue)
                 .error(R.drawable.ic_launcher_foreground)
                 .transition(DrawableTransitionOptions.withCrossFade())
@@ -67,11 +90,11 @@ class VenueDetailsFragment :
             var flag = true
             buttonLikeVenue.setOnClickListener {
                 if (buttonLikeVenue.tag == "not_liked") {
-                    buttonLikeVenue.setIconResource(com.example.eventify.R.drawable.like_fav)
+                    buttonLikeVenue.setIconResource(R.drawable.like_fav)
                     textVenueLikeCount.text = (venueDetailsItem.likeCount + 1).toString()
                     buttonLikeVenue.tag = "liked"
                 } else {
-                    buttonLikeVenue.setIconResource(com.example.eventify.R.drawable.like_fav_border)
+                    buttonLikeVenue.setIconResource(R.drawable.like_fav_border)
                     textVenueLikeCount.text = venueDetailsItem.likeCount.toString()
                     buttonLikeVenue.tag = "not_liked"
                 }
@@ -105,7 +128,6 @@ class VenueDetailsFragment :
                     flagRead = true
                 }
             }
-
 //            buttonReadMoreVenues.visibility = if (textVenueDescription.layout.lineCount < 3) View.GONE else View.VISIBLE
 //            buttonReadMoreVenues.setOnClickListener {
 //                if (textVenueDescription.layout.lineCount > 3 && textVenueDescription.maxLines < textVenueDescription.layout.lineCount) {
@@ -120,22 +142,40 @@ class VenueDetailsFragment :
 //                }
 //            }
 
-            buttonVenueSeeComments?.setOnClickListener {
-                findNavController().navigate(R.id.buttonVenueSeeComments)
+            buttonVenueShowLocation.setOnClickListener {
+                sharedViewModel.setCoordinates(
+                    PlaceCoordinates(
+                        placeId = venueDetailsItem.venueId,
+                        name = venueDetailsItem.title,
+                        placeType = "venue",
+                        long = venueDetailsItem.coordinates.longitude,
+                        lat = venueDetailsItem.coordinates.latitude
+                    )
+                )
+                val bottomNavigationView =
+                    requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+                bottomNavigationView.selectedItemId = R.id.mapFragment
             }
-//            buttonVenueShowLocation.setOnClickListener {
-//                sharedViewModel.setCoordinates(
-//                    PlaceCoordinates(
-//                        placeId = it.id,
-//                        name = it.name,
-//                        placeType = "event",
-//                        long = it.lng,
-//                        lat = it.lat
-//                    )
-//                )
-//                val bottomNavigationView = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
-//                bottomNavigationView.selectedItemId = R.id.mapFragment
-//            }
+        }
+    }
+
+    private fun setAdapters() {
+        binding.rvCommentsVenueDetails.adapter = commentAdapter
+    }
+
+    private fun updateAdapters() {
+        lifecycleScope.launch {
+            viewmodel.isLoadingComments.collectLatest {
+                binding.progressBarCommentVenueDetails.isVisible = it
+                binding.textNoCommentsTextVenueDetails.isInvisible = it
+            }
+        }
+        lifecycleScope.launch {
+            viewmodel.comments
+                .filter { it.isNotEmpty() }
+                .collect {
+                    commentAdapter.updateAdapter(it)
+                }
         }
     }
 }

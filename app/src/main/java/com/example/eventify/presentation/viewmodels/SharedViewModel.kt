@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.example.domain.model.PlaceCoordinates
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.update
 
 class SharedViewModel : ViewModel() {
 
@@ -11,8 +12,10 @@ class SharedViewModel : ViewModel() {
 
     var sharedCoordinates: com.example.domain.model.PlaceCoordinates? = null
 
+    val testStateFlow = MutableStateFlow<PlaceCoordinates?>(null)
+
     fun setCoordinates(placeCoordinates: com.example.domain.model.PlaceCoordinates) {
-        sharedCoordinates = placeCoordinates
+        testStateFlow.update { placeCoordinates }
     }
 
     suspend fun setRouteCoordinates(routeCoordinates: LatLng) {

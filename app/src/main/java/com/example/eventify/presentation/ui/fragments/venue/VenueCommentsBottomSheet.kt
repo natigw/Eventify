@@ -30,7 +30,6 @@ class VenueCommentsBottomSheet : BaseBottomSheetFragment<BottomsheetPlacesCommen
         viewmodel.getVenueName(placeId)
         viewmodel.getComments(placeId)
 
-//        observeVenueTitle()
         setAdapters()
         updateAdapters()
 
@@ -46,16 +45,6 @@ class VenueCommentsBottomSheet : BaseBottomSheetFragment<BottomsheetPlacesCommen
             binding.addComment.text = null
         }
     }
-
-//    private fun observeVenueTitle() {
-//        lifecycleScope.launch {
-//            viewmodel.venueTitle.collectLatest { title ->
-//                if (title != null) {
-//                    binding.textPlaceNameComments.text = title
-//                }
-//            }
-//        }
-//    }
 
     private fun setAdapters() {
         binding.rvPlaceComments.adapter = commentAdapter
