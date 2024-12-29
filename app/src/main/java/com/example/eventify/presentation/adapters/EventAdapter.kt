@@ -1,21 +1,19 @@
 package com.example.eventify.presentation.adapters
 
-import android.view.View
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.example.eventify.R
 import com.example.common.base.BaseAdapter
-import com.example.eventify.databinding.SampleEventBinding
 import com.example.domain.model.EventItem
-import java.util.Locale
+import com.example.eventify.R
+import com.example.eventify.databinding.SampleEventBinding
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 class EventAdapter(
-    val onClickSeeComments: (EventItem) -> Unit,
-    val onClickShowInMap: (EventItem) -> Unit,
-    val onClickBuyTicket: (EventItem) -> Unit
+    val onClick: (EventItem) -> Unit
 ) : BaseAdapter<SampleEventBinding>(SampleEventBinding::inflate) {
 
-    var events: List<com.example.domain.model.EventItem> = emptyList()
+    var events: List<EventItem> = emptyList()
 
     override fun getItemCount(): Int {
         return events.size
@@ -26,13 +24,7 @@ class EventAdapter(
 
         with(binding) {
             textEventName.text = event.name
-            textEventDescription.text = event.description
-            textEventType.text = event.eventType
-            textEventOrganizer.text = event.organizer
-            textEventDate.text = event.eventDate
-            textEventPublished.text = event.publishingDate
-            textEventDurationHours.text = event.eventDurationHours
-            textEventLikeCount.text = String.format(event.likeCount.toString())
+            textEventDateTime.text = event.eventDateTime
             Glide.with(imageEvent)
                 .load(event.imageLink)
                 .placeholder(R.drawable.placeholder_event)
@@ -44,12 +36,10 @@ class EventAdapter(
             buttonLikeEvent.setOnClickListener {
                 if (buttonLikeEvent.tag == "not_liked") {
                     buttonLikeEvent.setIconResource(R.drawable.like_fav)
-                    textEventLikeCount.text = (event.likeCount + 1).toString()
                     buttonLikeEvent.tag = "liked"
                 }
                 else {
                     buttonLikeEvent.setIconResource(R.drawable.like_fav_border)
-                    textEventLikeCount.text = event.likeCount.toString()
                     buttonLikeEvent.tag = "not_liked"
                 }
 //                buttonLikeEvent.setIconResource(if (flag) R.drawable.like_fav else R.drawable.like_fav_border)
@@ -60,39 +50,11 @@ class EventAdapter(
                 //TODO -> like olsun request atsin, icon qirmizi urek olsun, like count text bir dene artsin
             }
 
-            buttonReadMoreEvents.post {
-                val layout = textEventDescription.layout
-                val lines = layout.lineCount
-                if(lines > 0) {
-                    if(layout.getEllipsisCount(lines - 1) > 0){
-                        buttonReadMoreEvents.visibility = View.VISIBLE
-                    }
-                    else{
-                        buttonReadMoreEvents.visibility = View.GONE
-                    }
-                }
+            root.setOnClickListener {
+                onClick(event)
             }
-            var flagRead = true
-            buttonReadMoreEvents.setOnClickListener {
-                if(flagRead){
-                    textEventDescription.maxLines = Integer.MAX_VALUE
-                    buttonReadMoreEvents.text = "Read less"
-                    flagRead = false
-                }
-                else{
-                    buttonReadMoreEvents.text = "Read more"
-                    textEventDescription.maxLines = 3
-                    flagRead = true
-                }
-            }
-            buttonEventSeeComments.setOnClickListener {
-                onClickSeeComments(event)
-            }
-            buttonEventShowLocation.setOnClickListener {
-                onClickShowInMap(event)
-            }
-            buttonBuyTicketEvents.setOnClickListener {
-                onClickBuyTicket(event)
+            buttonEventAllDetails.setOnClickListener {
+                onClick(event)
             }
         }
     }
@@ -105,7 +67,7 @@ class EventAdapter(
         return position
     }
 
-    fun updateAdapter(newEvents: List<com.example.domain.model.EventItem>) {
+    fun updateAdapter(newEvents: List<EventItem>) {
         events = newEvents
         notifyDataSetChanged()
     }

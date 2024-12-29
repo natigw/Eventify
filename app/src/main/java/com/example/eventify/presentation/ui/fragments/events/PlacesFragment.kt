@@ -6,7 +6,7 @@ import com.example.data.remote.api.VenueAPI
 import com.example.data.remote.interceptor.TokenManager
 import com.example.domain.repository.AuthRepository
 import com.example.eventify.databinding.FragmentPlacesBinding
-import com.example.eventify.presentation.ui.fragments.events.event.CustomEventFragment
+import com.example.eventify.presentation.ui.fragments.events.event.CustomEventsFragment
 import com.example.eventify.presentation.ui.fragments.events.event.EventsFragment
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
@@ -34,7 +34,7 @@ class PlacesFragment : BaseFragment<FragmentPlacesBinding>(FragmentPlacesBinding
 
         val fragmentList = arrayListOf(
             EventsFragment(),
-            CustomEventFragment()
+            CustomEventsFragment()
         )
         val placesViewPagerAdapter = PlacesViewPagerAdapter(fragmentList, requireActivity().supportFragmentManager,lifecycle)
         binding.viewPagerPlaces.adapter = placesViewPagerAdapter

@@ -8,6 +8,20 @@
     android:background="@color/eventify_background_primary"
     tools:context=".presentation.ui.fragments.events.PlacesFragment">
 
+    <TextView
+        android:id="@+id/textHeadingEvents"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/inter_bold"
+        android:text="@string/events"
+        android:textAlignment="center"
+        android:textColor="@color/purple_dark_eventify"
+        android:textSize="28sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="wrap_content"
@@ -17,19 +31,19 @@
         app:tabTextColor="#909090"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textHeadingEvents"
         app:tabMode="scrollable"
         app:tabRippleColor="@color/transparent">
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/venues" />
+            android:text="@string/organizer_events" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/events" />
+            android:text="@string/user_events" />
 
     </com.google.android.material.tabs.TabLayout>
 

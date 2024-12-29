@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/rounded_bottom_sheet_background_secondary"
-    tools:context=".presentation.ui.fragments.venue.VenueCommentsBottomSheet">
+    tools:context="">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelinePlacesComments1"

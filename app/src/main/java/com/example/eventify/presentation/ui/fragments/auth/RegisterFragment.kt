@@ -8,10 +8,10 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.example.eventify.R
 import com.example.common.base.BaseFragment
 import com.example.common.utils.NancyToast
-import com.example.common.utils.isValidEmail
+import com.example.common.utils.functions.isValidEmail
+import com.example.eventify.R
 import com.example.eventify.databinding.FragmentRegisterBinding
 import com.example.eventify.presentation.viewmodels.RegisterViewModel
 import dagger.hilt.android.AndroidEntryPoint

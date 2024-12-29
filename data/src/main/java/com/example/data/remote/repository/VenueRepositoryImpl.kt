@@ -1,8 +1,8 @@
 package com.example.data.remote.repository
 
 import android.util.Log
-import com.example.common.utils.randomDouble
-import com.example.common.utils.roundDouble
+import com.example.common.utils.functions.randomDouble
+import com.example.common.utils.functions.roundDouble
 import com.example.data.remote.api.VenueAPI
 import com.example.data.remote.model.venues.comment.addComment.RequestAddVenueComment
 import com.example.domain.model.AddCommentItem
@@ -30,7 +30,6 @@ class VenueRepositoryImpl @Inject constructor(
                     )
                 }
             }
-
         }
 
         Log.e("venueRequestError", response.errorBody().toString())
@@ -47,7 +46,7 @@ class VenueRepositoryImpl @Inject constructor(
                     description = rawData.description,
                     imageLinks = listOf(rawData.image1Link, rawData.image2Link, rawData.image3Link),
                     venueType = rawData.venueType.replace('_', ' ').replaceFirstChar { it.uppercaseChar() },
-                    openHours = "${rawData.workHoursOpen.substring(0, 5)} - ${rawData.workHoursClose.substring(0, 5)}",
+                    openHours = if (rawData.workHoursOpen.substring(0, 5) == rawData.workHoursClose.substring(0, 5)) "24 hours open" else "${rawData.workHoursOpen.substring(0, 5)} - ${rawData.workHoursClose.substring(0, 5)}",
                     likeCount = rawData.numLikes,
                     rating = roundDouble(randomDouble(max = 5.0)),
                     coordinates = if (rawData.lat != "string") LatLng(rawData.lat.toDouble(), rawData.lng.toDouble()) else LatLng(0.0, 0.0)

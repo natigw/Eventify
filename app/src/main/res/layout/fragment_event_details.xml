@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.ui.fragments.events.event.EventDetailsFragment">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineEventDetails1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.05" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineEventDetails2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.95" />
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/progressBarEvents"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            app:layout_constraintTop_toTopOf="@id/textEventDescription"
+            app:layout_constraintBottom_toBottomOf="@+id/textEventDescription"
+            app:layout_constraintEnd_toStartOf="@+id/guidelineEventDetails2"
+            app:layout_constraintStart_toStartOf="@+id/guidelineEventDetails1" />
+
+        <TextView
+            android:id="@+id/textEventName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/inter_bold"
+            android:textAlignment="center"
+            android:textColor="@color/purple_dark_eventify"
+            android:textSize="28sp"
+            app:layout_constraintEnd_toEndOf="@+id/guidelineEventDetails2"
+            app:layout_constraintStart_toStartOf="@+id/guidelineEventDetails1"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Event title" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imageEvent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/placeholder_event"
+            app:layout_constraintEnd_toStartOf="@+id/guidelineEventDetails2"
+            app:layout_constraintStart_toStartOf="@+id/guidelineEventDetails1"
+            app:layout_constraintTop_toBottomOf="@id/textEventName"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Medium" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonLikeEvent"
+            style="?attr/materialIconButtonFilledTonalStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
+            android:backgroundTint="@color/eventify_background_primary"
+            android:tag="not_liked"
+            app:icon="@drawable/like_fav_border"
+            app:iconTint="@color/purple_dark_eventify"
+            app:layout_constraintEnd_toEndOf="@id/imageEvent"
+            app:layout_constraintTop_toTopOf="@+id/imageEvent" />
+
+        <!--    <com.google.android.material.button.MaterialButton-->
+        <!--        android:id="@+id/buttonChat"-->
+        <!--        style="?attr/materialIconButtonFilledTonalStyle"-->
+        <!--        android:layout_width="wrap_content"-->
+        <!--        android:layout_height="wrap_content"-->
+        <!--        android:tag="not_liked"-->
+        <!--        app:icon="@drawable/ic_chat_outlined"-->
+        <!--        app:iconTint="@color/purple_dark_eventify"-->
+        <!--        android:backgroundTint="@color/gray_light"-->
+        <!--        app:layout_constraintTop_toBottomOf="@id/buttonLikeEvent"-->
+        <!--        app:layout_constraintEnd_toEndOf="parent"/>-->
+
+        <TextView
+            android:id="@+id/textEventDetailsText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/event_details_colon"
+            android:textColor="@color/purple_dark_eventify"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@+id/guidelineEventDetails1"
+            app:layout_constraintTop_toBottomOf="@+id/imageEvent" />
+
+        <TextView
+            android:id="@+id/textEventDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/inter_regular"
+            android:maxLines="5"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/guidelineEventDetails2"
+            app:layout_constraintStart_toStartOf="@+id/guidelineEventDetails1"
+            app:layout_constraintTop_toBottomOf="@+id/textEventDetailsText"
+            tools:text="Event description" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonReadMoreEvents"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/gray_light"
+            android:fontFamily="@font/inter_regular"
+            android:minWidth="24dp"
+            android:minHeight="24dp"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="2dp"
+            android:text="@string/read_more"
+            android:textColor="@color/purple_dark_eventify"
+            android:textSize="12sp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@id/guidelineEventDetails2"
+            app:layout_constraintTop_toBottomOf="@id/textEventDescription" />
+
+        <TextView
+            android:id="@+id/textEventTypeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/inter_regular"
+            android:text="@string/event_type"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/guidelineEventDetails1"
+            app:layout_constraintTop_toBottomOf="@+id/textEventDescription" />
+
+        <TextView
+            android:id="@+id/textEventType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:fontFamily="@font/inter_light_italic"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@id/textEventTypeText"
+            app:layout_constraintTop_toTopOf="@id/textEventTypeText"
+            tools:text="cinema" />
+
+        <TextView
+            android:id="@+id/textEventOrganizerText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/inter_regular"
+            android:text="@string/organizer"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@id/textEventTypeText"
+            app:layout_constraintTop_toBottomOf="@+id/textEventTypeText" />
+
+        <TextView
+            android:id="@+id/textEventOrganizer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:fontFamily="@font/inter_light_italic"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@id/textEventOrganizerText"
+            app:layout_constraintTop_toTopOf="@id/textEventOrganizerText"
+            tools:text="Eventify Group" />
+
+
+        <TextView
+            android:id="@+id/textEventDateText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/inter_regular"
+            android:text="@string/date"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@id/textEventOrganizerText"
+            app:layout_constraintTop_toBottomOf="@+id/textEventOrganizerText" />
+
+        <TextView
+            android:id="@+id/textEventDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:fontFamily="@font/inter_light_italic"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@id/textEventDateText"
+            app:layout_constraintTop_toTopOf="@id/textEventDateText"
+            tools:text="12 October 2024" />
+
+        <TextView
+            android:id="@+id/textEventDurationHoursText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/inter_regular"
+            android:text="@string/duration"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@id/textEventDateText"
+            app:layout_constraintTop_toBottomOf="@+id/textEventDateText" />
+
+        <TextView
+            android:id="@+id/textEventDurationHours"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:fontFamily="@font/inter_light_italic"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@id/textEventDurationHoursText"
+            app:layout_constraintTop_toTopOf="@id/textEventDurationHoursText"
+            tools:text="09:00 - 23:00" />
+
+        <TextView
+            android:id="@+id/textEventPublishedText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/inter_regular"
+            android:text="@string/published"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@id/textEventDurationHoursText"
+            app:layout_constraintTop_toBottomOf="@+id/textEventDurationHoursText" />
+
+        <TextView
+            android:id="@+id/textEventPublished"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:fontFamily="@font/inter_light_italic"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@id/textEventPublishedText"
+            app:layout_constraintTop_toTopOf="@id/textEventPublishedText"
+            tools:text="4 October, 13:29" />
+
+        <TextView
+            android:id="@+id/textEventLikesText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/inter_regular"
+            android:text="@string/likes"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@id/textEventPublishedText"
+            app:layout_constraintTop_toBottomOf="@+id/textEventPublishedText" />
+
+        <TextView
+            android:id="@+id/textEventLikeCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:fontFamily="@font/inter_light_italic"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@id/textEventLikesText"
+            app:layout_constraintTop_toTopOf="@id/textEventLikesText"
+            tools:text="12" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonEventShowLocation"
+            style="?attr/materialIconButtonFilledTonalStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:backgroundTint="@color/green_light_eventify"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/show_location"
+            android:textColor="@color/purple_eventify"
+            android:textSize="18sp"
+            app:cornerRadius="12dp"
+            app:icon="@drawable/location_icon_unselected"
+            app:iconPadding="8dp"
+            app:iconSize="20dp"
+            app:iconTint="@color/purple_eventify"
+            app:iconGravity="textStart"
+            app:layout_constraintStart_toStartOf="@id/guidelineEventDetails1"
+            app:layout_constraintEnd_toEndOf="@id/guidelineEventDetails2"
+            app:layout_constraintTop_toBottomOf="@+id/textEventLikesText" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonBuyTicketEventDetails"
+            style="?attr/materialIconButtonFilledTonalStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/green_light_eventify"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/buy_ticket"
+            android:textColor="@color/purple_eventify"
+            android:textSize="18sp"
+            app:cornerRadius="12dp"
+            app:layout_constraintStart_toStartOf="@id/guidelineEventDetails1"
+            app:layout_constraintEnd_toEndOf="@id/guidelineEventDetails2"
+            app:layout_constraintTop_toBottomOf="@+id/buttonEventShowLocation" />
+
+        <TextView
+            android:id="@+id/textEventDetailsCommentsText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/event_comments_colon"
+            android:textColor="@color/purple_dark_eventify"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/guidelineEventDetails1"
+            app:layout_constraintTop_toBottomOf="@+id/buttonBuyTicketEventDetails" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputWriteCommentEventDetails"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
+            app:boxCornerRadiusBottomEnd="14dp"
+            app:boxCornerRadiusBottomStart="14dp"
+            app:boxCornerRadiusTopEnd="14dp"
+            app:boxCornerRadiusTopStart="14dp"
+            app:boxStrokeColor="@color/purple_eventify"
+            app:boxStrokeWidth="1dp"
+            app:boxStrokeWidthFocused="2dp"
+            app:hintTextColor="@color/purple_eventify"
+            app:layout_constraintTop_toBottomOf="@id/textEventDetailsCommentsText"
+            app:layout_constraintEnd_toStartOf="@id/buttonSendCommentEventDetails"
+            app:layout_constraintStart_toStartOf="@id/guidelineEventDetails1">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/addCommentEvent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/add_comment"
+                android:inputType="textEmailAddress"
+                android:textSize="16sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonSendCommentEventDetails"
+            style="?attr/materialIconButtonFilledStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginEnd="4dp"
+            android:contentDescription="@string/send"
+            app:icon="@drawable/ic_send"
+            app:layout_constraintBottom_toBottomOf="@+id/textInputWriteCommentEventDetails"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textInputWriteCommentEventDetails" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvCommentsEventDetails"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:itemCount="10"
+            tools:listitem="@layout/sample_comment"
+            app:layout_constraintEnd_toEndOf="@+id/guidelineEventDetails2"
+            app:layout_constraintStart_toStartOf="@+id/guidelineEventDetails1"
+            app:layout_constraintTop_toBottomOf="@+id/textInputWriteCommentEventDetails"/>
+
+        <TextView
+            android:id="@+id/textNoCommentsTextEventDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="50dp"
+            android:fontFamily="@font/inter_italic"
+            android:text="@string/no_comments"
+            android:textColor="@color/purple_dark_eventify"
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@id/textInputWriteCommentEventDetails"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guidelineEventDetails2"
+            app:layout_constraintStart_toStartOf="@id/guidelineEventDetails1" />
+
+        <ProgressBar
+            android:id="@+id/progressBarCommentEventDetails"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@+id/textNoCommentsTextEventDetails"
+            app:layout_constraintBottom_toBottomOf="@+id/textNoCommentsTextEventDetails"
+            app:layout_constraintStart_toStartOf="@id/guidelineEventDetails1"
+            app:layout_constraintEnd_toEndOf="@id/guidelineEventDetails2" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

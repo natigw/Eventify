@@ -12,12 +12,6 @@
         tools:layout="@layout/fragment_venues" >
 
         <action
-            android:id="@+id/action_venuesFragment_to_placesCommentsBottomSheet"
-            app:destination="@id/placesCommentsBottomSheet" />
-        <action
-            android:id="@+id/action_venuesFragment_to_mapFragment"
-            app:destination="@id/mapFragment" />
-        <action
             android:id="@+id/action_venuesFragment_to_venueDetailsFragment"
             app:destination="@id/venueDetailsFragment" />
     </fragment>
@@ -35,14 +29,7 @@
         android:id="@+id/eventsFragment"
         android:name="com.example.eventify.presentation.ui.fragments.events.event.EventsFragment"
         android:label="fragment_events"
-        tools:layout="@layout/fragment_events" >
-        <action
-            android:id="@+id/action_eventsFragment_to_placesCommentsBottomSheet"
-            app:destination="@id/placesCommentsBottomSheet" />
-        <action
-            android:id="@+id/action_eventsFragment_to_mapFragment"
-            app:destination="@id/mapFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_events" />
     <fragment
         android:id="@+id/placesFragment"
         android:name="com.example.eventify.presentation.ui.fragments.events.PlacesFragment"
@@ -55,8 +42,8 @@
             android:id="@+id/action_placesFragment_to_venuesFragment"
             app:destination="@id/venuesFragment" />
         <action
-            android:id="@+id/action_placesFragment_to_placesCommentsBottomSheet"
-            app:destination="@id/placesCommentsBottomSheet" />
+            android:id="@+id/action_placesFragment_to_eventDetailsFragment"
+            app:destination="@id/eventDetailsFragment" />
     </fragment>
     <dialog
         android:id="@+id/markerDetailsBottomSheet"
@@ -70,11 +57,6 @@
             android:name="placeType"
             app:argType="string" />
     </dialog>
-    <dialog
-        android:id="@+id/placesCommentsBottomSheet"
-        android:name="com.example.eventify.presentation.ui.fragments.venue.VenueCommentsBottomSheet"
-        android:label="bottomsheet_places_comments"
-        tools:layout="@layout/bottomsheet_places_comments" />
     <fragment
         android:id="@+id/mapFragment"
         android:name="com.example.eventify.presentation.ui.fragments.map.MapFragment"
@@ -113,6 +95,21 @@
             app:argType="integer" />
         <action
             android:id="@+id/action_venueDetailsFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
+        <action
+            android:id="@+id/action_venueDetailsFragment_to_mapFragment2"
+            app:destination="@id/mapFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/eventDetailsFragment"
+        android:name="com.example.eventify.presentation.ui.fragments.events.event.EventDetailsFragment"
+        android:label="EventDetailsFragment"
+        tools:layout="@layout/fragment_event_details">
+        <argument
+            android:name="eventId"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_eventDetailsFragment_to_mapFragment"
             app:destination="@id/mapFragment" />
     </fragment>
 </navigation>

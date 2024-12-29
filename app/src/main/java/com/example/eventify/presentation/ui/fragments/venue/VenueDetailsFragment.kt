@@ -25,8 +25,7 @@ import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class VenueDetailsFragment :
-    BaseFragment<FragmentVenueDetailsBinding>(FragmentVenueDetailsBinding::inflate) {
+class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentVenueDetailsBinding::inflate) {
 
     private val viewmodel by viewModels<VenueDetailsViewModel>()
     private val sharedViewModel: SharedViewModel by activityViewModels()
@@ -38,6 +37,9 @@ class VenueDetailsFragment :
 
         lifecycleScope.launch {
             viewmodel.getVenueDetails(args.venueId)
+            viewmodel.isLoadingMain.collectLatest {
+                binding.progressBarVenues.isVisible = it
+            }
         }
 
         lifecycleScope.launch {
@@ -50,7 +52,7 @@ class VenueDetailsFragment :
 
         lifecycleScope.launch {
             viewmodel.isLoadingMain.collectLatest {
-                binding.progressIndicator.isVisible = it
+                binding.progressBarCommentVenueDetails.isVisible = it
             }
         }
 

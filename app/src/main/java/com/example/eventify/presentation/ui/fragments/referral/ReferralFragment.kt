@@ -8,7 +8,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.eventify.R
 import com.example.common.base.BaseFragment
-import com.example.common.utils.copyToClipboard
+import com.example.common.utils.functions.copyToClipboard
 import com.example.data.remote.api.EventAPI
 import com.example.eventify.databinding.FragmentReferralBinding
 import com.example.eventify.presentation.viewmodels.ReferralViewModel

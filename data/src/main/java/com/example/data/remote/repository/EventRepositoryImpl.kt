@@ -1,7 +1,8 @@
 package com.example.data.remote.repository
 
 import android.util.Log
-import com.example.common.utils.randomDouble
+import com.example.common.utils.functions.dateFormatterYMDtoDMY
+import com.example.common.utils.functions.randomDouble
 import com.example.data.remote.api.EventAPI
 import com.example.data.remote.model.events.comment.addComment.RequestAddEventComment
 import com.example.domain.model.AddCommentItem
@@ -22,24 +23,15 @@ class EventRepositoryImpl @Inject constructor(
             response.body()?.let { rawData->
                 return rawData.map { event ->
                     EventItem(
-                        placeId = event.id,
+                        eventId = event.id,
                         name = event.title,
                         imageLink = event.posterImageLink,
-                        description = event.description,
-                        eventType = event.eventType.replace('_', ' ').replaceFirstChar { it.uppercaseChar() },
-                        organizer = if (event.organizerId == 1) "Eventify Group" else "Organizer${event.organizerId}", //TODO -> backend
-                        eventDate = event.date.substring(0,10),
-                        publishingDate = "${event.createdAt.substring(0,10)}, ${event.createdAt.substring(12)}",
-                        eventDurationHours = "${event.start.substring(0, 5)} - ${event.finish.substring(0, 5)}",
-                        likeCount = event.numLikes,
-                        lat = if (event.lat != "string") event.lat.toDouble() else 0.0,
-                        lng = if (event.lng != "string") event.lng.toDouble() else 0.0
+                        eventDateTime = if (event.start.substring(0, 5) == event.finish.substring(0, 5)) "${dateFormatterYMDtoDMY(event.date.substring(0,10))} • all the day" else "${dateFormatterYMDtoDMY(event.date.substring(0,10))} • ${event.start.substring(0, 5)}-${event.finish.substring(0, 5)}"
                     )
                 }
             }
         }
         return emptyList()
-
     }
 
     override suspend fun getEventDetails(eventId: Int): EventDetailsItem? {
@@ -52,10 +44,13 @@ class EventRepositoryImpl @Inject constructor(
                     description = rawData.event.description,
                     imageLinks = listOf(rawData.event.posterImageLink),
                     eventType = rawData.event.eventType.replace('_', ' ').replaceFirstChar { it.uppercaseChar() },
-                    eventDuration = "${rawData.event.start.substring(0, 5)} - ${rawData.event.finish.substring(0, 5)}",
+                    organizer = if (rawData.event.organizerId == 1) "Eventify Group" else "Organizer${rawData.event.organizerId}", //TODO -> backend
+                    eventDate = rawData.event.date.substring(0,10),
+                    publishingDate = "${rawData.event.createdAt.substring(0,10)}, ${rawData.event.createdAt.substring(12)}",
+                    eventDurationHours = if (rawData.event.start.substring(0, 5) == rawData.event.finish.substring(0, 5)) "all the day" else "${rawData.event.start.substring(0, 5)} - ${rawData.event.finish.substring(0, 5)}",
                     likeCount = rawData.event.numLikes,
                     rating = randomDouble(max = 5.0),
-                    coordinates = if (rawData.location.lat != "string") LatLng(rawData.location.lat.toDouble(), rawData.location.lng.toDouble()) else LatLng(40.3791, 49.8468) //baku
+                    coordinates = if (rawData.location.lat != "string") LatLng(rawData.location.lat.toDouble(), rawData.location.lng.toDouble()) else LatLng(0.0, 0.0)
                 )
             }
         }
@@ -84,9 +79,9 @@ class EventRepositoryImpl @Inject constructor(
     override suspend fun addEventComment(requestAddEventComment: AddCommentItem) {
         api.addEventComment(
             RequestAddEventComment(
-            content = requestAddEventComment.content,
-            event = requestAddEventComment.placeId
-        )
+                content = requestAddEventComment.content,
+                event = requestAddEventComment.placeId
+            )
         )
         //TODO -> successful olub olmadigini check ele
     }

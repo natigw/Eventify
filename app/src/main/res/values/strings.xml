@@ -78,7 +78,11 @@
     <string name="comments">comments</string>
     <string name="all_details">all details</string>
     <string name="venue_details_colon">Venue details:</string>
+    <string name="event_details_colon">Event details:</string>
     <string name="venue_comments_colon">Venue comments:</string>
+    <string name="event_comments_colon">Event comments:</string>
     <string name="eventify_az">eventify.az</string>
+    <string name="organizer_events">Organizer events</string>
+    <string name="user_events">User events</string>
 
 </resources>

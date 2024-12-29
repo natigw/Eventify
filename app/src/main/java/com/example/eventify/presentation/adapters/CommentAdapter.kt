@@ -1,16 +1,14 @@
 package com.example.eventify.presentation.adapters
 
-import android.view.View
 import com.example.common.base.BaseAdapter
-import com.example.eventify.databinding.BottomsheetPlacesCommentsBinding
-import com.example.eventify.databinding.SampleCommentBinding
 import com.example.domain.model.CommentItem
+import com.example.eventify.databinding.SampleCommentBinding
 
 class CommentAdapter (
 //    val bindinqa: BottomsheetPlacesCommentsBinding   //TODO -> daha yaxsi usul??
 ) : BaseAdapter<SampleCommentBinding>(SampleCommentBinding::inflate) {
 
-    var comments: List<com.example.domain.model.CommentItem> = emptyList()
+    var comments: List<CommentItem> = emptyList()
 
     override fun getItemCount(): Int {
 //        if (comments.isEmpty()) bindinqa.NoCommentsText.visibility = View.GONE
@@ -26,7 +24,7 @@ class CommentAdapter (
         }
     }
 
-    fun updateAdapter(newComments: List<com.example.domain.model.CommentItem>) {
+    fun updateAdapter(newComments: List<CommentItem>) {
         comments = newComments
         notifyDataSetChanged()
     }

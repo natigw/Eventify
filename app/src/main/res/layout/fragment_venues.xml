@@ -22,7 +22,7 @@
         app:layout_constraintGuide_percent="0.95" />
 
     <com.google.android.material.progressindicator.CircularProgressIndicator
-        android:id="@+id/progressIndicator"
+        android:id="@+id/progressBarVenues"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:indeterminate="true"
@@ -48,14 +48,16 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvVenues"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginBottom="-2dp"
         android:layout_marginTop="12dp"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/guidelineVenues2"
         app:layout_constraintStart_toStartOf="@id/guidelineVenues1"
         app:layout_constraintTop_toBottomOf="@+id/textVenueName"
-        tools:itemCount="10"
+        tools:itemCount="3"
         tools:listitem="@layout/sample_venue" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

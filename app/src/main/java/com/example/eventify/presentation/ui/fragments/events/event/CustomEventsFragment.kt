@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class EventsFragment : BaseFragment<FragmentEventsBinding>(FragmentEventsBinding::inflate) {
+class CustomEventsFragment : BaseFragment<FragmentEventsBinding>(FragmentEventsBinding::inflate) {
 
     private val viewmodel: EventViewModel by viewModels()
 

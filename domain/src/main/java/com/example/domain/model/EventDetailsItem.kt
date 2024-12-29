@@ -8,7 +8,10 @@ data class EventDetailsItem (
     val description: String,
     val imageLinks: List<Any>, //TODO string et
     val eventType: String,
-    val eventDuration: String,
+    val organizer: String,
+    val publishingDate: String,
+    val eventDate: String,
+    val eventDurationHours: String,
     val likeCount: Int,
     val rating: Double,
     val coordinates: LatLng

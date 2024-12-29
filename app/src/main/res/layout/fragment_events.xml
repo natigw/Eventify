@@ -7,8 +7,22 @@
     android:background="@color/eventify_background_primary"
     tools:context=".presentation.ui.fragments.events.event.EventsFragment">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineEvents1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineEvents2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
+
     <com.google.android.material.progressindicator.CircularProgressIndicator
-        android:id="@+id/progressIndicator"
+        android:id="@+id/progressBarEvents"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:indeterminate="true"
@@ -17,30 +31,18 @@
         app:layout_constraintStart_toStartOf="@+id/guidelineEvents1"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineEvents1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.06" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineEvents2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.94" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvEvents"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginBottom="-2dp"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:itemCount="10"
         tools:listitem="@layout/sample_event"
         app:layout_constraintStart_toStartOf="@id/guidelineEvents1"
         app:layout_constraintEnd_toEndOf="@id/guidelineEvents2"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

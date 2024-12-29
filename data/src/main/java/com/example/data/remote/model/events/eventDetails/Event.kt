@@ -16,6 +16,10 @@ data class Event(
     val finish: String,
     @SerializedName("id")
     val id: Int,
+    @SerializedName("lat")
+    val lat: String,
+    @SerializedName("lng")
+    val lng: String,
     @SerializedName("num_likes")
     val numLikes: Int,
     @SerializedName("organizer_id")
