@@ -7,6 +7,7 @@ import com.example.domain.model.places.AddCommentItem
 import com.example.domain.model.places.CommentItem
 import com.example.domain.model.places.event.EventDetailsItem
 import com.example.domain.repository.EventRepository
+import com.example.eventify.NetworkUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
@@ -41,17 +42,20 @@ class EventDetailsViewModel @Inject constructor(
 
     fun getEventLikeInfo(eventId: Int) {
         viewModelScope.launch {
-            try {
-                val response = eventRepository.getFavEvents()
-                val like = response.any {
-                    it.eventId == eventId
+            val checkIfValid = NetworkUtils.handleInvalidAccessToken()
+            if(checkIfValid){
+                try {
+                    val response = eventRepository.getFavEvents()
+                    val like = response.any {
+                        it.eventId == eventId
+                    }
+                    likedState.update { like }
                 }
-                likedState.update { like }
+                catch (e : Exception){
+                    Log.e("eventLike",e.message.toString())
+                }
             }
-            catch (e : Exception){
-                Log.e("eventLike",e.message.toString())
             }
-        }
     }
 
     fun getComments(eventId: Int) {

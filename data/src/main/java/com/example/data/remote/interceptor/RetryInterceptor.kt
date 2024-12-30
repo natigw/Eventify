@@ -28,18 +28,20 @@ class RetryInterceptor @Inject constructor() : Interceptor {
 
         while (attempt < maxRetries) {
             try {
+                Log.e("attempt: ","$attempt")
                 response = chain.proceed(request)
 
                 if (response.isSuccessful) {
                     return response
                 }
 
-
+                Log.e("MYInterceptor","url :  ${request.url()} / attempt :  ${attempt}")
 
             } catch (e: Exception) {
                 e.printStackTrace()
 
             }
+            Log.e("MYInterceptor","url :  ${request.url()} / attempt :  ${attempt}")
             attempt++
             Thread.sleep(delay*attempt)
 

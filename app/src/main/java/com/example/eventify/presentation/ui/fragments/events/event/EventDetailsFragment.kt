@@ -95,14 +95,6 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
         updateAdapters()
     }
 
-    fun observeChanges(){
-        lifecycleScope.launch {
-            viewmodel.likedState.collectLatest {
-
-            }
-        }
-    }
-
     override fun buttonListener() {
         super.buttonListener()
         binding.buttonLikeEvent.setOnClickListener{
@@ -176,10 +168,6 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
         }
     }
 
-    private fun setLikeUI(eventDetailsItem: EventDetailsItem) {
-
-
-    }
 
     private fun setAdapters() {
         binding.rvCommentsEventDetails.adapter = commentAdapter

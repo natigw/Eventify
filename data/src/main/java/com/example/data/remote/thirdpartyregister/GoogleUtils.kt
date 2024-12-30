@@ -36,9 +36,10 @@ object GoogleUtils {
                 val firebaseCredential = GoogleAuthProvider.getCredential(token.idToken,null)
                 val a = Firebase.auth.signInWithCredential(firebaseCredential).await()
                 Log.e("uid",a.user?.uid.toString())
-
-
-
+                Log.e("tenantid",a.user?.tenantId.toString())
+                Log.e("providerid",a.user?.providerId.toString())
+                Log.e("idid",a.credential?.provider.toString())
+                Log.e("ididid",a.additionalUserInfo?.profile?.keys.toString())
 
 
 
