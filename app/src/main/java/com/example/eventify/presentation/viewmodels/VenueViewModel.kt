@@ -30,9 +30,9 @@ class VenueViewModel @Inject constructor(
         }
     }
 
-    fun likeVenue(venueId) {
+    fun likeVenue(venueId : Int ) {
         viewModelScope.launch {
-            venueRepository.
+//            venueRepository.
         }
     }
 }

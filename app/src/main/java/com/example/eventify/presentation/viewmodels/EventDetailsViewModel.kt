@@ -1,5 +1,6 @@
 package com.example.eventify.presentation.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.model.places.AddCommentItem
@@ -20,11 +21,13 @@ class EventDetailsViewModel @Inject constructor(
     val isLoadingMain = MutableStateFlow(true)
     val eventDetails = MutableStateFlow<EventDetailsItem?>(null)
 
-    val isLiked = MutableStateFlow(false)
+    var likedState = MutableStateFlow(false)
 
     var noComments = false
     val isLoadingComments = MutableStateFlow(true)
     val comments = MutableStateFlow<List<CommentItem>>(emptyList())
+
+
 
     fun getEventDetails(eventId: Int) {
         viewModelScope.launch {
@@ -34,13 +37,20 @@ class EventDetailsViewModel @Inject constructor(
         }
     }
 
+
+
     fun getEventLikeInfo(eventId: Int) {
         viewModelScope.launch {
-            val response = eventRepository.getFavEvents()
-            val like = response.any {
-                it.eventId == eventId
+            try {
+                val response = eventRepository.getFavEvents()
+                val like = response.any {
+                    it.eventId == eventId
+                }
+                likedState.update { like }
             }
-            isLiked.update { like }
+            catch (e : Exception){
+                Log.e("eventLike",e.message.toString())
+            }
         }
     }
 
@@ -50,6 +60,12 @@ class EventDetailsViewModel @Inject constructor(
             comments.emit(response)
             isLoadingComments.update { false }
             if (response.isEmpty()) noComments = true
+        }
+    }
+
+    fun updateLikeEvent(eventId : Int){
+        viewModelScope.launch {
+            eventRepository.likeEvent(eventId)
         }
     }
 

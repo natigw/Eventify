@@ -22,11 +22,15 @@ abstract class BaseFragment<VB : ViewBinding>(private val bindingToInflate: (Lay
         _binding = bindingToInflate(inflater, container, false)
         return binding.root
     }
+    open fun buttonListener(){}
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         onViewCreatedLight()
+        buttonListener()
     }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()

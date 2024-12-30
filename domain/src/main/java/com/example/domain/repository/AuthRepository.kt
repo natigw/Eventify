@@ -30,4 +30,6 @@ interface AuthRepository {
         userEmail : String
     ) : Boolean
 
+    suspend fun signInWithGoogle()
+
 }

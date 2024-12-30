@@ -4,9 +4,10 @@ import com.example.data.remote.model.register.RequestUserRegistration
 import com.example.data.remote.model.register.ResponseUserRegistration
 import com.example.data.remote.model.userToken.RequestResendVerification
 import com.example.data.remote.model.userToken.RequestResetPassword
-import com.example.data.remote.model.userToken.RequestUserToken
 import com.example.data.remote.model.userToken.ResponseSuccessfulUserToken
 import com.example.data.remote.model.userToken.ResponseVerifyToken
+import com.example.data.remote.thirdpartyregister.RequestSignInWithGoogle
+import com.example.domain.model.auth.SuccessfulUserTokenItem
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.Field
@@ -14,8 +15,9 @@ import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
-import retrofit2.http.Path
 import retrofit2.http.Query
+
+
 
 interface AuthAPI {
     @POST("/auth")
@@ -62,6 +64,10 @@ interface AuthAPI {
     )
 
 
+    @POST("/social_auth/google")
+    suspend fun signInWithGoogle(
+        @Body requestSignInWithGoogle : RequestSignInWithGoogle
+    ) : Response<SuccessfulUserTokenItem>
 
 
 //    @GET("/social_auth/google/login")

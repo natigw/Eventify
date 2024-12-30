@@ -3,9 +3,12 @@ package com.example.data.remote.repository
 import com.example.data.remote.api.AuthAPI
 import com.example.data.remote.model.register.RequestUserRegistration
 import com.example.data.remote.model.userToken.RequestResetPassword
+import com.example.data.remote.thirdpartyregister.RequestSignInWithGoogle
 import com.example.domain.model.auth.SuccessfulUserTokenItem
 import com.example.domain.model.auth.UserRegistrationItem
 import com.example.domain.repository.AuthRepository
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import javax.inject.Inject
 
 class AuthRepositoryImpl @Inject constructor(
@@ -124,4 +127,30 @@ class AuthRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun signInWithGoogle() {
+        val currentUser = Firebase.auth.currentUser
+        if(currentUser != null){
+            try {
+                val fullName = currentUser.displayName.toString()
+                val firstname = fullName.substringBefore("")
+                val lastname =  fullName.substringAfter("")
+                val userId = currentUser.uid.toString()
+                val imageURL = currentUser.photoUrl.toString()
+                val email = currentUser.email.toString()
+                val provider = "google"
+
+                val response = api.signInWithGoogle(
+                    RequestSignInWithGoogle(
+                        displayName = fullName,
+                        email = email,
+                        firstName = firstname,
+                        lastName = lastname,
+                        id = userId,
+                        picture = imageURL,
+                        provider = provider
+                    )
+                )
+            }catch (_:Exception){}
+        }
+    }
 }

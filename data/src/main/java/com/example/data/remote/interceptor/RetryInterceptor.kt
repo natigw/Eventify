@@ -20,7 +20,7 @@ class RetryInterceptor @Inject constructor() : Interceptor {
         val request = chain.request()
 
         var attempt = 0
-        var response: Response? = null
+        var response = chain.proceed(request)
         val delay = 1000L
         val maxRetries = 3
 
@@ -44,12 +44,12 @@ class RetryInterceptor @Inject constructor() : Interceptor {
             Thread.sleep(delay*attempt)
 
         }
-        response?.close()
+        response.close()
         AppUtils.authChannel.trySend(RequestChannel.ON_401_ERROR)
 
         Log.e("main",response.toString())
 
-        return response!!
+        return response
 
     }
 }

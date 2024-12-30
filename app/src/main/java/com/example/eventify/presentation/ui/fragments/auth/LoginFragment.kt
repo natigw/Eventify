@@ -9,6 +9,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.credentials.CredentialManager
 import androidx.credentials.GetCredentialRequest
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.eventify.R
@@ -18,6 +19,7 @@ import com.example.eventify.BuildConfig
 import com.example.eventify.databinding.FragmentLoginBinding
 import com.example.eventify.presentation.ui.activities.MainActivity
 import com.example.eventify.presentation.viewmodels.LoginViewModel
+import com.example.data.remote.thirdpartyregister.GoogleUtils
 import com.example.test.TestActivity
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
@@ -60,32 +62,17 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         val clientId = BuildConfig.WEB_CLIENT_ID
 
         binding.googleButton.setOnClickListener {
-            getGoogleUserData(credentialManager,clientId,requireContext())
+            GoogleUtils.getGoogleUserData(
+                credentialManager = credentialManager,
+                clientId = clientId,
+                this,
+                requireContext()
+            )
         }
     }
 
 
-    private fun getGoogleUserData(credentialManager: CredentialManager,clientId :String,context : Context){
-        val googleIdOption: GetGoogleIdOption = GetGoogleIdOption.Builder()
-            .setFilterByAuthorizedAccounts(false)
-            .setServerClientId(clientId)
-            .setAutoSelectEnabled(false)
-            .build()
-        val request = GetCredentialRequest.Builder()
-            .addCredentialOption(googleIdOption)
-            .build()
-        lifecycleScope.launch {
-            try {
-                val result = credentialManager.getCredential(context, request)
-                val token = GoogleIdTokenCredential.createFrom(result.credential.data)
-                val firebaseCredential = GoogleAuthProvider.getCredential(token.idToken,null)
-                val e =  Firebase.auth.signInWithCredential(firebaseCredential).await()
-                Log.e("NHHH",e.user?.phoneNumber.toString())
-            } catch (e: Exception) {
-                Snackbar.make(binding.root,"Please sign in to your google account!",Snackbar.LENGTH_SHORT).show()
-            }
-        }
-    }
+
 
 
 

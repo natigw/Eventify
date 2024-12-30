@@ -43,6 +43,8 @@ dependencies {
     //hilt
     implementation(libs.hilt.android)
     implementation(libs.play.services.maps)
+    implementation(libs.google.googleid)
+    implementation(libs.firebase.auth)
     kapt(libs.hilt.android.compiler)
 
     implementation(project(":common"))

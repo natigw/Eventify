@@ -1,6 +1,7 @@
 package com.example.eventify.presentation.ui.fragments.events.event
 
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
@@ -23,6 +24,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -30,10 +32,9 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
 
     private val viewmodel by viewModels<EventDetailsViewModel>()
     private val sharedViewModel: SharedViewModel by activityViewModels()
-    private val args by navArgs<EventDetailsFragmentArgs>()
+    private val args by navArgs<EventDetailsFragmentArgs>() // id
 
     private val commentAdapter = CommentAdapter()
-
     override fun onViewCreatedLight() {
 
         lifecycleScope.launch {
@@ -45,6 +46,21 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
         lifecycleScope.launch {
             viewmodel.getEventLikeInfo(args.eventId)
         }
+
+
+        lifecycleScope.launch {
+            viewmodel.likedState.collectLatest {
+                if(it){
+                    binding.buttonLikeEvent.setIconResource(R.drawable.like_fav)
+                }
+                else{
+                    binding.buttonLikeEvent.setIconResource(R.drawable.like_fav_border)
+                }
+            }
+        }
+
+
+
 
         lifecycleScope.launch {
             viewmodel.eventDetails
@@ -77,6 +93,26 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
         viewmodel.getComments(args.eventId)
         setAdapters()
         updateAdapters()
+    }
+
+    fun observeChanges(){
+        lifecycleScope.launch {
+            viewmodel.likedState.collectLatest {
+
+            }
+        }
+    }
+
+    override fun buttonListener() {
+        super.buttonListener()
+        binding.buttonLikeEvent.setOnClickListener{
+            if(viewmodel.likedState.value){
+                viewmodel.likedState.update { false }
+            }
+            else{
+                viewmodel.likedState.update { true }
+            }
+        }
     }
 
     private fun setUI(eventDetailsItem: EventDetailsItem) {
@@ -141,25 +177,8 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
     }
 
     private fun setLikeUI(eventDetailsItem: EventDetailsItem) {
-        var like = viewmodel.isLiked
-        with(binding) {
-            buttonLikeEvent.setOnClickListener {
-                if (buttonLikeEvent.tag == "not_liked") {
-                    buttonLikeEvent.setIconResource(R.drawable.like_fav)
-                    textEventLikeCount.text = (eventDetailsItem.likeCount + 1).toString()
-                    buttonLikeEvent.tag = "liked"
-                } else {
-                    buttonLikeEvent.setIconResource(R.drawable.like_fav_border)
-                    textEventLikeCount.text = eventDetailsItem.likeCount.toString()
-                    buttonLikeEvent.tag = "not_liked"
-                }
-//                buttonLikeEvent.setIconResource(if (flag) R.drawable.like_fav else R.drawable.like_fav_border)
-//                flag = !flag
-//                buttonLikeEvent.setIconTintResource(R.color.purple_light_eventify)
-//                textEventLikeCount.text = if (flag) (Event.likeCount + 1).toString() else Event.likeCount.toString()
-                //TODO -> like olsun request atsin, icon fill olsun, like count text bir dene artsin
-            }
-        }
+
+
     }
 
     private fun setAdapters() {
@@ -179,6 +198,16 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
                 .collect {
                     commentAdapter.updateAdapter(it)
                 }
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        if(viewmodel.likedState.value){
+            viewmodel.updateLikeEvent(args.eventId)
+        }
+        else{
+            // delete
         }
     }
 }
