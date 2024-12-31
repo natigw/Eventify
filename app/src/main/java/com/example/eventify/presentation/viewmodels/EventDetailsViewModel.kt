@@ -55,7 +55,7 @@ class EventDetailsViewModel @Inject constructor(
                     Log.e("eventLike",e.message.toString())
                 }
             }
-            }
+        }
     }
 
     fun getComments(eventId: Int) {
