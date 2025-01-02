@@ -15,10 +15,9 @@ import kotlinx.coroutines.tasks.await
 
 object GoogleUtils {
 
-    fun getGoogleUserData(
+    suspend fun getGoogleUserData(
         credentialManager: androidx.credentials.CredentialManager,
         clientId :String,
-        lifecycleOwner: LifecycleOwner,
         context : Context
     ){
         val googleIdOption: GetGoogleIdOption = GetGoogleIdOption.Builder()
@@ -29,24 +28,16 @@ object GoogleUtils {
         val request = GetCredentialRequest.Builder()
             .addCredentialOption(googleIdOption)
             .build()
-        lifecycleOwner.lifecycleScope.launch {
-            try {
-                val result = credentialManager.getCredential(context, request)
-                val token = GoogleIdTokenCredential.createFrom(result.credential.data)
-                val firebaseCredential = GoogleAuthProvider.getCredential(token.idToken,null)
-                val a = Firebase.auth.signInWithCredential(firebaseCredential).await()
-                Log.e("uid",a.user?.uid.toString())
-                Log.e("tenantid",a.user?.tenantId.toString())
-                Log.e("providerid",a.user?.providerId.toString())
-                Log.e("idid",a.credential?.provider.toString())
-                Log.e("ididid",a.additionalUserInfo?.profile?.keys.toString())
 
-
-
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
+        try {
+            val result = credentialManager.getCredential(context, request)
+            val token = GoogleIdTokenCredential.createFrom(result.credential.data)
+            val firebaseCredential = GoogleAuthProvider.getCredential(token.idToken,null)
+            val a = Firebase.auth.signInWithCredential(firebaseCredential).await()
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
+
     }
 
 }

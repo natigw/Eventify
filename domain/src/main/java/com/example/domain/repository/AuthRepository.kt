@@ -30,6 +30,10 @@ interface AuthRepository {
         userEmail : String
     ) : Boolean
 
-    suspend fun signInWithGoogle()
+    suspend fun signInWithGoogle() : SuccessfulUserTokenItem
+
+    suspend fun resendVerification(
+        userEmail: String
+    ) : Boolean
 
 }

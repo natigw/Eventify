@@ -22,6 +22,7 @@ class OnBoardingActivity : BaseActivity<ActivityOnBoardingBinding>(ActivityOnBoa
 
     override fun onCreateLight() {
 
+
         // Access the application instance
         val app = application as EventifyApplication
 

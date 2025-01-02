@@ -4,12 +4,14 @@ import android.content.SharedPreferences
 import android.util.Log
 import androidx.core.content.edit
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.findViewTreeViewModelStoreOwner
 import androidx.lifecycle.viewModelScope
 import com.example.domain.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -57,6 +59,29 @@ class LoginViewModel @Inject constructor(
 
         }
         return loginChecker.await()
+    }
+
+    suspend fun linkGoogleAccount() : Boolean{
+        val check = viewModelScope.async {
+            try {
+                val response = authRepository.signInWithGoogle()
+                Log.e("tokens",response.toString())
+                sharedPrefUserTokens.edit {
+                    putString("access_token", response.accessToken)
+                    putString("refresh_token", response.refreshToken)
+                    putString("token_type", response.tokenType)
+                }
+
+                true
+            }
+            catch (e : Exception){
+                Log.e("mainException",e.message.toString())
+                e.printStackTrace()
+                false
+            }
+
+        }.await()
+        return check
     }
 
 

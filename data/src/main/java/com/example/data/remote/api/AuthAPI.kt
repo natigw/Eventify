@@ -2,7 +2,8 @@ package com.example.data.remote.api
 
 import com.example.data.remote.model.register.RequestUserRegistration
 import com.example.data.remote.model.register.ResponseUserRegistration
-import com.example.data.remote.model.userToken.RequestResendVerification
+import com.example.data.remote.model.register.UserData
+import com.example.domain.model.auth.RequestResendVerification
 import com.example.data.remote.model.userToken.RequestResetPassword
 import com.example.data.remote.model.userToken.ResponseSuccessfulUserToken
 import com.example.data.remote.model.userToken.ResponseVerifyToken
@@ -37,43 +38,33 @@ interface AuthAPI {
         @Field("client_secret") clientSecret: String? = null
     ): Response<ResponseSuccessfulUserToken>
 
-
-    @GET("/auth/verify-token")
-    suspend fun verifyUserToken(
-        @Header("Authorization") token : String
-    ): Response<ResponseVerifyToken>
-
-
     @POST("/auth/token/refresh") // qardasimsan bu niye postdu
     suspend fun refreshAccessToken(
         @Query("refresh_token") refreshToken : String
     ) : Response<ResponseSuccessfulUserToken>
 
 
-
+    @GET("/auth/verify-token")
+    suspend fun verifyUserToken(
+        @Header("Authorization") token : String
+    ): Response<ResponseVerifyToken>
 
     @POST("/auth/resend-verification")
     suspend fun resendVerification(
         @Body requestResendVerification: RequestResendVerification
     )
 
-
     @POST("/auth/password-reset-request")
     suspend fun resetUserPassword(
         @Body requestResetPassword: RequestResetPassword
     )
-
 
     @POST("/social_auth/google")
     suspend fun signInWithGoogle(
         @Body requestSignInWithGoogle : RequestSignInWithGoogle
     ) : Response<SuccessfulUserTokenItem>
 
-
-//    @GET("/social_auth/google/login")
-//    suspend fun authGoogleLogin() : ResponseGoogleLogin
-//
-//    @GET("/social_auth/google/callback")
-//    suspend fun authGoogleCallback() : ResponseGoogleCallback
+    @POST("/auth/user")
+    suspend fun getUserData() : Response<UserData>
 
 }

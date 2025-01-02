@@ -62,12 +62,18 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         val clientId = BuildConfig.WEB_CLIENT_ID
 
         binding.googleButton.setOnClickListener {
-            GoogleUtils.getGoogleUserData(
-                credentialManager = credentialManager,
-                clientId = clientId,
-                this,
-                requireContext()
-            )
+            lifecycleScope.launch {
+                GoogleUtils.getGoogleUserData(
+                    credentialManager = credentialManager,
+                    clientId = clientId,
+                    requireContext()
+                )
+                if(viewModel.linkGoogleAccount()){
+                    Intent(requireContext(),MainActivity::class.java).also {
+                        startActivity(it)
+                    }
+                }
+            }
         }
     }
 

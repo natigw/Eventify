@@ -1,9 +1,11 @@
 package com.example.data.remote.repository
 
+import android.util.Log
 import com.example.data.remote.api.AuthAPI
 import com.example.data.remote.model.register.RequestUserRegistration
 import com.example.data.remote.model.userToken.RequestResetPassword
 import com.example.data.remote.thirdpartyregister.RequestSignInWithGoogle
+import com.example.domain.model.auth.RequestResendVerification
 import com.example.domain.model.auth.SuccessfulUserTokenItem
 import com.example.domain.model.auth.UserRegistrationItem
 import com.example.domain.repository.AuthRepository
@@ -22,7 +24,6 @@ class AuthRepositoryImpl @Inject constructor(
         email: String,
         password: String
     ): UserRegistrationItem {
-
         try {
             val response = api.registerUser(
                 RequestUserRegistration(
@@ -48,7 +49,6 @@ class AuthRepositoryImpl @Inject constructor(
         catch (e: Exception){
             throw e
         }
-
     }
 
     override suspend fun loginUser(
@@ -127,17 +127,28 @@ class AuthRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun signInWithGoogle() {
+    override suspend fun signInWithGoogle() : SuccessfulUserTokenItem {
         val currentUser = Firebase.auth.currentUser
         if(currentUser != null){
             try {
                 val fullName = currentUser.displayName.toString()
-                val firstname = fullName.substringBefore("")
-                val lastname =  fullName.substringAfter("")
+                val firstname = fullName.substringBefore(' ')
+                val lastname =  if(fullName.contains(' ')) fullName.substringAfter(' ') else ""
                 val userId = currentUser.uid.toString()
                 val imageURL = currentUser.photoUrl.toString()
                 val email = currentUser.email.toString()
                 val provider = "google"
+
+                Log.e("Data",
+                    RequestSignInWithGoogle(
+                    displayName = fullName,
+                    email = email,
+                    firstName = firstname,
+                    lastName = lastname,
+                    id = userId,
+                    picture = imageURL,
+                    provider = provider
+                ).toString())
 
                 val response = api.signInWithGoogle(
                     RequestSignInWithGoogle(
@@ -150,7 +161,41 @@ class AuthRepositoryImpl @Inject constructor(
                         provider = provider
                     )
                 )
-            }catch (_:Exception){}
+
+                if(response.isSuccessful && response.body()!=null){
+                    Log.e("tester",response.body().toString())
+                    val accessToken = response.body()!!.accessToken
+                    val refreshToken =response.body()!!.refreshToken
+                    val tokenType = response.body()!!.tokenType
+
+                    return SuccessfulUserTokenItem(
+                        accessToken = accessToken,
+                        refreshToken = refreshToken,
+                        tokenType = tokenType
+                    )
+                }
+                else{
+                    throw Exception("Error ${response.code()}: ${response.errorBody()?.string()}")
+                }
+
+
+            }catch (e:Exception){
+                e.printStackTrace()
+                throw e
+            }
+        }
+        throw IllegalStateException("User not signed in!")
+    }
+
+    override suspend fun resendVerification(userEmail: String) : Boolean {
+        return try {
+            api.resendVerification(RequestResendVerification(userEmail))
+            true
+        }
+        catch (e : Exception){
+            e.printStackTrace()
+            false
         }
     }
+
 }
