@@ -1,11 +1,11 @@
-package com.example.eventify.presentation.ui.fragments.events.event
+package com.example.eventify.presentation.ui.fragments.events.customEvent
 
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.common.base.BaseFragment
-import com.example.eventify.databinding.FragmentEventsBinding
+import com.example.eventify.databinding.FragmentCustomEventsBinding
 import com.example.eventify.presentation.adapters.EventAdapter
 import com.example.eventify.presentation.ui.fragments.events.PlacesFragmentDirections
 import com.example.eventify.presentation.viewmodels.EventViewModel
@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class CustomEventsFragment : BaseFragment<FragmentEventsBinding>(FragmentEventsBinding::inflate) {
+class CustomEventsFragment : BaseFragment<FragmentCustomEventsBinding>(FragmentCustomEventsBinding::inflate) {
 
     private val viewmodel: EventViewModel by viewModels()
 
@@ -26,6 +26,11 @@ class CustomEventsFragment : BaseFragment<FragmentEventsBinding>(FragmentEventsB
     )
 
     override fun onViewCreatedLight() {
+
+        binding.buttonCreateCustomEvent.setOnClickListener {
+            findNavController().navigate(PlacesFragmentDirections.actionPlacesFragmentToCreateCustomEventFragment())
+        }
+
         setAdapters()
         updateAdapters()
     }
@@ -33,7 +38,7 @@ class CustomEventsFragment : BaseFragment<FragmentEventsBinding>(FragmentEventsB
     private fun updateAdapters() {
         lifecycleScope.launch {
             viewmodel.isLoading.collectLatest {
-                binding.progressBarEvents.isVisible = it
+                binding.progressBarCustomEvents.isVisible = it
             }
         }
 
@@ -47,6 +52,6 @@ class CustomEventsFragment : BaseFragment<FragmentEventsBinding>(FragmentEventsB
     }
 
     private fun setAdapters() {
-        binding.rvEvents.adapter = eventAdapter
+        binding.rvCustomEvents.adapter = eventAdapter
     }
 }

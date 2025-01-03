@@ -1,49 +1,35 @@
 package com.example.eventify.presentation.ui.fragments.auth
 
-import android.content.Context
 import android.content.Intent
 import android.graphics.Color.parseColor
-import android.util.Log
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.credentials.CredentialManager
-import androidx.credentials.GetCredentialRequest
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.example.eventify.R
 import com.example.common.base.BaseFragment
 import com.example.common.utils.NancyToast
+import com.example.data.remote.thirdpartyregister.GoogleUtils
 import com.example.eventify.BuildConfig
+import com.example.eventify.R
 import com.example.eventify.databinding.FragmentLoginBinding
 import com.example.eventify.presentation.ui.activities.MainActivity
 import com.example.eventify.presentation.viewmodels.LoginViewModel
-import com.example.data.remote.thirdpartyregister.GoogleUtils
 import com.example.test.TestActivity
-import com.google.android.libraries.identity.googleid.GetGoogleIdOption
-import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
-import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.GoogleAuthProvider
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.tasks.await
 
 @AndroidEntryPoint
 class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::inflate) {
 
-
-    val viewModel by viewModels<LoginViewModel>()
-
-
+    private val viewModel by viewModels<LoginViewModel>()
 
     override fun onViewCreatedLight() {
 
-        ////??????????????????
+        ////TODO -> ??????????????????
         if (viewModel.sharedPrefOnBoard.getBoolean("finished", false)) binding.textWelcomeLogin.visibility = View.VISIBLE
 
 
@@ -55,7 +41,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         loginButton()
         setConstraints()
         observeChanges()
-
 
 
         val credentialManager = CredentialManager.create(requireContext())
@@ -78,10 +63,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     }
 
 
-
-
-
-
     private fun setConstraints(){
         val screenHeight = resources.displayMetrics.heightPixels
         val topMargin = (0.08 * screenHeight).toInt()
@@ -93,6 +74,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
 
         }
     }
+
     private fun observeChanges() {
         binding.textForgotPassword.setOnClickListener {
             NancyToast.makeText(requireContext(), "[navigating to help page]", NancyToast.LENGTH_SHORT, NancyToast.INFO, false).show()
@@ -126,7 +108,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             lifecycleScope.launch {
                 if(viewModel.loginUser(username = username,password = password)){
                     clearInputFields()
-                    NancyToast.makeText(requireContext(), "Login Successful", NancyToast.LENGTH_SHORT,NancyToast.SUCCESS,false).show()
+                    NancyToast.makeText(requireContext(), getString(R.string.login_successful), NancyToast.LENGTH_SHORT,NancyToast.SUCCESS,false).show()
 
                     Intent(requireContext(), MainActivity::class.java).also {
                         startActivity(it)
@@ -135,7 +117,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                 }
                 else{
 
-                    NancyToast.makeText(requireContext(), "Login Unsuccessful", NancyToast.LENGTH_SHORT,NancyToast.WARNING,false).show()
+                    NancyToast.makeText(requireContext(), getString(R.string.login_unsuccessful), NancyToast.LENGTH_SHORT,NancyToast.WARNING,false).show()
                 }
 
 
@@ -191,33 +173,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             passwordLogin.text = null
         }
     }
-
-//    private suspend fun userAuthentication(email: String, password: String) {
-//        try {
-//            val document = firestore.collection("users").document(email).get().await()
-//            if (document.exists()) {
-//                val data = document.toObject(FirestoreUser::class.java)
-//                if (data != null && password == data.password) {
-//                    val editor = shprefLogon.edit()
-//                    editor.putString("username", data.username)
-//                    editor.putString("email", data.email)
-//                    editor.putBoolean("status_loggedin", true)
-//                    editor.putString("entrypin", data.entrypin)
-//                    editor.apply()
-//                    clearInputFields()
-//                    //authUserInTMDB(data.apikey)
-//                    NancyToast.makeText(requireContext(), "Login successful!", NancyToast.LENGTH_SHORT, NancyToast.SUCCESS, false).show()
-//                    navigateToMainActivity()
-//                } else {
-//                    NancyToast.makeText(requireContext(), "Invalid password!", NancyToast.LENGTH_SHORT, NancyToast.ERROR, false).show()
-//                }
-//            } else {
-//                NancyToast.makeText(requireContext(), "User doesn't exist!", NancyToast.LENGTH_SHORT, NancyToast.ERROR, false).show()
-//            }
-//        } catch (e: Exception) {
-//            NancyToast.makeText(requireContext(), "Auth failed!", NancyToast.LENGTH_SHORT, NancyToast.ERROR, false).show()
-//        }
-//    }
 
     private fun navigateToMainActivity() {
         val intent = Intent(requireContext(), MainActivity::class.java)

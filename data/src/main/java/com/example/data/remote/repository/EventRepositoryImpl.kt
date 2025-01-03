@@ -1,18 +1,21 @@
 package com.example.data.remote.repository
 
-import android.util.Log
-import com.example.common.utils.functions.dateFormatterYMDtoDMY
+import com.example.common.utils.functions.dateFormatterIFYEAR_MNAMED_Comma_HM
+import com.example.common.utils.functions.dateFormatter_RemoveDashes_YMDtoDMY
 import com.example.common.utils.functions.randomDouble
 import com.example.data.remote.api.EventAPI
 import com.example.data.remote.model.events.comment.addComment.RequestAddEventComment
+import com.example.data.remote.model.events.createEvent.RequestCreateCustomEvent
 import com.example.data.remote.model.events.likeDislike.RequestLikeDislikeEvent
 import com.example.domain.model.places.AddCommentItem
 import com.example.domain.model.places.CommentItem
+import com.example.domain.model.places.event.CreateCustomEventRequestItem
 import com.example.domain.model.places.event.EventDetailsItem
 import com.example.domain.model.places.event.EventItem
 import com.example.domain.model.places.event.FavEventItem
 import com.example.domain.repository.EventRepository
 import com.google.android.gms.maps.model.LatLng
+import java.time.Instant
 import javax.inject.Inject
 
 class EventRepositoryImpl @Inject constructor(
@@ -29,35 +32,15 @@ class EventRepositoryImpl @Inject constructor(
                             eventId = event.id,
                             name = event.title,
                             imageLink = event.posterImageLink,
-                            eventDateTime = if (event.start.substring(
-                                    0,
-                                    5
-                                ) == event.finish.substring(0, 5)
-                            ) "${
-                                dateFormatterYMDtoDMY(
-                                    event.date.substring(
-                                        0,
-                                        10
-                                    )
-                                )
-                            } • all the day" else "${
-                                dateFormatterYMDtoDMY(
-                                    event.date.substring(
-                                        0,
-                                        10
-                                    )
-                                )
-                            } • ${event.start.substring(0, 5)}-${event.finish.substring(0, 5)}"
+                            eventDateTime = if (event.start.substring(0, 5) == event.finish.substring(0, 5)) "${dateFormatter_RemoveDashes_YMDtoDMY(event.date.substring(0, 10))} • all the day" else "${dateFormatter_RemoveDashes_YMDtoDMY(event.date.substring(0, 10))} • ${event.start.substring(0, 5)}-${event.finish.substring(0, 5)}"
                         )
                     }
                 }
-            }
-            else{
+            } else {
                 throw Exception(response.errorBody()?.string())
             }
 
-        }
-        catch (e : Exception){
+        } catch (e: Exception) {
             throw e
         }
     }
@@ -74,23 +57,42 @@ class EventRepositoryImpl @Inject constructor(
                         imageLinks = listOf(rawData.event.posterImageLink),
                         eventType = rawData.event.eventType.replace('_', ' ').replaceFirstChar { it.uppercaseChar() },
                         organizer = if (rawData.event.organizerId == 1) "Eventify Group" else "Organizer${rawData.event.organizerId}", //TODO -> backend
-                        eventDate = rawData.event.date.substring(0,10),
-                        publishingDate = "${rawData.event.createdAt.substring(0,10)}, ${rawData.event.createdAt.substring(12)}",
+                        eventDate = rawData.event.date.substring(0, 10),
+                        publishingDate = "${rawData.event.createdAt.substring(0, 10)}, ${rawData.event.createdAt.substring(12)}",
                         eventDurationHours = if (rawData.event.start.substring(0, 5) == rawData.event.finish.substring(0, 5)) "all the day" else "${rawData.event.start.substring(0, 5)} - ${rawData.event.finish.substring(0, 5)}",
                         likeCount = rawData.event.numLikes,
                         rating = randomDouble(max = 5.0),
                         coordinates = if (rawData.location.lat != "string") LatLng(rawData.location.lat.toDouble(), rawData.location.lng.toDouble()) else LatLng(0.0, 0.0)
                     )
                 }
-            }
-            else{
+            } else {
                 throw Exception(response.errorBody()?.string())
             }
 
-        }
-        catch (e : Exception){
+        } catch (e: Exception) {
             throw Exception("Network error!")
         }
+    }
+
+    override suspend fun createCustomEvent(requestCreateEvent: CreateCustomEventRequestItem) {
+        try {
+//            api.createCustomEvent(
+//                RequestCreateCustomEvent(
+//                    title = requestCreateEvent.title,
+//                    description = requestCreateEvent.description,
+//                    eventType = requestCreateEvent.eventType.toString(),
+//                    posterImageLink = requestCreateEvent.posterImageLink,
+//                    date = requestCreateEvent.date,
+//                    start = requestCreateEvent.start,
+//                    finish = requestCreateEvent.finish,
+//                    lat = requestCreateEvent.lat,
+//                    lng = requestCreateEvent.lng
+//                )
+//            )
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        //TODO -> successful olub olmadigini check ele
     }
 
     override suspend fun getEventComments(eventId: Int): List<CommentItem> {
@@ -104,22 +106,15 @@ class EventRepositoryImpl @Inject constructor(
                             commentId = it.id,
                             username = it.ownerId.toString(),
                             content = it.content,
-                            date = "${it.createdAt.substring(0, 10)}, ${
-                                it.createdAt.substring(
-                                    11,
-                                    16
-                                )
-                            }"
+                            date = dateFormatterIFYEAR_MNAMED_Comma_HM(Instant.parse("${it.createdAt}Z"))
                         )
                     }
                 }
-            }
-            else{
+            } else {
                 throw Exception(response.errorBody()?.string())
             }
 
-        }
-        catch (e : Exception){
+        } catch (e: Exception) {
             throw Exception("Network error!")
         }
     }
@@ -132,8 +127,7 @@ class EventRepositoryImpl @Inject constructor(
                     event = requestAddEventComment.placeId
                 )
             )
-        }
-        catch (e : Exception){
+        } catch (e: Exception) {
             e.printStackTrace()
         }
         //TODO -> successful olub olmadigini check ele
@@ -150,26 +144,23 @@ class EventRepositoryImpl @Inject constructor(
                         )
                     }
                 }
-            }
-            else{
+            } else {
                 throw Exception(response.errorBody()?.string())
             }
-        }
-        catch (e : Exception){
+        } catch (e: Exception) {
             throw e
         }
     }
 
     override suspend fun likeEvent(eventId: Int) {
         try {
-            api.likeEvent (
+            api.likeEvent(
                 RequestLikeDislikeEvent(
                     event = eventId
                 )
             )
 
-        }
-        catch (e: Exception){
+        } catch (e: Exception) {
             e.printStackTrace()
         }
     }

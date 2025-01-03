@@ -177,13 +177,12 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
         lifecycleScope.launch {
             viewmodel.isLoadingComments.collectLatest {
                 binding.progressBarCommentEventDetails.isVisible = it
-                binding.textNoCommentsTextEventDetails.isInvisible = it
             }
         }
         lifecycleScope.launch {
             viewmodel.comments
-                .filter { it.isNotEmpty() }
                 .collect {
+                    binding.textNoCommentsTextEventDetails.isVisible = it.isEmpty()
                     commentAdapter.updateAdapter(it)
                 }
         }

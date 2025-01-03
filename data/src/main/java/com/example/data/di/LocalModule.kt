@@ -23,4 +23,9 @@ class LocalModule {
         return context.getSharedPreferences("userTokens",Context.MODE_PRIVATE)
     }
 
+    @Named("LanguageChoice")
+    @Provides
+    fun provideSharedPrefLanguage(context : Context) : SharedPreferences {
+        return context.getSharedPreferences("language",Context.MODE_PRIVATE)
+    }
 }

@@ -44,6 +44,9 @@
         <action
             android:id="@+id/action_placesFragment_to_eventDetailsFragment"
             app:destination="@id/eventDetailsFragment" />
+        <action
+            android:id="@+id/action_placesFragment_to_createCustomEventFragment"
+            app:destination="@id/createCustomEventFragment" />
     </fragment>
     <dialog
         android:id="@+id/markerDetailsBottomSheet"
@@ -112,4 +115,14 @@
             android:id="@+id/action_eventDetailsFragment_to_mapFragment"
             app:destination="@id/mapFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/customEventsFragment"
+        android:name="com.example.eventify.presentation.ui.fragments.events.customEvent.CustomEventsFragment"
+        android:label="fragment_custom_events"
+        tools:layout="@layout/fragment_custom_events" />
+    <fragment
+        android:id="@+id/createCustomEventFragment"
+        android:name="com.example.eventify.presentation.ui.fragments.events.customEvent.CreateCustomEventFragment"
+        android:label="fragment_create_custom_event"
+        tools:layout="@layout/fragment_create_custom_event" />
 </navigation>

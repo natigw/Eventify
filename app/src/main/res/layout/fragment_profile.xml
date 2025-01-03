@@ -21,27 +21,66 @@
         app:layout_constraintGuide_percent="0.95" />
 
     <TextView
-        android:id="@+id/textProfileText"
+        android:id="@+id/textHeadingProfile"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:fontFamily="@font/inter_bold"
+        android:text="@string/profile"
         android:textAlignment="center"
         android:textColor="@color/purple_dark_eventify"
         android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="@+id/guidelineProfile2"
         app:layout_constraintStart_toStartOf="@+id/guidelineProfile1"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="@string/profile" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/imageUserProfilePictureProfile"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/profile_icon_selected"
+        app:layout_constraintEnd_toEndOf="@id/guidelineProfile2"
+        app:layout_constraintStart_toStartOf="@id/guidelineProfile1"
+        app:layout_constraintTop_toBottomOf="@id/textHeadingProfile"
+        app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full" />
+
+    <TextView
+        android:id="@+id/textUsernameProfile"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_bold"
+        android:textAlignment="center"
+        android:textColor="@color/purple_eventify"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@+id/guidelineProfile2"
+        app:layout_constraintStart_toStartOf="@+id/guidelineProfile1"
+        app:layout_constraintTop_toBottomOf="@id/imageUserProfilePictureProfile"
+        tools:text="Username" />
+
+    <TextView
+        android:id="@+id/textUserEmailProfile"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_bold"
+        android:textAlignment="center"
+        android:textColor="@color/purple_dark_eventify"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/guidelineProfile2"
+        app:layout_constraintStart_toStartOf="@+id/guidelineProfile1"
+        app:layout_constraintTop_toBottomOf="@id/textUsernameProfile"
+        tools:text="User email" />
 
     <Button
         android:id="@+id/btnReferral"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:text="@string/referral_program"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textProfileText"/>
+        app:layout_constraintTop_toBottomOf="@+id/textUserEmailProfile" />
 
     <Button
         android:id="@+id/btnSubs"
@@ -53,12 +92,45 @@
         app:layout_constraintTop_toBottomOf="@+id/btnReferral" />
 
     <Button
-        android:id="@+id/btnLogout"
+        android:id="@+id/btnChangeLanguageEN"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/logout"
-        app:layout_constraintEnd_toEndOf="@+id/btnSubs"
+        android:text="@string/english"
+        app:layout_constraintEnd_toStartOf="@+id/btnChangeLanguageAZ"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="@+id/btnSubs"
         app:layout_constraintTop_toBottomOf="@+id/btnSubs" />
+
+    <Button
+        android:id="@+id/btnChangeLanguageAZ"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/azerbaijani"
+        app:layout_constraintEnd_toEndOf="@+id/btnSubs"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnChangeLanguageEN"
+        app:layout_constraintTop_toTopOf="@+id/btnChangeLanguageEN" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonLogoutProfile"
+        style="?attr/materialIconButtonFilledTonalStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:backgroundTint="#FF1100"
+        android:fontFamily="@font/inter_bold"
+        android:text="@string/logout"
+        android:textColor="@color/eventify_background_secondary"
+        android:textSize="18sp"
+        app:cornerRadius="12dp"
+        app:icon="@drawable/ic_logout"
+        app:iconGravity="textStart"
+        app:iconPadding="8dp"
+        app:iconSize="20dp"
+        app:iconTint="@color/eventify_background_secondary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/guidelineProfile2"
+        app:layout_constraintStart_toStartOf="@id/guidelineProfile1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

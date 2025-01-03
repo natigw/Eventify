@@ -3,12 +3,12 @@ package com.example.eventify.presentation.ui.fragments.events
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
+import androidx.viewbinding.ViewBinding
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.common.base.BaseFragment
-import com.example.eventify.databinding.FragmentEventsBinding
 
 class PlacesViewPagerAdapter(
-    list: ArrayList<BaseFragment<FragmentEventsBinding>>,
+    list: ArrayList<BaseFragment<out ViewBinding>>,
     fm: FragmentManager,
     lifecycle: Lifecycle
 ) : FragmentStateAdapter(fm, lifecycle) {

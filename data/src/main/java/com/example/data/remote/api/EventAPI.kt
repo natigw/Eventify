@@ -4,6 +4,7 @@ import com.example.data.remote.model.events.allEvents.ResponseAllEvents
 import com.example.data.remote.model.events.comment.addComment.RequestAddEventComment
 import com.example.data.remote.model.events.comment.commentDetails.ResponseEventCommentDetails
 import com.example.data.remote.model.events.comment.eventComments.ResponseEventComments
+import com.example.data.remote.model.events.createEvent.RequestCreateCustomEvent
 import com.example.data.remote.model.events.eventDetails.ResponseEventDetails
 import com.example.data.remote.model.events.likeDislike.RequestLikeDislikeEvent
 import com.example.data.remote.model.events.likeDislike.favEvents.ResponseFavEvents
@@ -27,6 +28,12 @@ interface EventAPI {
 //    suspend fun createEvent(
 //        @Body requestCreateEvent: RequestCreateEvent
 //    )
+
+    @POST("/events/custom")
+    suspend fun createCustomEvent(
+        @Body
+        requestCreateCustomEvent: RequestCreateCustomEvent
+    ) //: Response<>
 
     @GET("/events/favorites")
     suspend fun getFavEvents() : Response<List<ResponseFavEvents>>

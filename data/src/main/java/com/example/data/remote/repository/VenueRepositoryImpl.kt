@@ -1,6 +1,7 @@
 package com.example.data.remote.repository
 
 import android.util.Log
+import com.example.common.utils.functions.dateFormatterIFYEAR_MNAMED_Comma_HM
 import com.example.common.utils.functions.randomDouble
 import com.example.common.utils.functions.roundDouble
 import com.example.data.remote.api.VenueAPI
@@ -12,6 +13,7 @@ import com.example.domain.model.places.venue.VenueDetailsItem
 import com.example.domain.model.places.venue.VenueItem
 import com.example.domain.repository.VenueRepository
 import com.google.android.gms.maps.model.LatLng
+import java.time.Instant
 import javax.inject.Inject
 
 class VenueRepositoryImpl @Inject constructor(
@@ -69,7 +71,7 @@ class VenueRepositoryImpl @Inject constructor(
                         commentId = it.id,
                         username = it.ownerId.toString(),
                         content = it.content,
-                        date = "${it.createdAt.substring(0,10)}, ${it.createdAt.substring(11, 16)}"
+                        date = dateFormatterIFYEAR_MNAMED_Comma_HM(Instant.parse("${it.createdAt}Z"))
                     )
                 }
             }

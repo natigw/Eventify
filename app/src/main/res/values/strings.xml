@@ -1,17 +1,19 @@
 <resources>
     <string name="app_name" translatable="false">Eventify</string>
-    <string name="let_s_go">Let\'s Go</string>
-    <string name="welcome_to">Welcome to</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="let_s_go">Let\'s Go</string>
+    <string name="welcome_to">Welcome to</string>
     <string name="finish">Finish</string>
+    <string name="login_successful">Login Successful</string>
+    <string name="login_unsuccessful">Login Unsuccessful</string>
     <string name="next">Next</string>
     <string name="skip">Skip</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="send">Send</string>
     <string name="check_email">Please check your email!</string>
-    <string name="forgot_password_second">Forgot your password?</string>
+    <string name="forgot_your_password">Forgot your password?</string>
     <string name="type_email">Type Your Email</string>
     <string name="or">or</string>
     <string name="login">Login</string>
@@ -64,7 +66,7 @@
     <string name="network_connection_lost">Network connection lost!</string>
     <string name="get_shortest_route">Get shortest route</string>
     <string name="no_comments">No comments yet!</string>
-    <string name="logout">Logout</string>
+    <string name="logout">Log out</string>
     <string name="history">History</string>
     <string name="payment">Payment</string>
     <string name="settings">Settings</string>
@@ -81,8 +83,14 @@
     <string name="event_details_colon">Event details:</string>
     <string name="venue_comments_colon">Venue comments:</string>
     <string name="event_comments_colon">Event comments:</string>
-    <string name="eventify_az">eventify.az</string>
+    <string name="eventify_az" translatable="false">eventify.az</string>
     <string name="organizer_events">Organizer events</string>
     <string name="user_events">User events</string>
+    <string name="create_your_event">Create your event</string>
+    <string name="change_language">Change language</string>
+    <string name="azerbaijani" translatable="false">🇦🇿 Azərbaycanca</string>
+    <string name="english" translatable="false">🇺🇸 English</string>
+    <string name="az" translatable="false">🇦🇿</string>
+    <string name="en" translatable="false">🇺🇸</string>
 
 </resources>

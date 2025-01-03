@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -30,31 +29,66 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonWelcomeLanguageEN"
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/outfit_regular"
+        android:minWidth="0dp"
+        android:paddingHorizontal="10dp"
+        android:text="@string/en"
+        android:textColor="@color/purple_eventify"
+        android:textSize="16sp"
+        app:cornerRadius="20dp"
+        app:layout_constraintEnd_toStartOf="@+id/buttonWelcomeLanguageAZ"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonWelcomeLanguageAZ"
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/outfit_regular"
+        android:minWidth="0dp"
+        android:paddingHorizontal="10dp"
+        android:text="@string/az"
+        android:textColor="@color/purple_eventify"
+        android:textSize="16sp"
+        app:cornerRadius="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/buttonWelcomeLanguageEN"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonSkipFirst"
         style="?attr/materialButtonOutlinedStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/outfit_regular"
         android:minWidth="0dp"
         android:paddingHorizontal="12dp"
-        app:cornerRadius="20dp"
         android:text="@string/skip"
-        android:textSize="16sp"
         android:textColor="@color/purple_eventify"
-        android:fontFamily="@font/outfit_regular"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:textSize="16sp"
+        app:cornerRadius="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonLetsGoFirst"
         style="@style/Widget.Material3.Button.IconButton.Filled.Tonal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:cornerRadius="20dp"
-        android:text="@string/let_s_go"
-        android:textSize="18sp"
-        android:textColor="@color/purple_eventify"
-        android:fontFamily="@font/outfit_semibold"
         android:backgroundTint="@color/gray_light"
+        android:fontFamily="@font/outfit_semibold"
+        android:text="@string/let_s_go"
+        android:textColor="@color/purple_eventify"
+        android:textSize="18sp"
+        app:cornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

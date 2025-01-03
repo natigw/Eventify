@@ -44,7 +44,6 @@ class EventAdapter(
 //                flag = !flag
 //                buttonLikeEvent.setIconTintResource(R.color.purple_light_eventify)
 //                textEventLikeCount.text = if (flag) (event.likeCount + 1).toString() else event.likeCount.toString()
-                textEventName.text = "Like olundu ama bunu duzzeltt"
                 //TODO -> like olsun request atsin, icon qirmizi urek olsun, like count text bir dene artsin
             }
 

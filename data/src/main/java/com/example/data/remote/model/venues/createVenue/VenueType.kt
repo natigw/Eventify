@@ -22,5 +22,5 @@ enum class VenueType(val type: String) {
     MONUMENT("monument"),
 
     @SerializedName("cultural_space")
-    CULTURAL_SPACE("cultural_space");
+    CULTURAL_SPACE("cultural_space")
 }
