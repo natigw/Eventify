@@ -5,6 +5,7 @@
     android:id="@+id/main_nav"
     app:startDestination="@id/mapFragment">
 
+
     <fragment
         android:id="@+id/venuesFragment"
         android:name="com.example.eventify.presentation.ui.fragments.venue.VenuesFragment"
@@ -13,8 +14,13 @@
 
         <action
             android:id="@+id/action_venuesFragment_to_venueDetailsFragment"
-            app:destination="@id/venueDetailsFragment" />
+            app:destination="@id/venueDetailsFragment"
+            app:popUpTo="@+id/venuesFragment"
+            app:popUpToInclusive="true" />
     </fragment>
+
+
+
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.eventify.presentation.ui.fragments.profile.ProfileFragment"
@@ -39,11 +45,11 @@
             android:id="@+id/action_placesFragment_to_eventsFragment"
             app:destination="@id/eventsFragment" />
         <action
-            android:id="@+id/action_placesFragment_to_venuesFragment"
-            app:destination="@id/venuesFragment" />
-        <action
             android:id="@+id/action_placesFragment_to_eventDetailsFragment"
-            app:destination="@id/eventDetailsFragment" />
+            app:destination="@id/eventDetailsFragment"
+            app:popUpTo="@+id/placesFragment"
+            app:popUpToInclusive="true"
+            />
         <action
             android:id="@+id/action_placesFragment_to_createCustomEventFragment"
             app:destination="@id/createCustomEventFragment" />
@@ -88,6 +94,7 @@
         android:name="com.example.eventify.presentation.ui.fragments.chat.ChatFragment"
         android:label="fragment_chat"
         tools:layout="@layout/fragment_chat" />
+
     <fragment
         android:id="@+id/venueDetailsFragment"
         android:name="com.example.eventify.presentation.ui.fragments.venue.VenueDetailsFragment"
@@ -99,10 +106,8 @@
         <action
             android:id="@+id/action_venueDetailsFragment_to_mapFragment"
             app:destination="@id/mapFragment" />
-        <action
-            android:id="@+id/action_venueDetailsFragment_to_mapFragment2"
-            app:destination="@id/mapFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/eventDetailsFragment"
         android:name="com.example.eventify.presentation.ui.fragments.events.event.EventDetailsFragment"

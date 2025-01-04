@@ -5,6 +5,8 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavOptions
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
@@ -46,6 +48,7 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
             viewmodel.venueDetails
                 .filter { it != null }
                 .collectLatest {
+                    binding.venueBackButton.isVisible = true
                     setUI(it!!)
                 }
         }
@@ -158,6 +161,19 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
                     requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
                 bottomNavigationView.selectedItemId = R.id.mapFragment
             }
+        }
+    }
+
+    override fun buttonListener() {
+        super.buttonListener()
+        binding.venueBackButton.setOnClickListener {
+            findNavController().navigate(
+                R.id.venuesFragment,
+                null,
+                NavOptions.Builder()
+                    .setPopUpTo(R.id.venuesFragment,false)
+                    .build()
+            )
         }
     }
 

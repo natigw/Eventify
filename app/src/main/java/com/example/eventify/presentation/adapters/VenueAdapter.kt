@@ -31,7 +31,6 @@ class VenueAdapter(
 
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(imageVenue)
-            Log.e("image",venue.imageLink.toString())
 
             buttonLikeVenue.setOnClickListener {
                 if (buttonLikeVenue.tag == "not_liked") {

@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import androidx.core.view.forEach
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.example.common.base.BaseActivity
@@ -81,8 +82,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
     }
     @SuppressLint("RestrictedApi")
     private fun setUpBottomNavigation() {
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.fragmentContainerViewMain) as NavHostFragment
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerViewMain) as NavHostFragment
+        NavigationUI.setupWithNavController(
+            binding.bottomNavigationView, navHostFragment.navController
+        )
+
         lifecycleScope.launch {
 //            navHostFragment.navController.currentBackStackEntryFlow.collectLatest {
 //                Log.e("stack", it.toString())
@@ -94,8 +98,5 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
 //                }
             }
         }
-        NavigationUI.setupWithNavController(
-            binding.bottomNavigationView, navHostFragment.navController
-        )
     }
 }

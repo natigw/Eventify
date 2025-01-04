@@ -112,6 +112,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
 
                     Intent(requireContext(), MainActivity::class.java).also {
                         startActivity(it)
+                        requireActivity().finish()
                     }
 
                 }

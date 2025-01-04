@@ -25,6 +25,21 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.95" />
 
+        <Button
+            android:id="@+id/eventBackButton"
+            style="?attr/materialIconButtonFilledTonalStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="-16dp"
+            android:backgroundTint="@color/eventify_background_primary"
+            android:visibility="invisible"
+            app:icon="@drawable/ic_back_arrow"
+            app:iconSize="24dp"
+            app:iconTint="@color/purple_eventify"
+            app:layout_constraintBottom_toBottomOf="@+id/textEventName"
+            app:layout_constraintStart_toStartOf="@+id/guidelineEventDetails1"
+            app:layout_constraintTop_toTopOf="@+id/textEventName" />
+
         <com.google.android.material.progressindicator.CircularProgressIndicator
             android:id="@+id/progressBarEvents"
             android:layout_width="wrap_content"

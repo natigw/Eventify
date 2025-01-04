@@ -1,5 +1,6 @@
 package com.example.eventify.presentation.ui.fragments.venue
 
+import android.util.Log
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -27,6 +28,8 @@ class VenuesFragment : BaseFragment<FragmentVenuesBinding>(FragmentVenuesBinding
     override fun onViewCreatedLight() {
         setAdapters()
         updateAdapters()
+
+        viewmodel.getVenues()
     }
 
     private fun updateAdapters() {
@@ -47,5 +50,10 @@ class VenuesFragment : BaseFragment<FragmentVenuesBinding>(FragmentVenuesBinding
 
     private fun setAdapters() {
         binding.rvVenues.adapter = venueAdapter
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+
     }
 }

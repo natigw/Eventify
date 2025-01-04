@@ -1,5 +1,6 @@
 package com.example.eventify.presentation.ui.fragments.events.event
 
+import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.core.view.isInvisible
@@ -7,6 +8,8 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavOptions
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
@@ -49,17 +52,18 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
 
 
         lifecycleScope.launch {
-            viewmodel.likedState.collectLatest {
-                if(it){
-                    binding.buttonLikeEvent.setIconResource(R.drawable.like_fav)
-                }
-                else{
-                    binding.buttonLikeEvent.setIconResource(R.drawable.like_fav_border)
-                }
+            viewmodel.likedState
+                .filter { it!=null }
+                .collectLatest {
+                    if(it!!){
+                        binding.buttonLikeEvent.setIconResource(R.drawable.like_fav)
+                    }
+                    else{
+                        binding.buttonLikeEvent.setIconResource(R.drawable.like_fav_border)
+                    }
+                    binding.eventBackButton.isVisible = true
             }
         }
-
-
 
 
         lifecycleScope.launch {
@@ -98,13 +102,24 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
     override fun buttonListener() {
         super.buttonListener()
         binding.buttonLikeEvent.setOnClickListener{
-            if(viewmodel.likedState.value){
+            if(viewmodel.likedState.value == true){
                 viewmodel.likedState.update { false }
             }
             else{
                 viewmodel.likedState.update { true }
             }
         }
+
+        binding.eventBackButton.setOnClickListener {
+            findNavController().navigate(
+                R.id.placesFragment,
+                null,
+                NavOptions.Builder()
+                    .setPopUpTo(R.id.placesFragment,false)
+                    .build()
+            )
+        }
+
     }
 
     private fun setUI(eventDetailsItem: EventDetailsItem) {
@@ -181,8 +196,9 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
         }
         lifecycleScope.launch {
             viewmodel.comments
-                .collect {
-                    binding.textNoCommentsTextEventDetails.isVisible = it.isEmpty()
+                .filter { it!=null }
+                .collectLatest {
+                    binding.textNoCommentsTextEventDetails.isVisible = it!!.isEmpty()
                     commentAdapter.updateAdapter(it)
                 }
         }
@@ -190,7 +206,7 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
 
     override fun onPause() {
         super.onPause()
-        if(viewmodel.likedState.value){
+        if(viewmodel.likedState.value == true){
             viewmodel.updateLikeEvent(args.eventId)
         }
         else{

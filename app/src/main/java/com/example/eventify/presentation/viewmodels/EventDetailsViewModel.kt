@@ -22,19 +22,22 @@ class EventDetailsViewModel @Inject constructor(
     val isLoadingMain = MutableStateFlow(true)
     val eventDetails = MutableStateFlow<EventDetailsItem?>(null)
 
-    var likedState = MutableStateFlow(false)
+    var likedState = MutableStateFlow<Boolean?>(null)
 
     var noComments = false
     val isLoadingComments = MutableStateFlow(true)
-    val comments = MutableStateFlow<List<CommentItem>>(emptyList())
+    val comments = MutableStateFlow<List<CommentItem>?>(value = null)
 
 
 
     fun getEventDetails(eventId: Int) {
         viewModelScope.launch {
-            val response = eventRepository.getEventDetails(eventId)
-            eventDetails.emit(response)
-            isLoadingMain.update { false }
+            try {
+                val response = eventRepository.getEventDetails(eventId)
+                eventDetails.emit(response)
+                isLoadingMain.update { false }
+
+            }catch (_:Exception){}
         }
     }
 
@@ -60,10 +63,13 @@ class EventDetailsViewModel @Inject constructor(
 
     fun getComments(eventId: Int) {
         viewModelScope.launch {
-            val response = eventRepository.getEventComments(eventId)
-            comments.emit(response)
-            isLoadingComments.update { false }
-            if (response.isEmpty()) noComments = true
+            try {
+                val response = eventRepository.getEventComments(eventId)
+                comments.emit(response)
+                isLoadingComments.update { false }
+                if (response.isEmpty()) noComments = true
+
+            }catch (_:Exception){}
         }
     }
 
