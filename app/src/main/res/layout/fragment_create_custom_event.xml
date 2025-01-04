@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".presentation.ui.fragments.events.customEvent.CreateCustomEventFragment">
 
     <androidx.constraintlayout.widget.Guideline
@@ -11,17 +11,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.05" />
+        app:layout_constraintGuide_percent="0.06" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineCreateCustomEvent2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.95" />
+        app:layout_constraintGuide_percent="0.94" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineCreateCustomEvent4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.98" />
 
     <TextView
-        android:id="@+id/textCreateCustomEvent"
+        android:id="@+id/textHeadingCreateCustomEvent"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
@@ -33,5 +40,149 @@
         app:layout_constraintEnd_toEndOf="@+id/guidelineCreateCustomEvent2"
         app:layout_constraintStart_toStartOf="@+id/guidelineCreateCustomEvent1"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/imagePictureCreateCustomEvent"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/placeholder_event"
+        app:layout_constraintEnd_toEndOf="@id/guidelineCreateCustomEvent2"
+        app:layout_constraintStart_toStartOf="@id/guidelineCreateCustomEvent1"
+        app:layout_constraintTop_toBottomOf="@id/textHeadingCreateCustomEvent"
+        app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Medium" />
+
+    <ImageView
+        android:id="@+id/buttonAddPictureCreateCustomEvent"
+        android:layout_width="32dp"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:src="@drawable/ic_add"
+        app:layout_constraintBottom_toBottomOf="@id/imagePictureCreateCustomEvent"
+        app:layout_constraintEnd_toEndOf="@id/imagePictureCreateCustomEvent"
+        app:layout_constraintStart_toStartOf="@id/imagePictureCreateCustomEvent"
+        app:layout_constraintTop_toBottomOf="@id/imagePictureCreateCustomEvent"
+        app:tint="@color/purple_eventify" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputEventTitleCCE"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        app:boxCornerRadiusBottomEnd="@dimen/eventify_input_field_corner_radius"
+        app:boxCornerRadiusBottomStart="@dimen/eventify_input_field_corner_radius"
+        app:boxCornerRadiusTopEnd="@dimen/eventify_input_field_corner_radius"
+        app:boxCornerRadiusTopStart="@dimen/eventify_input_field_corner_radius"
+        app:boxStrokeColor="@color/purple_eventify"
+        app:boxStrokeWidth="1dp"
+        app:boxStrokeWidthFocused="2dp"
+        app:hintTextColor="@color/purple_eventify"
+        app:layout_constraintStart_toStartOf="@id/guidelineCreateCustomEvent1"
+        app:layout_constraintEnd_toEndOf="@id/guidelineCreateCustomEvent2"
+        app:layout_constraintTop_toBottomOf="@id/imagePictureCreateCustomEvent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/titleCCE"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/title"
+            android:textSize="18sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputEventDescriptionCCE"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        app:boxCornerRadiusBottomEnd="@dimen/eventify_input_field_corner_radius"
+        app:boxCornerRadiusBottomStart="@dimen/eventify_input_field_corner_radius"
+        app:boxCornerRadiusTopEnd="@dimen/eventify_input_field_corner_radius"
+        app:boxCornerRadiusTopStart="@dimen/eventify_input_field_corner_radius"
+        app:boxStrokeColor="@color/purple_eventify"
+        app:boxStrokeWidth="1dp"
+        app:boxStrokeWidthFocused="2dp"
+        app:hintTextColor="@color/purple_eventify"
+        app:layout_constraintStart_toStartOf="@id/guidelineCreateCustomEvent1"
+        app:layout_constraintEnd_toEndOf="@id/guidelineCreateCustomEvent2"
+        app:layout_constraintTop_toBottomOf="@id/textInputEventTitleCCE">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/descriptionCCE"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/description"
+            android:inputType="textMultiLine"
+            android:textSize="18sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputEventTypeCCE"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        app:boxCornerRadiusBottomEnd="@dimen/eventify_input_field_corner_radius"
+        app:boxCornerRadiusBottomStart="@dimen/eventify_input_field_corner_radius"
+        app:boxCornerRadiusTopEnd="@dimen/eventify_input_field_corner_radius"
+        app:boxCornerRadiusTopStart="@dimen/eventify_input_field_corner_radius"
+        app:boxStrokeColor="@color/purple_eventify"
+        app:boxStrokeWidth="1dp"
+        app:boxStrokeWidthFocused="2dp"
+        app:hintTextColor="@color/purple_eventify"
+        app:layout_constraintEnd_toEndOf="@id/guidelineCreateCustomEvent2"
+        app:layout_constraintStart_toStartOf="@id/guidelineCreateCustomEvent1"
+        app:layout_constraintTop_toBottomOf="@id/textInputEventDescriptionCCE">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/eventTypeCCE"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="bununuu acilan pencere kimi ele"
+            android:inputType="textMultiLine"
+            android:textSize="18sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonDatePickerCCE"
+        style="?attr/materialIconButtonFilledTonalStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="-4dp"
+        android:backgroundTint="@color/purple_eventify"
+        android:fontFamily="@font/inter_bold"
+        android:minHeight="0dp"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="8dp"
+        android:textColor="@color/eventify_background_secondary"
+        app:cornerRadius="10dp"
+        app:icon="@drawable/ic_edit_calendar"
+        app:iconGravity="start"
+        app:iconPadding="8dp"
+        app:iconTint="@color/eventify_background_secondary"
+        app:layout_constraintStart_toStartOf="@+id/guidelineCreateCustomEvent1"
+        app:layout_constraintTop_toBottomOf="@id/textInputEventTypeCCE"
+        tools:text="12 Mar 2022    Change" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonFinishCreateCustomEvent"
+        style="?attr/materialIconButtonFilledTonalStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/purple_eventify"
+        android:fontFamily="@font/inter_bold"
+        android:text="@string/create_event"
+        android:textColor="@color/eventify_background_secondary"
+        android:textSize="22sp"
+        app:cornerRadius="@dimen/eventify_large_button_corner_radius"
+        app:icon="@drawable/ic_success"
+        app:iconGravity="textStart"
+        app:iconPadding="8dp"
+        app:iconSize="22dp"
+        app:iconTint="@color/eventify_background_secondary"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineCreateCustomEvent4"
+        app:layout_constraintEnd_toEndOf="@id/guidelineCreateCustomEvent2"
+        app:layout_constraintStart_toStartOf="@id/guidelineCreateCustomEvent1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

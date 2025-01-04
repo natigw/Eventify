@@ -57,7 +57,7 @@
     <string name="organizer">Organizer:</string>
     <string name="published">Published:</string>
     <string name="events">Events</string>
-    <string name="custom_events">Custom events</string>
+    <string name="custom_events">User events</string>
     <string name="venue_details">Venue details</string>
     <string name="buy_ticket">Buy ticket</string>
     <string name="register_failed">Register failed!</string>
@@ -92,5 +92,9 @@
     <string name="english" translatable="false">🇺🇸 English</string>
     <string name="az" translatable="false">🇦🇿</string>
     <string name="en" translatable="false">🇺🇸</string>
-
+    <string name="create_event">Create event</string>
+    <string name="change">Change</string>
+    <string name="event_date">Event date</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
 </resources>

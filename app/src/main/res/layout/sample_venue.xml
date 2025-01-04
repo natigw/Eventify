@@ -102,6 +102,7 @@
                 android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:layout_marginTop="24dp"
+                app:dividerColor="@color/purple_dark_eventify"
                 app:lastItemDecorated="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
