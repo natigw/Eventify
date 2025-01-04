@@ -5,6 +5,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -13,6 +14,7 @@ import com.example.common.utils.NancyToast
 import com.example.common.utils.functions.isValidEmail
 import com.example.eventify.R
 import com.example.eventify.databinding.FragmentRegisterBinding
+import com.example.eventify.presentation.viewmodels.OnBoardingSharedViewModel
 import com.example.eventify.presentation.viewmodels.RegisterViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -22,6 +24,7 @@ import kotlinx.coroutines.launch
 class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterBinding::inflate) {
 
     private val viewModel by viewModels<RegisterViewModel>()
+    private val sharedViewModel by activityViewModels<OnBoardingSharedViewModel>()
 
     override fun onViewCreatedLight() {
         setScrollViewConstraints()
@@ -50,13 +53,14 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
                             password
                         )){
                         NancyToast.makeText(requireContext(), requireContext().getString(R.string.register_successful), NancyToast.LENGTH_SHORT, NancyToast.SUCCESS, false).show()
+                        sharedViewModel.setFromRegisterScreen()
+                        sharedViewModel.setUserEmail(email)
                         clearInputFields()
                         findNavController().popBackStack()
                     }
                     else{
                         NancyToast.makeText(requireContext(), requireContext().getString(R.string.register_failed), NancyToast.LENGTH_SHORT, NancyToast.ERROR, false).show()
                     }
-
                 }
             }
         }

@@ -21,44 +21,54 @@ class VenueRepositoryImpl @Inject constructor(
 ) : VenueRepository {
 
     override suspend fun getVenues(): List<VenueItem> {
-        val response = api.getAllVenues()
-        if(response.isSuccessful){
-            response.body()?.let { rawData ->
-                return rawData.map {
-                    VenueItem(
-                        venueId = it.id,
-                        title = it.name,
-                        imageLink = it.image1Link,
-                        description = it.description
+        try {
+            val response = api.getAllVenues()
+            if(response.isSuccessful && response.body()!=null){
+                response.body()!!.let { rawData ->
+                    return rawData.map {
+                        VenueItem(
+                            venueId = it.id,
+                            title = it.name,
+                            imageLink = it.image1Link,
+                            description = it.description
+                        )
+                    }
+                }
+            }
+            else{
+                throw Exception("Error ${response.code()}: ${response.errorBody()?.string()}")
+            }
+        }
+        catch (e : Exception){
+            throw e
+        }
+    }
+
+    override suspend fun getVenueDetails(venueId: Int): VenueDetailsItem {
+        try {
+            val response = api.getVenueDetails(venueId)
+            if (response.isSuccessful && response.body()!= null) {
+                response.body()!!.let { rawData ->
+                    return VenueDetailsItem(
+                        venueId = rawData.id,
+                        title = rawData.name,
+                        description = rawData.description,
+                        imageLinks = listOf(rawData.image1Link, rawData.image2Link, rawData.image3Link),
+                        venueType = rawData.venueType.replace('_', ' ').replaceFirstChar { it.uppercaseChar() },
+                        openHours = if (rawData.workHoursOpen.substring(0, 5) == rawData.workHoursClose.substring(0, 5)) "24 hours open" else "${rawData.workHoursOpen.substring(0, 5)} - ${rawData.workHoursClose.substring(0, 5)}",
+                        likeCount = rawData.numLikes,
+                        rating = roundDouble(randomDouble(max = 5.0)),
+                        coordinates = if (rawData.lat != "string") LatLng(rawData.lat.toDouble(), rawData.lng.toDouble()) else LatLng(0.0, 0.0)
                     )
                 }
             }
-        }
-
-        Log.e("venueRequestError", response.errorBody().toString())
-        return emptyList()
-    }
-
-    override suspend fun getVenueDetails(venueId: Int): VenueDetailsItem? {
-        val response = api.getVenueDetails(venueId)
-        if (response.isSuccessful) {
-            response.body()?.let { rawData ->
-                return VenueDetailsItem(
-                    venueId = rawData.id,
-                    title = rawData.name,
-                    description = rawData.description,
-                    imageLinks = listOf(rawData.image1Link, rawData.image2Link, rawData.image3Link),
-                    venueType = rawData.venueType.replace('_', ' ').replaceFirstChar { it.uppercaseChar() },
-                    openHours = if (rawData.workHoursOpen.substring(0, 5) == rawData.workHoursClose.substring(0, 5)) "24 hours open" else "${rawData.workHoursOpen.substring(0, 5)} - ${rawData.workHoursClose.substring(0, 5)}",
-                    likeCount = rawData.numLikes,
-                    rating = roundDouble(randomDouble(max = 5.0)),
-                    coordinates = if (rawData.lat != "string") LatLng(rawData.lat.toDouble(), rawData.lng.toDouble()) else LatLng(0.0, 0.0)
-                )
+            else{
+                throw Exception("Error ${response.code()}: ${response.errorBody()?.string()}")
             }
         }
-
-        Log.e("venueDetailsRequestError", response.errorBody().toString())
-        return null
+        catch (e : Exception){
+            throw e
+        }
     }
 
     override suspend fun getVenueComments(venueId: Int): List<CommentItem> {
@@ -85,10 +95,13 @@ class VenueRepositoryImpl @Inject constructor(
 //    }
 
     override suspend fun addVenueComment(requestAddVenueComment: AddCommentItem) {
-        api.addVenueComment(RequestAddVenueComment(
-            content = requestAddVenueComment.content,
-            venue = requestAddVenueComment.placeId
-        ))
+        try {
+            api.addVenueComment(RequestAddVenueComment(
+                content = requestAddVenueComment.content,
+                venue = requestAddVenueComment.placeId
+            ))
+        }
+        catch (_: Exception){}
         //TODO -> successful olub olmadigini check ele
     }
 
@@ -100,10 +113,14 @@ class VenueRepositoryImpl @Inject constructor(
 //    }
 
     override suspend fun likeVenue(venueId: Int) {
-        api.likeVenue(
-            RequestLikeDislikeVenue(
-                venue = venueId
+        try {
+            api.likeVenue(
+                RequestLikeDislikeVenue(
+                    venue = venueId
+                )
             )
-        )
+
+        }
+        catch (_:Exception){}
     }
 }

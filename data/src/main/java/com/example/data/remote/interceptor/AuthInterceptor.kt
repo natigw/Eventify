@@ -1,6 +1,7 @@
 package com.example.data.remote.interceptor
 
 import android.content.SharedPreferences
+import android.util.Log
 import com.example.common.utils.AppUtils
 import com.example.common.utils.RequestChannel
 import okhttp3.Interceptor
@@ -15,9 +16,9 @@ class AuthInterceptor @Inject constructor(
     override fun intercept(chain: Interceptor.Chain): Response {
         var request = chain.request()
 
-        val accessToken = sharedPrefUserTokens.getString("access_token",null)
+        val accessToken = sharedPrefUserTokens.getString("access_token","")
         val tokenType = "Bearer"
-
+        Log.e("MYInterceptor","url :  ${request.url()}")
         request = request.newBuilder()
             .addHeader("Authorization","$tokenType $accessToken")
             .build()

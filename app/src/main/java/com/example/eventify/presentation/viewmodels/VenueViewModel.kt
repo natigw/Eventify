@@ -18,15 +18,14 @@ class VenueViewModel @Inject constructor(
     val isLoading = MutableStateFlow(true)
     val venues = MutableStateFlow<List<VenueItem>>(emptyList())
 
-    init {
-        getVenues()
-    }
-
     private fun getVenues() {
         viewModelScope.launch {
-            val response = venueRepository.getVenues()
-            venues.emit(response)
-            isLoading.update { false }
+            try {
+                val response = venueRepository.getVenues()
+                venues.emit(response)
+                isLoading.update { false }
+            }
+            catch (_ : Exception){}
         }
     }
 

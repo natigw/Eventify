@@ -9,7 +9,7 @@ interface VenueRepository {
 
     suspend fun getVenues(): List<VenueItem>
 
-    suspend fun getVenueDetails(venueId: Int): VenueDetailsItem?
+    suspend fun getVenueDetails(venueId: Int): VenueDetailsItem
 
     suspend fun getVenueComments(venueId: Int): List<CommentItem>
 
