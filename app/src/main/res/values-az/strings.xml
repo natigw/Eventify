@@ -46,11 +46,11 @@
     <string name="likes">Bəyənilər:</string>
     <string name="show_location">xəritədə göstər</string>
     <string name="places">Yerlər</string>
-    <string name="event_type">Tədbirin tipi:</string>
-    <string name="duration">Müddəti:</string>
-    <string name="date">Tarixi:</string>
-    <string name="organizer">Təşkilatçı:</string>
-    <string name="published">Dərc olunub:</string>
+    <string name="event_type_colon">Tədbirin tipi:</string>
+    <string name="duration_colon">Müddəti:</string>
+    <string name="date_colon">Tarixi:</string>
+    <string name="organizer_colon">Təşkilatçı:</string>
+    <string name="published_colon">Dərc olunub:</string>
     <string name="events">Tədbirlər</string>
     <string name="custom_events">İstifadəçi tədbirləri</string>
     <string name="venue_details">Məkan haqqında</string>

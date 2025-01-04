@@ -1,4 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
+
     <!-- Base application theme. -->
     <style name="Base.Theme.Eventify" parent="Theme.Material3.DayNight.NoActionBar" />
 
@@ -10,6 +11,38 @@
         <item name="colorOnPrimary">@color/eventify_on_primary</item>
         <item name="android:navigationBarColor">@color/bottomNavBackground</item>
         <item name="android:statusBarColor">@color/eventify_background_primary</item>
+    </style>
+
+
+
+    <!-- CUSTOM DATE PICKER THEME -->
+    <style name="MaterialCalendarTheme" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimary">@color/purple_dark_eventify</item>
+        <item name="colorSurface">@color/green_light_eventify</item>
+    </style>
+
+<!--    &lt;!&ndash; CUSTOM TIME PICKER THEME &ndash;&gt;-->
+<!--    <style name="MaterialTime" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">-->
+<!--        <item name="colorOnPrimary">@color/white</item>-->
+<!--        <item name="colorPrimary">@color/purple_dark_eventify</item>-->
+<!--        <item name="colorSurface">@color/green_light_eventify</item>-->
+<!--    </style>-->
+
+
+
+    <!-- CUSTOM ALERT DIALOG THEME -->
+    <style name="CustomAlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="android:background">@color/purple_dark_eventify</item>
+    </style>
+    <style name="MaterialAlertDialog.App.Title.Text" parent="MaterialAlertDialog.Material3.Title.Text">
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <style name="MaterialAlertDialog.App.Content.Text" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <style name="Widget.App.Button" parent="Widget.Material3.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/white</item>
     </style>
 
 </resources>

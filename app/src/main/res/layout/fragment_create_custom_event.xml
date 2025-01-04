@@ -27,6 +27,20 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.98" />
 
+    <Button
+        android:id="@+id/buttonBackCCE"
+        style="?attr/materialIconButtonFilledTonalStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="-16dp"
+        android:backgroundTint="@color/eventify_background_primary"
+        app:icon="@drawable/ic_back_arrow"
+        app:iconTint="@color/purple_eventify"
+        app:iconSize="24dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textHeadingCreateCustomEvent"
+        app:layout_constraintStart_toStartOf="@id/guidelineCreateCustomEvent1"
+        app:layout_constraintTop_toTopOf="@id/textHeadingCreateCustomEvent" />
+
     <TextView
         android:id="@+id/textHeadingCreateCustomEvent"
         android:layout_width="0dp"
@@ -43,7 +57,7 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imagePictureCreateCustomEvent"
-        android:layout_width="150dp"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:adjustViewBounds="true"
@@ -119,28 +133,29 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputEventTypeCCE"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        app:boxCornerRadiusBottomEnd="@dimen/eventify_input_field_corner_radius"
-        app:boxCornerRadiusBottomStart="@dimen/eventify_input_field_corner_radius"
-        app:boxCornerRadiusTopEnd="@dimen/eventify_input_field_corner_radius"
-        app:boxCornerRadiusTopStart="@dimen/eventify_input_field_corner_radius"
         app:boxStrokeColor="@color/purple_eventify"
         app:boxStrokeWidth="1dp"
         app:boxStrokeWidthFocused="2dp"
         app:hintTextColor="@color/purple_eventify"
+        app:boxCornerRadiusTopStart="@dimen/eventify_input_field_corner_radius"
+        app:boxCornerRadiusTopEnd="@dimen/eventify_input_field_corner_radius"
+        app:boxCornerRadiusBottomStart="@dimen/eventify_input_field_corner_radius"
+        app:boxCornerRadiusBottomEnd="@dimen/eventify_input_field_corner_radius"
+        app:layout_constraintStart_toStartOf="@+id/guidelineCreateCustomEvent1"
         app:layout_constraintEnd_toEndOf="@id/guidelineCreateCustomEvent2"
-        app:layout_constraintStart_toStartOf="@id/guidelineCreateCustomEvent1"
-        app:layout_constraintTop_toBottomOf="@id/textInputEventDescriptionCCE">
+        app:layout_constraintTop_toBottomOf="@+id/textInputEventDescriptionCCE">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/eventTypeCCE"
+        <AutoCompleteTextView
+            android:id="@+id/autoCompleteTextEventType"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="bununuu acilan pencere kimi ele"
-            android:inputType="textMultiLine"
-            android:textSize="18sp" />
+            android:hint="@string/event_type"
+            android:textSize="18sp"
+            android:inputType="none" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
@@ -155,6 +170,7 @@
         android:minHeight="0dp"
         android:paddingHorizontal="12dp"
         android:paddingVertical="8dp"
+        android:text="@string/specify_event_date"
         android:textColor="@color/eventify_background_secondary"
         app:cornerRadius="10dp"
         app:icon="@drawable/ic_edit_calendar"
@@ -162,15 +178,58 @@
         app:iconPadding="8dp"
         app:iconTint="@color/eventify_background_secondary"
         app:layout_constraintStart_toStartOf="@+id/guidelineCreateCustomEvent1"
-        app:layout_constraintTop_toBottomOf="@id/textInputEventTypeCCE"
-        tools:text="12 Mar 2022    Change" />
+        app:layout_constraintTop_toBottomOf="@id/textInputEventTypeCCE" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonTimePickerStartCCE"
+        style="?attr/materialIconButtonFilledTonalStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="-4dp"
+        android:backgroundTint="@color/purple_eventify"
+        android:fontFamily="@font/inter_bold"
+        android:minHeight="0dp"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="8dp"
+        android:text="@string/specify_event_start_time"
+        android:textColor="@color/eventify_background_secondary"
+        app:cornerRadius="10dp"
+        app:icon="@drawable/ic_time_start"
+        app:iconGravity="start"
+        app:iconPadding="8dp"
+        app:iconTint="@color/eventify_background_secondary"
+        app:layout_constraintStart_toStartOf="@+id/guidelineCreateCustomEvent1"
+        app:layout_constraintTop_toBottomOf="@id/buttonDatePickerCCE" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonTimePickerFinishCCE"
+        style="?attr/materialIconButtonFilledTonalStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="-4dp"
+        android:backgroundTint="@color/purple_eventify"
+        android:fontFamily="@font/inter_bold"
+        android:minHeight="0dp"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="8dp"
+        android:text="@string/specify_event_finish_time"
+        android:textColor="@color/eventify_background_secondary"
+        app:cornerRadius="10dp"
+        app:icon="@drawable/ic_time_finish"
+        app:iconGravity="start"
+        app:iconPadding="8dp"
+        app:iconTint="@color/eventify_background_secondary"
+        app:layout_constraintStart_toStartOf="@+id/guidelineCreateCustomEvent1"
+        app:layout_constraintTop_toBottomOf="@id/buttonTimePickerStartCCE" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonFinishCreateCustomEvent"
         style="?attr/materialIconButtonFilledTonalStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/purple_eventify"
+        android:backgroundTint="@color/green_eventify"
         android:fontFamily="@font/inter_bold"
         android:text="@string/create_event"
         android:textColor="@color/eventify_background_secondary"

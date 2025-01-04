@@ -136,7 +136,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:fontFamily="@font/inter_regular"
-            android:text="@string/event_type"
+            android:text="@string/event_type_colon"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="@+id/guidelineEventDetails1"
             app:layout_constraintTop_toBottomOf="@+id/textEventDescription" />
@@ -158,7 +158,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:fontFamily="@font/inter_regular"
-            android:text="@string/organizer"
+            android:text="@string/organizer_colon"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="@id/textEventTypeText"
             app:layout_constraintTop_toBottomOf="@+id/textEventTypeText" />
@@ -181,7 +181,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:fontFamily="@font/inter_regular"
-            android:text="@string/date"
+            android:text="@string/date_colon"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="@id/textEventOrganizerText"
             app:layout_constraintTop_toBottomOf="@+id/textEventOrganizerText" />
@@ -203,7 +203,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:fontFamily="@font/inter_regular"
-            android:text="@string/duration"
+            android:text="@string/duration_colon"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="@id/textEventDateText"
             app:layout_constraintTop_toBottomOf="@+id/textEventDateText" />
@@ -225,7 +225,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:fontFamily="@font/inter_regular"
-            android:text="@string/published"
+            android:text="@string/published_colon"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="@id/textEventDurationHoursText"
             app:layout_constraintTop_toBottomOf="@+id/textEventDurationHoursText" />

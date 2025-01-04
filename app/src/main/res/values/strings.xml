@@ -51,11 +51,11 @@
     <string name="likes">Likes:</string>
     <string name="show_location">show location</string>
     <string name="places">Places</string>
-    <string name="event_type">Event type:</string>
-    <string name="duration">Duration:</string>
-    <string name="date">Date:</string>
-    <string name="organizer">Organizer:</string>
-    <string name="published">Published:</string>
+    <string name="event_type_colon">Event type:</string>
+    <string name="duration_colon">Duration:</string>
+    <string name="date_colon">Date:</string>
+    <string name="organizer_colon">Organizer:</string>
+    <string name="published_colon">Published:</string>
     <string name="events">Events</string>
     <string name="custom_events">User events</string>
     <string name="venue_details">Venue details</string>
@@ -95,6 +95,21 @@
     <string name="create_event">Create event</string>
     <string name="change">Change</string>
     <string name="event_date">Event date</string>
+    <string name="event_start_time">Event start time</string>
+    <string name="event_finish_time">Event finish time</string>
     <string name="title">Title</string>
     <string name="description">Description</string>
+    <string name="event_type">Event type</string>
+    <string name="specify_event_date">Specify event date</string>
+    <string name="specify_event_start_time">Specify event start time</string>
+    <string name="specify_event_finish_time">Specify event finish time</string>
+    <string-array name="event_types">
+        <item>Theatre</item>
+        <item>Concert</item>
+        <item>Exhibition</item>
+        <item>Book fare</item>
+        <item>Seminar</item>
+        <item>Festival</item>
+        <item>Dance</item>
+    </string-array>
 </resources>
