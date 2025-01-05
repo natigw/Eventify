@@ -28,10 +28,13 @@ class VenuesFragment : BaseFragment<FragmentVenuesBinding>(FragmentVenuesBinding
     override fun onViewCreatedLight() {
         setAdapters()
         updateAdapters()
+        observer()
+    }
 
-        viewmodel.getVenues()
-
-
+    private fun observer(){
+        lifecycleScope.launch {
+            viewmodel.getVenues()
+        }
     }
 
     private fun updateAdapters() {
@@ -53,6 +56,4 @@ class VenuesFragment : BaseFragment<FragmentVenuesBinding>(FragmentVenuesBinding
     private fun setAdapters() {
         binding.rvVenues.adapter = venueAdapter
     }
-
-
 }

@@ -36,29 +36,14 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
     private val commentAdapter = CommentAdapter()
 
     override fun onViewCreatedLight() {
+        updateAdapters()
+        setAdapters()
+        observer()
+    }
 
-        lifecycleScope.launch {
-            viewmodel.getVenueDetails(args.venueId)
-            viewmodel.isLoadingMain.collectLatest {
-                binding.progressBarVenues.isVisible = it
-            }
-        }
 
-        lifecycleScope.launch {
-            viewmodel.venueDetails
-                .filter { it != null }
-                .collectLatest {
-                    binding.venueBackButton.isVisible = true
-                    setUI(it!!)
-                }
-        }
-
-        lifecycleScope.launch {
-            viewmodel.isLoadingMain.collectLatest {
-                binding.progressBarCommentVenueDetails.isVisible = it
-            }
-        }
-
+    override fun buttonListener() {
+        super.buttonListener()
         binding.buttonSendCommentVenueDetails.setOnClickListener {
             if (binding.addCommentVenue.text.isNullOrEmpty()) {
                 NancyToast.makeText(requireContext(),"Type main text first!", NancyToast.LENGTH_SHORT, NancyToast.WARNING, false).show()
@@ -73,11 +58,16 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
             binding.addCommentVenue.text = null
         }
 
-        viewmodel.getComments(args.venueId)
-        setAdapters()
-        updateAdapters()
+        binding.venueBackButton.setOnClickListener {
+            findNavController().navigate(
+                R.id.venuesFragment,
+                null,
+                NavOptions.Builder()
+                    .setPopUpTo(R.id.venuesFragment,false)
+                    .build()
+            )
+        }
     }
-
     private fun setUI(venueDetailsItem: VenueDetailsItem) {
         with(binding) {
             textVenueName.text = venueDetailsItem.title
@@ -163,24 +153,38 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
         }
     }
 
-    override fun buttonListener() {
-        super.buttonListener()
-        binding.venueBackButton.setOnClickListener {
-            findNavController().navigate(
-                R.id.venuesFragment,
-                null,
-                NavOptions.Builder()
-                    .setPopUpTo(R.id.venuesFragment,false)
-                    .build()
-            )
+    private fun observer(){
+        lifecycleScope.launch {
+            viewmodel.getComments(args.venueId)
         }
+
+        lifecycleScope.launch {
+            viewmodel.getVenueDetails(args.venueId)
+            viewmodel.isLoadingMain.collectLatest {
+                binding.progressBarVenues.isVisible = it
+            }
+        }
+
+        lifecycleScope.launch {
+            viewmodel.venueDetails
+                .filter { it != null }
+                .collectLatest {
+                    binding.venueBackButton.isVisible = true
+                    setUI(it!!)
+                }
+        }
+
+        lifecycleScope.launch {
+            viewmodel.isLoadingMain.collectLatest {
+                binding.progressBarCommentVenueDetails.isVisible = it
+            }
+        }
+
+
+
     }
 
-    private fun setAdapters() {
-        binding.rvCommentsVenueDetails.adapter = commentAdapter
-    }
-
-    private fun updateAdapters() {
+    private fun updateAdapters(){
         lifecycleScope.launch {
             viewmodel.isLoadingComments.collectLatest {
                 binding.progressBarCommentVenueDetails.isVisible = it
@@ -195,4 +199,10 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
                 }
         }
     }
+
+
+    private fun setAdapters() {
+        binding.rvCommentsVenueDetails.adapter = commentAdapter
+    }
+
 }

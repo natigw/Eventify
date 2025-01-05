@@ -39,64 +39,9 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
 
     private val commentAdapter = CommentAdapter()
     override fun onViewCreatedLight() {
-
-        lifecycleScope.launch {
-            viewmodel.getEventDetails(args.eventId)
-            viewmodel.isLoadingMain.collectLatest {
-                binding.progressBarEvents.isVisible = it
-            }
-        }
-        lifecycleScope.launch {
-            viewmodel.getEventLikeInfo(args.eventId)
-        }
-
-
-        lifecycleScope.launch {
-            viewmodel.likedState
-                .filter { it!=null }
-                .collectLatest {
-                    if(it!!){
-                        binding.buttonLikeEvent.setIconResource(R.drawable.like_fav)
-                    }
-                    else{
-                        binding.buttonLikeEvent.setIconResource(R.drawable.like_fav_border)
-                    }
-                    binding.eventBackButton.isVisible = true
-            }
-        }
-
-
-        lifecycleScope.launch {
-            viewmodel.eventDetails
-                .filter { it != null }
-                .collectLatest {
-                    setUI(it!!)
-                }
-        }
-
-        lifecycleScope.launch {
-            viewmodel.isLoadingMain.collectLatest {
-                binding.progressBarCommentEventDetails.isVisible = it
-            }
-        }
-
-        binding.buttonSendCommentEventDetails.setOnClickListener {
-            if (binding.addCommentEvent.text.isNullOrEmpty()) {
-                NancyToast.makeText(requireContext(),"Type main text first!", NancyToast.LENGTH_SHORT, NancyToast.WARNING, false).show()
-                return@setOnClickListener
-            }
-            viewmodel.addComment(
-                AddCommentItem(
-                    content = binding.addCommentEvent.text.toString().trim(),
-                    placeId = args.eventId
-                )
-            )
-            binding.addCommentEvent.text = null
-        }
-
-        viewmodel.getComments(args.eventId)
         setAdapters()
         updateAdapters()
+        observer()
     }
 
     override fun buttonListener() {
@@ -120,6 +65,19 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
             )
         }
 
+        binding.buttonSendCommentEventDetails.setOnClickListener {
+            if (binding.addCommentEvent.text.isNullOrEmpty()) {
+                NancyToast.makeText(requireContext(),"Type main text first!", NancyToast.LENGTH_SHORT, NancyToast.WARNING, false).show()
+                return@setOnClickListener
+            }
+            viewmodel.addComment(
+                AddCommentItem(
+                    content = binding.addCommentEvent.text.toString().trim(),
+                    placeId = args.eventId
+                )
+            )
+            binding.addCommentEvent.text = null
+        }
     }
 
     private fun setUI(eventDetailsItem: EventDetailsItem) {
@@ -183,6 +141,56 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
         }
     }
 
+
+    private fun observer(){
+
+        lifecycleScope.launch {
+            viewmodel.getComments(args.eventId)
+        }
+
+
+        lifecycleScope.launch {
+            viewmodel.getEventDetails(args.eventId)
+            viewmodel.isLoadingMain.collectLatest {
+                binding.progressBarEvents.isVisible = it
+            }
+        }
+
+
+        lifecycleScope.launch {
+            viewmodel.getEventLikeInfo(args.eventId)
+        }
+
+
+        lifecycleScope.launch {
+            viewmodel.likedState
+                .filter { it!=null }
+                .collectLatest {
+                    if(it!!){
+                        binding.buttonLikeEvent.setIconResource(R.drawable.like_fav)
+                    }
+                    else{
+                        binding.buttonLikeEvent.setIconResource(R.drawable.like_fav_border)
+                    }
+                    binding.eventBackButton.isVisible = true
+                }
+        }
+
+
+        lifecycleScope.launch {
+            viewmodel.eventDetails
+                .filter { it != null }
+                .collectLatest {
+                    setUI(it!!)
+                }
+        }
+
+        lifecycleScope.launch {
+            viewmodel.isLoadingMain.collectLatest {
+                binding.progressBarCommentEventDetails.isVisible = it
+            }
+        }
+    }
 
     private fun setAdapters() {
         binding.rvCommentsEventDetails.adapter = commentAdapter
