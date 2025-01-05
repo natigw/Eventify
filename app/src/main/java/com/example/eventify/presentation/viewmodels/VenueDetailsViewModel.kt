@@ -22,7 +22,7 @@ class VenueDetailsViewModel @Inject constructor(
 
     var noComments = false
     val isLoadingComments = MutableStateFlow(true)
-    val comments = MutableStateFlow<List<CommentItem>>(emptyList())
+    val commentsState = MutableStateFlow<List<CommentItem>?>(value = null)
 
     fun getVenueDetails(venueId: Int) {
         viewModelScope.launch {
@@ -35,7 +35,7 @@ class VenueDetailsViewModel @Inject constructor(
     fun getComments(venueId: Int) {
         viewModelScope.launch {
             val response = venueRepository.getVenueComments(venueId)
-            comments.emit(response)
+            commentsState.emit(response)
             isLoadingComments.update { false }
             if (response.isEmpty()) noComments = true
         }

@@ -30,6 +30,8 @@ class VenuesFragment : BaseFragment<FragmentVenuesBinding>(FragmentVenuesBinding
         updateAdapters()
 
         viewmodel.getVenues()
+
+
     }
 
     private fun updateAdapters() {
@@ -52,8 +54,5 @@ class VenuesFragment : BaseFragment<FragmentVenuesBinding>(FragmentVenuesBinding
         binding.rvVenues.adapter = venueAdapter
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
 
-    }
 }

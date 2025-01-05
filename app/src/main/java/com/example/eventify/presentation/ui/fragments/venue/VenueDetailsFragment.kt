@@ -189,9 +189,10 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
             }
         }
         lifecycleScope.launch {
-            viewmodel.comments
-                .filter { it.isNotEmpty() }
+            viewmodel.commentsState
+                .filter { it!=null }
                 .collect {
+                    binding.textNoCommentsTextVenueDetails.isVisible = it!!.isEmpty()
                     commentAdapter.updateAdapter(it)
                 }
         }
