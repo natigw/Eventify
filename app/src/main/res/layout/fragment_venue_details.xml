@@ -75,7 +75,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="-16dp"
             android:backgroundTint="@color/eventify_background_primary"
-            android:visibility="visible"
+            android:visibility="invisible"
             app:icon="@drawable/ic_back_arrow"
             app:iconSize="24dp"
             app:iconTint="@color/purple_eventify"
@@ -129,6 +129,7 @@
             android:layout_marginEnd="4dp"
             android:backgroundTint="@color/eventify_background_primary"
             android:tag="not_liked"
+            android:visibility="gone"
             app:icon="@drawable/like_fav_border"
             app:iconTint="@color/purple_dark_eventify"
             app:layout_constraintEnd_toEndOf="@id/imageVenue"
@@ -392,10 +393,11 @@
             android:text="@string/no_comments"
             android:textColor="@color/purple_dark_eventify"
             android:textSize="20sp"
-            app:layout_constraintTop_toBottomOf="@id/textInputWriteCommentVenueDetails"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/guidelineVenueDetails2"
-            app:layout_constraintStart_toStartOf="@id/guidelineVenueDetails1" />
+            app:layout_constraintStart_toStartOf="@id/guidelineVenueDetails1"
+            app:layout_constraintTop_toBottomOf="@id/textInputWriteCommentVenueDetails" />
 
         <ProgressBar
             android:id="@+id/progressBarCommentVenueDetails"

@@ -92,7 +92,6 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(imageVenue)
 
-            var flag = true
             buttonLikeVenue.setOnClickListener {
                 if (buttonLikeVenue.tag == "not_liked") {
                     buttonLikeVenue.setIconResource(R.drawable.like_fav)
@@ -185,7 +184,6 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
         lifecycleScope.launch {
             viewmodel.isLoadingComments.collectLatest {
                 binding.progressBarCommentVenueDetails.isVisible = it
-                binding.textNoCommentsTextVenueDetails.isInvisible = it
             }
         }
         lifecycleScope.launch {
