@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="green_eventify">#E70707</color>
-    <color name="eventify_background_secondary">#000000</color>  <!--black-->
-    <color name="eventify_on_primary">#000000</color>            <!--white textColor on primary color (purple)-->
-    <color name="eventify_on_background_primary">#FFFFFF</color> <!--black text on light background-->
-    <color name="purple_dark_eventify">#6823EA</color>  <!-- bunu deyis adlandirmani -->
+    <color name="eventify_background_primary">#000000</color>    <!--black-->
+    <color name="eventify_background_secondary">#313131</color>  <!--dark gray-->
+    <color name="eventify_on_background">#FFFFFF</color>         <!--white text on dark background-->
 
-    <color name="appBackground">#03A9F4</color>
-    <color name="bottomNavBackground">#FF9800</color>
+    <color name="eventify_heading">#6823EA</color>               <!--purple-->
+    <color name="eventify_primary">#4819A2</color>               <!--dark purple-->
+    <color name="eventify_primary_helper">#FFFFFF</color>        <!--white for helper texts-->
+    <color name="eventify_secondary">#25AB62</color>             <!--dark green-->
+    <color name="eventify_on_primary">#FFFFFF</color>            <!--white on dark purple-->
+    <color name="eventify_on_secondary">#FFFFFF</color>          <!--white on dark green-->
+
+
+    <color name="purple_dark_eventify">#6823EA</color>           <!-- bunu deyis adlandirmani -->
+
+    <color name="eventify_bottom_nav_background">#121212</color>
 </resources>

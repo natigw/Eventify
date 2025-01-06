@@ -6,11 +6,13 @@ import android.widget.ArrayAdapter
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.common.base.BaseFragment
 import com.example.common.utils.functions.getLocalTime
+import com.example.common.utils.functions.validateInputFieldEmpty
 import com.example.common.utils.nancyToastError
 import com.example.common.utils.nancyToastSuccess
 import com.example.common.utils.nancyToastWarning
@@ -24,11 +26,11 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import dagger.hilt.android.AndroidEntryPoint
-import java.text.SimpleDateFormat
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.LocalTime
-import java.util.Date
-import java.util.Locale
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -62,16 +64,8 @@ class CreateCustomEventFragment : BaseFragment<FragmentCreateCustomEventBinding>
     }
 
     override fun onViewCreatedLight() {
-        setUI()
+        viewModelObserver()
         clickListeners()
-    }
-
-    private fun setUI() {
-        with(binding) {
-            buttonDatePickerCCE.text = if (viewmodel.pickedDate == null) getString(R.string.specify_event_date) else "${viewmodel.pickedDate}    ${getString(R.string.change)}"
-            buttonTimePickerStartCCE.text = if (viewmodel.pickedStartTime == null) getString(R.string.specify_event_start_time) else "${viewmodel.pickedStartTime}    ${getString(R.string.change)}"
-            buttonTimePickerFinishCCE.text = if (viewmodel.pickedFinishTime == null) getString(R.string.specify_event_finish_time) else "${viewmodel.pickedFinishTime}    ${getString(R.string.change)}"
-        }
     }
 
     private fun clickListeners() {
@@ -90,36 +84,32 @@ class CreateCustomEventFragment : BaseFragment<FragmentCreateCustomEventBinding>
             showDatePicker()
         }
         binding.buttonTimePickerStartCCE.setOnClickListener {
-            if (viewmodel.pickedDate == null) {
+            if (viewmodel.pickedDate.value == null) {
                 nancyToastWarning(requireContext(), getString(R.string.please_specify_event_date_first))
                 return@setOnClickListener
             }
             showTimePicker(true)
         }
         binding.buttonTimePickerFinishCCE.setOnClickListener {
-            if (viewmodel.pickedStartTime == null) {
+            if (viewmodel.pickedStartTime.value == null) {
                 nancyToastWarning(requireContext(), getString(R.string.please_specify_event_start_time_first))
                 return@setOnClickListener
             }
             showTimePicker(false)
         }
         binding.buttonCreateCCE.setOnClickListener {
-            val title = binding.titleCCE.text.toString().trim()
-            val description = binding.descriptionCCE.text.toString().trim()
+            val title = binding.textInputEdittextTitleCCE.text.toString().trim()
+            val description = binding.textInputEdittextDescriptionCCE.text.toString().trim()
             val eventType = binding.autoCompleteTextEventType.text.toString().trim()
-            if (title.isEmpty()) {
-                nancyToastWarning(requireContext(), getString(R.string.please_add_event_title))
+
+            val isEventTypeValid = validateInputFieldEmpty(binding.textInputLayoutEventTypeCCE, eventType, getString(R.string.please_specify_event_type))
+            val isDescriptionValid = validateInputFieldEmpty(binding.textInputLayoutEventDescriptionCCE, description, getString(R.string.please_add_event_description))
+            val isTitleValid = validateInputFieldEmpty(binding.textInputLayoutEventTitleCCE, title, getString(R.string.please_add_event_title))
+
+            if (!(isTitleValid and isDescriptionValid and isEventTypeValid)) {
                 return@setOnClickListener
             }
-            if (description.isEmpty()) {
-                nancyToastWarning(requireContext(), getString(R.string.please_add_event_description))
-                return@setOnClickListener
-            }
-            if (eventType.isEmpty()) {
-                nancyToastWarning(requireContext(), getString(R.string.please_specify_event_type))
-                return@setOnClickListener
-            }
-            if (viewmodel.pickedDate == null || viewmodel.pickedStartTime == null || viewmodel.pickedFinishTime == null) {
+            if (viewmodel.pickedDate.value == null || viewmodel.pickedStartTime.value == null || viewmodel.pickedFinishTime.value == null) {
                 nancyToastWarning(requireContext(), getString(R.string.please_specify_event_all_timing_details))
                 return@setOnClickListener
             }
@@ -127,6 +117,7 @@ class CreateCustomEventFragment : BaseFragment<FragmentCreateCustomEventBinding>
             findNavController().popBackStack()
         }
     }
+
 
     private fun showDatePicker() {
         // Create constraints to block past dates
@@ -144,17 +135,12 @@ class CreateCustomEventFragment : BaseFragment<FragmentCreateCustomEventBinding>
         datePicker.show(parentFragmentManager, "datePicker")
 
         datePicker.addOnPositiveButtonClickListener { selection ->
-            val selectedDate = Date(selection)
-            val formattedDate = SimpleDateFormat("dd MMM yyyy", Locale.getDefault()).format(selectedDate)
-            binding.buttonDatePickerCCE.text = "$formattedDate    ${getString(R.string.change)}"
-            viewmodel.pickedDate = LocalDate.ofEpochDay(selection / (24 * 60 * 60 * 1000))
+            viewmodel.pickedDate.value = LocalDate.ofEpochDay(selection / (24 * 60 * 60 * 1000))
 
-            if (viewmodel.pickedDate == getLocalTime().toLocalDate() && viewmodel.pickedStartTime != null && viewmodel.pickedStartTime!!.isBefore(getLocalTime().toLocalTime())) {
+            if (viewmodel.pickedDate.value == getLocalTime().toLocalDate() && viewmodel.pickedStartTime.value != null && viewmodel.pickedStartTime.value!!.isBefore(getLocalTime().toLocalTime())) {
                 nancyToastWarning(requireContext(), getString(R.string.please_reconsider_event_times))
-                binding.buttonTimePickerStartCCE.text = getString(R.string.specify_event_start_time)
-                binding.buttonTimePickerFinishCCE.text = getString(R.string.specify_event_finish_time)
-                viewmodel.pickedStartTime = null
-                viewmodel.pickedFinishTime = null
+                viewmodel.pickedStartTime.update { null }
+                viewmodel.pickedFinishTime.update { null }
             }
         }
     }
@@ -165,8 +151,8 @@ class CreateCustomEventFragment : BaseFragment<FragmentCreateCustomEventBinding>
         val timePicker = MaterialTimePicker.Builder()
             .setInputMode(MaterialTimePicker.INPUT_MODE_CLOCK)
             .setTimeFormat(TimeFormat.CLOCK_24H)
-            .setHour(if (isStart) currentHour else viewmodel.pickedStartTime!!.plusHours(2).hour)
-            .setMinute(if (isStart) currentMinute else viewmodel.pickedStartTime!!.plusHours(2).minute)
+            .setHour(if (isStart) currentHour else viewmodel.pickedStartTime.value!!.plusHours(2).hour)
+            .setMinute(if (isStart) currentMinute else viewmodel.pickedStartTime.value!!.plusHours(2).minute)
             .setTitleText(getString(if (isStart) R.string.event_start_time else R.string.event_finish_time))
             .build()
 
@@ -177,25 +163,41 @@ class CreateCustomEventFragment : BaseFragment<FragmentCreateCustomEventBinding>
             val selectedMinute = timePicker.minute
             val selectedTime = LocalTime.of(selectedHour, selectedMinute)
             if (isStart) {
-                if (viewmodel.pickedDate == getLocalTime().toLocalDate() && selectedTime.plusMinutes(1).isBefore(getLocalTime().toLocalTime())) {
+                if (viewmodel.pickedDate.value == getLocalTime().toLocalDate() && selectedTime.plusMinutes(1).isBefore(getLocalTime().toLocalTime())) {
                     nancyToastWarning(requireContext(), getString(R.string.start_time_cannot_be_past))
                     return@addOnPositiveButtonClickListener
                 }
-                if (viewmodel.pickedFinishTime != null && selectedTime.isAfter(viewmodel.pickedFinishTime)) {
+                if (viewmodel.pickedFinishTime.value != null && selectedTime.isAfter(viewmodel.pickedFinishTime.value)) {
                     nancyToastWarning(requireContext(), getString(R.string.please_reconsider_finish_time))
                     binding.buttonTimePickerFinishCCE.text = getString(R.string.specify_event_finish_time)
-                    viewmodel.pickedFinishTime = null
+                    viewmodel.pickedFinishTime.update { null }
                 }
-                binding.buttonTimePickerStartCCE.text = "$selectedTime    ${getString(R.string.change)}"
-                viewmodel.pickedStartTime = selectedTime
+                viewmodel.pickedStartTime.update { selectedTime }
             }
             else {
-                if (selectedTime.isBefore(viewmodel.pickedStartTime)) {
+                if (selectedTime.isBefore(viewmodel.pickedStartTime.value)) {
                     nancyToastWarning(requireContext(), getString(R.string.finish_time_cannot_be_earlier))
                     return@addOnPositiveButtonClickListener
                 }
-                binding.buttonTimePickerFinishCCE.text = "$selectedTime    ${getString(R.string.change)}"
-                viewmodel.pickedFinishTime = selectedTime
+                viewmodel.pickedFinishTime.update { selectedTime }
+            }
+        }
+    }
+
+    private fun viewModelObserver() {
+        lifecycleScope.launch {
+            viewmodel.pickedDate.collectLatest {
+                binding.buttonDatePickerCCE.text = if (it == null) getString(R.string.specify_event_date) else "$it    ${getString(R.string.change)}"
+            }
+        }
+        lifecycleScope.launch {
+            viewmodel.pickedStartTime.collectLatest {
+                binding.buttonTimePickerStartCCE.text = if (it == null) getString(R.string.specify_event_start_time) else "$it    ${getString(R.string.change)}"
+            }
+        }
+        lifecycleScope.launch {
+            viewmodel.pickedFinishTime.collectLatest {
+                binding.buttonTimePickerFinishCCE.text = if (it == null) getString(R.string.specify_event_finish_time) else "$it    ${getString(R.string.change)}"
             }
         }
     }

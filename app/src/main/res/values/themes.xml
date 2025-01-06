@@ -9,7 +9,7 @@
         <item name="colorPrimary">@color/purple_eventify</item>
         <item name="colorPrimaryVariant">@color/green_light_eventify</item>
         <item name="colorOnPrimary">@color/eventify_on_primary</item>
-        <item name="android:navigationBarColor">@color/bottomNavBackground</item>
+        <item name="android:navigationBarColor">@color/eventify_bottom_nav_background</item>
         <item name="android:statusBarColor">@color/eventify_background_primary</item>
     </style>
 
@@ -22,13 +22,12 @@
         <item name="colorSurface">@color/green_light_eventify</item>
     </style>
 
-<!--    &lt;!&ndash; CUSTOM TIME PICKER THEME &ndash;&gt;-->
+    <!-- CUSTOM TIME PICKER THEME -->
 <!--    <style name="MaterialTime" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">-->
 <!--        <item name="colorOnPrimary">@color/white</item>-->
 <!--        <item name="colorPrimary">@color/purple_dark_eventify</item>-->
 <!--        <item name="colorSurface">@color/green_light_eventify</item>-->
 <!--    </style>-->
-
 
 
     <!-- CUSTOM ALERT DIALOG THEME -->

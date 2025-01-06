@@ -5,6 +5,7 @@
     <string name="hello_blank_fragment">Salam boş fragment</string>
     <string name="finish">Bitir</string>
     <string name="login_unsuccessful">Giriş uğursuzdur</string>
+    <string name="logout_successful">Çıxış uğurludur!</string>
     <string name="next">Növbəti</string>
     <string name="skip">Təqdimatı ötür</string>
     <string name="email">E-poçt ünvanınız</string>
@@ -72,6 +73,7 @@
     <string name="tickets">Biletlər</string>
     <string name="chat">Söhbətlər</string>
     <string name="subscription">Abunəlik</string>
+    <string name="something_went_wrong_colon">"Nəsə yanlışlıq oldu: "</string>
     <string name="error_request">Vayy! Nəsə yanlışlıq oldu, yenidən cəhd edin!</string>
     <string name="add_comment">Şərh əlavə edin...</string>
     <string name="comments">şərhlər</string>
@@ -85,4 +87,56 @@
     <string name="create_your_event">Öz tədbirinizi yaradın</string>
     <string name="change_language">Tətbiqin dilini dəyişin</string>
     <string name="login_successful">Giriş uğurludur</string>
+    <string name="something_went_wrong">Vayy! Nəsə yanlışlıq oldu!</string>
+    <string name="create_event">Tədbir yarat</string>
+    <string name="change">Dəyişdir</string>
+    <string name="event_date">Tədbirin tarixi</string>
+    <string name="event_start_time">Tədbirin başlanma vaxtı</string>
+    <string name="event_finish_time">Tədbirin bitmə vaxtı</string>
+    <string name="title">Tədbirin başlığı</string>
+    <string name="description">Açıqlama</string>
+    <string name="event_type">Tədbirin tipi</string>
+    <string name="specify_event_date">Tarixi qeyd edin</string>
+    <string name="specify_event_start_time">Başlanma vaxtını qeyd edin</string>
+    <string name="specify_event_finish_time">Bitmə vaxtını qeyd edin</string>
+    <string-array name="event_types">
+        <item>Teatr</item>
+        <item>Konsert</item>
+        <item>Sərgi</item>
+        <item>Kitab sərgisi</item>
+        <item>Seminar</item>
+        <item>Festival</item>
+        <item>Rəqs</item>
+    </string-array>
+    <string name="type_main_text_first">Əvvəlcə əsas mətni daxil edin!</string>
+    <string name="password_should_contain_lowercase">Şifrədə kiçik hərf olmalıdır!</string>
+    <string name="password_should_contain_uppercase">Şifrədə böyük hərf olmalıdır!</string>
+    <string name="password_should_contain_digit">Şifrədə rəqəm olmalıdır!</string>
+    <string name="password_should_contain_special_character">Şifrədə simvol olmalıdır!</string>
+    <string name="min_password_length_is_8">Şifrənin minimum uzunluğu 8 olmalıdır!</string>
+    <string name="please_accept_terms">Şərtləri və qaydaları qəbul edin</string>
+    <string name="please_enter_valid_email">Keçərli bir email daxil edin!</string>
+    <string name="please_fill_all_fields">Bütün sahələri doldurun!</string>
+    <string name="fill_all_input_fields">Bütün sahələri doldurun!</string>
+    <string name="please_specify_event_type">Tədbirin tipini qeyd edin!</string>
+    <string name="please_specify_event_all_timing_details">Zamanlamaları qeyd edin!</string>
+    <string name="please_specify_event_date_first">Əvvəl tədbirin tarixini qeyd edin!</string>
+    <string name="please_specify_event_start_time_first">Əvvəl tədbirin başlama vaxtını qeyd edin!</string>
+    <string name="please_add_event_title">Tədbirə başlıq əlavə edin!</string>
+    <string name="please_add_event_description">Tədbirə açıqlama əlavə edin!</string>
+    <string name="please_reconsider_finish_time">Bitmə vaxtını yenidən qeyd edin!</string>
+    <string name="please_reconsider_event_times">Tədbirin saatlarını yenidən qeyd edin!</string>
+    <string name="start_time_cannot_be_past">Başlama vaxtı yanlışdır!</string>
+    <string name="finish_time_cannot_be_earlier">Bitmə vaxtı daha əvvəl ola bilməz!</string>
+    <string name="picture_upload_successful">Şəkil uğurla yükləndi!</string>
+    <string name="custom_event_creation_successful">İstifadəçi tədbiri uğurla yaradıldı!</string>
+    <string name="no_image_selected">Heç bir şəkil seçilməyib!</string>
+    <string name="upload_failed_colon">"Yüləmə uğursuzdur: "</string>
+    <string name="image_upload_successful_colon">"Şəkil uğurla yükləndi: "</string>
+    <string name="error_fetching_route">Marşrut yüklənə bilmədi!</string>
+    <string name="location_permission_denied">Məkan icazəsi verilməyib!</string>
+    <string name="enable_location_service">Zəhmət olmasa məkan servisini aktivləşdirin!</string>
+    <string name="navigating_help_page">kömək səhifəsinə yönləndirilir</string>
+    <string name="navigating_payment_screen">ödəniş səhifəsinə yönləndirilir</string>
+    <string name="navigating_buy_ticket">bilet al səhifəsinə yönləndirilir</string>
 </resources>

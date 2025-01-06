@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="username"
-        android:textColor="@color/eventify_on_background_primary"
+        android:textColor="@color/eventify_on_background"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -19,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="comment"
-        android:textColor="@color/eventify_on_background_primary"
+        android:textColor="@color/eventify_on_background"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textUsernameComments"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -30,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="comment date"
-        android:textColor="@color/eventify_on_background_primary"
+        android:textColor="@color/eventify_on_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

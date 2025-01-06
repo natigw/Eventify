@@ -25,7 +25,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="-8dp"
-        android:background="@color/bottomNavBackground"
+        android:background="@color/eventify_bottom_nav_background"
         app:itemActiveIndicatorStyle="@style/InvisibleIndicator"
         app:itemIconTint="@color/nav_item_color"
         app:itemPaddingBottom="24dp"
