@@ -1,7 +1,7 @@
-package com.example.test
+package com.example.eventify.test
 
 import com.example.common.base.BaseActivity
-import com.example.test.databinding.ActivityTestBinding
+import com.example.eventify.databinding.ActivityTestBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

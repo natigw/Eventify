@@ -3,9 +3,9 @@ package com.example.eventify.presentation.ui.fragments.subscription
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.res.ResourcesCompat
 import androidx.navigation.fragment.findNavController
-import com.example.eventify.R
 import com.example.common.base.BaseFragment
-import com.example.common.utils.NancyToast
+import com.example.common.utils.nancyToastSuccess
+import com.example.eventify.R
 import com.example.eventify.databinding.FragmentSubscriptionBinding
 import com.example.eventify.presentation.adapters.SubscriptionAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,7 +20,7 @@ class SubscriptionFragment : BaseFragment<FragmentSubscriptionBinding>(FragmentS
         currentPackage = "Base",
         isAnnualBilling = true, //viewmodel.switchStateFlow.value
         onClick = {
-            NancyToast.makeText(requireContext(), "[navigating payment screen]", NancyToast.LENGTH_SHORT, NancyToast.SUCCESS, false).show()
+            nancyToastSuccess(requireContext(), getString(R.string.navigating_payment_screen))
         }
     )
 

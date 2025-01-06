@@ -11,22 +11,18 @@ import android.content.res.Resources
 import android.graphics.Color
 import android.net.Uri
 import android.util.Log
-import android.view.Gravity
-import android.widget.Button
-import android.widget.TextView
 import androidx.core.app.ActivityCompat
-import androidx.core.content.edit
-import androidx.core.view.GravityCompat
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.common.base.BaseFragment
-import com.example.eventify.R
 import com.example.common.utils.NancyToast
+import com.example.common.utils.nancyToastError
+import com.example.common.utils.nancyToastInfo
+import com.example.common.utils.nancyToastSuccess
 import com.example.data.remote.api.EventAPI
 import com.example.data.remote.api.VenueAPI
+import com.example.eventify.R
 import com.example.eventify.databinding.FragmentMapBinding
 import com.example.eventify.presentation.ui.activities.OnBoardingActivity
 import com.example.eventify.presentation.viewmodels.SharedViewModel
@@ -41,8 +37,6 @@ import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.PolylineOptions
-import com.google.android.material.imageview.ShapeableImageView
-import com.google.android.material.navigation.NavigationView
 import com.google.maps.android.PolyUtil
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -268,7 +262,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
             try {
                 val response = client.newCall(request).execute()
-                val jsonResponse = JSONObject(response.body()!!.string())
+                val jsonResponse = JSONObject(response.body!!.string())
                 val routes = jsonResponse.getJSONArray("routes")
 
                 if (routes.length() > 0) {
@@ -291,13 +285,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             } catch (e: Exception) {
                 e.printStackTrace()
                 withContext(Dispatchers.Main) {
-                    NancyToast.makeText(
-                        requireContext(),
-                        "Error fetching route",
-                        NancyToast.LENGTH_LONG,
-                        NancyToast.ERROR,
-                        false
-                    )
+                    nancyToastError(requireContext(), getString(R.string.error_fetching_route))
                     Log.e("exception", e.toString())
                 }
             }
@@ -350,13 +338,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 getMyLocation()
             } else {
-                NancyToast.makeText(
-                    requireContext(),
-                    "Location permission denied",
-                    NancyToast.LENGTH_LONG,
-                    NancyToast.ERROR,
-                    false
-                )
+                nancyToastError(requireContext(), getString(R.string.location_permission_denied))
             }
         }
     }
@@ -390,7 +372,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 //            .into(userProfilePicture)
 //
 //        editProfileDrawer.setOnClickListener {
-//            NancyToast.makeText(requireContext(), "edit", NancyToast.LENGTH_SHORT, NancyToast.SUCCESS, false).show()
+//        nancyToastSuccess(requireContext(), getString(R.string.edit))
 //            //TODO -> edit screen
 //        }
 //
@@ -434,7 +416,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 //                    sharedPreferences.edit{
 //                        clear()
 //                    }
-//                    NancyToast.makeText(requireContext(), "You have been logged out!", NancyToast.LENGTH_SHORT, NancyToast.INFO, false).show()
+//                    nancyToastInfo(requireContext(), getString(R.string.logout_successful))
 //                    navigateToAuthActivity()
 //                    true
 //                }

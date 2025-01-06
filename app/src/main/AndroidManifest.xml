@@ -26,7 +26,7 @@
             android:value="${MAPS_API_KEY}" />
 
         <activity
-            android:name="com.example.test.TestActivity"
+            android:name=".test.TestActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity

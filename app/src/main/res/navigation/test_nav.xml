@@ -4,10 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/test_nav"
     app:startDestination="@id/test1Fragment">
-
     <fragment
         android:id="@+id/test1Fragment"
-        android:name="com.example.test.test.Test1Fragment"
+        android:name="com.example.eventify.test.Test1Fragment"
         android:label="fragment_test1"
         tools:layout="@layout/fragment_test1" />
 </navigation>

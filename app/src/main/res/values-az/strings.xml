@@ -20,7 +20,7 @@
     <string name="forgot_password">Şifrəni unutdunuz?</string>
     <string name="first_name">Adınız</string>
     <string name="last_name">Soyadınız</string>
-    <string name="accept_terms">Şərtləri və qaydaları qəbul edirəm</string>
+    <string name="i_accept_terms">Şərtləri və qaydaları qəbul edirəm</string>
     <string name="register">Qeydiyyatdan keçin</string>
     <string name="home">Ana səhifə</string>
     <string name="venues">Məkanlar</string>

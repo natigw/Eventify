@@ -90,6 +90,8 @@ dependencies {
     //retrofit
     implementation(libs.retrofit2.retrofit)
     implementation(libs.converter.gson)
+    // OkHttp
+    implementation(libs.okhttp)
 
     implementation(libs.android.maps.utils)
 

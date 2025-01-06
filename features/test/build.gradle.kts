@@ -40,8 +40,13 @@ android {
 
 dependencies {
 
+    //glide
+    implementation(libs.github.glide)
+
     //retrofit
     implementation(libs.retrofit2.retrofit)
+    // OkHttp
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
 
     //hilt
     implementation(libs.hilt.android)

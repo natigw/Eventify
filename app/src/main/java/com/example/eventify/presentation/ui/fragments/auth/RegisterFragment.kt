@@ -10,8 +10,10 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.common.base.BaseFragment
-import com.example.common.utils.NancyToast
 import com.example.common.utils.functions.isValidEmail
+import com.example.common.utils.nancyToastError
+import com.example.common.utils.nancyToastSuccess
+import com.example.common.utils.nancyToastWarning
 import com.example.eventify.R
 import com.example.eventify.databinding.FragmentRegisterBinding
 import com.example.eventify.presentation.viewmodels.OnBoardingSharedViewModel
@@ -52,14 +54,14 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
                             email,
                             password
                         )){
-                        NancyToast.makeText(requireContext(), requireContext().getString(R.string.register_successful), NancyToast.LENGTH_SHORT, NancyToast.SUCCESS, false).show()
+                        nancyToastSuccess(requireContext(), getString(R.string.register_successful))
                         sharedViewModel.setFromRegisterScreen()
                         sharedViewModel.setUserEmail(email)
                         clearInputFields()
                         findNavController().popBackStack()
                     }
                     else{
-                        NancyToast.makeText(requireContext(), requireContext().getString(R.string.register_failed), NancyToast.LENGTH_SHORT, NancyToast.ERROR, false).show()
+                        nancyToastError(requireContext(), getString(R.string.register_failed))
                     }
                 }
             }
@@ -100,37 +102,37 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
 
     private fun checkInputFields(firstname: String, lastname: String, username: String, email: String, password: String) : Boolean {
         if (firstname.isEmpty() || lastname.isEmpty() || username.isEmpty() || email.isEmpty() || password.isEmpty()) {
-            NancyToast.makeText(requireContext(), "Please fill the input fields!", NancyToast.LENGTH_SHORT, NancyToast.WARNING, false).show()
+            nancyToastWarning(requireContext(), getString(R.string.fill_all_input_fields))
             return false
         }
         if (!isValidEmail(email)) {
-            NancyToast.makeText(requireContext(), "Please enter a valid e-mail address!", NancyToast.LENGTH_SHORT, NancyToast.ERROR, false).show()
+            nancyToastError(requireContext(), getString(R.string.please_enter_valid_email))
             return false
         }
 
         if (!password.contains("[a-z]".toRegex())) {
-            NancyToast.makeText(requireContext(), "Password should contain lowercase letter(s)!", NancyToast.LENGTH_SHORT, NancyToast.WARNING, false).show()
+            nancyToastWarning(requireContext(), getString(R.string.password_should_contain_lowercase))
             return false
         }
         if (!password.contains("[A-Z]".toRegex())) {
-            NancyToast.makeText(requireContext(), "Password should contain uppercase letter(s)!", NancyToast.LENGTH_SHORT, NancyToast.WARNING, false).show()
+            nancyToastWarning(requireContext(), getString(R.string.password_should_contain_uppercase))
             return false
         }
         if (!password.contains("[0-9]".toRegex())) {
-            NancyToast.makeText(requireContext(), "Password should contain digit(s)!", NancyToast.LENGTH_SHORT, NancyToast.WARNING, false).show()
+            nancyToastWarning(requireContext(), getString(R.string.password_should_contain_digit))
             return false
         }
         if (!password.contains("[!\"#$%&'()*+,-./:;\\\\<=>?@\\[\\]^_`{|}~]".toRegex())) {
-            NancyToast.makeText(requireContext(), "Password should contain special character(s)!", NancyToast.LENGTH_SHORT, NancyToast.WARNING, false).show()
+            nancyToastWarning(requireContext(), getString(R.string.password_should_contain_special_character))
             return false
         }
 
         if (password.length < 8) {
-            NancyToast.makeText(requireContext(), "Minimum password length is 8!", NancyToast.LENGTH_SHORT, NancyToast.WARNING, false).show()
+            nancyToastWarning(requireContext(), getString(R.string.min_password_length_is_8))
             return false
         }
         if (!binding.checkboxTerms.isChecked) {
-            NancyToast.makeText(requireContext(), "Please accept Terms and Conditions!", NancyToast.LENGTH_SHORT, NancyToast.WARNING, false).show()
+            nancyToastWarning(requireContext(), getString(R.string.please_accept_terms))
             return false
         }
         return true

@@ -1,9 +1,6 @@
 package com.example.eventify.presentation.ui.fragments.events.event
 
-import android.util.Log
 import android.view.View
-import androidx.core.content.ContextCompat
-import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -14,15 +11,16 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.common.base.BaseFragment
-import com.example.common.utils.NancyToast
+import com.example.common.utils.nancyToastSuccess
+import com.example.common.utils.nancyToastWarning
 import com.example.domain.model.places.AddCommentItem
 import com.example.domain.model.places.PlaceCoordinates
 import com.example.domain.model.places.event.EventDetailsItem
 import com.example.eventify.R
 import com.example.eventify.databinding.FragmentEventDetailsBinding
 import com.example.eventify.presentation.adapters.CommentAdapter
-import com.example.eventify.presentation.viewmodels.SharedViewModel
 import com.example.eventify.presentation.viewmodels.EventDetailsViewModel
+import com.example.eventify.presentation.viewmodels.SharedViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -67,7 +65,7 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
 
         binding.buttonSendCommentEventDetails.setOnClickListener {
             if (binding.addCommentEvent.text.isNullOrEmpty()) {
-                NancyToast.makeText(requireContext(),"Type main text first!", NancyToast.LENGTH_SHORT, NancyToast.WARNING, false).show()
+                nancyToastWarning(requireContext(), getString(R.string.type_main_text_first))
                 return@setOnClickListener
             }
             viewmodel.addComment(
@@ -135,7 +133,7 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
                 bottomNavigationView.selectedItemId = R.id.mapFragment
             }
             buttonBuyTicketEventDetails.setOnClickListener {
-                NancyToast.makeText(requireContext(), "[buying ticket...]", NancyToast.LENGTH_SHORT, NancyToast.SUCCESS, false).show()
+                nancyToastSuccess(requireContext(), getString(R.string.navigating_buy_ticket))
                 //TODO -> backendden
             }
         }

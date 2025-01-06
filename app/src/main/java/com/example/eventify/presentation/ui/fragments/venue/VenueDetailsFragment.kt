@@ -10,7 +10,7 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.common.base.BaseFragment
-import com.example.common.utils.NancyToast
+import com.example.common.utils.nancyToastWarning
 import com.example.domain.model.places.AddCommentItem
 import com.example.domain.model.places.PlaceCoordinates
 import com.example.domain.model.places.venue.VenueDetailsItem
@@ -45,7 +45,7 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
         super.buttonListener()
         binding.buttonSendCommentVenueDetails.setOnClickListener {
             if (binding.addCommentVenue.text.isNullOrEmpty()) {
-                NancyToast.makeText(requireContext(),"Type main text first!", NancyToast.LENGTH_SHORT, NancyToast.WARNING, false).show()
+                nancyToastWarning(requireContext(), getString(R.string.type_main_text_first))
                 return@setOnClickListener
             }
             viewmodel.addComment(

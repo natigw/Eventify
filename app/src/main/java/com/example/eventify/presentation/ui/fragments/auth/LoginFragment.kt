@@ -9,14 +9,16 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.common.base.BaseFragment
-import com.example.common.utils.NancyToast
+import com.example.common.utils.nancyToastInfo
+import com.example.common.utils.nancyToastSuccess
+import com.example.common.utils.nancyToastWarning
 import com.example.data.remote.thirdpartyregister.GoogleUtils
 import com.example.eventify.BuildConfig
 import com.example.eventify.R
 import com.example.eventify.databinding.FragmentLoginBinding
 import com.example.eventify.presentation.ui.activities.MainActivity
 import com.example.eventify.presentation.viewmodels.LoginViewModel
-import com.example.test.TestActivity
+import com.example.eventify.test.TestActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.filter
@@ -77,7 +79,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
 
     private fun observeChanges() {
         binding.textForgotPassword.setOnClickListener {
-            NancyToast.makeText(requireContext(), "[navigating to help page]", NancyToast.LENGTH_SHORT, NancyToast.INFO, false).show()
+            nancyToastInfo(requireContext(), getString(R.string.navigating_help_page))
         }
         binding.textDontHaveAccount.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
@@ -101,15 +103,14 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             val password = binding.passwordLogin.text.toString().trim()
 
             if (username.isEmpty() || password.isEmpty()) {
-                NancyToast.makeText(requireContext(), "Please fill the fields!", NancyToast.LENGTH_SHORT, NancyToast.WARNING,false).show()
+                nancyToastWarning(requireContext(), getString(R.string.please_fill_all_fields))
                 return@setOnClickListener
             }
 
             lifecycleScope.launch {
                 if(viewModel.loginUser(username = username,password = password)){
                     clearInputFields()
-                    NancyToast.makeText(requireContext(), getString(R.string.login_successful), NancyToast.LENGTH_SHORT,NancyToast.SUCCESS,false).show()
-
+                    nancyToastSuccess(requireContext(), getString(R.string.login_successful))
                     Intent(requireContext(), MainActivity::class.java).also {
                         startActivity(it)
                         requireActivity().finish()
@@ -117,8 +118,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
 
                 }
                 else{
-
-                    NancyToast.makeText(requireContext(), getString(R.string.login_unsuccessful), NancyToast.LENGTH_SHORT,NancyToast.WARNING,false).show()
+                    nancyToastWarning(requireContext(), getString(R.string.login_unsuccessful))
                 }
 
 
@@ -132,7 +132,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             viewModel.errorMessagesState
                 .filter { it != null }
                 .collectLatest {
-                    NancyToast.makeText(requireContext(), it, NancyToast.LENGTH_SHORT, NancyToast.WARNING,false).show()
+                    nancyToastWarning(requireContext(), it)
             }
         }
     }

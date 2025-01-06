@@ -1,7 +1,6 @@
 package com.example.eventify.presentation.ui.fragments.events.customEvent
 
 import android.icu.util.Calendar
-import android.text.TextUtils.substring
 import android.util.Log
 import android.widget.ArrayAdapter
 import androidx.activity.result.PickVisualMediaRequest
@@ -10,8 +9,11 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.common.base.BaseFragment
-import com.example.common.utils.NancyToast
 import com.example.common.utils.functions.getLocalTime
+import com.example.common.utils.nancyToastError
+import com.example.common.utils.nancyToastSuccess
+import com.example.common.utils.nancyToastWarning
+import com.example.data.remote.api.EventAPI
 import com.example.eventify.R
 import com.example.eventify.databinding.FragmentCreateCustomEventBinding
 import com.google.android.material.datepicker.CalendarConstraints
@@ -25,6 +27,7 @@ import java.time.LocalDate
 import java.time.LocalTime
 import java.util.Date
 import java.util.Locale
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class CreateCustomEventFragment : BaseFragment<FragmentCreateCustomEventBinding>(FragmentCreateCustomEventBinding::inflate) {
@@ -32,6 +35,9 @@ class CreateCustomEventFragment : BaseFragment<FragmentCreateCustomEventBinding>
     private var pickedDate: LocalDate? = null
     private var pickedStartTime: LocalTime? = null
     private var pickedFinishTime: LocalTime? = null
+
+    @Inject
+    lateinit var api: EventAPI
 
     private val pickMedia =
         registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
@@ -42,7 +48,7 @@ class CreateCustomEventFragment : BaseFragment<FragmentCreateCustomEventBinding>
                     .placeholder(R.drawable.placeholder_event)
                     .transition(DrawableTransitionOptions.withCrossFade())
                     .into(binding.imagePictureCreateCustomEvent)
-                NancyToast.makeText(requireContext(), "Picture upload successful!", NancyToast.LENGTH_SHORT, NancyToast.SUCCESS, false).show()
+                nancyToastSuccess(requireContext(), getString(R.string.picture_upload_successful))
             } else {
                 Log.d("PhotoPicker", "No media selected")
             }
@@ -56,7 +62,6 @@ class CreateCustomEventFragment : BaseFragment<FragmentCreateCustomEventBinding>
     }
 
     override fun onViewCreatedLight() {
-//        setCurrentDatePicker()
         clickListeners()
     }
 
@@ -69,37 +74,50 @@ class CreateCustomEventFragment : BaseFragment<FragmentCreateCustomEventBinding>
                 pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
             } catch (e: Exception) {
                 Log.e("PhotoPicker", "PHOTOPICKER FAILED!")
-                NancyToast.makeText(requireContext(), "Something went wrong!", NancyToast.LENGTH_SHORT, NancyToast.ERROR,false).show()
+                nancyToastError(requireContext(), getString(R.string.something_went_wrong))
             }
         }
         binding.buttonDatePickerCCE.setOnClickListener {
             showDatePicker()
         }
         binding.buttonTimePickerStartCCE.setOnClickListener {
-            if (binding.buttonDatePickerCCE.text == getString(R.string.event_date)) {
-                NancyToast.makeText(requireContext(), "Please specify event date first!", NancyToast.LENGTH_SHORT, NancyToast.WARNING, false).show()
-                return@setOnClickListener
-            }
-            if (pickedStartTime == null) {
-                NancyToast.makeText(requireContext(), "AAAPlease specify event date first!", NancyToast.LENGTH_SHORT, NancyToast.WARNING, false).show()
+            if (pickedDate == null) {
+                nancyToastWarning(requireContext(), getString(R.string.please_specify_event_date_first))
                 return@setOnClickListener
             }
             showTimePicker(true)
         }
         binding.buttonTimePickerFinishCCE.setOnClickListener {
-            if (binding.buttonTimePickerStartCCE.text == getString(R.string.event_start_time)) {
-                NancyToast.makeText(requireContext(), "Please specify start time first!", NancyToast.LENGTH_SHORT, NancyToast.WARNING, false).show()
+            if (pickedStartTime == null) {
+                nancyToastWarning(requireContext(), getString(R.string.please_specify_event_start_time_first))
                 return@setOnClickListener
             }
             showTimePicker(false)
         }
+        binding.buttonCreateCCE.setOnClickListener {
+            val title = binding.titleCCE.text.toString().trim()
+            val description = binding.descriptionCCE.text.toString().trim()
+            val eventType = binding.autoCompleteTextEventType.text.toString().trim()
+            if (title.isEmpty()) {
+                nancyToastWarning(requireContext(), getString(R.string.please_add_event_title))
+                return@setOnClickListener
+            }
+            if (description.isEmpty()) {
+                nancyToastWarning(requireContext(), getString(R.string.please_add_event_description))
+                return@setOnClickListener
+            }
+            if (eventType.isEmpty()) {
+                nancyToastWarning(requireContext(), getString(R.string.please_specify_event_type))
+                return@setOnClickListener
+            }
+            if (pickedDate == null || pickedStartTime == null || pickedFinishTime == null) {
+                nancyToastWarning(requireContext(), getString(R.string.please_specify_event_all_timing_details))
+                return@setOnClickListener
+            }
+            nancyToastSuccess(requireContext(), getString(R.string.custom_event_creation_successful))
+            findNavController().popBackStack()
+        }
     }
-
-//    private fun setCurrentDatePicker() {
-//        val todayDate = Date()
-//        val dateFormatted = SimpleDateFormat("dd MMM yyyy", Locale.getDefault()).format(todayDate)
-//        binding.buttonDatePickerCCE.text = "${dateFormatted}   ${getString(R.string.change)}"
-//    }
 
     private fun showDatePicker() {
         // Create constraints to block past dates
@@ -119,8 +137,16 @@ class CreateCustomEventFragment : BaseFragment<FragmentCreateCustomEventBinding>
         datePicker.addOnPositiveButtonClickListener { selection ->
             val selectedDate = Date(selection)
             val formattedDate = SimpleDateFormat("dd MMM yyyy", Locale.getDefault()).format(selectedDate)
-            binding.buttonDatePickerCCE.text = "${formattedDate}    ${getString(R.string.change)}"
+            binding.buttonDatePickerCCE.text = "$formattedDate    ${getString(R.string.change)}"
             pickedDate = LocalDate.ofEpochDay(selection / (24 * 60 * 60 * 1000))
+
+            if (pickedDate == getLocalTime().toLocalDate() && pickedStartTime != null && pickedStartTime!!.isBefore(getLocalTime().toLocalTime())) {
+                nancyToastWarning(requireContext(), getString(R.string.please_reconsider_event_times))
+                binding.buttonTimePickerStartCCE.text = getString(R.string.specify_event_start_time)
+                binding.buttonTimePickerFinishCCE.text = getString(R.string.specify_event_finish_time)
+                pickedStartTime = null
+                pickedFinishTime = null
+            }
         }
     }
 
@@ -130,8 +156,8 @@ class CreateCustomEventFragment : BaseFragment<FragmentCreateCustomEventBinding>
         val timePicker = MaterialTimePicker.Builder()
             .setInputMode(MaterialTimePicker.INPUT_MODE_CLOCK)
             .setTimeFormat(TimeFormat.CLOCK_24H)
-            .setHour(if (isStart) currentHour else currentHour+1)
-            .setMinute(currentMinute)
+            .setHour(if (isStart) currentHour else pickedStartTime!!.plusHours(2).hour)
+            .setMinute(if (isStart) currentMinute else pickedStartTime!!.plusHours(2).minute)
             .setTitleText(getString(if (isStart) R.string.event_start_time else R.string.event_finish_time))
             .build()
 
@@ -141,23 +167,29 @@ class CreateCustomEventFragment : BaseFragment<FragmentCreateCustomEventBinding>
             val selectedHour = timePicker.hour
             val selectedMinute = timePicker.minute
             val selectedTime = LocalTime.of(selectedHour, selectedMinute)
-//            val selectedTime = String.format("%02d:%02d", selectedHour, selectedMinute)
             if (isStart) {
-                if (pickedDate != null && pickedDate == getLocalTime().toLocalDate() && selectedTime.isBefore(getLocalTime().toLocalTime())) {
-                    NancyToast.makeText(requireContext(), "Start time cannot be in the past!", NancyToast.LENGTH_SHORT, NancyToast.WARNING, false).show()
+                if (pickedDate == getLocalTime().toLocalDate() && selectedTime.plusMinutes(1).isBefore(getLocalTime().toLocalTime())) {
+                    nancyToastWarning(requireContext(), getString(R.string.start_time_cannot_be_past))
                     return@addOnPositiveButtonClickListener
                 }
-                binding.buttonTimePickerStartCCE.text = "${selectedTime}    ${getString(R.string.change)}"
+                if (pickedFinishTime != null && selectedTime.isAfter(pickedFinishTime)) {
+                    nancyToastWarning(requireContext(), getString(R.string.please_reconsider_finish_time))
+                    binding.buttonTimePickerFinishCCE.text = getString(R.string.specify_event_finish_time)
+                    pickedFinishTime = null
+                }
+                binding.buttonTimePickerStartCCE.text = "$selectedTime    ${getString(R.string.change)}"
                 pickedStartTime = selectedTime
             }
             else {
-                if (pickedStartTime != null && selectedTime.isBefore(pickedStartTime)) {
-                    NancyToast.makeText(requireContext(), "Finish time cannot be earlier than start time!", NancyToast.LENGTH_SHORT, NancyToast.WARNING, false).show()
+                if (selectedTime.isBefore(pickedStartTime)) {
+                    nancyToastWarning(requireContext(), getString(R.string.finish_time_cannot_be_earlier))
                     return@addOnPositiveButtonClickListener
                 }
-                binding.buttonTimePickerFinishCCE.text = "${selectedTime}    ${getString(R.string.change)}"
+                binding.buttonTimePickerFinishCCE.text = "$selectedTime    ${getString(R.string.change)}"
                 pickedFinishTime = selectedTime
             }
         }
     }
 }
+
+//NOTE: IF USER CANNOT TO SET AN EVENT THAT WILL CONTINUE LATE NIGHT (AFTER 00:00)

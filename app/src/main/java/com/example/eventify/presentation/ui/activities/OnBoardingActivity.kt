@@ -6,9 +6,6 @@ import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.core.content.edit
-import androidx.lifecycle.lifecycleScope
 import com.example.eventify.EventifyApplication
 import com.example.common.base.BaseActivity
 import com.example.eventify.databinding.ActivityOnBoardingBinding

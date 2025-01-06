@@ -225,7 +225,7 @@
         app:layout_constraintTop_toBottomOf="@id/buttonTimePickerStartCCE" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/buttonFinishCreateCustomEvent"
+        android:id="@+id/buttonCreateCCE"
         style="?attr/materialIconButtonFilledTonalStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

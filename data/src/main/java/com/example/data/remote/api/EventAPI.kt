@@ -1,5 +1,6 @@
 package com.example.data.remote.api
 
+import com.example.data.remote.model.events.FileUploadGetLinkResponse
 import com.example.data.remote.model.events.allEvents.ResponseAllEvents
 import com.example.data.remote.model.events.comment.addComment.RequestAddEventComment
 import com.example.data.remote.model.events.comment.commentDetails.ResponseEventCommentDetails
@@ -8,11 +9,15 @@ import com.example.data.remote.model.events.createEvent.RequestCreateCustomEvent
 import com.example.data.remote.model.events.eventDetails.ResponseEventDetails
 import com.example.data.remote.model.events.likeDislike.RequestLikeDislikeEvent
 import com.example.data.remote.model.events.likeDislike.favEvents.ResponseFavEvents
+import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Multipart
 import retrofit2.http.POST
+import retrofit2.http.Part
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface EventAPI {
     @GET("/events")
@@ -80,4 +85,13 @@ interface EventAPI {
 //    suspend fun searchEvent(
 //        @Path("query") query: String
 //    ) : ResponseEventSearch
+
+    @Multipart
+    @POST("/files")
+    suspend fun uploadFileAndGetLink(
+        @Query("destination")
+        destination: String, //= "events",
+        @Part
+        fileUploadBody: MultipartBody.Part
+    ) : Response<FileUploadGetLinkResponse>
 }

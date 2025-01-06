@@ -6,7 +6,9 @@ import android.content.SharedPreferences
 import android.content.res.Configuration
 import com.example.common.base.BaseFragment
 import com.example.common.utils.NancyToast
+import com.example.common.utils.nancyToastInfo
 import com.example.eventify.NetworkUtils
+import com.example.eventify.R
 import com.example.eventify.databinding.FragmentProfileBinding
 import com.example.eventify.presentation.ui.activities.OnBoardingActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,11 +25,11 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
 
     @Inject
     @Named("LanguageChoice")
-    lateinit var sharedPrefLanguage : SharedPreferences
+    lateinit var sharedPrefLanguage: SharedPreferences
 
     override fun onViewCreatedLight() {
         binding.buttonLogoutProfile.setOnClickListener {
-            NancyToast.makeText(requireContext(), "You have been logged out!", NancyToast.LENGTH_SHORT, NancyToast.INFO, false).show()
+            nancyToastInfo(requireContext(), getString(R.string.logout_successful))
             NetworkUtils.handleLogout(requireContext())
         }
 
@@ -46,6 +48,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         config.setLocale(locale)
         context.resources.updateConfiguration(config, context.resources.displayMetrics)
     }
+
     private fun changeLanguage(languageCode: String) {
         setAppLocale(requireContext(), languageCode)
         sharedPrefLanguage.edit().putString("language", languageCode).apply()
