@@ -8,7 +8,7 @@ fun nancyToast(
     @NancyToast.Duration duration: Int = NancyToast.LENGTH_SHORT,
     @NancyToast.LayoutType type: Int = NancyToast.DEFAULT
 ) {
-    NancyToast.makeText(context, message, duration, type, false).show()
+    NancyToast.makeText(context, message, duration, type).show()
 }
 
 fun nancyToastSuccess(
@@ -16,7 +16,7 @@ fun nancyToastSuccess(
     message: String?,
     @NancyToast.Duration duration: Int = NancyToast.LENGTH_SHORT
 ) {
-    NancyToast.makeText(context, message, duration, NancyToast.SUCCESS, false).show()
+    NancyToast.makeText(context, message, duration, NancyToast.SUCCESS).show()
 }
 
 fun nancyToastWarning(
@@ -24,7 +24,7 @@ fun nancyToastWarning(
     message: String?,
     @NancyToast.Duration duration: Int = NancyToast.LENGTH_SHORT
 ) {
-    NancyToast.makeText(context, message, duration, NancyToast.WARNING, false).show()
+    NancyToast.makeText(context, message, duration, NancyToast.WARNING).show()
 }
 
 fun nancyToastError(
@@ -32,7 +32,7 @@ fun nancyToastError(
     message: String?,
     @NancyToast.Duration duration: Int = NancyToast.LENGTH_SHORT
 ) {
-    NancyToast.makeText(context, message, duration, NancyToast.ERROR, false).show()
+    NancyToast.makeText(context, message, duration, NancyToast.ERROR).show()
 }
 
 fun nancyToastInfo(
@@ -40,5 +40,5 @@ fun nancyToastInfo(
     message: String?,
     @NancyToast.Duration duration: Int = NancyToast.LENGTH_SHORT
 ) {
-    NancyToast.makeText(context, message, duration, NancyToast.INFO, false).show()
+    NancyToast.makeText(context, message, duration, NancyToast.INFO).show()
 }

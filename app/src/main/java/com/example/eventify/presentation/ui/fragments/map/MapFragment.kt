@@ -20,6 +20,7 @@ import com.example.common.utils.NancyToast
 import com.example.common.utils.nancyToastError
 import com.example.common.utils.nancyToastInfo
 import com.example.common.utils.nancyToastSuccess
+import com.example.common.utils.nancyToastWarning
 import com.example.data.remote.api.EventAPI
 import com.example.data.remote.api.VenueAPI
 import com.example.eventify.R
@@ -97,13 +98,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     if (currentLatLng != null) {
                         fetchRoute(currentLatLng!!, LatLng(it.latitude, it.longitude))
                     } else {
-                        NancyToast.makeText(
-                            requireContext(),
-                            "Please enable location service!",
-                            NancyToast.LENGTH_SHORT,
-                            NancyToast.WARNING,
-                            false
-                        ).show()
+                        nancyToastWarning(requireContext(), getString(R.string.enable_location_service))
                     }
                 }
             }
@@ -138,13 +133,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     }
                 }
             } catch (e: Exception) {
-                NancyToast.makeText(
-                    requireContext(),
-                    "$e",
-                    NancyToast.LENGTH_SHORT,
-                    NancyToast.ERROR,
-                    false
-                ).show()
+                nancyToastError(requireContext(), e.toString())
                 Log.e("exception", e.toString())
             }
 

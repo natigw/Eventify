@@ -31,43 +31,38 @@ class NancyToast (context: Context) : Toast(context) {
 
         fun makeText(
             context: Context,
-            message: CharSequence?,
+            message: String?,
             @Duration duration: Int,
-            @LayoutType type: Int,
-            androidIcon : Boolean
+            @LayoutType type: Int
         ): Toast {
             val toast = Toast(context)
             toast.duration = duration
             val layout: View =
                 LayoutInflater.from(context).inflate(R.layout.nancy_toast_layout, null, false)
-            val l1 = layout.findViewById<TextView>(R.id.toast_text)
+            val text = layout.findViewById<TextView>(R.id.toast_text)
             val linearLayout = layout.findViewById<LinearLayout>(R.id.toast_type)
-            val img = layout.findViewById<ImageView>(R.id.toast_icon)
-            val img1 = layout.findViewById<ImageView>(R.id.imageView4)
-            l1.text = message
-            if (androidIcon)
-                img1.visibility = View.VISIBLE
-            else img1.visibility = View.GONE
+            val icon = layout.findViewById<ImageView>(R.id.toast_icon)
+            text.text = message
             when (type) {
                 SUCCESS -> {
                     linearLayout.setBackgroundResource(R.drawable.shape_success)
-                    img.setImageResource(R.drawable.ic_success)
+                    icon.setImageResource(R.drawable.ic_success)
                 }
                 WARNING -> {
                     linearLayout.setBackgroundResource(R.drawable.shape_warning)
-                    img.setImageResource(R.drawable.ic_warning)
+                    icon.setImageResource(R.drawable.ic_warning)
                 }
                 ERROR -> {
                     linearLayout.setBackgroundResource(R.drawable.shape_error)
-                    img.setImageResource(R.drawable.ic_cancel)
+                    icon.setImageResource(R.drawable.ic_cancel)
                 }
                 INFO -> {
                     linearLayout.setBackgroundResource(R.drawable.shape_info)
-                    img.setImageResource(R.drawable.ic_info)
+                    icon.setImageResource(R.drawable.ic_info)
                 }
                 DEFAULT -> {
                     linearLayout.setBackgroundResource(R.drawable.shape_default)
-                    img.visibility = View.GONE
+                    icon.visibility = View.GONE
                 }
             }
             toast.view = layout
