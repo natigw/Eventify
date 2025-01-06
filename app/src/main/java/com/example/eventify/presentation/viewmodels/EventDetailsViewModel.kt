@@ -37,7 +37,7 @@ class EventDetailsViewModel @Inject constructor(
                 eventDetails.emit(response)
                 isLoadingMain.update { false }
 
-            }catch (_:Exception){}
+            } catch (_:Exception){}
         }
     }
 

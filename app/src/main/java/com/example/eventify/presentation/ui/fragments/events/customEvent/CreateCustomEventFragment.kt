@@ -77,7 +77,11 @@ class CreateCustomEventFragment : BaseFragment<FragmentCreateCustomEventBinding>
         }
         binding.buttonTimePickerStartCCE.setOnClickListener {
             if (binding.buttonDatePickerCCE.text == getString(R.string.event_date)) {
-                NancyToast.makeText(requireContext(), "Please specify start time first!", NancyToast.LENGTH_SHORT, NancyToast.WARNING, false).show()
+                NancyToast.makeText(requireContext(), "Please specify event date first!", NancyToast.LENGTH_SHORT, NancyToast.WARNING, false).show()
+                return@setOnClickListener
+            }
+            if (pickedStartTime == null) {
+                NancyToast.makeText(requireContext(), "AAAPlease specify event date first!", NancyToast.LENGTH_SHORT, NancyToast.WARNING, false).show()
                 return@setOnClickListener
             }
             showTimePicker(true)

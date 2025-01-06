@@ -1,6 +1,5 @@
 package com.example.eventify.presentation.ui.fragments.venue
 
-import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -82,22 +81,22 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(imageVenue)
 
-            buttonLikeVenue.setOnClickListener {
-                if (buttonLikeVenue.tag == "not_liked") {
-                    buttonLikeVenue.setIconResource(R.drawable.like_fav)
-                    textVenueLikeCount.text = (venueDetailsItem.likeCount + 1).toString()
-                    buttonLikeVenue.tag = "liked"
-                } else {
-                    buttonLikeVenue.setIconResource(R.drawable.like_fav_border)
-                    textVenueLikeCount.text = venueDetailsItem.likeCount.toString()
-                    buttonLikeVenue.tag = "not_liked"
-                }
-//                buttonLikeVenue.setIconResource(if (flag) R.drawable.like_fav else R.drawable.like_fav_border)
-//                flag = !flag
-//                buttonLikeVenue.setIconTintResource(R.color.purple_light_eventify)
-//                textVenueLikeCount.text = if (flag) (venue.likeCount + 1).toString() else venue.likeCount.toString()
-                //TODO -> like olsun request atsin, icon fill olsun, like count text bir dene artsin
-            }
+//            buttonLikeVenue.setOnClickListener {
+//                if (buttonLikeVenue.tag == "not_liked") {
+//                    buttonLikeVenue.setIconResource(R.drawable.like_fav)
+//                    textVenueLikeCount.text = (venueDetailsItem.likeCount + 1).toString()
+//                    buttonLikeVenue.tag = "liked"
+//                } else {
+//                    buttonLikeVenue.setIconResource(R.drawable.like_fav_border)
+//                    textVenueLikeCount.text = venueDetailsItem.likeCount.toString()
+//                    buttonLikeVenue.tag = "not_liked"
+//                }
+////                buttonLikeVenue.setIconResource(if (flag) R.drawable.like_fav else R.drawable.like_fav_border)
+////                flag = !flag
+////                buttonLikeVenue.setIconTintResource(R.color.purple_light_eventify)
+////                textVenueLikeCount.text = if (flag) (venue.likeCount + 1).toString() else venue.likeCount.toString()
+//                //TODO -> like olsun request atsin, icon fill olsun, like count text bir dene artsin
+//            }
 
             buttonReadMoreVenues.post {
                 val layout = textVenueDescription.layout

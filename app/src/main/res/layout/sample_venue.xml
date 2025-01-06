@@ -34,20 +34,22 @@
                 app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Medium"
                 tools:srcCompat="@tools:sample/avatars" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/buttonLikeVenue"
-                style="?attr/materialIconButtonFilledTonalStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="4dp"
-                android:backgroundTint="@color/eventify_background_primary"
-                android:tag="not_liked"
-                android:visibility="gone"
-                app:icon="@drawable/like_fav_border"
-                app:iconTint="@color/purple_dark_eventify"
-                app:layout_constraintEnd_toEndOf="@id/imageVenue"
-                app:layout_constraintTop_toTopOf="@+id/imageVenue" />
+
+            <!--        TEMPORARILY COMMENTED!!!-->
+
+<!--            <com.google.android.material.button.MaterialButton-->
+<!--                android:id="@+id/buttonLikeVenue"-->
+<!--                style="?attr/materialIconButtonFilledTonalStyle"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="4dp"-->
+<!--                android:layout_marginEnd="4dp"-->
+<!--                android:backgroundTint="@color/eventify_background_primary"-->
+<!--                android:tag="not_liked"-->
+<!--                app:icon="@drawable/like_fav_border"-->
+<!--                app:iconTint="@color/purple_dark_eventify"-->
+<!--                app:layout_constraintEnd_toEndOf="@id/imageVenue"-->
+<!--                app:layout_constraintTop_toTopOf="@+id/imageVenue" />-->
 
             <TextView
                 android:id="@+id/textVenueName"

@@ -32,17 +32,17 @@ class VenueAdapter(
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(imageVenue)
 
-            buttonLikeVenue.setOnClickListener {
-                if (buttonLikeVenue.tag == "not_liked") {
-                    buttonLikeVenue.setIconResource(R.drawable.like_fav)
-                    //TODO -> like request at ve notifyOnChange ile dinamik yoxla
-                    buttonLikeVenue.tag = "liked"
-                } else {
-                    buttonLikeVenue.setIconResource(R.drawable.like_fav_border)
-                    buttonLikeVenue.tag = "not_liked"
-                }
-                //TODO -> like olsun request atsin, icon fill olsun
-            }
+//            buttonLikeVenue.setOnClickListener {
+//                if (buttonLikeVenue.tag == "not_liked") {
+//                    buttonLikeVenue.setIconResource(R.drawable.like_fav)
+//                    //TODO -> like request at ve notifyOnChange ile dinamik yoxla
+//                    buttonLikeVenue.tag = "liked"
+//                } else {
+//                    buttonLikeVenue.setIconResource(R.drawable.like_fav_border)
+//                    buttonLikeVenue.tag = "not_liked"
+//                }
+//                //TODO -> like olsun request atsin, icon fill olsun
+//            }
 
             root.setOnClickListener{
                 onClick(venue)

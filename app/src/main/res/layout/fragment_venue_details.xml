@@ -120,32 +120,34 @@
             app:layout_constraintTop_toBottomOf="@id/textVenueName"
             app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Medium" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/buttonLikeVenue"
-            style="?attr/materialIconButtonFilledTonalStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="4dp"
-            android:backgroundTint="@color/eventify_background_primary"
-            android:tag="not_liked"
-            android:visibility="gone"
-            app:icon="@drawable/like_fav_border"
-            app:iconTint="@color/purple_dark_eventify"
-            app:layout_constraintEnd_toEndOf="@id/imageVenue"
-            app:layout_constraintTop_toTopOf="@+id/imageVenue" />
 
-        <!--    <com.google.android.material.button.MaterialButton-->
-        <!--        android:id="@+id/buttonChat"-->
-        <!--        style="?attr/materialIconButtonFilledTonalStyle"-->
-        <!--        android:layout_width="wrap_content"-->
-        <!--        android:layout_height="wrap_content"-->
-        <!--        android:tag="not_liked"-->
-        <!--        app:icon="@drawable/ic_chat_outlined"-->
-        <!--        app:iconTint="@color/purple_dark_eventify"-->
-        <!--        android:backgroundTint="@color/gray_light"-->
-        <!--        app:layout_constraintTop_toBottomOf="@id/buttonLikeVenue"-->
-        <!--        app:layout_constraintEnd_toEndOf="parent"/>-->
+<!--        TEMPORARILY COMMENTED!!!-->
+
+<!--        <com.google.android.material.button.MaterialButton-->
+<!--            android:id="@+id/buttonLikeVenue"-->
+<!--            style="?attr/materialIconButtonFilledTonalStyle"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="4dp"-->
+<!--            android:layout_marginEnd="4dp"-->
+<!--            android:backgroundTint="@color/eventify_background_primary"-->
+<!--            android:tag="not_liked"-->
+<!--            app:icon="@drawable/like_fav_border"-->
+<!--            app:iconTint="@color/purple_dark_eventify"-->
+<!--            app:layout_constraintEnd_toEndOf="@id/imageVenue"-->
+<!--            app:layout_constraintTop_toTopOf="@+id/imageVenue" />-->
+
+<!--        <com.google.android.material.button.MaterialButton-->
+<!--            android:id="@+id/buttonChat"-->
+<!--            style="?attr/materialIconButtonFilledTonalStyle"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:backgroundTint="@color/gray_light"-->
+<!--            android:tag="not_liked"-->
+<!--            app:icon="@drawable/ic_chat_outlined"-->
+<!--            app:iconTint="@color/purple_dark_eventify"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/buttonLikeVenue" />-->
 
         <TextView
             android:id="@+id/textVenueDetailsText"
@@ -256,47 +258,6 @@
             app:layout_constraintTop_toTopOf="@id/textVenueLikesText"
             tools:text="12" />
 
-<!--        <com.google.android.material.button.MaterialButton-->
-<!--            android:id="@+id/buttonVenueSeeComments"-->
-<!--            style="?attr/materialIconButtonFilledTonalStyle"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="4dp"-->
-<!--            android:backgroundTint="@color/eventify_background_primary"-->
-<!--            android:fontFamily="@font/inter_italic"-->
-<!--            android:minHeight="24dp"-->
-<!--            android:paddingStart="8dp"-->
-<!--            android:paddingTop="1dp"-->
-<!--            android:paddingEnd="10dp"-->
-<!--            android:paddingBottom="3dp"-->
-<!--            android:text="@string/comments"-->
-<!--            android:textColor="@color/purple_eventify"-->
-<!--            app:layout_constraintBottom_toBottomOf="@id/textVenueLikesText"-->
-<!--            app:layout_constraintStart_toEndOf="@id/textVenueLikeCount"-->
-<!--            app:layout_constraintTop_toTopOf="@id/textVenueLikesText" />-->
-
-<!--        <com.google.android.material.button.MaterialButton-->
-<!--            android:id="@+id/buttonVenueShowLocation"-->
-<!--            style="?attr/materialIconButtonFilledTonalStyle"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="-4dp"-->
-<!--            android:layout_marginTop="4dp"-->
-<!--            android:backgroundTint="@color/eventify_background_primary"-->
-<!--            android:fontFamily="@font/inter_italic"-->
-<!--            android:minHeight="24dp"-->
-<!--            android:paddingStart="8dp"-->
-<!--            android:paddingTop="1dp"-->
-<!--            android:paddingEnd="10dp"-->
-<!--            android:paddingBottom="3dp"-->
-<!--            android:text="@string/show_location"-->
-<!--            android:textColor="@color/purple_eventify"-->
-<!--            app:icon="@drawable/location_icon_unselected"-->
-<!--            app:iconPadding="6dp"-->
-<!--            app:iconSize="18dp"-->
-<!--            app:iconTint="@color/purple_eventify"-->
-<!--            app:layout_constraintStart_toStartOf="@id/textVenueLikesText"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/textVenueLikesText" />-->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonVenueShowLocation"
             style="?attr/materialIconButtonFilledTonalStyle"
@@ -394,10 +355,10 @@
             android:textColor="@color/purple_dark_eventify"
             android:textSize="20sp"
             android:visibility="invisible"
+            app:layout_constraintTop_toBottomOf="@id/textInputWriteCommentVenueDetails"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/guidelineVenueDetails2"
-            app:layout_constraintStart_toStartOf="@id/guidelineVenueDetails1"
-            app:layout_constraintTop_toBottomOf="@id/textInputWriteCommentVenueDetails" />
+            app:layout_constraintStart_toStartOf="@id/guidelineVenueDetails1" />
 
         <ProgressBar
             android:id="@+id/progressBarCommentVenueDetails"
