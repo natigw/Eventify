@@ -119,7 +119,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputEmailRegister"
+            android:id="@+id/textInputLayoutEmailRegister"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -134,7 +134,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textInputUsernameRegister">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/emailRegister"
+                android:id="@+id/textInputEmailRegister"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/email"
@@ -143,7 +143,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputPasswordRegister"
+            android:id="@+id/textInputLayoutPasswordRegister"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -156,10 +156,10 @@
             app:hintTextColor="#407BFF"
             app:layout_constraintEnd_toEndOf="@+id/guidelineRegister2"
             app:layout_constraintStart_toStartOf="@+id/guidelineRegister1"
-            app:layout_constraintTop_toBottomOf="@+id/textInputEmailRegister">
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEmailRegister">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/passwordRegister"
+                android:id="@+id/textInputPasswordRegister"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/password"
@@ -172,7 +172,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/i_accept_terms"
-            app:layout_constraintTop_toBottomOf="@id/textInputPasswordRegister"
+            app:layout_constraintTop_toBottomOf="@id/textInputLayoutPasswordRegister"
             app:layout_constraintStart_toStartOf="@id/guidelineRegister1" />
         
         <Button

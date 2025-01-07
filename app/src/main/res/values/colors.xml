@@ -2,20 +2,25 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="eventify_background_primary">#F6F6F6</color>    <!--gray-->
-    <color name="eventify_background_secondary">#FFFFFF</color>  <!--white-->
-    <color name="eventify_on_primary">#FFFFFF</color>  <!--white textColor on primary color (purple)-->
-    <color name="eventify_on_background_primary">#000000</color>  <!--black text on light background-->
-    <color name="eventify_primary">#6823EA</color>  <!--purple-->
-    <color name="gray_light">#EBEBEB</color>
-    <color name="gray">#CCCCCC</color>
-    <color name="green_eventify">#2ED47B</color>
-    <color name="green_light_eventify">#D3FFE7</color>
-    <color name="purple_dark_eventify">#2E066D</color>
-    <color name="purple_eventify">#6823EA</color>
-    <color name="purple_light_eventify">#9A72F3</color>
     <color name="transparent">@android:color/transparent</color>
 
-    <color name="appBackground">#9C27B0</color>
-    <color name="bottomNavBackground">#DBDBDB</color>
+    <color name="eventify_background_primary">#F6F6F6</color>    <!--light gray-->
+    <color name="eventify_background_secondary">#FFFFFF</color>  <!--white-->
+    <color name="eventify_on_background">#000000</color>         <!--black text on light background-->
+    <color name="eventify_heading">#2E066D</color>               <!--dark purple-->
+    <color name="eventify_primary">#6823EA</color>               <!--purple-->
+    <color name="eventify_primary_helper">#6823EA</color>        <!--purple-->
+    <color name="eventify_secondary">#2ED47B</color>             <!--green-->
+    <color name="eventify_on_primary">#FFFFFF</color>            <!--white on purple-->
+    <color name="eventify_on_secondary">#FFFFFF</color>          <!--white on green-->
+
+    <color name="gray_light">#EBEBEB</color>
+    <color name="gray">#CCCCCC</color>
+    <color name="green_light_eventify">#D3FFE7</color>
+    <color name="green_eventify">#2ED47B</color>
+    <color name="purple_light_eventify">#9A72F3</color>
+    <color name="purple_eventify">#6823EA</color>
+    <color name="purple_dark_eventify">#2E066D</color>
+
+    <color name="eventify_bottom_nav_background">#DBDBDB</color>
 </resources>

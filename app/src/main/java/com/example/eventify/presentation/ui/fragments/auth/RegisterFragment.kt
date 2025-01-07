@@ -55,9 +55,10 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
                             password
                         )){
                         nancyToastSuccess(requireContext(), getString(R.string.register_successful))
-                        viewModel.setUserEmail(email)
+                        sharedViewModel.setFromRegisterScreen()
+                        sharedViewModel.setUserEmail(email)
                         clearInputFields()
-                        findNavController().navigate(RegisterFragmentDirections.actionRegisterFragmentToVerificationFragment())
+                        findNavController().popBackStack()
                     }
                     else{
                         nancyToastError(requireContext(), getString(R.string.register_failed))
@@ -151,7 +152,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
         binding.apply {
             progressBarRegister.visibility = View.INVISIBLE
             buttonRegister.isEnabled = true
-            buttonRegister.text = getString(R.string.register)
+            buttonRegister.text = "Register"
             buttonRegister.setBackgroundColor(parseColor("#407BFF"))
             checkboxTerms.isEnabled = true
         }
@@ -189,11 +190,11 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
     private fun checkAllFields() {
         val isAllFilled = binding.run {
             firstnameRegister.text!!.isNotBlank() &&
-                    lastnameRegister.text!!.isNotBlank() &&
-                    usernameRegister.text!!.isNotBlank() &&
-                    emailRegister.text!!.isNotBlank() &&
-                    passwordRegister.text!!.isNotBlank() &&
-                    checkboxTerms.isChecked
+            lastnameRegister.text!!.isNotBlank() &&
+            usernameRegister.text!!.isNotBlank() &&
+            emailRegister.text!!.isNotBlank() &&
+            passwordRegister.text!!.isNotBlank() &&
+            checkboxTerms.isChecked
         }
         binding.buttonRegister.isEnabled = isAllFilled
     }
