@@ -153,12 +153,12 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
     }
 
     private fun observer(){
-        lifecycleScope.launch {
-            viewmodel.getComments(args.venueId)
-        }
+
+        viewmodel.getComments(args.venueId)
+        viewmodel.getVenueDetails(args.venueId)
+
 
         lifecycleScope.launch {
-            viewmodel.getVenueDetails(args.venueId)
             viewmodel.isLoadingMain.collectLatest {
                 binding.progressBarVenues.isVisible = it
             }

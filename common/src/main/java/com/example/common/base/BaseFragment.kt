@@ -28,8 +28,9 @@ abstract class BaseFragment<VB : ViewBinding>(private val bindingToInflate: (Lay
         super.onViewCreated(view, savedInstanceState)
         onViewCreatedLight()
         buttonListener()
+        setUI()
     }
-
+    open fun setUI() {}
 
 
     override fun onDestroyView() {

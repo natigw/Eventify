@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.update
 
 class OnBoardingSharedViewModel : ViewModel() {
     val isRegisteredState = MutableStateFlow(false)
-    val userEmailState = MutableStateFlow("")
+    val userEmailState = MutableStateFlow<String?>(null)
 
 
     fun setFromRegisterScreen(){

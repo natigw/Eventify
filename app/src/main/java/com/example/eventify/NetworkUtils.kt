@@ -6,6 +6,8 @@ import com.example.common.utils.AppUtils
 import com.example.common.utils.RequestChannel
 import com.example.data.remote.interceptor.TokenManager
 import com.example.eventify.presentation.ui.activities.OnBoardingActivity
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 object NetworkUtils {
     private lateinit var tokenManager: TokenManager
@@ -47,10 +49,13 @@ object NetworkUtils {
     }
 
     fun handleLogout(context: Context) {
+        val currentUser = Firebase.auth.currentUser
+        if(currentUser!=null){
+            Firebase.auth.signOut()
+        }
         tokenManager.clearTokens()
         val intent = Intent(context, OnBoardingActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         context.startActivity(intent)
     }
-
 }

@@ -72,27 +72,31 @@ class VenueRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getVenueComments(venueId: Int): List<CommentItem> {
-        val response = api.getVenueComments(venueId)
-        if (response.isSuccessful) {
-            response.body()?.let { rawComment ->
-                return rawComment.map {
-                    //val details = api.getVenueCommentDetails(it.id)  //heleki eyni datani qaytarir - useless<<
-                    CommentItem(
-                        commentId = it.id,
-                        username = it.ownerId.toString(),
-                        content = it.content,
-                        date = dateFormatterIFYEAR_MNAMED_Comma_HM(Instant.parse("${it.createdAt}Z"))
-                    )
+
+        try {
+            val response = api.getVenueComments(venueId)
+            if (response.isSuccessful && response.body() != null) {
+                response.body()!!.let { rawComment ->
+                    return rawComment.map {
+                        //val details = api.getVenueCommentDetails(it.id)  //heleki eyni datani qaytarir - useless<<
+                        CommentItem(
+                            commentId = it.id,
+                            username = it.ownerId.toString(),
+                            content = it.content,
+                            date = dateFormatterIFYEAR_MNAMED_Comma_HM(Instant.parse("${it.createdAt}Z"))
+                        )
+                    }
                 }
             }
-        }
-        Log.e("venueCommentRequestError", response.errorBody().toString())
-        return emptyList()
-    }
+            else{
+                throw Exception("Error ${response.code()}: ${response.errorBody()?.string()}")
+            }
 
-//        override suspend fun getVenueCommentDetails(commentId: Int): ResponseVenueCommentDetails {
-//        TODO("Not yet implemented")
-//    }
+        }
+        catch (e : Exception){
+            throw e
+        }
+    }
 
     override suspend fun addVenueComment(requestAddVenueComment: AddCommentItem) {
         try {

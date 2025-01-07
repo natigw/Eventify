@@ -119,7 +119,7 @@ class AuthRepositoryImpl @Inject constructor(
 
     override suspend fun resetUserPassword(userEmail: String): Boolean {
         return try {
-            api.resetUserPassword(RequestResetPassword(userEmail))
+            val response = api.resetUserPassword(RequestResetPassword(userEmail))
             true
         }
         catch (e : Exception){
@@ -193,9 +193,24 @@ class AuthRepositoryImpl @Inject constructor(
             true
         }
         catch (e : Exception){
-            e.printStackTrace()
-            false
+            throw e
         }
     }
+
+    override suspend fun isUserVerified(userEmail: String): Boolean {
+        try {
+            val response = api.isUserVerified(userEmail)
+            if(response.isSuccessful && response.body()!=null){
+                return response.body()!!
+            }
+            else{
+                throw Exception("Error ${response.code()}: ${response.errorBody()?.string()}")
+            }
+
+        }catch (e :Exception){
+            throw e
+        }
+    }
+
 
 }

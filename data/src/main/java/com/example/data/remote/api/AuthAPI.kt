@@ -67,4 +67,9 @@ interface AuthAPI {
     @POST("/auth/user")
     suspend fun getUserData() : Response<UserData>
 
+    @GET("/auth/verification-status")
+    suspend fun isUserVerified(
+        @Query("email") userEmail : String
+    ) : Response<Boolean>
+
 }

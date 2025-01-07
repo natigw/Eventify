@@ -8,10 +8,12 @@ import androidx.lifecycle.findViewTreeViewModelStoreOwner
 import androidx.lifecycle.viewModelScope
 import com.example.domain.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -33,8 +35,7 @@ class LoginViewModel @Inject constructor(
 
     val errorMessagesState = MutableStateFlow<String?>(null)
     suspend fun loginUser(username : String, password : String) : Boolean {
-
-        val loginChecker = viewModelScope.async {
+        return withContext(Dispatchers.IO){
             try {
                 isLoading.update { true }
                 val response = authRepository.loginUser(
@@ -58,11 +59,10 @@ class LoginViewModel @Inject constructor(
             }
 
         }
-        return loginChecker.await()
     }
 
     suspend fun linkGoogleAccount() : Boolean{
-        val check = viewModelScope.async {
+        return withContext(Dispatchers.IO) {
             try {
                 val response = authRepository.signInWithGoogle()
                 Log.e("tokens",response.toString())
@@ -80,10 +80,15 @@ class LoginViewModel @Inject constructor(
                 false
             }
 
-        }.await()
-        return check
+        }
     }
 
 
+    fun removeVerifiedUserEmail(){
+        sharedPrefOnBoard.edit {
+            remove("userEmail")
+            remove("isAuthorized")
+        }
+    }
 
 }

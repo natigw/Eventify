@@ -17,7 +17,10 @@ class WelcomeFragment : BaseFragment<FragmentWelcomeBinding>(FragmentWelcomeBind
     lateinit var sharedPrefOnBoard : SharedPreferences
 
     override fun onViewCreatedLight() {
-        if (sharedPrefOnBoard.getBoolean("finished", false)) findNavController().navigate(R.id.action_welcomeFragment_to_loginFragment)
+        if (sharedPrefOnBoard.getBoolean("finished", false)){
+            findNavController().navigate(WelcomeFragmentDirections.actionWelcomeFragmentToLoginFragment())
+        }
+
         initViews()
     }
 

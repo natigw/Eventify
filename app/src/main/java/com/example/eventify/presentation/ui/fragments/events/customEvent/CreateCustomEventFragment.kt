@@ -62,11 +62,10 @@ class CreateCustomEventFragment : BaseFragment<FragmentCreateCustomEventBinding>
     }
 
     override fun onViewCreatedLight() {
-        setUI()
         clickListeners()
     }
 
-    private fun setUI() {
+    override fun setUI() {
         with(binding) {
             buttonDatePickerCCE.text = if (viewmodel.pickedDate == null) getString(R.string.specify_event_date) else "${viewmodel.pickedDate}    ${getString(R.string.change)}"
             buttonTimePickerStartCCE.text = if (viewmodel.pickedStartTime == null) getString(R.string.specify_event_start_time) else "${viewmodel.pickedStartTime}    ${getString(R.string.change)}"

@@ -146,4 +146,21 @@
     <string name="error_fetching_route">Error fetching route</string>
     <string name="location_permission_denied">Location permission denied!</string>
     <string name="enable_location_service">Please enable location service!</string>
+    <string name="verify_email">Please verify your account!</string>
+    <string name="continue_email">Continue</string>
+    <string name="send_verification">
+        <font>
+            Didn\'t receive the email?
+        </font>
+        <font><b>Click to resend.</b></font>
+    </string>
+    <string name="verification_link">We sent a verification link to</string>
+    <string name="try_again">Please try again!</string>
+    <string name="wrong_email">
+        <font>Wrong email address?
+        </font>
+
+        <font><b>Click to register.</b></font>
+    </string>
+
 </resources>

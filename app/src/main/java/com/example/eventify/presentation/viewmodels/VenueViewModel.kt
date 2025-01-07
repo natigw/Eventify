@@ -18,7 +18,11 @@ class VenueViewModel @Inject constructor(
     val isLoading = MutableStateFlow(true)
     val venues = MutableStateFlow<List<VenueItem>>(emptyList())
 
-    fun getVenues() {
+    init {
+        getVenues()
+    }
+
+    private fun getVenues() {
         viewModelScope.launch {
             try {
                 val response = venueRepository.getVenues()

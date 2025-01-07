@@ -26,18 +26,24 @@ class VenueDetailsViewModel @Inject constructor(
 
     fun getVenueDetails(venueId: Int) {
         viewModelScope.launch {
-            val response = venueRepository.getVenueDetails(venueId)
-            venueDetails.emit(response)
-            isLoadingMain.update { false }
+            try {
+                val response = venueRepository.getVenueDetails(venueId)
+                venueDetails.emit(response)
+                isLoadingMain.update { false }
+            }
+            catch (_:Exception){}
         }
     }
 
     fun getComments(venueId: Int) {
         viewModelScope.launch {
-            val response = venueRepository.getVenueComments(venueId)
-            commentsState.emit(response)
-            isLoadingComments.update { false }
-            if (response.isEmpty()) noComments = true
+            try {
+                val response = venueRepository.getVenueComments(venueId)
+                commentsState.emit(response)
+                isLoadingComments.update { false }
+                if (response.isEmpty()) noComments = true
+            }
+            catch (_:Exception){}
         }
     }
 

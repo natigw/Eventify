@@ -141,22 +141,16 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
 
 
     private fun observer(){
+        viewmodel.getComments(args.eventId)
+        viewmodel.getEventDetails(args.eventId)
+        viewmodel.getEventLikeInfo(args.eventId)
+
+
 
         lifecycleScope.launch {
-            viewmodel.getComments(args.eventId)
-        }
-
-
-        lifecycleScope.launch {
-            viewmodel.getEventDetails(args.eventId)
             viewmodel.isLoadingMain.collectLatest {
                 binding.progressBarEvents.isVisible = it
             }
-        }
-
-
-        lifecycleScope.launch {
-            viewmodel.getEventLikeInfo(args.eventId)
         }
 
 
@@ -188,6 +182,7 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
                 binding.progressBarCommentEventDetails.isVisible = it
             }
         }
+
     }
 
     private fun setAdapters() {

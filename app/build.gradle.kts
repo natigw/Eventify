@@ -96,7 +96,9 @@ dependencies {
     implementation(libs.android.maps.utils)
 
 
-
+    //lottie
+    implementation ("com.airbnb.android:lottie:3.4.0")
+    implementation("com.github.LottieFiles:dotlottie-android:0.6.1")
 
 
     implementation(project(":common"))

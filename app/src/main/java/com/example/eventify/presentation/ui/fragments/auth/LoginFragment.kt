@@ -4,10 +4,12 @@ import android.content.Intent
 import android.graphics.Color.parseColor
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.edit
 import androidx.credentials.CredentialManager
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.navigateUp
 import com.example.common.base.BaseFragment
 import com.example.common.utils.nancyToastInfo
 import com.example.common.utils.nancyToastSuccess
@@ -35,15 +37,18 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         if (viewModel.sharedPrefOnBoard.getBoolean("finished", false)) binding.textWelcomeLogin.visibility = View.VISIBLE
 
 
-        binding.textDontHaveAccount.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
-        }
+
 
         observer()
         loginButton()
         setConstraints()
-        observeChanges()
+        checkUser()
 
+
+    }
+
+    override fun buttonListener() {
+        super.buttonListener()
 
         val credentialManager = CredentialManager.create(requireContext())
         val clientId = BuildConfig.WEB_CLIENT_ID
@@ -62,6 +67,38 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                 }
             }
         }
+
+        binding.textForgotPassword.setOnClickListener {
+            nancyToastInfo(requireContext(), getString(R.string.navigating_help_page))
+        }
+
+        binding.textDontHaveAccount.setOnClickListener {
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRegisterFragment())
+        }
+
+        binding.button4.setOnClickListener {
+            navigateToMainActivity()
+        }
+
+        binding.buttonTEsts.setOnClickListener {
+            navigateToTestActivity()
+        }
+
+        binding.textForgotPassword.setOnClickListener {
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToResetPasswordFragment())
+        }
+    }
+
+
+
+    private fun checkUser(){
+        val userEmail = viewModel.sharedPrefUserTokens.getString("userEmail",null)
+        val condition = viewModel.sharedPrefUserTokens.getBoolean("isAuthorized",false)
+        if(userEmail != null && !condition){
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToVerificationFragment())
+        }else{
+            binding.emailLogin.setText(userEmail)
+        }
     }
 
 
@@ -77,24 +114,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         }
     }
 
-    private fun observeChanges() {
-        binding.textForgotPassword.setOnClickListener {
-            nancyToastInfo(requireContext(), getString(R.string.navigating_help_page))
-        }
-        binding.textDontHaveAccount.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
-        }
-        binding.button4.setOnClickListener {
-            navigateToMainActivity()
-        }
-        binding.buttonTEsts.setOnClickListener {
-            navigateToTestActivity()
-        }
-        binding.textForgotPassword.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_resetPasswordFragment)
-        }
 
-    }
 
     private fun loginButton() {
         binding.buttonLogin.setOnClickListener {
@@ -111,6 +131,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                 if(viewModel.loginUser(username = username,password = password)){
                     clearInputFields()
                     nancyToastSuccess(requireContext(), getString(R.string.login_successful))
+                    viewModel.removeVerifiedUserEmail()
                     Intent(requireContext(), MainActivity::class.java).also {
                         startActivity(it)
                         requireActivity().finish()
@@ -163,7 +184,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         binding.apply {
             progressBarLogin.visibility = View.INVISIBLE
             buttonLogin.isEnabled = true
-            buttonLogin.text = "Login"
+            buttonLogin.text = getString(R.string.login)
             buttonLogin.setBackgroundColor(parseColor("#F44336"))
         }
     }
