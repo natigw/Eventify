@@ -11,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.common.base.BaseFragment
 import com.example.common.utils.functions.isValidEmail
+import com.example.common.utils.functions.validateInputFieldMeet
 import com.example.common.utils.nancyToastError
 import com.example.common.utils.nancyToastSuccess
 import com.example.common.utils.nancyToastWarning
@@ -26,7 +27,6 @@ import kotlinx.coroutines.launch
 class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterBinding::inflate) {
 
     private val viewModel by viewModels<RegisterViewModel>()
-    private val sharedViewModel by activityViewModels<OnBoardingSharedViewModel>()
 
     override fun onViewCreatedLight() {
         setScrollViewConstraints()
@@ -41,8 +41,8 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
                 val firstname = firstnameRegister.text.toString().trim()
                 val lastname = lastnameRegister.text.toString().trim()
                 val username = usernameRegister.text.toString().trim()
-                val email = emailRegister.text.toString().trim()
-                val password = passwordRegister.text.toString().trim()
+                val email = textInputEmailRegister.text.toString().trim()
+                val password = textInputPasswordRegister.text.toString().trim()
 
                 if (!checkInputFields(firstname, lastname, username, email, password)) return@setOnClickListener
 
@@ -55,10 +55,9 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
                             password
                         )){
                         nancyToastSuccess(requireContext(), getString(R.string.register_successful))
-                        sharedViewModel.setFromRegisterScreen()
-                        sharedViewModel.setUserEmail(email)
+                        viewModel.setUserEmail(userEmail = email)
                         clearInputFields()
-                        findNavController().popBackStack()
+                        findNavController().navigate(RegisterFragmentDirections.actionRegisterFragmentToVerificationFragment())
                     }
                     else{
                         nancyToastError(requireContext(), getString(R.string.register_failed))
@@ -100,43 +99,86 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
         binding.imageBackToLogin.layoutParams = paramsArrow
     }
 
-    private fun checkInputFields(firstname: String, lastname: String, username: String, email: String, password: String) : Boolean {
+    private fun checkInputFields(firstname: String, lastname: String, username: String, email: String, password: String): Boolean {
+
         if (firstname.isEmpty() || lastname.isEmpty() || username.isEmpty() || email.isEmpty() || password.isEmpty()) {
             nancyToastWarning(requireContext(), getString(R.string.fill_all_input_fields))
             return false
         }
-        if (!isValidEmail(email)) {
-            nancyToastError(requireContext(), getString(R.string.please_enter_valid_email))
-            return false
+
+        val isEmailValid = validateInputFieldMeet(
+            binding.textInputLayoutEmailRegister,
+            isValidEmail(email),
+            getString(R.string.please_enter_valid_email)
+        )
+
+        val passwordErrors = mutableListOf<String>()
+
+        if (!password.contains("[a-z]".toRegex())) passwordErrors.add(getString(R.string.password_should_contain_lowercase))
+        if (!password.contains("[A-Z]".toRegex())) passwordErrors.add(getString(R.string.password_should_contain_uppercase))
+        if (!password.contains("[0-9]".toRegex())) passwordErrors.add(getString(R.string.password_should_contain_digit))
+        if (!password.contains("[!\"#$%&'()*+,-./:;\\\\<=>?@\\[\\]^_`{|}~]".toRegex())) passwordErrors.add(getString(R.string.password_should_contain_special_character))
+        if (password.length < 8) passwordErrors.add(getString(R.string.min_password_length_is_8))
+
+        if (passwordErrors.isNotEmpty()) {
+            binding.textInputLayoutPasswordRegister.error = passwordErrors.joinToString("\n")
+            binding.textInputLayoutPasswordRegister.isErrorEnabled = true
+            binding.textInputLayoutPasswordRegister.editText?.requestFocus()
+        } else {
+            binding.textInputLayoutPasswordRegister.error = null
+            binding.textInputLayoutPasswordRegister.isErrorEnabled = false
         }
 
-        if (!password.contains("[a-z]".toRegex())) {
-            nancyToastWarning(requireContext(), getString(R.string.password_should_contain_lowercase))
-            return false
-        }
-        if (!password.contains("[A-Z]".toRegex())) {
-            nancyToastWarning(requireContext(), getString(R.string.password_should_contain_uppercase))
-            return false
-        }
-        if (!password.contains("[0-9]".toRegex())) {
-            nancyToastWarning(requireContext(), getString(R.string.password_should_contain_digit))
-            return false
-        }
-        if (!password.contains("[!\"#$%&'()*+,-./:;\\\\<=>?@\\[\\]^_`{|}~]".toRegex())) {
-            nancyToastWarning(requireContext(), getString(R.string.password_should_contain_special_character))
-            return false
-        }
+        if (!isEmailValid || passwordErrors.isNotEmpty()) return false
 
-        if (password.length < 8) {
-            nancyToastWarning(requireContext(), getString(R.string.min_password_length_is_8))
-            return false
-        }
         if (!binding.checkboxTerms.isChecked) {
             nancyToastWarning(requireContext(), getString(R.string.please_accept_terms))
             return false
         }
+
         return true
     }
+
+
+//    private fun checkInputFields(firstname: String, lastname: String, username: String, email: String, password: String) : Boolean {
+//        if (firstname.isEmpty() || lastname.isEmpty() || username.isEmpty() || email.isEmpty() || password.isEmpty()) {
+//            nancyToastWarning(requireContext(), getString(R.string.fill_all_input_fields))
+//            return false
+//        }
+//        if (!isValidEmail(email)) {
+//            nancyToastError(requireContext(), getString(R.string.please_enter_valid_email))
+//            return false
+//        }
+//
+//        if (!password.contains("[a-z]".toRegex())) {
+//            nancyToastWarning(requireContext(), getString(R.string.password_should_contain_lowercase))
+//            return false
+//        }
+//        if (!password.contains("[A-Z]".toRegex())) {
+//            nancyToastWarning(requireContext(), getString(R.string.password_should_contain_uppercase))
+//            return false
+//        }
+//        if (!password.contains("[0-9]".toRegex())) {
+//            nancyToastWarning(requireContext(), getString(R.string.password_should_contain_digit))
+//            return false
+//        }
+//        if (!password.contains("[!\"#$%&'()*+,-./:;\\\\<=>?@\\[\\]^_`{|}~]".toRegex())) {
+//            nancyToastWarning(requireContext(), getString(R.string.password_should_contain_special_character))
+//            return false
+//        }
+//
+//        if (password.length < 8) {
+//            nancyToastWarning(requireContext(), getString(R.string.min_password_length_is_8))
+//            return false
+//        }
+//
+//        if (!binding.checkboxTerms.isChecked) {
+//            nancyToastWarning(requireContext(), getString(R.string.please_accept_terms))
+//            return false
+//        }
+//
+//        return true
+//    }
 
     private fun blockSignupButton() {
         binding.apply {
@@ -163,8 +205,8 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
             firstnameRegister.text = null
             lastnameRegister.text = null
             usernameRegister.text = null
-            emailRegister.text = null
-            passwordRegister.text = null
+            textInputEmailRegister.text = null
+            textInputPasswordRegister.text = null
             checkboxTerms.isChecked = false
         }
     }
@@ -181,8 +223,8 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
             firstnameRegister.addTextChangedListener(textWatcher)
             lastnameRegister.addTextChangedListener(textWatcher)
             usernameRegister.addTextChangedListener(textWatcher)
-            emailRegister.addTextChangedListener(textWatcher)
-            passwordRegister.addTextChangedListener(textWatcher)
+            textInputEmailRegister.addTextChangedListener(textWatcher)
+            textInputPasswordRegister.addTextChangedListener(textWatcher)
             checkboxTerms.setOnCheckedChangeListener { _, _ -> checkAllFields() }
         }
     }
@@ -190,11 +232,11 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
     private fun checkAllFields() {
         val isAllFilled = binding.run {
             firstnameRegister.text!!.isNotBlank() &&
-            lastnameRegister.text!!.isNotBlank() &&
-            usernameRegister.text!!.isNotBlank() &&
-            emailRegister.text!!.isNotBlank() &&
-            passwordRegister.text!!.isNotBlank() &&
-            checkboxTerms.isChecked
+                    lastnameRegister.text!!.isNotBlank() &&
+                    usernameRegister.text!!.isNotBlank() &&
+                    textInputEmailRegister.text!!.isNotBlank() &&
+                    textInputPasswordRegister.text!!.isNotBlank() &&
+                    checkboxTerms.isChecked
         }
         binding.buttonRegister.isEnabled = isAllFilled
     }

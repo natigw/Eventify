@@ -16,7 +16,7 @@ class SubscriptionFragment : BaseFragment<FragmentSubscriptionBinding>(FragmentS
 //    private val viewmodel by viewModels<SubscriptionViewModel>()
 
     private val adapter = SubscriptionAdapter(
-        context = requireContext(),
+//        context = requireContext(),
         currentPackage = "Base",
         isAnnualBilling = true, //viewmodel.switchStateFlow.value
         onClick = {

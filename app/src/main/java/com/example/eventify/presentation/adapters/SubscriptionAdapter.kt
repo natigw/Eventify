@@ -8,7 +8,7 @@ import com.example.eventify.databinding.SampleSubscriptionBinding
 import com.example.domain.model.subscription.SubscriptionData
 
 class SubscriptionAdapter(
-    val context: Context,
+//    val context: Context,
     val currentPackage: String,
     val isAnnualBilling: Boolean,
     val onClick: (packageName: String) -> Unit  //TODO -> bundan emin olmadin

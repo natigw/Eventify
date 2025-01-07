@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.Configuration
+import androidx.navigation.fragment.findNavController
 import com.example.common.base.BaseFragment
 import com.example.common.utils.NancyToast
 import com.example.common.utils.nancyToastInfo
@@ -39,7 +40,16 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         binding.btnChangeLanguageEN.setOnClickListener {
             changeLanguage("en")
         }
+        binding.btnSubs.setOnClickListener {
+            findNavController().navigate(R.id.subscriptionFragment)
+        }
+        binding.btnReferral.setOnClickListener {
+            findNavController().navigate(R.id.referralFragment)
+        }
+
     }
+
+
 
     private fun setAppLocale(context: Context, languageCode: String) {
         val locale = Locale(languageCode)
