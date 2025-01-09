@@ -15,7 +15,7 @@
     <string name="or">və ya</string>
     <string name="login">Daxil olun</string>
     <string name="sign_in">Daxil olun</string>
-    <string name="don_t_have_an_account_register">Hesabınız yoxdur? <font color="#882DFF">Qeydiyyatdan keçin</font></string>
+    <string name="don_t_have_an_account_register">Hesabınız yoxdur? <font color="#882DFF"><b>Qeydiyyatdan keçin</b></font></string>
     <string name="sign_up">Qeydiyyatdan keçin</string>
     <string name="username">İstifadəçi adınız</string>
     <string name="forgot_password">Şifrəni unutdunuz?</string>

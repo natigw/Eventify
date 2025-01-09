@@ -31,9 +31,10 @@ class LoginViewModel @Inject constructor(
     @Named("UserTokens")
     lateinit var sharedPrefUserTokens: SharedPreferences
 
-    val isLoading = MutableStateFlow(false)
-
+    val isLoading = MutableStateFlow<Boolean?>(null)
+    val isLoadingGoogle = MutableStateFlow<Boolean?>(null)
     val errorMessagesState = MutableStateFlow<String?>(null)
+
     suspend fun loginUser(username : String, password : String) : Boolean {
         return withContext(Dispatchers.IO){
             try {
@@ -64,8 +65,8 @@ class LoginViewModel @Inject constructor(
     suspend fun linkGoogleAccount() : Boolean{
         return withContext(Dispatchers.IO) {
             try {
+                isLoadingGoogle.update { true }
                 val response = authRepository.signInWithGoogle()
-                Log.e("tokens",response.toString())
                 sharedPrefUserTokens.edit {
                     putString("access_token", response.accessToken)
                     putString("refresh_token", response.refreshToken)
@@ -78,6 +79,9 @@ class LoginViewModel @Inject constructor(
                 Log.e("mainException",e.message.toString())
                 e.printStackTrace()
                 false
+            }
+            finally {
+                isLoadingGoogle.update { false }
             }
 
         }

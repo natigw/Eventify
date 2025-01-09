@@ -1,5 +1,6 @@
 package com.example.eventify.presentation.viewmodels
 
+import android.graphics.DiscretePathEffect
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -9,9 +10,11 @@ import com.example.domain.model.places.event.EventDetailsItem
 import com.example.domain.repository.EventRepository
 import com.example.eventify.NetworkUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -73,11 +76,18 @@ class EventDetailsViewModel @Inject constructor(
         }
     }
 
-    fun updateLikeEvent(eventId : Int){
-        viewModelScope.launch {
+    suspend fun updateLikeEvent(eventId : Int){
+        withContext(Dispatchers.IO) {
             eventRepository.likeEvent(eventId)
         }
     }
+
+    suspend fun updateDislikeEvent(eventId: Int){
+        withContext(Dispatchers.IO) {
+            eventRepository
+        }
+    }
+
 
     fun addComment(comment: AddCommentItem) {
         viewModelScope.launch {

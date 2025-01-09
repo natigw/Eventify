@@ -19,7 +19,7 @@
     <string name="or">or</string>
     <string name="login">Login</string>
     <string name="sign_in">Sign in</string>
-    <string name="don_t_have_an_account_register">Don\'t have an account? <font color='#882DFF'>Register</font></string>
+    <string name="don_t_have_an_account_register">Don\'t have an account? <font color='#882DFF'><b>Register</b></font></string>
     <string name="sign_up">Sign Up</string>
     <string name="username">Username</string>
     <string name="forgot_password">Forgot password?</string>
@@ -161,6 +161,9 @@
         </font>
 
         <font><b>Click to register.</b></font>
+    </string>
+    <string name="continue_with_google">
+        Continue with Google
     </string>
 
 </resources>

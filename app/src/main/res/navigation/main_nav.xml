@@ -52,7 +52,9 @@
             />
         <action
             android:id="@+id/action_placesFragment_to_createCustomEventFragment"
-            app:destination="@id/createCustomEventFragment" />
+            app:destination="@id/createCustomEventFragment"
+            app:popUpTo="@id/placesFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
     <dialog
         android:id="@+id/markerDetailsBottomSheet"

@@ -5,6 +5,7 @@ import android.graphics.Color.parseColor
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.edit
+import androidx.core.view.isVisible
 import androidx.credentials.CredentialManager
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -160,8 +161,23 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
 
     private fun observer(){
         lifecycleScope.launch {
-            viewModel.isLoading.collectLatest {
-                if(it){
+            viewModel.isLoadingGoogle
+                .filter { it!=null }
+                .collectLatest {
+                if(it!!){
+                    blockGoogleButton()
+                }
+                else{
+                    resetGoogleButton()
+                }
+            }
+        }
+
+        lifecycleScope.launch {
+            viewModel.isLoading
+                .filter { it!=null }
+                .collectLatest {
+                if(it!!){
                     blockLoginButton()
                 }
                 else{
@@ -188,6 +204,22 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             buttonLogin.setBackgroundColor(parseColor("#F44336"))
         }
     }
+
+    private fun blockGoogleButton(){
+        binding.apply {
+            googleProgressBar.isVisible = true
+            googleButton.isEnabled = false
+            googleButton.text = null
+        }
+    }
+    private fun resetGoogleButton(){
+        binding.apply {
+            googleProgressBar.isVisible = false
+            googleButton.isEnabled = true
+            googleButton.text = getString(R.string.continue_with_google)
+        }
+    }
+
 
     private fun clearInputFields() {
         binding.apply {

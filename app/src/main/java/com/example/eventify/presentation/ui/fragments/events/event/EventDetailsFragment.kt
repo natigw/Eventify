@@ -24,6 +24,7 @@ import com.example.eventify.presentation.viewmodels.SharedViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -147,6 +148,8 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
 
 
 
+
+
         lifecycleScope.launch {
             viewmodel.isLoadingMain.collectLatest {
                 binding.progressBarEvents.isVisible = it
@@ -157,12 +160,13 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
         lifecycleScope.launch {
             viewmodel.likedState
                 .filter { it!=null }
+                .debounce(300)
                 .collectLatest {
                     if(it!!){
-                        binding.buttonLikeEvent.setIconResource(R.drawable.like_fav)
+                        viewmodel.updateLikeEvent(args.eventId)
                     }
                     else{
-                        binding.buttonLikeEvent.setIconResource(R.drawable.like_fav_border)
+                        viewmodel.updateDislikeEvent(args.eventId)
                     }
                     binding.eventBackButton.isVisible = true
                 }
@@ -205,13 +209,15 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
         }
     }
 
+
+    //yaxsi usul deyil hemise cagirilmaya biler
     override fun onPause() {
         super.onPause()
-        if(viewmodel.likedState.value == true){
-            viewmodel.updateLikeEvent(args.eventId)
-        }
-        else{
-            // delete
-        }
+//        if(viewmodel.likedState.value == true){
+//            viewmodel.updateLikeEvent(args.eventId)
+//        }
+//        else{
+//            // delete
+//        }
     }
 }

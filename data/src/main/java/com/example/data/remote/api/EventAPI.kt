@@ -12,6 +12,7 @@ import com.example.data.remote.model.events.likeDislike.favEvents.ResponseFavEve
 import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Multipart
 import retrofit2.http.POST
@@ -48,12 +49,12 @@ interface EventAPI {
         @Body
         requestLikeEvent: RequestLikeDislikeEvent
     )
-//    @DELETE("/events/like")
-//    suspend fun dislikeEvent(
-//        @Header("Authorization")
-//        token : String,
-//        @Query("eventId") eventId: Int
-//    )
+
+    @DELETE("/events/like")
+    suspend fun dislikeEvent(
+        @Body
+        requestDeleteLikeEvent : RequestLikeDislikeEvent
+    )
 
 
     @GET("/events/{event_id}/comment")
