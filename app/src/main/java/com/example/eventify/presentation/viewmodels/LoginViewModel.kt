@@ -52,6 +52,7 @@ class LoginViewModel @Inject constructor(
             }
             catch (e : Exception){
                 errorMessagesState.update { e.message }
+
                 Log.e("errorLogin",e.message.toString())
                  false
             }
