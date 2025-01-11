@@ -20,8 +20,13 @@ class CustomEventsFragment : BaseFragment<FragmentCustomEventsBinding>(FragmentC
     private val viewmodel: EventViewModel by viewModels()
 
     private val eventAdapter = EventAdapter(
+        onLike = {
+//            lifecycleScope.launch {
+//                viewmodel.likeEvent(it)
+//            }
+        },
         onClick = {
-            findNavController().navigate(PlacesFragmentDirections.actionPlacesFragmentToEventDetailsFragment(it.eventId))
+            findNavController().navigate(PlacesFragmentDirections.actionPlacesFragmentToEventDetailsFragment(it))
         }
     )
 

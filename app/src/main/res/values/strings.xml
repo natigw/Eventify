@@ -165,5 +165,7 @@
     <string name="continue_with_google">
         Continue with Google
     </string>
+    <string name="stop">stop</string>
+    <string name="start">start</string>
 
 </resources>

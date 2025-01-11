@@ -8,7 +8,8 @@ import com.example.eventify.R
 import com.example.eventify.databinding.SampleEventBinding
 
 class EventAdapter(
-    val onClick: (EventItem) -> Unit
+    val onLike: (id: Int) -> Unit,
+    val onClick: (id: Int) -> Unit
 ) : BaseAdapter<SampleEventBinding>(SampleEventBinding::inflate) {
 
     var events: List<EventItem> = emptyList()
@@ -30,28 +31,14 @@ class EventAdapter(
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(imageEvent)
 
-            var flag = true
-            buttonLikeEvent.setOnClickListener {
-                if (buttonLikeEvent.tag == "not_liked") {
-                    buttonLikeEvent.setIconResource(R.drawable.like_fav)
-                    buttonLikeEvent.tag = "liked"
-                }
-                else {
-                    buttonLikeEvent.setIconResource(R.drawable.like_fav_border)
-                    buttonLikeEvent.tag = "not_liked"
-                }
-//                buttonLikeEvent.setIconResource(if (flag) R.drawable.like_fav else R.drawable.like_fav_border)
-//                flag = !flag
-//                buttonLikeEvent.setIconTintResource(R.color.purple_light_eventify)
-//                textEventLikeCount.text = if (flag) (event.likeCount + 1).toString() else event.likeCount.toString()
-                //TODO -> like olsun request atsin, icon qirmizi urek olsun, like count text bir dene artsin
-            }
-
             root.setOnClickListener {
-                onClick(event)
+                onClick(event.eventId)
             }
             buttonEventAllDetails.setOnClickListener {
-                onClick(event)
+                onClick(event.eventId)
+            }
+            buttonLikeEvent.setOnClickListener {
+                onLike(event.eventId)
             }
         }
     }

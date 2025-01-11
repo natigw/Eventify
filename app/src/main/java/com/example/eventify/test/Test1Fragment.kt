@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.common.base.BaseFragment
@@ -53,6 +54,9 @@ class Test1Fragment : BaseFragment<FragmentTest1Binding>(FragmentTest1Binding::i
                     NancyToast.LENGTH_LONG
                 )
             }
+        }
+        binding.buttonGoShimmer.setOnClickListener {
+            findNavController().navigate(R.id.action_test1Fragment_to_shimmerFragment)
         }
     }
 

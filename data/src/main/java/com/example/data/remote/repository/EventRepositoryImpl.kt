@@ -163,7 +163,6 @@ class EventRepositoryImpl @Inject constructor(
                     event = eventId
                 )
             )
-
         } catch (e: Exception) {
             e.printStackTrace()
         }

@@ -58,7 +58,7 @@ import javax.inject.Named
 @AndroidEntryPoint
 class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate), OnMapReadyCallback {
 
-    val viewModel by viewModels<MapViewModel>()
+    private val viewModel by viewModels<MapViewModel>()
 
 
 

@@ -290,7 +290,7 @@
             android:textColor="@color/purple_eventify"
             android:textSize="18sp"
             app:cornerRadius="12dp"
-            app:icon="@drawable/location_icon_unselected"
+            app:icon="@drawable/ic_location_outlined"
             app:iconPadding="8dp"
             app:iconSize="20dp"
             app:iconTint="@color/purple_eventify"

@@ -4,13 +4,11 @@ import android.content.Intent
 import android.graphics.Color.parseColor
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.edit
 import androidx.core.view.isVisible
 import androidx.credentials.CredentialManager
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.navigateUp
 import com.example.common.base.BaseFragment
 import com.example.common.utils.nancyToastInfo
 import com.example.common.utils.nancyToastSuccess
@@ -35,16 +33,16 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     override fun onViewCreatedLight() {
 
         ////TODO -> ??????????????????
-        if (viewModel.sharedPrefOnBoard.getBoolean("finished", false)) binding.textWelcomeLogin.visibility = View.VISIBLE
-
-
-
+        if (viewModel.sharedPrefOnBoard.getBoolean(
+                "finished",
+                false
+            )
+        ) binding.textWelcomeLogin.visibility = View.VISIBLE
 
         observer()
         loginButton()
         setConstraints()
         checkUser()
-
 
     }
 
@@ -61,67 +59,61 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                     clientId = clientId,
                     requireContext()
                 )
-                if(viewModel.linkGoogleAccount()){
-                    Intent(requireContext(),MainActivity::class.java).also {
+                if (viewModel.linkGoogleAccount()) {
+                    Intent(requireContext(), MainActivity::class.java).also {
                         startActivity(it)
                     }
                 }
             }
         }
 
-        binding.textForgotPassword.setOnClickListener {
+        binding.textForgotPasswordLogin.setOnClickListener {
             nancyToastInfo(requireContext(), getString(R.string.navigating_help_page))
         }
 
-        binding.textDontHaveAccount.setOnClickListener {
+        binding.textDontHaveAccountLoginTEXT.setOnClickListener {
             findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRegisterFragment())
         }
 
-        binding.button4.setOnClickListener {
+        binding.buttonMain.setOnClickListener {
             navigateToMainActivity()
         }
 
-        binding.buttonTEsts.setOnClickListener {
+        binding.buttonTest.setOnClickListener {
             navigateToTestActivity()
         }
 
-        binding.textForgotPassword.setOnClickListener {
+        binding.textForgotPasswordLogin.setOnClickListener {
             findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToResetPasswordFragment())
         }
     }
 
-
-
-    private fun checkUser(){
-        val userEmail = viewModel.sharedPrefUserTokens.getString("userEmail",null)
-        val condition = viewModel.sharedPrefUserTokens.getBoolean("isAuthorized",false)
-        if(userEmail != null && !condition){
+    private fun checkUser() {
+        val userEmail = viewModel.sharedPrefUserTokens.getString("userEmail", null)
+        val condition = viewModel.sharedPrefUserTokens.getBoolean("isAuthorized", false)
+        if (userEmail != null && !condition) {
             findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToVerificationFragment())
-        }else{
-            binding.emailLogin.setText(userEmail)
+        } else {
+            binding.textInputEmailLogin.setText(userEmail)
         }
     }
 
-
-    private fun setConstraints(){
+    private fun setConstraints() {
         val screenHeight = resources.displayMetrics.heightPixels
         val topMargin = (0.08 * screenHeight).toInt()
 
-        binding.textSignIn.post {
-            val params = binding.textSignIn.layoutParams as ConstraintLayout.LayoutParams
+        binding.textSignInTEXT.post {
+            val params = binding.textSignInTEXT.layoutParams as ConstraintLayout.LayoutParams
             params.topMargin = topMargin
-            binding.textSignIn.layoutParams = params
-
+            binding.textSignInTEXT.layoutParams = params
         }
     }
-
-
 
     private fun loginButton() {
         binding.buttonLogin.setOnClickListener {
 
-            val username = binding.emailLogin.text.toString().trim()
-            val password = binding.passwordLogin.text.toString().trim()
+            val username = binding.textInputEmailLogin.text.toString().trim()
+            val password = binding.textInputPasswordLogin.text.toString().trim()
 
             if (username.isEmpty() || password.isEmpty()) {
                 nancyToastWarning(requireContext(), getString(R.string.please_fill_all_fields))
@@ -129,7 +121,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             }
 
             lifecycleScope.launch {
-                if(viewModel.loginUser(username = username,password = password)){
+                if (viewModel.loginUser(username = username, password = password)) {
                     clearInputFields()
                     nancyToastSuccess(requireContext(), getString(R.string.login_successful))
                     viewModel.removeVerifiedUserEmail()
@@ -138,52 +130,43 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                         requireActivity().finish()
                     }
 
-                }
-                else{
+                } else {
                     nancyToastWarning(requireContext(), getString(R.string.login_unsuccessful))
                 }
-
-
             }
-
         }
     }
 
-    fun toastLoginErrors(){
+    fun toastLoginErrors() {
         lifecycleScope.launch {
             viewModel.errorMessagesState
                 .filter { it != null }
                 .collectLatest {
                     nancyToastWarning(requireContext(), it)
-            }
+                }
         }
     }
 
-    private fun observer(){
+    private fun observer() {
         lifecycleScope.launch {
             viewModel.isLoadingGoogle
-                .filter { it!=null }
+                .filter { it != null }
                 .collectLatest {
-                if(it!!){
-                    blockGoogleButton()
+                    if (it!!) blockGoogleButton()
+                    else resetGoogleButton()
                 }
-                else{
-                    resetGoogleButton()
-                }
-            }
         }
 
         lifecycleScope.launch {
             viewModel.isLoading
-                .filter { it!=null }
+                .filter { it != null }
                 .collectLatest {
-                if(it!!){
-                    blockLoginButton()
+                    if (it!!) {
+                        blockLoginButton()
+                    } else {
+                        resetLoginButton()
+                    }
                 }
-                else{
-                    resetLoginButton()
-                }
-            }
         }
     }
 
@@ -205,14 +188,15 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         }
     }
 
-    private fun blockGoogleButton(){
+    private fun blockGoogleButton() {
         binding.apply {
             googleProgressBar.isVisible = true
             googleButton.isEnabled = false
             googleButton.text = null
         }
     }
-    private fun resetGoogleButton(){
+
+    private fun resetGoogleButton() {
         binding.apply {
             googleProgressBar.isVisible = false
             googleButton.isEnabled = true
@@ -223,8 +207,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
 
     private fun clearInputFields() {
         binding.apply {
-            emailLogin.text = null
-            passwordLogin.text = null
+            textInputEmailLogin.text = null
+            textInputPasswordLogin.text = null
         }
     }
 
@@ -233,6 +217,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         startActivity(intent)
         requireActivity().finish()
     }
+
     private fun navigateToTestActivity() {
         val intent = Intent(requireContext(), TestActivity::class.java)
         startActivity(intent)

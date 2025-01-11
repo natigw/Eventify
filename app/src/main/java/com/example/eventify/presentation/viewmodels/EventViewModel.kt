@@ -3,6 +3,7 @@ package com.example.eventify.presentation.viewmodels
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.bumptech.glide.Glide.init
 import com.example.domain.model.places.event.EventItem
 import com.example.domain.repository.EventRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,6 +19,8 @@ class EventViewModel @Inject constructor(
 
     val isLoading = MutableStateFlow(true)
     val events = MutableStateFlow<List<EventItem>>(emptyList())
+
+//    val eventLikeList = arrayListOf<Pair<Int, Boolean>>()
 
     init {
         getEvents()
@@ -44,5 +47,9 @@ class EventViewModel @Inject constructor(
                 Log.e("network event", e.toString())
             }
         }
+    }
+
+    suspend fun likeEvent(eventId: Int) {
+        eventRepository.likeEvent(eventId)
     }
 }

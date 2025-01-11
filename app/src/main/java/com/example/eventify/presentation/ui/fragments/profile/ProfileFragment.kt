@@ -4,15 +4,18 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.Configuration
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.common.base.BaseFragment
 import com.example.common.utils.NancyToast
 import com.example.common.utils.nancyToastInfo
+import com.example.data.remote.api.EventAPI
 import com.example.eventify.NetworkUtils
 import com.example.eventify.R
 import com.example.eventify.databinding.FragmentProfileBinding
 import com.example.eventify.presentation.ui.activities.OnBoardingActivity
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import java.util.Locale
 import javax.inject.Inject
 import javax.inject.Named
@@ -29,6 +32,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
     lateinit var sharedPrefLanguage: SharedPreferences
 
     override fun onViewCreatedLight() {
+
         binding.buttonLogoutProfile.setOnClickListener {
             nancyToastInfo(requireContext(), getString(R.string.logout_successful))
             NetworkUtils.handleLogout(requireContext())

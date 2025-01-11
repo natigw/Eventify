@@ -97,9 +97,14 @@ dependencies {
 
 
     //lottie
-    implementation ("com.airbnb.android:lottie:3.4.0")
-    implementation("com.github.LottieFiles:dotlottie-android:0.6.1")
+    implementation(libs.lottie)
+    implementation(libs.dotlottie.android)
 
+    //shimmer - zaminali
+    implementation(libs.shimmer.animation)
+
+    //shimmer - facebook
+    implementation(libs.shimmer)
 
     implementation(project(":common"))
     implementation(project(":domain"))

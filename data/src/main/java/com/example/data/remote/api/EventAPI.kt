@@ -8,6 +8,7 @@ import com.example.data.remote.model.events.comment.eventComments.ResponseEventC
 import com.example.data.remote.model.events.createEvent.RequestCreateCustomEvent
 import com.example.data.remote.model.events.eventDetails.ResponseEventDetails
 import com.example.data.remote.model.events.likeDislike.RequestLikeDislikeEvent
+import com.example.data.remote.model.events.likeDislike.favEvents.ResponseFavEventIDs
 import com.example.data.remote.model.events.likeDislike.favEvents.ResponseFavEvents
 import okhttp3.MultipartBody
 import retrofit2.Response
@@ -43,6 +44,9 @@ interface EventAPI {
 
     @GET("/events/favorites")
     suspend fun getFavEvents() : Response<List<ResponseFavEvents>>
+
+    @GET("/events/favorites-ids")
+    suspend fun getFavEventIDs() : Response<List<ResponseFavEventIDs>>
 
     @POST("/events/like")
     suspend fun likeEvent(

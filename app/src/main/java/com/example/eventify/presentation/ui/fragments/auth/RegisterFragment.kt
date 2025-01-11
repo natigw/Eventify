@@ -38,9 +38,9 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
     private fun registerButton(){
         with(binding) {
             buttonRegister.setOnClickListener {
-                val firstname = firstnameRegister.text.toString().trim()
-                val lastname = lastnameRegister.text.toString().trim()
-                val username = usernameRegister.text.toString().trim()
+                val firstname = textInputFirstnameRegister.text.toString().trim()
+                val lastname = textInputLastnameRegister.text.toString().trim()
+                val username = textInputUsernameRegister.text.toString().trim()
                 val email = textInputEmailRegister.text.toString().trim()
                 val password = textInputPasswordRegister.text.toString().trim()
 
@@ -66,8 +66,9 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
             }
         }
     }
+
     private fun observeChanges() {
-        binding.imageBackToLogin.setOnClickListener {
+        binding.buttonBackRegister.setOnClickListener {
             findNavController().popBackStack()
         }
 
@@ -87,16 +88,16 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
         val screenHeight = resources.displayMetrics.heightPixels
         val topMargin = (0.08 * screenHeight).toInt()
 
-        binding.textSignUp.post {
-            val params = binding.textSignUp.layoutParams as ConstraintLayout.LayoutParams
+        binding.textSignUpTEXT.post {
+            val params = binding.textSignUpTEXT.layoutParams as ConstraintLayout.LayoutParams
             params.topMargin = topMargin
-            binding.textSignUp.layoutParams = params
+            binding.textSignUpTEXT.layoutParams = params
         }
 
         val topMarginArrow = (0.04 * screenHeight).toInt()
-        val paramsArrow = binding.imageBackToLogin.layoutParams as ConstraintLayout.LayoutParams
+        val paramsArrow = binding.buttonBackRegister.layoutParams as ConstraintLayout.LayoutParams
         paramsArrow.topMargin = topMarginArrow
-        binding.imageBackToLogin.layoutParams = paramsArrow
+        binding.buttonBackRegister.layoutParams = paramsArrow
     }
 
     private fun checkInputFields(firstname: String, lastname: String, username: String, email: String, password: String): Boolean {
@@ -202,9 +203,9 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
 
     private fun clearInputFields() {
         binding.apply {
-            firstnameRegister.text = null
-            lastnameRegister.text = null
-            usernameRegister.text = null
+            textInputFirstnameRegister.text = null
+            textInputLastnameRegister.text = null
+            textInputUsernameRegister.text = null
             textInputEmailRegister.text = null
             textInputPasswordRegister.text = null
             checkboxTerms.isChecked = false
@@ -220,9 +221,9 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
         }
 
         binding.apply {
-            firstnameRegister.addTextChangedListener(textWatcher)
-            lastnameRegister.addTextChangedListener(textWatcher)
-            usernameRegister.addTextChangedListener(textWatcher)
+            textInputFirstnameRegister.addTextChangedListener(textWatcher)
+            textInputLastnameRegister.addTextChangedListener(textWatcher)
+            textInputUsernameRegister.addTextChangedListener(textWatcher)
             textInputEmailRegister.addTextChangedListener(textWatcher)
             textInputPasswordRegister.addTextChangedListener(textWatcher)
             checkboxTerms.setOnCheckedChangeListener { _, _ -> checkAllFields() }
@@ -231,9 +232,9 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
 
     private fun checkAllFields() {
         val isAllFilled = binding.run {
-            firstnameRegister.text!!.isNotBlank() &&
-                    lastnameRegister.text!!.isNotBlank() &&
-                    usernameRegister.text!!.isNotBlank() &&
+            textInputFirstnameRegister.text!!.isNotBlank() &&
+                    textInputLastnameRegister.text!!.isNotBlank() &&
+                    textInputUsernameRegister.text!!.isNotBlank() &&
                     textInputEmailRegister.text!!.isNotBlank() &&
                     textInputPasswordRegister.text!!.isNotBlank() &&
                     checkboxTerms.isChecked

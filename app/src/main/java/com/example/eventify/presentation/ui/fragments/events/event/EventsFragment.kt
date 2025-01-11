@@ -20,8 +20,11 @@ class EventsFragment : BaseFragment<FragmentEventsBinding>(FragmentEventsBinding
     private val viewmodel: EventViewModel by viewModels()
 
     private val eventAdapter = EventAdapter(
+        onLike = {
+
+        },
         onClick = {
-            findNavController().navigate(PlacesFragmentDirections.actionPlacesFragmentToEventDetailsFragment(it.eventId))
+            findNavController().navigate(PlacesFragmentDirections.actionPlacesFragmentToEventDetailsFragment(it))
         }
     )
 
