@@ -1,8 +1,13 @@
 package com.example.eventify.presentation.ui.fragments.events.event
 
+import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import androidx.navigation.fragment.findNavController
 import com.example.common.base.BaseFragment
 import com.example.eventify.databinding.FragmentEventsBinding
@@ -17,11 +22,13 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class EventsFragment : BaseFragment<FragmentEventsBinding>(FragmentEventsBinding::inflate) {
 
-    private val viewmodel: EventViewModel by viewModels()
+    private val viewModel: EventViewModel by viewModels()
 
     private val eventAdapter = EventAdapter(
         onLike = {
-
+            lifecycleScope.launch {
+                viewModel.likeEvent(it)
+            }
         },
         onClick = {
             findNavController().navigate(PlacesFragmentDirections.actionPlacesFragmentToEventDetailsFragment(it))
@@ -31,17 +38,23 @@ class EventsFragment : BaseFragment<FragmentEventsBinding>(FragmentEventsBinding
     override fun onViewCreatedLight() {
         setAdapters()
         updateAdapters()
+
+
+
+
+
+
     }
 
     private fun updateAdapters() {
         lifecycleScope.launch {
-            viewmodel.isLoading.collectLatest {
+            viewModel.isLoading.collectLatest {
                 binding.progressBarEvents.isVisible = it
             }
         }
 
         lifecycleScope.launch {
-            viewmodel.events
+            viewModel.events
                 .filter { it.isNotEmpty() }
                 .collect {
                     eventAdapter.updateAdapter(it)
@@ -52,4 +65,6 @@ class EventsFragment : BaseFragment<FragmentEventsBinding>(FragmentEventsBinding
     private fun setAdapters() {
         binding.rvEvents.adapter = eventAdapter
     }
+
+
 }

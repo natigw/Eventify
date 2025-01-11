@@ -24,11 +24,9 @@ suspend fun test2()  {
 
 
 fun main() {
-    val job = CoroutineScope(Dispatchers.IO).launch {
-        test1()
-        test2()
-    }
 
-    runBlocking { job.join() }
+
+
+
 }
 

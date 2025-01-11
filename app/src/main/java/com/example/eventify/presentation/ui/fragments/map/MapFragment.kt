@@ -363,9 +363,6 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         }
 
 
-
-
-
         lifecycleScope.launch {
             viewModel.venuesState
                 .filter { it != null }

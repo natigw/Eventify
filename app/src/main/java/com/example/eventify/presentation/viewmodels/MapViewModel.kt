@@ -6,6 +6,7 @@ import com.example.domain.model.places.event.EventItem
 import com.example.domain.model.places.venue.VenueItem
 import com.example.domain.repository.EventRepository
 import com.example.domain.repository.VenueRepository
+import com.example.eventify.NetworkUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
@@ -23,13 +24,18 @@ class MapViewModel @Inject constructor(
 
 
     init {
+
         getEvents()
         getVenues()
     }
     private fun getEvents(){
         viewModelScope.launch {
-            eventsState.update {
-                eventRepository.getEvents()
+            val checkIfValid = NetworkUtils.handleInvalidAccessToken()
+            if(checkIfValid){
+                try {
+                    val response = eventRepository.getEvents()
+                    eventsState.update {response}
+                }catch (_:Exception){}
             }
         }
     }

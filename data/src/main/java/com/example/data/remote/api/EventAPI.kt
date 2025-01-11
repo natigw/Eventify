@@ -46,7 +46,7 @@ interface EventAPI {
     suspend fun getFavEvents() : Response<List<ResponseFavEvents>>
 
     @GET("/events/favorites-ids")
-    suspend fun getFavEventIDs() : Response<List<ResponseFavEventIDs>>
+    suspend fun getFavEventIDs() : Response<List<Int>>
 
     @POST("/events/like")
     suspend fun likeEvent(

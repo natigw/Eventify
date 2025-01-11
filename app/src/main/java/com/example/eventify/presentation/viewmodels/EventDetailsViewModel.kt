@@ -30,7 +30,7 @@ class EventDetailsViewModel @Inject constructor(
     var noComments = false
     val isLoadingComments = MutableStateFlow(true)
     val comments = MutableStateFlow<List<CommentItem>?>(value = null)
-
+    val lastLikedState = mutableListOf<Boolean>()
 
 
     fun getEventDetails(eventId: Int) {
@@ -49,16 +49,18 @@ class EventDetailsViewModel @Inject constructor(
     fun getEventLikeInfo(eventId: Int) {
         viewModelScope.launch {
             val checkIfValid = NetworkUtils.handleInvalidAccessToken()
+            Log.e("validity",checkIfValid.toString())
             if(checkIfValid){
                 try {
-                    val response = eventRepository.getFavEvents()
+                    val response = eventRepository.getFavEventsID()
                     val like = response.any {
-                        it.eventId == eventId
+                        it == eventId
                     }
+                    lastLikedState.add(like)
                     likedState.update { like }
                 }
                 catch (e : Exception){
-                    Log.e("eventLike",e.message.toString())
+                    Log.e("bilmire",e.message.toString())
                 }
             }
         }
@@ -84,7 +86,7 @@ class EventDetailsViewModel @Inject constructor(
 
     suspend fun updateDislikeEvent(eventId: Int){
         withContext(Dispatchers.IO) {
-            eventRepository
+            eventRepository.dislikeEvent(eventId)
         }
     }
 

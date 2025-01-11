@@ -7,6 +7,7 @@ import com.example.data.remote.api.EventAPI
 import com.example.data.remote.model.events.comment.addComment.RequestAddEventComment
 import com.example.data.remote.model.events.createEvent.RequestCreateCustomEvent
 import com.example.data.remote.model.events.likeDislike.RequestLikeDislikeEvent
+import com.example.data.remote.model.events.likeDislike.favEvents.ResponseFavEventIDs
 import com.example.domain.model.places.AddCommentItem
 import com.example.domain.model.places.CommentItem
 import com.example.domain.model.places.event.CreateCustomEventRequestItem
@@ -18,6 +19,7 @@ import com.google.android.gms.maps.model.LatLng
 import java.time.Instant
 import javax.inject.Inject
 import kotlin.math.ln
+import kotlin.math.truncate
 
 class EventRepositoryImpl @Inject constructor(
     private val api: EventAPI
@@ -26,20 +28,30 @@ class EventRepositoryImpl @Inject constructor(
     override suspend fun getEvents(): List<EventItem> {
         try {
             val response = api.getAllEvents()
-            if (response.isSuccessful && response.body() != null) {
-                response.body()!!.let { rawData ->
-                    return rawData.map { event ->
-                        EventItem(
-                            eventId = event.id,
-                            name = event.title,
-                            imageLink = event.posterImageLink,
-                            eventDateTime = if (event.start.substring(0, 5) == event.finish.substring(0, 5)) "${dateFormatter_RemoveDashes_YMDtoDMY(event.date.substring(0, 10))} • all the day" else "${dateFormatter_RemoveDashes_YMDtoDMY(event.date.substring(0, 10))} • ${event.start.substring(0, 5)}-${event.finish.substring(0, 5)}",
-                            lat = event.lat,
-                            lng = event.lng,
 
-                        )
+            val responseLiked = api.getFavEventIDs()
+
+
+
+            if (response.isSuccessful && response.body() != null) {
+                response.body()!!.let { events->
+                    responseLiked.body()!!.let { favs->
+                        return events.map{ event->
+                            EventItem(
+                                eventId = event.id,
+                                name = event.title,
+                                imageLink = event.posterImageLink,
+                                eventDateTime = if (event.start.substring(0, 5) == event.finish.substring(0, 5)) "${dateFormatter_RemoveDashes_YMDtoDMY(event.date.substring(0, 10))} • all the day" else "${dateFormatter_RemoveDashes_YMDtoDMY(event.date.substring(0, 10))} • ${event.start.substring(0, 5)}-${event.finish.substring(0, 5)}",
+                                lat = event.lat,
+                                lng = event.lng,
+                                isLiked = favs.contains(event.id)
+                            )
+                        }
+
+
                     }
                 }
+
             } else {
                 throw Exception(response.errorBody()?.string())
             }
@@ -152,6 +164,21 @@ class EventRepositoryImpl @Inject constructor(
                 throw Exception(response.errorBody()?.string())
             }
         } catch (e: Exception) {
+            throw e
+        }
+    }
+
+    override suspend fun getFavEventsID(): List<Int> {
+        try {
+            val response = api.getFavEventIDs()
+            if(response.isSuccessful && response.body()!=null){
+               return response.body()!!
+            }
+            else{
+                throw Exception(response.errorBody()?.string())
+            }
+        }
+        catch (e : Exception){
             throw e
         }
     }

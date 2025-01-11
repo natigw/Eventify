@@ -26,6 +26,8 @@ interface EventRepository {
 
     suspend fun getFavEvents(): List<FavEventItem>
 
+    suspend fun getFavEventsID() : List<Int>
+
     suspend fun likeEvent(eventId: Int)
 
     suspend fun dislikeEvent(eventId: Int)

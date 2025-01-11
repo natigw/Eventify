@@ -1,10 +1,14 @@
 package com.example.eventify.presentation.ui.fragments.events.event
 
+import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -41,6 +45,12 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
         setAdapters()
         updateAdapters()
         observer()
+
+
+
+
+
+
     }
 
     override fun buttonListener() {
@@ -160,15 +170,16 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
         lifecycleScope.launch {
             viewmodel.likedState
                 .filter { it!=null }
-                .debounce(300)
                 .collectLatest {
+                    Log.e("likedState",it.toString())
                     if(it!!){
-                        viewmodel.updateLikeEvent(args.eventId)
+                        binding.buttonLikeEvent.setIconResource(R.drawable.like_fav)
                     }
                     else{
-                        viewmodel.updateDislikeEvent(args.eventId)
+                        binding.buttonLikeEvent.setIconResource(R.drawable.like_fav_border)
                     }
                     binding.eventBackButton.isVisible = true
+
                 }
         }
 
@@ -210,14 +221,18 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
     }
 
 
+
+
     //yaxsi usul deyil hemise cagirilmaya biler
     override fun onPause() {
         super.onPause()
-//        if(viewmodel.likedState.value == true){
-//            viewmodel.updateLikeEvent(args.eventId)
-//        }
-//        else{
-//            // delete
-//        }
+        lifecycleScope.launch {
+            if(viewmodel.likedState.value!!){
+                viewmodel.updateLikeEvent(args.eventId)
+            }
+            else{
+                viewmodel.updateDislikeEvent(args.eventId)
+            }
+        }
     }
 }

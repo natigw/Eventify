@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.bumptech.glide.Glide.init
 import com.example.domain.model.places.event.EventItem
 import com.example.domain.repository.EventRepository
+import com.example.eventify.NetworkUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
@@ -20,7 +21,7 @@ class EventViewModel @Inject constructor(
     val isLoading = MutableStateFlow(true)
     val events = MutableStateFlow<List<EventItem>>(emptyList())
 
-//    val eventLikeList = arrayListOf<Pair<Int, Boolean>>()
+    val eventLikeList = mutableListOf<Int>()
 
     init {
         getEvents()
@@ -28,12 +29,16 @@ class EventViewModel @Inject constructor(
 
     private fun getEvents() {
         viewModelScope.launch {
-            try {
-                val response = eventRepository.getEvents()
-                events.emit(response)
-                isLoading.update { false }
-            } catch(e: Exception) {
-                Log.e("network event", e.toString())
+            val checkIfValid = NetworkUtils.handleInvalidAccessToken()
+            if(checkIfValid){
+                try {
+                    val response = eventRepository.getEvents()
+                    events.emit(response)
+                    isLoading.update { false }
+                } catch(e: Exception) {
+                    Log.e("network event", e.toString())
+                }
+
             }
         }
     }
@@ -46,6 +51,13 @@ class EventViewModel @Inject constructor(
             catch (e: Exception) {
                 Log.e("network event", e.toString())
             }
+        }
+    }
+
+
+    fun addLikedItem(eventId: Int){
+        if(!eventLikeList.contains(eventId)){
+            eventLikeList.add(eventId)
         }
     }
 

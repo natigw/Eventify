@@ -20,7 +20,6 @@ class EventAdapter(
 
     override fun onBindLight(binding: SampleEventBinding, position: Int) {
         val event = events[position]
-
         with(binding) {
             textEventName.text = event.name
             textEventDateTime.text = event.eventDateTime
@@ -31,6 +30,10 @@ class EventAdapter(
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(imageEvent)
 
+            if(event.isLiked){
+                buttonLikeEvent.setIconResource(R.drawable.like_fav)
+            }
+
             root.setOnClickListener {
                 onClick(event.eventId)
             }
@@ -39,6 +42,8 @@ class EventAdapter(
             }
             buttonLikeEvent.setOnClickListener {
                 onLike(event.eventId)
+
+
             }
         }
     }
