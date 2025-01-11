@@ -13,6 +13,7 @@ import android.net.Uri
 import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.common.base.BaseFragment
@@ -23,9 +24,12 @@ import com.example.common.utils.nancyToastSuccess
 import com.example.common.utils.nancyToastWarning
 import com.example.data.remote.api.EventAPI
 import com.example.data.remote.api.VenueAPI
+import com.example.domain.model.places.event.EventItem
+import com.example.domain.model.places.venue.VenueItem
 import com.example.eventify.R
 import com.example.eventify.databinding.FragmentMapBinding
 import com.example.eventify.presentation.ui.activities.OnBoardingActivity
+import com.example.eventify.presentation.viewmodels.MapViewModel
 import com.example.eventify.presentation.viewmodels.SharedViewModel
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -52,17 +56,11 @@ import javax.inject.Inject
 import javax.inject.Named
 
 @AndroidEntryPoint
-class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate) {
+class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate), OnMapReadyCallback {
 
-    @Inject
-    lateinit var venueApi: VenueAPI
+    val viewModel by viewModels<MapViewModel>()
 
-    @Inject
-    lateinit var eventApi: EventAPI
 
-    @Named("UserTokens")
-    @Inject
-    lateinit var sharedPreferences: SharedPreferences
 
     private val locationPermissionRequestCode = 1
 
@@ -76,98 +74,20 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
     private val markers = mutableListOf<Marker>()
 
-    @SuppressLint("PotentialBehaviorOverride")
-    private val callback = OnMapReadyCallback { googleMap ->
 
-        this.googleMap = googleMap
 
-        sharedViewModel.sharedCoordinates?.let {
-            removeMarkersAtLocation(it.lat, it.long)
-            addMarker(
-                lat = it.lat,
-                lng = it.long,
-                title = it.name,
-                placeId = it.placeId,
-                hue = if (it.placeType == "venue") BitmapDescriptorFactory.HUE_MAGENTA else BitmapDescriptorFactory.HUE_ORANGE
-            )
-        }
-
+    override fun onViewCreatedLight() {
+//        setDrawer()
         lifecycleScope.launch {
-            sharedViewModel.sharedRouteDestinationCoordinates.collect { destinationCoordinates ->
-                destinationCoordinates?.let {
-                    if (currentLatLng != null) {
-                        fetchRoute(currentLatLng!!, LatLng(it.latitude, it.longitude))
-                    } else {
-                        nancyToastWarning(requireContext(), getString(R.string.enable_location_service))
-                    }
-                }
+            sharedViewModel.testStateFlow
+                .filter { it!=null }
+                .collectLatest {
+
+                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(it!!.lat, it.long), 6f))
             }
         }
-
-        lifecycleScope.launch {
-            try {
-                // Adding markers
-                val venues = this@MapFragment.venueApi.getAllVenues().body()
-                val events = this@MapFragment.eventApi.getAllEvents().body()
-                venues?.forEach {
-                    if (it.lat != "string") {  //it.lat != 0.0   //viewmodeli qosandan sonra bele olmalidi
-                        addMarker(
-                            lat = it.lat.toDouble(),
-                            lng = it.lng.toDouble(),
-                            title = it.name,
-                            hue = BitmapDescriptorFactory.HUE_AZURE,
-                            placeId = it.id
-                        )
-                    }
-                }
-                events?.forEach {
-                    if (it.lat != "string") {
-                        addMarker(
-                            lat = it.lat.toDouble(),
-                            lng = it.lng.toDouble(),
-                            title = it.title,
-                            hue = BitmapDescriptorFactory.HUE_RED,
-                            placeId = it.venueId,
-                            placeType = "event"
-                        )
-                    }
-                }
-            } catch (e: Exception) {
-                nancyToastError(requireContext(), e.toString())
-                Log.e("exception", e.toString())
-            }
-
-            addMarker(
-                40.38,
-                49.85,
-                "natig's custom event",
-                BitmapDescriptorFactory.HUE_GREEN,
-                12,
-                "event"
-            )
-
-            // Marker click listener
-            googleMap.setOnMarkerClickListener { marker ->
-                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(marker.position.latitude-0.005, marker.position.longitude), 15f))
-                marker.showInfoWindow()
-
-                val tags = marker.tag as List<*>
-                val placeId = tags[0] as Int
-                val placeType = tags[1] as String
-                placeId.let {
-                    findNavController().navigate(MapFragmentDirections.actionMapFragmentToMarkerDetailsBottomSheet(placeId, placeType))
-                }
-                true
-            }
-        }
-
-        binding.buttonSwitchMode.setOnClickListener {
-            googleMap.mapType =
-                if (googleMap.mapType == GoogleMap.MAP_TYPE_HYBRID) GoogleMap.MAP_TYPE_NORMAL else GoogleMap.MAP_TYPE_HYBRID
-        }
-        googleMap.uiSettings.setAllGesturesEnabled(true)
-//        googleMap.uiSettings.isMyLocationButtonEnabled = false
-        getMyLocation()  //show user's current location
+        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
+        mapFragment?.getMapAsync(this)
     }
 
     //TODO -> burda nese sehv olub
@@ -187,19 +107,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         }
     }
 
-    override fun onViewCreatedLight() {
-//        setDrawer()
-        lifecycleScope.launch {
-            sharedViewModel.testStateFlow
-                .filter { it!=null }
-                .collectLatest {
-                    Log.e("nagiq",it.toString())
-                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(it!!.lat, it.long), 6f))
-            }
-        }
-        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
-        mapFragment?.getMapAsync(callback)
-    }
+
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
@@ -424,5 +332,108 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         val intent = Intent(requireContext(), OnBoardingActivity::class.java)
         startActivity(intent)
         requireActivity().finish()
+    }
+
+    @SuppressLint("PotentialBehaviorOverride")
+    override fun onMapReady(googleMap: GoogleMap) {
+
+        this.googleMap = googleMap
+
+        sharedViewModel.sharedCoordinates?.let {
+            removeMarkersAtLocation(it.lat, it.long)
+            addMarker(
+                lat = it.lat,
+                lng = it.long,
+                title = it.name,
+                placeId = it.placeId,
+                hue = if (it.placeType == "venue") BitmapDescriptorFactory.HUE_MAGENTA else BitmapDescriptorFactory.HUE_ORANGE
+            )
+        }
+
+        lifecycleScope.launch {
+            sharedViewModel.sharedRouteDestinationCoordinates.collect { destinationCoordinates ->
+                destinationCoordinates?.let {
+                    if (currentLatLng != null) {
+                        fetchRoute(currentLatLng!!, LatLng(it.latitude, it.longitude))
+                    } else {
+                        nancyToastWarning(requireContext(), getString(R.string.enable_location_service))
+                    }
+                }
+            }
+        }
+
+
+
+
+
+        lifecycleScope.launch {
+            viewModel.venuesState
+                .filter { it != null }
+                .collectLatest { venues ->
+                    venues!!.forEach {
+                        if (it.lat != "string") {  //it.lat != 0.0   //viewmodeli qosandan sonra bele olmalidi
+                            addMarker(
+                                lat = it.lat.toDouble(),
+                                lng = it.lng.toDouble(),
+                                title = it.title,
+                                hue = BitmapDescriptorFactory.HUE_AZURE,
+                                placeId = it.venueId
+                            )
+                        }
+                    }
+
+                }
+
+            viewModel.eventsState
+                .filter { it != null }
+                .collectLatest { events ->
+                    events!!.forEach {
+                        if (it.lat != "string") {
+                            addMarker(
+                                lat = it.lat.toDouble(),
+                                lng = it.lng.toDouble(),
+                                title = it.name,
+                                hue = BitmapDescriptorFactory.HUE_RED,
+                                placeId = it.eventId,
+                                placeType = "event"
+                            )
+                        }
+
+                    }
+                }
+        }
+
+        addMarker(
+            40.38,
+            49.85,
+            "natig's custom event",
+            BitmapDescriptorFactory.HUE_GREEN,
+            12,
+            "event"
+        )
+
+        // Marker click listener
+        googleMap.setOnMarkerClickListener { marker ->
+            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(marker.position.latitude-0.005, marker.position.longitude), 15f))
+            marker.showInfoWindow()
+            val tags = marker.tag as List<*>
+            val placeId = tags[0] as Int
+            val placeType = tags[1] as String
+            placeId.let {
+                findNavController().navigate(MapFragmentDirections.actionMapFragmentToMarkerDetailsBottomSheet(placeId, placeType))
+            }
+            true
+        }
+
+
+        binding.buttonSwitchMode.setOnClickListener {
+            googleMap.mapType =
+                if (googleMap.mapType == GoogleMap.MAP_TYPE_HYBRID) GoogleMap.MAP_TYPE_NORMAL else GoogleMap.MAP_TYPE_HYBRID
+        }
+
+        googleMap.uiSettings.setAllGesturesEnabled(true)
+//        googleMap.uiSettings.isMyLocationButtonEnabled = false
+        getMyLocation()  //show user's current location
+
     }
 }

@@ -200,7 +200,7 @@ class AuthRepositoryImpl @Inject constructor(
     override suspend fun isUserVerified(userEmail: String): Boolean {
         try {
             val response = api.isUserVerified(userEmail)
-            if(response.isSuccessful && response.body()!=null){
+            if(response.isSuccessful && response.body() != null){
                 return response.body()!!
             }
             else{

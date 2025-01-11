@@ -8,5 +8,7 @@ data class EventItem(
     val eventId : Int,
     val name : String,
     val imageLink : String?,
-    val eventDateTime: String
+    val eventDateTime: String,
+    val lat : String,
+    val lng : String
 ) : Parcelable

@@ -30,7 +30,9 @@ class VenueRepositoryImpl @Inject constructor(
                             venueId = it.id,
                             title = it.name,
                             imageLink = it.image1Link,
-                            description = it.description
+                            description = it.description,
+                            lat = it.lat,
+                            lng = it.lng
                         )
                     }
                 }

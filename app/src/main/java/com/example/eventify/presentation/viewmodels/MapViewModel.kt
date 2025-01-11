@@ -15,15 +15,16 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MapViewModel @Inject constructor(
-    val venueRepository: VenueRepository,
-    val eventRepository: EventRepository
+    private val venueRepository: VenueRepository,
+    private val eventRepository: EventRepository
 ) : ViewModel() {
     val eventsState = MutableStateFlow<List<EventItem>?>(null)
     val venuesState = MutableStateFlow<List<VenueItem>?>(null)
 
 
     init {
-
+        getEvents()
+        getVenues()
     }
     private fun getEvents(){
         viewModelScope.launch {
