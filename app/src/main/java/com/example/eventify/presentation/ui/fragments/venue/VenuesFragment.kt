@@ -1,11 +1,11 @@
 package com.example.eventify.presentation.ui.fragments.venue
 
-import android.util.Log
-import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.common.base.BaseFragment
+import com.example.common.utils.startShimmer
+import com.example.common.utils.stopShimmer
 import com.example.eventify.databinding.FragmentVenuesBinding
 import com.example.eventify.presentation.adapters.VenueAdapter
 import com.example.eventify.presentation.viewmodels.VenueViewModel
@@ -21,21 +21,32 @@ class VenuesFragment : BaseFragment<FragmentVenuesBinding>(FragmentVenuesBinding
 
     private val venueAdapter = VenueAdapter(
         onClick = {
-            findNavController().navigate(VenuesFragmentDirections.actionVenuesFragmentToVenueDetailsFragment(it.venueId))
+            findNavController().navigate(
+                VenuesFragmentDirections.actionVenuesFragmentToVenueDetailsFragment(it.venueId)
+            )
         }
     )
+
+    override fun onResume() {
+        super.onResume()
+        if (viewmodel.venues.value.isEmpty())
+            startShimmer(binding.shimmerVenues)
+    }
 
     override fun onViewCreatedLight() {
         setAdapters()
         updateAdapters()
     }
 
-
+    override fun onPause() {
+        super.onPause()
+        stopShimmer(binding.shimmerVenues)
+    }
 
     private fun updateAdapters() {
         lifecycleScope.launch {
             viewmodel.isLoading.collectLatest {
-                binding.progressBarVenues.isVisible = it
+                stopShimmer(binding.shimmerVenues)
             }
         }
 

@@ -1,15 +1,11 @@
 package com.example.eventify.presentation.ui.fragments.events.event
 
-import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
-import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.NavController
-import androidx.navigation.NavDestination
 import androidx.navigation.fragment.findNavController
 import com.example.common.base.BaseFragment
+import com.example.common.utils.startShimmer
+import com.example.common.utils.stopShimmer
 import com.example.eventify.databinding.FragmentEventsBinding
 import com.example.eventify.presentation.adapters.EventAdapter
 import com.example.eventify.presentation.ui.fragments.events.PlacesFragmentDirections
@@ -31,28 +27,34 @@ class EventsFragment : BaseFragment<FragmentEventsBinding>(FragmentEventsBinding
             }
         },
         onClick = {
-            findNavController().navigate(PlacesFragmentDirections.actionPlacesFragmentToEventDetailsFragment(it))
+            findNavController().navigate(
+                PlacesFragmentDirections.actionPlacesFragmentToEventDetailsFragment(it)
+            )
         }
     )
+
+    override fun onResume() {
+        super.onResume()
+        if (viewModel.events.value.isEmpty())
+            startShimmer(binding.shimmerEvents)
+    }
 
     override fun onViewCreatedLight() {
         setAdapters()
         updateAdapters()
+    }
 
-
-
-
-
-
+    override fun onPause() {
+        super.onPause()
+        stopShimmer(binding.shimmerEvents)
     }
 
     private fun updateAdapters() {
         lifecycleScope.launch {
             viewModel.isLoading.collectLatest {
-                binding.progressBarEvents.isVisible = it
+                stopShimmer(binding.shimmerEvents)
             }
         }
-
         lifecycleScope.launch {
             viewModel.events
                 .filter { it.isNotEmpty() }
@@ -65,6 +67,4 @@ class EventsFragment : BaseFragment<FragmentEventsBinding>(FragmentEventsBinding
     private fun setAdapters() {
         binding.rvEvents.adapter = eventAdapter
     }
-
-
 }
