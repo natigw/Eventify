@@ -9,7 +9,6 @@ import com.example.domain.model.places.event.FavEventItem
 import com.example.domain.model.places.event.SearchEventItem
 
 interface EventRepository {
-
     suspend fun getEvents(): List<EventItem>
 
     suspend fun getEventDetails(eventId: Int): EventDetailsItem?

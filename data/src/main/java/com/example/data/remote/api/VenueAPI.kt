@@ -18,7 +18,6 @@ import retrofit2.http.Path
 
 
 interface VenueAPI {
-
     @GET("/venues")
     suspend fun getAllVenues(): Response<List<ResponseAllVenues>>
 
@@ -38,13 +37,6 @@ interface VenueAPI {
         @Body
         requestLikeVenue: RequestLikeDislikeVenue
     )
-//    @DELETE("/venues/like")
-//    suspend fun dislikeVenue(
-//        @Header("Authorization")
-//        token : String,
-//        @Query("venueId") venueId: Int
-//    )
-
 
     @GET("/venues/{venue_id}/comment")
     suspend fun getVenueComments(

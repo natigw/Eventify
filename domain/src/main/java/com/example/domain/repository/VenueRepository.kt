@@ -25,4 +25,7 @@ interface VenueRepository {
 //    )
 
     suspend fun likeVenue(venueId: Int)
+
+    suspend fun searchVenue(query: String): List<VenueItem>
+
 }
