@@ -19,13 +19,12 @@ import javax.inject.Named
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    val authRepository: com.example.domain.repository.AuthRepository
+    val authRepository: AuthRepository
 ): ViewModel() {
 
     @Inject
     @Named("OnBoardingWelcome")
     lateinit var sharedPrefOnBoard: SharedPreferences
-
 
     @Inject
     @Named("UserTokens")
@@ -48,18 +47,18 @@ class LoginViewModel @Inject constructor(
                     putString("refresh_token",response.refreshToken)
                     putString("token_type",response.tokenType)
                 }
+                removeVerifiedUserEmail()
                 true
             }
             catch (e : Exception){
                 errorMessagesState.update { e.message }
 
                 Log.e("errorLogin",e.message.toString())
-                 false
+                false
             }
             finally {
                 isLoading.update { false }
             }
-
         }
     }
 
@@ -84,16 +83,13 @@ class LoginViewModel @Inject constructor(
             finally {
                 isLoadingGoogle.update { false }
             }
-
         }
     }
 
-
-    fun removeVerifiedUserEmail(){
+    private fun removeVerifiedUserEmail(){
         sharedPrefOnBoard.edit {
             remove("userEmail")
             remove("isAuthorized")
         }
     }
-
 }

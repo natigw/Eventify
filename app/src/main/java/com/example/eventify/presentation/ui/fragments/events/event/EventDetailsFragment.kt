@@ -131,7 +131,7 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
             viewmodel.updateLikeEvent(args.eventId)
         }
 
-        binding.eventBackButton.setOnClickListener {
+        binding.buttonBackEventDetails.setOnClickListener {
             findNavController().navigate(
                 R.id.placesFragment,
                 null,
@@ -247,7 +247,7 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
                     else{
                         binding.buttonLikeEvent.setIconResource(R.drawable.like_fav_border)
                     }
-                    binding.eventBackButton.isVisible = true
+                    binding.buttonBackEventDetails.visibility = View.VISIBLE
 
                 }
         }

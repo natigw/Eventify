@@ -17,14 +17,14 @@
 
     <!-- CUSTOM DATE PICKER THEME -->
     <style name="MaterialCalendarTheme" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorOnPrimary">@color/eventify_on_primary</item>
         <item name="colorPrimary">@color/purple_dark_eventify</item>
         <item name="colorSurface">@color/green_light_eventify</item>
     </style>
 
     <!-- CUSTOM TIME PICKER THEME -->
 <!--    <style name="MaterialTime" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">-->
-<!--        <item name="colorOnPrimary">@color/white</item>-->
+<!--        <item name="colorOnPrimary">@color/eventify_on_primary</item>-->
 <!--        <item name="colorPrimary">@color/purple_dark_eventify</item>-->
 <!--        <item name="colorSurface">@color/green_light_eventify</item>-->
 <!--    </style>-->
@@ -35,13 +35,13 @@
         <item name="android:background">@color/purple_dark_eventify</item>
     </style>
     <style name="MaterialAlertDialog.App.Title.Text" parent="MaterialAlertDialog.Material3.Title.Text">
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">@color/eventify_on_primary</item>
     </style>
     <style name="MaterialAlertDialog.App.Content.Text" parent="TextAppearance.Material3.BodyMedium">
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">@color/eventify_on_primary</item>
     </style>
     <style name="Widget.App.Button" parent="Widget.Material3.Button.TextButton.Dialog">
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">@color/eventify_on_primary</item>
     </style>
 
 </resources>

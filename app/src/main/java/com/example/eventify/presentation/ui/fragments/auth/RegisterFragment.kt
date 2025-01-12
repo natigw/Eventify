@@ -1,11 +1,9 @@
 package com.example.eventify.presentation.ui.fragments.auth
 
-import android.graphics.Color.parseColor
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -17,7 +15,6 @@ import com.example.common.utils.nancyToastSuccess
 import com.example.common.utils.nancyToastWarning
 import com.example.eventify.R
 import com.example.eventify.databinding.FragmentRegisterBinding
-import com.example.eventify.presentation.viewmodels.OnBoardingSharedViewModel
 import com.example.eventify.presentation.viewmodels.RegisterViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -107,11 +104,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
             return false
         }
 
-        val isEmailValid = validateInputFieldMeet(
-            binding.textInputLayoutEmailRegister,
-            isValidEmail(email),
-            getString(R.string.please_enter_valid_email)
-        )
+        val isEmailValid = validateInputFieldMeet(binding.textInputLayoutEmailRegister, isValidEmail(email), getString(R.string.please_enter_valid_email))
 
         val passwordErrors = mutableListOf<String>()
 
@@ -186,7 +179,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
             progressBarRegister.visibility = View.VISIBLE
             buttonRegister.isEnabled = false
             buttonRegister.text = null
-            buttonRegister.setBackgroundColor(parseColor("#FFDADADA"))
+            buttonRegister.setBackgroundColor(requireContext().getColor(R.color.button_disabled))
             checkboxTerms.isEnabled = false
         }
     }
@@ -196,7 +189,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
             progressBarRegister.visibility = View.INVISIBLE
             buttonRegister.isEnabled = true
             buttonRegister.text = "Register"
-            buttonRegister.setBackgroundColor(parseColor("#407BFF"))
+            buttonRegister.setBackgroundColor(requireContext().getColor(R.color.register))
             checkboxTerms.isEnabled = true
         }
     }

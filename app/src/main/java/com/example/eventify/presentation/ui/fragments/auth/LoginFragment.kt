@@ -10,6 +10,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.common.base.BaseFragment
+import com.example.common.utils.functions.isValidEmail
+import com.example.common.utils.functions.validateInputFieldEmpty
+import com.example.common.utils.functions.validateInputFieldMeet
 import com.example.common.utils.nancyToastInfo
 import com.example.common.utils.nancyToastSuccess
 import com.example.common.utils.nancyToastWarning
@@ -33,17 +36,15 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     override fun onViewCreatedLight() {
 
         ////TODO -> ??????????????????
-        if (viewModel.sharedPrefOnBoard.getBoolean(
-                "finished",
-                false
-            )
-        ) binding.textWelcomeLogin.visibility = View.VISIBLE
+        if (viewModel.sharedPrefOnBoard.getBoolean("finished", false)) binding.textWelcomeLogin.visibility = View.VISIBLE
 
         observer()
-        loginButton()
         setConstraints()
         checkUser()
 
+        binding.buttonTest.setOnClickListener {
+            navigateToTestActivity()
+        }
     }
 
     override fun buttonListener() {
@@ -52,7 +53,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         val credentialManager = CredentialManager.create(requireContext())
         val clientId = BuildConfig.WEB_CLIENT_ID
 
-        binding.googleButton.setOnClickListener {
+        binding.buttonGoogle.setOnClickListener {
             lifecycleScope.launch {
                 GoogleUtils.getGoogleUserData(
                     credentialManager = credentialManager,
@@ -67,21 +68,35 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             }
         }
 
-        binding.textForgotPasswordLogin.setOnClickListener {
-            nancyToastInfo(requireContext(), getString(R.string.navigating_help_page))
-        }
-
         binding.textDontHaveAccountLoginTEXT.setOnClickListener {
             findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRegisterFragment())
         }
 
-
-        binding.buttonTest.setOnClickListener {
-            navigateToTestActivity()
-        }
-
         binding.textForgotPasswordLogin.setOnClickListener {
             findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToResetPasswordFragment())
+        }
+
+        binding.buttonLogin.setOnClickListener {
+
+            val username = binding.textInputUsernameLogin.text.toString().trim()
+            val password = binding.textInputPasswordLogin.text.toString().trim()
+
+            val isUsernameFilled = validateInputFieldEmpty(binding.textInputLayoutUsernameLogin, username, getString(R.string.please_enter_username))
+            val isPasswordFilled = validateInputFieldEmpty(binding.textInputLayoutPasswordLogin, password, getString(R.string.please_enter_password))
+
+            if (!(isUsernameFilled and isPasswordFilled)) {
+                return@setOnClickListener
+            }
+
+            lifecycleScope.launch {
+                if (viewModel.loginUser(username = username, password = password)) {
+                    clearInputFields()
+                    nancyToastSuccess(requireContext(), getString(R.string.login_successful))
+                    navigateToMainActivity()
+                } else {
+                    nancyToastWarning(requireContext(), getString(R.string.login_unsuccessful))
+                }
+            }
         }
     }
 
@@ -91,7 +106,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         if (userEmail != null && !condition) {
             findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToVerificationFragment())
         } else {
-            binding.textInputEmailLogin.setText(userEmail)
+            binding.textInputUsernameLogin.setText(userEmail)
         }
     }
 
@@ -103,34 +118,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             val params = binding.textSignInTEXT.layoutParams as ConstraintLayout.LayoutParams
             params.topMargin = topMargin
             binding.textSignInTEXT.layoutParams = params
-        }
-    }
-
-    private fun loginButton() {
-        binding.buttonLogin.setOnClickListener {
-
-            val username = binding.textInputEmailLogin.text.toString().trim()
-            val password = binding.textInputPasswordLogin.text.toString().trim()
-
-            if (username.isEmpty() || password.isEmpty()) {
-                nancyToastWarning(requireContext(), getString(R.string.please_fill_all_fields))
-                return@setOnClickListener
-            }
-
-            lifecycleScope.launch {
-                if (viewModel.loginUser(username = username, password = password)) {
-                    clearInputFields()
-                    nancyToastSuccess(requireContext(), getString(R.string.login_successful))
-                    viewModel.removeVerifiedUserEmail()
-                    Intent(requireContext(), MainActivity::class.java).also {
-                        startActivity(it)
-                        requireActivity().finish()
-                    }
-
-                } else {
-                    nancyToastWarning(requireContext(), getString(R.string.login_unsuccessful))
-                }
-            }
         }
     }
 
@@ -171,9 +158,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         binding.apply {
             progressBarLogin.visibility = View.VISIBLE
             buttonLogin.isEnabled = false
-            googleButton.isEnabled = false
+            buttonGoogle.isEnabled = false
             buttonLogin.text = null
-            buttonLogin.setBackgroundColor(parseColor("#FFDADADA"))
+            buttonLogin.setBackgroundColor(requireContext().getColor(R.color.button_disabled))
         }
     }
 
@@ -181,34 +168,34 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         binding.apply {
             progressBarLogin.visibility = View.INVISIBLE
             buttonLogin.isEnabled = true
-            googleButton.isEnabled = true
+            buttonGoogle.isEnabled = true
             buttonLogin.text = getString(R.string.login)
-            buttonLogin.setBackgroundColor(parseColor("#F44336"))
+            buttonLogin.setBackgroundColor(requireContext().getColor(R.color.login))
         }
     }
 
     private fun blockGoogleButton() {
         binding.apply {
-            googleProgressBar.isVisible = true
-            googleButton.isEnabled = false
+            progressBarGoogle.isVisible = true
+            buttonGoogle.isEnabled = false
             buttonLogin.isEnabled = false
-            googleButton.text = null
+            buttonGoogle.text = null
         }
     }
 
     private fun resetGoogleButton() {
         binding.apply {
-            googleProgressBar.isVisible = false
-            googleButton.isEnabled = true
+            progressBarGoogle.isVisible = false
+            buttonGoogle.isEnabled = true
             buttonLogin.isEnabled = true
-            googleButton.text = getString(R.string.continue_with_google)
+            buttonGoogle.text = getString(R.string.continue_with_google)
         }
     }
 
 
     private fun clearInputFields() {
         binding.apply {
-            textInputEmailLogin.text = null
+            textInputUsernameLogin.text = null
             textInputPasswordLogin.text = null
         }
     }

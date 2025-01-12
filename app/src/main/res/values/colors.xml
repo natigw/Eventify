@@ -22,5 +22,9 @@
     <color name="purple_eventify">#6823EA</color>
     <color name="purple_dark_eventify">#2E066D</color>
 
+    <color name="login">#F44336</color>
+    <color name="register">#407BFF</color>
+    <color name="button_disabled">#FFDADADA</color>
+
     <color name="eventify_bottom_nav_background">#DBDBDB</color>
 </resources>
