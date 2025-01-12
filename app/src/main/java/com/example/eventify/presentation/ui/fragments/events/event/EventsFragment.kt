@@ -22,9 +22,7 @@ class EventsFragment : BaseFragment<FragmentEventsBinding>(FragmentEventsBinding
 
     private val eventAdapter = EventAdapter(
         onLike = {
-            lifecycleScope.launch {
-                viewModel.likeEvent(it)
-            }
+            viewModel.likeEvent(it)
         },
         onClick = {
             findNavController().navigate(

@@ -45,12 +45,6 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
         setAdapters()
         updateAdapters()
         observer()
-
-
-
-
-
-
     }
 
     override fun buttonListener() {
@@ -62,6 +56,7 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
             else{
                 viewmodel.likedState.update { true }
             }
+            viewmodel.updateLikeEvent(args.eventId)
         }
 
         binding.eventBackButton.setOnClickListener {
@@ -226,13 +221,6 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
     //yaxsi usul deyil hemise cagirilmaya biler
     override fun onPause() {
         super.onPause()
-        lifecycleScope.launch {
-            if(viewmodel.likedState.value!!){
-                viewmodel.updateLikeEvent(args.eventId)
-            }
-            else{
-                viewmodel.updateDislikeEvent(args.eventId)
-            }
-        }
+
     }
 }

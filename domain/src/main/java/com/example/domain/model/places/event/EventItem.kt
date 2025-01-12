@@ -11,5 +11,5 @@ data class EventItem(
     val eventDateTime: String,
     val lat : String,
     val lng : String,
-    val isLiked : Boolean
+    var isLiked : Boolean
 ) : Parcelable

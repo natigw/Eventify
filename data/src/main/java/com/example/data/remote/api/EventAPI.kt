@@ -54,12 +54,6 @@ interface EventAPI {
         requestLikeEvent: RequestLikeDislikeEvent
     )
 
-    @DELETE("/events/like")
-    suspend fun dislikeEvent(
-        @Body
-        requestDeleteLikeEvent : RequestLikeDislikeEvent
-    )
-
 
     @GET("/events/{event_id}/comment")
     suspend fun getEventComments(

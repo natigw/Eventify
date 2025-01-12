@@ -24,6 +24,8 @@ class EventifyApplication : Application() {
     @Inject
     lateinit var tokenManager: TokenManager
 
+    val applicationScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
+
     private val _isNetworkConnected = MutableLiveData<Boolean>()
     val isNetworkConnected: LiveData<Boolean> get() = _isNetworkConnected
 

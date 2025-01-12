@@ -19,7 +19,7 @@ class EventAdapter(
     }
 
     override fun onBindLight(binding: SampleEventBinding, position: Int) {
-        val event = events[position]
+        var event = events[position]
         with(binding) {
             textEventName.text = event.name
             textEventDateTime.text = event.eventDateTime
@@ -42,8 +42,8 @@ class EventAdapter(
             }
             buttonLikeEvent.setOnClickListener {
                 onLike(event.eventId)
-
-
+                event.isLiked = !event.isLiked
+                notifyItemChanged(position)
             }
         }
     }

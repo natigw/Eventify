@@ -78,15 +78,9 @@ class EventDetailsViewModel @Inject constructor(
         }
     }
 
-    suspend fun updateLikeEvent(eventId : Int){
-        withContext(Dispatchers.IO) {
+    fun updateLikeEvent(eventId : Int){
+        viewModelScope.launch {
             eventRepository.likeEvent(eventId)
-        }
-    }
-
-    suspend fun updateDislikeEvent(eventId: Int){
-        withContext(Dispatchers.IO) {
-            eventRepository.dislikeEvent(eventId)
         }
     }
 

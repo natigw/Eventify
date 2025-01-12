@@ -61,7 +61,9 @@ class EventViewModel @Inject constructor(
         }
     }
 
-    suspend fun likeEvent(eventId: Int) {
-        eventRepository.likeEvent(eventId)
+    fun likeEvent(eventId: Int) {
+        viewModelScope.launch {
+            eventRepository.likeEvent(eventId)
+        }
     }
 }

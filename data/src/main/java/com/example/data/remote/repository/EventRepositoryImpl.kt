@@ -195,13 +195,4 @@ class EventRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun dislikeEvent(eventId: Int) {
-        try {
-            api.dislikeEvent(RequestLikeDislikeEvent(eventId))
-        }
-        catch (e : Exception){
-            e.printStackTrace()
-        }
-    }
-
 }
