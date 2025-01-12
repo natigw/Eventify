@@ -6,6 +6,7 @@ import com.example.domain.model.places.event.CreateCustomEventRequestItem
 import com.example.domain.model.places.event.EventDetailsItem
 import com.example.domain.model.places.event.EventItem
 import com.example.domain.model.places.event.FavEventItem
+import com.example.domain.model.places.event.SearchEventItem
 
 interface EventRepository {
 
@@ -29,5 +30,7 @@ interface EventRepository {
     suspend fun getFavEventsID(): List<Int>
 
     suspend fun likeEvent(eventId: Int)
+
+//    suspend fun searchEvent(query: String) : List<SearchEventItem>
 
 }

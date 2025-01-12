@@ -7,6 +7,7 @@ import com.example.data.remote.api.EventAPI
 import com.example.data.remote.model.events.comment.addComment.RequestAddEventComment
 import com.example.data.remote.model.events.createEvent.RequestCreateCustomEvent
 import com.example.data.remote.model.events.likeDislike.RequestLikeDislikeEvent
+import com.example.data.remote.model.events.likeDislike.favEvents.Event
 import com.example.data.remote.model.events.likeDislike.favEvents.ResponseFavEventIDs
 import com.example.domain.model.places.AddCommentItem
 import com.example.domain.model.places.CommentItem
@@ -14,8 +15,10 @@ import com.example.domain.model.places.event.CreateCustomEventRequestItem
 import com.example.domain.model.places.event.EventDetailsItem
 import com.example.domain.model.places.event.EventItem
 import com.example.domain.model.places.event.FavEventItem
+import com.example.domain.model.places.event.SearchEventItem
 import com.example.domain.repository.EventRepository
 import com.google.android.gms.maps.model.LatLng
+import retrofit2.http.Query
 import java.time.Instant
 import javax.inject.Inject
 import kotlin.math.ln
@@ -194,5 +197,28 @@ class EventRepositoryImpl @Inject constructor(
             e.printStackTrace()
         }
     }
+
+//    override suspend fun searchEvent(query: String): List<SearchEventItem> {
+//        try {
+//            val response = api.searchEvent(query)
+//            if(response.isSuccessful && response.body()!=null){
+//                return response.body()!!.map {event->
+//                    SearchEventItem(
+//                        eventId = event.id,
+//                        name = event.title,
+//                        imageLink = event.posterImageLink,
+//                        eventDateTime = if (event.start.substring(0, 5) == event.finish.substring(0, 5)) "${dateFormatter_RemoveDashes_YMDtoDMY(event.date.substring(0, 10))} • all the day" else "${dateFormatter_RemoveDashes_YMDtoDMY(event.date.substring(0, 10))} • ${event.start.substring(0, 5)}-${event.finish.substring(0, 5)}",
+//                        lat = event.lat,
+//                        lng = event.lng,
+//                    )
+//                }
+//            }
+//            else{
+//                throw Exception(response.errorBody()?.string())
+//            }
+//        }catch (e: Exception){
+//            throw e
+//        }
+//    }
 
 }

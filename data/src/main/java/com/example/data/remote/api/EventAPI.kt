@@ -10,6 +10,9 @@ import com.example.data.remote.model.events.eventDetails.ResponseEventDetails
 import com.example.data.remote.model.events.likeDislike.RequestLikeDislikeEvent
 import com.example.data.remote.model.events.likeDislike.favEvents.ResponseFavEventIDs
 import com.example.data.remote.model.events.likeDislike.favEvents.ResponseFavEvents
+import com.example.data.remote.model.events.search.ResponseSearchEvent
+import com.example.domain.model.places.event.EventItem
+import com.example.domain.model.places.event.SearchEventItem
 import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.Body
@@ -80,10 +83,12 @@ interface EventAPI {
 //    )
 //
 //
-//    @GET("/events/search/{query}")
-//    suspend fun searchEvent(
-//        @Path("query") query: String
-//    ) : ResponseEventSearch
+    @GET("/events/search/{query}")
+    suspend fun searchEvent(
+        @Path("query") query: String
+    ) : Response<List<ResponseSearchEvent>>
+
+
 
     @Multipart
     @POST("/files")

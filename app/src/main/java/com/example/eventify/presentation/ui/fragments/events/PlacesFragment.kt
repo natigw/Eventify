@@ -15,16 +15,6 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class PlacesFragment : BaseFragment<FragmentPlacesBinding>(FragmentPlacesBinding::inflate) {
 
-
-    @Inject
-    lateinit var venueAPI: VenueAPI
-
-    @Inject
-    lateinit var authAPI: AuthRepository
-
-    @Inject
-    lateinit var tokenManager: TokenManager
-
     override fun onViewCreatedLight() {
         setTabLayoutMediator()
     }
