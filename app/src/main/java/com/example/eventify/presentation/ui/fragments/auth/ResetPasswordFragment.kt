@@ -4,8 +4,8 @@ import android.util.Log
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.example.common.base.BaseFragment
-import com.example.common.utils.NancyToast
 import com.example.eventify.R
 import com.example.eventify.databinding.PasswordResetBinding
 import com.example.eventify.presentation.viewmodels.ResetPasswordViewModel
@@ -16,13 +16,22 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ResetPasswordFragment : BaseFragment<PasswordResetBinding>(PasswordResetBinding::inflate) {
-    val viewModel by viewModels<ResetPasswordViewModel>()
+    private val viewModel by viewModels<ResetPasswordViewModel>()
 
 
     override fun onViewCreatedLight() {
+
+    }
+
+    override fun buttonListener() {
+        super.buttonListener()
         binding.buttonSend.setOnClickListener{
             resetUserPassword()
         }
+        binding.eventBackButton.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
     }
 
     fun resetUserPassword(){

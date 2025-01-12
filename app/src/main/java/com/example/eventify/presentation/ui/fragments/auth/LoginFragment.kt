@@ -75,9 +75,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRegisterFragment())
         }
 
-        binding.buttonMain.setOnClickListener {
-            navigateToMainActivity()
-        }
 
         binding.buttonTest.setOnClickListener {
             navigateToTestActivity()
@@ -174,6 +171,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         binding.apply {
             progressBarLogin.visibility = View.VISIBLE
             buttonLogin.isEnabled = false
+            googleButton.isEnabled = false
             buttonLogin.text = null
             buttonLogin.setBackgroundColor(parseColor("#FFDADADA"))
         }
@@ -183,6 +181,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         binding.apply {
             progressBarLogin.visibility = View.INVISIBLE
             buttonLogin.isEnabled = true
+            googleButton.isEnabled = true
             buttonLogin.text = getString(R.string.login)
             buttonLogin.setBackgroundColor(parseColor("#F44336"))
         }
@@ -192,6 +191,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         binding.apply {
             googleProgressBar.isVisible = true
             googleButton.isEnabled = false
+            buttonLogin.isEnabled = false
             googleButton.text = null
         }
     }
@@ -200,6 +200,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         binding.apply {
             googleProgressBar.isVisible = false
             googleButton.isEnabled = true
+            buttonLogin.isEnabled = true
             googleButton.text = getString(R.string.continue_with_google)
         }
     }

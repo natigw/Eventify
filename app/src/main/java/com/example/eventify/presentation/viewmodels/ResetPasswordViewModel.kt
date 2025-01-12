@@ -5,7 +5,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.domain.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
