@@ -73,6 +73,7 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
             if (binding.addCommentEvent.text.isNullOrEmpty()) {
                 nancyToastWarning(requireContext(), getString(R.string.type_main_text_first))
                 return@setOnClickListener
+
             }
             viewmodel.addComment(
                 AddCommentItem(
