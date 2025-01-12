@@ -38,7 +38,7 @@
             app:layout_constraintGuide_percent="0.95" />
 
         <Button
-            android:id="@+id/eventBackButton"
+            android:id="@+id/buttonBackEventDetails"
             style="?attr/materialIconButtonFilledTonalStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

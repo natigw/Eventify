@@ -1,16 +1,12 @@
 package com.example.eventify.presentation.ui.fragments.auth
 
-import android.graphics.Color.parseColor
 import android.view.View
-import android.widget.Toast
 import androidx.core.content.edit
 import androidx.core.view.isVisible
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.common.base.BaseFragment
-import com.example.common.utils.NancyToast
 import com.example.common.utils.nancyToastSuccess
 import com.example.common.utils.nancyToastWarning
 import com.example.eventify.R
@@ -21,105 +17,91 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 
-
 @AndroidEntryPoint
 class VerificationFragment : BaseFragment<VerificationLayoutBinding>(VerificationLayoutBinding::inflate) {
 
-    val viewModel by viewModels<VerificationViewModel>()
+    private val viewModel by viewModels<VerificationViewModel>()
 
     override fun onViewCreatedLight() {
         observer()
-
     }
 
-    override fun setUI(){
-        val userEmail = viewModel.getUserEmail()
-        binding.userEmailTextView.text = userEmail
+    override fun setUI() {
+        binding.textUserEmailVerification.text = viewModel.getUserEmail()
     }
-
 
     override fun buttonListener() {
         super.buttonListener()
         val userEmail = viewModel.getUserEmail()
-        binding.verifyButton.setOnClickListener {
+        binding.buttonVerify.setOnClickListener {
             lifecycleScope.launch {
-                if(viewModel.isUserVerified(
-                        userEmail = userEmail
-                )){
+                if (viewModel.isUserVerified(userEmail = userEmail)) {
                     viewModel.sharedPrefOnBoard.edit {
-                        putBoolean("isAuthorized",true)
+                        putBoolean("isAuthorized", true)
                     }
                     findNavController().navigate(VerificationFragmentDirections.actionVerificationFragmentToLoginFragment())
-                }
-                else{
-                    nancyToastWarning(requireContext(),getString(R.string.verify_email))
+                } else {
+                    nancyToastWarning(requireContext(), getString(R.string.verify_email))
                 }
             }
         }
 
-        binding.resendVerificationTextView.setOnClickListener {
+        binding.textResendVerification.setOnClickListener {
             lifecycleScope.launch {
-                if(
-                    viewModel.resendVerification(userEmail)
-                ){
-                    binding.registerTextView.isVisible = true
-                    nancyToastSuccess(requireContext(),getString(R.string.check_email))
-                }
-                else {
+                if (viewModel.resendVerification(userEmail)) {
+                    binding.textWrongEmailRegisterVerification.isVisible = true
+                    nancyToastSuccess(requireContext(), getString(R.string.check_email))
+                } else {
                     nancyToastWarning(requireContext(), getString(R.string.try_again))
                 }
             }
         }
-        binding.lottie.setMaxFrame(40)
-
+        binding.lottieEnvelopeVerification.setMaxFrame(40)
     }
 
-    private fun observer(){
+    private fun observer() {
         lifecycleScope.launch {
             viewModel.isLoading
-                .filter { it!=null }
+                .filter { it != null }
                 .collectLatest {
-                if(it!!){
-                    blockSignupButton()
+                    if (it!!) {
+                        blockSignupButton()
+                    } else {
+                        resetSignupButton()
+                    }
                 }
-                else{
-                    resetSignupButton()
-                }
-            }
         }
         lifecycleScope.launch {
             viewModel.resendVerificationState
-                .filter { it!=null }
+                .filter { it != null }
                 .collectLatest {
-                    if(it!!){
-                        binding.resendVerificationTextView.isClickable = false
-                        binding.resendVerificationTextView.isFocusable = false
+                    if (it!!) {
+                        binding.textResendVerification.isClickable = false
+                        binding.textResendVerification.isFocusable = false
+                    } else {
+                        binding.textResendVerification.isClickable = true
+                        binding.textResendVerification.isFocusable = true
                     }
-                    else{
-                        binding.resendVerificationTextView.isClickable = true
-                        binding.resendVerificationTextView.isFocusable = true
-                    }
-            }
+                }
         }
-
     }
 
 
     private fun blockSignupButton() {
         binding.apply {
-            progressBar.visibility = View.VISIBLE
-            verifyButton.isEnabled = false
-            verifyButton.text = null
-            verifyButton.setBackgroundColor(parseColor("#FFDADADA"))
+            progressBarVerification.visibility = View.VISIBLE
+            buttonVerify.isEnabled = false
+            buttonVerify.text = null
+            buttonVerify.setBackgroundColor(requireContext().getColor(R.color.button_disabled))
         }
     }
 
     private fun resetSignupButton() {
         binding.apply {
-            progressBar.visibility = View.INVISIBLE
-            verifyButton.isEnabled = true
-            verifyButton.text = getString(R.string.continue_email)
-            verifyButton.setBackgroundColor(parseColor("#407BFF"))
+            progressBarVerification.visibility = View.INVISIBLE
+            buttonVerify.isEnabled = true
+            buttonVerify.text = getString(R.string.continue_email)
+            buttonVerify.setBackgroundColor(requireContext().getColor(R.color.register))
         }
     }
 }
