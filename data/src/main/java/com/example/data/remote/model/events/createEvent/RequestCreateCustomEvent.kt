@@ -1,6 +1,5 @@
 package com.example.data.remote.model.events.createEvent
 
-
 import com.google.gson.annotations.SerializedName
 
 data class RequestCreateCustomEvent(

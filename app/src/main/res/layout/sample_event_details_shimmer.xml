@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.ui.fragments.events.event.EventDetailsFragment">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineEventDetailsShimmer1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.05" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineEventDetailsShimmer2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.95" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/textEventNameDetailsShimmer"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="20dp"
+            android:adjustViewBounds="true"
+            android:background="@color/eventify_heading"
+            app:layout_constraintEnd_toEndOf="@id/guidelineEventDetailsShimmer2"
+            app:layout_constraintStart_toStartOf="@id/guidelineEventDetailsShimmer1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.5"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imageEventDetailsShimmer"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="18dp"
+            android:adjustViewBounds="true"
+            android:background="@color/gray"
+            app:layout_constraintDimensionRatio="W,1:1.4"
+            app:layout_constraintEnd_toStartOf="@+id/guidelineEventDetailsShimmer2"
+            app:layout_constraintStart_toStartOf="@+id/guidelineEventDetailsShimmer1"
+            app:layout_constraintTop_toBottomOf="@id/textEventNameDetailsShimmer"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Medium" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/buttonLikeEventDetailsShimmer"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:adjustViewBounds="true"
+            android:background="@color/gray_light"
+            app:layout_constraintEnd_toEndOf="@id/imageEventDetailsShimmer"
+            app:layout_constraintTop_toTopOf="@+id/imageEventDetailsShimmer"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full" />
+
+<!--        <com.google.android.material.imageview.ShapeableImageView-->
+<!--            android:id="@+id/buttonChatEventDetailsShimmer"-->
+<!--            android:layout_width="40dp"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:layout_marginTop="8dp"-->
+<!--            android:adjustViewBounds="true"-->
+<!--            android:background="@color/gray_light"-->
+<!--            app:layout_constraintEnd_toEndOf="@id/buttonLikeEventDetailsShimmer"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/buttonLikeEventDetailsShimmer"-->
+<!--            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full" />-->
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/textEventDetailsTextShimmer"
+            android:layout_width="0dp"
+            android:layout_height="24dp"
+            app:layout_constraintWidth_percent="0.4"
+            android:layout_marginTop="18dp"
+            android:adjustViewBounds="true"
+            android:background="@color/eventify_heading"
+            app:layout_constraintStart_toStartOf="@+id/guidelineEventDetailsShimmer1"
+            app:layout_constraintTop_toBottomOf="@+id/imageEventDetailsShimmer"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small" />
+        
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/textEventDetailsDescription1Shimmer"
+            android:layout_width="0dp"
+            android:layout_height="16dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="16dp"
+            android:adjustViewBounds="true"
+            android:background="@color/gray"
+            app:layout_constraintStart_toStartOf="@id/guidelineEventDetailsShimmer1"
+            app:layout_constraintEnd_toEndOf="@id/guidelineEventDetailsShimmer2"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintTop_toBottomOf="@+id/textEventDetailsTextShimmer"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/textEventDetailsDescription2Shimmer"
+            android:layout_width="0dp"
+            android:layout_height="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="32dp"
+            android:adjustViewBounds="true"
+            android:background="@color/gray"
+            app:layout_constraintStart_toStartOf="@id/guidelineEventDetailsShimmer1"
+            app:layout_constraintEnd_toEndOf="@+id/textEventDetailsDescription1Shimmer"
+            app:layout_constraintTop_toBottomOf="@+id/textEventDetailsDescription1Shimmer"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/textEventDetailsDescription3Shimmer"
+            android:layout_width="0dp"
+            android:layout_height="16dp"
+            android:layout_marginTop="4dp"
+            android:adjustViewBounds="true"
+            android:background="@color/gray"
+            app:layout_constraintStart_toStartOf="@id/guidelineEventDetailsShimmer1"
+            app:layout_constraintEnd_toEndOf="@+id/guidelineEventDetailsShimmer2"
+            app:layout_constraintTop_toBottomOf="@+id/textEventDetailsDescription2Shimmer"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/textEventDetailsDescription4Shimmer"
+            android:layout_width="0dp"
+            android:layout_height="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="12dp"
+            android:adjustViewBounds="true"
+            android:background="@color/gray"
+            app:layout_constraintStart_toStartOf="@id/guidelineEventDetailsShimmer1"
+            app:layout_constraintEnd_toEndOf="@+id/textEventDetailsDescription1Shimmer"
+            app:layout_constraintTop_toBottomOf="@+id/textEventDetailsDescription3Shimmer"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/textEventDetailsDescription5Shimmer"
+            android:layout_width="0dp"
+            android:layout_height="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="100dp"
+            android:adjustViewBounds="true"
+            android:background="@color/gray"
+            app:layout_constraintStart_toStartOf="@id/guidelineEventDetailsShimmer1"
+            app:layout_constraintEnd_toEndOf="@+id/textEventDetailsDescription1Shimmer"
+            app:layout_constraintTop_toBottomOf="@+id/textEventDetailsDescription4Shimmer"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonReadMoreEventsShimmer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/gray"
+            android:clickable="false"
+            android:fontFamily="@font/inter_regular"
+            android:minWidth="24dp"
+            android:minHeight="24dp"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="2dp"
+            android:text="@string/read_more"
+            android:textColor="@color/gray"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@id/guidelineEventDetailsShimmer2"
+            app:layout_constraintTop_toBottomOf="@id/textEventDetailsDescription5Shimmer" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/textEventTypeTextShimmer"
+            android:layout_width="100dp"
+            android:layout_height="16dp"
+            android:layout_marginTop="22dp"
+            android:adjustViewBounds="true"
+            android:background="@color/gray"
+            app:layout_constraintStart_toStartOf="@+id/guidelineEventDetailsShimmer1"
+            app:layout_constraintTop_toBottomOf="@+id/textEventDetailsDescription5Shimmer"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/textEventTypeShimmer"
+            android:layout_width="64dp"
+            android:layout_height="16dp"
+            android:layout_marginStart="12dp"
+            android:adjustViewBounds="true"
+            android:background="@color/gray"
+            app:layout_constraintStart_toEndOf="@id/textEventTypeTextShimmer"
+            app:layout_constraintTop_toTopOf="@id/textEventTypeTextShimmer"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/textEventOrganizerTextShimmer"
+            android:layout_width="80dp"
+            android:layout_height="16dp"
+            android:layout_marginTop="11.5dp"
+            android:adjustViewBounds="true"
+            android:background="@color/gray"
+            app:layout_constraintStart_toStartOf="@id/textEventTypeTextShimmer"
+            app:layout_constraintTop_toBottomOf="@+id/textEventTypeTextShimmer"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/textEventOrganizerShimmer"
+            android:layout_width="100dp"
+            android:layout_height="16dp"
+            android:layout_marginStart="12dp"
+            android:adjustViewBounds="true"
+            android:background="@color/gray"
+            app:layout_constraintStart_toEndOf="@id/textEventOrganizerTextShimmer"
+            app:layout_constraintTop_toTopOf="@id/textEventOrganizerTextShimmer"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/textEventDateTEXTShimmer"
+            android:layout_width="50dp"
+            android:layout_height="16dp"
+            android:layout_marginTop="11.5dp"
+            android:adjustViewBounds="true"
+            android:background="@color/gray"
+            app:layout_constraintStart_toStartOf="@id/textEventOrganizerTextShimmer"
+            app:layout_constraintTop_toBottomOf="@+id/textEventOrganizerTextShimmer"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/textEventDateShimmer"
+            android:layout_width="120dp"
+            android:layout_height="16dp"
+            android:layout_marginStart="12dp"
+            android:adjustViewBounds="true"
+            android:background="@color/gray"
+            app:layout_constraintStart_toEndOf="@id/textEventDateTEXTShimmer"
+            app:layout_constraintTop_toTopOf="@id/textEventDateTEXTShimmer"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/textEventDurationHoursTextShimmer"
+            android:layout_width="64dp"
+            android:layout_height="16dp"
+            android:layout_marginTop="11.5dp"
+            android:adjustViewBounds="true"
+            android:background="@color/gray"
+            app:layout_constraintStart_toStartOf="@id/textEventDateTEXTShimmer"
+            app:layout_constraintTop_toBottomOf="@+id/textEventDateTEXTShimmer"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/textEventDurationHoursShimmer"
+            android:layout_width="90dp"
+            android:layout_height="16dp"
+            android:layout_marginStart="12dp"
+            android:adjustViewBounds="true"
+            android:background="@color/gray"
+            app:layout_constraintStart_toEndOf="@id/textEventDurationHoursTextShimmer"
+            app:layout_constraintTop_toTopOf="@id/textEventDurationHoursTextShimmer"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/textEventPublishedTextShimmer"
+            android:layout_width="80dp"
+            android:layout_height="16dp"
+            android:layout_marginTop="11.5dp"
+            android:adjustViewBounds="true"
+            android:background="@color/gray"
+            app:layout_constraintStart_toStartOf="@id/textEventDurationHoursTextShimmer"
+            app:layout_constraintTop_toBottomOf="@+id/textEventDurationHoursTextShimmer"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/textEventPublishedShimmer"
+            android:layout_width="110dp"
+            android:layout_height="16dp"
+            android:layout_marginStart="12dp"
+            android:adjustViewBounds="true"
+            android:background="@color/gray"
+            app:layout_constraintStart_toEndOf="@id/textEventPublishedTextShimmer"
+            app:layout_constraintTop_toTopOf="@id/textEventPublishedTextShimmer"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/textEventLikesTextShimmer"
+            android:layout_width="50dp"
+            android:layout_height="16dp"
+            android:layout_marginTop="11.5dp"
+            android:adjustViewBounds="true"
+            android:background="@color/gray"
+            app:layout_constraintStart_toStartOf="@id/textEventPublishedTextShimmer"
+            app:layout_constraintTop_toBottomOf="@+id/textEventPublishedTextShimmer"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/textEventLikesShimmer"
+            android:layout_width="40dp"
+            android:layout_height="16dp"
+            android:layout_marginStart="12dp"
+            android:adjustViewBounds="true"
+            android:background="@color/gray"
+            app:layout_constraintStart_toEndOf="@id/textEventLikesTextShimmer"
+            app:layout_constraintTop_toTopOf="@id/textEventLikesTextShimmer"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonEventDetailsShowLocationShimmer"
+            style="?attr/materialIconButtonFilledTonalStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:clickable="false"
+            android:backgroundTint="@color/green_light_eventify"
+            android:fontFamily="@font/inter_bold"
+            android:textSize="18sp"
+            app:cornerRadius="12dp"
+            app:layout_constraintEnd_toEndOf="@id/guidelineEventDetailsShimmer2"
+            app:layout_constraintStart_toStartOf="@id/guidelineEventDetailsShimmer1"
+            app:layout_constraintTop_toBottomOf="@+id/textEventLikesTextShimmer" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonBuyTicketEventDetailsShimmer"
+            style="?attr/materialIconButtonFilledTonalStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="9dp"
+            android:clickable="false"
+            android:backgroundTint="@color/green_light_eventify"
+            android:fontFamily="@font/inter_bold"
+            android:textSize="18sp"
+            app:cornerRadius="12dp"
+            app:layout_constraintEnd_toEndOf="@id/guidelineEventDetailsShimmer2"
+            app:layout_constraintStart_toStartOf="@id/guidelineEventDetailsShimmer1"
+            app:layout_constraintTop_toBottomOf="@+id/buttonEventDetailsShowLocationShimmer" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/textEventDetailsCommentsTextShimmer"
+            android:layout_width="0dp"
+            android:layout_height="22dp"
+            app:layout_constraintWidth_percent="0.4"
+            android:layout_marginTop="20dp"
+            android:adjustViewBounds="true"
+            android:background="@color/eventify_heading"
+            app:layout_constraintStart_toStartOf="@+id/guidelineEventDetailsShimmer1"
+            app:layout_constraintTop_toBottomOf="@+id/buttonBuyTicketEventDetailsShimmer"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputWriteCommentEventDetailsShimmer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
+            android:clickable="false"
+            app:boxBackgroundColor="@color/gray"
+            app:boxStrokeWidth="0dp"
+            app:boxCornerRadiusBottomEnd="@dimen/eventify_input_field_corner_radius"
+            app:boxCornerRadiusBottomStart="@dimen/eventify_input_field_corner_radius"
+            app:boxCornerRadiusTopEnd="@dimen/eventify_input_field_corner_radius"
+            app:boxCornerRadiusTopStart="@dimen/eventify_input_field_corner_radius"
+            app:layout_constraintEnd_toStartOf="@id/buttonSendCommentEventDetailsShimmer"
+            app:layout_constraintStart_toStartOf="@id/guidelineEventDetailsShimmer1"
+            app:layout_constraintTop_toBottomOf="@id/textEventDetailsCommentsTextShimmer">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/addCommentEventShimmer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:textSize="16sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonSendCommentEventDetailsShimmer"
+            style="?attr/materialIconButtonFilledStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="4dp"
+            android:contentDescription="@string/send"
+            android:backgroundTint="@color/gray"
+            app:iconTint="@color/gray"
+            android:clickable="false"
+            app:icon="@drawable/ic_send"
+            app:layout_constraintBottom_toBottomOf="@+id/textInputWriteCommentEventDetailsShimmer"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textInputWriteCommentEventDetailsShimmer" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

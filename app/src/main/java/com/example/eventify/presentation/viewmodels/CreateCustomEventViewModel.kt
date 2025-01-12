@@ -1,7 +1,7 @@
 package com.example.eventify.presentation.viewmodels
 
 import androidx.lifecycle.ViewModel
-import com.example.data.remote.api.EventAPI
+import com.example.domain.repository.EventRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import java.time.LocalDate
@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CreateCustomEventViewModel @Inject constructor(
-    private val api: EventAPI
+    private val eventRepository: EventRepository
 ): ViewModel() {
 
     val pickedDate = MutableStateFlow<LocalDate?>(null)

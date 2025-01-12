@@ -1,14 +1,11 @@
 package com.example.eventify.presentation.ui.fragments.events.event
 
-import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.NavController
-import androidx.navigation.NavDestination
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -17,6 +14,8 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.common.base.BaseFragment
 import com.example.common.utils.nancyToastSuccess
 import com.example.common.utils.nancyToastWarning
+import com.example.common.utils.startShimmer
+import com.example.common.utils.stopShimmer
 import com.example.domain.model.places.AddCommentItem
 import com.example.domain.model.places.PlaceCoordinates
 import com.example.domain.model.places.event.EventDetailsItem
@@ -28,7 +27,6 @@ import com.example.eventify.presentation.viewmodels.SharedViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -38,13 +36,87 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
 
     private val viewmodel by viewModels<EventDetailsViewModel>()
     private val sharedViewModel: SharedViewModel by activityViewModels()
-    private val args by navArgs<EventDetailsFragmentArgs>() // id
+    private val args by navArgs<EventDetailsFragmentArgs>() //id
 
     private val commentAdapter = CommentAdapter()
+
+    override fun onResume() {
+        super.onResume()
+        if (viewmodel.isLoadingMain.value) {
+            makeViewsInvisible()
+            startShimmer(binding.shimmerEventDetails)
+        }
+    }
+
     override fun onViewCreatedLight() {
+        binding.textEventName.isSelected = true
         setAdapters()
         updateAdapters()
         observer()
+    }
+
+    //yaxsi usul deyil hemise cagirilmaya biler
+    override fun onPause() {
+        super.onPause()
+        stopShimmer(binding.shimmerEventDetails)
+        makeViewsVisible()
+    }
+
+    private fun makeViewsInvisible(){
+        with(binding) {
+            textEventName.visibility = View.INVISIBLE
+            imageEvent.visibility = View.INVISIBLE
+            buttonLikeEvent.visibility = View.INVISIBLE
+            textEventDetailsText.visibility = View.INVISIBLE
+            textEventDescription.visibility = View.INVISIBLE
+            textEventTypeText.visibility = View.INVISIBLE
+            textEventType.visibility = View.INVISIBLE
+            textEventOrganizerText.visibility = View.INVISIBLE
+            textEventOrganizer.visibility = View.INVISIBLE
+            textEventDateText.visibility = View.INVISIBLE
+            textEventDate.visibility = View.INVISIBLE
+            textEventDurationHoursText.visibility = View.INVISIBLE
+            textEventDurationHours.visibility = View.INVISIBLE
+            textEventPublishedText.visibility = View.INVISIBLE
+            textEventPublished.visibility = View.INVISIBLE
+            textEventLikesText.visibility = View.INVISIBLE
+            textEventLikeCount.visibility = View.INVISIBLE
+            buttonEventShowLocation.visibility = View.INVISIBLE
+            buttonBuyTicketEventDetails.visibility = View.INVISIBLE
+            textEventDetailsCommentsText.visibility = View.INVISIBLE
+            textInputLayoutWriteCommentEventDetails.visibility = View.INVISIBLE
+            textInputEdittextAddCommentEvent.visibility = View.INVISIBLE
+            buttonSendCommentEventDetails.visibility = View.INVISIBLE
+            textEventLikesText.visibility = View.INVISIBLE
+        }
+    }
+    private fun makeViewsVisible(){
+        with(binding) {
+            textEventName.visibility = View.VISIBLE
+            imageEvent.visibility = View.VISIBLE
+            buttonLikeEvent.visibility = View.VISIBLE
+            textEventDetailsText.visibility = View.VISIBLE
+            textEventDescription.visibility = View.VISIBLE
+            textEventTypeText.visibility = View.VISIBLE
+            textEventType.visibility = View.VISIBLE
+            textEventOrganizerText.visibility = View.VISIBLE
+            textEventOrganizer.visibility = View.VISIBLE
+            textEventDateText.visibility = View.VISIBLE
+            textEventDate.visibility = View.VISIBLE
+            textEventDurationHoursText.visibility = View.VISIBLE
+            textEventDurationHours.visibility = View.VISIBLE
+            textEventPublishedText.visibility = View.VISIBLE
+            textEventPublished.visibility = View.VISIBLE
+            textEventLikesText.visibility = View.VISIBLE
+            textEventLikeCount.visibility = View.VISIBLE
+            buttonEventShowLocation.visibility = View.VISIBLE
+            buttonBuyTicketEventDetails.visibility = View.VISIBLE
+            textEventDetailsCommentsText.visibility = View.VISIBLE
+            textInputLayoutWriteCommentEventDetails.visibility = View.VISIBLE
+            textInputEdittextAddCommentEvent.visibility = View.VISIBLE
+            buttonSendCommentEventDetails.visibility = View.VISIBLE
+            textEventLikesText.visibility = View.VISIBLE
+        }
     }
 
     override fun buttonListener() {
@@ -70,18 +142,18 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
         }
 
         binding.buttonSendCommentEventDetails.setOnClickListener {
-            if (binding.addCommentEvent.text.isNullOrEmpty()) {
+            if (binding.textInputEdittextAddCommentEvent.text.isNullOrEmpty()) {
                 nancyToastWarning(requireContext(), getString(R.string.type_main_text_first))
                 return@setOnClickListener
 
             }
             viewmodel.addComment(
                 AddCommentItem(
-                    content = binding.addCommentEvent.text.toString().trim(),
+                    content = binding.textInputEdittextAddCommentEvent.text.toString().trim(),
                     placeId = args.eventId
                 )
             )
-            binding.addCommentEvent.text = null
+            binding.textInputEdittextAddCommentEvent.text = null
         }
     }
 
@@ -158,7 +230,8 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
 
         lifecycleScope.launch {
             viewmodel.isLoadingMain.collectLatest {
-                binding.progressBarEvents.isVisible = it
+                stopShimmer(binding.shimmerEventDetails)
+                makeViewsVisible()
             }
         }
 
@@ -214,14 +287,5 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
                     commentAdapter.updateAdapter(it)
                 }
         }
-    }
-
-
-
-
-    //yaxsi usul deyil hemise cagirilmaya biler
-    override fun onPause() {
-        super.onPause()
-
     }
 }

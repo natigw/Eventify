@@ -1,11 +1,12 @@
 package com.example.eventify.presentation.ui.fragments.events.customEvent
 
-import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.example.common.base.BaseFragment
+import com.example.common.utils.startShimmer
+import com.example.common.utils.stopShimmer
 import com.example.eventify.R
 import com.example.eventify.databinding.FragmentCustomEventsBinding
 import com.example.eventify.presentation.adapters.EventAdapter
@@ -32,19 +33,30 @@ class CustomEventsFragment : BaseFragment<FragmentCustomEventsBinding>(FragmentC
         }
     )
 
+    override fun onResume() {
+        super.onResume()
+        if (viewmodel.events.value.isEmpty())
+            startShimmer(binding.shimmerCustomEvents)
+    }
+
     override fun onViewCreatedLight() {
         setAdapters()
         updateAdapters()
     }
 
+    override fun onPause() {
+        super.onPause()
+        stopShimmer(binding.shimmerCustomEvents)
+    }
+
     override fun buttonListener() {
         super.buttonListener()
-        binding.buttonCreateCustomEvent.setOnClickListener {
-            findNavController().navigate(PlacesFragmentDirections.actionPlacesFragmentToCreateCustomEventFragment())
-        }
+//        binding.buttonCreateCustomEvent.setOnClickListener {
+//            findNavController().navigate(PlacesFragmentDirections.actionPlacesFragmentToCreateCustomEventFragment())
+//        }
         binding.buttonCreateCustomEvent.setOnClickListener{
             findNavController().navigate(
-                R.id.placesFragment,
+                R.id.createCustomEventFragment,
                 null,
                 NavOptions.Builder()
                     .setPopUpTo(R.id.placesFragment,false)
@@ -56,7 +68,7 @@ class CustomEventsFragment : BaseFragment<FragmentCustomEventsBinding>(FragmentC
     private fun updateAdapters() {
         lifecycleScope.launch {
             viewmodel.isLoading.collectLatest {
-                binding.progressBarCustomEvents.isVisible = it
+                stopShimmer(binding.shimmerCustomEvents)
             }
         }
 

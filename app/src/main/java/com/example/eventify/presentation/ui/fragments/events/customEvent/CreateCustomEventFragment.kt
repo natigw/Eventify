@@ -36,9 +36,6 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class CreateCustomEventFragment : BaseFragment<FragmentCreateCustomEventBinding>(FragmentCreateCustomEventBinding::inflate) {
 
-    @Inject
-    lateinit var api: EventAPI
-
     private val viewmodel by viewModels<CreateCustomEventViewModel>()
 
     private val pickMedia =

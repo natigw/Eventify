@@ -11,6 +11,18 @@
         android:layout_height="match_parent"
         tools:context=".presentation.ui.fragments.events.event.EventDetailsFragment">
 
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmerEventDetails"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <include layout="@layout/sample_event_details_shimmer" />
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guidelineEventDetails1"
             android:layout_width="wrap_content"
@@ -40,23 +52,17 @@
             app:layout_constraintStart_toStartOf="@+id/guidelineEventDetails1"
             app:layout_constraintTop_toTopOf="@+id/textEventName" />
 
-        <com.google.android.material.progressindicator.CircularProgressIndicator
-            android:id="@+id/progressBarEvents"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:indeterminate="true"
-            app:layout_constraintTop_toTopOf="@id/textEventDescription"
-            app:layout_constraintBottom_toBottomOf="@+id/textEventDescription"
-            app:layout_constraintEnd_toStartOf="@+id/guidelineEventDetails2"
-            app:layout_constraintStart_toStartOf="@+id/guidelineEventDetails1" />
-
         <TextView
             android:id="@+id/textEventName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
+            android:ellipsize="marquee"
             android:fontFamily="@font/inter_bold"
-            android:textAlignment="center"
+            android:gravity="center"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
             android:textColor="@color/purple_dark_eventify"
             android:textSize="28sp"
             app:layout_constraintEnd_toEndOf="@+id/guidelineEventDetails2"
@@ -291,12 +297,12 @@
             android:textSize="18sp"
             app:cornerRadius="12dp"
             app:icon="@drawable/ic_location_outlined"
+            app:iconGravity="textStart"
             app:iconPadding="8dp"
             app:iconSize="20dp"
             app:iconTint="@color/purple_eventify"
-            app:iconGravity="textStart"
-            app:layout_constraintStart_toStartOf="@id/guidelineEventDetails1"
             app:layout_constraintEnd_toEndOf="@id/guidelineEventDetails2"
+            app:layout_constraintStart_toStartOf="@id/guidelineEventDetails1"
             app:layout_constraintTop_toBottomOf="@+id/textEventLikesText" />
 
         <com.google.android.material.button.MaterialButton
@@ -311,8 +317,8 @@
             android:textColor="@color/purple_eventify"
             android:textSize="18sp"
             app:cornerRadius="12dp"
-            app:layout_constraintStart_toStartOf="@id/guidelineEventDetails1"
             app:layout_constraintEnd_toEndOf="@id/guidelineEventDetails2"
+            app:layout_constraintStart_toStartOf="@id/guidelineEventDetails1"
             app:layout_constraintTop_toBottomOf="@+id/buttonEventShowLocation" />
 
         <TextView
@@ -328,7 +334,7 @@
             app:layout_constraintTop_toBottomOf="@+id/buttonBuyTicketEventDetails" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputWriteCommentEventDetails"
+            android:id="@+id/textInputLayoutWriteCommentEventDetails"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -341,12 +347,12 @@
             app:boxStrokeWidth="1dp"
             app:boxStrokeWidthFocused="2dp"
             app:hintTextColor="@color/purple_eventify"
-            app:layout_constraintTop_toBottomOf="@id/textEventDetailsCommentsText"
             app:layout_constraintEnd_toStartOf="@id/buttonSendCommentEventDetails"
-            app:layout_constraintStart_toStartOf="@id/guidelineEventDetails1">
+            app:layout_constraintStart_toStartOf="@id/guidelineEventDetails1"
+            app:layout_constraintTop_toBottomOf="@id/textEventDetailsCommentsText">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/addCommentEvent"
+                android:id="@+id/textInputEdittextAddCommentEvent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/add_comment"
@@ -360,13 +366,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="4dp"
             android:layout_marginEnd="4dp"
+            android:layout_marginBottom="4dp"
             android:contentDescription="@string/send"
             app:icon="@drawable/ic_send"
-            app:layout_constraintBottom_toBottomOf="@+id/textInputWriteCommentEventDetails"
+            app:layout_constraintBottom_toBottomOf="@+id/textInputLayoutWriteCommentEventDetails"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textInputWriteCommentEventDetails" />
+            app:layout_constraintTop_toTopOf="@+id/textInputLayoutWriteCommentEventDetails" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvCommentsEventDetails"
@@ -375,11 +381,11 @@
             android:layout_marginTop="12dp"
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:itemCount="10"
-            tools:listitem="@layout/sample_comment"
             app:layout_constraintEnd_toEndOf="@+id/guidelineEventDetails2"
             app:layout_constraintStart_toStartOf="@+id/guidelineEventDetails1"
-            app:layout_constraintTop_toBottomOf="@+id/textInputWriteCommentEventDetails"/>
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutWriteCommentEventDetails"
+            tools:itemCount="10"
+            tools:listitem="@layout/sample_comment" />
 
         <TextView
             android:id="@+id/textNoCommentsTextEventDetails"
@@ -391,20 +397,20 @@
             android:textColor="@color/purple_dark_eventify"
             android:textSize="20sp"
             android:visibility="invisible"
-            app:layout_constraintTop_toBottomOf="@id/textInputWriteCommentEventDetails"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/guidelineEventDetails2"
-            app:layout_constraintStart_toStartOf="@id/guidelineEventDetails1" />
+            app:layout_constraintStart_toStartOf="@id/guidelineEventDetails1"
+            app:layout_constraintTop_toBottomOf="@id/textInputLayoutWriteCommentEventDetails" />
 
         <ProgressBar
             android:id="@+id/progressBarCommentEventDetails"
             style="?android:attr/progressBarStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="@+id/textNoCommentsTextEventDetails"
             app:layout_constraintBottom_toBottomOf="@+id/textNoCommentsTextEventDetails"
+            app:layout_constraintEnd_toEndOf="@id/guidelineEventDetails2"
             app:layout_constraintStart_toStartOf="@id/guidelineEventDetails1"
-            app:layout_constraintEnd_toEndOf="@id/guidelineEventDetails2" />
+            app:layout_constraintTop_toTopOf="@+id/textNoCommentsTextEventDetails" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
