@@ -128,6 +128,7 @@
     <string name="please_enter_valid_email">Please enter a valid e-mail address!</string>
     <string name="please_enter_username">Please enter the username!</string>
     <string name="please_enter_password">Please enter the password!</string>
+    <string name="please_enter_comment">Please write a comment!</string>
     <string name="please_fill_all_fields">Please fill the fields!</string>
     <string name="fill_all_input_fields">Please fill the input fields!</string>
     <string name="please_specify_event_type">Please specify the event type!</string>

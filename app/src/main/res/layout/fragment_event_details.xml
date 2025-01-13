@@ -63,7 +63,7 @@
             android:marqueeRepeatLimit="marquee_forever"
             android:scrollHorizontally="true"
             android:singleLine="true"
-            android:textColor="@color/purple_dark_eventify"
+            android:textColor="@color/eventify_heading"
             android:textSize="28sp"
             app:layout_constraintEnd_toEndOf="@+id/guidelineEventDetails2"
             app:layout_constraintStart_toStartOf="@+id/guidelineEventDetails1"

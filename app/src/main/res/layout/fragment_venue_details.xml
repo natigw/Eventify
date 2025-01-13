@@ -54,6 +54,18 @@
         android:layout_height="match_parent"
         tools:context=".presentation.ui.fragments.venue.VenueDetailsFragment">
 
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmerVenueDetails"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <include layout="@layout/sample_venue_details_shimmer" />
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guidelineVenueDetails1"
             android:layout_width="wrap_content"
@@ -83,16 +95,6 @@
             app:layout_constraintStart_toStartOf="@+id/guidelineVenueDetails1"
             app:layout_constraintTop_toTopOf="@+id/textVenueName" />
 
-        <com.google.android.material.progressindicator.CircularProgressIndicator
-            android:id="@+id/progressBarVenues"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:indeterminate="true"
-            app:layout_constraintTop_toTopOf="@id/textVenueDescription"
-            app:layout_constraintBottom_toBottomOf="@+id/textVenueDescription"
-            app:layout_constraintEnd_toStartOf="@+id/guidelineVenueDetails2"
-            app:layout_constraintStart_toStartOf="@+id/guidelineVenueDetails1" />
-
         <TextView
             android:id="@+id/textVenueName"
             android:layout_width="0dp"
@@ -100,8 +102,12 @@
             android:layout_marginTop="12dp"
             android:fontFamily="@font/inter_bold"
             android:textAlignment="center"
-            android:textColor="@color/purple_dark_eventify"
+            android:textColor="@color/eventify_heading"
             android:textSize="28sp"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
             app:layout_constraintEnd_toEndOf="@+id/guidelineVenueDetails2"
             app:layout_constraintStart_toStartOf="@+id/guidelineVenueDetails1"
             app:layout_constraintTop_toTopOf="parent"
@@ -292,7 +298,7 @@
             app:layout_constraintTop_toBottomOf="@+id/buttonVenueShowLocation" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputWriteCommentVenueDetails"
+            android:id="@+id/textInputLayoutWriteCommentVenueDetails"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -310,7 +316,7 @@
             app:layout_constraintStart_toStartOf="@id/guidelineVenueDetails1">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/addCommentVenue"
+                android:id="@+id/textInputAddCommentVenue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/add_comment"
@@ -328,9 +334,9 @@
             android:layout_marginEnd="4dp"
             android:contentDescription="@string/send"
             app:icon="@drawable/ic_send"
-            app:layout_constraintBottom_toBottomOf="@+id/textInputWriteCommentVenueDetails"
+            app:layout_constraintBottom_toBottomOf="@+id/textInputLayoutWriteCommentVenueDetails"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textInputWriteCommentVenueDetails" />
+            app:layout_constraintTop_toTopOf="@+id/textInputLayoutWriteCommentVenueDetails" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvCommentsVenueDetails"
@@ -339,11 +345,11 @@
             android:layout_marginTop="12dp"
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:itemCount="10"
+            tools:itemCount="3"
             tools:listitem="@layout/sample_comment"
             app:layout_constraintEnd_toEndOf="@+id/guidelineVenueDetails2"
             app:layout_constraintStart_toStartOf="@+id/guidelineVenueDetails1"
-            app:layout_constraintTop_toBottomOf="@+id/textInputWriteCommentVenueDetails"/>
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutWriteCommentVenueDetails"/>
 
         <TextView
             android:id="@+id/textNoCommentsTextVenueDetails"
@@ -355,7 +361,7 @@
             android:textColor="@color/purple_dark_eventify"
             android:textSize="20sp"
             android:visibility="invisible"
-            app:layout_constraintTop_toBottomOf="@id/textInputWriteCommentVenueDetails"
+            app:layout_constraintTop_toBottomOf="@id/textInputLayoutWriteCommentVenueDetails"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/guidelineVenueDetails2"
             app:layout_constraintStart_toStartOf="@id/guidelineVenueDetails1" />

@@ -12,6 +12,7 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.common.base.BaseFragment
+import com.example.common.utils.functions.validateInputFieldEmpty
 import com.example.common.utils.nancyToastSuccess
 import com.example.common.utils.nancyToastWarning
 import com.example.common.utils.startShimmer
@@ -55,7 +56,6 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
         observer()
     }
 
-    //yaxsi usul deyil hemise cagirilmaya biler
     override fun onPause() {
         super.onPause()
         stopShimmer(binding.shimmerEventDetails)
@@ -142,14 +142,15 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
         }
 
         binding.buttonSendCommentEventDetails.setOnClickListener {
-            if (binding.textInputEdittextAddCommentEvent.text.isNullOrEmpty()) {
-                nancyToastWarning(requireContext(), getString(R.string.type_main_text_first))
-                return@setOnClickListener
+            val comment = binding.textInputEdittextAddCommentEvent.text.toString().trim()
+            val isCommentFilled = validateInputFieldEmpty(binding.textInputLayoutWriteCommentEventDetails, comment, getString(R.string.please_enter_comment))
 
+            if (!isCommentFilled) {
+                return@setOnClickListener
             }
             viewmodel.addComment(
                 AddCommentItem(
-                    content = binding.textInputEdittextAddCommentEvent.text.toString().trim(),
+                    content = comment,
                     placeId = args.eventId
                 )
             )

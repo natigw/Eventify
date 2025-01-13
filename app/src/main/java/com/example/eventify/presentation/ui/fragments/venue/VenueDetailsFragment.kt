@@ -1,5 +1,6 @@
 package com.example.eventify.presentation.ui.fragments.venue
 
+import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -10,7 +11,10 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.common.base.BaseFragment
+import com.example.common.utils.functions.validateInputFieldEmpty
 import com.example.common.utils.nancyToastWarning
+import com.example.common.utils.startShimmer
+import com.example.common.utils.stopShimmer
 import com.example.domain.model.places.AddCommentItem
 import com.example.domain.model.places.PlaceCoordinates
 import com.example.domain.model.places.venue.VenueDetailsItem
@@ -33,28 +37,83 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
     private val args by navArgs<VenueDetailsFragmentArgs>()
 
     private val commentAdapter = CommentAdapter()
-
+    
+    override fun onResume() {
+        super.onResume()
+        if (viewmodel.isLoadingMain.value) {
+            makeViewsInvisible()
+            startShimmer(binding.shimmerVenueDetails)
+        }
+    }
+    
     override fun onViewCreatedLight() {
+        binding.textVenueName.isSelected = true
         updateAdapters()
         setAdapters()
         observer()
     }
+    
+    override fun onPause() {
+        super.onPause()
+        stopShimmer(binding.shimmerVenueDetails)
+        makeViewsVisible()
+    }
 
+    private fun makeViewsInvisible(){
+        with(binding) {
+            textVenueName.visibility = View.INVISIBLE
+            imageVenue.visibility = View.INVISIBLE
+            textVenueDetailsText.visibility = View.INVISIBLE
+            textVenueDescription.visibility = View.INVISIBLE
+            textVenueTypeText.visibility = View.INVISIBLE
+            textVenueType.visibility = View.INVISIBLE
+            textVenueOpenHoursText.visibility = View.INVISIBLE
+            textVenueOpenHours.visibility = View.INVISIBLE
+            textVenueLikesText.visibility = View.INVISIBLE
+            textVenueLikeCount.visibility = View.INVISIBLE
+            buttonVenueShowLocation.visibility = View.INVISIBLE
+            textVenueDetailsCommentsText.visibility = View.INVISIBLE
+            textInputLayoutWriteCommentVenueDetails.visibility = View.INVISIBLE
+            textInputAddCommentVenue.visibility = View.INVISIBLE
+            buttonSendCommentVenueDetails.visibility = View.INVISIBLE
+        }
+    }
+    private fun makeViewsVisible(){
+        with(binding) {
+            textVenueName.visibility = View.VISIBLE
+            imageVenue.visibility = View.VISIBLE
+            textVenueDetailsText.visibility = View.VISIBLE
+            textVenueDescription.visibility = View.VISIBLE
+            textVenueTypeText.visibility = View.VISIBLE
+            textVenueType.visibility = View.VISIBLE
+            textVenueOpenHoursText.visibility = View.VISIBLE
+            textVenueOpenHours.visibility = View.VISIBLE
+            textVenueLikesText.visibility = View.VISIBLE
+            textVenueLikeCount.visibility = View.VISIBLE
+            buttonVenueShowLocation.visibility = View.VISIBLE
+            textVenueDetailsCommentsText.visibility = View.VISIBLE
+            textInputLayoutWriteCommentVenueDetails.visibility = View.VISIBLE
+            textInputAddCommentVenue.visibility = View.VISIBLE
+            buttonSendCommentVenueDetails.visibility = View.VISIBLE
+        }
+    }
 
     override fun buttonListener() {
         super.buttonListener()
         binding.buttonSendCommentVenueDetails.setOnClickListener {
-            if (binding.addCommentVenue.text.isNullOrEmpty()) {
-                nancyToastWarning(requireContext(), getString(R.string.type_main_text_first))
+            val comment = binding.textInputAddCommentVenue.text.toString().trim()
+            val isCommentFilled = validateInputFieldEmpty(binding.textInputLayoutWriteCommentVenueDetails, comment, getString(R.string.please_enter_comment))
+
+            if (!isCommentFilled) {
                 return@setOnClickListener
             }
             viewmodel.addComment(
                 AddCommentItem(
-                    content = binding.addCommentVenue.text.toString().trim(),
+                    content = comment,
                     placeId = args.venueId
                 )
             )
-            binding.addCommentVenue.text = null
+            binding.textInputAddCommentVenue.text = null
         }
 
         binding.venueBackButton.setOnClickListener {
@@ -160,7 +219,8 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
 
         lifecycleScope.launch {
             viewmodel.isLoadingMain.collectLatest {
-                binding.progressBarVenues.isVisible = it
+                stopShimmer(binding.shimmerVenueDetails)
+                makeViewsVisible()
             }
         }
 
