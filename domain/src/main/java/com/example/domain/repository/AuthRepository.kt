@@ -1,6 +1,7 @@
 package com.example.domain.repository
 
 import com.example.domain.model.auth.SuccessfulUserTokenItem
+import com.example.domain.model.auth.UserData
 import com.example.domain.model.auth.UserRegistrationItem
 import retrofit2.http.Query
 
@@ -41,4 +42,5 @@ interface AuthRepository {
         userEmail : String
     ) : Boolean
 
+    suspend fun getUserData() : UserData
 }

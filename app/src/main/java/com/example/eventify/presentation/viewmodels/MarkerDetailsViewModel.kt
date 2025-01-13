@@ -39,7 +39,4 @@ class MarkerDetailsViewModel @Inject constructor(
         }
         catch (_:Exception){}
     }
-
-
-
 }

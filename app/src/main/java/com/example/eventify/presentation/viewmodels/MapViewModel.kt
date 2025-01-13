@@ -13,21 +13,20 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-
 @HiltViewModel
 class MapViewModel @Inject constructor(
     private val venueRepository: VenueRepository,
     private val eventRepository: EventRepository
 ) : ViewModel() {
+
     val eventsState = MutableStateFlow<List<EventItem>?>(null)
     val venuesState = MutableStateFlow<List<VenueItem>?>(null)
 
-
     init {
-
         getEvents()
         getVenues()
     }
+
     private fun getEvents(){
         viewModelScope.launch {
             val checkIfValid = NetworkUtils.handleInvalidAccessToken()
@@ -47,5 +46,4 @@ class MapViewModel @Inject constructor(
             }
         }
     }
-
 }

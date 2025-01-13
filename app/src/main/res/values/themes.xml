@@ -11,6 +11,8 @@
         <item name="android:navigationBarColor">@color/eventify_bottom_nav_background</item>
         <item name="android:statusBarColor">@color/eventify_background_primary</item>
         <item name="android:windowLightStatusBar">true</item>
+<!--        <item name="android:fontFamily">@font/inter_bold</item>-->
+<!--        <item name="fontFamily">@font/inter_bold</item>-->
     </style>
 
 

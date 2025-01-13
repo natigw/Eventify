@@ -1,8 +1,8 @@
 package com.example.data.remote.api
 
 import com.example.data.remote.model.register.RequestUserRegistration
+import com.example.data.remote.model.register.ResponseGetUserData
 import com.example.data.remote.model.register.ResponseUserRegistration
-import com.example.data.remote.model.register.UserData
 import com.example.domain.model.auth.RequestResendVerification
 import com.example.data.remote.model.userToken.RequestResetPassword
 import com.example.data.remote.model.userToken.ResponseSuccessfulUserToken
@@ -18,9 +18,8 @@ import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.Query
 
-
-
 interface AuthAPI {
+
     @POST("/auth")
     suspend fun registerUser(
         @Body requestUserRegistration: RequestUserRegistration
@@ -65,7 +64,7 @@ interface AuthAPI {
     ) : Response<SuccessfulUserTokenItem>
 
     @POST("/auth/user")
-    suspend fun getUserData() : Response<UserData>
+    suspend fun getUserData() : Response<ResponseGetUserData>
 
     @GET("/auth/verification-status")
     suspend fun isUserVerified(

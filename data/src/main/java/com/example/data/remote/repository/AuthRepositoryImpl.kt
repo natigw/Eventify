@@ -7,6 +7,7 @@ import com.example.data.remote.model.userToken.RequestResetPassword
 import com.example.data.remote.thirdpartyregister.RequestSignInWithGoogle
 import com.example.domain.model.auth.RequestResendVerification
 import com.example.domain.model.auth.SuccessfulUserTokenItem
+import com.example.domain.model.auth.UserData
 import com.example.domain.model.auth.UserRegistrationItem
 import com.example.domain.repository.AuthRepository
 import com.google.firebase.auth.ktx.auth
@@ -212,5 +213,21 @@ class AuthRepositoryImpl @Inject constructor(
         }
     }
 
-
+    override suspend fun getUserData(): UserData {
+        try {
+            val response = api.getUserData()
+            val responseBody = response.body()
+            if (response.isSuccessful && responseBody != null) {
+                return UserData(
+                    username = responseBody.username,
+                    fullName = "${responseBody.firstName} ${responseBody.lastName}",
+                    isOrganizer = responseBody.isOrganizer
+                )
+            } else {
+                throw Exception("Error ${response.code()}: ${response.errorBody()?.string()}")
+            }
+        } catch (e :Exception){
+            throw e
+        }
+    }
 }

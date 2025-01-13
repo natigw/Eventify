@@ -21,11 +21,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class ReferralFragment : BaseFragment<FragmentReferralBinding>(FragmentReferralBinding::inflate) {
 
-    @Inject
-    lateinit var eventApi: EventAPI
-
-
-    val referralViewModel by viewModels<ReferralViewModel>()
+    private val referralViewModel by viewModels<ReferralViewModel>()
 
     override fun onViewCreatedLight() {
 
@@ -48,10 +44,8 @@ class ReferralFragment : BaseFragment<FragmentReferralBinding>(FragmentReferralB
                     .filter { it.isNotEmpty() }
                     .collectLatest {
                         chosenEvent = it.random().name
-                        binding.textGetTicketDescriptionReferral.text =
-                            "Almost there! Refer ${3 - numberOfLinkSent} more friend to get a free ticket for $chosenEvent event."
-                        binding.textGetTicketDescriptionReferral.text =
-                            "Congratulations! You got a ticket for $chosenEvent event. Please check your ticket box!"
+                        binding.textGetTicketDescriptionReferral.text = "Almost there! Refer ${3 - numberOfLinkSent} more friend to get a free ticket for $chosenEvent event."
+                        binding.textGetTicketDescriptionReferral.text = "Congratulations! You got a ticket for $chosenEvent event. Please check your ticket box!"
                     }
 
                 binding.progressReferral.progress = 33 * numberOfLinkSent

@@ -20,5 +20,4 @@ class CreateCustomEventViewModel @Inject constructor(
     fun createCustomEvent() {
 
     }
-
 }

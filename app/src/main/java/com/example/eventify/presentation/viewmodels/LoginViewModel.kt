@@ -1,6 +1,7 @@
 package com.example.eventify.presentation.viewmodels
 
 import android.content.SharedPreferences
+import android.system.Os.remove
 import android.util.Log
 import androidx.core.content.edit
 import androidx.lifecycle.ViewModel
@@ -19,16 +20,12 @@ import javax.inject.Named
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
+    @Named("OnBoardingWelcome")
+    var sharedPrefOnBoard: SharedPreferences,
+    @Named("UserTokens")
+    var sharedPrefUserTokens: SharedPreferences,
     val authRepository: AuthRepository
 ): ViewModel() {
-
-    @Inject
-    @Named("OnBoardingWelcome")
-    lateinit var sharedPrefOnBoard: SharedPreferences
-
-    @Inject
-    @Named("UserTokens")
-    lateinit var sharedPrefUserTokens: SharedPreferences
 
     val isLoading = MutableStateFlow<Boolean?>(null)
     val isLoadingGoogle = MutableStateFlow<Boolean?>(null)

@@ -14,7 +14,6 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.common.base.BaseFragment
 import com.example.common.utils.functions.validateInputFieldEmpty
 import com.example.common.utils.nancyToastSuccess
-import com.example.common.utils.nancyToastWarning
 import com.example.common.utils.startShimmer
 import com.example.common.utils.stopShimmer
 import com.example.domain.model.places.AddCommentItem

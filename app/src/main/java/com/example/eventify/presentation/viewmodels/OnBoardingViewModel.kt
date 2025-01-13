@@ -18,7 +18,6 @@ class OnBoardingViewModel @Inject constructor(
     val authRepository: com.example.domain.repository.AuthRepository
 ): ViewModel() {
 
-
     fun checkRefreshTokenIsValid(refreshToken : String) : Boolean{
         return try {
             viewModelScope.launch {

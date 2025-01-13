@@ -60,8 +60,6 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
     private val viewModel by viewModels<MapViewModel>()
 
-
-
     private val locationPermissionRequestCode = 1
 
     private val sharedViewModel by activityViewModels<SharedViewModel>()

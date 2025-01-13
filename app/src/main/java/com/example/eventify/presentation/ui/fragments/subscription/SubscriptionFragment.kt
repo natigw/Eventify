@@ -2,6 +2,7 @@ package com.example.eventify.presentation.ui.fragments.subscription
 
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.res.ResourcesCompat
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.common.base.BaseFragment
 import com.example.common.utils.nancyToastSuccess

@@ -16,12 +16,10 @@ import javax.inject.Named
 
 @HiltViewModel
 class VerificationViewModel @Inject constructor(
+    @Named("OnBoardingWelcome")
+    var sharedPrefOnBoard : SharedPreferences,
     val authRepository: AuthRepository
 ) : ViewModel() {
-
-    @Inject
-    @Named("OnBoardingWelcome")
-    lateinit var sharedPrefOnBoard : SharedPreferences
 
     val isLoading = MutableStateFlow<Boolean?>(null)
     val resendVerificationState = MutableStateFlow<Boolean?>(null)

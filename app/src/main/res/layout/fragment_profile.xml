@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".presentation.ui.fragments.profile.ProfileFragment">
 
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmerProfile"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <include layout="@layout/shimmer_profile" />
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineProfile1"
         android:layout_width="wrap_content"
@@ -41,6 +53,7 @@
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"
         android:src="@drawable/profile_icon_selected"
+        app:tint="@color/eventify_on_background"
         app:layout_constraintEnd_toEndOf="@id/guidelineProfile2"
         app:layout_constraintStart_toStartOf="@id/guidelineProfile1"
         app:layout_constraintTop_toBottomOf="@id/textHeadingProfile"
@@ -60,7 +73,7 @@
         tools:text="Username" />
 
     <TextView
-        android:id="@+id/textUserEmailProfile"
+        android:id="@+id/textUserFullNameProfile"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/inter_bold"
@@ -70,47 +83,91 @@
         app:layout_constraintEnd_toEndOf="@+id/guidelineProfile2"
         app:layout_constraintStart_toStartOf="@+id/guidelineProfile1"
         app:layout_constraintTop_toBottomOf="@id/textUsernameProfile"
-        tools:text="User email" />
+        tools:text="User name and surname" />
 
-    <Button
-        android:id="@+id/btnReferral"
+    <TextView
+        android:id="@+id/textSeeAlsoTEXT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        android:fontFamily="@font/inter_bold"
+        android:text="@string/see_also"
+        android:textColor="@color/purple_dark_eventify"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/guidelineProfile1"
+        app:layout_constraintTop_toBottomOf="@+id/textUserFullNameProfile" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnReferral"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         android:text="@string/referral_program"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textUserEmailProfile" />
+        android:textSize="16sp"
+        app:icon="@drawable/ic_open_in_new_screen"
+        app:iconGravity="end"
+        app:iconTint="@color/eventify_on_primary"
+        android:paddingStart="18dp"
+        android:paddingEnd="12dp"
+        app:layout_constraintStart_toStartOf="@id/guidelineProfile1"
+        app:layout_constraintTop_toBottomOf="@+id/textSeeAlsoTEXT" />
 
     <Button
         android:id="@+id/btnSubs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingStart="18dp"
+        android:paddingEnd="12dp"
         android:text="@string/subscription"
-        app:layout_constraintEnd_toEndOf="@+id/btnReferral"
-        app:layout_constraintStart_toStartOf="@+id/btnReferral"
+        android:textSize="16sp"
+        app:icon="@drawable/ic_open_in_new_screen"
+        app:iconGravity="end"
+        app:iconTint="@color/eventify_on_primary"
+        app:layout_constraintStart_toStartOf="@+id/guidelineProfile1"
         app:layout_constraintTop_toBottomOf="@+id/btnReferral" />
 
-    <Button
-        android:id="@+id/btnChangeLanguageEN"
+    <TextView
+        android:id="@+id/textChangeLanguageTEXT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/english"
-        app:layout_constraintEnd_toStartOf="@+id/btnChangeLanguageAZ"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toStartOf="@+id/btnSubs"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/inter_bold"
+        android:text="@string/application_language"
+        android:textColor="@color/purple_dark_eventify"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/guidelineProfile1"
         app:layout_constraintTop_toBottomOf="@+id/btnSubs" />
 
     <Button
-        android:id="@+id/btnChangeLanguageAZ"
+        android:id="@+id/buttonChangeLanguageAZ"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/inter_bold"
         android:text="@string/azerbaijani"
-        app:layout_constraintEnd_toEndOf="@+id/btnSubs"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btnChangeLanguageEN"
-        app:layout_constraintTop_toTopOf="@+id/btnChangeLanguageEN" />
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@+id/textChangeLanguageTEXT"
+        app:layout_constraintStart_toStartOf="@id/guidelineProfile1"/>
+
+    <Button
+        android:id="@+id/buttonChangeLanguageEN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_bold"
+        android:text="@string/english"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@+id/buttonChangeLanguageAZ"
+        app:layout_constraintStart_toStartOf="@id/guidelineProfile1" />
+
+    <Button
+        android:id="@+id/buttonChangeLanguageRU"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_bold"
+        android:text="@string/russian"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@+id/buttonChangeLanguageEN"
+        app:layout_constraintStart_toStartOf="@id/guidelineProfile1" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonLogoutProfile"
