@@ -10,7 +10,7 @@ import com.example.domain.model.subscription.SubscriptionData
 class SubscriptionAdapter(
 //    val context: Context,
     val currentPackage: String,
-    val isAnnualBilling: Boolean,
+    var isAnnualBilling: Boolean,
     val onClick: (packageName: String) -> Unit  //TODO -> bundan emin olmadin
 ) : BaseAdapter<SampleSubscriptionBinding>(SampleSubscriptionBinding::inflate) {
 
@@ -68,4 +68,8 @@ class SubscriptionAdapter(
             }
         }
     }
+
+//    fun updateAdapter() {
+//        notifyDataSetChanged()
+//    }
 }
