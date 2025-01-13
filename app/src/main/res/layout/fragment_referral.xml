@@ -17,14 +17,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.06" />
+            app:layout_constraintGuide_percent="@dimen/eventify_guideline_left_mid" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guidelineReferral2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.94" />
+            app:layout_constraintGuide_percent="@dimen/eventify_guideline_right_mid" />
 
         <Button
             android:id="@+id/buttonBackReferral"
@@ -48,7 +48,7 @@
             android:fontFamily="@font/inter_bold"
             android:text="@string/referral_program"
             android:textAlignment="center"
-            android:textColor="@color/purple_dark_eventify"
+            android:textColor="@color/eventify_heading"
             android:textSize="28sp"
             app:layout_constraintEnd_toStartOf="@+id/guidelineReferral2"
             app:layout_constraintStart_toStartOf="@+id/guidelineReferral1"
@@ -76,14 +76,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_constraintGuide_percent="0.06" />
+                    app:layout_constraintGuide_percent="@dimen/eventify_guideline_left_mid" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guidelineCard1Referral2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_constraintGuide_percent="0.94" />
+                    app:layout_constraintGuide_percent="@dimen/eventify_guideline_right_mid" />
 
                 <com.google.android.material.progressindicator.LinearProgressIndicator
                     android:id="@+id/progressReferral"
@@ -221,14 +221,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_constraintGuide_percent="0.06" />
+                    app:layout_constraintGuide_percent="@dimen/eventify_guideline_left_mid" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guidelineCard2Referral2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_constraintGuide_percent="0.94" />
+                    app:layout_constraintGuide_percent="@dimen/eventify_guideline_right_mid" />
 
                 <TextView
                     android:id="@+id/textShareLinkReferral"

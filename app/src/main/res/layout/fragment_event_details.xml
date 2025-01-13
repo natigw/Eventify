@@ -28,14 +28,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.05" />
+            app:layout_constraintGuide_percent="@dimen/eventify_guideline_left" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guidelineEventDetails2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.95" />
+            app:layout_constraintGuide_percent="@dimen/eventify_guideline_right" />
 
         <Button
             android:id="@+id/buttonBackEventDetails"
@@ -47,7 +47,7 @@
             android:visibility="invisible"
             app:icon="@drawable/ic_back_arrow"
             app:iconSize="24dp"
-            app:iconTint="@color/purple_eventify"
+            app:iconTint="@color/eventify_primary"
             app:layout_constraintBottom_toBottomOf="@+id/textEventName"
             app:layout_constraintStart_toStartOf="@+id/guidelineEventDetails1"
             app:layout_constraintTop_toTopOf="@+id/textEventName" />
@@ -293,14 +293,14 @@
             android:backgroundTint="@color/green_light_eventify"
             android:fontFamily="@font/inter_bold"
             android:text="@string/show_location"
-            android:textColor="@color/purple_eventify"
+            android:textColor="@color/eventify_primary"
             android:textSize="18sp"
             app:cornerRadius="12dp"
             app:icon="@drawable/ic_location_outlined"
             app:iconGravity="textStart"
             app:iconPadding="8dp"
             app:iconSize="20dp"
-            app:iconTint="@color/purple_eventify"
+            app:iconTint="@color/eventify_primary"
             app:layout_constraintEnd_toEndOf="@id/guidelineEventDetails2"
             app:layout_constraintStart_toStartOf="@id/guidelineEventDetails1"
             app:layout_constraintTop_toBottomOf="@+id/textEventLikesText" />
@@ -314,7 +314,7 @@
             android:backgroundTint="@color/green_light_eventify"
             android:fontFamily="@font/inter_bold"
             android:text="@string/buy_ticket"
-            android:textColor="@color/purple_eventify"
+            android:textColor="@color/eventify_primary"
             android:textSize="18sp"
             app:cornerRadius="12dp"
             app:layout_constraintEnd_toEndOf="@id/guidelineEventDetails2"
@@ -343,10 +343,10 @@
             app:boxCornerRadiusBottomStart="@dimen/eventify_input_field_corner_radius"
             app:boxCornerRadiusTopEnd="@dimen/eventify_input_field_corner_radius"
             app:boxCornerRadiusTopStart="@dimen/eventify_input_field_corner_radius"
-            app:boxStrokeColor="@color/purple_eventify"
+            app:boxStrokeColor="@color/eventify_primary"
             app:boxStrokeWidth="1dp"
             app:boxStrokeWidthFocused="2dp"
-            app:hintTextColor="@color/purple_eventify"
+            app:hintTextColor="@color/eventify_primary"
             app:layout_constraintEnd_toStartOf="@id/buttonSendCommentEventDetails"
             app:layout_constraintStart_toStartOf="@id/guidelineEventDetails1"
             app:layout_constraintTop_toBottomOf="@id/textEventDetailsCommentsText">

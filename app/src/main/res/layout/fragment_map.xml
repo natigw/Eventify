@@ -43,7 +43,7 @@
         android:fontFamily="@font/inter_bold"
         android:text="@string/eventify_az"
         android:textAlignment="center"
-        android:textColor="@color/purple_dark_eventify"
+        android:textColor="@color/eventify_heading"
         android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

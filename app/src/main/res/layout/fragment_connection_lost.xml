@@ -12,14 +12,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.06" />
+        app:layout_constraintGuide_percent="@dimen/eventify_guideline_left_large" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineConnectionLost2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.94" />
+        app:layout_constraintGuide_percent="@dimen/eventify_guideline_right_large" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineConnectionLost3"
@@ -58,7 +58,7 @@
         android:backgroundTint="@color/green_light_eventify"
         android:fontFamily="@font/outfit_semibold"
         android:text="@string/retry"
-        android:textColor="@color/purple_eventify"
+        android:textColor="@color/eventify_primary"
         android:textSize="24sp"
         app:cornerRadius="16dp"
         app:layout_constraintStart_toStartOf="@id/guidelineConnectionLost1"

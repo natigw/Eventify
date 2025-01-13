@@ -12,14 +12,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.05" />
+        app:layout_constraintGuide_percent="@dimen/eventify_guideline_left" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineCustomEvents2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.95" />
+        app:layout_constraintGuide_percent="@dimen/eventify_guideline_right" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonCreateCustomEvent"
@@ -30,14 +30,14 @@
         android:backgroundTint="@color/green_light_eventify"
         android:fontFamily="@font/inter_bold"
         android:text="@string/create_your_event"
-        android:textColor="@color/purple_eventify"
+        android:textColor="@color/eventify_primary"
         android:textSize="18sp"
         app:cornerRadius="12dp"
         app:icon="@drawable/ic_create_custom_event"
         app:iconGravity="textStart"
         app:iconPadding="8dp"
         app:iconSize="20dp"
-        app:iconTint="@color/purple_eventify"
+        app:iconTint="@color/eventify_primary"
         app:layout_constraintEnd_toStartOf="@+id/guidelineCustomEvents2"
         app:layout_constraintStart_toStartOf="@+id/guidelineCustomEvents1"
         app:layout_constraintTop_toTopOf="parent" />

@@ -5,12 +5,12 @@
 
     <!-- Custom Eventify theme. -->
     <style name="Theme.Eventify" parent="Base.Theme.Eventify">
-        <item name="android:windowLightStatusBar">true</item>
-        <item name="colorPrimary">@color/purple_eventify</item>
+        <item name="colorPrimary">@color/eventify_primary</item>
         <item name="colorPrimaryVariant">@color/green_light_eventify</item>
         <item name="colorOnPrimary">@color/eventify_on_primary</item>
         <item name="android:navigationBarColor">@color/eventify_bottom_nav_background</item>
         <item name="android:statusBarColor">@color/eventify_background_primary</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
 

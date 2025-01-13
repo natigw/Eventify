@@ -17,14 +17,13 @@
     <color name="gray_light">#EBEBEB</color>
     <color name="gray">#CCCCCC</color>
     <color name="green_light_eventify">#D3FFE7</color>
-    <color name="green_eventify">#2ED47B</color>
     <color name="purple_light_eventify">#9A72F3</color>
-    <color name="purple_eventify">#6823EA</color>
     <color name="purple_dark_eventify">#2E066D</color>
 
     <color name="login">#F44336</color>
     <color name="register">#407BFF</color>
     <color name="button_disabled">#FFDADADA</color>
+    <color name="danger">#FF1100</color>
 
     <color name="eventify_bottom_nav_background">#DBDBDB</color>
 </resources>

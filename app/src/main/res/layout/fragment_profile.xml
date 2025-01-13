@@ -11,14 +11,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.05" />
+        app:layout_constraintGuide_percent="@dimen/eventify_guideline_left" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineProfile2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.95" />
+        app:layout_constraintGuide_percent="@dimen/eventify_guideline_right" />
 
     <TextView
         android:id="@+id/textHeadingProfile"
@@ -28,7 +28,7 @@
         android:fontFamily="@font/inter_bold"
         android:text="@string/profile"
         android:textAlignment="center"
-        android:textColor="@color/purple_dark_eventify"
+        android:textColor="@color/eventify_heading"
         android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="@+id/guidelineProfile2"
         app:layout_constraintStart_toStartOf="@+id/guidelineProfile1"
@@ -52,7 +52,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/inter_bold"
         android:textAlignment="center"
-        android:textColor="@color/purple_eventify"
+        android:textColor="@color/eventify_primary"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="@+id/guidelineProfile2"
         app:layout_constraintStart_toStartOf="@+id/guidelineProfile1"
@@ -118,17 +118,17 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
-        android:backgroundTint="#FF1100"
+        android:backgroundTint="@color/danger"
         android:fontFamily="@font/inter_bold"
         android:text="@string/logout"
-        android:textColor="@color/eventify_background_secondary"
+        android:textColor="@color/eventify_on_primary"
         android:textSize="22sp"
         app:cornerRadius="@dimen/eventify_large_button_corner_radius"
         app:icon="@drawable/ic_logout"
         app:iconGravity="textStart"
         app:iconPadding="8dp"
         app:iconSize="22sp"
-        app:iconTint="@color/eventify_background_secondary"
+        app:iconTint="@color/eventify_on_primary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/guidelineProfile2"
         app:layout_constraintStart_toStartOf="@id/guidelineProfile1" />

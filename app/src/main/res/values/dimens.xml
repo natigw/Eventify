@@ -2,4 +2,11 @@
 <resources>
     <dimen name="eventify_large_button_corner_radius">12dp</dimen>
     <dimen name="eventify_input_field_corner_radius">12dp</dimen>
+
+    <dimen name="eventify_guideline_left">0.05</dimen>
+    <dimen name="eventify_guideline_right">0.95</dimen>
+    <dimen name="eventify_guideline_left_mid">0.06</dimen>
+    <dimen name="eventify_guideline_right_mid">0.94</dimen>
+    <dimen name="eventify_guideline_left_large">0.08</dimen>
+    <dimen name="eventify_guideline_right_large">0.92</dimen>
 </resources>

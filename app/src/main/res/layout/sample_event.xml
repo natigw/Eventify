@@ -89,11 +89,11 @@
                 android:paddingEnd="5dp"
                 android:paddingBottom="3dp"
                 android:text="@string/all_details"
-                android:textColor="@color/purple_dark_eventify"
+                android:textColor="@color/eventify_primary_helper"
                 app:icon="@drawable/ic_back_ios_rotated"
                 app:iconPadding="6dp"
                 app:iconSize="14dp"
-                app:iconTint="@color/purple_dark_eventify"
+                app:iconTint="@color/eventify_primary_helper"
                 app:iconGravity="end"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="@id/textEventDateTime" />

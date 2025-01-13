@@ -13,14 +13,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.04" />
+        app:layout_constraintGuide_percent="@dimen/eventify_guideline_left" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelinePlacesComments2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.96" />
+        app:layout_constraintGuide_percent="@dimen/eventify_guideline_right" />
 
     <ImageView
         android:id="@+id/imageDrawerPlacesComments"
@@ -95,10 +95,10 @@
         app:boxCornerRadiusBottomStart="@dimen/eventify_input_field_corner_radius"
         app:boxCornerRadiusTopEnd="@dimen/eventify_input_field_corner_radius"
         app:boxCornerRadiusTopStart="@dimen/eventify_input_field_corner_radius"
-        app:boxStrokeColor="@color/purple_eventify"
+        app:boxStrokeColor="@color/eventify_primary"
         app:boxStrokeWidth="1dp"
         app:boxStrokeWidthFocused="2dp"
-        app:hintTextColor="@color/purple_eventify"
+        app:hintTextColor="@color/eventify_primary"
         app:boxBackgroundColor="@color/eventify_background_secondary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/buttonSendComment"

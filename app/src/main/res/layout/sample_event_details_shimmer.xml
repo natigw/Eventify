@@ -16,14 +16,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.05" />
+            app:layout_constraintGuide_percent="@dimen/eventify_guideline_left" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guidelineEventDetailsShimmer2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.95" />
+            app:layout_constraintGuide_percent="@dimen/eventify_guideline_right" />
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/textEventNameDetailsShimmer"
