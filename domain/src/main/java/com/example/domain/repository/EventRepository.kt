@@ -2,6 +2,7 @@ package com.example.domain.repository
 
 import com.example.domain.model.places.AddCommentItem
 import com.example.domain.model.places.CommentItem
+import com.example.domain.model.places.FavoriteItem
 import com.example.domain.model.places.event.CreateCustomEventRequestItem
 import com.example.domain.model.places.event.EventDetailsItem
 import com.example.domain.model.places.event.EventItem
@@ -24,7 +25,7 @@ interface EventRepository {
         requestAddEventComment: AddCommentItem
     )
 
-    suspend fun getFavEvents(): List<FavEventItem>
+    suspend fun getFavEvents(): List<FavoriteItem>
 
     suspend fun getFavEventsID(): List<Int>
 

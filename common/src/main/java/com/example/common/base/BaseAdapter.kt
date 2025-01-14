@@ -17,4 +17,12 @@ abstract class BaseAdapter<VB : ViewBinding>(val inflater: (LayoutInflater, View
     }
 
     abstract fun onBindLight(binding: VB, position: Int)
+
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return position
+    }
 }

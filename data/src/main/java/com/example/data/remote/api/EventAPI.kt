@@ -8,8 +8,7 @@ import com.example.data.remote.model.events.comment.eventComments.ResponseEventC
 import com.example.data.remote.model.events.createEvent.RequestCreateCustomEvent
 import com.example.data.remote.model.events.eventDetails.ResponseEventDetails
 import com.example.data.remote.model.events.likeDislike.RequestLikeDislikeEvent
-import com.example.data.remote.model.events.likeDislike.favEvents.ResponseFavEventIDs
-import com.example.data.remote.model.events.likeDislike.favEvents.ResponseFavEvents
+import com.example.data.remote.model.events.likeDislike.favEvents.ResponseFavoriteEvents
 import com.example.data.remote.model.events.search.ResponseSearchEvent
 import com.example.domain.model.places.event.EventItem
 import com.example.domain.model.places.event.SearchEventItem
@@ -46,7 +45,7 @@ interface EventAPI {
     ) //: Response<>
 
     @GET("/events/favorites")
-    suspend fun getFavEvents() : Response<List<ResponseFavEvents>>
+    suspend fun getFavEvents() : Response<List<ResponseFavoriteEvents>>
 
     @GET("/events/favorites-ids")
     suspend fun getFavEventIDs() : Response<List<Int>>

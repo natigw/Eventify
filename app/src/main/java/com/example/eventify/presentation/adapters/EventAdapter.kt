@@ -48,14 +48,6 @@ class EventAdapter(
         }
     }
 
-    override fun getItemId(position: Int): Long {
-        return position.toLong()
-    }
-
-    override fun getItemViewType(position: Int): Int {
-        return position
-    }
-
     fun updateAdapter(newEvents: List<EventItem>) {
         events = newEvents
         notifyDataSetChanged()

@@ -72,10 +72,10 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
         lifecycleScope.launch {
             viewModel.isLoading.collectLatest {
                 if(it){
-                    blockSignupButton()
+                    blockRegisterButton()
                 }
                 else{
-                    resetSignupButton()
+                    resetRegisterButton()
                 }
             }
         }
@@ -132,8 +132,6 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
 
         return true
     }
-
-
 //    private fun checkInputFields(firstname: String, lastname: String, username: String, email: String, password: String) : Boolean {
 //        if (firstname.isEmpty() || lastname.isEmpty() || username.isEmpty() || email.isEmpty() || password.isEmpty()) {
 //            nancyToastWarning(requireContext(), getString(R.string.fill_all_input_fields))
@@ -174,23 +172,21 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
 //        return true
 //    }
 
-    private fun blockSignupButton() {
-        binding.apply {
-            progressBarRegister.visibility = View.VISIBLE
-            buttonRegister.isEnabled = false
-            buttonRegister.text = null
-            buttonRegister.setBackgroundColor(requireContext().getColor(R.color.button_disabled))
-            checkboxTerms.isEnabled = false
+    private fun blockRegisterButton() {
+        binding.progressBarRegister.visibility = View.VISIBLE
+        binding.buttonRegister.apply {
+            isEnabled = false
+            text = null
+            setBackgroundColor(requireContext().getColor(R.color.button_disabled))
         }
     }
 
-    private fun resetSignupButton() {
-        binding.apply {
-            progressBarRegister.visibility = View.INVISIBLE
-            buttonRegister.isEnabled = true
-            buttonRegister.text = "Register"
-            buttonRegister.setBackgroundColor(requireContext().getColor(R.color.register))
-            checkboxTerms.isEnabled = true
+    private fun resetRegisterButton() {
+        binding.progressBarRegister.visibility = View.INVISIBLE
+        binding.buttonRegister.apply {
+            isEnabled = true
+            text = getString(R.string.register)
+            setBackgroundColor(requireContext().getColor(R.color.register))
         }
     }
 

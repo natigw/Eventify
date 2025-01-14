@@ -29,7 +29,7 @@ class CustomEventsFragment : BaseFragment<FragmentCustomEventsBinding>(FragmentC
 //            }
         },
         onClick = {
-            findNavController().navigate(PlacesFragmentDirections.actionPlacesFragmentToEventDetailsFragment(it))
+            findNavController().navigate(PlacesFragmentDirections.actionPlacesFragmentToEventDetailsFragment(it, false))
         }
     )
 

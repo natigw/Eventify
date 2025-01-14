@@ -36,7 +36,7 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
 
     private val viewmodel by viewModels<EventDetailsViewModel>()
     private val sharedViewModel: SharedViewModel by activityViewModels()
-    private val args by navArgs<EventDetailsFragmentArgs>() //id
+    private val args by navArgs<EventDetailsFragmentArgs>() //id, where it comes
 
     private val commentAdapter = CommentAdapter()
 
@@ -131,6 +131,7 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
         }
 
         binding.buttonBackEventDetails.setOnClickListener {
+            if (args.comingProfile) findNavController().popBackStack()
             findNavController().navigate(
                 R.id.placesFragment,
                 null,

@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.Configuration
+import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -16,6 +17,7 @@ import com.example.data.remote.api.EventAPI
 import com.example.eventify.NetworkUtils
 import com.example.eventify.R
 import com.example.eventify.databinding.FragmentProfileBinding
+import com.example.eventify.presentation.adapters.FavoriteAdapter
 import com.example.eventify.presentation.ui.activities.OnBoardingActivity
 import com.example.eventify.presentation.viewmodels.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,6 +33,12 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
 
     private val viewModel by viewModels<ProfileViewModel>()
 
+    private val favoritesAdapter = FavoriteAdapter(
+        onClick = {
+            findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToEventDetailsFragment(it, true))
+        }
+    )
+
     override fun onResume() {
         super.onResume()
         if (viewModel.userData.value == null)
@@ -38,7 +46,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
     }
 
     override fun onViewCreatedLight() {
-
+        setAdapters()
+        updateAdapters()
     }
 
     override fun onPause() {
@@ -94,5 +103,19 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         setAppLocale(requireContext(), languageCode)
         viewModel.sharedPrefLanguage.edit().putString("language", languageCode).apply()
         requireActivity().recreate()
+    }
+
+    private fun setAdapters() {
+        binding.rvFavoritesProfile.adapter = favoritesAdapter
+    }
+
+    private fun updateAdapters() {
+        lifecycleScope.launch {
+            viewModel.favorites
+                .filterNotNull()
+                .collectLatest {
+                    favoritesAdapter.updateAdapter(it)
+                }
+        }
     }
 }

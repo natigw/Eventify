@@ -26,7 +26,7 @@ class EventsFragment : BaseFragment<FragmentEventsBinding>(FragmentEventsBinding
         },
         onClick = {
             findNavController().navigate(
-                PlacesFragmentDirections.actionPlacesFragmentToEventDetailsFragment(it)
+                PlacesFragmentDirections.actionPlacesFragmentToEventDetailsFragment(it, false)
             )
         }
     )

@@ -7,10 +7,9 @@ import com.example.data.remote.api.EventAPI
 import com.example.data.remote.model.events.comment.addComment.RequestAddEventComment
 import com.example.data.remote.model.events.createEvent.RequestCreateCustomEvent
 import com.example.data.remote.model.events.likeDislike.RequestLikeDislikeEvent
-import com.example.data.remote.model.events.likeDislike.favEvents.Event
-import com.example.data.remote.model.events.likeDislike.favEvents.ResponseFavEventIDs
 import com.example.domain.model.places.AddCommentItem
 import com.example.domain.model.places.CommentItem
+import com.example.domain.model.places.FavoriteItem
 import com.example.domain.model.places.event.CreateCustomEventRequestItem
 import com.example.domain.model.places.event.EventDetailsItem
 import com.example.domain.model.places.event.EventItem
@@ -152,14 +151,18 @@ class EventRepositoryImpl @Inject constructor(
         //TODO -> successful olub olmadigini check ele
     }
 
-    override suspend fun getFavEvents(): List<FavEventItem> {
+    override suspend fun getFavEvents(): List<FavoriteItem> {
         try {
             val response = api.getFavEvents()
             if (response.isSuccessful && response.body() != null) {
                 response.body()!!.let { rawFavEvents ->
                     return rawFavEvents.map {
-                        FavEventItem(
-                            eventId = it.event.id
+                        FavoriteItem(
+                            id = it.id,
+                            imageLink = it.posterImageLink,
+                            title = it.title,
+                            description = it.description,
+                            date = dateFormatter_RemoveDashes_YMDtoDMY(it.date.substring(0,10))
                         )
                     }
                 }

@@ -1,9 +1,8 @@
 package com.example.data.remote.model.events.likeDislike.favEvents
 
-
 import com.google.gson.annotations.SerializedName
 
-data class Event(
+data class ResponseFavoriteEvents(
     @SerializedName("created_at")
     val createdAt: String,
     @SerializedName("date")

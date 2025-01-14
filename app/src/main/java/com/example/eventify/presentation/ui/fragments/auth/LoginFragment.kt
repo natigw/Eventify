@@ -155,22 +155,20 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     }
 
     private fun blockLoginButton() {
-        binding.apply {
-            progressBarLogin.visibility = View.VISIBLE
-            buttonLogin.isEnabled = false
-            buttonGoogle.isEnabled = false
-            buttonLogin.text = null
-            buttonLogin.setBackgroundColor(requireContext().getColor(R.color.button_disabled))
+        binding.progressBarLogin.visibility = View.VISIBLE
+        binding.buttonLogin.apply {
+            isEnabled = false
+            text = null
+            setBackgroundColor(requireContext().getColor(R.color.button_disabled))
         }
     }
 
     private fun resetLoginButton() {
-        binding.apply {
-            progressBarLogin.visibility = View.INVISIBLE
-            buttonLogin.isEnabled = true
-            buttonGoogle.isEnabled = true
-            buttonLogin.text = getString(R.string.login)
-            buttonLogin.setBackgroundColor(requireContext().getColor(R.color.login))
+        binding.progressBarLogin.visibility = View.INVISIBLE
+        binding.buttonLogin.apply {
+            isEnabled = true
+            text = getString(R.string.login)
+            setBackgroundColor(requireContext().getColor(R.color.login))
         }
     }
 
