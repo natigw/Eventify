@@ -88,6 +88,14 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         mapFragment?.getMapAsync(this)
     }
 
+    override fun buttonListener() {
+        super.buttonListener()
+        binding.backwardButton.setOnClickListener {
+            binding.root.transitionToStart()
+        }
+    }
+
+
     //TODO -> burda nese sehv olub
     private fun isDarkModeEnabled(context: Context): Boolean {
         val currentNightMode = context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
