@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/sample_Favorite_layout"
+    android:id="@+id/sample_favorite_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -90,19 +90,20 @@
                 android:backgroundTint="@color/eventify_background_secondary"
                 android:fontFamily="@font/inter_italic"
                 android:minHeight="24dp"
-                android:paddingStart="8dp"
-                android:paddingTop="1dp"
-                android:paddingEnd="5dp"
-                android:paddingBottom="3dp"
+                android:paddingStart="6dp"
+                android:paddingTop="0dp"
+                android:paddingEnd="3dp"
+                android:paddingBottom="1dp"
                 android:text="@string/all_details"
                 android:textColor="@color/eventify_primary_helper"
                 app:icon="@drawable/ic_back_ios_rotated"
                 app:iconGravity="end"
-                app:iconPadding="6dp"
+                app:iconPadding="2dp"
                 app:iconSize="14dp"
                 app:iconTint="@color/eventify_primary_helper"
+                app:layout_constraintBottom_toBottomOf="@+id/imageFavorite"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="@+id/imageFavorite" />
+                app:layout_constraintTop_toTopOf="@+id/textFavoriteDate" />
 
             <com.google.android.material.divider.MaterialDivider
                 android:id="@+id/materialDividerFavorite"

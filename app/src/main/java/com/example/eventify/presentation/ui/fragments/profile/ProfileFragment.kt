@@ -1,32 +1,24 @@
 package com.example.eventify.presentation.ui.fragments.profile
 
 import android.content.Context
-import android.content.Intent
-import android.content.SharedPreferences
 import android.content.res.Configuration
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.common.base.BaseFragment
-import com.example.common.utils.NancyToast
 import com.example.common.utils.nancyToastInfo
 import com.example.common.utils.startShimmer
 import com.example.common.utils.stopShimmer
-import com.example.data.remote.api.EventAPI
 import com.example.eventify.NetworkUtils
 import com.example.eventify.R
 import com.example.eventify.databinding.FragmentProfileBinding
 import com.example.eventify.presentation.adapters.FavoriteAdapter
-import com.example.eventify.presentation.ui.activities.OnBoardingActivity
 import com.example.eventify.presentation.viewmodels.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 import java.util.Locale
-import javax.inject.Inject
-import javax.inject.Named
 
 @AndroidEntryPoint
 class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBinding::inflate) {
@@ -43,6 +35,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         super.onResume()
         if (viewModel.userData.value == null)
             startShimmer(binding.shimmerProfile)
+        if (viewModel.favorites.value.isEmpty())
+            startShimmer(binding.shimmerFavoriteProfile)
     }
 
     override fun onViewCreatedLight() {
@@ -53,6 +47,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
     override fun onPause() {
         super.onPause()
         stopShimmer(binding.shimmerProfile)
+        stopShimmer(binding.shimmerFavoriteProfile)
     }
 
     override fun setUI() {
@@ -115,6 +110,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
                 .filterNotNull()
                 .collectLatest {
                     favoritesAdapter.updateAdapter(it)
+                    stopShimmer(binding.shimmerFavoriteProfile)
                 }
         }
     }

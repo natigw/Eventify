@@ -138,14 +138,14 @@
             android:id="@+id/buttonReadMoreEvents"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/gray_light"
+            android:backgroundTint="@color/eventify_background_secondary"
             android:fontFamily="@font/inter_regular"
             android:minWidth="24dp"
             android:minHeight="24dp"
             android:paddingHorizontal="8dp"
             android:paddingVertical="2dp"
             android:text="@string/read_more"
-            android:textColor="@color/purple_dark_eventify"
+            android:textColor="@color/eventify_primary_helper"
             android:textSize="12sp"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="@id/guidelineEventDetails2"
@@ -194,7 +194,6 @@
             app:layout_constraintStart_toEndOf="@id/textEventOrganizerText"
             app:layout_constraintTop_toTopOf="@id/textEventOrganizerText"
             tools:text="Eventify Group" />
-
 
         <TextView
             android:id="@+id/textEventDateText"

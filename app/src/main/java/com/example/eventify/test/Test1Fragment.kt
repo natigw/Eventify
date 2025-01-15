@@ -1,29 +1,42 @@
 package com.example.eventify.test
 
+import android.Manifest
+import android.app.Activity
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
-import androidx.activity.result.PickVisualMediaRequest
-import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.common.base.BaseFragment
 import com.example.common.utils.NancyToast
 import com.example.common.utils.nancyToastError
-import com.example.common.utils.nancyToastInfo
 import com.example.common.utils.nancyToastSuccess
 import com.example.data.remote.api.EventAPI
 import com.example.data.remote.model.events.FileUploadGetLinkResponse
 import com.example.eventify.R
 import com.example.eventify.databinding.FragmentTest1Binding
+import com.google.gson.GsonBuilder
+import com.google.gson.JsonDeserializationContext
+import com.google.gson.JsonDeserializer
+import com.google.gson.JsonElement
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
+import java.lang.reflect.Type
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -32,69 +45,121 @@ class Test1Fragment : BaseFragment<FragmentTest1Binding>(FragmentTest1Binding::i
     @Inject
     lateinit var api: EventAPI
 
-    private val pickMedia =
-        registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
-            if (uri != null) {
-                uploadImageToApi(uri)
-            } else {
-                nancyToastInfo(requireContext(), getString(R.string.no_image_selected), NancyToast.LENGTH_LONG)
-            }
+    override fun onViewCreatedLight() {
+        if (ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                PERMISSION_REQUEST_CODE
+            )
+        } else {
+            openGallery()
         }
 
-    override fun onViewCreatedLight() {
-        val a = getString(R.string.event_finish_time)
         binding.button.setOnClickListener {
-            try {
-                pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
-            } catch (e: Exception) {
-                Log.e("PhotoPicker", "PHOTOPICKER FAILED!", e)
-                nancyToastError(
-                    requireContext(),
-                    getString(R.string.something_went_wrong_colon) + e.message,
-                    NancyToast.LENGTH_LONG
-                )
-            }
-        }
-        binding.buttonGoShimmer.setOnClickListener {
-            findNavController().navigate(R.id.action_test1Fragment_to_shimmerFragment)
+            openGallery()
         }
     }
 
-    private fun uploadImageToApi(uri: Uri) {
-        val context = requireContext()
-        val contentResolver = context.contentResolver
-        val inputStream = contentResolver.openInputStream(uri)
-        val file = File(context.cacheDir, "temp_image").apply {
-            outputStream().use { inputStream?.copyTo(it) }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == GALLERY_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            val imageUri = data?.data
+            imageUri?.let {
+                uploadImage(it)
+            }
         }
+    }
 
-        val requestBody = file.asRequestBody("image/*".toMediaTypeOrNull())
-        val multipartBody = MultipartBody.Part.createFormData("file", file.name, requestBody)
+    private fun openGallery() {
+        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        startActivityForResult(intent, GALLERY_REQUEST_CODE)
+    }
+
+    private fun uploadImage(uri: Uri) {
+        val filePart = prepareFilePart(uri)
 
         lifecycleScope.launch {
             try {
-                val response = api.uploadFileAndGetLink("events", multipartBody)
+                val response = api.uploadFileAndGetLink("events", filePart)
                 handleApiResponse(response)
             } catch (e: Exception) {
                 Log.e("UploadError", "Failed to upload image", e)
-                nancyToastError(requireContext(), getString(R.string.upload_failed_colon) + e.message)
+                nancyToastError(
+                    requireContext(),
+                    getString(R.string.upload_failed_colon) + e.message
+                )
             }
         }
+    }
+
+    private fun prepareFilePart(uri: Uri): MultipartBody.Part {
+        val file = File(getRealPathFromURI(uri))
+        val requestFile = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
+        return MultipartBody.Part.createFormData("file", file.name, requestFile)
+    }
+
+    private fun getRealPathFromURI(uri: Uri): String {
+        var path = ""
+        val projection = arrayOf(MediaStore.Images.Media.DATA)
+        val cursor = context?.contentResolver?.query(uri, projection, null, null, null)
+        cursor?.use {
+            val columnIndex = it.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+            it.moveToFirst()
+            path = it.getString(columnIndex)
+        }
+        return path
     }
 
     private fun handleApiResponse(response: Response<FileUploadGetLinkResponse>) {
         if (response.isSuccessful) {
-            val link = response.body()?.link ?: "No link provided"
-            nancyToastSuccess(requireContext(), getString(R.string.image_upload_successful_colon) + link)
-
-            // Update the image view with the uploaded image
+            val bodyString = response.body()?.link ?: "No link provided"
+            nancyToastSuccess(
+                requireContext(),
+                getString(R.string.image_upload_successful_colon) + bodyString
+            )
             Glide.with(binding.imageView)
-                .load(link)
+                .load(bodyString)
                 .placeholder(com.example.common.R.drawable.ic_warning)
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(binding.imageView)
         } else {
-            nancyToastError(requireContext(), getString(R.string.upload_failed_colon) + response.errorBody()?.string())
+            val errorBody = response.errorBody()?.string() ?: "Unknown error"
+            Log.e("API Error", errorBody)
+            nancyToastError(
+                requireContext(),
+                getString(R.string.upload_failed_colon) + errorBody
+            )
+        }
+    }
+
+    companion object {
+        private const val PERMISSION_REQUEST_CODE = 888
+        private const val GALLERY_REQUEST_CODE = 999
+    }
+}
+
+class FileUploadGetLinkResponseDeserializer : JsonDeserializer<FileUploadGetLinkResponse> {
+    override fun deserialize(json: JsonElement, typeOfT: Type, context: JsonDeserializationContext): FileUploadGetLinkResponse {
+        return if (json.isJsonObject) {
+            val jsonObject = json.asJsonObject
+            val link = jsonObject.get("link")?.asString ?: ""
+            FileUploadGetLinkResponse(link)
+        } else {
+            FileUploadGetLinkResponse(json.asString)
         }
     }
 }
+
+val gson = GsonBuilder()
+    .registerTypeAdapter(FileUploadGetLinkResponse::class.java, FileUploadGetLinkResponseDeserializer())
+    .create()
+
+val retrofit = Retrofit.Builder()
+    .baseUrl("https://eventify-az.onrender.com/")
+    .addConverterFactory(GsonConverterFactory.create(gson))
+    .build()
