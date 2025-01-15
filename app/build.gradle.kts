@@ -87,6 +87,10 @@ dependencies {
     //palette
     implementation(libs.androidx.palette)
 
+
+    // Gson for JSON parsing
+    implementation(libs.gson)
+
     //retrofit
     implementation(libs.retrofit2.retrofit)
     implementation(libs.converter.gson)
@@ -99,9 +103,6 @@ dependencies {
     //lottie
     implementation(libs.lottie)
     implementation(libs.dotlottie.android)
-
-    //shimmer - zaminali
-    implementation(libs.shimmer.animation)
 
     //shimmer - facebook
     implementation(libs.shimmer)

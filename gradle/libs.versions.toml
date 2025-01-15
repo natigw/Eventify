@@ -7,6 +7,7 @@ dotsindicator = "5.0"
 githubFancytoast = "2.0.2"
 glideVersion = "4.16.0"
 googleid = "<latest version>"
+gson = "2.10.1"
 hiltAndroidCompiler = "2.51.1"
 kotlin = "1.9.24"
 coreKtx = "1.15.0"
@@ -46,6 +47,7 @@ dotsindicator = { module = "com.tbuonomo:dotsindicator", version.ref = "dotsindi
 github-fancytoast = { module = "io.github.shashank02051997:FancyToast", version.ref = "githubFancytoast" }
 github-glide = { module = "com.github.bumptech.glide:glide", version.ref = "glideVersion" }
 googleid = { module = "com.google.android.libraries.identity.googleid:googleid", version.ref = "googleid" }
+gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroidCompiler" }
 hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltAndroidCompiler" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }

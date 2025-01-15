@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sample_favorite_shimmer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardFavoriteShimmer"
+        style="?attr/materialCardViewFilledStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/eventify_background_primary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imageFavoriteShimmer"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintWidth_percent="0.25"
+                app:layout_constraintDimensionRatio="W,1:1"
+                android:layout_marginTop="12dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:background="@color/gray"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Medium" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/textFavoriteNameShimmer"
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="2dp"
+                app:layout_constraintWidth_percent="0.4"
+                android:layout_marginStart="12dp"
+                android:fontFamily="@font/inter_bold"
+                android:textColor="@color/purple_dark_eventify"
+                android:textSize="20sp"
+                android:singleLine="true"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:scrollHorizontally="true"
+                android:adjustViewBounds="true"
+                android:background="@color/eventify_heading"
+                app:layout_constraintStart_toEndOf="@+id/imageFavoriteShimmer"
+                app:layout_constraintTop_toTopOf="@+id/imageFavoriteShimmer"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/textFavoriteDescription1Shimmer"
+                android:layout_width="0dp"
+                android:layout_height="18dp"
+                android:layout_marginTop="8dp"
+                android:adjustViewBounds="true"
+                android:background="@color/gray"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintTop_toBottomOf="@id/textFavoriteNameShimmer"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/textFavoriteNameShimmer"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/textFavoriteDescription2Shimmer"
+                android:layout_width="0dp"
+                android:layout_height="18dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="50dp"
+                android:adjustViewBounds="true"
+                android:background="@color/gray"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textFavoriteDescription1Shimmer"
+                app:layout_constraintStart_toStartOf="@+id/textFavoriteNameShimmer"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/textFavoriteDateShimmer"
+                android:layout_width="0dp"
+                android:layout_height="18dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="64dp"
+                android:adjustViewBounds="true"
+                android:background="@color/gray"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintBottom_toBottomOf="@+id/imageFavoriteShimmer"
+                app:layout_constraintEnd_toStartOf="@id/buttonFavoriteAllDetailsShimmer"
+                app:layout_constraintStart_toStartOf="@+id/textFavoriteNameShimmer"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonFavoriteAllDetailsShimmer"
+                style="?attr/materialIconButtonFilledTonalStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="-4dp"
+                android:backgroundTint="@color/gray"
+                android:clickable="false"
+                android:fontFamily="@font/inter_italic"
+                android:minHeight="24dp"
+                android:paddingStart="6dp"
+                android:paddingTop="0dp"
+                android:paddingEnd="3dp"
+                android:paddingBottom="1dp"
+                android:text="@string/all_details"
+                android:textColor="@color/gray"
+                app:icon="@drawable/ic_back_ios_rotated"
+                app:iconGravity="end"
+                app:iconPadding="2dp"
+                app:iconSize="14dp"
+                app:iconTint="@color/gray"
+                app:layout_constraintBottom_toBottomOf="@+id/imageFavoriteShimmer"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textFavoriteDateShimmer" />
+
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/materialDividerFavoriteShimmer"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="12dp"
+                app:dividerColor="@color/gray"
+                app:lastItemDecorated="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/imageFavoriteShimmer" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

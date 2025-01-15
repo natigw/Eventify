@@ -8,14 +8,5 @@
         android:id="@+id/test1Fragment"
         android:name="com.example.eventify.test.Test1Fragment"
         android:label="fragment_test1"
-        tools:layout="@layout/fragment_test1" >
-        <action
-            android:id="@+id/action_test1Fragment_to_shimmerFragment"
-            app:destination="@id/shimmerFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/shimmerFragment"
-        android:name="com.example.eventify.test.ShimmerFragment"
-        android:label="fragment_shimmer"
-        tools:layout="@layout/fragment_shimmer" />
+        tools:layout="@layout/fragment_test1" />
 </navigation>

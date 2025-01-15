@@ -200,6 +200,27 @@
             tools:itemCount="10"
             tools:listitem="@layout/sample_favorite" />
 
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmerFavoriteProfile"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="4dp"
+            app:layout_constraintEnd_toEndOf="@id/guidelineProfile2"
+            app:layout_constraintStart_toStartOf="@id/guidelineProfile1"
+            app:layout_constraintTop_toBottomOf="@id/textFavoritesProfileTEXT">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <include layout="@layout/sample_favorite_shimmer" />
+                <include layout="@layout/sample_favorite_shimmer" />
+                <include layout="@layout/sample_favorite_shimmer" />
+
+            </LinearLayout>
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonLogoutProfile"
             style="?attr/materialIconButtonFilledTonalStyle"
