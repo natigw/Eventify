@@ -10,6 +10,7 @@
     <color name="eventify_secondary">#25AB62</color>             <!--dark green-->
     <color name="eventify_on_primary">#FFFFFF</color>            <!--white on dark purple-->
     <color name="eventify_on_secondary">#FFFFFF</color>          <!--white on dark green-->
+    <color name="eventify_main_text">#FFFFFF</color>             <!--black-->
 
 
     <color name="purple_dark_eventify">#6823EA</color>           <!-- bunu deyis adlandirmani -->

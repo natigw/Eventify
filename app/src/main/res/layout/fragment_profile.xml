@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -83,7 +84,6 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/inter_bold"
             android:textAlignment="center"
-            android:textColor="@color/purple_dark_eventify"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="@+id/guidelineProfile2"
             app:layout_constraintStart_toStartOf="@+id/guidelineProfile1"
@@ -189,11 +189,10 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvFavoritesProfile"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginVertical="4dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toTopOf="@id/buttonLogoutProfile"
             app:layout_constraintEnd_toEndOf="@id/guidelineProfile2"
             app:layout_constraintStart_toStartOf="@id/guidelineProfile1"
             app:layout_constraintTop_toBottomOf="@id/textFavoritesProfileTEXT"
@@ -214,9 +213,9 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <include layout="@layout/sample_favorite_shimmer" />
-                <include layout="@layout/sample_favorite_shimmer" />
-                <include layout="@layout/sample_favorite_shimmer" />
+                <include layout="@layout/shimmer_favorite" />
+                <include layout="@layout/shimmer_favorite" />
+                <include layout="@layout/shimmer_favorite" />
 
             </LinearLayout>
         </com.facebook.shimmer.ShimmerFrameLayout>
@@ -226,7 +225,7 @@
             style="?attr/materialIconButtonFilledTonalStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_marginVertical="16dp"
             android:backgroundTint="@color/danger"
             android:fontFamily="@font/inter_bold"
             android:text="@string/logout"
@@ -238,6 +237,8 @@
             app:iconPadding="8dp"
             app:iconSize="22sp"
             app:iconTint="@color/eventify_on_primary"
+            android:visibility="invisible"
+            app:layout_constraintTop_toBottomOf="@id/rvFavoritesProfile"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/guidelineProfile2"
             app:layout_constraintStart_toStartOf="@id/guidelineProfile1" />

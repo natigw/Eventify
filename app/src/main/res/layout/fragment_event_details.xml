@@ -19,7 +19,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <include layout="@layout/sample_event_details_shimmer" />
+            <include layout="@layout/shimmer_event_details" />
 
         </com.facebook.shimmer.ShimmerFrameLayout>
 
@@ -37,21 +37,6 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="@dimen/eventify_guideline_right" />
 
-        <Button
-            android:id="@+id/buttonBackEventDetails"
-            style="?attr/materialIconButtonFilledTonalStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="-16dp"
-            android:backgroundTint="@color/eventify_background_primary"
-            android:visibility="invisible"
-            app:icon="@drawable/ic_back_arrow"
-            app:iconSize="24dp"
-            app:iconTint="@color/eventify_primary"
-            app:layout_constraintBottom_toBottomOf="@+id/textEventName"
-            app:layout_constraintStart_toStartOf="@+id/guidelineEventDetails1"
-            app:layout_constraintTop_toTopOf="@+id/textEventName" />
-
         <TextView
             android:id="@+id/textEventName"
             android:layout_width="0dp"
@@ -63,12 +48,27 @@
             android:marqueeRepeatLimit="marquee_forever"
             android:scrollHorizontally="true"
             android:singleLine="true"
-            android:textColor="@color/eventify_heading"
+            android:textColor="@color/eventify_main_text"
             android:textSize="28sp"
+            app:layout_constraintStart_toStartOf="@id/guidelineEventDetails1"
             app:layout_constraintEnd_toEndOf="@+id/guidelineEventDetails2"
-            app:layout_constraintStart_toStartOf="@+id/guidelineEventDetails1"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Event title" />
+
+        <Button
+            android:id="@+id/buttonBackEventDetails"
+            style="?attr/materialIconButtonFilledTonalStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="-20dp"
+            android:backgroundTint="@color/eventify_background_primary"
+            android:visibility="invisible"
+            app:icon="@drawable/ic_back_arrow"
+            app:iconSize="24dp"
+            app:iconTint="@color/eventify_primary"
+            app:layout_constraintBottom_toBottomOf="@+id/textEventName"
+            app:layout_constraintStart_toStartOf="@+id/guidelineEventDetails1"
+            app:layout_constraintTop_toTopOf="@+id/textEventName" />
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imageEvent"
@@ -104,7 +104,7 @@
         <!--        android:tag="not_liked"-->
         <!--        app:icon="@drawable/ic_chat_outlined"-->
         <!--        app:iconTint="@color/purple_dark_eventify"-->
-        <!--        android:backgroundTint="@color/gray_light"-->
+        <!--        android:backgroundTint="@color/eventify_background_primary"-->
         <!--        app:layout_constraintTop_toBottomOf="@id/buttonLikeEvent"-->
         <!--        app:layout_constraintEnd_toEndOf="parent"/>-->
 
