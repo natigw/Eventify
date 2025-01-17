@@ -41,16 +41,16 @@
         android:id="@+id/textVenueNameDetailsShimmer"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginBottom="-2dp"
         android:layout_marginStart="-16dp"
+        android:layout_marginTop="2dp"
         android:layout_marginEnd="-14dp"
+        android:layout_marginBottom="-2dp"
         android:adjustViewBounds="true"
         android:background="@color/eventify_heading"
+        app:layout_constraintBottom_toBottomOf="@+id/textMapHeading"
         app:layout_constraintEnd_toEndOf="@id/textMapHeading"
         app:layout_constraintStart_toStartOf="@id/textMapHeading"
         app:layout_constraintTop_toTopOf="@+id/textMapHeading"
-        app:layout_constraintBottom_toBottomOf="@+id/textMapHeading"
         app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full" />
 
     <TextView
