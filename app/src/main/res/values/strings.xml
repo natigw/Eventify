@@ -183,4 +183,7 @@
     <string name="see_also">See also:</string>
     <string name="your_favorites">Your favorites:</string>
     <string name="eventify_slogan">Experience Events Like Never Before!</string>
+    <string name="search_places">Search for places</string>
+    <string name="select_place">Select a place</string>
+    <string name="search">Search</string>
 </resources>

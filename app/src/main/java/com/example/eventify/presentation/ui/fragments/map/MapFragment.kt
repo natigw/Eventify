@@ -3,35 +3,29 @@ package com.example.eventify.presentation.ui.fragments.map
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.Intent
-import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.graphics.Color
 import android.net.Uri
 import android.util.Log
+import android.view.View
+import android.view.inputmethod.InputMethodManager
+import androidx.activity.OnBackPressedCallback
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.common.base.BaseFragment
-import com.example.common.utils.NancyToast
 import com.example.common.utils.nancyToastError
-import com.example.common.utils.nancyToastInfo
-import com.example.common.utils.nancyToastSuccess
 import com.example.common.utils.nancyToastWarning
-import com.example.data.remote.api.EventAPI
-import com.example.data.remote.api.VenueAPI
-import com.example.domain.model.places.event.EventItem
-import com.example.domain.model.places.venue.VenueItem
 import com.example.eventify.R
 import com.example.eventify.databinding.FragmentMapBinding
 import com.example.eventify.presentation.adapters.MapSearchAdapter
-import com.example.eventify.presentation.ui.activities.OnBoardingActivity
 import com.example.eventify.presentation.viewmodels.MapViewModel
 import com.example.eventify.presentation.viewmodels.SharedViewModel
 import com.google.android.gms.location.LocationServices
@@ -56,8 +50,6 @@ import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.json.JSONObject
-import javax.inject.Inject
-import javax.inject.Named
 
 @AndroidEntryPoint
 class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate), OnMapReadyCallback {
@@ -101,13 +93,33 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         super.buttonListener()
         binding.backwardButton.setOnClickListener {
             binding.root.transitionToStart()
-            binding.searchRV.animate()
-                .alpha(0f)
-                .setDuration(300)
-                .start()
+            animateSearchRV()
         }
+
+        requireActivity().onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if(binding.root.currentState == R.id.end){
+                    binding.root.transitionToStart()
+                    animateSearchRV()
+                    binding.editTextText.hideKeyboard()
+                }
+                else{
+                    requireActivity().finish()
+                }
+            }
+        })
+    }
+    fun View.hideKeyboard() {
+        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(windowToken, 0)
     }
 
+    fun animateSearchRV(){
+        binding.searchRV.animate()
+            .alpha(0f)
+            .setDuration(300)
+            .start()
+    }
 
     private fun motionLayout(){
         binding.root.setTransitionListener(object : MotionLayout.TransitionListener{
