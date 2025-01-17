@@ -1,5 +1,6 @@
 package com.example.eventify.presentation.viewmodels
 
+import android.content.SharedPreferences
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.model.places.event.EventItem
@@ -12,9 +13,12 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import javax.inject.Named
 
 @HiltViewModel
 class MapViewModel @Inject constructor(
+    @Named("ThemeChoice")
+    var sharedPrefTheme: SharedPreferences,
     private val venueRepository: VenueRepository,
     private val eventRepository: EventRepository
 ) : ViewModel() {

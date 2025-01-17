@@ -156,12 +156,12 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
             Glide.with(imageVenue)
                 .load(venueDetailsItem.imageLinks[0])
                 .placeholder(R.drawable.placeholder_venue)
-                .error(R.drawable.ic_launcher_foreground)
+                .error(R.drawable.placeholder_venue)
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(imageVenue)
 
 
-                //TODO -> like olsun request atsin, icon fill olsun, like count text bir dene artsin
+                //TODO -> like olsun request atsin, icon fill ol sun, like count text bir dene artsin
 
             buttonReadMoreVenues.post {
                 val layout = textVenueDescription.layout

@@ -218,7 +218,7 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
             Glide.with(imageEvent)
                 .load(eventDetailsItem.imageLinks[0])
                 .placeholder(R.drawable.placeholder_event)
-                .error(R.drawable.ic_launcher_foreground)
+                .error(R.drawable.placeholder_event)
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(imageEvent)
 

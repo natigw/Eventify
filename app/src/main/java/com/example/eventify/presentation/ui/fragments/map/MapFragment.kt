@@ -14,7 +14,6 @@ import android.view.inputmethod.InputMethodManager
 import androidx.activity.OnBackPressedCallback
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -79,8 +78,8 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 .filter { it!=null }
                 .collectLatest {
 
-                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(it!!.lat, it.long), 6f))
-            }
+                    googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(it!!.lat, it.long), 6f))
+                }
         }
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(this)
