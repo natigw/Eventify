@@ -44,6 +44,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.Polyline
 import com.google.android.gms.maps.model.PolylineOptions
 import com.google.maps.android.PolyUtil
 import dagger.hilt.android.AndroidEntryPoint
@@ -76,6 +77,8 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     private val markers = mutableListOf<Marker>()
 
     val mapSearchAdapter = MapSearchAdapter()
+    private var currentPolyline: Polyline? = null
+
 
     override fun onViewCreatedLight() {
 //        setDrawer()
@@ -218,7 +221,6 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         withContext(Dispatchers.IO) {
             val client = OkHttpClient()
             val request = Request.Builder().url(url).build()
-
             try {
                 val response = client.newCall(request).execute()
                 val jsonResponse = JSONObject(response.body!!.string())
@@ -230,8 +232,15 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                         .getString("points")
 
                     val decodedPath = PolyUtil.decode(points)
+
+
+
                     withContext(Dispatchers.Main) {
-                        googleMap.addPolyline(
+                        // Remove the previous polyline without clearing the map
+                        currentPolyline?.remove()
+
+                        // Add the new polyline
+                        currentPolyline = googleMap.addPolyline(
                             PolylineOptions()
                                 .addAll(decodedPath)
                                 .color(Color.BLUE)
@@ -391,11 +400,6 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         else Uri.parse(uriImage)
     }
 
-    private fun navigateToAuthActivity() {
-        val intent = Intent(requireContext(), OnBoardingActivity::class.java)
-        startActivity(intent)
-        requireActivity().finish()
-    }
 
     @SuppressLint("PotentialBehaviorOverride")
     override fun onMapReady(googleMap: GoogleMap) {
