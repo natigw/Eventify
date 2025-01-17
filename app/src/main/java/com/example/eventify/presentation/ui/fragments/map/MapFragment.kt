@@ -5,13 +5,13 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
 import android.content.res.Configuration
-import android.content.res.Resources
 import android.graphics.Color
 import android.net.Uri
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.view.isVisible
@@ -172,25 +172,25 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         return currentNightMode == Configuration.UI_MODE_NIGHT_YES
     }
 
+//
+//    private fun applyDynamicMapStyle(googleMap: GoogleMap) {
+//        val isDarkMode = isDarkModeEnabled(requireContext())
+//        val styleRes = if (isDarkMode) R.raw.map_aubergine else GoogleMap.MAP_TYPE_NORMAL
+//        try {
+//            googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(requireContext(), styleRes))
+//        } catch (e: Resources.NotFoundException) {
+//            Log.e("MapStyle", "Error loading map style: ${e.message}")
+//        }
+//    }
 
-    private fun applyDynamicMapStyle(googleMap: GoogleMap) {
-        val isDarkMode = isDarkModeEnabled(requireContext())
-        val styleRes = if (isDarkMode) R.raw.map_aubergine else GoogleMap.MAP_TYPE_NORMAL
-        try {
-            googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(requireContext(), styleRes))
-        } catch (e: Resources.NotFoundException) {
-            Log.e("MapStyle", "Error loading map style: ${e.message}")
-        }
-    }
 
 
-
-    override fun onConfigurationChanged(newConfig: Configuration) {
-        super.onConfigurationChanged(newConfig)
-        if (::googleMap.isInitialized) {
-            applyDynamicMapStyle(googleMap)
-        }
-    }
+//    override fun onConfigurationChanged(newConfig: Configuration) {
+//        super.onConfigurationChanged(newConfig)
+//        if (::googleMap.isInitialized) {
+//            applyDynamicMapStyle(googleMap)
+//        }
+//    }
 
     private fun addMarker(
         lat: Double,
@@ -509,6 +509,32 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         googleMap.uiSettings.setAllGesturesEnabled(true)
 //        googleMap.uiSettings.isMyLocationButtonEnabled = false
         getMyLocation()  //show user's current location
+        applyDynamicMapStyle()
+    }
 
+    private fun applyDynamicMapStyle() {
+        val themePreference = viewModel.sharedPrefTheme.getInt("theme", AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+        val styleResId = when (themePreference) {
+            AppCompatDelegate.MODE_NIGHT_YES -> R.raw.map_aubergine
+            AppCompatDelegate.MODE_NIGHT_NO -> R.raw.map_daylight
+            else -> {
+                val nightModeFlags = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+                if (nightModeFlags == Configuration.UI_MODE_NIGHT_YES)
+                    R.raw.map_aubergine
+                else
+                    R.raw.map_daylight
+            }
+        }
+
+        try {
+            val success = googleMap.setMapStyle(
+                MapStyleOptions.loadRawResourceStyle(requireContext(), styleResId)
+            )
+            if (!success)
+                Log.e("map","Map style parsing failed.")
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Log.e("map","Map style parsing failed.")
+        }
     }
 }

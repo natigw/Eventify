@@ -37,22 +37,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/buttonDarkMapMode"
-        style="?attr/materialIconButtonFilledTonalStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="7dp"
-        android:backgroundTint="@color/green_light_eventify"
-        app:icon="@drawable/ic_map_texture"
-        app:iconTint="@color/purple_dark_eventify"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/map" />
-
-
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/textVenueNameDetailsShimmer"
         android:layout_width="0dp"
