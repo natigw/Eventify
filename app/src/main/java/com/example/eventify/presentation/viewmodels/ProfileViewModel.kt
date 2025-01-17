@@ -3,7 +3,6 @@ package com.example.eventify.presentation.viewmodels
 import android.content.SharedPreferences
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.bumptech.glide.Glide.init
 import com.example.domain.model.auth.UserData
 import com.example.domain.model.places.FavoriteItem
 import com.example.domain.repository.AuthRepository
@@ -19,6 +18,8 @@ import javax.inject.Named
 class ProfileViewModel @Inject constructor(
     @Named("LanguageChoice")
     var sharedPrefLanguage: SharedPreferences,
+    @Named("ThemeChoice")
+    var sharedPrefTheme: SharedPreferences,
     private val authRepository: AuthRepository,
     private val eventRepository: EventRepository
 ): ViewModel() {
@@ -38,7 +39,7 @@ class ProfileViewModel @Inject constructor(
         }
     }
 
-    private fun getFavorites() {
+    fun getFavorites() {
         viewModelScope.launch {
             val favoriteResponse = eventRepository.getFavEvents()
             favorites.update { favoriteResponse }

@@ -2,10 +2,10 @@ package com.example.eventify.presentation.ui.activities
 
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatDelegate
 import com.example.eventify.EventifyApplication
 import com.example.common.base.BaseActivity
 import com.example.eventify.databinding.ActivityOnBoardingBinding
@@ -13,22 +13,19 @@ import com.example.eventify.presentation.viewmodels.OnBoardingViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Locale
-import javax.inject.Inject
-import javax.inject.Named
 
 @AndroidEntryPoint
 class OnBoardingActivity : BaseActivity<ActivityOnBoardingBinding>(ActivityOnBoardingBinding::inflate) {
-
-    @Inject
-    @Named("LanguageChoice")
-    lateinit var sharedPrefLanguage : SharedPreferences
 
     private val onBoardingViewModel by viewModels<OnBoardingViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val languageCode = sharedPrefLanguage.getString("language", "en") ?: "en"
+        val languageCode = onBoardingViewModel.sharedPrefLanguage.getString("language", "en") ?: "en"
         setAppLocale(this, languageCode)
+        val themeMode = onBoardingViewModel.sharedPrefTheme.getInt("theme", AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+        AppCompatDelegate.setDefaultNightMode(themeMode)
+        recreate()
     }
 
     override fun onCreateLight() {
@@ -82,7 +79,7 @@ class OnBoardingActivity : BaseActivity<ActivityOnBoardingBinding>(ActivityOnBoa
 
     fun onLanguageChanged(languageCode: String) {
         setAppLocale(this, languageCode)
-        sharedPrefLanguage.edit().putString("language", languageCode).apply()
+        onBoardingViewModel.sharedPrefLanguage.edit().putString("language", languageCode).apply()
         recreate()
     }
 }

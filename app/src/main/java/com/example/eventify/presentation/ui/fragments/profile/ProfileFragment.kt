@@ -2,8 +2,8 @@ package com.example.eventify.presentation.ui.fragments.profile
 
 import android.content.Context
 import android.content.res.Configuration
-import android.util.Log
 import android.view.View
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -38,6 +38,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
 
     override fun onResume() {
         super.onResume()
+        viewModel.getFavorites()
         if (viewModel.userData.value == null)
             startShimmer(binding.shimmerProfile)
         if (viewModel.favorites.value == null)
@@ -69,25 +70,36 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
 
     override fun buttonListener() {
         super.buttonListener()
-        binding.btnReferral.setOnClickListener {
-            findNavController().navigate(R.id.referralFragment)
-        }
-        binding.btnSubs.setOnClickListener {
-            findNavController().navigate(R.id.subscriptionFragment)
-        }
-        binding.buttonChangeLanguageAZ.setOnClickListener {
-            changeLanguage("az")
-        }
-        binding.buttonChangeLanguageEN.setOnClickListener {
-            changeLanguage("en")
-        }
-        binding.buttonChangeLanguageRU.setOnClickListener {
-            nancyToastInfo(requireContext(), "Aqsin tercume eder")
-            //changeLanguage("ru")
-        }
-        binding.buttonLogoutProfile.setOnClickListener {
-            nancyToastInfo(requireContext(), getString(R.string.logout_successful))
-            NetworkUtils.handleLogout(requireContext())
+        with(binding) {
+            btnReferral.setOnClickListener {
+                findNavController().navigate(R.id.referralFragment)
+            }
+            btnSubs.setOnClickListener {
+                findNavController().navigate(R.id.subscriptionFragment)
+            }
+            buttonChangeLanguageAZ.setOnClickListener {
+                changeLanguage("az")
+            }
+            buttonChangeLanguageEN.setOnClickListener {
+                changeLanguage("en")
+            }
+            buttonChangeLanguageRU.setOnClickListener {
+                nancyToastInfo(requireContext(), "Aqsin tercume eder")
+                //changeLanguage("ru")
+            }
+            buttonChangeThemeLight.setOnClickListener {
+                changeTheme(false)
+            }
+            buttonChangeThemeDark.setOnClickListener {
+                changeTheme(true)
+            }
+            buttonChangeThemeUseSystem.setOnClickListener {
+                changeTheme(null)
+            }
+            buttonLogoutProfile.setOnClickListener {
+                nancyToastInfo(requireContext(), getString(R.string.logout_successful))
+                NetworkUtils.handleLogout(requireContext())
+            }
         }
     }
 
@@ -102,6 +114,24 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
     private fun changeLanguage(languageCode: String) {
         setAppLocale(requireContext(), languageCode)
         viewModel.sharedPrefLanguage.edit().putString("language", languageCode).apply()
+        requireActivity().recreate()
+    }
+
+    private fun changeTheme(isDark: Boolean?) {
+        when (isDark) {
+            null -> {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+                viewModel.sharedPrefTheme.edit().putInt("theme", AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM).apply()
+            }
+            true -> {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                viewModel.sharedPrefTheme.edit().putInt("theme", AppCompatDelegate.MODE_NIGHT_YES).apply()
+            }
+            false -> {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                viewModel.sharedPrefTheme.edit().putInt("theme", AppCompatDelegate.MODE_NIGHT_NO).apply()
+            }
+        }
         requireActivity().recreate()
     }
 

@@ -13,19 +13,25 @@ import javax.inject.Named
 class LocalModule {
     @Named("OnBoardingWelcome")
     @Provides
-    fun provideSharedPrefOnBoardWelcome(context: Context) : SharedPreferences {
+    fun provideSharedPrefOnBoardWelcome(context: Context): SharedPreferences {
         return context.getSharedPreferences("onBoardingWelcome", Context.MODE_PRIVATE)
     }
 
     @Named("UserTokens")
     @Provides
-    fun provideSharedPrefTokens(context : Context) : SharedPreferences {
-        return context.getSharedPreferences("userTokens",Context.MODE_PRIVATE)
+    fun provideSharedPrefTokens(context: Context): SharedPreferences {
+        return context.getSharedPreferences("userTokens", Context.MODE_PRIVATE)
     }
 
     @Named("LanguageChoice")
     @Provides
-    fun provideSharedPrefLanguage(context : Context) : SharedPreferences {
-        return context.getSharedPreferences("language",Context.MODE_PRIVATE)
+    fun provideSharedPrefLanguage(context: Context): SharedPreferences {
+        return context.getSharedPreferences("language", Context.MODE_PRIVATE)
+    }
+
+    @Named("ThemeChoice")
+    @Provides
+    fun provideSharedPrefTheme(context: Context): SharedPreferences {
+        return context.getSharedPreferences("theme", Context.MODE_PRIVATE)
     }
 }
