@@ -17,7 +17,7 @@ interface VenueRepository {
 
     suspend fun addVenueComment(
         requestAddVenueComment: AddCommentItem
-    )
+    ) : Boolean
 
 //    suspend fun deleteVenueComment(
 //        token: String,

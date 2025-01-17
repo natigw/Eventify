@@ -23,7 +23,7 @@ interface EventRepository {
 
     suspend fun addEventComment(
         requestAddEventComment: AddCommentItem
-    )
+    ) : Boolean
 
     suspend fun getFavEvents(): List<FavoriteItem>
 

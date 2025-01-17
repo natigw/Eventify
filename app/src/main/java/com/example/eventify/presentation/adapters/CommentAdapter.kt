@@ -1,17 +1,17 @@
 package com.example.eventify.presentation.adapters
 
 import com.example.common.base.BaseAdapter
+import com.example.common.utils.functions.getLocalTime
+import com.example.domain.model.places.AddCommentItem
 import com.example.domain.model.places.CommentItem
 import com.example.eventify.databinding.SampleCommentBinding
 
 class CommentAdapter (
-//    val bindinqa: BottomsheetPlacesCommentsBinding   //TODO -> daha yaxsi usul??
 ) : BaseAdapter<SampleCommentBinding>(SampleCommentBinding::inflate) {
 
-    var comments: List<CommentItem> = emptyList()
+    var comments: MutableList<CommentItem> = mutableListOf()
 
     override fun getItemCount(): Int {
-//        if (comments.isEmpty()) bindinqa.NoCommentsText.visibility = View.GONE
         return comments.size
     }
 
@@ -22,10 +22,11 @@ class CommentAdapter (
             textContentComments.text = comment.content
             textCommentDateComments.text = comment.date
         }
+
     }
 
     fun updateAdapter(newComments: List<CommentItem>) {
-        comments = newComments
+        comments = newComments.toMutableList()
         notifyDataSetChanged()
     }
 }

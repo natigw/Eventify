@@ -13,11 +13,13 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.common.base.BaseFragment
+import com.example.common.utils.functions.getLocalTime
 import com.example.common.utils.functions.validateInputFieldEmpty
 import com.example.common.utils.nancyToastSuccess
 import com.example.common.utils.startShimmer
 import com.example.common.utils.stopShimmer
 import com.example.domain.model.places.AddCommentItem
+import com.example.domain.model.places.CommentItem
 import com.example.domain.model.places.PlaceCoordinates
 import com.example.domain.model.places.event.EventDetailsItem
 import com.example.eventify.R
@@ -31,6 +33,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import org.w3c.dom.Comment
 
 @AndroidEntryPoint
 class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentEventDetailsBinding::inflate) {
@@ -132,33 +135,16 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
         }
 
         binding.buttonBackEventDetails.setOnClickListener {
-            if (args.comingProfile) findNavController().popBackStack()
-            findNavController().navigate(
-                R.id.placesFragment,
-                null,
-                NavOptions.Builder()
-                    .setPopUpTo(R.id.placesFragment,false)
-                    .build()
-            )
-        }
-
-        binding.buttonSendCommentEventDetails.setOnClickListener {
-            val comment = binding.textInputEdittextAddCommentEvent.text.toString().trim()
-            val isCommentFilled = validateInputFieldEmpty(binding.textInputLayoutWriteCommentEventDetails, comment, getString(R.string.please_enter_comment))
-
-            if (!isCommentFilled) {
-                return@setOnClickListener
-            }
-            viewmodel.addComment(
-                AddCommentItem(
-                    content = comment,
-                    placeId = args.eventId
+            if(args.comingProfile){
+                findNavController().navigate(
+                    R.id.profileFragment,
+                    null,
+                    NavOptions.Builder()
+                        .setPopUpTo(R.id.profileFragment,false)
+                        .build()
                 )
-            )
-            binding.textInputEdittextAddCommentEvent.text = null
-        }
-        requireActivity().onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
+            }
+            else{
                 findNavController().navigate(
                     R.id.placesFragment,
                     null,
@@ -167,7 +153,57 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
                         .build()
                 )
             }
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if(args.comingProfile){
+                    findNavController().navigate(
+                        R.id.profileFragment,
+                        null,
+                        NavOptions.Builder()
+                            .setPopUpTo(R.id.profileFragment,false)
+                            .build()
+                    )
+                }
+                else{
+                    findNavController().navigate(
+                        R.id.placesFragment,
+                        null,
+                        NavOptions.Builder()
+                            .setPopUpTo(R.id.placesFragment,false)
+                            .build()
+                    )
+                }
+
+            }
         })
+
+
+        binding.buttonSendCommentEventDetails.setOnClickListener {
+            val comment = binding.textInputEdittextAddCommentEvent.text.toString().trim()
+            val isCommentFilled = validateInputFieldEmpty(binding.textInputLayoutWriteCommentEventDetails, comment, getString(R.string.please_enter_comment))
+
+            if (!isCommentFilled) {
+                return@setOnClickListener
+            }
+            lifecycleScope.launch {
+                if(
+                    viewmodel.addComment(
+                        AddCommentItem(
+                            content = comment,
+                            placeId = args.eventId
+                        )
+                    )
+                ){
+                    viewmodel.getComments(args.eventId)
+                }
+            }
+
+
+            binding.textInputEdittextAddCommentEvent.text = null
+        }
+
     }
 
     private fun setUI(eventDetailsItem: EventDetailsItem) {

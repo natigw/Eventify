@@ -4,13 +4,16 @@ import android.graphics.DiscretePathEffect
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.domain.model.auth.UserData
 import com.example.domain.model.places.AddCommentItem
 import com.example.domain.model.places.CommentItem
 import com.example.domain.model.places.event.EventDetailsItem
+import com.example.domain.repository.AuthRepository
 import com.example.domain.repository.EventRepository
 import com.example.eventify.NetworkUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -19,13 +22,17 @@ import javax.inject.Inject
 
 @HiltViewModel
 class EventDetailsViewModel @Inject constructor(
-    private val eventRepository: EventRepository
+    private val eventRepository: EventRepository,
+    private val authRepository: AuthRepository
 ) : ViewModel() {
 
     val isLoadingMain = MutableStateFlow(true)
     val eventDetails = MutableStateFlow<EventDetailsItem?>(null)
 
     var likedState = MutableStateFlow<Boolean?>(null)
+
+    val userDataState = MutableStateFlow<UserData?>(null)
+
 
     var noComments = false
     val isLoadingComments = MutableStateFlow(true)
@@ -85,9 +92,11 @@ class EventDetailsViewModel @Inject constructor(
     }
 
 
-    fun addComment(comment: AddCommentItem) {
-        viewModelScope.launch {
+    suspend fun addComment(comment: AddCommentItem) : Boolean {
+        return viewModelScope.async {
             eventRepository.addEventComment(comment)
-        }
+        }.await()
     }
+
+
 }

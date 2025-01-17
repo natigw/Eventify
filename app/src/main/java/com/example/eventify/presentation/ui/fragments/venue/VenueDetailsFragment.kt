@@ -108,12 +108,19 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
             if (!isCommentFilled) {
                 return@setOnClickListener
             }
-            viewmodel.addComment(
-                AddCommentItem(
-                    content = comment,
-                    placeId = args.venueId
-                )
-            )
+            lifecycleScope.launch {
+                if(
+                    viewmodel.addComment(
+                        AddCommentItem(
+                            content = comment,
+                            placeId = args.venueId
+                        )
+                    )
+                ){
+                    viewmodel.getComments(args.venueId)
+                }
+            }
+
             binding.textInputAddCommentVenue.text = null
         }
 

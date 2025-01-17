@@ -137,16 +137,18 @@ class EventRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun addEventComment(requestAddEventComment: AddCommentItem) {
-        try {
+    override suspend fun addEventComment(requestAddEventComment: AddCommentItem) : Boolean{
+        return try {
             api.addEventComment(
                 RequestAddEventComment(
                     content = requestAddEventComment.content,
                     event = requestAddEventComment.placeId
                 )
             )
+            true
         } catch (e: Exception) {
             e.printStackTrace()
+            false
         }
         //TODO -> successful olub olmadigini check ele
     }
@@ -188,6 +190,7 @@ class EventRepositoryImpl @Inject constructor(
             throw e
         }
     }
+
 
     override suspend fun likeEvent(eventId: Int) {
         try {

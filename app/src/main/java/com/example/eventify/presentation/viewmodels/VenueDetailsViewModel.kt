@@ -7,6 +7,7 @@ import com.example.domain.model.places.CommentItem
 import com.example.domain.model.places.venue.VenueDetailsItem
 import com.example.domain.repository.VenueRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -47,9 +48,9 @@ class VenueDetailsViewModel @Inject constructor(
         }
     }
 
-    fun addComment(comment: AddCommentItem) {
-        viewModelScope.launch {
+    suspend fun addComment(comment: AddCommentItem) : Boolean{
+        return viewModelScope.async {
             venueRepository.addVenueComment(comment)
-        }
+        }.await()
     }
 }

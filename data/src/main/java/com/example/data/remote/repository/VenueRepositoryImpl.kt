@@ -102,15 +102,17 @@ class VenueRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun addVenueComment(requestAddVenueComment: AddCommentItem) {
-        try {
+    override suspend fun addVenueComment(requestAddVenueComment: AddCommentItem) : Boolean {
+        return try {
             api.addVenueComment(RequestAddVenueComment(
                 content = requestAddVenueComment.content,
                 venue = requestAddVenueComment.placeId
             ))
+            true
         }
-        catch (_: Exception){}
-        //TODO -> successful olub olmadigini check ele
+        catch (_: Exception){
+            false
+        }
     }
 
 //    override suspend fun deleteVenueComment(
