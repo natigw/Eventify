@@ -1,5 +1,7 @@
 package com.example.eventify.presentation.ui.fragments.events.event
 
+import androidx.activity.OnBackPressedCallback
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -10,6 +12,7 @@ import com.example.eventify.databinding.FragmentEventsBinding
 import com.example.eventify.presentation.adapters.EventAdapter
 import com.example.eventify.presentation.ui.fragments.events.PlacesFragmentDirections
 import com.example.eventify.presentation.viewmodels.EventViewModel
+import com.example.eventify.presentation.viewmodels.SharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.filter
@@ -19,6 +22,8 @@ import kotlinx.coroutines.launch
 class EventsFragment : BaseFragment<FragmentEventsBinding>(FragmentEventsBinding::inflate) {
 
     private val viewModel: EventViewModel by viewModels()
+    private val sharedViewModel by activityViewModels<SharedViewModel>()
+
 
     private val eventAdapter = EventAdapter(
         onLike = {
@@ -28,8 +33,17 @@ class EventsFragment : BaseFragment<FragmentEventsBinding>(FragmentEventsBinding
             findNavController().navigate(
                 PlacesFragmentDirections.actionPlacesFragmentToEventDetailsFragment(it, false)
             )
+            sharedViewModel.eventsRVState = binding.rvEvents.layoutManager?.onSaveInstanceState()
         }
     )
+    override fun onViewCreatedLight() {
+        setAdapters()
+        updateAdapters()
+
+    }
+
+
+
 
     override fun onResume() {
         super.onResume()
@@ -37,10 +51,6 @@ class EventsFragment : BaseFragment<FragmentEventsBinding>(FragmentEventsBinding
             startShimmer(binding.shimmerEvents)
     }
 
-    override fun onViewCreatedLight() {
-        setAdapters()
-        updateAdapters()
-    }
 
     override fun onPause() {
         super.onPause()
@@ -58,10 +68,12 @@ class EventsFragment : BaseFragment<FragmentEventsBinding>(FragmentEventsBinding
                 .filter { it.isNotEmpty() }
                 .collect {
                     eventAdapter.updateAdapter(it)
+                    sharedViewModel.eventsRVState?.let { state->
+                        binding.rvEvents.layoutManager?.onRestoreInstanceState(state)
+                    }
                 }
         }
     }
-
     private fun setAdapters() {
         binding.rvEvents.adapter = eventAdapter
     }

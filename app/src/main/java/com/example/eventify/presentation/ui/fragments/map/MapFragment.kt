@@ -11,7 +11,9 @@ import android.content.res.Resources
 import android.graphics.Color
 import android.net.Uri
 import android.util.Log
+import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.app.ActivityCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -28,6 +30,7 @@ import com.example.domain.model.places.event.EventItem
 import com.example.domain.model.places.venue.VenueItem
 import com.example.eventify.R
 import com.example.eventify.databinding.FragmentMapBinding
+import com.example.eventify.presentation.adapters.MapSearchAdapter
 import com.example.eventify.presentation.ui.activities.OnBoardingActivity
 import com.example.eventify.presentation.viewmodels.MapViewModel
 import com.example.eventify.presentation.viewmodels.SharedViewModel
@@ -72,7 +75,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
     private val markers = mutableListOf<Marker>()
 
-
+    val mapSearchAdapter = MapSearchAdapter()
 
     override fun onViewCreatedLight() {
 //        setDrawer()
@@ -86,15 +89,68 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         }
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(this)
+
+        binding.searchRV.adapter = mapSearchAdapter
+        motionLayout()
     }
 
     override fun buttonListener() {
         super.buttonListener()
         binding.backwardButton.setOnClickListener {
             binding.root.transitionToStart()
+            binding.searchRV.animate()
+                .alpha(0f)
+                .setDuration(300)
+                .start()
         }
     }
 
+
+    private fun motionLayout(){
+        binding.root.setTransitionListener(object : MotionLayout.TransitionListener{
+            override fun onTransitionStarted(
+                motionLayout: MotionLayout?,
+                startId: Int,
+                endId: Int
+            ) {
+
+            }
+
+            override fun onTransitionChange(
+                motionLayout: MotionLayout?,
+                startId: Int,
+                endId: Int,
+                progress: Float
+            ) {
+                Log.e("progress",progress.toString())
+            }
+
+            override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
+                if(currentId == R.id.end){
+                    binding.searchRV.isVisible = true
+                    binding.searchRV.animate()
+                        .alpha(1f)
+                        .setDuration(300)
+                        .start()
+                    binding.root.getTransition(R.id.myTransition).isEnabled = false
+                }
+                else if(currentId == R.id.start){
+                    binding.root.getTransition(R.id.myTransition).isEnabled = true
+                }
+            }
+
+            override fun onTransitionTrigger(
+                motionLayout: MotionLayout?,
+                triggerId: Int,
+                positive: Boolean,
+                progress: Float
+            ) {
+                Log.e("triggerId",triggerId.toString())
+
+            }
+
+        })
+    }
 
     //TODO -> burda nese sehv olub
     private fun isDarkModeEnabled(context: Context): Boolean {
@@ -182,6 +238,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                                 .width(10f)
                         )
                     }
+
                 } else {
 
                 }

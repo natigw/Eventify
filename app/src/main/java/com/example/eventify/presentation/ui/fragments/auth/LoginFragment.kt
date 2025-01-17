@@ -63,6 +63,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                 if (viewModel.linkGoogleAccount()) {
                     Intent(requireContext(), MainActivity::class.java).also {
                         startActivity(it)
+                        requireActivity().finish()
                     }
                     requireActivity().finish()
                 }
@@ -122,15 +123,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         }
     }
 
-    fun toastLoginErrors() {
-        lifecycleScope.launch {
-            viewModel.errorMessagesState
-                .filter { it != null }
-                .collectLatest {
-                    nancyToastWarning(requireContext(), it)
-                }
-        }
-    }
 
     private fun observer() {
         lifecycleScope.launch {

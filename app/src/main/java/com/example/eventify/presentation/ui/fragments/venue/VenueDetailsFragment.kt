@@ -1,6 +1,7 @@
 package com.example.eventify.presentation.ui.fragments.venue
 
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -125,6 +126,18 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
                     .build()
             )
         }
+
+        requireActivity().onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                findNavController().navigate(
+                    R.id.venuesFragment,
+                    null,
+                    NavOptions.Builder()
+                        .setPopUpTo(R.id.venuesFragment,false)
+                        .build()
+                )
+            }
+        })
     }
     private fun setUI(venueDetailsItem: VenueDetailsItem) {
         with(binding) {
