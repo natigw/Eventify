@@ -6,30 +6,83 @@
     android:layout_height="match_parent"
     tools:context=".presentation.ui.fragments.auth.welcomeOnBoard.SecondFragment">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineWelcomeSecond1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="@dimen/eventify_guideline_left" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineWelcomeSecond2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="@dimen/eventify_guideline_right" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineWelcomeSecond22"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineWelcomeSecond31"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.04" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineWelcomeSecond32"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.15" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineWelcomeSecond4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.96" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="SECOND"
-        tools:layout_editor_absoluteX="94dp"
-        tools:layout_editor_absoluteY="207dp" />
+        app:layout_constraintTop_toTopOf="@+id/guidelineWelcomeSecond32"
+        tools:layout_editor_absoluteX="94dp" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonSkipSecond"
         style="?attr/materialButtonOutlinedStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/outfit_regular"
+        android:minWidth="0dp"
+        android:paddingHorizontal="16dp"
         android:text="@string/skip"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:textColor="@color/eventify_primary"
+        android:textSize="16sp"
+        app:cornerRadius="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/guidelineWelcomeSecond31" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonNextSecond"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/eventify_primary"
+        android:fontFamily="@font/inter_bold"
+        android:minHeight="60dp"
         android:text="@string/next"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:textSize="24sp"
+        app:cornerRadius="@dimen/eventify_extra_large_button_corner_radius"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineWelcomeSecond4"
+        app:layout_constraintEnd_toEndOf="@id/guidelineWelcomeSecond2"
+        app:layout_constraintStart_toStartOf="@+id/guidelineWelcomeSecond22" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

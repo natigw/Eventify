@@ -37,19 +37,34 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/textVenueNameDetailsShimmer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="-2dp"
+        android:layout_marginStart="-16dp"
+        android:layout_marginEnd="-14dp"
+        android:adjustViewBounds="true"
+        android:background="@color/eventify_heading"
+        app:layout_constraintEnd_toEndOf="@id/textMapHeading"
+        app:layout_constraintStart_toStartOf="@id/textMapHeading"
+        app:layout_constraintTop_toTopOf="@+id/textMapHeading"
+        app:layout_constraintBottom_toBottomOf="@+id/textMapHeading"
+        app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full" />
+
     <TextView
         android:id="@+id/textMapHeading"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:fontFamily="@font/inter_bold"
         android:text="@string/eventify_az"
-        android:textAlignment="center"
-        android:textColor="@color/eventify_heading"
+        android:textColor="@color/white"
         android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/topCardView" />
 
     <!--    <com.google.android.material.button.MaterialButton-->
     <!--        android:id="@+id/buttonDrawer"-->

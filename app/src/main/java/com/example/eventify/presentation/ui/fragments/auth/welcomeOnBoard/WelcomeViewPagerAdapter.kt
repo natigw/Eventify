@@ -8,12 +8,10 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.common.base.BaseFragment
 
 class WelcomeViewPagerAdapter(
-    list: ArrayList<BaseFragment<out ViewBinding>>,
-    fm: FragmentManager,
+    private val fragmentList: ArrayList<BaseFragment<out ViewBinding>>,
+    fragmentManager: FragmentManager,
     lifecycle: Lifecycle
-) : FragmentStateAdapter(fm, lifecycle) {
-
-    private val fragmentList = list
+) : FragmentStateAdapter(fragmentManager, lifecycle) {
 
     override fun getItemCount(): Int {
         return fragmentList.size

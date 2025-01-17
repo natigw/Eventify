@@ -1,27 +1,22 @@
 package com.example.eventify.presentation.ui.fragments.auth.welcomeOnBoard
 
-import android.content.SharedPreferences
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.example.eventify.R
 import com.example.common.base.BaseFragment
 import com.example.eventify.databinding.FragmentWelcomeBinding
+import com.example.eventify.presentation.viewmodels.WelcomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
-import javax.inject.Named
 
 @AndroidEntryPoint
 class WelcomeFragment : BaseFragment<FragmentWelcomeBinding>(FragmentWelcomeBinding::inflate) {
 
-    @Inject
-    @Named("OnBoardingWelcome")
-    lateinit var sharedPrefOnBoard : SharedPreferences
+    private val viewmodel by viewModels<WelcomeViewModel>()
 
     override fun onViewCreatedLight() {
-        if (sharedPrefOnBoard.getBoolean("finished", false)){
+        initViews()
+        if (viewmodel.sharedPrefOnBoard.getBoolean("finished", false)){
             findNavController().navigate(WelcomeFragmentDirections.actionWelcomeFragmentToLoginFragment())
         }
-
-        initViews()
     }
 
     private fun initViews() {

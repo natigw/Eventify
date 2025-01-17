@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="let_s_go">Başlayaq</string>
+    <string name="get_started">Başlayaq</string>
     <string name="welcome_to">Xoş gəlmisiniz</string>
     <string name="hello_blank_fragment">Salam boş fragment</string>
     <string name="finish">Bitir</string>

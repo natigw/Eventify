@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="eventify_extra_large_button_corner_radius">14dp</dimen>
     <dimen name="eventify_large_button_corner_radius">12dp</dimen>
     <dimen name="eventify_input_field_corner_radius">12dp</dimen>
 
