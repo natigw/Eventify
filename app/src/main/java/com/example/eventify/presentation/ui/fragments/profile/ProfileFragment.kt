@@ -2,6 +2,7 @@ package com.example.eventify.presentation.ui.fragments.profile
 
 import android.content.Context
 import android.content.res.Configuration
+import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -9,6 +10,7 @@ import com.example.common.base.BaseFragment
 import com.example.common.utils.nancyToastInfo
 import com.example.common.utils.startShimmer
 import com.example.common.utils.stopShimmer
+import com.example.common.utils.stopShimmerGone
 import com.example.eventify.NetworkUtils
 import com.example.eventify.R
 import com.example.eventify.databinding.FragmentProfileBinding
@@ -27,6 +29,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
 
     private val favoritesAdapter = FavoriteAdapter(
         onClick = {
+            //TODO -> qayitmaq isteyende event fragmentde gedir duzelt
             findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToEventDetailsFragment(it, true))
         }
     )
@@ -35,8 +38,10 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         super.onResume()
         if (viewModel.userData.value == null)
             startShimmer(binding.shimmerProfile)
-        if (viewModel.favorites.value.isEmpty())
+        if (viewModel.favorites.value.isEmpty()) {
             startShimmer(binding.shimmerFavoriteProfile)
+            binding.buttonLogoutProfile.visibility = View.INVISIBLE
+        }
     }
 
     override fun onViewCreatedLight() {
@@ -47,7 +52,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
     override fun onPause() {
         super.onPause()
         stopShimmer(binding.shimmerProfile)
-        stopShimmer(binding.shimmerFavoriteProfile)
+        stopShimmerGone(binding.shimmerFavoriteProfile)
     }
 
     override fun setUI() {
@@ -110,7 +115,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
                 .filterNotNull()
                 .collectLatest {
                     favoritesAdapter.updateAdapter(it)
-                    stopShimmer(binding.shimmerFavoriteProfile)
+                    stopShimmerGone(binding.shimmerFavoriteProfile)
+                    binding.buttonLogoutProfile.visibility = View.VISIBLE
                 }
         }
     }

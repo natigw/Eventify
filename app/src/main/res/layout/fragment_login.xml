@@ -181,7 +181,7 @@
             app:layout_constraintStart_toStartOf="@+id/buttonLogin"
             app:layout_constraintTop_toBottomOf="@+id/textOrTEXT"
             app:rippleColor="@color/gray_light"
-            app:strokeColor="@color/gray"
+            app:strokeColor="@color/gray_helper_text"
             app:strokeWidth="1dp" />
 
         <ProgressBar

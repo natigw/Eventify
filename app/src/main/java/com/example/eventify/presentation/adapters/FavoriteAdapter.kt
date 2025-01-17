@@ -24,7 +24,6 @@ class FavoriteAdapter(
 
         with(binding) {
             textFavoriteName.text = favItem.title
-            textFavoriteName.isSelected = true
             textFavoriteDescription.text = favItem.description
             textFavoriteDate.text = favItem.date
 

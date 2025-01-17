@@ -187,7 +187,7 @@
                     android:layout_marginBottom="12dp"
                     android:fontFamily="@font/outfit_regular"
                     android:text="@string/referral_note"
-                    android:textColor="@color/gray"
+                    android:textColor="@color/gray_helper_text"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/guidelineCard1Referral2"
                     app:layout_constraintStart_toStartOf="@+id/guidelineCard1Referral1" />

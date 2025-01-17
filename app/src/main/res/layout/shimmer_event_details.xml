@@ -31,7 +31,7 @@
             android:layout_height="30dp"
             android:layout_marginTop="20dp"
             android:adjustViewBounds="true"
-            android:background="@color/eventify_heading"
+            android:background="@color/eventify_main_text"
             app:layout_constraintEnd_toEndOf="@id/guidelineEventDetailsShimmer2"
             app:layout_constraintStart_toStartOf="@id/guidelineEventDetailsShimmer1"
             app:layout_constraintTop_toTopOf="parent"
@@ -44,7 +44,7 @@
             android:layout_height="0dp"
             android:layout_marginTop="18dp"
             android:adjustViewBounds="true"
-            android:background="@color/gray"
+            android:background="@color/shimmer_gray"
             app:layout_constraintDimensionRatio="W,1:1.4"
             app:layout_constraintEnd_toStartOf="@+id/guidelineEventDetailsShimmer2"
             app:layout_constraintStart_toStartOf="@+id/guidelineEventDetailsShimmer1"
@@ -58,7 +58,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:adjustViewBounds="true"
-            android:background="@color/gray_light"
+            android:background="@color/shimmer_gray_light"
             app:layout_constraintEnd_toEndOf="@id/imageEventDetailsShimmer"
             app:layout_constraintTop_toTopOf="@+id/imageEventDetailsShimmer"
             app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full" />
@@ -69,7 +69,7 @@
 <!--            android:layout_height="40dp"-->
 <!--            android:layout_marginTop="8dp"-->
 <!--            android:adjustViewBounds="true"-->
-<!--            android:background="@color/gray_light"-->
+<!--            android:background="@color/shimmer_gray_light"-->
 <!--            app:layout_constraintEnd_toEndOf="@id/buttonLikeEventDetailsShimmer"-->
 <!--            app:layout_constraintTop_toBottomOf="@id/buttonLikeEventDetailsShimmer"-->
 <!--            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full" />-->
@@ -93,7 +93,7 @@
             android:layout_marginTop="12dp"
             android:layout_marginEnd="16dp"
             android:adjustViewBounds="true"
-            android:background="@color/gray"
+            android:background="@color/shimmer_gray"
             app:layout_constraintStart_toStartOf="@id/guidelineEventDetailsShimmer1"
             app:layout_constraintEnd_toEndOf="@id/guidelineEventDetailsShimmer2"
             app:layout_constraintHorizontal_bias="0.0"
@@ -107,7 +107,7 @@
             android:layout_marginTop="4dp"
             android:layout_marginEnd="32dp"
             android:adjustViewBounds="true"
-            android:background="@color/gray"
+            android:background="@color/shimmer_gray"
             app:layout_constraintStart_toStartOf="@id/guidelineEventDetailsShimmer1"
             app:layout_constraintEnd_toEndOf="@+id/textEventDetailsDescription1Shimmer"
             app:layout_constraintTop_toBottomOf="@+id/textEventDetailsDescription1Shimmer"
@@ -119,7 +119,7 @@
             android:layout_height="16dp"
             android:layout_marginTop="4dp"
             android:adjustViewBounds="true"
-            android:background="@color/gray"
+            android:background="@color/shimmer_gray"
             app:layout_constraintStart_toStartOf="@id/guidelineEventDetailsShimmer1"
             app:layout_constraintEnd_toEndOf="@+id/guidelineEventDetailsShimmer2"
             app:layout_constraintTop_toBottomOf="@+id/textEventDetailsDescription2Shimmer"
@@ -132,7 +132,7 @@
             android:layout_marginTop="4dp"
             android:layout_marginEnd="12dp"
             android:adjustViewBounds="true"
-            android:background="@color/gray"
+            android:background="@color/shimmer_gray"
             app:layout_constraintStart_toStartOf="@id/guidelineEventDetailsShimmer1"
             app:layout_constraintEnd_toEndOf="@+id/textEventDetailsDescription1Shimmer"
             app:layout_constraintTop_toBottomOf="@+id/textEventDetailsDescription3Shimmer"
@@ -145,7 +145,7 @@
             android:layout_marginTop="4dp"
             android:layout_marginEnd="100dp"
             android:adjustViewBounds="true"
-            android:background="@color/gray"
+            android:background="@color/shimmer_gray"
             app:layout_constraintStart_toStartOf="@id/guidelineEventDetailsShimmer1"
             app:layout_constraintEnd_toEndOf="@+id/textEventDetailsDescription1Shimmer"
             app:layout_constraintTop_toBottomOf="@+id/textEventDetailsDescription4Shimmer"
@@ -155,7 +155,7 @@
             android:id="@+id/buttonReadMoreEventsShimmer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/gray"
+            android:backgroundTint="@color/shimmer_gray"
             android:clickable="false"
             android:fontFamily="@font/inter_regular"
             android:minWidth="24dp"
@@ -163,7 +163,7 @@
             android:paddingHorizontal="8dp"
             android:paddingVertical="2dp"
             android:text="@string/read_more"
-            android:textColor="@color/gray"
+            android:textColor="@color/shimmer_gray"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="@id/guidelineEventDetailsShimmer2"
             app:layout_constraintTop_toBottomOf="@id/textEventDetailsDescription5Shimmer" />
@@ -174,7 +174,7 @@
             android:layout_height="16dp"
             android:layout_marginTop="22dp"
             android:adjustViewBounds="true"
-            android:background="@color/gray"
+            android:background="@color/shimmer_gray"
             app:layout_constraintStart_toStartOf="@+id/guidelineEventDetailsShimmer1"
             app:layout_constraintTop_toBottomOf="@+id/textEventDetailsDescription5Shimmer"
             app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small" />
@@ -185,7 +185,7 @@
             android:layout_height="16dp"
             android:layout_marginStart="12dp"
             android:adjustViewBounds="true"
-            android:background="@color/gray"
+            android:background="@color/shimmer_gray"
             app:layout_constraintStart_toEndOf="@id/textEventTypeTextShimmer"
             app:layout_constraintTop_toTopOf="@id/textEventTypeTextShimmer"
             app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small" />
@@ -196,7 +196,7 @@
             android:layout_height="16dp"
             android:layout_marginTop="11.5dp"
             android:adjustViewBounds="true"
-            android:background="@color/gray"
+            android:background="@color/shimmer_gray"
             app:layout_constraintStart_toStartOf="@id/textEventTypeTextShimmer"
             app:layout_constraintTop_toBottomOf="@+id/textEventTypeTextShimmer"
             app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small" />
@@ -207,7 +207,7 @@
             android:layout_height="16dp"
             android:layout_marginStart="12dp"
             android:adjustViewBounds="true"
-            android:background="@color/gray"
+            android:background="@color/shimmer_gray"
             app:layout_constraintStart_toEndOf="@id/textEventOrganizerTextShimmer"
             app:layout_constraintTop_toTopOf="@id/textEventOrganizerTextShimmer"
             app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small" />
@@ -218,7 +218,7 @@
             android:layout_height="16dp"
             android:layout_marginTop="11.5dp"
             android:adjustViewBounds="true"
-            android:background="@color/gray"
+            android:background="@color/shimmer_gray"
             app:layout_constraintStart_toStartOf="@id/textEventOrganizerTextShimmer"
             app:layout_constraintTop_toBottomOf="@+id/textEventOrganizerTextShimmer"
             app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small" />
@@ -229,7 +229,7 @@
             android:layout_height="16dp"
             android:layout_marginStart="12dp"
             android:adjustViewBounds="true"
-            android:background="@color/gray"
+            android:background="@color/shimmer_gray"
             app:layout_constraintStart_toEndOf="@id/textEventDateTEXTShimmer"
             app:layout_constraintTop_toTopOf="@id/textEventDateTEXTShimmer"
             app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small" />
@@ -240,7 +240,7 @@
             android:layout_height="16dp"
             android:layout_marginTop="11.5dp"
             android:adjustViewBounds="true"
-            android:background="@color/gray"
+            android:background="@color/shimmer_gray"
             app:layout_constraintStart_toStartOf="@id/textEventDateTEXTShimmer"
             app:layout_constraintTop_toBottomOf="@+id/textEventDateTEXTShimmer"
             app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small" />
@@ -251,7 +251,7 @@
             android:layout_height="16dp"
             android:layout_marginStart="12dp"
             android:adjustViewBounds="true"
-            android:background="@color/gray"
+            android:background="@color/shimmer_gray"
             app:layout_constraintStart_toEndOf="@id/textEventDurationHoursTextShimmer"
             app:layout_constraintTop_toTopOf="@id/textEventDurationHoursTextShimmer"
             app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small" />
@@ -262,7 +262,7 @@
             android:layout_height="16dp"
             android:layout_marginTop="11.5dp"
             android:adjustViewBounds="true"
-            android:background="@color/gray"
+            android:background="@color/shimmer_gray"
             app:layout_constraintStart_toStartOf="@id/textEventDurationHoursTextShimmer"
             app:layout_constraintTop_toBottomOf="@+id/textEventDurationHoursTextShimmer"
             app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small" />
@@ -273,7 +273,7 @@
             android:layout_height="16dp"
             android:layout_marginStart="12dp"
             android:adjustViewBounds="true"
-            android:background="@color/gray"
+            android:background="@color/shimmer_gray"
             app:layout_constraintStart_toEndOf="@id/textEventPublishedTextShimmer"
             app:layout_constraintTop_toTopOf="@id/textEventPublishedTextShimmer"
             app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small" />
@@ -284,7 +284,7 @@
             android:layout_height="16dp"
             android:layout_marginTop="11.5dp"
             android:adjustViewBounds="true"
-            android:background="@color/gray"
+            android:background="@color/shimmer_gray"
             app:layout_constraintStart_toStartOf="@id/textEventPublishedTextShimmer"
             app:layout_constraintTop_toBottomOf="@+id/textEventPublishedTextShimmer"
             app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small" />
@@ -295,7 +295,7 @@
             android:layout_height="16dp"
             android:layout_marginStart="12dp"
             android:adjustViewBounds="true"
-            android:background="@color/gray"
+            android:background="@color/shimmer_gray"
             app:layout_constraintStart_toEndOf="@id/textEventLikesTextShimmer"
             app:layout_constraintTop_toTopOf="@id/textEventLikesTextShimmer"
             app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small" />
@@ -349,7 +349,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="4dp"
             android:clickable="false"
-            app:boxBackgroundColor="@color/gray"
+            app:boxBackgroundColor="@color/shimmer_gray"
             app:boxStrokeWidth="0dp"
             app:boxCornerRadiusBottomEnd="@dimen/eventify_input_field_corner_radius"
             app:boxCornerRadiusBottomStart="@dimen/eventify_input_field_corner_radius"
@@ -376,8 +376,8 @@
             android:layout_marginEnd="4dp"
             android:layout_marginBottom="4dp"
             android:contentDescription="@string/send"
-            android:backgroundTint="@color/gray"
-            app:iconTint="@color/gray"
+            android:backgroundTint="@color/shimmer_gray"
+            app:iconTint="@color/shimmer_gray"
             android:clickable="false"
             app:icon="@drawable/ic_send"
             app:layout_constraintBottom_toBottomOf="@+id/textInputWriteCommentEventDetailsShimmer"

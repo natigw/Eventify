@@ -71,9 +71,9 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <include layout="@layout/sample_event_shimmer" />
-            <include layout="@layout/sample_event_shimmer" />
-            <include layout="@layout/sample_event_shimmer" />
+            <include layout="@layout/shimmer_event" />
+            <include layout="@layout/shimmer_event" />
+            <include layout="@layout/shimmer_event" />
 
         </LinearLayout>
     </com.facebook.shimmer.ShimmerFrameLayout>

@@ -31,7 +31,7 @@
             android:layout_height="30dp"
             android:layout_marginTop="20dp"
             android:adjustViewBounds="true"
-            android:background="@color/eventify_heading"
+            android:background="@color/eventify_main_text"
             app:layout_constraintEnd_toEndOf="@id/guidelineVenueDetailsShimmer2"
             app:layout_constraintStart_toStartOf="@id/guidelineVenueDetailsShimmer1"
             app:layout_constraintTop_toTopOf="parent"
@@ -44,7 +44,7 @@
             android:layout_height="0dp"
             android:layout_marginTop="18dp"
             android:adjustViewBounds="true"
-            android:background="@color/gray"
+            android:background="@color/shimmer_gray"
             app:layout_constraintDimensionRatio="W,1:1.4"
             app:layout_constraintEnd_toStartOf="@+id/guidelineVenueDetailsShimmer2"
             app:layout_constraintStart_toStartOf="@+id/guidelineVenueDetailsShimmer1"
@@ -58,7 +58,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:adjustViewBounds="true"
-            android:background="@color/gray_light"
+            android:background="@color/shimmer_gray_light"
             app:layout_constraintEnd_toEndOf="@id/imageVenueDetailsShimmer"
             app:layout_constraintTop_toTopOf="@+id/imageVenueDetailsShimmer"
             app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full" />
@@ -69,7 +69,7 @@
 <!--            android:layout_height="40dp"-->
 <!--            android:layout_marginTop="8dp"-->
 <!--            android:adjustViewBounds="true"-->
-<!--            android:background="@color/gray_light"-->
+<!--            android:background="@color/shimmer_gray_light"-->
 <!--            app:layout_constraintEnd_toEndOf="@id/buttonLikeVenueDetailsShimmer"-->
 <!--            app:layout_constraintTop_toBottomOf="@id/buttonLikeVenueDetailsShimmer"-->
 <!--            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full" />-->
@@ -93,7 +93,7 @@
             android:layout_marginTop="12dp"
             android:layout_marginEnd="16dp"
             android:adjustViewBounds="true"
-            android:background="@color/gray"
+            android:background="@color/shimmer_gray"
             app:layout_constraintStart_toStartOf="@id/guidelineVenueDetailsShimmer1"
             app:layout_constraintEnd_toEndOf="@id/guidelineVenueDetailsShimmer2"
             app:layout_constraintHorizontal_bias="0.0"
@@ -107,7 +107,7 @@
             android:layout_marginTop="4dp"
             android:layout_marginEnd="32dp"
             android:adjustViewBounds="true"
-            android:background="@color/gray"
+            android:background="@color/shimmer_gray"
             app:layout_constraintStart_toStartOf="@id/guidelineVenueDetailsShimmer1"
             app:layout_constraintEnd_toEndOf="@+id/textVenueDetailsDescription1Shimmer"
             app:layout_constraintTop_toBottomOf="@+id/textVenueDetailsDescription1Shimmer"
@@ -119,7 +119,7 @@
             android:layout_height="16dp"
             android:layout_marginTop="4dp"
             android:adjustViewBounds="true"
-            android:background="@color/gray"
+            android:background="@color/shimmer_gray"
             app:layout_constraintStart_toStartOf="@id/guidelineVenueDetailsShimmer1"
             app:layout_constraintEnd_toEndOf="@+id/guidelineVenueDetailsShimmer2"
             app:layout_constraintTop_toBottomOf="@+id/textVenueDetailsDescription2Shimmer"
@@ -132,7 +132,7 @@
             android:layout_marginTop="4dp"
             android:layout_marginEnd="12dp"
             android:adjustViewBounds="true"
-            android:background="@color/gray"
+            android:background="@color/shimmer_gray"
             app:layout_constraintStart_toStartOf="@id/guidelineVenueDetailsShimmer1"
             app:layout_constraintEnd_toEndOf="@+id/textVenueDetailsDescription1Shimmer"
             app:layout_constraintTop_toBottomOf="@+id/textVenueDetailsDescription3Shimmer"
@@ -145,7 +145,7 @@
             android:layout_marginTop="4dp"
             android:layout_marginEnd="100dp"
             android:adjustViewBounds="true"
-            android:background="@color/gray"
+            android:background="@color/shimmer_gray"
             app:layout_constraintStart_toStartOf="@id/guidelineVenueDetailsShimmer1"
             app:layout_constraintEnd_toEndOf="@+id/textVenueDetailsDescription1Shimmer"
             app:layout_constraintTop_toBottomOf="@+id/textVenueDetailsDescription4Shimmer"
@@ -155,7 +155,7 @@
             android:id="@+id/buttonReadMoreVenuesShimmer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/gray"
+            android:backgroundTint="@color/shimmer_gray"
             android:clickable="false"
             android:fontFamily="@font/inter_regular"
             android:minWidth="24dp"
@@ -163,7 +163,7 @@
             android:paddingHorizontal="8dp"
             android:paddingVertical="2dp"
             android:text="@string/read_more"
-            android:textColor="@color/gray"
+            android:textColor="@color/shimmer_gray"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="@id/guidelineVenueDetailsShimmer2"
             app:layout_constraintTop_toBottomOf="@id/textVenueDetailsDescription5Shimmer" />
@@ -174,7 +174,7 @@
             android:layout_height="16dp"
             android:layout_marginTop="22dp"
             android:adjustViewBounds="true"
-            android:background="@color/gray"
+            android:background="@color/shimmer_gray"
             app:layout_constraintStart_toStartOf="@+id/guidelineVenueDetailsShimmer1"
             app:layout_constraintTop_toBottomOf="@+id/textVenueDetailsDescription5Shimmer"
             app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small" />
@@ -185,7 +185,7 @@
             android:layout_height="16dp"
             android:layout_marginStart="12dp"
             android:adjustViewBounds="true"
-            android:background="@color/gray"
+            android:background="@color/shimmer_gray"
             app:layout_constraintStart_toEndOf="@id/textVenueTypeTextShimmer"
             app:layout_constraintTop_toTopOf="@id/textVenueTypeTextShimmer"
             app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small" />
@@ -196,7 +196,7 @@
             android:layout_height="16dp"
             android:layout_marginTop="11.5dp"
             android:adjustViewBounds="true"
-            android:background="@color/gray"
+            android:background="@color/shimmer_gray"
             app:layout_constraintStart_toStartOf="@id/textVenueTypeTextShimmer"
             app:layout_constraintTop_toBottomOf="@+id/textVenueTypeTextShimmer"
             app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small" />
@@ -207,7 +207,7 @@
             android:layout_height="16dp"
             android:layout_marginStart="12dp"
             android:adjustViewBounds="true"
-            android:background="@color/gray"
+            android:background="@color/shimmer_gray"
             app:layout_constraintStart_toEndOf="@id/textVenueOpenHoursTextShimmer"
             app:layout_constraintTop_toTopOf="@id/textVenueOpenHoursTextShimmer"
             app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small" />
@@ -218,7 +218,7 @@
             android:layout_height="16dp"
             android:layout_marginTop="11.5dp"
             android:adjustViewBounds="true"
-            android:background="@color/gray"
+            android:background="@color/shimmer_gray"
             app:layout_constraintStart_toStartOf="@id/textVenueOpenHoursTextShimmer"
             app:layout_constraintTop_toBottomOf="@+id/textVenueOpenHoursTextShimmer"
             app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small" />
@@ -229,7 +229,7 @@
             android:layout_height="16dp"
             android:layout_marginStart="12dp"
             android:adjustViewBounds="true"
-            android:background="@color/gray"
+            android:background="@color/shimmer_gray"
             app:layout_constraintStart_toEndOf="@id/textVenueLikesTextShimmer"
             app:layout_constraintTop_toTopOf="@id/textVenueLikesTextShimmer"
             app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small" />
@@ -268,7 +268,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="4dp"
             android:clickable="false"
-            app:boxBackgroundColor="@color/gray"
+            app:boxBackgroundColor="@color/shimmer_gray"
             app:boxStrokeWidth="0dp"
             app:boxCornerRadiusBottomEnd="@dimen/eventify_input_field_corner_radius"
             app:boxCornerRadiusBottomStart="@dimen/eventify_input_field_corner_radius"
@@ -295,8 +295,8 @@
             android:layout_marginEnd="4dp"
             android:layout_marginBottom="4dp"
             android:contentDescription="@string/send"
-            android:backgroundTint="@color/gray"
-            app:iconTint="@color/gray"
+            android:backgroundTint="@color/shimmer_gray"
+            app:iconTint="@color/shimmer_gray"
             android:clickable="false"
             app:icon="@drawable/ic_send"
             app:layout_constraintBottom_toBottomOf="@+id/textInputWriteCommentVenueDetailsShimmer"

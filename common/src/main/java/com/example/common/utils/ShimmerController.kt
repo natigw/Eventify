@@ -12,3 +12,8 @@ fun stopShimmer(shimmerView: ShimmerFrameLayout) {
     shimmerView.stopShimmer()
     shimmerView.visibility = View.INVISIBLE
 }
+
+fun stopShimmerGone(shimmerView: ShimmerFrameLayout) {
+    shimmerView.stopShimmer()
+    shimmerView.visibility = View.GONE
+}
