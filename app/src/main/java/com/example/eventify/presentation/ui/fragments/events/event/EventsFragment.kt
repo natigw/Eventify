@@ -36,14 +36,6 @@ class EventsFragment : BaseFragment<FragmentEventsBinding>(FragmentEventsBinding
             sharedViewModel.eventsRVState = binding.rvEvents.layoutManager?.onSaveInstanceState()
         }
     )
-    override fun onViewCreatedLight() {
-        setAdapters()
-        updateAdapters()
-
-    }
-
-
-
 
     override fun onResume() {
         super.onResume()
@@ -51,6 +43,10 @@ class EventsFragment : BaseFragment<FragmentEventsBinding>(FragmentEventsBinding
             startShimmer(binding.shimmerEvents)
     }
 
+    override fun onViewCreatedLight() {
+        setAdapters()
+        updateAdapters()
+    }
 
     override fun onPause() {
         super.onPause()

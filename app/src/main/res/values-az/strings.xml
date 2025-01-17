@@ -64,6 +64,7 @@
     <string name="network_connection_lost">İnternet bağlantısı yoxdur!</string>
     <string name="get_shortest_route">Ən yaxın marşrut</string>
     <string name="no_comments">Hələlik şərh yoxdur!</string>
+    <string name="no_favorites">Hələki sevimli yoxdur!</string>
     <string name="logout">Çıxış edin</string>
     <string name="history">Tarixçə</string>
     <string name="payment">Ödənişlər</string>
@@ -116,6 +117,7 @@
     <string name="min_password_length_is_8">Şifrənin minimum uzunluğu 8 olmalıdır!</string>
     <string name="please_accept_terms">Şərtləri və qaydaları qəbul edin</string>
     <string name="please_enter_valid_email">Keçərli bir email daxil edin!</string>
+    <string name="please_enter_comment">Şərh yazın!</string>
     <string name="please_fill_all_fields">Bütün sahələri doldurun!</string>
     <string name="fill_all_input_fields">Bütün sahələri doldurun!</string>
     <string name="please_specify_event_type">Tədbirin tipini qeyd edin!</string>
@@ -139,4 +141,16 @@
     <string name="navigating_help_page">kömək səhifəsinə yönləndirilir</string>
     <string name="navigating_payment_screen">ödəniş səhifəsinə yönləndirilir</string>
     <string name="navigating_buy_ticket">bilet al səhifəsinə yönləndirilir</string>
+    <string name="please_enter_username">İstifadəçi adınızı daxil edin!</string>
+    <string name="please_enter_password">Şifrənizi daxil edin!</string>
+    <string name="verify_email">Hesabınızı təsdiqləyin!</string>
+    <string name="continue_email">Davam et</string>
+    <string name="verification_link">Biz sizə təsdiq linki göndərdik</string>
+    <string name="try_again">Yenidən cəhd edin!</string>
+    <string name="stop">dayan</string>
+    <string name="start">davam et</string>
+    <string name="application_language">Tətbiqin dili:</string>
+    <string name="see_also">Həmçinin baxın:</string>
+    <string name="your_favorites">Sizin sevimliləriniz:</string>
+    <string name="eventify_slogan">Heç vaxt yaşamadığınız əyləncəni yaşayın!</string>
 </resources>

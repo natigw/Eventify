@@ -67,6 +67,7 @@
     <string name="network_connection_lost">Network connection lost!</string>
     <string name="get_shortest_route">Get shortest route</string>
     <string name="no_comments">No comments yet!</string>
+    <string name="no_favorites">No favorites yet!</string>
     <string name="logout">Log out</string>
     <string name="history">History</string>
     <string name="payment">Payment</string>

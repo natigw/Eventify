@@ -2,7 +2,9 @@ package com.example.eventify.presentation.ui.fragments.profile
 
 import android.content.Context
 import android.content.res.Configuration
+import android.util.Log
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -38,10 +40,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         super.onResume()
         if (viewModel.userData.value == null)
             startShimmer(binding.shimmerProfile)
-        if (viewModel.favorites.value.isEmpty()) {
+        if (viewModel.favorites.value == null)
             startShimmer(binding.shimmerFavoriteProfile)
-            binding.buttonLogoutProfile.visibility = View.INVISIBLE
-        }
     }
 
     override fun onViewCreatedLight() {
@@ -113,7 +113,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         lifecycleScope.launch {
             viewModel.favorites
                 .filterNotNull()
-                .collectLatest {
+                .collect {
+                    if (it.isEmpty())
+                        binding.textNoFavoritesTEXTProfile.visibility = View.VISIBLE
                     favoritesAdapter.updateAdapter(it)
                     stopShimmerGone(binding.shimmerFavoriteProfile)
                     binding.buttonLogoutProfile.visibility = View.VISIBLE

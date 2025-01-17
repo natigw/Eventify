@@ -25,4 +25,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayouttest"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:boxCornerRadiusBottomEnd="@dimen/eventify_input_field_corner_radius"
+        app:boxCornerRadiusBottomStart="@dimen/eventify_input_field_corner_radius"
+        app:boxCornerRadiusTopEnd="@dimen/eventify_input_field_corner_radius"
+        app:boxCornerRadiusTopStart="@dimen/eventify_input_field_corner_radius"
+        app:boxStrokeColor="@color/login"
+        app:boxStrokeWidth="1dp"
+        app:boxStrokeWidthFocused="2dp"
+        app:endIconMode="clear_text"
+        app:hintTextColor="@color/login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textInputUsernametest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_regular"
+            android:hint="@string/username"
+            android:textSize="18sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

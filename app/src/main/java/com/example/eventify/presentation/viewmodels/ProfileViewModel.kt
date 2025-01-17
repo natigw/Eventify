@@ -24,7 +24,7 @@ class ProfileViewModel @Inject constructor(
 ): ViewModel() {
 
     val userData = MutableStateFlow<UserData?>(null)
-    val favorites = MutableStateFlow<List<FavoriteItem>>(emptyList())
+    val favorites = MutableStateFlow<List<FavoriteItem>?>(null)
 
     init {
         getUserData()
