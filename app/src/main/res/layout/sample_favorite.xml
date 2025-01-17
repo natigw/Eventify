@@ -55,13 +55,13 @@
                 android:id="@+id/textFavoriteDescription"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/inter_regular"
-                android:textSize="16sp"
-                android:maxLines="2"
                 android:ellipsize="end"
-                app:layout_constraintTop_toBottomOf="@id/textFavoriteName"
+                android:fontFamily="@font/inter_regular"
+                android:singleLine="true"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textFavoriteName"
+                app:layout_constraintTop_toBottomOf="@id/textFavoriteName"
                 tools:text="Description" />
 
             <TextView
