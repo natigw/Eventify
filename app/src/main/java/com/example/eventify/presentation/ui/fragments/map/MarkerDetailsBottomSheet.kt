@@ -82,6 +82,7 @@ class MarkerDetailsBottomSheet : BaseBottomSheetFragment<BottomsheetMarkerDetail
             buttonShortestRouteMarkerDetails.setOnClickListener {
                 lifecycleScope.launch {
                     sharedViewModel.setRouteCoordinates(eventDetails.coordinates)
+                    dismiss()
                 }
             }
         }
@@ -103,6 +104,7 @@ class MarkerDetailsBottomSheet : BaseBottomSheetFragment<BottomsheetMarkerDetail
             buttonShortestRouteMarkerDetails.setOnClickListener {
                 lifecycleScope.launch {
                     sharedViewModel.setRouteCoordinates(venueDetails.coordinates)
+                    dismiss()
                 }
             }
         }

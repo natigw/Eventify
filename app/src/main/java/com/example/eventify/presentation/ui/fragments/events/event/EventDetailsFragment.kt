@@ -2,6 +2,7 @@ package com.example.eventify.presentation.ui.fragments.events.event
 
 import android.util.Log
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -156,6 +157,17 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
             )
             binding.textInputEdittextAddCommentEvent.text = null
         }
+        requireActivity().onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                findNavController().navigate(
+                    R.id.placesFragment,
+                    null,
+                    NavOptions.Builder()
+                        .setPopUpTo(R.id.placesFragment,false)
+                        .build()
+                )
+            }
+        })
     }
 
     private fun setUI(eventDetailsItem: EventDetailsItem) {

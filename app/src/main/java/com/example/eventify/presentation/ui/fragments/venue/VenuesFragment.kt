@@ -1,5 +1,6 @@
 package com.example.eventify.presentation.ui.fragments.venue
 
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -8,6 +9,7 @@ import com.example.common.utils.startShimmer
 import com.example.common.utils.stopShimmer
 import com.example.eventify.databinding.FragmentVenuesBinding
 import com.example.eventify.presentation.adapters.VenueAdapter
+import com.example.eventify.presentation.viewmodels.SharedViewModel
 import com.example.eventify.presentation.viewmodels.VenueViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -18,12 +20,15 @@ import kotlinx.coroutines.launch
 class VenuesFragment : BaseFragment<FragmentVenuesBinding>(FragmentVenuesBinding::inflate) {
 
     private val viewmodel by viewModels<VenueViewModel>()
+    private val sharedViewModel by activityViewModels<SharedViewModel>()
+
 
     private val venueAdapter = VenueAdapter(
         onClick = {
             findNavController().navigate(
                 VenuesFragmentDirections.actionVenuesFragmentToVenueDetailsFragment(it.venueId)
             )
+            sharedViewModel.venuesRVState = binding.rvVenues.layoutManager?.onSaveInstanceState()
         }
     )
 
@@ -55,6 +60,9 @@ class VenuesFragment : BaseFragment<FragmentVenuesBinding>(FragmentVenuesBinding
                 .filter { it.isNotEmpty() }
                 .collect {
                     venueAdapter.updateAdapter(it)
+                    sharedViewModel.venuesRVState?.let { state->
+                        binding.rvVenues.layoutManager?.onRestoreInstanceState(state)
+                    }
                 }
         }
     }

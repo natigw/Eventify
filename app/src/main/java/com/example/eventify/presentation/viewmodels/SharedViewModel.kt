@@ -1,5 +1,6 @@
 package com.example.eventify.presentation.viewmodels
 
+import android.os.Parcelable
 import androidx.lifecycle.ViewModel
 import com.example.domain.model.places.PlaceCoordinates
 import com.google.android.gms.maps.model.LatLng
@@ -14,6 +15,8 @@ class SharedViewModel : ViewModel() {
 
     val testStateFlow = MutableStateFlow<PlaceCoordinates?>(null)
 
+    var eventsRVState : Parcelable? = null
+    var venuesRVState : Parcelable? = null
     fun setCoordinates(placeCoordinates: PlaceCoordinates) {
         testStateFlow.update { placeCoordinates }
     }
