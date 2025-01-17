@@ -1,5 +1,7 @@
 package com.example.eventify.presentation.ui.fragments.events.customEvent
 
+import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavOptions
@@ -14,13 +16,13 @@ import com.example.eventify.presentation.ui.fragments.events.PlacesFragmentDirec
 import com.example.eventify.presentation.viewmodels.EventViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class CustomEventsFragment : BaseFragment<FragmentCustomEventsBinding>(FragmentCustomEventsBinding::inflate) {
 
-    private val viewmodel: EventViewModel by viewModels()
+    private val viewmodel by viewModels<EventViewModel>()
 
     private val eventAdapter = EventAdapter(
         onLike = {
@@ -35,7 +37,7 @@ class CustomEventsFragment : BaseFragment<FragmentCustomEventsBinding>(FragmentC
 
     override fun onResume() {
         super.onResume()
-        if (viewmodel.events.value.isEmpty())
+        if (viewmodel.events.value == null)
             startShimmer(binding.shimmerCustomEvents)
     }
 
@@ -65,23 +67,19 @@ class CustomEventsFragment : BaseFragment<FragmentCustomEventsBinding>(FragmentC
         }
     }
 
+    private fun setAdapters() {
+        binding.rvCustomEvents.adapter = eventAdapter
+    }
+
     private fun updateAdapters() {
         lifecycleScope.launch {
-            viewmodel.isLoading.collectLatest {
-                stopShimmer(binding.shimmerCustomEvents)
-            }
-        }
-
-        lifecycleScope.launch {
             viewmodel.events
-                .filter { it.isNotEmpty() }
-                .collect {
+                .filterNotNull()
+                .collectLatest {
+                    binding.textNoCustomEventsTEXT.isVisible = it.isEmpty()
+                    stopShimmer(binding.shimmerCustomEvents)
                     eventAdapter.updateAdapter(it)
                 }
         }
-    }
-
-    private fun setAdapters() {
-        binding.rvCustomEvents.adapter = eventAdapter
     }
 }

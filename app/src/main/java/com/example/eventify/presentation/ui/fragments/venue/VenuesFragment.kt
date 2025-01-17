@@ -1,5 +1,6 @@
 package com.example.eventify.presentation.ui.fragments.venue
 
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -13,7 +14,7 @@ import com.example.eventify.presentation.viewmodels.SharedViewModel
 import com.example.eventify.presentation.viewmodels.VenueViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -21,7 +22,6 @@ class VenuesFragment : BaseFragment<FragmentVenuesBinding>(FragmentVenuesBinding
 
     private val viewmodel by viewModels<VenueViewModel>()
     private val sharedViewModel by activityViewModels<SharedViewModel>()
-
 
     private val venueAdapter = VenueAdapter(
         onClick = {
@@ -34,7 +34,7 @@ class VenuesFragment : BaseFragment<FragmentVenuesBinding>(FragmentVenuesBinding
 
     override fun onResume() {
         super.onResume()
-        if (viewmodel.venues.value.isEmpty())
+        if (viewmodel.venues.value == null)
             startShimmer(binding.shimmerVenues)
     }
 
@@ -50,17 +50,13 @@ class VenuesFragment : BaseFragment<FragmentVenuesBinding>(FragmentVenuesBinding
 
     private fun updateAdapters() {
         lifecycleScope.launch {
-            viewmodel.isLoading.collectLatest {
-                stopShimmer(binding.shimmerVenues)
-            }
-        }
-
-        lifecycleScope.launch {
             viewmodel.venues
-                .filter { it.isNotEmpty() }
-                .collect {
+                .filterNotNull()
+                .collectLatest {
+                    binding.textNoVenuesTEXT.isVisible = it.isEmpty()
+                    stopShimmer(binding.shimmerVenues)
                     venueAdapter.updateAdapter(it)
-                    sharedViewModel.venuesRVState?.let { state->
+                    sharedViewModel.venuesRVState?.let { state ->
                         binding.rvVenues.layoutManager?.onRestoreInstanceState(state)
                     }
                 }

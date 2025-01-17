@@ -13,7 +13,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.common.base.BaseFragment
 import com.example.common.utils.functions.validateInputFieldEmpty
-import com.example.common.utils.nancyToastWarning
 import com.example.common.utils.startShimmer
 import com.example.common.utils.stopShimmer
 import com.example.domain.model.places.AddCommentItem
@@ -28,6 +27,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -41,7 +41,7 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
     
     override fun onResume() {
         super.onResume()
-        if (viewmodel.isLoadingMain.value) {
+        if (viewmodel.venueDetails.value == null) {
             makeViewsInvisible()
             startShimmer(binding.shimmerVenueDetails)
         }
@@ -160,22 +160,8 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(imageVenue)
 
-//            buttonLikeVenue.setOnClickListener {
-//                if (buttonLikeVenue.tag == "not_liked") {
-//                    buttonLikeVenue.setIconResource(R.drawable.like_fav)
-//                    textVenueLikeCount.text = (venueDetailsItem.likeCount + 1).toString()
-//                    buttonLikeVenue.tag = "liked"
-//                } else {
-//                    buttonLikeVenue.setIconResource(R.drawable.like_fav_border)
-//                    textVenueLikeCount.text = venueDetailsItem.likeCount.toString()
-//                    buttonLikeVenue.tag = "not_liked"
-//                }
-////                buttonLikeVenue.setIconResource(if (flag) R.drawable.like_fav else R.drawable.like_fav_border)
-////                flag = !flag
-////                buttonLikeVenue.setIconTintResource(R.color.purple_light_eventify)
-////                textVenueLikeCount.text = if (flag) (venue.likeCount + 1).toString() else venue.likeCount.toString()
-//                //TODO -> like olsun request atsin, icon fill olsun, like count text bir dene artsin
-//            }
+
+                //TODO -> like olsun request atsin, icon fill olsun, like count text bir dene artsin
 
             buttonReadMoreVenues.post {
                 val layout = textVenueDescription.layout
@@ -231,36 +217,8 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
         }
     }
 
-    private fun observer(){
-
-        viewmodel.getComments(args.venueId)
-        viewmodel.getVenueDetails(args.venueId)
-
-
-        lifecycleScope.launch {
-            viewmodel.isLoadingMain.collectLatest {
-                stopShimmer(binding.shimmerVenueDetails)
-                makeViewsVisible()
-            }
-        }
-
-        lifecycleScope.launch {
-            viewmodel.venueDetails
-                .filter { it != null }
-                .collectLatest {
-                    binding.venueBackButton.isVisible = true
-                    setUI(it!!)
-                }
-        }
-
-        lifecycleScope.launch {
-            viewmodel.isLoadingMain.collectLatest {
-                binding.progressBarCommentVenueDetails.isVisible = it
-            }
-        }
-
-
-
+    private fun setAdapters() {
+        binding.rvCommentsVenueDetails.adapter = commentAdapter
     }
 
     private fun updateAdapters(){
@@ -271,17 +229,34 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
         }
         lifecycleScope.launch {
             viewmodel.commentsState
-                .filter { it!=null }
+                .filterNotNull()
                 .collect {
-                    binding.textNoCommentsTextVenueDetails.isVisible = it!!.isEmpty()
+                    binding.textNoCommentsTextVenueDetails.isVisible = it.isEmpty()
                     commentAdapter.updateAdapter(it)
                 }
         }
     }
 
+    private fun observer(){
 
-    private fun setAdapters() {
-        binding.rvCommentsVenueDetails.adapter = commentAdapter
+        viewmodel.getComments(args.venueId)
+        viewmodel.getVenueDetails(args.venueId)
+
+        lifecycleScope.launch {
+            viewmodel.venueDetails
+                .filterNotNull()
+                .collectLatest {
+                    stopShimmer(binding.shimmerVenueDetails)
+                    makeViewsVisible()
+                    binding.venueBackButton.isVisible = true
+                    setUI(it)
+                }
+        }
+
+        lifecycleScope.launch {
+            viewmodel.isLoadingComments.collectLatest {
+                binding.progressBarCommentVenueDetails.isVisible = it
+            }
+        }
     }
-
 }

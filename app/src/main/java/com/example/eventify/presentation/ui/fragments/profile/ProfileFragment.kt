@@ -113,9 +113,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         lifecycleScope.launch {
             viewModel.favorites
                 .filterNotNull()
-                .collect {
-                    if (it.isEmpty())
-                        binding.textNoFavoritesTEXTProfile.visibility = View.VISIBLE
+                .collectLatest {
+                    binding.textNoFavoritesTEXTProfile.isVisible = it.isEmpty()
                     favoritesAdapter.updateAdapter(it)
                     stopShimmerGone(binding.shimmerFavoriteProfile)
                     binding.buttonLogoutProfile.visibility = View.VISIBLE

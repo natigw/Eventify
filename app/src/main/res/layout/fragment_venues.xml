@@ -22,7 +22,7 @@
         app:layout_constraintGuide_percent="@dimen/eventify_guideline_right" />
 
     <TextView
-        android:id="@+id/textVenueName"
+        android:id="@+id/textVenuesHeading"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
@@ -46,7 +46,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/guidelineVenues2"
         app:layout_constraintStart_toStartOf="@id/guidelineVenues1"
-        app:layout_constraintTop_toBottomOf="@+id/textVenueName"
+        app:layout_constraintTop_toBottomOf="@+id/textVenuesHeading"
         tools:itemCount="3"
         tools:listitem="@layout/sample_venue" />
 
@@ -57,7 +57,7 @@
         android:layout_marginTop="12dp"
         app:layout_constraintStart_toStartOf="@id/guidelineVenues1"
         app:layout_constraintEnd_toEndOf="@id/guidelineVenues2"
-        app:layout_constraintTop_toBottomOf="@+id/textVenueName" >
+        app:layout_constraintTop_toBottomOf="@+id/textVenuesHeading" >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -70,5 +70,19 @@
 
         </LinearLayout>
     </com.facebook.shimmer.ShimmerFrameLayout>
+
+    <TextView
+        android:id="@+id/textNoVenuesTEXT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_italic"
+        android:text="@string/no_venues"
+        android:textColor="@color/eventify_main_text"
+        android:textSize="20sp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="@id/guidelineVenues2"
+        app:layout_constraintStart_toStartOf="@id/guidelineVenues1"
+        app:layout_constraintTop_toBottomOf="@id/textVenuesHeading"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

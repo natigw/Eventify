@@ -18,8 +18,7 @@ class EventViewModel @Inject constructor(
     private val eventRepository: EventRepository
 ) : ViewModel() {
 
-    val isLoading = MutableStateFlow(true)
-    val events = MutableStateFlow<List<EventItem>>(emptyList())
+    val events = MutableStateFlow<List<EventItem>?>(null)
 
     val eventLikeList = mutableListOf<Int>()
 
@@ -34,11 +33,9 @@ class EventViewModel @Inject constructor(
                 try {
                     val response = eventRepository.getEvents()
                     events.emit(response)
-                    isLoading.update { false }
                 } catch(e: Exception) {
                     Log.e("network event", e.toString())
                 }
-
             }
         }
     }

@@ -1,6 +1,7 @@
 package com.example.eventify.presentation.ui.fragments.events.event
 
-import androidx.activity.OnBackPressedCallback
+import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -15,13 +16,13 @@ import com.example.eventify.presentation.viewmodels.EventViewModel
 import com.example.eventify.presentation.viewmodels.SharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class EventsFragment : BaseFragment<FragmentEventsBinding>(FragmentEventsBinding::inflate) {
 
-    private val viewModel: EventViewModel by viewModels()
+    private val viewModel by viewModels<EventViewModel>()
     private val sharedViewModel by activityViewModels<SharedViewModel>()
 
 
@@ -39,7 +40,7 @@ class EventsFragment : BaseFragment<FragmentEventsBinding>(FragmentEventsBinding
 
     override fun onResume() {
         super.onResume()
-        if (viewModel.events.value.isEmpty())
+        if (viewModel.events.value == null)
             startShimmer(binding.shimmerEvents)
     }
 
@@ -53,24 +54,22 @@ class EventsFragment : BaseFragment<FragmentEventsBinding>(FragmentEventsBinding
         stopShimmer(binding.shimmerEvents)
     }
 
+    private fun setAdapters() {
+        binding.rvEvents.adapter = eventAdapter
+    }
+
     private fun updateAdapters() {
         lifecycleScope.launch {
-            viewModel.isLoading.collectLatest {
-                stopShimmer(binding.shimmerEvents)
-            }
-        }
-        lifecycleScope.launch {
             viewModel.events
-                .filter { it.isNotEmpty() }
-                .collect {
+                .filterNotNull()
+                .collectLatest {
+                    binding.textNoEventsTEXT.isVisible = it.isEmpty()
+                    stopShimmer(binding.shimmerEvents)
                     eventAdapter.updateAdapter(it)
                     sharedViewModel.eventsRVState?.let { state->
                         binding.rvEvents.layoutManager?.onRestoreInstanceState(state)
                     }
                 }
         }
-    }
-    private fun setAdapters() {
-        binding.rvEvents.adapter = eventAdapter
     }
 }

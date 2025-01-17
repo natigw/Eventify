@@ -18,19 +18,16 @@ class VenueDetailsViewModel @Inject constructor(
     private val venueRepository: VenueRepository
 ) : ViewModel() {
 
-    val isLoadingMain = MutableStateFlow(true)
     val venueDetails = MutableStateFlow<VenueDetailsItem?>(null)
 
-    var noComments = false
     val isLoadingComments = MutableStateFlow(true)
-    val commentsState = MutableStateFlow<List<CommentItem>?>(value = null)
+    val commentsState = MutableStateFlow<List<CommentItem>?>(null)
 
     fun getVenueDetails(venueId: Int) {
         viewModelScope.launch {
             try {
                 val response = venueRepository.getVenueDetails(venueId)
                 venueDetails.emit(response)
-                isLoadingMain.update { false }
             }
             catch (_:Exception){}
         }
@@ -42,7 +39,6 @@ class VenueDetailsViewModel @Inject constructor(
                 val response = venueRepository.getVenueComments(venueId)
                 commentsState.emit(response)
                 isLoadingComments.update { false }
-                if (response.isEmpty()) noComments = true
             }
             catch (_:Exception){}
         }

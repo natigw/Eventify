@@ -55,4 +55,18 @@
         </LinearLayout>
     </com.facebook.shimmer.ShimmerFrameLayout>
 
+    <TextView
+        android:id="@+id/textNoEventsTEXT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_italic"
+        android:text="@string/no_events"
+        android:textColor="@color/eventify_main_text"
+        android:textSize="20sp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEvents2"
+        app:layout_constraintStart_toStartOf="@id/guidelineEvents1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

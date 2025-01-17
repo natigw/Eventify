@@ -108,7 +108,7 @@
             android:visibility="invisible"
             app:icon="@drawable/ic_back_arrow"
             app:iconSize="24dp"
-            app:iconTint="@color/eventify_primary"
+            app:iconTint="@color/eventify_main_text"
             app:layout_constraintBottom_toBottomOf="@+id/textVenueName"
             app:layout_constraintStart_toStartOf="@+id/guidelineVenueDetails1"
             app:layout_constraintTop_toTopOf="@+id/textVenueName" />
@@ -310,7 +310,7 @@
             app:boxStrokeColor="@color/eventify_primary"
             app:boxStrokeWidth="1dp"
             app:boxStrokeWidthFocused="2dp"
-            app:hintTextColor="@color/eventify_primary"
+            app:hintTextColor="@color/eventify_primary_helper"
             app:layout_constraintTop_toBottomOf="@id/textVenueDetailsCommentsText"
             app:layout_constraintEnd_toStartOf="@id/buttonSendCommentVenueDetails"
             app:layout_constraintStart_toStartOf="@id/guidelineVenueDetails1">
@@ -358,7 +358,7 @@
             android:layout_marginVertical="50dp"
             android:fontFamily="@font/inter_italic"
             android:text="@string/no_comments"
-            android:textColor="@color/purple_dark_eventify"
+            android:textColor="@color/eventify_main_text"
             android:textSize="20sp"
             android:visibility="invisible"
             app:layout_constraintTop_toBottomOf="@id/textInputLayoutWriteCommentVenueDetails"

@@ -31,6 +31,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.w3c.dom.Comment
@@ -46,7 +47,7 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
 
     override fun onResume() {
         super.onResume()
-        if (viewmodel.isLoadingMain.value) {
+        if (viewmodel.eventDetails.value == null) {
             makeViewsInvisible()
             startShimmer(binding.shimmerEventDetails)
         }
@@ -199,8 +200,6 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
                     viewmodel.getComments(args.eventId)
                 }
             }
-
-
             binding.textInputEdittextAddCommentEvent.text = null
         }
 
@@ -273,45 +272,34 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
         viewmodel.getEventDetails(args.eventId)
         viewmodel.getEventLikeInfo(args.eventId)
 
-
-
-
-
-        lifecycleScope.launch {
-            viewmodel.isLoadingMain.collectLatest {
-                stopShimmer(binding.shimmerEventDetails)
-                makeViewsVisible()
-            }
-        }
-
-
         lifecycleScope.launch {
             viewmodel.likedState
-                .filter { it!=null }
+                .filterNotNull()
                 .collectLatest {
                     Log.e("likedState",it.toString())
-                    if(it!!){
+                    if(it){
                         binding.buttonLikeEvent.setIconResource(R.drawable.like_fav)
                     }
                     else{
                         binding.buttonLikeEvent.setIconResource(R.drawable.like_fav_border)
                     }
                     binding.buttonBackEventDetails.visibility = View.VISIBLE
-
                 }
         }
 
 
         lifecycleScope.launch {
             viewmodel.eventDetails
-                .filter { it != null }
+                .filterNotNull()
                 .collectLatest {
-                    setUI(it!!)
+                    stopShimmer(binding.shimmerEventDetails)
+                    makeViewsVisible()
+                    setUI(it)
                 }
         }
 
         lifecycleScope.launch {
-            viewmodel.isLoadingMain.collectLatest {
+            viewmodel.isLoadingComments.collectLatest {
                 binding.progressBarCommentEventDetails.isVisible = it
             }
         }
@@ -330,9 +318,9 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
         }
         lifecycleScope.launch {
             viewmodel.comments
-                .filter { it!=null }
+                .filterNotNull()
                 .collectLatest {
-                    binding.textNoCommentsTextEventDetails.isVisible = it!!.isEmpty()
+                    binding.textNoCommentsTextEventDetails.isVisible = it.isEmpty()
                     commentAdapter.updateAdapter(it)
                 }
         }
