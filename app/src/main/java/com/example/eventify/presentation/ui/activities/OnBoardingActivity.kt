@@ -25,7 +25,6 @@ class OnBoardingActivity : BaseActivity<ActivityOnBoardingBinding>(ActivityOnBoa
         setAppLocale(this, languageCode)
         val themeMode = onBoardingViewModel.sharedPrefTheme.getInt("theme", AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
         AppCompatDelegate.setDefaultNightMode(themeMode)
-        recreate()
     }
 
     override fun onCreateLight() {
@@ -54,7 +53,7 @@ class OnBoardingActivity : BaseActivity<ActivityOnBoardingBinding>(ActivityOnBoa
         val refreshToken = onBoardingViewModel.getRefreshToken()
         if(refreshToken != null){
             val condition = onBoardingViewModel.checkRefreshTokenIsValid(refreshToken)
-            if(condition){
+            if(condition) {
                 Intent(this,MainActivity::class.java).also {
                     startActivity(it)
                 }
@@ -75,11 +74,5 @@ class OnBoardingActivity : BaseActivity<ActivityOnBoardingBinding>(ActivityOnBoa
         val config = Configuration(context.resources.configuration)
         config.setLocale(locale)
         context.resources.updateConfiguration(config, context.resources.displayMetrics)
-    }
-
-    fun onLanguageChanged(languageCode: String) {
-        setAppLocale(this, languageCode)
-        onBoardingViewModel.sharedPrefLanguage.edit().putString("language", languageCode).apply()
-        recreate()
     }
 }
