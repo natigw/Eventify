@@ -2,10 +2,14 @@ package com.example.eventify.presentation.ui.fragments.auth
 
 import android.content.Intent
 import android.graphics.Color.parseColor
+import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import androidx.credentials.CredentialManager
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -29,27 +33,36 @@ import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::inflate) {
+class LoginFragment : Fragment() {
+
+    private var _binding : FragmentLoginBinding? = null
+    private val binding get() = _binding!!
 
     private val viewModel by viewModels<LoginViewModel>()
 
-    override fun onViewCreatedLight() {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentLoginBinding.inflate(layoutInflater,container,false)
+        return binding.root
+    }
 
-        ////TODO -> ??????????????????
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         if (viewModel.sharedPrefOnBoard.getBoolean("finished", false)) binding.textWelcomeLogin.visibility = View.VISIBLE
 
         observer()
         setConstraints()
         checkUser()
-
+        buttonListener()
         binding.buttonTest.setOnClickListener {
             navigateToTestActivity()
         }
     }
 
-    override fun buttonListener() {
-        super.buttonListener()
-
+    fun buttonListener() {
         val credentialManager = CredentialManager.create(requireContext())
         val clientId = BuildConfig.WEB_CLIENT_ID
 
@@ -61,11 +74,11 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                     requireContext()
                 )
                 if (viewModel.linkGoogleAccount()) {
-                    Intent(requireContext(), MainActivity::class.java).also {
-                        startActivity(it)
-                        requireActivity().finish()
-                    }
-                    requireActivity().finish()
+                    navigateToMainActivity()
+                    nancyToastSuccess(requireContext(), getString(R.string.login_successful))
+                }
+                else{
+                    nancyToastWarning(requireContext(), getString(R.string.login_unsuccessful))
                 }
             }
         }

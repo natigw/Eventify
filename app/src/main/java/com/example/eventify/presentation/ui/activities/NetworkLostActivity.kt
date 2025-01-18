@@ -3,10 +3,14 @@ package com.example.eventify.presentation.ui.activities
 import android.content.Intent
 import android.graphics.Color
 import android.view.View
+import android.window.OnBackInvokedDispatcher
+import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat.startActivity
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavOptions
+import androidx.navigation.fragment.findNavController
 import com.example.common.base.BaseActivity
 import com.example.common.utils.nancyToastError
 import com.example.eventify.EventifyApplication
@@ -20,14 +24,17 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class NetworkLostActivity : BaseActivity<ActivityNetworkLostBinding>(ActivityNetworkLostBinding::inflate) {
 
-    val app = application as EventifyApplication
+
 
     override fun onCreateLight() {
+        val app = application as EventifyApplication
+
         app.isNetworkConnected.observe(this) { isConnected ->
             if (isConnected)
-                navigateToMainActivity()
+                finish()
         }
         buttonListeners()
+
     }
 
     private fun buttonListeners() {
@@ -39,6 +46,12 @@ class NetworkLostActivity : BaseActivity<ActivityNetworkLostBinding>(ActivityNet
                 resetRetryButton()
             }
         }
+
+        this.onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                
+            }
+        })
     }
 
     private fun blockRetryButton() {
@@ -59,9 +72,5 @@ class NetworkLostActivity : BaseActivity<ActivityNetworkLostBinding>(ActivityNet
         }
     }
 
-    private fun navigateToMainActivity() {
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
-        finish()
-    }
+
 }

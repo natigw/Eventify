@@ -36,20 +36,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
 
         val app = application as EventifyApplication
 
-        val snackBar = Snackbar.make(
-            findViewById(android.R.id.content),
-            "Connection Lost",
-            Snackbar.LENGTH_INDEFINITE
-        ).apply {
-            setAction("Dismiss") { dismiss() }
-        }
-
         app.isNetworkConnected.observe(this) { isConnected ->
             if (!isConnected)
-//                snackBar.show()
                 navigateToNetworkActivity()
-            else
-                snackBar.dismiss()
+
         }
 
         //disabling bottom navigation hint
@@ -66,12 +56,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
     }
 
     private fun navigateToNetworkActivity() {
-        val intent = Intent(this, NetworkLostActivity::class.java)
-        startActivity(intent)
+        Intent(this@MainActivity, NetworkLostActivity::class.java).also {
+            startActivity(it)
+        }
     }
 
     private fun initializeTokenManager() {
-        NetworkUtils.initializeTokenManager(tokenManager)
+        initializeTokenManager(tokenManager)
 
         lifecycleScope.launch {
             try {

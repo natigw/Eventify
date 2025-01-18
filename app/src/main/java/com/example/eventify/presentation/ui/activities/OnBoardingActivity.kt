@@ -28,25 +28,20 @@ class OnBoardingActivity : BaseActivity<ActivityOnBoardingBinding>(ActivityOnBoa
     }
 
     override fun onCreateLight() {
-
-        // Access the application instance
         val app = application as EventifyApplication
-
-        // Observe global network state
         app.isNetworkConnected.observe(this) { isConnected ->
-            if (!isConnected) {
-                Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "Connection Lost",
-                    Snackbar.LENGTH_INDEFINITE
-                ).apply {
-                    setAction("Dismiss") { dismiss() }
-                }.show()
-            }
-//            else (isConnected)
+            if (!isConnected)
+                navigateToNetworkActivity()
         }
 
         checkIfUserLoggedIn()
+
+    }
+
+    private fun navigateToNetworkActivity() {
+        Intent(this@OnBoardingActivity, NetworkLostActivity::class.java).also {
+            startActivity(it)
+        }
     }
 
     private fun checkIfUserLoggedIn(){
