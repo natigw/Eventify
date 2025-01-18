@@ -3,8 +3,11 @@ package com.example.eventify.presentation.ui.fragments.events.customEvent
 import android.icu.util.Calendar
 import android.util.Log
 import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.ImageView
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -16,7 +19,6 @@ import com.example.common.utils.functions.validateInputFieldEmpty
 import com.example.common.utils.nancyToastError
 import com.example.common.utils.nancyToastSuccess
 import com.example.common.utils.nancyToastWarning
-import com.example.data.remote.api.EventAPI
 import com.example.eventify.R
 import com.example.eventify.databinding.FragmentCreateCustomEventBinding
 import com.example.eventify.presentation.viewmodels.CreateCustomEventViewModel
@@ -31,7 +33,6 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.LocalTime
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class CreateCustomEventFragment : BaseFragment<FragmentCreateCustomEventBinding>(FragmentCreateCustomEventBinding::inflate) {
@@ -83,6 +84,8 @@ class CreateCustomEventFragment : BaseFragment<FragmentCreateCustomEventBinding>
         binding.buttonTimePickerStartCCE.setOnClickListener {
             if (viewmodel.pickedDate.value == null) {
                 nancyToastWarning(requireContext(), getString(R.string.please_specify_event_date_first))
+                ariseErrorIcon(binding.imageErrorDateCCE, true)
+                ariseErrorButton(binding.buttonDatePickerCCE, true)
                 return@setOnClickListener
             }
             showTimePicker(true)
@@ -90,6 +93,8 @@ class CreateCustomEventFragment : BaseFragment<FragmentCreateCustomEventBinding>
         binding.buttonTimePickerFinishCCE.setOnClickListener {
             if (viewmodel.pickedStartTime.value == null) {
                 nancyToastWarning(requireContext(), getString(R.string.please_specify_event_start_time_first))
+                ariseErrorIcon(binding.imageErrorStartTimeCCE, true)
+                ariseErrorButton(binding.buttonTimePickerStartCCE, true)
                 return@setOnClickListener
             }
             showTimePicker(false)
@@ -102,6 +107,13 @@ class CreateCustomEventFragment : BaseFragment<FragmentCreateCustomEventBinding>
             val isEventTypeValid = validateInputFieldEmpty(binding.textInputLayoutEventTypeCCE, eventType, getString(R.string.please_specify_event_type))
             val isDescriptionValid = validateInputFieldEmpty(binding.textInputLayoutEventDescriptionCCE, description, getString(R.string.please_add_event_description))
             val isTitleValid = validateInputFieldEmpty(binding.textInputLayoutEventTitleCCE, title, getString(R.string.please_add_event_title))
+
+            ariseErrorIcon(binding.imageErrorDateCCE, viewmodel.pickedDate.value == null)
+            ariseErrorIcon(binding.imageErrorStartTimeCCE, viewmodel.pickedStartTime.value == null)
+            ariseErrorIcon(binding.imageErrorFinishTimeCCE, viewmodel.pickedFinishTime.value == null)
+            ariseErrorButton(binding.buttonDatePickerCCE, viewmodel.pickedDate.value == null)
+            ariseErrorButton(binding.buttonTimePickerStartCCE, viewmodel.pickedStartTime.value == null)
+            ariseErrorButton(binding.buttonTimePickerFinishCCE, viewmodel.pickedFinishTime.value == null)
 
             if (!(isTitleValid and isDescriptionValid and isEventTypeValid)) {
                 return@setOnClickListener
@@ -136,8 +148,15 @@ class CreateCustomEventFragment : BaseFragment<FragmentCreateCustomEventBinding>
 
             if (viewmodel.pickedDate.value == getLocalTime().toLocalDate() && viewmodel.pickedStartTime.value != null && viewmodel.pickedStartTime.value!!.isBefore(getLocalTime().toLocalTime())) {
                 nancyToastWarning(requireContext(), getString(R.string.please_reconsider_event_times))
+                ariseErrorIcon(binding.imageErrorStartTimeCCE, true)
+                ariseErrorButton(binding.buttonTimePickerStartCCE, true)
+                ariseErrorIcon(binding.imageErrorFinishTimeCCE, true)
+                ariseErrorButton(binding.buttonTimePickerFinishCCE, true)
                 viewmodel.pickedStartTime.update { null }
                 viewmodel.pickedFinishTime.update { null }
+            } else {
+                ariseErrorIcon(binding.imageErrorDateCCE, false)
+                ariseErrorButton(binding.buttonDatePickerCCE, false)
             }
         }
     }
@@ -167,18 +186,35 @@ class CreateCustomEventFragment : BaseFragment<FragmentCreateCustomEventBinding>
                 if (viewmodel.pickedFinishTime.value != null && selectedTime.isAfter(viewmodel.pickedFinishTime.value)) {
                     nancyToastWarning(requireContext(), getString(R.string.please_reconsider_finish_time))
                     binding.buttonTimePickerFinishCCE.text = getString(R.string.specify_event_finish_time)
+                    ariseErrorIcon(binding.imageErrorFinishTimeCCE, true)
+                    ariseErrorButton(binding.buttonTimePickerFinishCCE, true)
                     viewmodel.pickedFinishTime.update { null }
+                } else {
+                    ariseErrorIcon(binding.imageErrorStartTimeCCE, false)
+                    ariseErrorButton(binding.buttonTimePickerStartCCE, false)
                 }
                 viewmodel.pickedStartTime.update { selectedTime }
             }
             else {
                 if (selectedTime.isBefore(viewmodel.pickedStartTime.value)) {
                     nancyToastWarning(requireContext(), getString(R.string.finish_time_cannot_be_earlier))
+                    ariseErrorIcon(binding.imageErrorFinishTimeCCE, true)
+                    ariseErrorButton(binding.buttonTimePickerFinishCCE, true)
                     return@addOnPositiveButtonClickListener
+                } else {
+                    ariseErrorIcon(binding.imageErrorFinishTimeCCE, false)
+                    ariseErrorButton(binding.buttonTimePickerFinishCCE, false)
                 }
                 viewmodel.pickedFinishTime.update { selectedTime }
             }
         }
+    }
+
+    private fun ariseErrorIcon(view: ImageView, isError: Boolean) {
+        view.isVisible = isError
+    }
+    private fun ariseErrorButton(button: Button, isError: Boolean) {
+        button.setBackgroundColor(requireContext().getColor(if (isError) R.color.error else R.color.eventify_primary))
     }
 
     private fun viewModelObserver() {

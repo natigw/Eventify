@@ -27,7 +27,8 @@
     <color name="login">#F44336</color>
     <color name="register">#407BFF</color>
     <color name="button_disabled">#FFDADADA</color>
-    <color name="danger">#FF1100</color>
+    <color name="logout">#FF1100</color>
+    <color name="error">#B00020</color>
 
     <color name="eventify_bottom_nav_background">#DBDBDB</color>
 </resources>

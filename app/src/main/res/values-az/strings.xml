@@ -37,8 +37,8 @@
     <string name="get_a_free_ticket">Pulsuz bilet əldə et!</string>
     <string name="referral_note">Nəzərə alın ki, mükafatlardan istifadə etmək üçün aktiv abunəlik mütləqdir.</string>
     <string name="share_invite_link">Dəvət linkini paylaşın</string>
-    <string name="copy_link">Linki kopyalayın</string>
-    <string name="share">Paylaşın</string>
+    <string name="copy_link">Linki kopyala</string>
+    <string name="share">Paylaş</string>
     <string name="type_your_message">Mesaj yazın...</string>
     <string name="read_more">Daha çox</string>
     <string name="read_less">Daha az</string>
@@ -63,6 +63,7 @@
     <string name="retry">Yenidən cəhd edin</string>
     <string name="network_connection_lost">İnternet bağlantısı yoxdur!</string>
     <string name="get_shortest_route">Ən yaxın marşrut</string>
+    <string name="no_venues">Hələlik məkan yoxdur!</string>
     <string name="no_comments">Hələlik şərh yoxdur!</string>
     <string name="no_favorites">Hələki sevimli yoxdur!</string>
     <string name="logout">Çıxış edin</string>
@@ -150,7 +151,17 @@
     <string name="stop">dayan</string>
     <string name="start">davam et</string>
     <string name="application_language">Tətbiqin dili:</string>
+    <string name="use_system">Sistem</string>
     <string name="see_also">Həmçinin baxın:</string>
     <string name="your_favorites">Sizin sevimliləriniz:</string>
     <string name="eventify_slogan">Heç vaxt yaşamadığınız əyləncəni yaşayın!</string>
+    <string name="application_theme">Tətbiqin mövzusu:</string>
+    <string name="light">Açıq</string>
+    <string name="dark">Tünd</string>
+    <string name="search_places">Yeri axtarın</string>
+    <string name="select_place">Yer seçin</string>
+    <string name="search">Axtarın</string>
+    <string name="connection_lost_retry">Bağlantı yoxdur! Yenidən cəhd edin!</string>
+    <string name="no_events">Hələlik tədbir yoxdur!</string>
+    <string name="no_custom_events">Hələlik istifadəçi tədbiri yoxdur!</string>
 </resources>

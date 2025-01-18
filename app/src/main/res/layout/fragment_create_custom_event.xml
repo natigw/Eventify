@@ -180,6 +180,17 @@
         app:layout_constraintStart_toStartOf="@+id/guidelineCreateCustomEvent1"
         app:layout_constraintTop_toBottomOf="@id/textInputLayoutEventTypeCCE" />
 
+    <ImageView
+        android:id="@+id/imageErrorDateCCE"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_error"
+        android:visibility="invisible"
+        app:tint="@color/error"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonDatePickerCCE"
+        app:layout_constraintStart_toEndOf="@+id/buttonDatePickerCCE"
+        app:layout_constraintTop_toTopOf="@+id/buttonDatePickerCCE" />
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonTimePickerStartCCE"
         style="?attr/materialIconButtonFilledTonalStyle"
@@ -202,6 +213,17 @@
         app:layout_constraintStart_toStartOf="@+id/guidelineCreateCustomEvent1"
         app:layout_constraintTop_toBottomOf="@id/buttonDatePickerCCE" />
 
+    <ImageView
+        android:id="@+id/imageErrorStartTimeCCE"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_error"
+        android:visibility="invisible"
+        app:tint="@color/error"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonTimePickerStartCCE"
+        app:layout_constraintStart_toEndOf="@+id/buttonTimePickerStartCCE"
+        app:layout_constraintTop_toTopOf="@+id/buttonTimePickerStartCCE" />
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonTimePickerFinishCCE"
         style="?attr/materialIconButtonFilledTonalStyle"
@@ -223,6 +245,17 @@
         app:iconTint="@color/eventify_on_primary"
         app:layout_constraintStart_toStartOf="@+id/guidelineCreateCustomEvent1"
         app:layout_constraintTop_toBottomOf="@id/buttonTimePickerStartCCE" />
+
+    <ImageView
+        android:id="@+id/imageErrorFinishTimeCCE"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_error"
+        android:visibility="invisible"
+        app:tint="@color/error"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonTimePickerFinishCCE"
+        app:layout_constraintStart_toEndOf="@+id/buttonTimePickerFinishCCE"
+        app:layout_constraintTop_toTopOf="@+id/buttonTimePickerFinishCCE" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonCreateCCE"

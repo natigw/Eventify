@@ -81,7 +81,5 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         NavigationUI.setupWithNavController(
             binding.bottomNavigationView, navHostFragment.navController
         )
-
-
     }
 }
