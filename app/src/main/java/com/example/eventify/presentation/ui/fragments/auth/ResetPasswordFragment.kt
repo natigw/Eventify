@@ -22,8 +22,8 @@ class ResetPasswordFragment : BaseFragment<PasswordResetBinding>(PasswordResetBi
 
     }
 
-    override fun buttonListener() {
-        super.buttonListener()
+    override fun buttonListeners() {
+        super.buttonListeners()
         binding.buttonSendPasswordReset.setOnClickListener{
             resetUserPassword()
         }

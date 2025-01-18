@@ -26,7 +26,6 @@ import com.example.eventify.presentation.viewmodels.VenueDetailsViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 
@@ -99,8 +98,8 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
         }
     }
 
-    override fun buttonListener() {
-        super.buttonListener()
+    override fun buttonListeners() {
+        super.buttonListeners()
         binding.buttonSendCommentVenueDetails.setOnClickListener {
             val comment = binding.textInputAddCommentVenue.text.toString().trim()
             val isCommentFilled = validateInputFieldEmpty(binding.textInputLayoutWriteCommentVenueDetails, comment, getString(R.string.please_enter_comment))

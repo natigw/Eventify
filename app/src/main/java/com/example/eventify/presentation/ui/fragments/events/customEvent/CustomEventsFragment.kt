@@ -1,6 +1,5 @@
 package com.example.eventify.presentation.ui.fragments.events.customEvent
 
-import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -51,8 +50,8 @@ class CustomEventsFragment : BaseFragment<FragmentCustomEventsBinding>(FragmentC
         stopShimmer(binding.shimmerCustomEvents)
     }
 
-    override fun buttonListener() {
-        super.buttonListener()
+    override fun buttonListeners() {
+        super.buttonListeners()
 //        binding.buttonCreateCustomEvent.setOnClickListener {
 //            findNavController().navigate(PlacesFragmentDirections.actionPlacesFragmentToCreateCustomEventFragment())
 //        }

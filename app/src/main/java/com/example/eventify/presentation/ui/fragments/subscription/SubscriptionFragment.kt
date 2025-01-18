@@ -45,8 +45,8 @@ class SubscriptionFragment : BaseFragment<FragmentSubscriptionBinding>(FragmentS
         }
     }
 
-    override fun buttonListener() {
-        super.buttonListener()
+    override fun buttonListeners() {
+        super.buttonListeners()
 
         val typefaceLight = ResourcesCompat.getFont(requireContext(), R.font.inter_light)
         val typefaceBold = ResourcesCompat.getFont(requireContext(), R.font.inter_bold)

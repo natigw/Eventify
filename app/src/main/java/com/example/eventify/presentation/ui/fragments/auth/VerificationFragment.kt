@@ -30,8 +30,8 @@ class VerificationFragment : BaseFragment<VerificationLayoutBinding>(Verificatio
         binding.textUserEmailVerification.text = viewModel.getUserEmail()
     }
 
-    override fun buttonListener() {
-        super.buttonListener()
+    override fun buttonListeners() {
+        super.buttonListeners()
         val userEmail = viewModel.getUserEmail()
         binding.buttonVerify.setOnClickListener {
             lifecycleScope.launch {

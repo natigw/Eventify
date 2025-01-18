@@ -14,7 +14,7 @@ abstract class BaseFragment<VB : ViewBinding>(private val bindingToInflate: (Lay
 
     abstract fun onViewCreatedLight()
     open fun setUI() {}
-    open fun buttonListener() {}
+    open fun buttonListeners() {}
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,7 +28,7 @@ abstract class BaseFragment<VB : ViewBinding>(private val bindingToInflate: (Lay
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         onViewCreatedLight()
-        buttonListener()
+        buttonListeners()
         setUI()
     }
 

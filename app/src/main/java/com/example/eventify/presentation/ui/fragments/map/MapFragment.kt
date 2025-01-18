@@ -88,8 +88,8 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         motionLayout()
     }
 
-    override fun buttonListener() {
-        super.buttonListener()
+    override fun buttonListeners() {
+        super.buttonListeners()
         binding.backwardButton.setOnClickListener {
             binding.root.transitionToStart()
             animateSearchRV()

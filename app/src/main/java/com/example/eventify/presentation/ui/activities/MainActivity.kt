@@ -3,7 +3,6 @@ package com.example.eventify.presentation.ui.activities
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.view.View
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.forEach
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
@@ -17,8 +16,6 @@ import com.example.eventify.NetworkUtils
 import com.example.eventify.NetworkUtils.initializeTokenManager
 import com.example.eventify.R
 import com.example.eventify.databinding.ActivityMainBinding
-import com.example.eventify.presentation.ui.fragments.connectionLost.ConnectionLostFragment
-import com.example.eventify.test.TestActivity
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -35,7 +32,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
     override fun onCreateLight() {
 
         val app = application as EventifyApplication
-
         app.isNetworkConnected.observe(this) { isConnected ->
             if (!isConnected)
                 navigateToNetworkActivity()
@@ -52,7 +48,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
 
         setUpBottomNavigation()
         initializeTokenManager()
-
     }
 
     private fun navigateToNetworkActivity() {

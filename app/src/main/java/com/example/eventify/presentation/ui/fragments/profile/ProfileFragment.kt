@@ -68,8 +68,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         }
     }
 
-    override fun buttonListener() {
-        super.buttonListener()
+    override fun buttonListeners() {
+        super.buttonListeners()
         with(binding) {
             btnReferral.setOnClickListener {
                 findNavController().navigate(R.id.referralFragment)

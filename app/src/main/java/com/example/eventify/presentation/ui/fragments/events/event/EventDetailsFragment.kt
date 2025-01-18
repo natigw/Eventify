@@ -13,13 +13,11 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.common.base.BaseFragment
-import com.example.common.utils.functions.getLocalTime
 import com.example.common.utils.functions.validateInputFieldEmpty
 import com.example.common.utils.nancyToastSuccess
 import com.example.common.utils.startShimmer
 import com.example.common.utils.stopShimmer
 import com.example.domain.model.places.AddCommentItem
-import com.example.domain.model.places.CommentItem
 import com.example.domain.model.places.PlaceCoordinates
 import com.example.domain.model.places.event.EventDetailsItem
 import com.example.eventify.R
@@ -30,11 +28,9 @@ import com.example.eventify.presentation.viewmodels.SharedViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import org.w3c.dom.Comment
 
 @AndroidEntryPoint
 class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentEventDetailsBinding::inflate) {
@@ -123,8 +119,8 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
         }
     }
 
-    override fun buttonListener() {
-        super.buttonListener()
+    override fun buttonListeners() {
+        super.buttonListeners()
         binding.buttonLikeEvent.setOnClickListener{
             if(viewmodel.likedState.value == true){
                 viewmodel.likedState.update { false }

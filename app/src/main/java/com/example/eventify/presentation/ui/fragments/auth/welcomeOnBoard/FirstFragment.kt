@@ -19,8 +19,8 @@ class FirstFragment : BaseFragment<FragmentWelcomeFirstBinding>(FragmentWelcomeF
 
     override fun onViewCreatedLight() { }
 
-    override fun buttonListener() {
-        super.buttonListener()
+    override fun buttonListeners() {
+        super.buttonListeners()
         binding.buttonSkipFirst.setOnClickListener {
             viewmodel.sharedPrefOnBoard.edit().putBoolean("finished", true).apply()
             findNavController().navigate(R.id.action_welcomeFragment_to_loginFragment)

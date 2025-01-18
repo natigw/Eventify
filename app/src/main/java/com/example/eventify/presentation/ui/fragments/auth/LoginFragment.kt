@@ -1,23 +1,15 @@
 package com.example.eventify.presentation.ui.fragments.auth
 
 import android.content.Intent
-import android.graphics.Color.parseColor
-import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import androidx.credentials.CredentialManager
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.common.base.BaseFragment
-import com.example.common.utils.functions.isValidEmail
 import com.example.common.utils.functions.validateInputFieldEmpty
-import com.example.common.utils.functions.validateInputFieldMeet
-import com.example.common.utils.nancyToastInfo
 import com.example.common.utils.nancyToastSuccess
 import com.example.common.utils.nancyToastWarning
 import com.example.data.remote.thirdpartyregister.GoogleUtils
@@ -33,36 +25,21 @@ import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class LoginFragment : Fragment() {
-
-    private var _binding : FragmentLoginBinding? = null
-    private val binding get() = _binding!!
+class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::inflate) {
 
     private val viewModel by viewModels<LoginViewModel>()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentLoginBinding.inflate(layoutInflater,container,false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        if (viewModel.sharedPrefOnBoard.getBoolean("finished", false)) binding.textWelcomeLogin.visibility = View.VISIBLE
+    override fun onViewCreatedLight() {
+        if (viewModel.sharedPrefOnBoard.getBoolean("finished", false))
+            binding.textWelcomeLogin.visibility = View.VISIBLE
 
         observer()
         setConstraints()
         checkUser()
-        buttonListener()
-        binding.buttonTest.setOnClickListener {
-            navigateToTestActivity()
-        }
     }
 
-    fun buttonListener() {
+    override fun buttonListeners() {
+        super.buttonListeners()
         val credentialManager = CredentialManager.create(requireContext())
         val clientId = BuildConfig.WEB_CLIENT_ID
 
@@ -112,6 +89,10 @@ class LoginFragment : Fragment() {
                     nancyToastWarning(requireContext(), getString(R.string.login_unsuccessful))
                 }
             }
+        }
+
+        binding.buttonTest.setOnClickListener {
+            navigateToTestActivity()
         }
     }
 
