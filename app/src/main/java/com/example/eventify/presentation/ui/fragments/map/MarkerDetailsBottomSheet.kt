@@ -37,16 +37,6 @@ class MarkerDetailsBottomSheet : BaseBottomSheetFragment<BottomsheetMarkerDetail
         checkIfVenueOrEvent()
         observer()
 
-        binding.buttonShortestRouteMarkerDetails.setOnClickListener {
-            args.let {locationData->
-                val gmmIntentUri = Uri.parse("geo:${locationData},${longitude}")
-                val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
-                mapIntent.setPackage("com.google.android.apps.maps")
-                if (mapIntent.resolveActivity(packageManager) != null) {
-                    startActivity(mapIntent)
-                }
-            }
-        }
     }
 
     fun observer(){
