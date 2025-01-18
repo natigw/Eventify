@@ -186,4 +186,5 @@
     <string name="search_places">Search for places</string>
     <string name="select_place">Select a place</string>
     <string name="search">Search</string>
+    <string name="connection_lost_retry">No connection! Try again later!</string>
 </resources>

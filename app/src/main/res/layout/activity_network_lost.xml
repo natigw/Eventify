@@ -62,14 +62,14 @@
         android:minHeight="60dp"
         android:text="@string/retry"
         android:textSize="24sp"
-        android:textColor="@color/eventify_main_text"
+        android:textColor="@color/eventify_primary"
         app:cornerRadius="@dimen/eventify_large_button_corner_radius"
         app:layout_constraintEnd_toEndOf="@id/guidelineConnectionLost2"
         app:layout_constraintStart_toStartOf="@+id/guidelineConnectionLost1"
         app:layout_constraintBottom_toBottomOf="@id/guidelineConnectionLost3" />
 
     <ProgressBar
-        android:id="@+id/progressBarLogin"
+        android:id="@+id/progressBarRetryConnectionLost"
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

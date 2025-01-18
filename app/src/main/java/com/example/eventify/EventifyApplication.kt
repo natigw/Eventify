@@ -24,28 +24,18 @@ class EventifyApplication : Application() {
     @Inject
     lateinit var tokenManager: TokenManager
 
-    val applicationScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
-
     private val _isNetworkConnected = MutableLiveData<Boolean>()
     val isNetworkConnected: LiveData<Boolean> get() = _isNetworkConnected
 
     override fun onCreate() {
         super.onCreate()
 
-        // Observe network changes
         observeNetworkConnection()
-
     }
 
     private fun observeNetworkConnection() {
         networkConnection.isConnected.observeForever { isConnected ->
             _isNetworkConnected.postValue(isConnected)
         }
-    }
-
-
-
-    override fun onTerminate() {
-        super.onTerminate()
     }
 }
