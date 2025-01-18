@@ -93,6 +93,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         binding.backwardButton.setOnClickListener {
             binding.root.transitionToStart()
             animateSearchRV()
+            binding.editTextText.hideKeyboard()
         }
 
         requireActivity().onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
@@ -111,6 +112,12 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     fun View.hideKeyboard() {
         val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(windowToken, 0)
+    }
+
+    fun showKeyboard(){
+        val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        binding.editTextText.requestFocus()
+        imm.showSoftInput(binding.editTextText, InputMethodManager.SHOW_IMPLICIT)
     }
 
     fun animateSearchRV(){
@@ -141,6 +148,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
             override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
                 if(currentId == R.id.end){
+                    showKeyboard()
                     binding.searchRV.isVisible = true
                     binding.searchRV.animate()
                         .alpha(1f)

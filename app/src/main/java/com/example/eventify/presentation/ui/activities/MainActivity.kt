@@ -82,16 +82,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
             binding.bottomNavigationView, navHostFragment.navController
         )
 
-        lifecycleScope.launch {
-//            navHostFragment.navController.currentBackStackEntryFlow.collectLatest {
-//                Log.e("stack", it.toString())
-//            }
-            navHostFragment.navController.currentBackStack.collectLatest {
-//                Log.e("stackSize", it.size.toString())
-//                it.forEach { salam ->
-//                    Log.e("stack", salam.toString())
-//                }
-            }
-        }
+
     }
 }
