@@ -25,6 +25,13 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="@dimen/eventify_guideline_right_large" />
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineRegister3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.05" />
+
         <Button
             android:id="@+id/buttonBackRegister"
             style="?attr/materialIconButtonFilledTonalStyle"
@@ -33,22 +40,22 @@
             android:backgroundTint="@color/eventify_background_primary"
             app:icon="@drawable/ic_back_arrow"
             app:iconSize="24dp"
-            app:iconTint="@color/eventify_primary"
+            app:iconTint="@color/eventify_main_text"
             app:layout_constraintEnd_toEndOf="@id/guidelineRegister1"
             app:layout_constraintStart_toStartOf="@id/guidelineRegister1"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/guidelineRegister3" />
 
         <TextView
             android:id="@+id/textSignUpTEXT"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="@string/sign_up"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/register"
             android:textSize="32sp"
-            android:textStyle="bold"
+            android:textColor="@color/eventify_main_text"
             app:layout_constraintEnd_toEndOf="@+id/guidelineRegister2"
             app:layout_constraintStart_toStartOf="@+id/guidelineRegister1"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/guidelineRegister3" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayoutFirstnameRegister"

@@ -12,10 +12,6 @@ import javax.inject.Named
 
 @HiltViewModel
 class OnBoardingViewModel @Inject constructor(
-    @Named("LanguageChoice")
-    val sharedPrefLanguage : SharedPreferences,
-    @Named("ThemeChoice")
-    val sharedPrefTheme : SharedPreferences,
     @Named("UserTokens")
     val sharedPrefToken: SharedPreferences,
     val authRepository: AuthRepository
@@ -46,6 +42,4 @@ class OnBoardingViewModel @Inject constructor(
             clear()
         }
     }
-
-
 }

@@ -31,10 +31,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
 
     override fun onViewCreatedLight() {
         if (viewModel.sharedPrefOnBoard.getBoolean("finished", false))
-            binding.textWelcomeLogin.visibility = View.VISIBLE
+            binding.textSloganLogin.visibility = View.VISIBLE
 
         observer()
-        setConstraints()
         checkUser()
     }
 
@@ -105,18 +104,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             binding.textInputUsernameLogin.setText(userEmail)
         }
     }
-
-    private fun setConstraints() {
-        val screenHeight = resources.displayMetrics.heightPixels
-        val topMargin = (0.08 * screenHeight).toInt()
-
-        binding.textSignInTEXT.post {
-            val params = binding.textSignInTEXT.layoutParams as ConstraintLayout.LayoutParams
-            params.topMargin = topMargin
-            binding.textSignInTEXT.layoutParams = params
-        }
-    }
-
 
     private fun observer() {
         lifecycleScope.launch {

@@ -25,6 +25,13 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="@dimen/eventify_guideline_right_large" />
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineLogin3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.05" />
+
         <Button
             android:id="@+id/buttonTest"
             android:layout_width="wrap_content"
@@ -34,35 +41,38 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textWelcomeLogin"
-            android:layout_width="wrap_content"
+            android:id="@+id/textSloganLogin"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/welcome_message_login"
-            android:textColor="@color/eventify_on_background"
-            android:textSize="32sp"
-            android:textStyle="bold"
+            android:fontFamily="@font/outfit_regular"
+            android:text="@string/eventify_slogan"
+            android:textColor="@color/eventify_primary_helper"
+            android:textSize="28sp"
+            android:textStyle="italic"
+            android:textAlignment="center"
             android:visibility="gone"
             app:layout_constraintEnd_toStartOf="@+id/guidelineLogin2"
             app:layout_constraintStart_toStartOf="@+id/guidelineLogin1"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@id/guidelineLogin3" />
 
         <TextView
             android:id="@+id/textSignInTEXT"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/sign_in"
-            android:textColor="@color/eventify_on_background"
+            android:layout_marginTop="50dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/login"
             android:textSize="32sp"
-            android:textStyle="bold"
+            android:textColor="@color/eventify_main_text"
             app:layout_constraintEnd_toStartOf="@+id/guidelineLogin2"
             app:layout_constraintStart_toStartOf="@+id/guidelineLogin1"
-            app:layout_constraintTop_toBottomOf="@id/textWelcomeLogin" />
+            app:layout_constraintTop_toBottomOf="@id/textSloganLogin" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayoutUsernameLogin"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="32dp"
             app:boxCornerRadiusBottomEnd="@dimen/eventify_input_field_corner_radius"
             app:boxCornerRadiusBottomStart="@dimen/eventify_input_field_corner_radius"
             app:boxCornerRadiusTopEnd="@dimen/eventify_input_field_corner_radius"

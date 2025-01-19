@@ -26,7 +26,6 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
     private val viewModel by viewModels<RegisterViewModel>()
 
     override fun onViewCreatedLight() {
-        setScrollViewConstraints()
         setInputFieldListeners()
         registerButton()
         observeChanges()
@@ -79,22 +78,6 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
                 }
             }
         }
-    }
-
-    private fun setScrollViewConstraints() {
-        val screenHeight = resources.displayMetrics.heightPixels
-        val topMargin = (0.08 * screenHeight).toInt()
-
-        binding.textSignUpTEXT.post {
-            val params = binding.textSignUpTEXT.layoutParams as ConstraintLayout.LayoutParams
-            params.topMargin = topMargin
-            binding.textSignUpTEXT.layoutParams = params
-        }
-
-        val topMarginArrow = (0.04 * screenHeight).toInt()
-        val paramsArrow = binding.buttonBackRegister.layoutParams as ConstraintLayout.LayoutParams
-        paramsArrow.topMargin = topMarginArrow
-        binding.buttonBackRegister.layoutParams = paramsArrow
     }
 
     private fun checkInputFields(firstname: String, lastname: String, username: String, email: String, password: String): Boolean {

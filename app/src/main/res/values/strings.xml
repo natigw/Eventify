@@ -27,7 +27,6 @@
     <string name="last_name">Last name</string>
     <string name="i_accept_terms">I accept Terms and Conditions</string>
     <string name="register">Register</string>
-    <string name="welcome_message_login">Welcome to eventify.az\nSlogan</string>
     <string name="home">Home</string>
     <string name="venues">Venues</string>
     <string name="profile">Profile</string>
@@ -170,9 +169,7 @@
 
         <font><b>Click to register.</b></font>
     </string>
-    <string name="continue_with_google">
-        Continue with Google
-    </string>
+    <string name="continue_with_google">Continue with Google</string>
     <string name="stop">stop</string>
     <string name="start">start</string>
     <string name="application_language">Application language:</string>

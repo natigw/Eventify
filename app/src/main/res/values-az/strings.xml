@@ -164,4 +164,19 @@
     <string name="connection_lost_retry">Bağlantı yoxdur! Yenidən cəhd edin!</string>
     <string name="no_events">Hələlik tədbir yoxdur!</string>
     <string name="no_custom_events">Hələlik istifadəçi tədbiri yoxdur!</string>
+    <string name="send_verification">
+        <font>
+            Sizə email gəlmədi?
+        </font>
+        <font><b>Yenidən göndərmək üçün kliklə.</b></font>
+    </string>
+    <string name="wrong_email">
+        <font>
+            Yanlış email ünvan?
+        </font>
+        <font>
+            <b>Qeydiyyat üçün kliklə.</b>
+        </font>
+    </string>
+    <string name="continue_with_google">Google ilə davam edin</string>
 </resources>
