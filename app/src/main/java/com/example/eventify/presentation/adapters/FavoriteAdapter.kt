@@ -9,10 +9,10 @@ import com.example.domain.model.places.FavoriteItem
 import com.example.eventify.databinding.SampleFavoriteBinding
 
 class FavoriteAdapter(
-    val onClick: (id: Int)->Unit
+    val onClick: (id: Int) -> Unit
 ) : BaseAdapter<SampleFavoriteBinding>(SampleFavoriteBinding::inflate) {
 
-    private var favorites : List<FavoriteItem> = emptyList()
+    private var favorites: List<FavoriteItem> = emptyList()
 
     override fun getItemCount(): Int {
         return favorites.size
@@ -45,7 +45,7 @@ class FavoriteAdapter(
     }
 
     fun updateAdapter(newFavorites: List<FavoriteItem>) {
-        favorites = newFavorites
+        favorites = newFavorites.reversed()
         notifyDataSetChanged()
     }
 }

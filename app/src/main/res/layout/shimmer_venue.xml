@@ -18,17 +18,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Medium" />
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/buttonLikeVenueShimmer"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:adjustViewBounds="true"
-        android:background="@color/shimmer_gray_light"
-        app:layout_constraintEnd_toEndOf="@id/imageVenueShimmer"
-        app:layout_constraintTop_toTopOf="@+id/imageVenueShimmer"
-        app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full" />
+<!--    <com.google.android.material.imageview.ShapeableImageView-->
+<!--        android:id="@+id/buttonLikeVenueShimmer"-->
+<!--        android:layout_width="40dp"-->
+<!--        android:layout_height="40dp"-->
+<!--        android:layout_marginTop="8dp"-->
+<!--        android:layout_marginEnd="8dp"-->
+<!--        android:adjustViewBounds="true"-->
+<!--        android:background="@color/shimmer_gray_light"-->
+<!--        app:layout_constraintEnd_toEndOf="@id/imageVenueShimmer"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/imageVenueShimmer"-->
+<!--        app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full" />-->
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/textVenueNameShimmer"

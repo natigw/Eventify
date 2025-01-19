@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.common.base.BaseFragment
+import com.example.common.utils.crossfadeAppear
 import com.example.common.utils.nancyToastInfo
 import com.example.common.utils.startShimmer
 import com.example.common.utils.stopShimmer
@@ -31,7 +32,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
 
     private val favoritesAdapter = FavoriteAdapter(
         onClick = {
-            //TODO -> qayitmaq isteyende event fragmentde gedir duzelt
             findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToEventDetailsFragment(it, true))
         }
     )
@@ -144,8 +144,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
             viewModel.favorites
                 .filterNotNull()
                 .collectLatest {
-                    binding.textNoFavoritesTEXTProfile.isVisible = it.isEmpty()
+                    binding.textFavoritesProfileTEXT.isVisible = it.isNotEmpty()
                     favoritesAdapter.updateAdapter(it)
+                    crossfadeAppear(binding.rvFavoritesProfile)
                     stopShimmerGone(binding.shimmerFavoriteProfile)
                     binding.buttonLogoutProfile.visibility = View.VISIBLE
                 }

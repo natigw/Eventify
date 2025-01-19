@@ -51,17 +51,17 @@
             app:layout_constraintTop_toBottomOf="@id/textVenueNameDetailsShimmer"
             app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Medium" />
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/buttonLikeVenueDetailsShimmer"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:adjustViewBounds="true"
-            android:background="@color/shimmer_gray_light"
-            app:layout_constraintEnd_toEndOf="@id/imageVenueDetailsShimmer"
-            app:layout_constraintTop_toTopOf="@+id/imageVenueDetailsShimmer"
-            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full" />
+<!--        <com.google.android.material.imageview.ShapeableImageView-->
+<!--            android:id="@+id/buttonLikeVenueDetailsShimmer"-->
+<!--            android:layout_width="40dp"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:layout_marginTop="8dp"-->
+<!--            android:layout_marginEnd="8dp"-->
+<!--            android:adjustViewBounds="true"-->
+<!--            android:background="@color/shimmer_gray_light"-->
+<!--            app:layout_constraintEnd_toEndOf="@id/imageVenueDetailsShimmer"-->
+<!--            app:layout_constraintTop_toTopOf="@+id/imageVenueDetailsShimmer"-->
+<!--            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full" />-->
 
 <!--        <com.google.android.material.imageview.ShapeableImageView-->
 <!--            android:id="@+id/buttonChatVenueDetailsShimmer"-->
@@ -244,7 +244,7 @@
             android:backgroundTint="@color/green_light_eventify"
             android:fontFamily="@font/inter_bold"
             android:textSize="18sp"
-            app:cornerRadius="12dp"
+            app:cornerRadius="@dimen/eventify_large_button_corner_radius"
             app:layout_constraintEnd_toEndOf="@id/guidelineVenueDetailsShimmer2"
             app:layout_constraintStart_toStartOf="@id/guidelineVenueDetailsShimmer1"
             app:layout_constraintTop_toBottomOf="@+id/textVenueLikesTextShimmer" />

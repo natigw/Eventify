@@ -1,6 +1,5 @@
 package com.example.eventify.presentation.ui.fragments.events.event
 
-import android.util.Log
 import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
@@ -13,6 +12,8 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.common.base.BaseFragment
+import com.example.common.utils.crossfadeAppear
+import com.example.common.utils.crossfadeDisappear
 import com.example.common.utils.functions.validateInputFieldEmpty
 import com.example.common.utils.nancyToastSuccess
 import com.example.common.utils.startShimmer
@@ -94,7 +95,6 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
         with(binding) {
             textEventName.visibility = View.VISIBLE
             imageEvent.visibility = View.VISIBLE
-            buttonLikeEvent.visibility = View.VISIBLE
             textEventDetailsText.visibility = View.VISIBLE
             textEventDescription.visibility = View.VISIBLE
             textEventTypeText.visibility = View.VISIBLE
@@ -272,14 +272,12 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
             viewmodel.likedState
                 .filterNotNull()
                 .collectLatest {
-                    Log.e("likedState",it.toString())
-                    if(it){
+                    if(it)
                         binding.buttonLikeEvent.setIconResource(R.drawable.like_fav)
-                    }
-                    else{
+                    else
                         binding.buttonLikeEvent.setIconResource(R.drawable.like_fav_border)
-                    }
-                    binding.buttonBackEventDetails.visibility = View.VISIBLE
+                    crossfadeAppear(binding.buttonLikeEvent)
+                    crossfadeAppear(binding.buttonBackEventDetails)
                 }
         }
 

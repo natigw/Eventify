@@ -1,20 +1,27 @@
 package com.example.eventify.test
 
 import android.Manifest
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color.alpha
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.view.View
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat.animate
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.common.base.BaseFragment
 import com.example.common.utils.NancyToast
+import com.example.common.utils.crossfadeAppear
+import com.example.common.utils.crossfadeDisappear
 import com.example.common.utils.nancyToastError
 import com.example.common.utils.nancyToastSuccess
 import com.example.data.remote.api.EventAPI
@@ -27,6 +34,7 @@ import com.google.gson.JsonDeserializer
 import com.google.gson.JsonElement
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -45,7 +53,17 @@ class Test1Fragment : BaseFragment<FragmentTest1Binding>(FragmentTest1Binding::i
     @Inject
     lateinit var api: EventAPI
 
+
+
     override fun onViewCreatedLight() {
+        lifecycleScope.launch {
+            delay(2000)
+            crossfadeAppear(binding.imageView5, 3000)
+            delay(2000)
+            crossfadeDisappear(binding.progressBar)
+        }
+
+
         if (ContextCompat.checkSelfPermission(
                 requireContext(),
                 Manifest.permission.READ_EXTERNAL_STORAGE
@@ -144,7 +162,11 @@ class Test1Fragment : BaseFragment<FragmentTest1Binding>(FragmentTest1Binding::i
 }
 
 class FileUploadGetLinkResponseDeserializer : JsonDeserializer<FileUploadGetLinkResponse> {
-    override fun deserialize(json: JsonElement, typeOfT: Type, context: JsonDeserializationContext): FileUploadGetLinkResponse {
+    override fun deserialize(
+        json: JsonElement,
+        typeOfT: Type,
+        context: JsonDeserializationContext
+    ): FileUploadGetLinkResponse {
         return if (json.isJsonObject) {
             val jsonObject = json.asJsonObject
             val link = jsonObject.get("link")?.asString ?: ""
@@ -156,7 +178,10 @@ class FileUploadGetLinkResponseDeserializer : JsonDeserializer<FileUploadGetLink
 }
 
 val gson = GsonBuilder()
-    .registerTypeAdapter(FileUploadGetLinkResponse::class.java, FileUploadGetLinkResponseDeserializer())
+    .registerTypeAdapter(
+        FileUploadGetLinkResponse::class.java,
+        FileUploadGetLinkResponseDeserializer()
+    )
     .create()
 
 val retrofit = Retrofit.Builder()

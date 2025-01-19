@@ -108,6 +108,7 @@
             android:layout_marginTop="4dp"
             android:paddingStart="18dp"
             android:paddingEnd="12dp"
+            android:fontFamily="@font/inter_bold"
             android:text="@string/referral_program"
             android:textSize="16sp"
             app:icon="@drawable/ic_open_in_new_screen"
@@ -122,6 +123,7 @@
             android:layout_height="wrap_content"
             android:paddingStart="18dp"
             android:paddingEnd="12dp"
+            android:fontFamily="@font/inter_bold"
             android:text="@string/subscription"
             android:textSize="16sp"
             app:icon="@drawable/ic_open_in_new_screen"
@@ -238,19 +240,19 @@
             app:layout_constraintStart_toStartOf="@+id/guidelineProfile1"
             app:layout_constraintTop_toBottomOf="@+id/buttonChangeThemeUseSystem" />
 
-        <TextView
-            android:id="@+id/textNoFavoritesTEXTProfile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:fontFamily="@font/inter_italic"
-            android:text="@string/no_favorites"
-            android:textColor="@color/eventify_main_text"
-            android:textSize="20sp"
-            android:visibility="invisible"
-            app:layout_constraintEnd_toEndOf="@id/guidelineProfile2"
-            app:layout_constraintStart_toStartOf="@id/guidelineProfile1"
-            app:layout_constraintTop_toBottomOf="@id/textFavoritesProfileTEXT" />
+<!--        <TextView-->
+<!--            android:id="@+id/textNoFavoritesTEXTProfile"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="12dp"-->
+<!--            android:fontFamily="@font/inter_italic"-->
+<!--            android:text="@string/no_favorites"-->
+<!--            android:textColor="@color/eventify_main_text"-->
+<!--            android:textSize="20sp"-->
+<!--            android:visibility="invisible"-->
+<!--            app:layout_constraintEnd_toEndOf="@id/guidelineProfile2"-->
+<!--            app:layout_constraintStart_toStartOf="@id/guidelineProfile1"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/textFavoritesProfileTEXT" />-->
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvFavoritesProfile"
@@ -258,6 +260,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:orientation="vertical"
+            android:visibility="invisible"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="@id/guidelineProfile2"
             app:layout_constraintStart_toStartOf="@id/guidelineProfile1"

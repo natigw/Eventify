@@ -167,6 +167,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonShortestRouteMarkerDetails"
+        style="?attr/materialIconButtonFilledTonalStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
@@ -176,7 +177,7 @@
         android:text="@string/get_shortest_route"
         android:textColor="@color/eventify_primary"
         android:textSize="18sp"
-        app:cornerRadius="16dp"
+        app:cornerRadius="@dimen/eventify_large_button_corner_radius"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/buttonBuyTicketMarkerDetails"
         app:layout_constraintHorizontal_bias="0.5"

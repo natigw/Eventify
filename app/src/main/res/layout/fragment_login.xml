@@ -129,6 +129,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
+            android:enabled="true"
             android:allowClickWhenDisabled="true"
             android:backgroundTint="@color/login"
             android:fontFamily="@font/inter_bold"

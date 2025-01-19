@@ -25,7 +25,7 @@ class EventDetailsViewModel @Inject constructor(
     var likedState = MutableStateFlow<Boolean?>(null)
 
     val isLoadingComments = MutableStateFlow(true)
-    val comments = MutableStateFlow<List<CommentItem>?>(value = null)
+    val comments = MutableStateFlow<List<CommentItem>?>(null)
     val lastLikedState = mutableListOf<Boolean>()
 
 
@@ -52,7 +52,7 @@ class EventDetailsViewModel @Inject constructor(
                     likedState.update { like }
                 }
                 catch (e : Exception){
-                    Log.e("bilmire",e.message.toString())
+                    Log.e("network - like",e.message.toString())
                 }
             }
         }
