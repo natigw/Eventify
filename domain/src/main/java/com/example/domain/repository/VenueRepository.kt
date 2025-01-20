@@ -2,6 +2,7 @@ package com.example.domain.repository
 
 import com.example.domain.model.places.AddCommentItem
 import com.example.domain.model.places.CommentItem
+import com.example.domain.model.places.SearchItem
 import com.example.domain.model.places.venue.VenueDetailsItem
 import com.example.domain.model.places.venue.VenueItem
 
@@ -26,6 +27,6 @@ interface VenueRepository {
 
     suspend fun likeVenue(venueId: Int)
 
-    suspend fun searchVenue(query: String): List<VenueItem>
+    suspend fun searchVenue(query: String): List<SearchItem>
 
 }

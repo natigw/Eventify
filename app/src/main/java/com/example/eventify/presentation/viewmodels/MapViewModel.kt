@@ -1,8 +1,10 @@
 package com.example.eventify.presentation.viewmodels
 
 import android.content.SharedPreferences
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.domain.model.places.SearchItem
 import com.example.domain.model.places.event.EventItem
 import com.example.domain.model.places.venue.VenueItem
 import com.example.domain.repository.EventRepository
@@ -26,6 +28,21 @@ class MapViewModel @Inject constructor(
     val eventsState = MutableStateFlow<List<EventItem>?>(null)
     val venuesState = MutableStateFlow<List<VenueItem>?>(null)
 
+    val searchState = MutableStateFlow<List<SearchItem>?>(null)
+    val inputState = MutableStateFlow<String?>(null)
+    val isLoading = MutableStateFlow<Boolean?>(null)
+
+    private val searchItems = mutableListOf<SearchItem>()
+
+    enum class Filter{
+        ALL,
+        VENUES,
+        EVENTS
+    }
+
+
+
+
     init {
         getEvents()
         getVenues()
@@ -48,6 +65,45 @@ class MapViewModel @Inject constructor(
             venuesState.update {
                 venueRepository.getVenues()
             }
+        }
+    }
+
+
+
+
+    fun searchPlaces(query : String, filter : Filter = Filter.ALL){
+        viewModelScope.launch {
+            searchItems.clear()
+
+            try {
+                isLoading.update { true }
+                val eventsResponse = eventRepository.searchEvent(query)
+                val venuesResponse = venueRepository.searchVenue(query)
+
+                when(filter){
+                    Filter.ALL->{
+                        searchItems.addAll(eventsResponse)
+                        searchItems.addAll(venuesResponse)
+
+                    }
+                    Filter.EVENTS->{
+                        searchItems.addAll(eventsResponse)
+                    }
+                    Filter.VENUES->{
+                        searchItems.addAll(venuesResponse)
+                    }
+                }
+
+                Log.e("RealItems",searchItems.size.toString())
+                searchState.update { searchItems.toList() }
+            }
+            catch (_:Exception){
+
+            }
+            finally {
+                isLoading.update { false }
+            }
+
         }
     }
 }

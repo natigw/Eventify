@@ -3,6 +3,7 @@ package com.example.domain.repository
 import com.example.domain.model.places.AddCommentItem
 import com.example.domain.model.places.CommentItem
 import com.example.domain.model.places.FavoriteItem
+import com.example.domain.model.places.SearchItem
 import com.example.domain.model.places.event.CreateCustomEventRequestItem
 import com.example.domain.model.places.event.EventDetailsItem
 import com.example.domain.model.places.event.EventItem
@@ -31,6 +32,6 @@ interface EventRepository {
 
     suspend fun likeEvent(eventId: Int)
 
-//    suspend fun searchEvent(query: String) : List<SearchEventItem>
+    suspend fun searchEvent(query: String) : List<SearchItem>
 
 }

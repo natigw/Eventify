@@ -9,6 +9,7 @@ import com.example.data.remote.model.venues.comment.addComment.RequestAddVenueCo
 import com.example.data.remote.model.venues.likeDislike.RequestLikeDislikeVenue
 import com.example.domain.model.places.AddCommentItem
 import com.example.domain.model.places.CommentItem
+import com.example.domain.model.places.SearchItem
 import com.example.domain.model.places.event.EventItem
 import com.example.domain.model.places.event.SearchEventItem
 import com.example.domain.model.places.venue.VenueDetailsItem
@@ -134,18 +135,17 @@ class VenueRepositoryImpl @Inject constructor(
         catch (_:Exception){}
     }
 
-    override suspend fun searchVenue(query: String): List<VenueItem> {
+    override suspend fun searchVenue(query: String): List<SearchItem> {
         try {
             val response = api.searchVenue(query)
             if(response.isSuccessful && response.body() != null){
                 return response.body()!!.map{
-                    VenueItem(
-                        venueId = it.id,
-                        title = it.name,
-                        imageLink = it.image1Link,
-                        description = it.description,
+                    SearchItem(
+                        placeId = it.id,
+                        name = it.name,
                         lat = it.lat,
-                        lng = it.lng
+                        lng = it.lng,
+                        placeType = "venue"
                     )
                 }
             }

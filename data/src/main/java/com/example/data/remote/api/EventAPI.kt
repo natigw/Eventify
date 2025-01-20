@@ -82,6 +82,7 @@ interface EventAPI {
 //    )
 //
 //
+
     @GET("/events/search/{query}")
     suspend fun searchEvent(
         @Path("query") query: String

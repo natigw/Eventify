@@ -10,6 +10,7 @@ import com.example.data.remote.model.events.likeDislike.RequestLikeDislikeEvent
 import com.example.domain.model.places.AddCommentItem
 import com.example.domain.model.places.CommentItem
 import com.example.domain.model.places.FavoriteItem
+import com.example.domain.model.places.SearchItem
 import com.example.domain.model.places.event.CreateCustomEventRequestItem
 import com.example.domain.model.places.event.EventDetailsItem
 import com.example.domain.model.places.event.EventItem
@@ -204,27 +205,27 @@ class EventRepositoryImpl @Inject constructor(
         }
     }
 
-//    override suspend fun searchEvent(query: String): List<SearchEventItem> {
-//        try {
-//            val response = api.searchEvent(query)
-//            if(response.isSuccessful && response.body()!=null){
-//                return response.body()!!.map {event->
-//                    SearchEventItem(
-//                        eventId = event.id,
-//                        name = event.title,
-//                        imageLink = event.posterImageLink,
-//                        eventDateTime = if (event.start.substring(0, 5) == event.finish.substring(0, 5)) "${dateFormatter_RemoveDashes_YMDtoDMY(event.date.substring(0, 10))} • all the day" else "${dateFormatter_RemoveDashes_YMDtoDMY(event.date.substring(0, 10))} • ${event.start.substring(0, 5)}-${event.finish.substring(0, 5)}",
-//                        lat = event.lat,
-//                        lng = event.lng,
-//                    )
-//                }
-//            }
-//            else{
-//                throw Exception(response.errorBody()?.string())
-//            }
-//        }catch (e: Exception){
-//            throw e
-//        }
-//    }
+    override suspend fun searchEvent(query: String): List<SearchItem> {
+        try {
+            val response = api.searchEvent(query)
+            if(response.isSuccessful && response.body()!=null){
+                return response.body()!!.map {
+                    SearchItem(
+                        placeId = it.id,
+                        name = it.title,
+                        lat = it.lat,
+                        lng = it.lng,
+                        placeType = "event"
+                    )
+                }
+            }
+            else{
+                throw Exception(response.errorBody()?.string())
+            }
+        }
+        catch (e : Exception){
+            throw e
+        }
+    }
 
 }

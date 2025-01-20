@@ -7,11 +7,15 @@ import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.graphics.Color
 import android.net.Uri
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.collection.emptyObjectIntMap
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.view.isVisible
@@ -22,6 +26,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.common.base.BaseFragment
 import com.example.common.utils.nancyToastError
 import com.example.common.utils.nancyToastWarning
+import com.example.domain.model.places.SearchItem
 import com.example.eventify.R
 import com.example.eventify.databinding.FragmentMapBinding
 import com.example.eventify.presentation.adapters.MapSearchAdapter
@@ -42,13 +47,18 @@ import com.google.android.gms.maps.model.PolylineOptions
 import com.google.maps.android.PolyUtil
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.json.JSONObject
+import org.w3c.dom.Text
 
 @AndroidEntryPoint
 class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate), OnMapReadyCallback {
@@ -67,7 +77,17 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
     private val markers = mutableListOf<Marker>()
 
-    val mapSearchAdapter = MapSearchAdapter()
+    val mapSearchAdapter = MapSearchAdapter{
+        findNavController().navigate(MapFragmentDirections.actionMapFragmentToMarkerDetailsBottomSheet(
+            placeId = it.placeId,
+            placeType = it.placeType,
+            lat = it.lat,
+            lng = it.lng
+        ))
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(it.lat.toDouble()-0.005, it.lng.toDouble()), 15f))
+        binding.root.transitionToStart()
+        animateSearchRV()
+    }
     private var currentPolyline: Polyline? = null
 
 
@@ -81,11 +101,15 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(it!!.lat, it.long), 6f))
                 }
         }
+
+        setAdapters()
+        motionLayout()
+        observer()
+        searchInputHandler()
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(this)
 
-        binding.searchRV.adapter = mapSearchAdapter
-        motionLayout()
+
     }
 
     override fun buttonListeners() {
@@ -112,12 +136,13 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     fun View.hideKeyboard() {
         val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(windowToken, 0)
+        binding.editTextText.clearFocus()
     }
 
     fun showKeyboard(){
         val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        binding.editTextText.requestFocus()
         imm.showSoftInput(binding.editTextText, InputMethodManager.SHOW_IMPLICIT)
+        binding.editTextText.requestFocus()
     }
 
     fun animateSearchRV(){
@@ -125,6 +150,73 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             .alpha(0f)
             .setDuration(300)
             .start()
+    }
+
+    fun View.animateToInvisible(){
+        animate().alpha(0f).setDuration(300).start()
+    }
+
+    fun View.animateToVisible(){
+        animate().alpha(1f).setDuration(300).start()
+    }
+
+    private fun searchInputHandler(){
+
+        binding.editTextText.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                viewModel.inputState.update { s.toString() }
+            }
+        })
+    }
+
+
+    @OptIn(FlowPreview::class)
+    private fun observer(){
+        lifecycleScope.launch {
+            viewModel.searchState
+                .filterNotNull()
+                .collectLatest{
+
+                    mapSearchAdapter.updateAdapter(it)
+                }
+        }
+
+        lifecycleScope.launch {
+            viewModel.inputState
+                .filterNotNull()
+                .debounce(1000)
+                .collectLatest {
+                    if(it==""){
+                        mapSearchAdapter.updateAdapter(emptyList())
+                    }
+                    else{
+                        viewModel.searchPlaces(it)
+                    }
+            }
+        }
+
+
+
+        lifecycleScope.launch {
+            viewModel.isLoading
+                .filterNotNull()
+                .collectLatest {
+                    binding.progressBar.isVisible = it
+                    binding.searchRV.isVisible = !it
+            }
+        }
+    }
+
+    private fun setAdapters(){
+        binding.searchRV.adapter = mapSearchAdapter
     }
 
     private fun motionLayout(){
@@ -423,6 +515,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     @SuppressLint("PotentialBehaviorOverride")
     override fun onMapReady(googleMap: GoogleMap) {
 
+
         this.googleMap = googleMap
 
         sharedViewModel.sharedCoordinates?.let {
@@ -496,6 +589,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         )
 
         // Marker click listener
+
         googleMap.setOnMarkerClickListener { marker ->
             googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(marker.position.latitude-0.005, marker.position.longitude), 15f))
             marker.showInfoWindow()
@@ -503,7 +597,12 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             val placeId = tags[0] as Int
             val placeType = tags[1] as String
             placeId.let {
-                findNavController().navigate(MapFragmentDirections.actionMapFragmentToMarkerDetailsBottomSheet(placeId, placeType))
+                findNavController().navigate(MapFragmentDirections.actionMapFragmentToMarkerDetailsBottomSheet(
+                    placeId,
+                    placeType,
+                    marker.position.latitude.toString(),
+                    marker.position.longitude.toString())
+                )
             }
             true
         }
