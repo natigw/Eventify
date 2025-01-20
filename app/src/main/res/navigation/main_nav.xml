@@ -31,6 +31,12 @@
             app:destination="@id/eventDetailsFragment"
             app:popUpTo="@+id/profileFragment"
             app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_profileFragment_to_languageBottomSheet"
+            app:destination="@id/languageBottomSheet" />
+        <action
+            android:id="@+id/action_profileFragment_to_themeBottomSheet"
+            app:destination="@id/themeBottomSheet" />
     </fragment>
     <fragment
         android:id="@+id/referralFragment"
@@ -142,4 +148,14 @@
         android:name="com.example.eventify.presentation.ui.fragments.events.customEvent.CreateCustomEventFragment"
         android:label="fragment_create_custom_event"
         tools:layout="@layout/fragment_create_custom_event" />
+    <dialog
+        android:id="@+id/languageBottomSheet"
+        android:name="com.example.eventify.presentation.ui.fragments.profile.LanguageBottomSheet"
+        android:label="bottomsheet_language"
+        tools:layout="@layout/bottomsheet_language" />
+    <dialog
+        android:id="@+id/themeBottomSheet"
+        android:name="com.example.eventify.presentation.ui.fragments.profile.ThemeBottomSheet"
+        android:label="bottomsheet_theme"
+        tools:layout="@layout/bottomsheet_theme" />
 </navigation>

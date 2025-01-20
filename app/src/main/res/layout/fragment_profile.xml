@@ -96,6 +96,7 @@
             android:layout_height="wrap_content"
             app:cardCornerRadius="8dp"
             app:cardBackgroundColor="@color/gray"
+            app:rippleColor="?attr/colorControlHighlight"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textUserFullNameProfile">
@@ -204,37 +205,6 @@
             app:layout_constraintStart_toStartOf="@+id/guidelineProfile1"
             app:layout_constraintTop_toBottomOf="@+id/btnSubs" />
 
-        <Button
-            android:id="@+id/buttonChangeLanguageAZ"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:fontFamily="@font/inter_bold"
-            android:text="@string/azerbaijani"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="@id/guidelineProfile1"
-            app:layout_constraintTop_toBottomOf="@+id/textChangeLanguageTEXT" />
-
-        <Button
-            android:id="@+id/buttonChangeLanguageEN"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/inter_bold"
-            android:text="@string/english"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="@id/guidelineProfile1"
-            app:layout_constraintTop_toBottomOf="@+id/buttonChangeLanguageAZ" />
-
-        <Button
-            android:id="@+id/buttonChangeLanguageRU"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/inter_bold"
-            android:text="@string/russian"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="@id/guidelineProfile1"
-            app:layout_constraintTop_toBottomOf="@+id/buttonChangeLanguageEN" />
-
         <TextView
             android:id="@+id/textChangeThemeTEXT"
             android:layout_width="wrap_content"
@@ -245,48 +215,7 @@
             android:textColor="@color/purple_dark_eventify"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="@+id/guidelineProfile1"
-            app:layout_constraintTop_toBottomOf="@+id/buttonChangeLanguageRU" />
-
-        <Button
-            android:id="@+id/buttonChangeThemeLight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:fontFamily="@font/inter_bold"
-            android:paddingStart="14dp"
-            android:paddingEnd="16dp"
-            android:text="@string/light"
-            android:textSize="16sp"
-            app:icon="@drawable/ic_light_mode"
-            app:layout_constraintStart_toStartOf="@id/guidelineProfile1"
-            app:layout_constraintTop_toBottomOf="@+id/textChangeThemeTEXT" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/buttonChangeThemeDark"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/inter_bold"
-            android:paddingStart="14dp"
-            android:paddingEnd="16dp"
-            android:text="@string/dark"
-            android:textSize="16sp"
-            app:icon="@drawable/ic_dark_mode"
-            app:layout_constraintStart_toStartOf="@id/guidelineProfile1"
-            app:layout_constraintTop_toBottomOf="@+id/buttonChangeThemeLight" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/buttonChangeThemeUseSystem"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/inter_bold"
-            android:paddingStart="12dp"
-            android:paddingEnd="16dp"
-            android:text="@string/use_system"
-            android:textSize="16sp"
-            app:icon="@drawable/ic_theme_auto"
-            app:iconSize="20dp"
-            app:layout_constraintStart_toStartOf="@id/guidelineProfile1"
-            app:layout_constraintTop_toBottomOf="@+id/buttonChangeThemeDark" />
+            app:layout_constraintTop_toBottomOf="@+id/textChangeLanguageTEXT" />
 
         <TextView
             android:id="@+id/textFavoritesProfileTEXT"
@@ -298,7 +227,7 @@
             android:textColor="@color/purple_dark_eventify"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="@+id/guidelineProfile1"
-            app:layout_constraintTop_toBottomOf="@+id/buttonChangeThemeUseSystem" />
+            app:layout_constraintTop_toBottomOf="@+id/textChangeThemeTEXT" />
 
         <!--        <TextView-->
         <!--            android:id="@+id/textNoFavoritesTEXTProfile"-->

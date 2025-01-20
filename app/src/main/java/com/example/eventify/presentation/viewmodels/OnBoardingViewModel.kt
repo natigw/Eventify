@@ -12,10 +12,14 @@ import javax.inject.Named
 
 @HiltViewModel
 class OnBoardingViewModel @Inject constructor(
+    @Named("LanguageChoice")
+    val sharedPrefLanguage : SharedPreferences,
     @Named("UserTokens")
     val sharedPrefToken: SharedPreferences,
     val authRepository: AuthRepository
 ): ViewModel() {
+
+    val currentLanguage = sharedPrefLanguage.getString("language", "en")
 
     fun checkRefreshTokenIsValid(refreshToken : String) : Boolean{
         return try {

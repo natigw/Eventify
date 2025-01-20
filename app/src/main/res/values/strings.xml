@@ -94,9 +94,12 @@
     <string name="user_events">User events</string>
     <string name="create_your_event">Create your event</string>
     <string name="change_language">Change language</string>
-    <string name="azerbaijani" translatable="false">🇦🇿 Azərbaycanca</string>
-    <string name="english" translatable="false">🇺🇸 English</string>
-    <string name="russian" translatable="false">🇷🇺 Русский</string>
+    <string name="azerbaijani_with_flag" translatable="false">🇦🇿 Azərbaycanca</string>
+    <string name="english_with_flag" translatable="false">🇺🇸 English</string>
+    <string name="russian_with_flag" translatable="false">🇷🇺 Русский</string>
+    <string name="azerbaijani" translatable="false">Azərbaycanca</string>
+    <string name="english" translatable="false">English</string>
+    <string name="russian" translatable="false">Русский</string>
     <string name="az" translatable="false">🇦🇿</string>
     <string name="en" translatable="false">🇺🇸</string>
     <string name="create_event">Create event</string>
@@ -174,9 +177,11 @@
     <string name="start">start</string>
     <string name="application_language">Application language:</string>
     <string name="application_theme">Application theme:</string>
+    <string name="choose_language">Choose language</string>
+    <string name="choose_theme">Choose theme</string>
     <string name="light">Light</string>
     <string name="dark">Dark</string>
-    <string name="use_system">Use system</string>
+    <string name="system">System</string>
     <string name="see_also">See also:</string>
     <string name="your_favorites">Your favorites:</string>
     <string name="eventify_slogan">Experience Events Like Never Before!</string>
@@ -184,4 +189,5 @@
     <string name="select_place">Select a place</string>
     <string name="search">Search</string>
     <string name="connection_lost_retry">No connection! Try again later!</string>
+    <string name="confirm">Confirm</string>
 </resources>

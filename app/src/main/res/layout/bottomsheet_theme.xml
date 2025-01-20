@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/rounded_bottom_sheet_background_secondary"
+    tools:context=".presentation.ui.fragments.profile.ThemeBottomSheet">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineThemeBSh1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="@dimen/eventify_guideline_left" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineThemeBSh2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="@dimen/eventify_guideline_right" />
+
+    <ImageView
+        android:id="@+id/imageDrawerElementThemeBSh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:elevation="4dp"
+        android:src="@drawable/bottomsheet_drawer_element_on_secondary"
+        app:layout_constraintEnd_toEndOf="@id/guidelineThemeBSh2"
+        app:layout_constraintStart_toStartOf="@id/guidelineThemeBSh1"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textChooseThemeBShTEXT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/inter_bold"
+        android:text="@string/choose_theme"
+        android:textColor="@color/purple_dark_eventify"
+        android:textSize="28sp"
+        app:layout_constraintStart_toStartOf="@+id/guidelineThemeBSh1"
+        app:layout_constraintTop_toBottomOf="@+id/imageDrawerElementThemeBSh" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/imageLightThemeBSh"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="24dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_light_mode"
+        android:tint="@color/eventify_on_background"
+        app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full"
+        app:layout_constraintStart_toStartOf="@id/guidelineThemeBSh1"
+        app:layout_constraintTop_toBottomOf="@id/textChooseThemeBShTEXT" />
+
+    <TextView
+        android:id="@+id/textLightThemeBShTEXT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:fontFamily="@font/inter_bold"
+        android:text="@string/light"
+        android:textColor="@color/eventify_on_background"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@id/imageLightThemeBSh"
+        app:layout_constraintTop_toTopOf="@+id/imageLightThemeBSh"
+        app:layout_constraintBottom_toBottomOf="@+id/imageLightThemeBSh"/>
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/imageDarkThemeBSh"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="16dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_dark_mode"
+        android:tint="@color/eventify_on_background"
+        app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full"
+        app:layout_constraintStart_toStartOf="@id/guidelineThemeBSh1"
+        app:layout_constraintTop_toBottomOf="@id/imageLightThemeBSh" />
+
+    <TextView
+        android:id="@+id/textDarkThemeBShTEXT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_bold"
+        android:text="@string/dark"
+        android:textColor="@color/eventify_on_background"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageDarkThemeBSh"
+        app:layout_constraintStart_toStartOf="@+id/textLightThemeBShTEXT"
+        app:layout_constraintTop_toTopOf="@+id/imageDarkThemeBSh" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/imageSystemThemeBSh"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="16dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_theme_auto"
+        android:tint="@color/eventify_on_background"
+        app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full"
+        app:layout_constraintStart_toStartOf="@id/guidelineThemeBSh1"
+        app:layout_constraintTop_toBottomOf="@id/textDarkThemeBShTEXT" />
+
+    <TextView
+        android:id="@+id/textSystemThemeBShTEXT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_bold"
+        android:text="@string/system"
+        android:textColor="@color/eventify_on_background"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageSystemThemeBSh"
+        app:layout_constraintStart_toStartOf="@+id/textDarkThemeBShTEXT"
+        app:layout_constraintTop_toTopOf="@+id/imageSystemThemeBSh" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupThemeBSh"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="-6dp"
+        android:layout_marginBottom="-8dp"
+        android:layout_marginEnd="-16dp"
+        app:layout_constraintBottom_toBottomOf="@id/imageSystemThemeBSh"
+        app:layout_constraintEnd_toEndOf="@id/guidelineThemeBSh2"
+        app:layout_constraintTop_toTopOf="@id/imageLightThemeBSh">
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/radioButtonLightThemeBSh"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            app:buttonTint="@color/eventify_primary_helper" />
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/radioButtonDarkThemeBSh"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            app:buttonTint="@color/eventify_primary_helper" />
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/radioButtonSystemThemeBSh"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            app:buttonTint="@color/eventify_primary_helper" />
+
+    </RadioGroup>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonConfirmThemeBSh"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="24dp"
+        android:fontFamily="@font/inter_bold"
+        android:minHeight="60dp"
+        android:text="@string/confirm"
+        android:textSize="24sp"
+        app:cornerRadius="@dimen/eventify_large_button_corner_radius"
+        android:textColor="@color/eventify_on_primary"
+        android:backgroundTint="@color/eventify_primary"
+        app:rippleColor="?attr/colorControlHighlight"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineThemeBSh2"
+        app:layout_constraintStart_toStartOf="@+id/guidelineThemeBSh1"
+        app:layout_constraintTop_toBottomOf="@id/imageSystemThemeBSh"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

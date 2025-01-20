@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/rounded_bottom_sheet_background_secondary"
+    tools:context=".presentation.ui.fragments.profile.LanguageBottomSheet">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineLanguageBSh1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="@dimen/eventify_guideline_left" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineLanguageBSh2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="@dimen/eventify_guideline_right" />
+
+    <ImageView
+        android:id="@+id/imageDrawerElementLanguageBSh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:elevation="4dp"
+        android:src="@drawable/bottomsheet_drawer_element_on_secondary"
+        app:layout_constraintEnd_toEndOf="@id/guidelineLanguageBSh2"
+        app:layout_constraintStart_toStartOf="@id/guidelineLanguageBSh1"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textChooseLanguageBShTEXT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/inter_bold"
+        android:text="@string/choose_language"
+        android:textColor="@color/purple_dark_eventify"
+        android:textSize="28sp"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLanguageBSh1"
+        app:layout_constraintTop_toBottomOf="@+id/imageDrawerElementLanguageBSh" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/imageLanguageIconAZ"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="24dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/flag_aze"
+        app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full"
+        app:layout_constraintStart_toStartOf="@id/guidelineLanguageBSh1"
+        app:layout_constraintTop_toBottomOf="@id/textChooseLanguageBShTEXT" />
+
+    <TextView
+        android:id="@+id/textAZLanguageBShTEXT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:fontFamily="@font/inter_bold"
+        android:text="@string/azerbaijani"
+        android:textColor="@color/eventify_on_background"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@id/imageLanguageIconAZ"
+        app:layout_constraintTop_toTopOf="@+id/imageLanguageIconAZ"
+        app:layout_constraintBottom_toBottomOf="@+id/imageLanguageIconAZ"/>
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/imageLanguageIconEN"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="16dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/flag_en"
+        app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full"
+        app:layout_constraintStart_toStartOf="@id/guidelineLanguageBSh1"
+        app:layout_constraintTop_toBottomOf="@id/imageLanguageIconAZ" />
+
+    <TextView
+        android:id="@+id/textENLanguageBShTEXT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_bold"
+        android:text="@string/english"
+        android:textColor="@color/eventify_on_background"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageLanguageIconEN"
+        app:layout_constraintStart_toStartOf="@+id/textAZLanguageBShTEXT"
+        app:layout_constraintTop_toTopOf="@+id/imageLanguageIconEN" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/imageLanguageIconRU"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="16dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/flag_rus"
+        app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full"
+        app:layout_constraintStart_toStartOf="@id/guidelineLanguageBSh1"
+        app:layout_constraintTop_toBottomOf="@id/textENLanguageBShTEXT" />
+
+    <TextView
+        android:id="@+id/textRULanguageBShTEXT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_bold"
+        android:text="@string/russian"
+        android:textColor="@color/eventify_on_background"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageLanguageIconRU"
+        app:layout_constraintStart_toStartOf="@+id/textENLanguageBShTEXT"
+        app:layout_constraintTop_toTopOf="@+id/imageLanguageIconRU" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupLanguageBSh"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="-6dp"
+        android:layout_marginBottom="-8dp"
+        android:layout_marginEnd="-16dp"
+        app:layout_constraintBottom_toBottomOf="@id/imageLanguageIconRU"
+        app:layout_constraintEnd_toEndOf="@id/guidelineLanguageBSh2"
+        app:layout_constraintTop_toTopOf="@id/imageLanguageIconAZ">
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/radioButtonAZLanguageBSh"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            app:buttonTint="@color/eventify_primary_helper" />
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/radioButtonENLanguageBSh"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            app:buttonTint="@color/eventify_primary_helper" />
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/radioButtonRULanguageBSh"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            app:buttonTint="@color/eventify_primary_helper" />
+
+    </RadioGroup>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonConfirmLanguageBSh"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="24dp"
+        android:fontFamily="@font/inter_bold"
+        android:minHeight="60dp"
+        android:text="@string/confirm"
+        android:textSize="24sp"
+        app:cornerRadius="@dimen/eventify_large_button_corner_radius"
+        android:textColor="@color/eventify_on_primary"
+        android:backgroundTint="@color/eventify_primary"
+        app:rippleColor="?attr/colorControlHighlight"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineLanguageBSh2"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLanguageBSh1"
+        app:layout_constraintTop_toBottomOf="@id/imageLanguageIconRU"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
