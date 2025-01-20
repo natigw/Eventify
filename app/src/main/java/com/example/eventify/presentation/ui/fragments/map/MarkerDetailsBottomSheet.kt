@@ -1,7 +1,9 @@
 package com.example.eventify.presentation.ui.fragments.map
 
+import android.content.Intent
 import android.net.Uri
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -22,6 +24,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
+import java.net.URI
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -36,10 +39,29 @@ class MarkerDetailsBottomSheet : BaseBottomSheetFragment<BottomsheetMarkerDetail
     override fun onViewCreatedLight() {
         checkIfVenueOrEvent()
         observer()
-
+        routeIntent()
     }
 
-    fun observer(){
+    private fun routeIntent(){
+        binding.buttonShortestRouteMarkerDetails.setOnClickListener {
+
+            val latitude = args.lat
+            val longitude = args.lng
+            val geoUri = "geo:$latitude,$longitude?q=$latitude,$longitude"
+
+            val intent = Intent(Intent.ACTION_VIEW).apply {
+                data = Uri.parse(geoUri)
+            }
+
+            if (intent.resolveActivity(requireActivity().packageManager) != null) {
+                requireActivity().startActivity(intent)
+            } else {
+                Toast.makeText(requireContext(), "No app found to open maps", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun observer(){
         lifecycleScope.launch {
             viewModel.eventDetails
                 .filter { it!=null }
@@ -57,7 +79,7 @@ class MarkerDetailsBottomSheet : BaseBottomSheetFragment<BottomsheetMarkerDetail
         }
     }
 
-    fun checkIfVenueOrEvent(){
+    private fun checkIfVenueOrEvent(){
         if(args.placeType == "venue"){
             viewModel.getVenueDetails(args.placeId)
         }
@@ -66,7 +88,7 @@ class MarkerDetailsBottomSheet : BaseBottomSheetFragment<BottomsheetMarkerDetail
         }
     }
 
-    fun setEventUI(eventDetails : EventDetailsItem){
+    private fun setEventUI(eventDetails : EventDetailsItem){
         with(binding) {
             textVenueNameMarkerDetails.text = eventDetails.title
             textVenueDescriptionMarkerDetails.text = eventDetails.description
@@ -81,12 +103,12 @@ class MarkerDetailsBottomSheet : BaseBottomSheetFragment<BottomsheetMarkerDetail
                 .into(imageVenueMarkerDetails)
             buttonBuyTicketMarkerDetails.visibility = View.VISIBLE
             buttonShortestRouteMarkerDetails.text = "Get route"
-            buttonShortestRouteMarkerDetails.setOnClickListener {
-                lifecycleScope.launch {
-                    sharedViewModel.setRouteCoordinates(eventDetails.coordinates)
-                    dismiss()
-                }
-            }
+//            buttonShortestRouteMarkerDetails.setOnClickListener {
+//                lifecycleScope.launch {
+//                    sharedViewModel.setRouteCoordinates(eventDetails.coordinates)
+//                    dismiss()
+//                }
+//            }
         }
     }
 
@@ -103,12 +125,12 @@ class MarkerDetailsBottomSheet : BaseBottomSheetFragment<BottomsheetMarkerDetail
                 .placeholder(R.drawable.placeholder_venue)
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(imageVenueMarkerDetails)
-            buttonShortestRouteMarkerDetails.setOnClickListener {
-                lifecycleScope.launch {
-                    sharedViewModel.setRouteCoordinates(venueDetails.coordinates)
-                    dismiss()
-                }
-            }
+//            buttonShortestRouteMarkerDetails.setOnClickListener {
+//                lifecycleScope.launch {
+//                    sharedViewModel.setRouteCoordinates(venueDetails.coordinates)
+//                    dismiss()
+//                }
+//            }
         }
     }
 

@@ -1,5 +1,6 @@
 package com.example.eventify.presentation.ui.fragments.venue
 
+import android.util.Log
 import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
@@ -23,6 +24,7 @@ import com.example.eventify.databinding.FragmentVenueDetailsBinding
 import com.example.eventify.presentation.adapters.CommentAdapter
 import com.example.eventify.presentation.viewmodels.SharedViewModel
 import com.example.eventify.presentation.viewmodels.VenueDetailsViewModel
+import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -202,13 +204,11 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
 //            }
 
             buttonVenueShowLocation.setOnClickListener {
+                venueDetailsItem.coordinates.latitude
                 sharedViewModel.setCoordinates(
-                    PlaceCoordinates(
-                        placeId = venueDetailsItem.venueId,
-                        name = venueDetailsItem.title,
-                        placeType = "venue",
-                        long = venueDetailsItem.coordinates.longitude,
-                        lat = venueDetailsItem.coordinates.latitude
+                    LatLng(
+                        venueDetailsItem.coordinates.latitude,
+                        venueDetailsItem.coordinates.longitude
                     )
                 )
                 val bottomNavigationView =

@@ -84,23 +84,18 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             lat = it.lat,
             lng = it.lng
         ))
+        val marker = viewModel.findMarkerByLatLng(it.lat.toDouble(),it.lng.toDouble())
+        marker?.showInfoWindow()
         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(it.lat.toDouble()-0.005, it.lng.toDouble()), 15f))
         binding.root.transitionToStart()
         animateSearchRV()
+        binding.progressBar.animateToInvisible()
+        binding.editTextText.hideKeyboard()
     }
-    private var currentPolyline: Polyline? = null
+
 
 
     override fun onViewCreatedLight() {
-//        setDrawer()
-        lifecycleScope.launch {
-            sharedViewModel.testStateFlow
-                .filter { it!=null }
-                .collectLatest {
-
-                    googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(it!!.lat, it.long), 6f))
-                }
-        }
 
         setAdapters()
         motionLayout()
@@ -108,8 +103,6 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         searchInputHandler()
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(this)
-
-
     }
 
     override fun buttonListeners() {
@@ -117,6 +110,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         binding.backwardButton.setOnClickListener {
             binding.root.transitionToStart()
             animateSearchRV()
+            binding.progressBar.animateToInvisible()
             binding.editTextText.hideKeyboard()
         }
 
@@ -125,6 +119,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 if(binding.root.currentState == R.id.end){
                     binding.root.transitionToStart()
                     animateSearchRV()
+                    binding.progressBar.animateToInvisible()
                     binding.editTextText.hideKeyboard()
                 }
                 else{
@@ -184,7 +179,6 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             viewModel.searchState
                 .filterNotNull()
                 .collectLatest{
-
                     mapSearchAdapter.updateAdapter(it)
                 }
         }
@@ -246,6 +240,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                         .alpha(1f)
                         .setDuration(300)
                         .start()
+                    binding.progressBar.animateToVisible()
                     binding.root.getTransition(R.id.myTransition).isEnabled = false
                 }
                 else if(currentId == R.id.start){
@@ -266,31 +261,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         })
     }
 
-    //TODO -> burda nese sehv olub
-    private fun isDarkModeEnabled(context: Context): Boolean {
-        val currentNightMode = context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
-        return currentNightMode == Configuration.UI_MODE_NIGHT_YES
-    }
 
-//
-//    private fun applyDynamicMapStyle(googleMap: GoogleMap) {
-//        val isDarkMode = isDarkModeEnabled(requireContext())
-//        val styleRes = if (isDarkMode) R.raw.map_aubergine else GoogleMap.MAP_TYPE_NORMAL
-//        try {
-//            googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(requireContext(), styleRes))
-//        } catch (e: Resources.NotFoundException) {
-//            Log.e("MapStyle", "Error loading map style: ${e.message}")
-//        }
-//    }
-
-
-
-//    override fun onConfigurationChanged(newConfig: Configuration) {
-//        super.onConfigurationChanged(newConfig)
-//        if (::googleMap.isInitialized) {
-//            applyDynamicMapStyle(googleMap)
-//        }
-//    }
 
     private fun addMarker(
         lat: Double,
@@ -306,6 +277,9 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 .title(title)
                 .icon(BitmapDescriptorFactory.defaultMarker(hue))
         )
+        marker?.let {
+            viewModel.markerList.add(marker)
+        }
         marker?.tag = listOf(placeId, placeType)
         marker?.let { markers.add(it) }
     }
@@ -322,55 +296,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         }
     }
 
-    private suspend fun fetchRoute(origin: LatLng, destination: LatLng) {
-        val directionsApiKey = com.example.eventify.BuildConfig.MAPS_API_KEY
-        val url = "https://maps.googleapis.com/maps/api/directions/json?" +
-                "origin=${origin.latitude},${origin.longitude}" +
-                "&destination=${destination.latitude},${destination.longitude}" +
-                "&key=$directionsApiKey"
 
-        withContext(Dispatchers.IO) {
-            val client = OkHttpClient()
-            val request = Request.Builder().url(url).build()
-            try {
-                val response = client.newCall(request).execute()
-                val jsonResponse = JSONObject(response.body!!.string())
-                val routes = jsonResponse.getJSONArray("routes")
-
-                if (routes.length() > 0) {
-                    val points = routes.getJSONObject(0)
-                        .getJSONObject("overview_polyline")
-                        .getString("points")
-
-                    val decodedPath = PolyUtil.decode(points)
-
-
-
-                    withContext(Dispatchers.Main) {
-                        // Remove the previous polyline without clearing the map
-                        currentPolyline?.remove()
-
-                        // Add the new polyline
-                        currentPolyline = googleMap.addPolyline(
-                            PolylineOptions()
-                                .addAll(decodedPath)
-                                .color(Color.BLUE)
-                                .width(10f)
-                        )
-                    }
-
-                } else {
-
-                }
-            } catch (e: Exception) {
-                e.printStackTrace()
-                withContext(Dispatchers.Main) {
-                    nancyToastError(requireContext(), getString(R.string.error_fetching_route))
-                    Log.e("exception", e.toString())
-                }
-            }
-        }
-    }
 
     private fun getMyLocation() {
         if (ActivityCompat.checkSelfPermission(
@@ -423,87 +349,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         }
     }
 
-//    private fun setDrawer() {
-//
-//        binding.buttonDrawer.setOnClickListener {
-//            binding.myDrawerLayout.openDrawer(Gravity.LEFT, true)
-//        }
-//
-//        val drawerLayout = binding.myDrawerLayout
-//        val navigationView: NavigationView = requireActivity().findViewById(R.id.drawerNavigationHome)
-//
-//        val username = "username temp" //shprefLoggedin.getString("username", null)
-//        val useremail = "email temp" //shprefLoggedin.getString("email", null)
-//
-//        val headerView = navigationView.getHeaderView(0)
-//        val userProfilePicture = headerView.findViewById<ShapeableImageView>(R.id.imageUserProfilePictureDrawer)
-//        val usernameDrawer = headerView.findViewById<TextView>(R.id.textUsernameDrawer)
-//        val userEmailDrawer = headerView.findViewById<TextView>(R.id.textUserEmailDrawer)
-//        val editProfileDrawer = headerView.findViewById<Button>(R.id.buttonEditProfileDrawer)
-//
-//
-//        usernameDrawer.text = username
-//        userEmailDrawer.text = useremail
-//
-//        Glide.with(userProfilePicture)
-//            .load(getProfilePictureUri())
-//            .placeholder(R.drawable.usersample)
-//            .transition(DrawableTransitionOptions.withCrossFade())
-//            .into(userProfilePicture)
-//
-//        editProfileDrawer.setOnClickListener {
-//        nancyToastSuccess(requireContext(), getString(R.string.edit))
-//            //TODO -> edit screen
-//        }
-//
-//        navigationView.setNavigationItemSelectedListener { menuItem ->
-//            when (menuItem.itemId) {
-//                R.id.drawer_profile -> {
-//                    drawerLayout.closeDrawer(GravityCompat.START)
-//                    findNavController().navigate(R.id.profileFragment)
-//                    true
-//                }
-//                R.id.drawer_referral -> {
-//                    drawerLayout.closeDrawer(GravityCompat.START)
-//                    findNavController().navigate(R.id.referralFragment)
-//                    true
-//                }
-//                R.id.drawer_subscription -> {
-//                    drawerLayout.closeDrawer(GravityCompat.START)
-//                    findNavController().navigate(R.id.subscriptionFragment)
-//                    true
-//                }
-//                R.id.drawer_tickets -> {
-//                    drawerLayout.closeDrawer(GravityCompat.START)
-//                    //findNavController().navigate(R.id.)
-//                    //TODO -> current tickets
-//                    true
-//                }
-//                R.id.drawer_payment_history -> {
-//                    drawerLayout.closeDrawer(GravityCompat.START)
-//                    //findNavController().navigate(R.id.)
-//                    //TODO -> all previous payments and active tickets
-//                    true
-//                }
-//                R.id.drawer_settings -> {
-//                    drawerLayout.closeDrawer(GravityCompat.START)
-//                    //findNavController().navigate(R.id.)
-//                    //TODO -> profile info and edit screen
-//                    true
-//                }
-//                R.id.drawer_logout -> {
-//                    drawerLayout.closeDrawer(GravityCompat.START)
-//                    sharedPreferences.edit{
-//                        clear()
-//                    }
-//                    nancyToastInfo(requireContext(), getString(R.string.logout_successful))
-//                    navigateToAuthActivity()
-//                    true
-//                }
-//                else -> false
-//            }
-//        }
-//    }
+
 
     private fun getProfilePictureUri(): Uri {
         val uriImage = null//shprefProfilePicture.getString("profile_image_uri", null)
@@ -512,6 +358,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     }
 
 
+    @OptIn(FlowPreview::class)
     @SuppressLint("PotentialBehaviorOverride")
     override fun onMapReady(googleMap: GoogleMap) {
 
@@ -530,14 +377,19 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         }
 
         lifecycleScope.launch {
-            sharedViewModel.sharedRouteDestinationCoordinates.collect { destinationCoordinates ->
-                destinationCoordinates?.let {
-                    if (currentLatLng != null) {
-                        fetchRoute(currentLatLng!!, LatLng(it.latitude, it.longitude))
-                    } else {
-                        nancyToastWarning(requireContext(), getString(R.string.enable_location_service))
+            sharedViewModel.sharedRouteDestinationCoordinates
+                .debounce(800)
+                .filterNotNull()
+                .collectLatest { destinationCoordinates ->
+                    val marker = viewModel.findMarkerByLatLng(
+                        destinationCoordinates.latitude,
+                        destinationCoordinates.longitude
+                    )
+                    Log.e("Markerer",marker.toString())
+                    if(marker!=null){
+                        marker.showInfoWindow()
+                        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(marker.position.latitude, marker.position.longitude), 15f))
                     }
-                }
             }
         }
 
@@ -557,7 +409,6 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                             )
                         }
                     }
-
                 }
 
             viewModel.eventsState
@@ -645,3 +496,85 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         }
     }
 }
+
+//    private fun setDrawer() {
+//
+//        binding.buttonDrawer.setOnClickListener {
+//            binding.myDrawerLayout.openDrawer(Gravity.LEFT, true)
+//        }
+//
+//        val drawerLayout = binding.myDrawerLayout
+//        val navigationView: NavigationView = requireActivity().findViewById(R.id.drawerNavigationHome)
+//
+//        val username = "username temp" //shprefLoggedin.getString("username", null)
+//        val useremail = "email temp" //shprefLoggedin.getString("email", null)
+//
+//        val headerView = navigationView.getHeaderView(0)
+//        val userProfilePicture = headerView.findViewById<ShapeableImageView>(R.id.imageUserProfilePictureDrawer)
+//        val usernameDrawer = headerView.findViewById<TextView>(R.id.textUsernameDrawer)
+//        val userEmailDrawer = headerView.findViewById<TextView>(R.id.textUserEmailDrawer)
+//        val editProfileDrawer = headerView.findViewById<Button>(R.id.buttonEditProfileDrawer)
+//
+//
+//        usernameDrawer.text = username
+//        userEmailDrawer.text = useremail
+//
+//        Glide.with(userProfilePicture)
+//            .load(getProfilePictureUri())
+//            .placeholder(R.drawable.usersample)
+//            .transition(DrawableTransitionOptions.withCrossFade())
+//            .into(userProfilePicture)
+//
+//        editProfileDrawer.setOnClickListener {
+//        nancyToastSuccess(requireContext(), getString(R.string.edit))
+//            //TODO -> edit screen
+//        }
+//
+//        navigationView.setNavigationItemSelectedListener { menuItem ->
+//            when (menuItem.itemId) {
+//                R.id.drawer_profile -> {
+//                    drawerLayout.closeDrawer(GravityCompat.START)
+//                    findNavController().navigate(R.id.profileFragment)
+//                    true
+//                }
+//                R.id.drawer_referral -> {
+//                    drawerLayout.closeDrawer(GravityCompat.START)
+//                    findNavController().navigate(R.id.referralFragment)
+//                    true
+//                }
+//                R.id.drawer_subscription -> {
+//                    drawerLayout.closeDrawer(GravityCompat.START)
+//                    findNavController().navigate(R.id.subscriptionFragment)
+//                    true
+//                }
+//                R.id.drawer_tickets -> {
+//                    drawerLayout.closeDrawer(GravityCompat.START)
+//                    //findNavController().navigate(R.id.)
+//                    //TODO -> current tickets
+//                    true
+//                }
+//                R.id.drawer_payment_history -> {
+//                    drawerLayout.closeDrawer(GravityCompat.START)
+//                    //findNavController().navigate(R.id.)
+//                    //TODO -> all previous payments and active tickets
+//                    true
+//                }
+//                R.id.drawer_settings -> {
+//                    drawerLayout.closeDrawer(GravityCompat.START)
+//                    //findNavController().navigate(R.id.)
+//                    //TODO -> profile info and edit screen
+//                    true
+//                }
+//                R.id.drawer_logout -> {
+//                    drawerLayout.closeDrawer(GravityCompat.START)
+//                    sharedPreferences.edit{
+//                        clear()
+//                    }
+//                    nancyToastInfo(requireContext(), getString(R.string.logout_successful))
+//                    navigateToAuthActivity()
+//                    true
+//                }
+//                else -> false
+//            }
+//        }
+//    }

@@ -26,6 +26,7 @@ import com.example.eventify.databinding.FragmentEventDetailsBinding
 import com.example.eventify.presentation.adapters.CommentAdapter
 import com.example.eventify.presentation.viewmodels.EventDetailsViewModel
 import com.example.eventify.presentation.viewmodels.SharedViewModel
+import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -152,6 +153,7 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
                         .build()
                 )
             }
+            binding.buttonEventShowLocation
         }
 
         requireActivity().onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
@@ -246,17 +248,15 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
 
             buttonEventShowLocation.setOnClickListener {
                 sharedViewModel.setCoordinates(
-                    PlaceCoordinates(
-                        placeId = eventDetailsItem.eventId,
-                        name = eventDetailsItem.title,
-                        placeType = "Event",
-                        long = eventDetailsItem.coordinates.longitude,
-                        lat = eventDetailsItem.coordinates.latitude
+                    LatLng(
+                        eventDetailsItem.coordinates.latitude,
+                        eventDetailsItem.coordinates.longitude
                     )
                 )
                 val bottomNavigationView = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
                 bottomNavigationView.selectedItemId = R.id.mapFragment
             }
+
             buttonBuyTicketEventDetails.setOnClickListener {
                 nancyToastSuccess(requireContext(), getString(R.string.navigating_buy_ticket))
                 //TODO -> backendden

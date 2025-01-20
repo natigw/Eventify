@@ -13,12 +13,11 @@ class SharedViewModel : ViewModel() {
 
     var sharedCoordinates: PlaceCoordinates? = null
 
-    val testStateFlow = MutableStateFlow<PlaceCoordinates?>(null)
 
     var eventsRVState : Parcelable? = null
     var venuesRVState : Parcelable? = null
-    fun setCoordinates(placeCoordinates: PlaceCoordinates) {
-        testStateFlow.update { placeCoordinates }
+    fun setCoordinates(latLng: LatLng) {
+        sharedRouteDestinationCoordinates.update { latLng }
     }
 
     suspend fun setRouteCoordinates(routeCoordinates: LatLng) {
