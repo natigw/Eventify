@@ -89,6 +89,7 @@
     <string name="create_your_event">Öz tədbirinizi yaradın</string>
     <string name="change_language">Tətbiqin dilini dəyişin</string>
     <string name="login_successful">Giriş uğurludur</string>
+    <string name="done">Tamamlanıb</string>
     <string name="something_went_wrong">Vayy! Nəsə yanlışlıq oldu!</string>
     <string name="create_event">Tədbir yarat</string>
     <string name="change">Dəyişdir</string>
@@ -150,12 +151,11 @@
     <string name="try_again">Yenidən cəhd edin!</string>
     <string name="stop">dayan</string>
     <string name="start">davam et</string>
-    <string name="application_language">Tətbiqin dili:</string>
     <string name="system">Sistem</string>
     <string name="see_also">Həmçinin baxın:</string>
     <string name="your_favorites">Sizin sevimliləriniz:</string>
     <string name="eventify_slogan">Heç vaxt yaşamadığınız əyləncəni yaşayın!</string>
-    <string name="application_theme">Tətbiqin mövzusu:</string>
+    <string name="choose_theme">Mövzu seçin</string>
     <string name="light">Açıq</string>
     <string name="dark">Tünd</string>
     <string name="search_places">Yeri axtarın</string>
@@ -179,4 +179,10 @@
         </font>
     </string>
     <string name="continue_with_google">Google ilə davam edin</string>
+    <string name="free">Pulsuz</string>
+    <string name="options">Tənzimləmələr:</string>
+    <string name="language">Tətbiqin dili</string>
+    <string name="theme">Tətbiqin mövzusu</string>
+    <string name="choose_language">Dil seçin</string>
+    <string name="confirm">Təsdiqlə</string>
 </resources>

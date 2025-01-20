@@ -33,6 +33,19 @@ class ThemeBottomSheet : BaseBottomSheetFragment<BottomsheetThemeBinding>(Bottom
             viewmodel.chosenTheme = AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
         }
 
+        binding.cardLightThemeBSh.setOnClickListener {
+            viewmodel.chosenTheme = AppCompatDelegate.MODE_NIGHT_NO
+            binding.radioButtonLightThemeBSh.isChecked = true
+        }
+        binding.cardDarkThemeBSh.setOnClickListener {
+            viewmodel.chosenTheme = AppCompatDelegate.MODE_NIGHT_YES
+            binding.radioButtonDarkThemeBSh.isChecked = true
+        }
+        binding.cardSystemThemeBSh.setOnClickListener {
+            viewmodel.chosenTheme = AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+            binding.radioButtonSystemThemeBSh.isChecked = true
+        }
+
         binding.buttonConfirmThemeBSh.setOnClickListener {
             if (viewmodel.chosenTheme != viewmodel.currentTheme)
                 changeTheme(viewmodel.chosenTheme)

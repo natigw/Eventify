@@ -65,6 +65,7 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
 
     private fun makeViewsInvisible(){
         with(binding) {
+            buttonBackEventDetails.visibility = View.INVISIBLE
             textEventName.visibility = View.INVISIBLE
             imageEvent.visibility = View.INVISIBLE
             buttonLikeEvent.visibility = View.INVISIBLE
@@ -93,6 +94,7 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
     }
     private fun makeViewsVisible(){
         with(binding) {
+            buttonBackEventDetails.visibility = View.VISIBLE
             textEventName.visibility = View.VISIBLE
             imageEvent.visibility = View.VISIBLE
             textEventDetailsText.visibility = View.VISIBLE
@@ -184,7 +186,7 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
             if (!isCommentFilled) {
                 return@setOnClickListener
             }
-            lifecycleScope.launch {
+            viewLifecycleOwner.lifecycleScope.launch {
                 if(
                     viewmodel.addComment(
                         AddCommentItem(
@@ -268,7 +270,7 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
         viewmodel.getEventDetails(args.eventId)
         viewmodel.getEventLikeInfo(args.eventId)
 
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewmodel.likedState
                 .filterNotNull()
                 .collectLatest {
@@ -277,12 +279,11 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
                     else
                         binding.buttonLikeEvent.setIconResource(R.drawable.like_fav_border)
                     crossfadeAppear(binding.buttonLikeEvent)
-                    crossfadeAppear(binding.buttonBackEventDetails)
                 }
         }
 
 
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewmodel.eventDetails
                 .filterNotNull()
                 .collectLatest {
@@ -292,7 +293,7 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
                 }
         }
 
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewmodel.isLoadingComments.collectLatest {
                 binding.progressBarCommentEventDetails.isVisible = it
             }
@@ -305,12 +306,12 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
     }
 
     private fun updateAdapters() {
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewmodel.isLoadingComments.collectLatest {
                 binding.progressBarCommentEventDetails.isVisible = it
             }
         }
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewmodel.comments
                 .filterNotNull()
                 .collectLatest {

@@ -89,67 +89,6 @@
             app:layout_constraintTop_toBottomOf="@id/textUsernameProfile"
             tools:text="User name and surname" />
 
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/carta"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="8dp"
-            app:cardBackgroundColor="@color/gray"
-            app:rippleColor="?attr/colorControlHighlight"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textUserFullNameProfile">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:id="@+id/iconSettings"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginVertical="12dp"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/ic_android"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-                    android:text="Language"
-                    app:layout_constraintStart_toEndOf="@id/iconSettings"
-                    app:layout_constraintTop_toTopOf="@id/iconSettings"
-                    app:layout_constraintBottom_toBottomOf="@id/iconSettings" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="12dp"
-                    android:text="Selected"
-                    app:layout_constraintEnd_toStartOf="@id/iconOpenSettings"
-                    app:layout_constraintTop_toTopOf="@id/iconSettings"
-                    app:layout_constraintBottom_toBottomOf="@id/iconSettings" />
-
-                <ImageView
-                    android:id="@+id/iconOpenSettings"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginEnd="16dp"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/ic_arrow_right"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-
         <TextView
             android:id="@+id/textSeeAlsoTEXT"
             android:layout_width="wrap_content"
@@ -158,64 +97,384 @@
             android:fontFamily="@font/inter_bold"
             android:text="@string/see_also"
             android:textColor="@color/purple_dark_eventify"
-            android:textSize="20sp"
+            android:textSize="22sp"
             app:layout_constraintStart_toStartOf="@+id/guidelineProfile1"
-            app:layout_constraintTop_toBottomOf="@+id/carta" />
+            app:layout_constraintTop_toBottomOf="@+id/textUserFullNameProfile" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnReferral"
-            android:layout_width="wrap_content"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardReferralProfile"
+            style="@style/Widget.Material3.CardView.Filled"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:fontFamily="@font/inter_bold"
-            android:paddingStart="18dp"
-            android:paddingEnd="12dp"
-            android:text="@string/referral_program"
-            android:textSize="16sp"
-            app:icon="@drawable/ic_open_in_new_screen"
-            app:iconGravity="end"
-            app:iconTint="@color/eventify_on_primary"
+            android:layout_marginTop="8dp"
+            app:cardBackgroundColor="@color/eventify_background_primary"
+            app:cardCornerRadius="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textSeeAlsoTEXT"
+            app:rippleColor="?attr/colorControlHighlight">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guidelineReferralCard1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="@dimen/eventify_guideline_left" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guidelineReferralCard2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="@dimen/eventify_guideline_right" />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/imageReferralIconProfile"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_marginVertical="12dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/ic_referral"
+                    android:tint="@color/eventify_primary_helper"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/guidelineReferralCard1"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Large" />
+
+                <TextView
+                    android:id="@+id/textReferralTEXT"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginBottom="2dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:text="@string/referral_program"
+                    android:textColor="@color/eventify_main_text"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/imageReferralIconProfile"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textCurrentStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="2dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:textColor="@color/gray_helper_text"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/imageReferralArrowProfile"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Done" />
+
+                <ImageView
+                    android:id="@+id/imageReferralArrowProfile"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="-8dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/ic_arrow_right"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/guidelineReferralCard2"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/gray_helper_text" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/dividerSeeAlsoProfile"
+            android:layout_width="0dp"
+            android:layout_height="0.64dp"
+            android:layout_marginStart="48dp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="@id/guidelineProfile2"
             app:layout_constraintStart_toStartOf="@id/guidelineProfile1"
-            app:layout_constraintTop_toBottomOf="@+id/textSeeAlsoTEXT" />
+            app:layout_constraintTop_toBottomOf="@id/cardReferralProfile" />
 
-        <Button
-            android:id="@+id/btnSubs"
-            android:layout_width="wrap_content"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardSubscriptionProfile"
+            style="@style/Widget.Material3.CardView.Filled"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/inter_bold"
-            android:paddingStart="18dp"
-            android:paddingEnd="12dp"
-            android:text="@string/subscription"
-            android:textSize="16sp"
-            app:icon="@drawable/ic_open_in_new_screen"
-            app:iconGravity="end"
-            app:iconTint="@color/eventify_on_primary"
-            app:layout_constraintStart_toStartOf="@+id/guidelineProfile1"
-            app:layout_constraintTop_toBottomOf="@+id/btnReferral" />
+            app:cardBackgroundColor="@color/eventify_background_primary"
+            app:cardCornerRadius="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dividerSeeAlsoProfile"
+            app:rippleColor="?attr/colorControlHighlight">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guidelineSubscriptionCard1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="@dimen/eventify_guideline_left" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guidelineSubscriptionCard2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="@dimen/eventify_guideline_right" />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/imageSubscriptionIconProfile"
+                    android:layout_width="36dp"
+                    android:layout_height="34dp"
+                    android:layout_marginVertical="13dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/ic_subscription_currency"
+                    android:tint="@color/eventify_primary_helper"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/guidelineSubscriptionCard1"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Large" />
+
+                <TextView
+                    android:id="@+id/textSubscriptionTEXT"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginBottom="2dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:text="@string/subscription"
+                    android:textColor="@color/eventify_main_text"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/imageSubscriptionIconProfile"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textCurrentPlan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="2dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:textColor="@color/gray_helper_text"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/imageSubscriptionArrowProfile"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Free" />
+
+                <ImageView
+                    android:id="@+id/imageSubscriptionArrowProfile"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="-8dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/ic_arrow_right"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/guidelineSubscriptionCard2"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/gray_helper_text" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
 
         <TextView
-            android:id="@+id/textChangeLanguageTEXT"
+            android:id="@+id/textOptionsProfileTEXT"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:fontFamily="@font/inter_bold"
-            android:text="@string/application_language"
+            android:text="@string/options"
             android:textColor="@color/purple_dark_eventify"
-            android:textSize="20sp"
+            android:textSize="22sp"
             app:layout_constraintStart_toStartOf="@+id/guidelineProfile1"
-            app:layout_constraintTop_toBottomOf="@+id/btnSubs" />
+            app:layout_constraintTop_toBottomOf="@+id/cardSubscriptionProfile" />
 
-        <TextView
-            android:id="@+id/textChangeThemeTEXT"
-            android:layout_width="wrap_content"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardLanguageProfile"
+            style="@style/Widget.Material3.CardView.Filled"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:fontFamily="@font/inter_bold"
-            android:text="@string/application_theme"
-            android:textColor="@color/purple_dark_eventify"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="@+id/guidelineProfile1"
-            app:layout_constraintTop_toBottomOf="@+id/textChangeLanguageTEXT" />
+            android:layout_marginTop="8dp"
+            app:cardBackgroundColor="@color/eventify_background_primary"
+            app:cardCornerRadius="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textOptionsProfileTEXT"
+            app:rippleColor="?attr/colorControlHighlight">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guidelineLanguageCard1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="@dimen/eventify_guideline_left" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guidelineLanguageCard2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="@dimen/eventify_guideline_right" />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/imageLanguageIconProfile"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_marginVertical="12dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/ic_languages"
+                    android:tint="@color/eventify_primary_helper"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/guidelineLanguageCard1"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Large" />
+
+                <TextView
+                    android:id="@+id/textChangeLanguageTEXT"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginBottom="2dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:text="@string/language"
+                    android:textColor="@color/eventify_main_text"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/imageLanguageIconProfile"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textCurrentLanguage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="2dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:textColor="@color/gray_helper_text"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/imageLanguageArrowProfile"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="English" />
+
+                <ImageView
+                    android:id="@+id/imageLanguageArrowProfile"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="-8dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/ic_arrow_right"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/guidelineLanguageCard2"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/gray_helper_text" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/dividerOptionsProfile"
+            android:layout_width="0dp"
+            android:layout_height="0.64dp"
+            android:layout_marginStart="48dp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="@id/guidelineProfile2"
+            app:layout_constraintStart_toStartOf="@id/guidelineProfile1"
+            app:layout_constraintTop_toBottomOf="@id/cardLanguageProfile" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardThemeProfile"
+            style="@style/Widget.Material3.CardView.Filled"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/eventify_background_primary"
+            app:cardCornerRadius="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dividerOptionsProfile"
+            app:rippleColor="?attr/colorControlHighlight">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guidelineThemeCard1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="@dimen/eventify_guideline_left" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guidelineThemeCard2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="@dimen/eventify_guideline_right" />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/imageThemeIconProfile"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_marginVertical="12dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/ic_theme"
+                    android:tint="@color/eventify_primary_helper"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/guidelineThemeCard1"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Large" />
+
+                <TextView
+                    android:id="@+id/textChangeThemeTEXT"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginBottom="2dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:text="@string/theme"
+                    android:textColor="@color/eventify_main_text"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/imageThemeIconProfile"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textCurrentTheme"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="2dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:textColor="@color/gray_helper_text"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/imageThemeArrowProfile"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Dark" />
+
+                <ImageView
+                    android:id="@+id/imageThemeArrowProfile"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="-8dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/ic_arrow_right"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/guidelineThemeCard2"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/gray_helper_text" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
 
         <TextView
             android:id="@+id/textFavoritesProfileTEXT"
@@ -225,29 +484,31 @@
             android:fontFamily="@font/inter_bold"
             android:text="@string/your_favorites"
             android:textColor="@color/purple_dark_eventify"
-            android:textSize="20sp"
+            android:textSize="22sp"
             app:layout_constraintStart_toStartOf="@+id/guidelineProfile1"
-            app:layout_constraintTop_toBottomOf="@+id/textChangeThemeTEXT" />
+            app:layout_constraintTop_toBottomOf="@+id/cardThemeProfile" />
 
-        <!--        <TextView-->
-        <!--            android:id="@+id/textNoFavoritesTEXTProfile"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginTop="12dp"-->
-        <!--            android:fontFamily="@font/inter_italic"-->
-        <!--            android:text="@string/no_favorites"-->
-        <!--            android:textColor="@color/eventify_main_text"-->
-        <!--            android:textSize="20sp"-->
-        <!--            android:visibility="invisible"-->
-        <!--            app:layout_constraintEnd_toEndOf="@id/guidelineProfile2"-->
-        <!--            app:layout_constraintStart_toStartOf="@id/guidelineProfile1"-->
-        <!--            app:layout_constraintTop_toBottomOf="@id/textFavoritesProfileTEXT" />-->
+<!--        <TextView-->
+<!--            android:id="@+id/textNoFavoritesTEXTProfile"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="12dp"-->
+<!--            android:fontFamily="@font/inter_italic"-->
+<!--            android:text="@string/no_favorites"-->
+<!--            android:textColor="@color/eventify_main_text"-->
+<!--            android:textSize="20sp"-->
+<!--            android:visibility="invisible"-->
+<!--            app:layout_constraintEnd_toEndOf="@id/guidelineProfile2"-->
+<!--            app:layout_constraintStart_toStartOf="@id/guidelineProfile1"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/textFavoritesProfileTEXT" />-->
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvFavoritesProfile"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
+            android:layout_marginStart="-12dp"
+            android:layout_marginEnd="-12dp"
             android:orientation="vertical"
             android:visibility="invisible"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

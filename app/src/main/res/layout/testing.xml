@@ -25,11 +25,11 @@
                 android:layout_marginTop="24dp"
                 android:text="Select a place"
                 android:textSize="20sp"
-                app:layout_constraintStart_toEndOf="@+id/venueBackButton"
+                app:layout_constraintStart_toEndOf="@+id/buttonBackVenue"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
-                android:id="@+id/venueBackButton"
+                android:id="@+id/buttonBackVenue"
                 style="?attr/materialIconButtonFilledTonalStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

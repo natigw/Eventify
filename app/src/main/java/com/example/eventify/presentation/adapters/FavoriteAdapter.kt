@@ -38,6 +38,9 @@ class FavoriteAdapter(
             root.setOnClickListener {
                 onClick(favItem.id)
             }
+            cardFavorite.setOnClickListener {
+                onClick(favItem.id)
+            }
 
             if (position == favorites.size - 1)
                 materialDividerFavorite.visibility = View.INVISIBLE

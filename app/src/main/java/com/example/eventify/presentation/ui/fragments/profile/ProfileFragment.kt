@@ -60,32 +60,49 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
                 .collectLatest {
                     binding.textUsernameProfile.text = it.username
                     binding.textUserFullNameProfile.text = it.fullName
+                    crossfadeAppear(binding.textUsernameProfile, duration = 400)
+                    crossfadeAppear(binding.textUserFullNameProfile, duration = 400)
                     stopShimmer(binding.shimmerProfile)
                 }
         }
+
+        //val subscriptionCode = viewModel...              //from backend
+        val subscriptionDisplay = getString(R.string.free) //from backend
+        binding.textCurrentPlan.text = subscriptionDisplay
+
+        //val referralCode = viewModel...               //from backend
+        val referralDisplay = getString(R.string.done)  //from backend
+        binding.textCurrentStatus.text = referralDisplay
+
+        val languageCode = viewModel.sharedPrefLanguage.getString("language", "en")
+        val languageDisplay = if (languageCode == "az") getString(R.string.azerbaijani) else if (languageCode == "en") getString(R.string.english) else getString(R.string.russian)
+        binding.textCurrentLanguage.text = languageDisplay
+
+        val themeCode = viewModel.sharedPrefTheme.getInt("theme", AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+        val themeDisplay = if (themeCode == 1) getString(R.string.light) else if (themeCode == 2) getString(R.string.dark) else getString(R.string.system)
+        binding.textCurrentTheme.text = themeDisplay
     }
 
     override fun buttonListeners() {
         super.buttonListeners()
         with(binding) {
-            btnReferral.setOnClickListener {
+            cardReferralProfile.setOnClickListener {
                 findNavController().navigate(R.id.referralFragment)
             }
-            btnSubs.setOnClickListener {
+            cardSubscriptionProfile.setOnClickListener {
                 findNavController().navigate(R.id.subscriptionFragment)
             }
+
+            cardLanguageProfile.setOnClickListener {
+                findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToLanguageBottomSheet())
+            }
+            cardThemeProfile.setOnClickListener {
+                findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToThemeBottomSheet())
+            }
+
             buttonLogoutProfile.setOnClickListener {
                 nancyToastInfo(requireContext(), getString(R.string.logout_successful))
                 NetworkUtils.handleLogout(requireContext())
-            }
-
-
-
-            carta.setOnClickListener {
-                findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToLanguageBottomSheet())
-            }
-            textChangeThemeTEXT.setOnClickListener {
-                findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToThemeBottomSheet())
             }
         }
     }

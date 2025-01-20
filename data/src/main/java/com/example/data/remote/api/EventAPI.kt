@@ -10,12 +10,9 @@ import com.example.data.remote.model.events.eventDetails.ResponseEventDetails
 import com.example.data.remote.model.events.likeDislike.RequestLikeDislikeEvent
 import com.example.data.remote.model.events.likeDislike.favEvents.ResponseFavoriteEvents
 import com.example.data.remote.model.events.search.ResponseSearchEvent
-import com.example.domain.model.places.event.EventItem
-import com.example.domain.model.places.event.SearchEventItem
 import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.Body
-import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Multipart
 import retrofit2.http.POST

@@ -61,6 +61,7 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
 
     private fun makeViewsInvisible(){
         with(binding) {
+            buttonBackVenue.visibility = View.INVISIBLE
             textVenueName.visibility = View.INVISIBLE
             imageVenue.visibility = View.INVISIBLE
             textVenueDetailsText.visibility = View.INVISIBLE
@@ -80,6 +81,7 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
     }
     private fun makeViewsVisible(){
         with(binding) {
+            buttonBackVenue.visibility = View.VISIBLE
             textVenueName.visibility = View.VISIBLE
             imageVenue.visibility = View.VISIBLE
             textVenueDetailsText.visibility = View.VISIBLE
@@ -123,7 +125,7 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
             binding.textInputAddCommentVenue.text = null
         }
 
-        binding.venueBackButton.setOnClickListener {
+        binding.buttonBackVenue.setOnClickListener {
             findNavController().navigate(
                 R.id.venuesFragment,
                 null,
@@ -247,7 +249,6 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
                 .collectLatest {
                     stopShimmer(binding.shimmerVenueDetails)
                     makeViewsVisible()
-                    binding.venueBackButton.isVisible = true
                     setUI(it)
                 }
         }

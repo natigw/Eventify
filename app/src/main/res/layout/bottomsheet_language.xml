@@ -12,14 +12,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="@dimen/eventify_guideline_left" />
+        app:layout_constraintGuide_percent="@dimen/eventify_guideline_left_mid" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineLanguageBSh2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="@dimen/eventify_guideline_right" />
+        app:layout_constraintGuide_percent="@dimen/eventify_guideline_right_mid" />
 
     <ImageView
         android:id="@+id/imageDrawerElementLanguageBSh"
@@ -44,89 +44,196 @@
         app:layout_constraintStart_toStartOf="@+id/guidelineLanguageBSh1"
         app:layout_constraintTop_toBottomOf="@+id/imageDrawerElementLanguageBSh" />
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/imageLanguageIconAZ"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:layout_marginTop="24dp"
-        android:adjustViewBounds="true"
-        android:scaleType="centerCrop"
-        android:src="@drawable/flag_aze"
-        app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full"
-        app:layout_constraintStart_toStartOf="@id/guidelineLanguageBSh1"
-        app:layout_constraintTop_toBottomOf="@id/textChooseLanguageBShTEXT" />
 
-    <TextView
-        android:id="@+id/textAZLanguageBShTEXT"
-        android:layout_width="wrap_content"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardAZLanguageBSh"
+        style="@style/Widget.Material3.CardView.Filled"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:fontFamily="@font/inter_bold"
-        android:text="@string/azerbaijani"
-        android:textColor="@color/eventify_on_background"
-        android:textSize="20sp"
-        app:layout_constraintStart_toEndOf="@id/imageLanguageIconAZ"
-        app:layout_constraintTop_toTopOf="@+id/imageLanguageIconAZ"
-        app:layout_constraintBottom_toBottomOf="@+id/imageLanguageIconAZ"/>
-
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/imageLanguageIconEN"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
         android:layout_marginTop="16dp"
-        android:adjustViewBounds="true"
-        android:scaleType="centerCrop"
-        android:src="@drawable/flag_en"
-        app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full"
-        app:layout_constraintStart_toStartOf="@id/guidelineLanguageBSh1"
-        app:layout_constraintTop_toBottomOf="@id/imageLanguageIconAZ" />
+        android:clickable="true"
+        app:cardBackgroundColor="@color/eventify_background_secondary"
+        app:cardCornerRadius="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textChooseLanguageBShTEXT"
+        app:rippleColor="?attr/colorControlHighlight">
 
-    <TextView
-        android:id="@+id/textENLanguageBShTEXT"
-        android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineLanguageCardAZ1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="@dimen/eventify_guideline_left_mid" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineLanguageCardAZ2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="@dimen/eventify_guideline_right_mid" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imageLanguageIconAZ"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginVertical="12dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/flag_aze"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@id/guidelineLanguageCardAZ1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full" />
+
+            <TextView
+                android:id="@+id/textAZLanguageBShTEXT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/inter_bold"
+                android:text="@string/azerbaijani"
+                android:textColor="@color/eventify_on_background"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/imageLanguageIconAZ"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardENLanguageBSh"
+        style="@style/Widget.Material3.CardView.Filled"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/inter_bold"
-        android:text="@string/english"
-        android:textColor="@color/eventify_on_background"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageLanguageIconEN"
-        app:layout_constraintStart_toStartOf="@+id/textAZLanguageBShTEXT"
-        app:layout_constraintTop_toTopOf="@+id/imageLanguageIconEN" />
+        android:clickable="true"
+        app:cardBackgroundColor="@color/eventify_background_secondary"
+        app:cardCornerRadius="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardAZLanguageBSh"
+        app:rippleColor="?attr/colorControlHighlight">
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/imageLanguageIconRU"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:layout_marginTop="16dp"
-        android:adjustViewBounds="true"
-        android:scaleType="centerCrop"
-        android:src="@drawable/flag_rus"
-        app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full"
-        app:layout_constraintStart_toStartOf="@id/guidelineLanguageBSh1"
-        app:layout_constraintTop_toBottomOf="@id/textENLanguageBShTEXT" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/textRULanguageBShTEXT"
-        android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineLanguageCardEN1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="@dimen/eventify_guideline_left_mid" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineLanguageCardEN2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="@dimen/eventify_guideline_right_mid" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imageLanguageIconEN"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginVertical="12dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/flag_en"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@id/guidelineLanguageCardEN1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full" />
+
+            <TextView
+                android:id="@+id/textENLanguageBShTEXT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/inter_bold"
+                android:text="@string/english"
+                android:textColor="@color/eventify_on_background"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/imageLanguageIconEN"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardRULanguageBSh"
+        style="@style/Widget.Material3.CardView.Filled"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/inter_bold"
-        android:text="@string/russian"
-        android:textColor="@color/eventify_on_background"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageLanguageIconRU"
-        app:layout_constraintStart_toStartOf="@+id/textENLanguageBShTEXT"
-        app:layout_constraintTop_toTopOf="@+id/imageLanguageIconRU" />
+        android:clickable="true"
+        app:cardBackgroundColor="@color/eventify_background_secondary"
+        app:cardCornerRadius="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardENLanguageBSh"
+        app:rippleColor="?attr/colorControlHighlight">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineLanguageCardRU1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="@dimen/eventify_guideline_left_mid" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineLanguageCardRU2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="@dimen/eventify_guideline_right_mid" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imageLanguageIconRU"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginVertical="12dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/flag_rus"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@id/guidelineLanguageCardRU1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full" />
+
+            <TextView
+                android:id="@+id/textRULanguageBShTEXT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/inter_bold"
+                android:text="@string/russian"
+                android:textColor="@color/eventify_on_background"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/imageLanguageIconRU"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
 
     <RadioGroup
         android:id="@+id/radioGroupLanguageBSh"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginTop="-6dp"
-        android:layout_marginBottom="-8dp"
         android:layout_marginEnd="-16dp"
-        app:layout_constraintBottom_toBottomOf="@id/imageLanguageIconRU"
+        app:layout_constraintBottom_toBottomOf="@id/cardRULanguageBSh"
         app:layout_constraintEnd_toEndOf="@id/guidelineLanguageBSh2"
-        app:layout_constraintTop_toTopOf="@id/imageLanguageIconAZ">
+        app:layout_constraintTop_toTopOf="@id/cardAZLanguageBSh">
 
         <com.google.android.material.radiobutton.MaterialRadioButton
             android:id="@+id/radioButtonAZLanguageBSh"
@@ -157,17 +264,17 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:layout_marginBottom="24dp"
+        android:backgroundTint="@color/eventify_primary"
         android:fontFamily="@font/inter_bold"
         android:minHeight="60dp"
         android:text="@string/confirm"
+        android:textColor="@color/eventify_on_primary"
         android:textSize="24sp"
         app:cornerRadius="@dimen/eventify_large_button_corner_radius"
-        android:textColor="@color/eventify_on_primary"
-        android:backgroundTint="@color/eventify_primary"
-        app:rippleColor="?attr/colorControlHighlight"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guidelineLanguageBSh2"
         app:layout_constraintStart_toStartOf="@+id/guidelineLanguageBSh1"
-        app:layout_constraintTop_toBottomOf="@id/imageLanguageIconRU"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/cardRULanguageBSh"
+        app:rippleColor="?attr/colorControlHighlight" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

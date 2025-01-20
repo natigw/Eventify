@@ -35,6 +35,19 @@ class LanguageBottomSheet : BaseBottomSheetFragment<BottomsheetLanguageBinding>(
             viewmodel.chosenLanguage = "ru"
         }
 
+        binding.cardAZLanguageBSh.setOnClickListener {
+            viewmodel.chosenLanguage = "az"
+            binding.radioButtonAZLanguageBSh.isChecked = true
+        }
+        binding.cardENLanguageBSh.setOnClickListener {
+            viewmodel.chosenLanguage = "en"
+            binding.radioButtonENLanguageBSh.isChecked = true
+        }
+        binding.cardRULanguageBSh.setOnClickListener {
+            binding.radioButtonRULanguageBSh.isChecked = true
+            viewmodel.chosenLanguage = "ru"
+        }
+
         binding.buttonConfirmLanguageBSh.setOnClickListener {
             if (viewmodel.chosenLanguage != viewmodel.currentLanguage)
                 changeLanguage(viewmodel.chosenLanguage)

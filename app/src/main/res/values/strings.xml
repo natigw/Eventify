@@ -79,6 +79,8 @@
     <string name="tickets">Tickets</string>
     <string name="chat">Chat</string>
     <string name="subscription">Subscription</string>
+    <string name="free">Free</string>
+    <string name="done">Done</string>
     <string name="something_went_wrong">Something went wrong!</string>
     <string name="something_went_wrong_colon">Something went wrong: </string>
     <string name="error_request">Something went wrong. Try again later.</string>
@@ -175,8 +177,9 @@
     <string name="continue_with_google">Continue with Google</string>
     <string name="stop">stop</string>
     <string name="start">start</string>
-    <string name="application_language">Application language:</string>
-    <string name="application_theme">Application theme:</string>
+    <string name="options">Options:</string>
+    <string name="language">Language</string>
+    <string name="theme">Theme</string>
     <string name="choose_language">Choose language</string>
     <string name="choose_theme">Choose theme</string>
     <string name="light">Light</string>

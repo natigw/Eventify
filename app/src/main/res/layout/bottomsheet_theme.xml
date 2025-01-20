@@ -12,14 +12,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="@dimen/eventify_guideline_left" />
+        app:layout_constraintGuide_percent="@dimen/eventify_guideline_left_mid" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineThemeBSh2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="@dimen/eventify_guideline_right" />
+        app:layout_constraintGuide_percent="@dimen/eventify_guideline_right_mid" />
 
     <ImageView
         android:id="@+id/imageDrawerElementThemeBSh"
@@ -44,92 +44,200 @@
         app:layout_constraintStart_toStartOf="@+id/guidelineThemeBSh1"
         app:layout_constraintTop_toBottomOf="@+id/imageDrawerElementThemeBSh" />
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/imageLightThemeBSh"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:layout_marginTop="24dp"
-        android:adjustViewBounds="true"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ic_light_mode"
-        android:tint="@color/eventify_on_background"
-        app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full"
-        app:layout_constraintStart_toStartOf="@id/guidelineThemeBSh1"
-        app:layout_constraintTop_toBottomOf="@id/textChooseThemeBShTEXT" />
 
-    <TextView
-        android:id="@+id/textLightThemeBShTEXT"
-        android:layout_width="wrap_content"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardLightThemeBSh"
+        style="@style/Widget.Material3.CardView.Filled"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:fontFamily="@font/inter_bold"
-        android:text="@string/light"
-        android:textColor="@color/eventify_on_background"
-        android:textSize="20sp"
-        app:layout_constraintStart_toEndOf="@id/imageLightThemeBSh"
-        app:layout_constraintTop_toTopOf="@+id/imageLightThemeBSh"
-        app:layout_constraintBottom_toBottomOf="@+id/imageLightThemeBSh"/>
-
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/imageDarkThemeBSh"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
         android:layout_marginTop="16dp"
-        android:adjustViewBounds="true"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ic_dark_mode"
-        android:tint="@color/eventify_on_background"
-        app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full"
-        app:layout_constraintStart_toStartOf="@id/guidelineThemeBSh1"
-        app:layout_constraintTop_toBottomOf="@id/imageLightThemeBSh" />
+        android:clickable="true"
+        app:cardBackgroundColor="@color/eventify_background_secondary"
+        app:cardCornerRadius="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textChooseThemeBShTEXT"
+        app:rippleColor="?attr/colorControlHighlight">
 
-    <TextView
-        android:id="@+id/textDarkThemeBShTEXT"
-        android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineThemeCardLight1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="@dimen/eventify_guideline_left_mid" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineThemeCardLight2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="@dimen/eventify_guideline_right_mid" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imageThemeIconLight"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginVertical="12dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_light_mode"
+                android:tint="@color/eventify_on_background"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@id/guidelineThemeCardLight1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full" />
+
+            <TextView
+                android:id="@+id/textLightThemeBShTEXT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/inter_bold"
+                android:text="@string/light"
+                android:textColor="@color/eventify_on_background"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/imageThemeIconLight"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardDarkThemeBSh"
+        style="@style/Widget.Material3.CardView.Filled"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/inter_bold"
-        android:text="@string/dark"
-        android:textColor="@color/eventify_on_background"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageDarkThemeBSh"
-        app:layout_constraintStart_toStartOf="@+id/textLightThemeBShTEXT"
-        app:layout_constraintTop_toTopOf="@+id/imageDarkThemeBSh" />
+        android:clickable="true"
+        app:cardBackgroundColor="@color/eventify_background_secondary"
+        app:cardCornerRadius="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardLightThemeBSh"
+        app:rippleColor="?attr/colorControlHighlight">
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/imageSystemThemeBSh"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:layout_marginTop="16dp"
-        android:adjustViewBounds="true"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ic_theme_auto"
-        android:tint="@color/eventify_on_background"
-        app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full"
-        app:layout_constraintStart_toStartOf="@id/guidelineThemeBSh1"
-        app:layout_constraintTop_toBottomOf="@id/textDarkThemeBShTEXT" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/textSystemThemeBShTEXT"
-        android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineThemeCardDark1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="@dimen/eventify_guideline_left_mid" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineThemeCardDark2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="@dimen/eventify_guideline_right_mid" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imageThemeIconDark"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginVertical="12dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_dark_mode"
+                android:tint="@color/eventify_on_background"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@id/guidelineThemeCardDark1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full" />
+
+            <TextView
+                android:id="@+id/textDarkThemeBShTEXT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/inter_bold"
+                android:text="@string/dark"
+                android:textColor="@color/eventify_on_background"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/imageThemeIconDark"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardSystemThemeBSh"
+        style="@style/Widget.Material3.CardView.Filled"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/inter_bold"
-        android:text="@string/system"
-        android:textColor="@color/eventify_on_background"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageSystemThemeBSh"
-        app:layout_constraintStart_toStartOf="@+id/textDarkThemeBShTEXT"
-        app:layout_constraintTop_toTopOf="@+id/imageSystemThemeBSh" />
+        android:clickable="true"
+        app:cardBackgroundColor="@color/eventify_background_secondary"
+        app:cardCornerRadius="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardDarkThemeBSh"
+        app:rippleColor="?attr/colorControlHighlight">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineThemeCardSystem1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="@dimen/eventify_guideline_left_mid" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineThemeCardSystem2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="@dimen/eventify_guideline_right_mid" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imageThemeIconSystem"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginVertical="12dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_system_theme_auto"
+                android:tint="@color/eventify_on_background"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@id/guidelineThemeCardSystem1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full" />
+
+            <TextView
+                android:id="@+id/textSystemThemeBShTEXT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/inter_bold"
+                android:text="@string/system"
+                android:textColor="@color/eventify_on_background"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/imageThemeIconSystem"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
 
     <RadioGroup
         android:id="@+id/radioGroupThemeBSh"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginTop="-6dp"
-        android:layout_marginBottom="-8dp"
         android:layout_marginEnd="-16dp"
-        app:layout_constraintBottom_toBottomOf="@id/imageSystemThemeBSh"
+        app:layout_constraintBottom_toBottomOf="@id/cardSystemThemeBSh"
         app:layout_constraintEnd_toEndOf="@id/guidelineThemeBSh2"
-        app:layout_constraintTop_toTopOf="@id/imageLightThemeBSh">
+        app:layout_constraintTop_toTopOf="@id/cardLightThemeBSh">
 
         <com.google.android.material.radiobutton.MaterialRadioButton
             android:id="@+id/radioButtonLightThemeBSh"
@@ -160,17 +268,17 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:layout_marginBottom="24dp"
+        android:backgroundTint="@color/eventify_primary"
         android:fontFamily="@font/inter_bold"
         android:minHeight="60dp"
         android:text="@string/confirm"
+        android:textColor="@color/eventify_on_primary"
         android:textSize="24sp"
         app:cornerRadius="@dimen/eventify_large_button_corner_radius"
-        android:textColor="@color/eventify_on_primary"
-        android:backgroundTint="@color/eventify_primary"
-        app:rippleColor="?attr/colorControlHighlight"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guidelineThemeBSh2"
         app:layout_constraintStart_toStartOf="@+id/guidelineThemeBSh1"
-        app:layout_constraintTop_toBottomOf="@id/imageSystemThemeBSh"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/cardSystemThemeBSh"
+        app:rippleColor="?attr/colorControlHighlight" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -55,17 +55,17 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Event title" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonBackEventDetails"
             style="?attr/materialIconButtonFilledTonalStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="-20dp"
             android:backgroundTint="@color/eventify_background_primary"
-            android:visibility="invisible"
             app:icon="@drawable/ic_back_arrow"
             app:iconSize="24dp"
             app:iconTint="@color/eventify_main_text"
+            app:cornerRadius="8dp"
             app:layout_constraintBottom_toBottomOf="@+id/textEventName"
             app:layout_constraintStart_toStartOf="@+id/guidelineEventDetails1"
             app:layout_constraintTop_toTopOf="@+id/textEventName" />
@@ -400,7 +400,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/guidelineEventDetails2"
             app:layout_constraintStart_toStartOf="@id/guidelineEventDetails1"
-            app:layout_constraintTop_toBottomOf="@id/textInputLayoutWriteCommentEventDetails" />
+            app:layout_constraintTop_toBottomOf="@id/shimmerEventDetails" />
 
         <ProgressBar
             android:id="@+id/progressBarCommentEventDetails"

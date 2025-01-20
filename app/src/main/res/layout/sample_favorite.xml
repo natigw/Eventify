@@ -2,16 +2,16 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/sample_favorite_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <com.google.android.material.card.MaterialCardView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
         android:id="@+id/cardFavorite"
         style="?attr/materialCardViewFilledStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:backgroundTint="@color/eventify_background_primary"
+        android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,33 +19,34 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="12dp">
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imageFavorite"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                app:layout_constraintWidth_percent="0.25"
-                app:layout_constraintDimensionRatio="W,1:1"
                 android:layout_marginTop="12dp"
                 android:adjustViewBounds="true"
                 android:scaleType="centerCrop"
+                android:src="@drawable/placeholder_event"
+                app:layout_constraintDimensionRatio="W,1:1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Medium"
-                android:src="@drawable/placeholder_event" />
+                app:layout_constraintWidth_percent="0.25"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Medium" />
 
             <TextView
                 android:id="@+id/textFavoriteName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="-4dp"
                 android:layout_marginStart="12dp"
+                android:layout_marginTop="-4dp"
+                android:ellipsize="end"
                 android:fontFamily="@font/inter_bold"
+                android:maxLines="1"
                 android:textColor="@color/eventify_main_text"
                 android:textSize="18sp"
-                android:maxLines="1"
-                android:ellipsize="end"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageFavorite"
                 app:layout_constraintTop_toTopOf="@+id/imageFavorite"
