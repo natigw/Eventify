@@ -81,7 +81,6 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     }
 
 
-
     override fun onViewCreatedLight() {
 
         setAdapters()
