@@ -5,17 +5,14 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
 import android.content.res.Configuration
-import android.graphics.Color
 import android.net.Uri
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.collection.emptyObjectIntMap
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.view.isVisible
@@ -24,9 +21,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.common.base.BaseFragment
+import com.example.common.utils.crossfadeAppear
 import com.example.common.utils.nancyToastError
-import com.example.common.utils.nancyToastWarning
-import com.example.domain.model.places.SearchItem
 import com.example.eventify.R
 import com.example.eventify.databinding.FragmentMapBinding
 import com.example.eventify.presentation.adapters.MapSearchAdapter
@@ -42,11 +38,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
-import com.google.android.gms.maps.model.Polyline
-import com.google.android.gms.maps.model.PolylineOptions
-import com.google.maps.android.PolyUtil
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.debounce
@@ -54,11 +46,6 @@ import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import org.json.JSONObject
-import org.w3c.dom.Text
 
 @AndroidEntryPoint
 class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate), OnMapReadyCallback {
@@ -77,7 +64,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
     private val markers = mutableListOf<Marker>()
 
-    val mapSearchAdapter = MapSearchAdapter{
+    private val mapSearchAdapter = MapSearchAdapter{
         findNavController().navigate(MapFragmentDirections.actionMapFragmentToMarkerDetailsBottomSheet(
             placeId = it.placeId,
             placeType = it.placeType,
@@ -358,12 +345,17 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     }
 
 
+
     @OptIn(FlowPreview::class)
     @SuppressLint("PotentialBehaviorOverride")
     override fun onMapReady(googleMap: GoogleMap) {
 
-
         this.googleMap = googleMap
+
+//        googleMap.setOnMapLoadedCallback {
+//            crossfadeAppear(binding.map)
+//        }
+
 
         sharedViewModel.sharedCoordinates?.let {
             removeMarkersAtLocation(it.lat, it.long)
