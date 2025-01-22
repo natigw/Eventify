@@ -6,6 +6,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.example.common.base.BaseFragment
+import com.example.common.utils.navigateWithAnimationLeftToRight
+import com.example.common.utils.navigateWithAnimationRightToLeft
 import com.example.common.utils.startShimmer
 import com.example.common.utils.stopShimmer
 import com.example.eventify.R
@@ -56,13 +58,7 @@ class CustomEventsFragment : BaseFragment<FragmentCustomEventsBinding>(FragmentC
 //            findNavController().navigate(PlacesFragmentDirections.actionPlacesFragmentToCreateCustomEventFragment())
 //        }
         binding.buttonCreateCustomEvent.setOnClickListener{
-            findNavController().navigate(
-                R.id.createCustomEventFragment,
-                null,
-                NavOptions.Builder()
-                    .setPopUpTo(R.id.placesFragment,false)
-                    .build()
-            )
+            findNavController().navigateWithAnimationRightToLeft(destination = R.id.createCustomEventFragment, popUpTo = R.id.placesFragment)
         }
     }
 

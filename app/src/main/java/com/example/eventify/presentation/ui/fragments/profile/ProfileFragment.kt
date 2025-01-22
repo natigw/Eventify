@@ -87,10 +87,10 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         super.buttonListeners()
         with(binding) {
             cardReferralProfile.setOnClickListener {
-                findNavController().navigate(R.id.referralFragment)
+                findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToReferralFragment())
             }
             cardSubscriptionProfile.setOnClickListener {
-                findNavController().navigate(R.id.subscriptionFragment)
+                findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToSubscriptionFragment())
             }
 
             cardLanguageProfile.setOnClickListener {

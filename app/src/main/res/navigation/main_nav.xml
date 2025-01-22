@@ -40,6 +40,20 @@
         <action
             android:id="@+id/action_profileFragment_to_themeBottomSheet"
             app:destination="@id/themeBottomSheet" />
+        <action
+            android:id="@+id/action_profileFragment_to_subscriptionFragment"
+            app:destination="@id/subscriptionFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
+        <action
+            android:id="@+id/action_profileFragment_to_referralFragment"
+            app:destination="@id/referralFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
     </fragment>
     <fragment
         android:id="@+id/referralFragment"

@@ -1,23 +1,21 @@
 package com.example.eventify.presentation.ui.fragments.venue
 
-import android.util.Log
 import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.common.base.BaseFragment
 import com.example.common.utils.functions.validateInputFieldEmpty
+import com.example.common.utils.navigateWithAnimationLeftToRight
 import com.example.common.utils.startShimmer
 import com.example.common.utils.stopShimmer
 import com.example.domain.model.places.AddCommentItem
-import com.example.domain.model.places.PlaceCoordinates
 import com.example.domain.model.places.venue.VenueDetailsItem
 import com.example.eventify.R
 import com.example.eventify.databinding.FragmentVenueDetailsBinding
@@ -32,14 +30,15 @@ import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentVenueDetailsBinding::inflate) {
+class VenueDetailsFragment :
+    BaseFragment<FragmentVenueDetailsBinding>(FragmentVenueDetailsBinding::inflate) {
 
     private val viewmodel by viewModels<VenueDetailsViewModel>()
     private val sharedViewModel: SharedViewModel by activityViewModels()
     private val args by navArgs<VenueDetailsFragmentArgs>()
 
     private val commentAdapter = CommentAdapter()
-    
+
     override fun onResume() {
         super.onResume()
         if (viewmodel.venueDetails.value == null) {
@@ -47,21 +46,21 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
             startShimmer(binding.shimmerVenueDetails)
         }
     }
-    
+
     override fun onViewCreatedLight() {
         binding.textVenueName.isSelected = true
         updateAdapters()
         setAdapters()
         observer()
     }
-    
+
     override fun onPause() {
         super.onPause()
         stopShimmer(binding.shimmerVenueDetails)
         makeViewsVisible()
     }
 
-    private fun makeViewsInvisible(){
+    private fun makeViewsInvisible() {
         with(binding) {
             buttonBackVenue.visibility = View.INVISIBLE
             textVenueName.visibility = View.INVISIBLE
@@ -81,7 +80,8 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
             buttonSendCommentVenueDetails.visibility = View.INVISIBLE
         }
     }
-    private fun makeViewsVisible(){
+
+    private fun makeViewsVisible() {
         with(binding) {
             buttonBackVenue.visibility = View.VISIBLE
             textVenueName.visibility = View.VISIBLE
@@ -106,20 +106,24 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
         super.buttonListeners()
         binding.buttonSendCommentVenueDetails.setOnClickListener {
             val comment = binding.textInputAddCommentVenue.text.toString().trim()
-            val isCommentFilled = validateInputFieldEmpty(binding.textInputLayoutWriteCommentVenueDetails, comment, getString(R.string.please_enter_comment))
+            val isCommentFilled = validateInputFieldEmpty(
+                binding.textInputLayoutWriteCommentVenueDetails,
+                comment,
+                getString(R.string.please_enter_comment)
+            )
 
             if (!isCommentFilled) {
                 return@setOnClickListener
             }
             viewLifecycleOwner.lifecycleScope.launch {
-                if(
+                if (
                     viewmodel.addComment(
                         AddCommentItem(
                             content = comment,
                             placeId = args.venueId
                         )
                     )
-                ){
+                ) {
                     viewmodel.getComments(args.venueId)
                 }
             }
@@ -128,27 +132,18 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
         }
 
         binding.buttonBackVenue.setOnClickListener {
-            findNavController().navigate(
-                R.id.venuesFragment,
-                null,
-                NavOptions.Builder()
-                    .setPopUpTo(R.id.venuesFragment,false)
-                    .build()
-            )
+            findNavController().navigateWithAnimationLeftToRight(R.id.venuesFragment)
         }
 
-        requireActivity().onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                findNavController().navigate(
-                    R.id.venuesFragment,
-                    null,
-                    NavOptions.Builder()
-                        .setPopUpTo(R.id.venuesFragment,false)
-                        .build()
-                )
-            }
-        })
+        requireActivity().onBackPressedDispatcher.addCallback(
+            this,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    findNavController().navigateWithAnimationLeftToRight(R.id.venuesFragment)
+                }
+            })
     }
+
     private fun setUI(venueDetailsItem: VenueDetailsItem) {
         with(binding) {
             textVenueName.text = venueDetailsItem.title
@@ -164,7 +159,7 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
                 .into(imageVenue)
 
 
-                //TODO -> like olsun request atsin, icon fill ol sun, like count text bir dene artsin
+            //TODO -> like olsun request atsin, icon fill ol sun, like count text bir dene artsin
 
             buttonReadMoreVenues.post {
                 val layout = textVenueDescription.layout
@@ -180,28 +175,15 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
             var flagRead = true
             buttonReadMoreVenues.setOnClickListener {
                 if (flagRead) {
-                    textVenueDescription.maxLines = java.lang.Integer.MAX_VALUE
-                    buttonReadMoreVenues.text = "Read less"
+                    textVenueDescription.maxLines = Integer.MAX_VALUE
+                    buttonReadMoreVenues.text = getString(R.string.read_less)
                     flagRead = false
                 } else {
-                    buttonReadMoreVenues.text = "Read more"
+                    buttonReadMoreVenues.text = getString(R.string.read_more)
                     textVenueDescription.maxLines = 3
                     flagRead = true
                 }
             }
-//            buttonReadMoreVenues.visibility = if (textVenueDescription.layout.lineCount < 3) View.GONE else View.VISIBLE
-//            buttonReadMoreVenues.setOnClickListener {
-//                if (textVenueDescription.layout.lineCount > 3 && textVenueDescription.maxLines < textVenueDescription.layout.lineCount) {
-//                    textVenueDescription.maxLines += 3
-//                }
-//                if (buttonReadMoreVenues.text == "Read less") {
-//                    textVenueDescription.maxLines = 3
-//                    buttonReadMoreVenues.text = "Read more"
-//                }
-//                if (textVenueDescription.maxLines >= textVenueDescription.layout.lineCount) {
-//                    buttonReadMoreVenues.text = "Read less"
-//                }
-//            }
 
             buttonVenueShowLocation.setOnClickListener {
                 venueDetailsItem.coordinates.latitude
@@ -222,7 +204,7 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
         binding.rvCommentsVenueDetails.adapter = commentAdapter
     }
 
-    private fun updateAdapters(){
+    private fun updateAdapters() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewmodel.isLoadingComments.collectLatest {
                 binding.progressBarCommentVenueDetails.isVisible = it
@@ -238,7 +220,7 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
         }
     }
 
-    private fun observer(){
+    private fun observer() {
 
         viewmodel.getComments(args.venueId)
         viewmodel.getVenueDetails(args.venueId)

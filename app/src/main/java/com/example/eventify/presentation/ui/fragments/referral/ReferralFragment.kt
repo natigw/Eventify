@@ -3,6 +3,7 @@ package com.example.eventify.presentation.ui.fragments.referral
 import android.content.Intent
 import android.util.Log
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -25,14 +26,7 @@ class ReferralFragment : BaseFragment<FragmentReferralBinding>(FragmentReferralB
 
     override fun onViewCreatedLight() {
 
-        val link = "https://picsum.photos/id/237/200/300"  //TODO -> backendden iste
-
-        binding.buttonCopyLink.setOnClickListener {
-            copyToClipboard(requireContext(), link)
-        }
-        binding.buttonShareLink.setOnClickListener {
-            shareLink(link)
-        }
+        setConstraints()
 
         lateinit var chosenEvent: String
 
@@ -44,8 +38,10 @@ class ReferralFragment : BaseFragment<FragmentReferralBinding>(FragmentReferralB
                     .filter { it.isNotEmpty() }
                     .collectLatest {
                         chosenEvent = it.random().name
-                        binding.textGetTicketDescriptionReferral.text = "Almost there! Refer ${3 - numberOfLinkSent} more friend to get a free ticket for $chosenEvent event."
-                        binding.textGetTicketDescriptionReferral.text = "Congratulations! You got a ticket for $chosenEvent event. Please check your ticket box!"
+                        binding.textGetTicketDescriptionReferral.text =
+                            "Almost there! Refer ${3 - numberOfLinkSent} more friend to get a free ticket for $chosenEvent event."
+                        binding.textGetTicketDescriptionReferral.text =
+                            "Congratulations! You got a ticket for $chosenEvent event. Please check your ticket box!"
                     }
 
                 binding.progressReferral.progress = 33 * numberOfLinkSent
@@ -69,23 +65,34 @@ class ReferralFragment : BaseFragment<FragmentReferralBinding>(FragmentReferralB
                 }
             }
         } catch (e: Exception) {
-            Log.e("network", e.toString(), )
+            Log.e("network", e.toString(),)
         }
 
+    }
+
+    override fun buttonListeners() {
+        super.buttonListeners()
 
         binding.buttonBackReferral.setOnClickListener {
             findNavController().popBackStack()
         }
 
-        setConstraints()
+        val link = "https://picsum.photos/id/237/200/300"  //TODO -> backendden iste
+
+        binding.buttonCopyLink.setOnClickListener {
+            copyToClipboard(requireContext(), link)
+        }
+        binding.buttonShareLink.setOnClickListener {
+            shareLink(link)
+        }
     }
 
     private fun shareLink(text: String, subject: String? = null) {
         val intent = Intent(Intent.ACTION_SEND).apply {
-            type = "text/plain" // Specify the MIME type for text
-            putExtra(Intent.EXTRA_TEXT, text) // Add the text to share
+            type = "text/plain"
+            putExtra(Intent.EXTRA_TEXT, text)
             subject?.let {
-                putExtra(Intent.EXTRA_SUBJECT, it) // Optional: Add a subject
+                putExtra(Intent.EXTRA_SUBJECT, it) //Optional: Add a subject
             }
         }
         // Show a chooser to let the user pick the app

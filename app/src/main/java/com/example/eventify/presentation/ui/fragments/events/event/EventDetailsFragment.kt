@@ -15,6 +15,8 @@ import com.example.common.base.BaseFragment
 import com.example.common.utils.crossfadeAppear
 import com.example.common.utils.functions.validateInputFieldEmpty
 import com.example.common.utils.nancyToastSuccess
+import com.example.common.utils.navigateWithAnimationLeftToRight
+import com.example.common.utils.navigateWithoutAnimation
 import com.example.common.utils.startShimmer
 import com.example.common.utils.stopShimmer
 import com.example.domain.model.places.AddCommentItem
@@ -133,48 +135,18 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
         }
 
         binding.buttonBackEventDetails.setOnClickListener {
-            if(args.comingProfile){
-                findNavController().navigate(
-                    R.id.profileFragment,
-                    null,
-                    NavOptions.Builder()
-                        .setPopUpTo(R.id.profileFragment,false)
-                        .build()
-                )
-            }
-            else{
-                findNavController().navigate(
-                    R.id.placesFragment,
-                    null,
-                    NavOptions.Builder()
-                        .setPopUpTo(R.id.placesFragment,false)
-                        .build()
-                )
-            }
-            binding.buttonEventShowLocation
+            if(args.comingProfile)
+                findNavController().navigateWithoutAnimation(R.id.profileFragment)
+            else
+                findNavController().navigateWithAnimationLeftToRight(R.id.placesFragment)
         }
 
         requireActivity().onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                if(args.comingProfile){
-                    findNavController().navigate(
-                        R.id.profileFragment,
-                        null,
-                        NavOptions.Builder()
-                            .setPopUpTo(R.id.profileFragment,false)
-                            .build()
-                    )
-                }
-                else{
-                    findNavController().navigate(
-                        R.id.placesFragment,
-                        null,
-                        NavOptions.Builder()
-                            .setPopUpTo(R.id.placesFragment,false)
-                            .build()
-                    )
-                }
-
+                if(args.comingProfile)
+                    findNavController().navigateWithoutAnimation(R.id.profileFragment)
+                else
+                    findNavController().navigateWithAnimationLeftToRight(R.id.placesFragment)
             }
         })
 
@@ -235,10 +207,10 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
             buttonReadMoreEvents.setOnClickListener {
                 if (flagRead) {
                     textEventDescription.maxLines = Integer.MAX_VALUE
-                    buttonReadMoreEvents.text = "Read less"
+                    buttonReadMoreEvents.text = getString(R.string.read_less)
                     flagRead = false
                 } else {
-                    buttonReadMoreEvents.text = "Read more"
+                    buttonReadMoreEvents.text = getString(R.string.read_more)
                     textEventDescription.maxLines = 3
                     flagRead = true
                 }
