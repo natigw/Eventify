@@ -38,7 +38,7 @@ class ReferralFragment : BaseFragment<FragmentReferralBinding>(FragmentReferralB
 
         val numberOfLinkSent = 2  //TODO -> backendden iste
         try {
-            lifecycleScope.launch {
+            viewLifecycleOwner.lifecycleScope.launch {
 //            val chosenEvent = eventApi.getAllEvents().body()?.random()?.event?.title   //TODO -> backendden
                 referralViewModel.eventsState
                     .filter { it.isNotEmpty() }

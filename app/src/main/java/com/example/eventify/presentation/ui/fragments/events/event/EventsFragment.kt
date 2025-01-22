@@ -59,7 +59,7 @@ class EventsFragment : BaseFragment<FragmentEventsBinding>(FragmentEventsBinding
     }
 
     private fun updateAdapters() {
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewModel.events
                 .filterNotNull()
                 .collectLatest {

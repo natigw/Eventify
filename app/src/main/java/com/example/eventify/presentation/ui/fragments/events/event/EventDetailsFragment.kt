@@ -13,13 +13,11 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.common.base.BaseFragment
 import com.example.common.utils.crossfadeAppear
-import com.example.common.utils.crossfadeDisappear
 import com.example.common.utils.functions.validateInputFieldEmpty
 import com.example.common.utils.nancyToastSuccess
 import com.example.common.utils.startShimmer
 import com.example.common.utils.stopShimmer
 import com.example.domain.model.places.AddCommentItem
-import com.example.domain.model.places.PlaceCoordinates
 import com.example.domain.model.places.event.EventDetailsItem
 import com.example.eventify.R
 import com.example.eventify.databinding.FragmentEventDetailsBinding

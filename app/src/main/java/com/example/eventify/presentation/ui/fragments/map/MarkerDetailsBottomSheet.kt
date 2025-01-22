@@ -62,7 +62,7 @@ class MarkerDetailsBottomSheet : BaseBottomSheetFragment<BottomsheetMarkerDetail
     }
 
     private fun observer(){
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewModel.eventDetails
                 .filter { it!=null }
                 .collectLatest {
@@ -70,7 +70,7 @@ class MarkerDetailsBottomSheet : BaseBottomSheetFragment<BottomsheetMarkerDetail
             }
         }
 
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewModel.venueDetails
                 .filter { it!=null }
                 .collectLatest {
@@ -104,7 +104,7 @@ class MarkerDetailsBottomSheet : BaseBottomSheetFragment<BottomsheetMarkerDetail
             buttonBuyTicketMarkerDetails.visibility = View.VISIBLE
             buttonShortestRouteMarkerDetails.text = "Get route"
 //            buttonShortestRouteMarkerDetails.setOnClickListener {
-//                lifecycleScope.launch {
+//                viewLifecycleOwner.lifecycleScope.launch {
 //                    sharedViewModel.setRouteCoordinates(eventDetails.coordinates)
 //                    dismiss()
 //                }
@@ -126,7 +126,7 @@ class MarkerDetailsBottomSheet : BaseBottomSheetFragment<BottomsheetMarkerDetail
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(imageVenueMarkerDetails)
 //            buttonShortestRouteMarkerDetails.setOnClickListener {
-//                lifecycleScope.launch {
+//                viewLifecycleOwner.lifecycleScope.launch {
 //                    sharedViewModel.setRouteCoordinates(venueDetails.coordinates)
 //                    dismiss()
 //                }

@@ -175,7 +175,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
     @OptIn(FlowPreview::class)
     private fun observer(){
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewModel.searchState
                 .filterNotNull()
                 .collectLatest{
@@ -183,7 +183,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 }
         }
 
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewModel.inputState
                 .filterNotNull()
                 .debounce(1000)
@@ -199,7 +199,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
 
 
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewModel.isLoading
                 .filterNotNull()
                 .collectLatest {
@@ -376,7 +376,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             )
         }
 
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             sharedViewModel.sharedRouteDestinationCoordinates
                 .debounce(800)
                 .filterNotNull()
@@ -394,7 +394,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         }
 
 
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewModel.venuesState
                 .filter { it != null }
                 .collectLatest { venues ->

@@ -33,7 +33,7 @@ class ResetPasswordFragment : BaseFragment<PasswordResetBinding>(PasswordResetBi
     }
 
     private fun resetUserPassword(){
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             val response = viewModel.resetUserPassword(binding.textInputEdittextPasswordReset.text.toString())
             Log.e("response",response.toString())
             if (response){

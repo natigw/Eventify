@@ -186,22 +186,21 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonBuyTicketMarkerDetails"
+        style="?attr/materialIconButtonFilledTonalStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginBottom="12dp"
         android:backgroundTint="@color/green_light_eventify"
         android:fontFamily="@font/inter_bold"
         android:text="@string/buy_ticket"
         android:textColor="@color/eventify_primary"
         android:textSize="18sp"
-        app:cornerRadius="16dp"
+        app:cornerRadius="@dimen/eventify_large_button_corner_radius"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/buttonShortestRouteMarkerDetails"
         app:layout_constraintEnd_toStartOf="@+id/guidelineMarkerDetails2"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/buttonShortestRouteMarkerDetails"
-        app:layout_constraintTop_toBottomOf="@+id/ratingBarMarkerDetails" />
+        app:layout_constraintTop_toTopOf="@id/buttonShortestRouteMarkerDetails" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

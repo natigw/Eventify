@@ -111,7 +111,7 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
             if (!isCommentFilled) {
                 return@setOnClickListener
             }
-            lifecycleScope.launch {
+            viewLifecycleOwner.lifecycleScope.launch {
                 if(
                     viewmodel.addComment(
                         AddCommentItem(
@@ -223,12 +223,12 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
     }
 
     private fun updateAdapters(){
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewmodel.isLoadingComments.collectLatest {
                 binding.progressBarCommentVenueDetails.isVisible = it
             }
         }
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewmodel.commentsState
                 .filterNotNull()
                 .collect {
@@ -243,7 +243,7 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
         viewmodel.getComments(args.venueId)
         viewmodel.getVenueDetails(args.venueId)
 
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewmodel.venueDetails
                 .filterNotNull()
                 .collectLatest {
@@ -253,7 +253,7 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
                 }
         }
 
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewmodel.isLoadingComments.collectLatest {
                 binding.progressBarCommentVenueDetails.isVisible = it
             }

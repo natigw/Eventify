@@ -218,17 +218,17 @@ class CreateCustomEventFragment : BaseFragment<FragmentCreateCustomEventBinding>
     }
 
     private fun viewModelObserver() {
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewmodel.pickedDate.collectLatest {
                 binding.buttonDatePickerCCE.text = if (it == null) getString(R.string.specify_event_date) else "$it    ${getString(R.string.change)}"
             }
         }
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewmodel.pickedStartTime.collectLatest {
                 binding.buttonTimePickerStartCCE.text = if (it == null) getString(R.string.specify_event_start_time) else "$it    ${getString(R.string.change)}"
             }
         }
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewmodel.pickedFinishTime.collectLatest {
                 binding.buttonTimePickerFinishCCE.text = if (it == null) getString(R.string.specify_event_finish_time) else "$it    ${getString(R.string.change)}"
             }

@@ -25,7 +25,7 @@ class CustomEventsFragment : BaseFragment<FragmentCustomEventsBinding>(FragmentC
 
     private val eventAdapter = EventAdapter(
         onLike = {
-//            lifecycleScope.launch {
+//            viewLifecycleOwner.lifecycleScope.launch {
 //                viewmodel.likeEvent(it)
 //            }
         },
@@ -71,7 +71,7 @@ class CustomEventsFragment : BaseFragment<FragmentCustomEventsBinding>(FragmentC
     }
 
     private fun updateAdapters() {
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewmodel.events
                 .filterNotNull()
                 .collectLatest {

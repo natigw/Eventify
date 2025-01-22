@@ -15,10 +15,13 @@
         <action
             android:id="@+id/action_venuesFragment_to_venueDetailsFragment"
             app:destination="@id/venueDetailsFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right"
             app:popUpTo="@+id/venuesFragment"
             app:popUpToInclusive="true" />
     </fragment>
-
 
 
     <fragment
@@ -59,14 +62,22 @@
         <action
             android:id="@+id/action_placesFragment_to_eventDetailsFragment"
             app:destination="@id/eventDetailsFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right"
             app:popUpTo="@+id/placesFragment"
             app:popUpToInclusive="true"
             />
         <action
             android:id="@+id/action_placesFragment_to_createCustomEventFragment"
             app:destination="@id/createCustomEventFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right"
             app:popUpTo="@id/placesFragment"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
     </fragment>
     <dialog
         android:id="@+id/markerDetailsBottomSheet"

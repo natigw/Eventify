@@ -1,5 +1,6 @@
 package com.example.common.base
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.activity.enableEdgeToEdge
@@ -8,17 +9,22 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
 import androidx.viewbinding.ViewBinding
+import com.example.common.utils.RuntimeLocaleChanger
 
 abstract class BaseActivity<VB : ViewBinding>(private val bindingInflater: (LayoutInflater)->VB) : AppCompatActivity() {
 
     private var _binding: VB? = null
     protected val binding get() = _binding!!
 
+    override fun attachBaseContext(base: Context) {
+        super.attachBaseContext(RuntimeLocaleChanger.wrapContext(base))
+    }
+
     abstract fun onCreateLight()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        enableEdgeToEdge()
+        //enableEdgeToEdge()
         _binding = bindingInflater(layoutInflater)
         setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { view, insets ->

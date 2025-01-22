@@ -42,7 +42,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
 
                 if (!checkInputFields(firstname, lastname, username, email, password)) return@setOnClickListener
 
-                lifecycleScope.launch {
+                viewLifecycleOwner.lifecycleScope.launch {
                     if(viewModel.registerUser(
                             firstname,
                             lastname,
@@ -68,7 +68,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
             findNavController().popBackStack()
         }
 
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewModel.isLoading.collectLatest {
                 if(it){
                     blockRegisterButton()

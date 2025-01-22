@@ -21,11 +21,10 @@ class SubscriptionFragment : BaseFragment<FragmentSubscriptionBinding>(FragmentS
     private val viewmodel by viewModels<SubscriptionViewModel>()
 
     private val subscriptionAdapter = SubscriptionAdapter(
-//        context = requireContext(),
-        currentPackage = "Base",
-        isAnnualBilling = false,
+        currentPackage = "Pro",
+        isAnnual = false,
         onClick = {
-            nancyToastSuccess(requireContext(), getString(R.string.navigating_payment_screen))
+            nancyToastSuccess(requireContext(), it + getString(R.string.navigating_payment_screen))
         }
     )
 
@@ -47,17 +46,11 @@ class SubscriptionFragment : BaseFragment<FragmentSubscriptionBinding>(FragmentS
 
     override fun buttonListeners() {
         super.buttonListeners()
-
-        val typefaceLight = ResourcesCompat.getFont(requireContext(), R.font.inter_light)
-        val typefaceBold = ResourcesCompat.getFont(requireContext(), R.font.inter_bold)
-        binding.materialSwitch.setOnCheckedChangeListener { _, isChecked ->
-            binding.textBillMonthly.typeface = if (!isChecked) typefaceBold else typefaceLight
-            binding.textBillAnnually.typeface = if (isChecked) typefaceBold else typefaceLight
-            viewmodel.changeSwitchState()
-        }
-
         binding.buttonBackSubs.setOnClickListener {
             findNavController().popBackStack()
+        }
+        binding.switchSubscription.setOnClickListener {
+            viewmodel.changeSwitchState()
         }
     }
 
@@ -66,11 +59,18 @@ class SubscriptionFragment : BaseFragment<FragmentSubscriptionBinding>(FragmentS
     }
 
     private fun observeChanges() {
-        lifecycleScope.launch {
-            viewmodel.switchState.collectLatest {
-                binding.materialSwitch.isChecked = it
-                subscriptionAdapter.isAnnualBilling = it // Update adapter with the latest state
-                subscriptionAdapter.notifyDataSetChanged() // Notify adapter of data changes if necessary
+
+        val typefaceLight = ResourcesCompat.getFont(requireContext(), R.font.inter_light)
+        val typefaceBold = ResourcesCompat.getFont(requireContext(), R.font.inter_bold)
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewmodel.isAnnual.collectLatest {
+                binding.switchSubscription.isChecked = it
+                binding.textBillMonthly.typeface = if (!it) typefaceBold else typefaceLight
+                binding.textBillAnnually.typeface = if (it) typefaceBold else typefaceLight
+                
+                subscriptionAdapter.isAnnual = it
+                subscriptionAdapter.notifyDataSetChanged()
             }
         }
     }

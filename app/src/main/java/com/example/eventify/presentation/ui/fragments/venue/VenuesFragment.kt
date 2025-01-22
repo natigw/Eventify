@@ -49,7 +49,7 @@ class VenuesFragment : BaseFragment<FragmentVenuesBinding>(FragmentVenuesBinding
     }
 
     private fun updateAdapters() {
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewmodel.venues
                 .filterNotNull()
                 .collectLatest {

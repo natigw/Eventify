@@ -56,7 +56,7 @@ class Test1Fragment : BaseFragment<FragmentTest1Binding>(FragmentTest1Binding::i
 
 
     override fun onViewCreatedLight() {
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             delay(2000)
             crossfadeAppear(binding.imageView5, 3000)
             delay(2000)
@@ -101,7 +101,7 @@ class Test1Fragment : BaseFragment<FragmentTest1Binding>(FragmentTest1Binding::i
     private fun uploadImage(uri: Uri) {
         val filePart = prepareFilePart(uri)
 
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             try {
                 val response = api.uploadFileAndGetLink("events", filePart)
                 handleApiResponse(response)

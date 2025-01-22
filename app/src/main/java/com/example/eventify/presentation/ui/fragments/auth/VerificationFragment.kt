@@ -34,7 +34,7 @@ class VerificationFragment : BaseFragment<VerificationLayoutBinding>(Verificatio
         super.buttonListeners()
         val userEmail = viewModel.getUserEmail()
         binding.buttonVerify.setOnClickListener {
-            lifecycleScope.launch {
+            viewLifecycleOwner.lifecycleScope.launch {
                 if (viewModel.isUserVerified(userEmail = userEmail)) {
                     viewModel.sharedPrefOnBoard.edit {
                         putBoolean("isAuthorized", true)
@@ -47,7 +47,7 @@ class VerificationFragment : BaseFragment<VerificationLayoutBinding>(Verificatio
         }
 
         binding.textResendVerification.setOnClickListener {
-            lifecycleScope.launch {
+            viewLifecycleOwner.lifecycleScope.launch {
                 if (viewModel.resendVerification(userEmail)) {
                     binding.textWrongEmailRegisterVerification.isVisible = true
                     nancyToastSuccess(requireContext(), getString(R.string.check_email))
@@ -60,7 +60,7 @@ class VerificationFragment : BaseFragment<VerificationLayoutBinding>(Verificatio
     }
 
     private fun observer() {
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewModel.isLoading
                 .filter { it != null }
                 .collectLatest {
@@ -71,7 +71,7 @@ class VerificationFragment : BaseFragment<VerificationLayoutBinding>(Verificatio
                     }
                 }
         }
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewModel.resendVerificationState
                 .filter { it != null }
                 .collectLatest {

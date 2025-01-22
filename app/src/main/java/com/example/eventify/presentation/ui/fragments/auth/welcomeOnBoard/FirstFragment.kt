@@ -30,23 +30,23 @@ class FirstFragment : BaseFragment<FragmentWelcomeFirstBinding>(FragmentWelcomeF
             viewPager?.currentItem = 1
         }
         binding.buttonWelcomeLanguageAZ.setOnClickListener {
-            changeLanguage("az")
+            //TODO -> changeLanguage("az")
         }
         binding.buttonWelcomeLanguageEN.setOnClickListener {
-            changeLanguage("en")
+            //TODO -> //changeLanguage("en")
         }
     }
 
-    private fun setAppLocale(context: Context, languageCode: String) {
-        val locale = Locale(languageCode)
-        Locale.setDefault(locale)
-        val config = Configuration(context.resources.configuration)
-        config.setLocale(locale)
-        context.resources.updateConfiguration(config, context.resources.displayMetrics)
-    }
-    private fun changeLanguage(languageCode: String) {
-        setAppLocale(requireContext(), languageCode)
-        viewmodel.sharedPrefLanguage.edit().putString("language", languageCode).apply()
-        requireParentFragment().requireActivity().recreate()  //TODO -> bunu hell et crash olur
-    }
+//    private fun setAppLocale(context: Context, languageCode: String) {
+//        val locale = Locale(languageCode)
+//        Locale.setDefault(locale)
+//        val config = Configuration(context.resources.configuration)
+//        config.setLocale(locale)
+//        context.resources.updateConfiguration(config, context.resources.displayMetrics)
+//    }
+//    private fun changeLanguage(languageCode: String) {
+//        setAppLocale(requireContext(), languageCode)
+//        viewmodel.sharedPrefLanguage.edit().putString("language", languageCode).apply()
+//        requireParentFragment().requireActivity().recreate()  //TODO -> bunu hell et crash olur
+//    }
 }

@@ -6,9 +6,9 @@ import kotlinx.coroutines.flow.update
 
 class SubscriptionViewModel : ViewModel() {
 
-    var switchState = MutableStateFlow<Boolean>(false)
+    var isAnnual = MutableStateFlow<Boolean>(false)
 
     fun changeSwitchState() {
-        switchState.update { !switchState.value }
+        isAnnual.update { !isAnnual.value }
     }
 }

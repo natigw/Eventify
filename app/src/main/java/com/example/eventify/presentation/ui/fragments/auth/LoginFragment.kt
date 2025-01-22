@@ -43,7 +43,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         val clientId = BuildConfig.WEB_CLIENT_ID
 
         binding.buttonGoogle.setOnClickListener {
-            lifecycleScope.launch {
+            viewLifecycleOwner.lifecycleScope.launch {
                 GoogleUtils.getGoogleUserData(
                     credentialManager = credentialManager,
                     clientId = clientId,
@@ -79,7 +79,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                 return@setOnClickListener
             }
 
-            lifecycleScope.launch {
+            viewLifecycleOwner.lifecycleScope.launch {
                 if (viewModel.loginUser(username = username, password = password)) {
                     clearInputFields()
                     nancyToastSuccess(requireContext(), getString(R.string.login_successful))
@@ -106,7 +106,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     }
 
     private fun observer() {
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewModel.isLoadingGoogle
                 .filter { it != null }
                 .collectLatest {
@@ -115,7 +115,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                 }
         }
 
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewModel.isLoading
                 .filter { it != null }
                 .collectLatest {
