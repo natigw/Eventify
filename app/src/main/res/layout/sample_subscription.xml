@@ -6,14 +6,14 @@
     android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineSampleSubs1"
+        android:id="@+id/guidelineSamplePlan1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="@dimen/eventify_guideline_left_large" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineSampleSubs2"
+        android:id="@+id/guidelineSamplePlan2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -24,12 +24,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="24dp"
-        android:backgroundTint="@color/green_light_eventify"
+        android:backgroundTint="@color/card_color_eventify"
         app:cardCornerRadius="24dp"
         app:cardElevation="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/guidelineSampleSubs2"
-        app:layout_constraintStart_toStartOf="@id/guidelineSampleSubs1"
+        app:layout_constraintEnd_toEndOf="@id/guidelineSamplePlan2"
+        app:layout_constraintStart_toStartOf="@id/guidelineSamplePlan1"
         app:layout_constraintTop_toTopOf="parent"
         app:strokeColor="@color/transparent">
 
@@ -37,16 +37,29 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelinePlanCard1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="@dimen/eventify_guideline_left_large" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelinePlanCard2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="@dimen/eventify_guideline_right_large" />
+
             <TextView
                 android:id="@+id/textPackageNameSubscription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
                 android:fontFamily="@font/inter_bold"
                 android:textColor="@color/purple_dark_eventify"
                 android:textSize="26sp"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@id/guidelinePlanCard1"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Base" />
 
@@ -54,7 +67,6 @@
                 android:id="@+id/textSaveMoneySubscription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="24dp"
                 android:backgroundTint="@color/eventify_background_primary"
                 android:clickable="false"
                 android:fontFamily="@font/inter_bold"
@@ -62,12 +74,11 @@
                 android:minHeight="28dp"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
-                android:textColor="@color/eventify_primary"
+                android:textColor="@color/eventify_primary_helper"
                 android:textSize="12sp"
-                android:visibility="visible"
                 app:cornerRadius="10dp"
                 app:layout_constraintBottom_toBottomOf="@+id/textPackageNameSubscription"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/guidelinePlanCard2"
                 app:layout_constraintTop_toTopOf="@id/textPackageNameSubscription"
                 tools:text="Save $80" />
 
@@ -77,10 +88,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:fontFamily="@font/inter_regular"
-                android:textColor="@color/purple_dark_eventify"
+                android:textColor="@color/eventify_main_text"
                 android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="@+id/textSaveMoneySubscription"
-                app:layout_constraintStart_toStartOf="@+id/textPackageNameSubscription"
+                app:layout_constraintEnd_toEndOf="@+id/guidelinePlanCard2"
+                app:layout_constraintStart_toStartOf="@+id/guidelinePlanCard1"
                 app:layout_constraintTop_toBottomOf="@id/textPackageNameSubscription"
                 tools:text="Features" />
 
@@ -90,9 +101,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:fontFamily="@font/inter_bold"
-                android:textColor="@color/eventify_primary"
+                android:textColor="@color/eventify_primary_helper"
                 android:textSize="24sp"
-                app:layout_constraintStart_toStartOf="@+id/textFeaturesSubscription"
+                app:layout_constraintStart_toStartOf="@+id/guidelinePlanCard1"
                 app:layout_constraintTop_toBottomOf="@id/textFeaturesSubscription"
                 tools:text="Free" />
 
@@ -101,7 +112,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:layout_marginBottom="2dp"
+                android:layout_marginBottom="3dp"
                 android:fontFamily="@font/inter_regular"
                 android:textSize="16sp"
                 android:visibility="visible"
@@ -121,10 +132,10 @@
                 android:paddingBottom="10dp"
                 android:text="@string/try_1_month"
                 android:textSize="20sp"
-                app:cornerRadius="16dp"
+                app:cornerRadius="@dimen/eventify_extra_large_button_corner_radius"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/textFeaturesSubscription"
-                app:layout_constraintStart_toStartOf="@+id/textFeaturesSubscription"
+                app:layout_constraintEnd_toEndOf="@+id/guidelinePlanCard2"
+                app:layout_constraintStart_toStartOf="@+id/guidelinePlanCard1"
                 app:layout_constraintTop_toBottomOf="@id/textPriceSubscription" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

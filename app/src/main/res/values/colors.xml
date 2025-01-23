@@ -21,7 +21,7 @@
     <color name="gray_light">#EBEBEB</color>
     <color name="gray_helper_text">#CCCCCC</color>
     <color name="green_light_eventify">#D3FFE7</color>
-    <color name="purple_light_eventify">#9A72F3</color>
+    <color name="card_color_eventify">#D3FFE7</color>
     <color name="purple_dark_eventify">#2E066D</color>
 
     <color name="login">#F44336</color>

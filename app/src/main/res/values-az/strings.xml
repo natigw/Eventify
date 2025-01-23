@@ -28,7 +28,7 @@
     <string name="profile">Hesab</string>
     <string name="map">Xəritə</string>
     <string name="search_here">Axtar</string>
-    <string name="subs_heading">Sizə ən uyğun\n planı seçin</string>
+    <string name="subs_description">Sizə ən uyğun planı seçin</string>
     <string name="subs_heading2">Biznesinizə və tərzinizə uyğun bir neçə abunəlik paketlərimiz var. Ehtiyacınız olan hərşey.</string>
     <string name="bill_monthly">Aylıq abunəlik</string>
     <string name="bill_annually">İllik abunəlik</string>
@@ -36,6 +36,7 @@
     <string name="referral_program">Tövsiyyə Proqramı</string>
     <string name="get_a_free_ticket">Pulsuz bilet əldə et!</string>
     <string name="referral_note">Nəzərə alın ki, mükafatlardan istifadə etmək üçün aktiv abunəlik mütləqdir.</string>
+    <string name="invite_link_note">*Nəzərə alın ki, əlavə mükafat sistemi də yaxın zamanda əlçatan olacaq.</string>
     <string name="share_invite_link">Dəvət linkini paylaşın</string>
     <string name="copy_link">Linki kopyala</string>
     <string name="share">Paylaş</string>
@@ -185,4 +186,6 @@
     <string name="theme">Tətbiqin mövzusu</string>
     <string name="choose_language">Dil seçin</string>
     <string name="confirm">Təsdiqlə</string>
+    <string name="referral_description_1">"Çox az qalıb! "</string>
+    <string name="referral_description_2">" üçün pulsuz bilet əldə etmək üçün "</string>
 </resources>

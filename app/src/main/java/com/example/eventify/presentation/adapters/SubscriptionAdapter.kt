@@ -3,6 +3,8 @@ package com.example.eventify.presentation.adapters
 import android.annotation.SuppressLint
 import android.view.View
 import com.example.common.base.BaseAdapter
+import com.example.common.utils.crossfadeAppear
+import com.example.common.utils.crossfadeDisappear
 import com.example.eventify.databinding.SampleSubscriptionBinding
 import com.example.domain.model.subscription.SubscriptionData
 import com.example.eventify.R
@@ -47,12 +49,14 @@ class SubscriptionAdapter(
             textPackageNameSubscription.text = item.name
             textFeaturesSubscription.text = item.features
 
-            textSaveMoneySubscription.visibility = if (isAnnual) View.VISIBLE else View.INVISIBLE
+            if (isAnnual) crossfadeAppear(textSaveMoneySubscription)
+            else crossfadeDisappear(textSaveMoneySubscription, 200)
 
             if (item.priceMonthly == 0.0) {
                 textPriceSubscription.text = "Free"
                 textMonthlyAnnuallySubscription.visibility = View.GONE
                 textSaveMoneySubscription.visibility = View.INVISIBLE
+                buttonChoosePackageSubscription.text = "Try"
             }
             else {
                 textPriceSubscription.text = if (isAnnual) "$${item.priceAnnually}" else "$${item.priceMonthly}"

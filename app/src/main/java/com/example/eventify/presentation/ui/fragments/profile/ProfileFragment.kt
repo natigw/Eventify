@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.common.base.BaseFragment
 import com.example.common.utils.crossfadeAppear
 import com.example.common.utils.nancyToastInfo
+import com.example.common.utils.navigateWithoutAnimation
 import com.example.common.utils.startShimmer
 import com.example.common.utils.stopShimmer
 import com.example.common.utils.stopShimmerGone
@@ -66,13 +67,14 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
                 }
         }
 
+
+        //val referralCode = viewModel...               //from backend
+        //val referralDisplay = getString(R.string.done)  //from backend
+        //binding.textCurrentStatus.text = referralDisplay
+
         //val subscriptionCode = viewModel...              //from backend
         val subscriptionDisplay = getString(R.string.free) //from backend
         binding.textCurrentPlan.text = subscriptionDisplay
-
-        //val referralCode = viewModel...               //from backend
-        val referralDisplay = getString(R.string.done)  //from backend
-        binding.textCurrentStatus.text = referralDisplay
 
         val languageCode = viewModel.sharedPrefLanguage.getString("language", "en")
         val languageDisplay = if (languageCode == "az") getString(R.string.azerbaijani) else if (languageCode == "en") getString(R.string.english) else getString(R.string.russian)

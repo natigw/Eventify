@@ -17,7 +17,6 @@ class PlacesFragment : BaseFragment<FragmentPlacesBinding>(FragmentPlacesBinding
 
     override fun onViewCreatedLight() {
         setTabLayoutMediator()
-
     }
 
     private fun setTabLayoutMediator(){

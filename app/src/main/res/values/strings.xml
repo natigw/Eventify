@@ -32,7 +32,7 @@
     <string name="profile">Profile</string>
     <string name="map">Map</string>
     <string name="search_here">Search here</string>
-    <string name="subs_heading">The Right Plan\n for Your Business</string>
+    <string name="subs_description">The Right Plan for Your Business</string>
     <string name="subs_heading2">We have several powerful plans to showcase your business and get discovered as a creative entrepreneurs. \nEverything you need.</string>
     <string name="bill_monthly">Bill Monthly</string>
     <string name="bill_annually">Bill Annually</string>
@@ -40,7 +40,8 @@
     <string name="referral_program">Referral Program</string>
     <string name="get_a_free_ticket">Get a free ticket!</string>
     <string name="referral_note">Note that to access and enjoy our exclusive rewards, an active subscription is mandatory.</string>
-    <string name="share_invite_link">Share your invite link</string>
+    <string name="invite_link_note">*Note that additional reward system will also be available soon.</string>
+    <string name="share_invite_link">Share your invite link*</string>
     <string name="copy_link">Copy link</string>
     <string name="share">Share</string>
     <string name="type_your_message">Type your message...</string>
@@ -193,4 +194,8 @@
     <string name="search">Search</string>
     <string name="connection_lost_retry">No connection! Try again later!</string>
     <string name="confirm">Confirm</string>
+    <string name="referral_description_1">Almost there! Refer </string>
+    <string name="referral_description_2">\ more friend to get a free ticket for\ </string>
+    <string name="referral_congrats_1">Congratulations! You got a ticket for\ </string>
+    <string name="referral_congrats_2">\ event. Please check your ticket box!</string>
 </resources>

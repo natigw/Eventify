@@ -22,14 +22,14 @@
         app:layout_constraintGuide_percent="@dimen/eventify_guideline_right" />
 
     <TextView
-        android:id="@+id/textVenuesHeading"
+        android:id="@+id/textHeadingVenues"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:fontFamily="@font/inter_bold"
         android:text="@string/venues"
         android:textAlignment="center"
-        android:textColor="@color/purple_dark_eventify"
+        android:textColor="@color/eventify_heading"
         android:textSize="28sp"
         app:layout_constraintEnd_toStartOf="@+id/guidelineVenues2"
         app:layout_constraintStart_toStartOf="@+id/guidelineVenues1"
@@ -46,7 +46,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/guidelineVenues2"
         app:layout_constraintStart_toStartOf="@id/guidelineVenues1"
-        app:layout_constraintTop_toBottomOf="@+id/textVenuesHeading"
+        app:layout_constraintTop_toBottomOf="@+id/textHeadingVenues"
         tools:itemCount="3"
         tools:listitem="@layout/sample_venue" />
 
@@ -57,7 +57,7 @@
         android:layout_marginTop="12dp"
         app:layout_constraintStart_toStartOf="@id/guidelineVenues1"
         app:layout_constraintEnd_toEndOf="@id/guidelineVenues2"
-        app:layout_constraintTop_toBottomOf="@+id/textVenuesHeading" >
+        app:layout_constraintTop_toBottomOf="@+id/textHeadingVenues" >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -82,7 +82,7 @@
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="@id/guidelineVenues2"
         app:layout_constraintStart_toStartOf="@id/guidelineVenues1"
-        app:layout_constraintTop_toBottomOf="@id/textVenuesHeading"
+        app:layout_constraintTop_toBottomOf="@id/textHeadingVenues"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

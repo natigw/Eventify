@@ -1,15 +1,13 @@
 package com.example.common.utils
 
-import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
 import com.example.common.R
 
 fun NavController.navigateWithAnimationLeftToRight(
     destination: Int,
-    args: Bundle? = null,
     popUpTo: Int? = null,
-    inclusive: Boolean = false
+    inclusive: Boolean = true
 ) {
     val navOptions = NavOptions.Builder().apply {
         setEnterAnim(R.anim.from_left)
@@ -19,14 +17,13 @@ fun NavController.navigateWithAnimationLeftToRight(
         popUpTo?.let { setPopUpTo(it, inclusive) }
     }.build()
 
-    this.navigate(destination, args, navOptions)
+    this.navigate(destination, navOptions)
 }
 
 fun NavController.navigateWithAnimationRightToLeft(
     destination: Int,
-    args: Bundle? = null,
     popUpTo: Int? = null,
-    inclusive: Boolean = false
+    inclusive: Boolean = true
 ) {
     val navOptions = NavOptions.Builder().apply {
         setEnterAnim(R.anim.from_right)
@@ -36,18 +33,17 @@ fun NavController.navigateWithAnimationRightToLeft(
         popUpTo?.let { setPopUpTo(it, inclusive) }
     }.build()
 
-    this.navigate(destination, args, navOptions)
+    this.navigate(destination, navOptions)
 }
 
 fun NavController.navigateWithoutAnimation(
     destination: Int,
-    args: Bundle? = null,
     popUpTo: Int? = null,
-    inclusive: Boolean = false
+    inclusive: Boolean = true
 ) {
     val navOptions = NavOptions.Builder().apply {
         popUpTo?.let { setPopUpTo(it, inclusive) }
     }.build()
 
-    this.navigate(destination, args, navOptions)
+    this.navigate(destination, navOptions)
 }

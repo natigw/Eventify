@@ -34,7 +34,7 @@
             android:backgroundTint="@color/eventify_background_primary"
             app:icon="@drawable/ic_back_arrow"
             app:iconSize="24dp"
-            app:iconTint="@color/eventify_primary"
+            app:iconTint="@color/eventify_primary_helper"
             app:layout_constraintBottom_toBottomOf="@+id/textHeadingReferral"
             app:layout_constraintStart_toStartOf="@id/guidelineReferral1"
             app:layout_constraintTop_toTopOf="@id/textHeadingReferral" />
@@ -108,7 +108,7 @@
                     android:fontFamily="@font/outfit_semibold"
                     android:text="@string/get_a_free_ticket"
                     android:textAlignment="center"
-                    android:textColor="@color/purple_dark_eventify"
+                    android:textColor="@color/eventify_primary"
                     android:textSize="24sp"
                     app:layout_constraintEnd_toEndOf="@id/guidelineCard1Referral2"
                     app:layout_constraintStart_toStartOf="@id/guidelineCard1Referral1"
@@ -121,7 +121,7 @@
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/outfit_regular"
                     android:textAlignment="center"
-                    android:textColor="@color/purple_light_eventify"
+                    android:textColor="@color/eventify_primary"
                     android:textSize="20sp"
                     app:layout_constraintEnd_toEndOf="@+id/guidelineCard1Referral2"
                     app:layout_constraintStart_toStartOf="@+id/guidelineCard1Referral1"
@@ -201,7 +201,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:layout_marginBottom="32dp"
-            android:backgroundTint="@color/green_light_eventify"
+            android:backgroundTint="@color/card_color_eventify"
             app:cardCornerRadius="24dp"
             app:cardElevation="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -237,7 +237,7 @@
                     android:fontFamily="@font/outfit_semibold"
                     android:text="@string/share_invite_link"
                     android:textAlignment="center"
-                    android:textColor="@color/purple_dark_eventify"
+                    android:textColor="@color/eventify_primary_helper"
                     android:textSize="24sp"
                     app:layout_constraintEnd_toEndOf="@id/guidelineCard2Referral2"
                     app:layout_constraintStart_toStartOf="@id/guidelineCard2Referral1"
@@ -266,7 +266,7 @@
                     android:paddingTop="8dp"
                     android:paddingBottom="8dp"
                     android:text="@string/copy_link"
-                    android:textColor="@color/eventify_primary"
+                    android:textColor="@color/eventify_primary_helper"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/buttonShareLink"
@@ -274,7 +274,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/imageShareLinkReferral"
                     app:layout_constraintVertical_bias="0.0"
-                    app:strokeColor="@color/eventify_primary"
+                    app:strokeColor="@color/eventify_primary_helper"
                     app:strokeWidth="3dp" />
 
                 <Button
@@ -299,6 +299,20 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/textLinkNoteReferral"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/outfit_regular"
+            android:text="@string/invite_link_note"
+            android:textColor="@color/gray_helper_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/guidelineReferral2"
+            app:layout_constraintStart_toStartOf="@+id/guidelineReferral1"
+            app:layout_constraintTop_toBottomOf="@id/card2Referral"
+            app:layout_constraintVertical_bias="1.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

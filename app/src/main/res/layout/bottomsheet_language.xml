@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:elevation="4dp"
-        android:src="@drawable/bottomsheet_drawer_element_on_secondary"
+        android:src="@drawable/bottomsheet_drawer_element_primary_helper"
         app:layout_constraintEnd_toEndOf="@id/guidelineLanguageBSh2"
         app:layout_constraintStart_toStartOf="@id/guidelineLanguageBSh1"
         app:layout_constraintTop_toTopOf="parent" />

@@ -1,6 +1,5 @@
 package com.example.eventify.presentation.ui.fragments.subscription
 
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -21,7 +20,7 @@ class SubscriptionFragment : BaseFragment<FragmentSubscriptionBinding>(FragmentS
     private val viewmodel by viewModels<SubscriptionViewModel>()
 
     private val subscriptionAdapter = SubscriptionAdapter(
-        currentPackage = "Pro",
+        currentPackage = "Base",
         isAnnual = false,
         onClick = {
             nancyToastSuccess(requireContext(), it + getString(R.string.navigating_payment_screen))
@@ -29,19 +28,8 @@ class SubscriptionFragment : BaseFragment<FragmentSubscriptionBinding>(FragmentS
     )
 
     override fun onViewCreatedLight() {
-        setLayouts()
         observeChanges()
         setAdapters()
-    }
-
-    private fun setLayouts() {
-        val screenHeight = resources.displayMetrics.heightPixels
-        val topMargin = (0.04 * screenHeight).toInt()
-        binding.textHeadingSubs.post {
-            val params = binding.textHeadingSubs.layoutParams as ConstraintLayout.LayoutParams
-            params.topMargin = topMargin
-            binding.textHeadingSubs.layoutParams = params
-        }
     }
 
     override fun buttonListeners() {
@@ -68,7 +56,7 @@ class SubscriptionFragment : BaseFragment<FragmentSubscriptionBinding>(FragmentS
                 binding.switchSubscription.isChecked = it
                 binding.textBillMonthly.typeface = if (!it) typefaceBold else typefaceLight
                 binding.textBillAnnually.typeface = if (it) typefaceBold else typefaceLight
-                
+
                 subscriptionAdapter.isAnnual = it
                 subscriptionAdapter.notifyDataSetChanged()
             }
