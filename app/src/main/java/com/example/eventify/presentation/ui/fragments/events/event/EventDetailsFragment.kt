@@ -136,17 +136,17 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
 
         binding.buttonBackEventDetails.setOnClickListener {
             if(args.comingProfile)
-                findNavController().navigateWithoutAnimation(R.id.profileFragment)
+                navigateWithoutAnimation(findNavController(), R.id.profileFragment, R.id.placesFragment)
             else
-                findNavController().navigateWithAnimationLeftToRight(R.id.placesFragment)
+                navigateWithoutAnimation(findNavController(), R.id.placesFragment)
         }
 
         requireActivity().onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 if(args.comingProfile)
-                    findNavController().navigateWithoutAnimation(R.id.profileFragment)
+                    navigateWithoutAnimation(findNavController(), R.id.profileFragment, R.id.placesFragment)
                 else
-                    findNavController().navigateWithAnimationLeftToRight(R.id.placesFragment)
+                    navigateWithoutAnimation(findNavController(), R.id.placesFragment)
             }
         })
 

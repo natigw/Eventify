@@ -19,7 +19,7 @@
     <string name="or">or</string>
     <string name="login">Login</string>
     <string name="sign_in">Sign in</string>
-    <string name="don_t_have_an_account_register">Don\'t have an account? <font color='#6823EA'><b>Register</b></font></string>
+    <string name="don_t_have_an_account_register">Don\'t have an account? <font color='#2ED47B'><b>Register</b></font></string>
     <string name="sign_up">Sign Up</string>
     <string name="username">Username</string>
     <string name="forgot_password">Forgot password?</string>
@@ -92,6 +92,7 @@
     <string name="event_details_colon">Event details:</string>
     <string name="venue_comments_colon">Venue comments:</string>
     <string name="event_comments_colon">Event comments:</string>
+    <string name="eventify" translatable="false">eventify</string>
     <string name="eventify_az" translatable="false">eventify.az</string>
     <string name="organizer_events">Organizer events</string>
     <string name="user_events">User events</string>
@@ -160,22 +161,18 @@
     <string name="location_permission_denied">Location permission denied!</string>
     <string name="enable_location_service">Please enable location service!</string>
     <string name="verify_email">Please verify your account!</string>
-    <string name="continue_email">Continue</string>
-    <string name="send_verification">
-        <font>
-            Didn\'t receive the email?
-        </font>
-        <font><b>Click to resend.</b></font>
-    </string>
-    <string name="verification_link">We sent a verification link to</string>
+    <string name="continue_">Continue</string>
+    <string name="verification_link">We sent a verification link to:</string>
     <string name="try_again">Please try again!</string>
-    <string name="wrong_email">
-        <font>Wrong email address?
-        </font>
-
-        <font><b>Click to register.</b></font>
-    </string>
+    <string name="send_verification">Didn\'t receive the email?</string>
+    <string name="click_to_resend">Click to resend.</string>
+    <string name="wrong_email">Wrong email address?</string>
+    <string name="click_to_register">Click to register.</string>
     <string name="continue_with_google">Continue with Google</string>
+    <string name="warning">Warning!</string>
+    <string name="got_it">Got it</string>
+    <string name="cancel_">Cancel</string>
+    <string name="verification_warning_text">If you want to leave now, please finish the registration later via verification link sent to your email.</string>
     <string name="stop">stop</string>
     <string name="start">start</string>
     <string name="options">Options:</string>
@@ -196,6 +193,7 @@
     <string name="confirm">Confirm</string>
     <string name="referral_description_1">Almost there! Refer </string>
     <string name="referral_description_2">\ more friend to get a free ticket for\ </string>
+    <string name="referral_description_3">\ event.</string>
     <string name="referral_congrats_1">Congratulations! You got a ticket for\ </string>
     <string name="referral_congrats_2">\ event. Please check your ticket box!</string>
 </resources>

@@ -67,7 +67,6 @@ class SubscriptionAdapter(
             if (item.name == currentPackage) {
                 buttonChoosePackageSubscription.text = "Current plan"
                 buttonChoosePackageSubscription.isEnabled = false
-                buttonChoosePackageSubscription.setBackgroundColor(R.color.button_disabled)
             }
 
             buttonChoosePackageSubscription.setOnClickListener {

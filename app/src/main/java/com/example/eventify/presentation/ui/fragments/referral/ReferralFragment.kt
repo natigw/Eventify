@@ -42,7 +42,7 @@ class ReferralFragment : BaseFragment<FragmentReferralBinding>(FragmentReferralB
                     .collectLatest {
                         chosenEvent = it.random().name
                         binding.textGetTicketDescriptionReferral.text =
-                            getString(R.string.referral_description_1)+"${3 - numberOfLinkSent}"+getString(R.string.referral_description_2)+"$chosenEvent"
+                            getString(R.string.referral_description_1)+"${3 - numberOfLinkSent}"+getString(R.string.referral_description_2)+"$chosenEvent"+getString(R.string.referral_description_3)
                         binding.textGetTicketDescriptionReferral.text =
                             getString(R.string.referral_congrats_1)+"$chosenEvent"+getString(R.string.referral_congrats_2)
                     }
@@ -76,13 +76,24 @@ class ReferralFragment : BaseFragment<FragmentReferralBinding>(FragmentReferralB
         super.buttonListeners()
 
         binding.buttonBackReferral.setOnClickListener {
-            findNavController().navigateWithAnimationLeftToRight(R.id.profileFragment, R.id.referralFragment)
+            navigateWithAnimationLeftToRight(findNavController(),R.id.profileFragment, R.id.referralFragment)
         }
         requireActivity().onBackPressedDispatcher.addCallback(
             this,
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
-                    findNavController().navigateWithAnimationLeftToRight(R.id.profileFragment, popUpTo = R.id.referralFragment)
+//                    navigateWithAnimationLeftToRight(findNavController(), R.id.profileFragment, R.id.referralFragment)
+                    findNavController().navigate(
+                        R.id.profileFragment,
+                        null,
+                        NavOptions.Builder()
+                            .setEnterAnim(R.anim.from_left)
+                            .setExitAnim(R.anim.to_right)
+                            .setPopEnterAnim(R.anim.fade_in)
+                            .setPopExitAnim(R.anim.fade_out)
+                            .setPopUpTo(R.id.referralFragment, true)
+                            .build()
+                    )
                 }
             }
         )

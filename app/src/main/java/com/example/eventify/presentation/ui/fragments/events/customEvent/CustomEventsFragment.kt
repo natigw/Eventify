@@ -54,12 +54,13 @@ class CustomEventsFragment : BaseFragment<FragmentCustomEventsBinding>(FragmentC
 
     override fun buttonListeners() {
         super.buttonListeners()
-//        binding.buttonCreateCustomEvent.setOnClickListener {
-//            findNavController().navigate(PlacesFragmentDirections.actionPlacesFragmentToCreateCustomEventFragment())
-//        }
-        binding.buttonCreateCustomEvent.setOnClickListener{
-            findNavController().navigateWithAnimationRightToLeft(destination = R.id.createCustomEventFragment, popUpTo = R.id.placesFragment)
+        binding.buttonCreateCustomEvent.setOnClickListener {
+            findNavController().navigate(PlacesFragmentDirections.actionPlacesFragmentToCreateCustomEventFragment())
         }
+        //TODO
+//        binding.buttonCreateCustomEvent.setOnClickListener{
+//            navigateWithAnimationRightToLeft(findNavController(), destination = R.id.createCustomEventFragment, popUpTo = R.id.placesFragment)
+//        }
     }
 
     private fun setAdapters() {

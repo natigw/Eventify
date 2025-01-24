@@ -132,14 +132,14 @@ class VenueDetailsFragment :
         }
 
         binding.buttonBackVenue.setOnClickListener {
-            findNavController().navigateWithAnimationLeftToRight(R.id.venuesFragment)
+            navigateWithAnimationLeftToRight(findNavController(), R.id.venuesFragment, R.id.venueDetailsFragment)
         }
 
         requireActivity().onBackPressedDispatcher.addCallback(
             this,
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
-                    findNavController().navigateWithAnimationLeftToRight(R.id.venuesFragment)
+                    navigateWithAnimationLeftToRight(findNavController(), R.id.venuesFragment, R.id.venueDetailsFragment)
                 }
             })
     }

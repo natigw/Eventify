@@ -5,6 +5,7 @@ import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ImageView
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
@@ -19,6 +20,8 @@ import com.example.common.utils.functions.validateInputFieldEmpty
 import com.example.common.utils.nancyToastError
 import com.example.common.utils.nancyToastSuccess
 import com.example.common.utils.nancyToastWarning
+import com.example.common.utils.navigateWithAnimationLeftToRight
+import com.example.common.utils.navigateWithoutAnimation
 import com.example.eventify.R
 import com.example.eventify.databinding.FragmentCreateCustomEventBinding
 import com.example.eventify.presentation.viewmodels.CreateCustomEventViewModel
@@ -63,12 +66,19 @@ class CreateCustomEventFragment : BaseFragment<FragmentCreateCustomEventBinding>
 
     override fun onViewCreatedLight() {
         viewModelObserver()
-        clickListeners()
     }
 
-    private fun clickListeners() {
+    override fun buttonListeners() {
+        super.buttonListeners()
+
+        requireActivity().onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                navigateWithAnimationLeftToRight(findNavController(), R.id.customEventsFragment, R.id.createCustomEventFragment)
+            }
+        })
+
         binding.buttonBackCCE.setOnClickListener {
-            findNavController().popBackStack()
+            navigateWithAnimationLeftToRight(findNavController(), R.id.customEventsFragment, R.id.createCustomEventFragment)
         }
         binding.buttonAddPictureCreateCustomEvent.setOnClickListener {
             try {

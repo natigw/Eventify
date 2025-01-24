@@ -2,16 +2,25 @@ package com.example.eventify.presentation.ui.fragments.auth
 
 import android.content.Intent
 import android.view.View
+import android.widget.EditText
+import android.widget.TextView
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
 import androidx.core.view.isVisible
 import androidx.credentials.CredentialManager
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.common.base.BaseFragment
+import com.example.common.utils.blockButton
+import com.example.common.utils.functions.hideKeyboard
 import com.example.common.utils.functions.validateInputFieldEmpty
 import com.example.common.utils.nancyToastSuccess
 import com.example.common.utils.nancyToastWarning
+import com.example.common.utils.resetButton
 import com.example.data.remote.thirdpartyregister.GoogleUtils
 import com.example.eventify.BuildConfig
 import com.example.eventify.R
@@ -30,9 +39,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     private val viewModel by viewModels<LoginViewModel>()
 
     override fun onViewCreatedLight() {
-        if (viewModel.sharedPrefOnBoard.getBoolean("finished", false))
-            binding.textSloganLogin.visibility = View.VISIBLE
-
         observer()
         checkUser()
     }
@@ -63,7 +69,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRegisterFragment())
         }
 
-        binding.textForgotPasswordLogin.setOnClickListener {
+        binding.buttonForgotPasswordLogin.setOnClickListener {
             findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToResetPasswordFragment())
         }
 
@@ -110,8 +116,18 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             viewModel.isLoadingGoogle
                 .filter { it != null }
                 .collectLatest {
-                    if (it!!) blockGoogleButton()
-                    else resetGoogleButton()
+                    if (it!!)
+                        blockButton(
+                            progressBar = binding.progressBarGoogle,
+                            button = binding.buttonGoogle
+                        )
+                    else
+                        resetButton(
+                            progressBar = binding.progressBarGoogle,
+                            button = binding.buttonGoogle,
+                            buttonText = getString(R.string.continue_with_google),
+                            buttonColor = requireContext().getColor(R.color.eventify_background_secondary)
+                        )
                 }
         }
 
@@ -119,51 +135,27 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             viewModel.isLoading
                 .filter { it != null }
                 .collectLatest {
-                    if (it!!) {
-                        blockLoginButton()
-                    } else {
-                        resetLoginButton()
+                    with(binding) {
+                        if (it!!) {
+                            blockButton(
+                                progressBar = progressBarLogin,
+                                button = buttonLogin
+                            )
+                            textInputLayoutUsernameLogin.clearFocus()
+                            textInputLayoutPasswordLogin.clearFocus()
+                            hideKeyboard(binding.root)
+                        } else {
+                            resetButton(
+                                progressBar = progressBarLogin,
+                                button = buttonLogin,
+                                buttonText = getString(R.string.login),
+                                buttonColor = requireContext().getColor(R.color.login)
+                            )
+                        }
                     }
                 }
         }
     }
-
-    private fun blockLoginButton() {
-        binding.progressBarLogin.visibility = View.VISIBLE
-        binding.buttonLogin.apply {
-            isEnabled = false
-            text = null
-            setBackgroundColor(requireContext().getColor(R.color.button_disabled))
-        }
-    }
-
-    private fun resetLoginButton() {
-        binding.progressBarLogin.visibility = View.INVISIBLE
-        binding.buttonLogin.apply {
-            isEnabled = true
-            text = getString(R.string.login)
-            setBackgroundColor(requireContext().getColor(R.color.login))
-        }
-    }
-
-    private fun blockGoogleButton() {
-        binding.apply {
-            progressBarGoogle.isVisible = true
-            buttonGoogle.isEnabled = false
-            buttonLogin.isEnabled = false
-            buttonGoogle.text = null
-        }
-    }
-
-    private fun resetGoogleButton() {
-        binding.apply {
-            progressBarGoogle.isVisible = false
-            buttonGoogle.isEnabled = true
-            buttonLogin.isEnabled = true
-            buttonGoogle.text = getString(R.string.continue_with_google)
-        }
-    }
-
 
     private fun clearInputFields() {
         binding.apply {

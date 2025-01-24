@@ -42,7 +42,7 @@ fun validateInputFieldEmpty(
     inputText: String,
     errorMessage: String
 ): Boolean {
-    if (inputText.isEmpty()) {
+    if (inputText.isBlank()) {
         inputLayout.isErrorEnabled = true
         inputLayout.error = errorMessage
         inputLayout.editText?.requestFocus()  //focus on the layout

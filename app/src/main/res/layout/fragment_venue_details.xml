@@ -328,6 +328,7 @@
             style="?android:attr/progressBarStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:indeterminateTint="@color/eventify_primary_helper"
             app:layout_constraintTop_toTopOf="@+id/textNoCommentsTextVenueDetails"
             app:layout_constraintBottom_toBottomOf="@+id/textNoCommentsTextVenueDetails"
             app:layout_constraintStart_toStartOf="@id/guidelineVenueDetails1"

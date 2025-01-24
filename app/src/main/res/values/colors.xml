@@ -2,7 +2,10 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="gray_light">#EBEBEB</color>
     <color name="gray">#BABABA</color>
+    <color name="gray_dark">#666666</color>
+    <color name="gray_darkest">#3A3A3A</color>
     <color name="transparent">@android:color/transparent</color>
 
     <color name="eventify_background_primary">#F6F6F6</color>    <!--light gray-->
@@ -18,16 +21,15 @@
 
     <color name="shimmer_gray">#CCCCCC</color>
     <color name="shimmer_gray_light">#EBEBEB</color>
-    <color name="gray_light">#EBEBEB</color>
     <color name="gray_helper_text">#CCCCCC</color>
     <color name="green_light_eventify">#D3FFE7</color>
     <color name="card_color_eventify">#D3FFE7</color>
     <color name="purple_dark_eventify">#2E066D</color>
 
-    <color name="login">#F44336</color>
-    <color name="register">#407BFF</color>
-    <color name="button_disabled">#FFDADADA</color>
-    <color name="logout">#FF1100</color>
+    <color name="eventify">#1EEBAA</color>
+    <color name="login">#6823EA</color>
+    <color name="register">#2ED47B</color>
+    <color name="logout">#FF0000</color>
     <color name="error">#B00020</color>
 
     <color name="eventify_bottom_nav_background">#DBDBDB</color>

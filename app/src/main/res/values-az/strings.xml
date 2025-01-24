@@ -15,7 +15,7 @@
     <string name="or">və ya</string>
     <string name="login">Daxil olun</string>
     <string name="sign_in">Daxil olun</string>
-    <string name="don_t_have_an_account_register">Hesabınız yoxdur? <font color="#882DFF"><b>Qeydiyyatdan keçin</b></font></string>
+    <string name="don_t_have_an_account_register">Hesabınız yoxdur? <font color="#2ED47B"><b>Qeydiyyatdan keçin</b></font></string>
     <string name="sign_up">Qeydiyyatdan keçin</string>
     <string name="username">İstifadəçi adınız</string>
     <string name="forgot_password">Şifrəni unutdunuz?</string>
@@ -147,9 +147,11 @@
     <string name="please_enter_username">İstifadəçi adınızı daxil edin!</string>
     <string name="please_enter_password">Şifrənizi daxil edin!</string>
     <string name="verify_email">Hesabınızı təsdiqləyin!</string>
-    <string name="continue_email">Davam et</string>
-    <string name="verification_link">Biz sizə təsdiq linki göndərdik</string>
+    <string name="continue_">Davam et</string>
+    <string name="verification_link">Biz sizə təsdiq linki göndərdik:</string>
     <string name="try_again">Yenidən cəhd edin!</string>
+    <string name="cancel_">İmtina</string>
+    <string name="verification_warning_text">Əgər indi çıxmaq istəyirsinizsə, zəhmət olmasa emailinizə gələn linkə klikləyib qeydiyyatı tamamlayın.</string>
     <string name="stop">dayan</string>
     <string name="start">davam et</string>
     <string name="system">Sistem</string>
@@ -165,20 +167,10 @@
     <string name="connection_lost_retry">Bağlantı yoxdur! Yenidən cəhd edin!</string>
     <string name="no_events">Hələlik tədbir yoxdur!</string>
     <string name="no_custom_events">Hələlik istifadəçi tədbiri yoxdur!</string>
-    <string name="send_verification">
-        <font>
-            Sizə email gəlmədi?
-        </font>
-        <font><b>Yenidən göndərmək üçün kliklə.</b></font>
-    </string>
-    <string name="wrong_email">
-        <font>
-            Yanlış email ünvan?
-        </font>
-        <font>
-            <b>Qeydiyyat üçün kliklə.</b>
-        </font>
-    </string>
+    <string name="send_verification">Sizə email gəlmədi?</string>
+    <string name="click_to_resend">Yenidən göndər.</string>
+    <string name="wrong_email">Yanlış email ünvan?</string>
+    <string name="click_to_register">Qeydiyyat üçün kliklə.</string>
     <string name="continue_with_google">Google ilə davam edin</string>
     <string name="free">Pulsuz</string>
     <string name="options">Tənzimləmələr:</string>
@@ -186,6 +178,11 @@
     <string name="theme">Tətbiqin mövzusu</string>
     <string name="choose_language">Dil seçin</string>
     <string name="confirm">Təsdiqlə</string>
-    <string name="referral_description_1">"Çox az qalıb! "</string>
-    <string name="referral_description_2">" üçün pulsuz bilet əldə etmək üçün "</string>
+    <string name="referral_description_1">"Çox az qalıb!\ "</string>
+    <string name="referral_description_2">"\ tədbirinə pulsuz bilet əldə etmək üçün\ "</string>
+    <string name="referral_description_3">"\ dostuna daha tövsiyyə et."</string>
+    <string name="referral_congrats_1">"Təbriklər!\ "</string>
+    <string name="referral_congrats_2">\ üçün bilet əldə etmisiniz. Elektron poçtunuzu yoxlayın!</string>
+    <string name="warning">Diqqət!</string>
+    <string name="got_it">Oldu</string>
 </resources>
