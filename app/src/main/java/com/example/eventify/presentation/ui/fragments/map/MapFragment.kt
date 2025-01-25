@@ -82,7 +82,6 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
 
     override fun onViewCreatedLight() {
-
         setAdapters()
         motionLayout()
         observer()
@@ -304,18 +303,26 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         }
 
         googleMap.isMyLocationEnabled = true
+        googleMap.uiSettings.isMyLocationButtonEnabled = false
 
-        val fusedLocationProviderClient =
-            LocationServices.getFusedLocationProviderClient(requireContext())
-        fusedLocationProviderClient.lastLocation.addOnSuccessListener { location ->
-            if (location != null) {
-                currentLatLng = LatLng(location.latitude, location.longitude)
-                //oldugun yere pin de qoysun? deqiqlesdir
-                addMarker(location.latitude, location.longitude, "You are here", BitmapDescriptorFactory.HUE_RED, 0)
-                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng!!, 12f))
-            } else {
-                val bakuCityCenter = LatLng(40.3791, 49.8468)
-                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(bakuCityCenter, 12f))
+        binding.buttonLocationMap.setOnClickListener {
+            val fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext())
+            fusedLocationProviderClient.lastLocation.addOnSuccessListener { location ->
+                if (location != null) {
+                    currentLatLng = LatLng(location.latitude, location.longitude)
+                    //TODO oldugun yere pin de qoysun? deqiqlesdir
+                    addMarker(
+                        location.latitude,
+                        location.longitude,
+                        getString(R.string.you_are_here),
+                        BitmapDescriptorFactory.HUE_RED,
+                        0
+                    )
+                    googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng!!, 15f))
+                } else {
+                    val bakuCityCenter = LatLng(40.3791, 49.8468)
+                    googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(bakuCityCenter, 12f))
+                }
             }
         }
     }

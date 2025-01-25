@@ -1,8 +1,6 @@
 package com.example.eventify.presentation.adapters
 
-import android.util.Log
 import android.view.View
-import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.common.base.BaseAdapter
@@ -14,7 +12,7 @@ class VenueAdapter(
     val onClick: (VenueItem) -> Unit
 ) : BaseAdapter<SampleVenueBinding>(SampleVenueBinding::inflate) {
 
-    var venues: List<VenueItem> = emptyList()
+    private var venues: List<VenueItem> = emptyList()
 
     override fun getItemCount(): Int {
         return venues.size
@@ -49,7 +47,7 @@ class VenueAdapter(
 //                //TODO -> like olsun request atsin, icon fill olsun
 //            }
 
-            root.setOnClickListener{
+            cardVenue.setOnClickListener{
                 onClick(venue)
             }
             buttonVenueAllDetails.setOnClickListener {

@@ -8,8 +8,7 @@ import com.example.domain.model.places.AddCommentItem
 import com.example.domain.model.places.CommentItem
 import com.example.eventify.databinding.SampleCommentBinding
 
-class CommentAdapter (
-) : BaseAdapter<SampleCommentBinding>(SampleCommentBinding::inflate) {
+class CommentAdapter : BaseAdapter<SampleCommentBinding>(SampleCommentBinding::inflate) {
 
     var comments: MutableList<CommentItem> = mutableListOf()
 

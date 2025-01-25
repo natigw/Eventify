@@ -57,6 +57,7 @@
     <string name="date_colon">Date:</string>
     <string name="organizer_colon">Organizer:</string>
     <string name="published_colon">Published:</string>
+    <string name="event_duration_colon">Event duration:</string>
     <string name="events">Events</string>
     <string name="custom_events">User events</string>
     <string name="venue_details">Venue details</string>
@@ -65,6 +66,7 @@
     <string name="register_successful">Registration successful!</string>
     <string name="retry">Retry</string>
     <string name="network_connection_lost">Network connection lost!</string>
+    <string name="get_route">Get route</string>
     <string name="get_shortest_route">Get shortest route</string>
     <string name="no_events">No events yet!</string>
     <string name="no_custom_events">No user events yet!</string>
@@ -196,4 +198,6 @@
     <string name="referral_description_3">\ event.</string>
     <string name="referral_congrats_1">Congratulations! You got a ticket for\ </string>
     <string name="referral_congrats_2">\ event. Please check your ticket box!</string>
+    <string name="you_are_here">You are here</string>
+    <string name="no_apps_to_open_maps">No app found to open maps</string>
 </resources>

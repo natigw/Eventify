@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.eventify.R
 import com.example.common.base.BaseBottomSheetFragment
+import com.example.common.utils.nancyToastWarning
 import com.example.domain.model.places.event.EventDetailsItem
 import com.example.domain.model.places.venue.VenueDetailsItem
 import com.example.eventify.databinding.BottomsheetMarkerDetailsBinding
@@ -30,11 +31,10 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MarkerDetailsBottomSheet : BaseBottomSheetFragment<BottomsheetMarkerDetailsBinding>(BottomsheetMarkerDetailsBinding::inflate) {
 
-    private val args by navArgs<MarkerDetailsBottomSheetArgs>()
-
+    private val viewModel by viewModels<MarkerDetailsViewModel>()
     private val sharedViewModel by activityViewModels<SharedViewModel>()
 
-    private val viewModel by viewModels<MarkerDetailsViewModel>()
+    private val args by navArgs<MarkerDetailsBottomSheetArgs>()
 
     override fun onViewCreatedLight() {
         checkIfVenueOrEvent()
@@ -53,11 +53,10 @@ class MarkerDetailsBottomSheet : BaseBottomSheetFragment<BottomsheetMarkerDetail
                 data = Uri.parse(geoUri)
             }
 
-            if (intent.resolveActivity(requireActivity().packageManager) != null) {
+            if (intent.resolveActivity(requireActivity().packageManager) != null)
                 requireActivity().startActivity(intent)
-            } else {
-                Toast.makeText(requireContext(), "No app found to open maps", Toast.LENGTH_SHORT).show()
-            }
+            else
+                nancyToastWarning(requireContext(), getString(R.string.no_apps_to_open_maps))
         }
     }
 
@@ -79,13 +78,11 @@ class MarkerDetailsBottomSheet : BaseBottomSheetFragment<BottomsheetMarkerDetail
         }
     }
 
-    private fun checkIfVenueOrEvent(){
-        if(args.placeType == "venue"){
+    private fun checkIfVenueOrEvent() {
+        if(args.placeType == "venue")
             viewModel.getVenueDetails(args.placeId)
-        }
-        else {
+        else
             viewModel.getEventDetails(args.placeId)
-        }
     }
 
     private fun setEventUI(eventDetails : EventDetailsItem){
@@ -93,7 +90,7 @@ class MarkerDetailsBottomSheet : BaseBottomSheetFragment<BottomsheetMarkerDetail
             textVenueNameMarkerDetails.text = eventDetails.title
             textVenueDescriptionMarkerDetails.text = eventDetails.description
             textVenueTypeMarkerDetails.text = eventDetails.eventType
-            VenueOpenHoursMarkerDetailsText.text = "Event duration:"
+            VenueOpenHoursMarkerDetailsText.text = getString(R.string.event_duration_colon)
             ratingBarMarkerDetails.rating = eventDetails.rating.toFloat()
             textVenueLikeCountMarkerDetails.text = eventDetails.likeCount.toString()
             Glide.with(imageVenueMarkerDetails)
@@ -102,7 +99,7 @@ class MarkerDetailsBottomSheet : BaseBottomSheetFragment<BottomsheetMarkerDetail
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(imageVenueMarkerDetails)
             buttonBuyTicketMarkerDetails.visibility = View.VISIBLE
-            buttonShortestRouteMarkerDetails.text = "Get route"
+            buttonShortestRouteMarkerDetails.text = getString(R.string.get_route)
 //            buttonShortestRouteMarkerDetails.setOnClickListener {
 //                viewLifecycleOwner.lifecycleScope.launch {
 //                    sharedViewModel.setRouteCoordinates(eventDetails.coordinates)

@@ -43,8 +43,8 @@
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/guidelineVenues2"
-        app:layout_constraintStart_toStartOf="@id/guidelineVenues1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textHeadingVenues"
         tools:itemCount="3"
         tools:listitem="@layout/sample_venue" />

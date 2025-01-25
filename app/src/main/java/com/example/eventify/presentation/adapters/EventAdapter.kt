@@ -39,7 +39,7 @@ class EventAdapter(
             if (position == events.size - 1)
                 dividerEvent.visibility = View.INVISIBLE
 
-            root.setOnClickListener {
+            cardEvent.setOnClickListener {
                 onClick(event.eventId)
             }
             buttonEventAllDetails.setOnClickListener {

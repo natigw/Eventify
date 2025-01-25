@@ -65,7 +65,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             }
         }
 
-        binding.textDontHaveAccountLoginTEXT.setOnClickListener {
+        binding.buttonRegisterLogin.setOnClickListener {
             findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRegisterFragment())
         }
 

@@ -153,7 +153,8 @@
             android:textSize="12sp"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="@id/guidelineVenueDetails2"
-            app:layout_constraintTop_toBottomOf="@id/textVenueDescription" />
+            app:layout_constraintTop_toBottomOf="@id/textVenueDescription"
+            app:rippleColor="?attr/colorControlHighlight" />
 
         <TextView
             android:id="@+id/textVenueTypeText"

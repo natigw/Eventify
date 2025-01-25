@@ -38,7 +38,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/textVenueNameDetailsShimmer"
+        android:id="@+id/imageHeadingBackgroundMap"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="-16dp"
@@ -47,14 +47,14 @@
         android:layout_marginBottom="-2dp"
         android:adjustViewBounds="true"
         android:background="@color/eventify_heading"
-        app:layout_constraintBottom_toBottomOf="@+id/textMapHeading"
-        app:layout_constraintEnd_toEndOf="@id/textMapHeading"
-        app:layout_constraintStart_toStartOf="@id/textMapHeading"
-        app:layout_constraintTop_toTopOf="@+id/textMapHeading"
+        app:layout_constraintBottom_toBottomOf="@+id/textHeadingMap"
+        app:layout_constraintEnd_toEndOf="@id/textHeadingMap"
+        app:layout_constraintStart_toStartOf="@id/textHeadingMap"
+        app:layout_constraintTop_toTopOf="@+id/textHeadingMap"
         app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full" />
 
     <TextView
-        android:id="@+id/textMapHeading"
+        android:id="@+id/textHeadingMap"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
@@ -80,17 +80,35 @@
     <!--        app:layout_constraintTop_toTopOf="@id/buttonSwitchMode" />-->
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonLocationMap"
+        style="?attr/materialIconButtonFilledTonalStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="7dp"
+        android:backgroundTint="@color/gray_light"
+        android:elevation="2dp"
+        android:translationZ="-2dp"
+        app:cornerRadius="8dp"
+        app:icon="@drawable/ic_find_location"
+        app:iconTint="@color/purple_dark_eventify"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/textHeadingMap" />
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonSwitchMode"
         style="?attr/materialIconButtonFilledTonalStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="7dp"
-        android:backgroundTint="@color/green_light_eventify"
+        android:layout_marginTop="4dp"
+        android:backgroundTint="@color/gray_light"
+        android:elevation="2dp"
+        android:translationZ="-2dp"
+        app:cornerRadius="8dp"
         app:icon="@drawable/ic_map_texture"
         app:iconTint="@color/purple_dark_eventify"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/map" />
+        app:layout_constraintEnd_toEndOf="@id/buttonLocationMap"
+        app:layout_constraintTop_toBottomOf="@id/buttonLocationMap" />
+
 
 
     <androidx.cardview.widget.CardView
@@ -248,21 +266,21 @@
 
 </androidx.constraintlayout.motion.widget.MotionLayout>
 
-<!--<com.google.android.material.navigation.NavigationView-->
-<!--android:background="@color/eventify_background_primary"-->
-<!--android:id="@+id/drawerNavigationHome"-->
-<!--android:layout_gravity="start"-->
-<!--android:layout_height="match_parent"-->
-<!--android:layout_width="260dp"-->
-<!--app:drawerLayoutCornerSize="32dp"-->
-<!--app:headerLayout="@layout/drawer_header"-->
-<!--app:itemIconSize="26dp"-->
-<!--app:itemIconTint="@color/drawer_item_color"-->
-<!--app:itemRippleColor="@color/green_light_eventify"-->
-<!--app:itemShapeAppearance="@style/ShapeAppearance.Material3.Corner.Large"-->
-<!--app:itemShapeFillColor="@color/drawer_button_back_color"-->
-<!--app:itemTextAppearanceActiveBoldEnabled="true"-->
-<!--app:itemTextColor="@color/drawer_item_color"-->
-<!--app:menu="@menu/drawer_menu" />-->
+    <!--<com.google.android.material.navigation.NavigationView-->
+    <!--android:background="@color/eventify_background_primary"-->
+    <!--android:id="@+id/drawerNavigationHome"-->
+    <!--android:layout_gravity="start"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_width="260dp"-->
+    <!--app:drawerLayoutCornerSize="32dp"-->
+    <!--app:headerLayout="@layout/drawer_header"-->
+    <!--app:itemIconSize="26dp"-->
+    <!--app:itemIconTint="@color/drawer_item_color"-->
+    <!--app:itemRippleColor="@color/green_light_eventify"-->
+    <!--app:itemShapeAppearance="@style/ShapeAppearance.Material3.Corner.Large"-->
+    <!--app:itemShapeFillColor="@color/drawer_button_back_color"-->
+    <!--app:itemTextAppearanceActiveBoldEnabled="true"-->
+    <!--app:itemTextColor="@color/drawer_item_color"-->
+    <!--app:menu="@menu/drawer_menu" />-->
 
-<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
+    <!--    </androidx.constraintlayout.widget.ConstraintLayout>-->

@@ -18,11 +18,11 @@
                motion:framePosition="100"
                android:alpha="0.0" />
            <KeyAttribute
-               motion:motionTarget="@+id/textMapHeading"
+               motion:motionTarget="@+id/textHeadingMap"
                motion:framePosition="100"
                android:alpha="0.0" />
            <KeyAttribute
-               motion:motionTarget="@+id/textVenueNameDetailsShimmer"
+               motion:motionTarget="@+id/imageHeadingBackgroundMap"
                motion:framePosition="100"
                android:alpha="0.0" />
        </KeyFrameSet>
@@ -50,27 +50,36 @@
             motion:layout_editor_absoluteY="501dp"
             motion:layout_editor_absoluteX="1dp" />
         <Constraint
-            android:layout_marginEnd="-14dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="2dp"
-            motion:layout_constraintTop_toTopOf="@+id/textMapHeading"
-            android:layout_marginBottom="-2dp"
-            motion:layout_constraintBottom_toBottomOf="@+id/textMapHeading"
-            motion:layout_constraintHorizontal_bias="0.0"
-            motion:layout_constraintEnd_toEndOf="@id/textMapHeading"
-            android:layout_width="0dp"
-            motion:layout_constraintVertical_bias="0.0"
-            motion:layout_constraintStart_toStartOf="@id/textMapHeading"
-            android:layout_marginStart="-16dp"
-            android:id="@+id/textVenueNameDetailsShimmer" />
-        <Constraint
-            android:id="@+id/textMapHeading"
+            android:id="@+id/textHeadingMap"
             motion:layout_constraintEnd_toEndOf="parent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             motion:layout_constraintTop_toBottomOf="@id/topCardView"
             motion:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="12dp" />
+        <Constraint
+            android:id="@+id/imageHeadingBackgroundMap"
+            motion:layout_constraintEnd_toEndOf="@id/textHeadingMap"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="-14dp"
+            android:layout_marginStart="-16dp"
+            motion:layout_constraintTop_toTopOf="@+id/textHeadingMap"
+            motion:layout_constraintStart_toStartOf="@id/textHeadingMap"
+            android:layout_marginTop="2dp"
+            motion:layout_constraintBottom_toBottomOf="@+id/textHeadingMap"
+            android:layout_marginBottom="-2dp" />
+        <Constraint
+            android:id="@+id/searchButton"
+            motion:layout_constraintEnd_toEndOf="@+id/bottomCardView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            motion:layout_constraintStart_toStartOf="@+id/bottomCardView"
+            android:layout_marginTop="16dp"
+            motion:layout_constraintTop_toBottomOf="@+id/imageView4"
+            android:translationZ="8dp" />
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/end">
@@ -96,7 +105,7 @@
             motion:layout_editor_absoluteY="0dp"
             motion:layout_editor_absoluteX="1dp" />
         <Constraint
-            android:id="@+id/textMapHeading"
+            android:id="@+id/textHeadingMap"
             motion:layout_constraintEnd_toEndOf="parent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -104,16 +113,27 @@
             motion:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="12dp" />
         <Constraint
-            android:id="@+id/textVenueNameDetailsShimmer"
-            motion:layout_constraintEnd_toEndOf="@id/textMapHeading"
+            android:id="@+id/imageHeadingBackgroundMap"
+            motion:layout_constraintEnd_toEndOf="@id/textHeadingMap"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginEnd="-14dp"
             android:layout_marginStart="-16dp"
-            motion:layout_constraintTop_toTopOf="@+id/textMapHeading"
-            motion:layout_constraintStart_toStartOf="@id/textMapHeading"
+            motion:layout_constraintTop_toTopOf="@+id/textHeadingMap"
+            motion:layout_constraintStart_toStartOf="@id/textHeadingMap"
             android:layout_marginTop="2dp"
-            motion:layout_constraintBottom_toBottomOf="@+id/textMapHeading"
+            motion:layout_constraintBottom_toBottomOf="@+id/textHeadingMap"
             android:layout_marginBottom="-2dp" />
+        <Constraint
+            android:id="@+id/searchButton"
+            motion:layout_constraintEnd_toEndOf="@+id/bottomCardView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            motion:layout_constraintStart_toStartOf="@+id/bottomCardView"
+            android:layout_marginTop="16dp"
+            motion:layout_constraintTop_toBottomOf="@+id/imageView4"
+            android:translationZ="8dp" />
     </ConstraintSet>
 </MotionScene>

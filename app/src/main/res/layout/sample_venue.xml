@@ -11,7 +11,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/cardVenue"
         style="?attr/materialCardViewFilledStyle"
+        android:clickable="true"
         android:backgroundTint="@color/eventify_background_primary"
+        app:cardCornerRadius="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,6 +23,20 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineSampleVenues1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="@dimen/eventify_guideline_left" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineSampleVenues2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="@dimen/eventify_guideline_right" />
+
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imageVenue"
                 android:layout_width="0dp"
@@ -28,8 +44,8 @@
                 android:layout_marginTop="24dp"
                 android:adjustViewBounds="true"
                 android:scaleType="centerCrop"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/guidelineSampleVenues2"
+                app:layout_constraintStart_toStartOf="@id/guidelineSampleVenues1"
                 app:layout_constraintTop_toTopOf="parent"
                 app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Medium"
                 tools:srcCompat="@tools:sample/avatars" />
@@ -59,8 +75,8 @@
                 android:fontFamily="@font/inter_bold"
                 android:textColor="@color/purple_dark_eventify"
                 android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/guidelineSampleVenues2"
+                app:layout_constraintStart_toStartOf="@id/guidelineSampleVenues1"
                 app:layout_constraintTop_toBottomOf="@+id/imageVenue"
                 tools:text="Venue name" />
 
@@ -74,7 +90,7 @@
                 android:maxLines="2"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toStartOf="@id/buttonVenueAllDetails"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@id/guidelineSampleVenues1"
                 app:layout_constraintTop_toBottomOf="@+id/textVenueName"
                 tools:text="Venue description" />
 
@@ -97,7 +113,7 @@
                 app:iconSize="14dp"
                 app:iconTint="@color/eventify_primary_helper"
                 app:iconGravity="end"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/guidelineSampleVenues2"
                 app:layout_constraintTop_toTopOf="@id/textVenueDescription"
                 app:layout_constraintBottom_toBottomOf="@id/textVenueDescription" />
 
@@ -107,8 +123,8 @@
                 android:layout_height="1dp"
                 android:layout_marginTop="20dp"
                 app:lastItemDecorated="false"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/guidelineSampleVenues2"
+                app:layout_constraintStart_toStartOf="@id/guidelineSampleVenues1"
                 app:layout_constraintTop_toBottomOf="@id/textVenueDescription" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
