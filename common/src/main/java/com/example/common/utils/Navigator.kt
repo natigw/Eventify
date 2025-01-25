@@ -17,8 +17,28 @@ fun NavController.navigateWithAnimationLeftToRight(
         popUpTo?.let { setPopUpTo(it, inclusive) }
     }.build()
 
+
     this.navigate(destination, navOptions)
 }
+fun natigsNavigation(
+    navController: NavController,
+    destination: Int,
+    popUpTo: Int? = null,
+    inclusive: Boolean = true
+) {
+    val navOptions = NavOptions.Builder().apply {
+        setEnterAnim(R.anim.from_left)
+        setExitAnim(R.anim.to_right)
+        setPopEnterAnim(R.anim.from_right)
+        setPopExitAnim(R.anim.to_left)
+        popUpTo?.let { setPopUpTo(it, inclusive) }
+    }.build()
+
+
+
+    navController.navigate(destination,null, navOptions)
+}
+
 
 fun NavController.navigateWithAnimationRightToLeft(
     destination: Int,

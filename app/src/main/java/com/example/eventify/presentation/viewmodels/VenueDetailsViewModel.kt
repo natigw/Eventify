@@ -1,5 +1,6 @@
 package com.example.eventify.presentation.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.model.places.AddCommentItem
@@ -19,6 +20,8 @@ class VenueDetailsViewModel @Inject constructor(
 ) : ViewModel() {
 
     val venueDetails = MutableStateFlow<VenueDetailsItem?>(null)
+
+    val isCommentAdded = MutableStateFlow(false)
 
     val isLoadingComments = MutableStateFlow(true)
     val commentsState = MutableStateFlow<List<CommentItem>?>(null)
@@ -44,9 +47,13 @@ class VenueDetailsViewModel @Inject constructor(
         }
     }
 
-    suspend fun addComment(comment: AddCommentItem) : Boolean{
-        return viewModelScope.async {
-            venueRepository.addVenueComment(comment)
-        }.await()
+    fun addComment() {
+        viewModelScope.launch {
+//            val condition = venueRepository.addVenueComment(comment)
+//            isCommentAdded.update {
+//                condition
+//            }
+            isCommentAdded.update { true }
+        }
     }
 }

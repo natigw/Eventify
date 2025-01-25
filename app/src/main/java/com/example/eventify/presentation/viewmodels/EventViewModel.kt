@@ -28,15 +28,15 @@ class EventViewModel @Inject constructor(
 
     private fun getEvents() {
         viewModelScope.launch {
-            val checkIfValid = NetworkUtils.handleInvalidAccessToken()
-            if(checkIfValid){
-                try {
+            try{
+                val checkIfValid = NetworkUtils.handleInvalidAccessToken()
+                if(checkIfValid){
                     val response = eventRepository.getEvents()
                     events.emit(response)
-                } catch(e: Exception) {
-                    Log.e("network event", e.toString())
                 }
             }
+            catch (_:Exception){}
+
         }
     }
 

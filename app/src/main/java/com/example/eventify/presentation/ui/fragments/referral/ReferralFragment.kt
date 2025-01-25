@@ -10,6 +10,7 @@ import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.example.common.base.BaseFragment
 import com.example.common.utils.functions.copyToClipboard
+import com.example.common.utils.natigsNavigation
 import com.example.common.utils.navigateWithAnimationLeftToRight
 import com.example.common.utils.navigateWithAnimationRightToLeft
 import com.example.eventify.R
@@ -82,7 +83,13 @@ class ReferralFragment : BaseFragment<FragmentReferralBinding>(FragmentReferralB
             this,
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
-                    findNavController().navigateWithAnimationLeftToRight(R.id.profileFragment, popUpTo = R.id.referralFragment)
+//                    natigsNavigation(findNavController(),R.id.profileFragment, popUpTo = R.id.referralFragment)
+//                    findNavController().navigateWithAnimationLeftToRight(R.id.profileFragment, popUpTo = R.id.referralFragment)
+                    findNavController().navigate(
+                        R.id.profileFragment,
+                        null,
+                        NavOptions.Builder()
+                            .setPopUpTo(R.id.referralFragment,true).build())
                 }
             }
         )

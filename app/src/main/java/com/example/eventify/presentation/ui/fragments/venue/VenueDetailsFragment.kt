@@ -1,11 +1,14 @@
 package com.example.eventify.presentation.ui.fragments.venue
 
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
@@ -16,6 +19,7 @@ import com.example.common.utils.navigateWithAnimationLeftToRight
 import com.example.common.utils.startShimmer
 import com.example.common.utils.stopShimmer
 import com.example.domain.model.places.AddCommentItem
+import com.example.domain.model.places.CommentItem
 import com.example.domain.model.places.venue.VenueDetailsItem
 import com.example.eventify.R
 import com.example.eventify.databinding.FragmentVenueDetailsBinding
@@ -27,6 +31,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -52,6 +57,12 @@ class VenueDetailsFragment :
         updateAdapters()
         setAdapters()
         observer()
+        lifecycleScope.launch {
+            viewmodel.isCommentAdded
+                .collectLatest {
+                    Toast.makeText(requireContext(), "HELLLOoo", Toast.LENGTH_SHORT).show()
+                }
+        }
     }
 
     override fun onPause() {
@@ -104,6 +115,7 @@ class VenueDetailsFragment :
 
     override fun buttonListeners() {
         super.buttonListeners()
+
         binding.buttonSendCommentVenueDetails.setOnClickListener {
             val comment = binding.textInputAddCommentVenue.text.toString().trim()
             val isCommentFilled = validateInputFieldEmpty(
@@ -115,31 +127,45 @@ class VenueDetailsFragment :
             if (!isCommentFilled) {
                 return@setOnClickListener
             }
-            viewLifecycleOwner.lifecycleScope.launch {
-                if (
-                    viewmodel.addComment(
-                        AddCommentItem(
-                            content = comment,
-                            placeId = args.venueId
-                        )
-                    )
-                ) {
-                    viewmodel.getComments(args.venueId)
-                }
-            }
+
+
+            viewmodel.isCommentAdded.update { true }
+
+//            viewmodel.addComment(
+//                AddCommentItem(
+//                    content = comment,
+//                    placeId = args.venueId
+//                )
+//            )
+
+            commentAdapter.addComment(CommentItem(1,1,"Tural",comment,"",true))
 
             binding.textInputAddCommentVenue.text = null
         }
 
         binding.buttonBackVenue.setOnClickListener {
-            findNavController().navigateWithAnimationLeftToRight(R.id.venuesFragment)
+            findNavController().navigate(
+                R.id.venuesFragment,
+                null,
+                NavOptions.Builder()
+                    .setPopUpTo(R.id.venueDetailsFragment,true)
+                    .build()
+                )
+
+
         }
 
         requireActivity().onBackPressedDispatcher.addCallback(
             this,
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
-                    findNavController().navigateWithAnimationLeftToRight(R.id.venuesFragment)
+                    findNavController().navigate(
+                        R.id.venuesFragment,
+                        null,
+                        NavOptions.Builder()
+                            .setPopUpTo(R.id.venueDetailsFragment,true)
+                            .build()
+                    )
                 }
             })
     }
@@ -222,6 +248,7 @@ class VenueDetailsFragment :
 
     private fun observer() {
 
+
         viewmodel.getComments(args.venueId)
         viewmodel.getVenueDetails(args.venueId)
 
@@ -240,5 +267,16 @@ class VenueDetailsFragment :
                 binding.progressBarCommentVenueDetails.isVisible = it
             }
         }
+
+//        viewLifecycleOwner.lifecycleScope.launch {
+//            viewmodel.isCommentAdded
+//                .collectLatest {
+//                    Log.e("CommentState",it.toString())
+//                    if(it){
+//                        commentAdapter.updateComment()
+//                    }
+//                }
+//        }
+
     }
 }

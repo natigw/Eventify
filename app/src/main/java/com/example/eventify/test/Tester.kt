@@ -25,8 +25,8 @@ suspend fun test2()  {
 
 fun main() {
     val mutable = mutableListOf(1,2,3,4,5,6)
-    mutable.removeAll { true }
-    println(mutable)
+    mutable.add(5)
+    print(mutable)
 
 
 }

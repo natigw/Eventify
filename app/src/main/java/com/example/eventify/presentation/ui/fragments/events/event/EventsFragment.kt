@@ -5,10 +5,12 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.example.common.base.BaseFragment
 import com.example.common.utils.startShimmer
 import com.example.common.utils.stopShimmer
+import com.example.eventify.R
 import com.example.eventify.databinding.FragmentEventsBinding
 import com.example.eventify.presentation.adapters.EventAdapter
 import com.example.eventify.presentation.ui.fragments.events.PlacesFragmentDirections
@@ -36,17 +38,20 @@ class EventsFragment : BaseFragment<FragmentEventsBinding>(FragmentEventsBinding
             )
             sharedViewModel.eventsRVState = binding.rvEvents.layoutManager?.onSaveInstanceState()
         }
+
     )
 
     override fun onResume() {
         super.onResume()
         if (viewModel.events.value == null)
             startShimmer(binding.shimmerEvents)
+
     }
 
     override fun onViewCreatedLight() {
         setAdapters()
         updateAdapters()
+
     }
 
     override fun onPause() {

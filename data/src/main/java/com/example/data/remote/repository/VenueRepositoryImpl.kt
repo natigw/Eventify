@@ -83,12 +83,13 @@ class VenueRepositoryImpl @Inject constructor(
             if (response.isSuccessful && response.body() != null) {
                 response.body()!!.let { rawComment ->
                     return rawComment.map {
-                        //val details = api.getVenueCommentDetails(it.id)  //heleki eyni datani qaytarir - useless<<
                         CommentItem(
-                            commentId = it.id,
-                            username = it.ownerId.toString(),
-                            content = it.content,
-                            date = dateFormatterIFYEAR_MNAMED_Comma_HM(Instant.parse("${it.createdAt}Z"))
+                            ownerId = it.owner.id,
+                            commentId = it.comment.id,
+                            username = it.owner.username,
+                            content = it.comment.content,
+                            date = dateFormatterIFYEAR_MNAMED_Comma_HM(Instant.parse("${it.comment.createdAt}Z")),
+                            isPending = false
                         )
                     }
                 }

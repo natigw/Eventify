@@ -1,10 +1,10 @@
 package com.example.data.remote.api
 
 import com.example.data.remote.model.venues.allVenues.ResponseAllVenues
-import com.example.data.remote.model.venues.comment.venueComments.ResponseVenueComments
 import com.example.data.remote.model.venues.comment.addComment.RequestAddVenueComment
 import com.example.data.remote.model.venues.comment.commentDetails.ResponseVenueCommentDetails
 import com.example.data.remote.model.venues.comment.deleteComment.RequestDeleteVenueComment
+import com.example.data.remote.model.venues.comment.venueComments.ResponseVenueComments
 import com.example.data.remote.model.venues.createVenue.RequestCreateVenue
 import com.example.data.remote.model.venues.likeDislike.RequestLikeDislikeVenue
 import com.example.data.remote.model.venues.search.ResponseVenueSearch

@@ -1,5 +1,7 @@
 package com.example.eventify.presentation.adapters
 
+import android.util.Log
+import androidx.core.view.isVisible
 import com.example.common.base.BaseAdapter
 import com.example.common.utils.functions.getLocalTime
 import com.example.domain.model.places.AddCommentItem
@@ -16,11 +18,14 @@ class CommentAdapter (
     }
 
     override fun onBindLight(binding: SampleCommentBinding, position: Int) {
-        val comment = comments[position]
+        val currentComment = comments[position]
         with(binding) {
-            textUsernameComments.text = comment.username
-            textContentComments.text = comment.content
-            textCommentDateComments.text = comment.date
+            textUsernameComments.text = currentComment.username
+            textContentComments.text = currentComment.content
+            textCommentDateComments.text = currentComment.date
+            if(currentComment.isPending){
+                isPendingTextView.isVisible = true
+            }
         }
 
     }
@@ -29,4 +34,27 @@ class CommentAdapter (
         comments = newComments.toMutableList()
         notifyDataSetChanged()
     }
+
+    fun addComment(commentItem: CommentItem){
+        comments.add(0,commentItem)
+        Log.e("comments",comments.toString())
+        notifyItemInserted(0)
+    }
+
+    fun updateComment(){
+        val oldCommentItem = comments[0]
+        oldCommentItem.let{
+            val newCommentItem = CommentItem(
+                ownerId = it.ownerId,
+                commentId = it.commentId,
+                username = it.username,
+                content = it.content,
+                date = it.date,
+                isPending = !it.isPending
+            )
+            comments[0] = newCommentItem
+        }
+        notifyItemChanged(0)
+    }
+
 }

@@ -25,15 +25,14 @@ class VenueViewModel @Inject constructor(
 
     private fun getVenues() {
         viewModelScope.launch {
-            val checkIfValid = NetworkUtils.handleInvalidAccessToken()
-            if (checkIfValid) {
-                try {
+            try {
+                val checkIfValid = NetworkUtils.handleInvalidAccessToken()
+                if (checkIfValid) {
                     val response = venueRepository.getVenues()
                     venues.emit(response)
-                } catch (e: Exception) {
-                    Log.e("network venue", e.toString())
                 }
             }
+            catch (_:Exception){}
         }
     }
 

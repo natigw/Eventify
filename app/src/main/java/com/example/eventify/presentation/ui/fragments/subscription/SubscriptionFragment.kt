@@ -1,8 +1,10 @@
 package com.example.eventify.presentation.ui.fragments.subscription
 
+import androidx.activity.OnBackPressedCallback
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.example.common.base.BaseFragment
 import com.example.common.utils.nancyToastSuccess
@@ -25,11 +27,13 @@ class SubscriptionFragment : BaseFragment<FragmentSubscriptionBinding>(FragmentS
         onClick = {
             nancyToastSuccess(requireContext(), it + getString(R.string.navigating_payment_screen))
         }
+
     )
 
     override fun onViewCreatedLight() {
         observeChanges()
         setAdapters()
+
     }
 
     override fun buttonListeners() {
@@ -40,6 +44,19 @@ class SubscriptionFragment : BaseFragment<FragmentSubscriptionBinding>(FragmentS
         binding.switchSubscription.setOnClickListener {
             viewmodel.changeSwitchState()
         }
+        requireActivity().onBackPressedDispatcher.addCallback(
+            this,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    findNavController().navigate(
+                        R.id.profileFragment,
+                        null,
+                        NavOptions.Builder()
+                            .setPopUpTo(R.id.subscriptionFragment,true).build())
+
+                }
+            }
+        )
     }
 
     private fun setAdapters() {
