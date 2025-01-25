@@ -1,6 +1,8 @@
 package com.example.eventify.presentation.adapters
 
 import android.util.Log
+import android.view.View
+import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.common.base.BaseAdapter
@@ -31,6 +33,9 @@ class VenueAdapter(
 
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(imageVenue)
+
+            if (position == venues.size-1)
+                dividerVenue.visibility = View.INVISIBLE
 
 //            buttonLikeVenue.setOnClickListener {
 //                if (buttonLikeVenue.tag == "not_liked") {

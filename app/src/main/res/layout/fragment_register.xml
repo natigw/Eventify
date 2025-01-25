@@ -64,6 +64,7 @@
             app:boxCornerRadiusTopStart="@dimen/eventify_input_field_corner_radius"
             app:boxStrokeColor="@color/register"
             app:hintTextColor="@color/register"
+            app:cursorColor="@color/register"
             app:layout_constraintEnd_toEndOf="@+id/guidelineRegister2"
             app:layout_constraintStart_toStartOf="@+id/guidelineRegister1"
             app:layout_constraintTop_toBottomOf="@+id/textHeadingRegister">
@@ -72,6 +73,7 @@
                 android:id="@+id/textInputFirstnameRegister"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_regular"
                 android:hint="@string/first_name"
                 android:textSize="18sp" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -87,6 +89,7 @@
             app:boxCornerRadiusTopStart="@dimen/eventify_input_field_corner_radius"
             app:boxStrokeColor="@color/register"
             app:hintTextColor="@color/register"
+            app:cursorColor="@color/register"
             app:layout_constraintEnd_toEndOf="@+id/guidelineRegister2"
             app:layout_constraintStart_toStartOf="@+id/guidelineRegister1"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayoutFirstnameRegister">
@@ -95,6 +98,7 @@
                 android:id="@+id/textInputLastnameRegister"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_regular"
                 android:hint="@string/last_name"
                 android:textSize="18sp" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -110,6 +114,7 @@
             app:boxCornerRadiusTopStart="@dimen/eventify_input_field_corner_radius"
             app:boxStrokeColor="@color/register"
             app:hintTextColor="@color/register"
+            app:cursorColor="@color/register"
             app:layout_constraintEnd_toEndOf="@+id/guidelineRegister2"
             app:layout_constraintStart_toStartOf="@+id/guidelineRegister1"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayoutLastnameRegister">
@@ -118,6 +123,7 @@
                 android:id="@+id/textInputUsernameRegister"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_regular"
                 android:hint="@string/username"
                 android:textSize="18sp" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -133,6 +139,7 @@
             app:boxCornerRadiusTopStart="@dimen/eventify_input_field_corner_radius"
             app:boxStrokeColor="@color/register"
             app:hintTextColor="@color/register"
+            app:cursorColor="@color/register"
             app:layout_constraintEnd_toEndOf="@+id/guidelineRegister2"
             app:layout_constraintStart_toStartOf="@+id/guidelineRegister1"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayoutUsernameRegister">
@@ -141,6 +148,7 @@
                 android:id="@+id/textInputEmailRegister"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_regular"
                 android:hint="@string/email"
                 android:inputType="textEmailAddress"
                 android:textSize="18sp" />
@@ -157,7 +165,9 @@
             app:boxCornerRadiusTopStart="@dimen/eventify_input_field_corner_radius"
             app:boxStrokeColor="@color/register"
             app:endIconMode="password_toggle"
+            android:fontFamily="@font/inter_regular"
             app:hintTextColor="@color/register"
+            app:cursorColor="@color/register"
             app:layout_constraintEnd_toEndOf="@+id/guidelineRegister2"
             app:layout_constraintStart_toStartOf="@+id/guidelineRegister1"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEmailRegister">
@@ -166,6 +176,7 @@
                 android:id="@+id/textInputPasswordRegister"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_regular"
                 android:hint="@string/password"
                 android:inputType="textPassword"
                 android:textSize="18sp" />

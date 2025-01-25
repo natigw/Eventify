@@ -99,7 +99,8 @@
         app:boxStrokeColor="@color/eventify_primary"
         app:boxStrokeWidth="1dp"
         app:boxStrokeWidthFocused="2dp"
-        app:hintTextColor="@color/eventify_primary"
+        app:hintTextColor="@color/eventify_primary_helper"
+        app:cursorColor="@color/eventify_primary_helper"
         app:boxBackgroundColor="@color/eventify_background_secondary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/buttonSendComment"
@@ -109,6 +110,7 @@
             android:id="@+id/addComment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_regular"
             android:hint="@string/add_comment"
             android:inputType="textEmailAddress"
             android:textSize="18sp" />

@@ -1,5 +1,7 @@
 package com.example.eventify.presentation.adapters
 
+import android.view.View
+import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.common.base.BaseAdapter
@@ -19,7 +21,7 @@ class EventAdapter(
     }
 
     override fun onBindLight(binding: SampleEventBinding, position: Int) {
-        var event = events[position]
+        val event = events[position]
         with(binding) {
             textEventName.text = event.name
             textEventDateTime.text = event.eventDateTime
@@ -33,6 +35,9 @@ class EventAdapter(
             if(event.isLiked){
                 buttonLikeEvent.setIconResource(R.drawable.like_fav)
             }
+
+            if (position == events.size - 1)
+                dividerEvent.visibility = View.INVISIBLE
 
             root.setOnClickListener {
                 onClick(event.eventId)

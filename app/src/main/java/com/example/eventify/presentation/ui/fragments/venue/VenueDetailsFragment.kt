@@ -158,17 +158,14 @@ class VenueDetailsFragment :
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(imageVenue)
 
-
-            //TODO -> like olsun request atsin, icon fill ol sun, like count text bir dene artsin
-
             buttonReadMoreVenues.post {
                 val layout = textVenueDescription.layout
                 val lines = layout.lineCount
                 if (lines > 0) {
                     if (layout.getEllipsisCount(lines - 1) > 0) {
-                        buttonReadMoreVenues.visibility = android.view.View.VISIBLE
+                        buttonReadMoreVenues.visibility = View.VISIBLE
                     } else {
-                        buttonReadMoreVenues.visibility = android.view.View.GONE
+                        buttonReadMoreVenues.visibility = View.GONE
                     }
                 }
             }
