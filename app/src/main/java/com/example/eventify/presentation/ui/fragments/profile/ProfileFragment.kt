@@ -9,7 +9,6 @@ import androidx.navigation.fragment.findNavController
 import com.example.common.base.BaseFragment
 import com.example.common.utils.crossfadeAppear
 import com.example.common.utils.nancyToastInfo
-import com.example.common.utils.navigateWithoutAnimation
 import com.example.common.utils.startShimmer
 import com.example.common.utils.stopShimmer
 import com.example.common.utils.stopShimmerGone

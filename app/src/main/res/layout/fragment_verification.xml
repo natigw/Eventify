@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.ui.fragments.auth.VerificationFragment">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineVerification1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="@dimen/eventify_guideline_left" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineVerification2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="@dimen/eventify_guideline_right" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineVerification12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="@dimen/eventify_guideline_left_large" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineVerification22"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="@dimen/eventify_guideline_right_large" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineVerification3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.20" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottieEnvelopeVerification"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineVerification2"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="@+id/guidelineVerification1"
+        app:layout_constraintTop_toTopOf="@+id/guidelineVerification3"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="false"
+        app:lottie_rawRes="@raw/last_try" />
+
+    <TextView
+        android:id="@+id/textCheckInboxTEXT"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/inter_regular"
+        android:text="@string/check_email"
+        android:textAlignment="center"
+        android:textSize="26sp"
+        android:textColor="@color/eventify_on_background"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineVerification2"
+        app:layout_constraintStart_toStartOf="@+id/guidelineVerification1"
+        app:layout_constraintTop_toBottomOf="@+id/lottieEnvelopeVerification" />
+
+    <TextView
+        android:id="@+id/textLinkSentTEXT"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/inter_regular"
+        android:text="@string/verification_link"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineVerification2"
+        app:layout_constraintStart_toStartOf="@+id/guidelineVerification1"
+        app:layout_constraintTop_toBottomOf="@id/textCheckInboxTEXT" />
+
+    <TextView
+        android:id="@+id/textUserEmailVerification"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_bold"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/guidelineVerification2"
+        app:layout_constraintStart_toStartOf="@id/guidelineVerification1"
+        app:layout_constraintTop_toBottomOf="@id/textLinkSentTEXT"
+        tools:text="dummy@gmail.com" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonContinueVerification"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="@color/register"
+        android:fontFamily="@font/inter_bold"
+        android:minHeight="60dp"
+        android:text="@string/continue_"
+        android:textSize="24sp"
+        app:cornerRadius="@dimen/eventify_large_button_corner_radius"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineVerification22"
+        app:layout_constraintStart_toStartOf="@+id/guidelineVerification12"
+        app:layout_constraintTop_toBottomOf="@+id/textUserEmailVerification" />
+
+    <ProgressBar
+        android:id="@+id/progressBarVerification"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:indeterminateTint="@color/gray_dark"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonContinueVerification"
+        app:layout_constraintEnd_toEndOf="@+id/buttonContinueVerification"
+        app:layout_constraintStart_toStartOf="@+id/buttonContinueVerification"
+        app:layout_constraintTop_toTopOf="@+id/buttonContinueVerification" />
+
+    <TextView
+        android:id="@+id/textResendVerification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/inter_regular"
+        android:text="@string/send_verification"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/buttonResendVerification"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonContinueVerification" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonResendVerification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/eventify_background_primary"
+        android:fontFamily="@font/inter_bold"
+        android:minHeight="0dp"
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="4dp"
+        android:text="@string/click_to_resend"
+        android:textColor="@color/eventify_on_background"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textResendVerification"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/textResendVerification"
+        app:layout_constraintTop_toTopOf="@+id/textResendVerification"
+        app:rippleColor="?attr/colorControlHighlight" />
+
+    <TextView
+        android:id="@+id/textWrongEmailRegisterVerification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:fontFamily="@font/inter_regular"
+        android:text="@string/wrong_email"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/buttonRegisterVerification"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonRegisterVerification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/eventify_background_primary"
+        android:fontFamily="@font/inter_bold"
+        android:minHeight="0dp"
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="4dp"
+        android:text="@string/click_to_register"
+        android:textColor="@color/eventify_on_background"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textWrongEmailRegisterVerification"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/textWrongEmailRegisterVerification"
+        app:layout_constraintTop_toTopOf="@+id/textWrongEmailRegisterVerification"
+        app:rippleColor="?attr/colorControlHighlight" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

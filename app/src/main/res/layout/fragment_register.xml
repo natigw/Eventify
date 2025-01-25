@@ -25,13 +25,6 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="@dimen/eventify_guideline_right_large" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guidelineRegister3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.05" />
-
         <Button
             android:id="@+id/buttonBackRegister"
             style="?attr/materialIconButtonFilledTonalStyle"
@@ -41,21 +34,24 @@
             app:icon="@drawable/ic_back_arrow"
             app:iconSize="24dp"
             app:iconTint="@color/eventify_main_text"
+            app:layout_constraintBottom_toBottomOf="@+id/textHeadingRegister"
             app:layout_constraintEnd_toEndOf="@id/guidelineRegister1"
             app:layout_constraintStart_toStartOf="@id/guidelineRegister1"
-            app:layout_constraintTop_toTopOf="@+id/guidelineRegister3" />
+            app:layout_constraintTop_toTopOf="@+id/textHeadingRegister" />
 
         <TextView
-            android:id="@+id/textSignUpTEXT"
-            android:layout_width="wrap_content"
+            android:id="@+id/textHeadingRegister"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:fontFamily="@font/inter_bold"
             android:text="@string/register"
             android:textSize="32sp"
             android:textColor="@color/eventify_main_text"
+            android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="@+id/guidelineRegister2"
             app:layout_constraintStart_toStartOf="@+id/guidelineRegister1"
-            app:layout_constraintTop_toTopOf="@+id/guidelineRegister3" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayoutFirstnameRegister"
@@ -68,14 +64,16 @@
             app:boxCornerRadiusTopStart="@dimen/eventify_input_field_corner_radius"
             app:boxStrokeColor="@color/register"
             app:hintTextColor="@color/register"
+            app:cursorColor="@color/register"
             app:layout_constraintEnd_toEndOf="@+id/guidelineRegister2"
             app:layout_constraintStart_toStartOf="@+id/guidelineRegister1"
-            app:layout_constraintTop_toBottomOf="@+id/textSignUpTEXT">
+            app:layout_constraintTop_toBottomOf="@+id/textHeadingRegister">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/textInputFirstnameRegister"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_regular"
                 android:hint="@string/first_name"
                 android:textSize="18sp" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -91,6 +89,7 @@
             app:boxCornerRadiusTopStart="@dimen/eventify_input_field_corner_radius"
             app:boxStrokeColor="@color/register"
             app:hintTextColor="@color/register"
+            app:cursorColor="@color/register"
             app:layout_constraintEnd_toEndOf="@+id/guidelineRegister2"
             app:layout_constraintStart_toStartOf="@+id/guidelineRegister1"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayoutFirstnameRegister">
@@ -99,6 +98,7 @@
                 android:id="@+id/textInputLastnameRegister"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_regular"
                 android:hint="@string/last_name"
                 android:textSize="18sp" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -114,6 +114,7 @@
             app:boxCornerRadiusTopStart="@dimen/eventify_input_field_corner_radius"
             app:boxStrokeColor="@color/register"
             app:hintTextColor="@color/register"
+            app:cursorColor="@color/register"
             app:layout_constraintEnd_toEndOf="@+id/guidelineRegister2"
             app:layout_constraintStart_toStartOf="@+id/guidelineRegister1"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayoutLastnameRegister">
@@ -122,6 +123,7 @@
                 android:id="@+id/textInputUsernameRegister"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_regular"
                 android:hint="@string/username"
                 android:textSize="18sp" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -137,6 +139,7 @@
             app:boxCornerRadiusTopStart="@dimen/eventify_input_field_corner_radius"
             app:boxStrokeColor="@color/register"
             app:hintTextColor="@color/register"
+            app:cursorColor="@color/register"
             app:layout_constraintEnd_toEndOf="@+id/guidelineRegister2"
             app:layout_constraintStart_toStartOf="@+id/guidelineRegister1"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayoutUsernameRegister">
@@ -145,6 +148,7 @@
                 android:id="@+id/textInputEmailRegister"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_regular"
                 android:hint="@string/email"
                 android:inputType="textEmailAddress"
                 android:textSize="18sp" />
@@ -161,7 +165,9 @@
             app:boxCornerRadiusTopStart="@dimen/eventify_input_field_corner_radius"
             app:boxStrokeColor="@color/register"
             app:endIconMode="password_toggle"
+            android:fontFamily="@font/inter_regular"
             app:hintTextColor="@color/register"
+            app:cursorColor="@color/register"
             app:layout_constraintEnd_toEndOf="@+id/guidelineRegister2"
             app:layout_constraintStart_toStartOf="@+id/guidelineRegister1"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEmailRegister">
@@ -170,21 +176,34 @@
                 android:id="@+id/textInputPasswordRegister"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_regular"
                 android:hint="@string/password"
                 android:inputType="textPassword"
                 android:textSize="18sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <CheckBox
-            android:id="@+id/checkboxTerms"
+            android:id="@+id/checkboxTermsRegister"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/inter_regular"
             android:text="@string/i_accept_terms"
-            android:buttonTint="@color/eventify_primary_helper"
+            android:textColor="@color/eventify_on_background"
             app:layout_constraintStart_toStartOf="@id/guidelineRegister1"
             app:layout_constraintTop_toBottomOf="@id/textInputLayoutPasswordRegister" />
+
+        <ImageView
+            android:id="@+id/imageErrorCheckboxTermsRegister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:src="@drawable/ic_error"
+            android:visibility="invisible"
+            app:tint="@color/error"
+            app:layout_constraintBottom_toBottomOf="@+id/checkboxTermsRegister"
+            app:layout_constraintStart_toEndOf="@+id/checkboxTermsRegister"
+            app:layout_constraintTop_toTopOf="@+id/checkboxTermsRegister" />
 
         <Button
             android:id="@+id/buttonRegister"
@@ -202,8 +221,7 @@
             app:cornerRadius="@dimen/eventify_large_button_corner_radius"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/guidelineRegister2"
-            app:layout_constraintStart_toStartOf="@+id/guidelineRegister1"
-            app:layout_constraintTop_toBottomOf="@id/checkboxTerms" />
+            app:layout_constraintStart_toStartOf="@+id/guidelineRegister1" />
 
         <ProgressBar
             android:id="@+id/progressBarRegister"
@@ -211,6 +229,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="invisible"
+            android:indeterminateTint="@color/gray_dark"
             app:layout_constraintBottom_toBottomOf="@+id/buttonRegister"
             app:layout_constraintEnd_toEndOf="@+id/buttonRegister"
             app:layout_constraintStart_toStartOf="@+id/buttonRegister"

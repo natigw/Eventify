@@ -4,15 +4,19 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.common.base.BaseFragment
+import com.example.common.utils.blockButton
+import com.example.common.utils.functions.hideKeyboard
 import com.example.common.utils.functions.isValidEmail
 import com.example.common.utils.functions.validateInputFieldMeet
 import com.example.common.utils.nancyToastError
 import com.example.common.utils.nancyToastSuccess
 import com.example.common.utils.nancyToastWarning
+import com.example.common.utils.resetButton
 import com.example.eventify.R
 import com.example.eventify.databinding.FragmentRegisterBinding
 import com.example.eventify.presentation.viewmodels.RegisterViewModel
@@ -26,12 +30,49 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
     private val viewModel by viewModels<RegisterViewModel>()
 
     override fun onViewCreatedLight() {
-        setInputFieldListeners()
-        registerButton()
+        checkAllFields()
         observeChanges()
     }
 
-    private fun registerButton(){
+    private fun observeChanges() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.isLoading.collectLatest {
+                with(binding) {
+                    if (it) {
+                        blockButton(
+                            progressBar = progressBarRegister,
+                            button = buttonRegister
+                        )
+                        textInputLayoutFirstnameRegister.clearFocus()
+                        textInputLayoutLastnameRegister.clearFocus()
+                        textInputLayoutUsernameRegister.clearFocus()
+                        textInputLayoutEmailRegister.clearFocus()
+                        textInputLayoutPasswordRegister.clearFocus()
+                        hideKeyboard(binding.root)
+                    } else {
+                        resetButton(
+                            progressBar = progressBarRegister,
+                            button = buttonRegister,
+                            buttonText = getString(R.string.register),
+                            buttonColor = requireContext().getColor(R.color.register)
+                        )
+                    }
+                }
+            }
+        }
+    }
+
+    override fun buttonListeners() {
+        super.buttonListeners()
+
+        binding.buttonBackRegister.setOnClickListener {
+            findNavController().popBackStack()
+        }
+        setInputFieldListeners()
+        registerButton()
+    }
+
+    private fun registerButton() {
         with(binding) {
             buttonRegister.setOnClickListener {
                 val firstname = textInputFirstnameRegister.text.toString().trim()
@@ -40,22 +81,29 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
                 val email = textInputEmailRegister.text.toString().trim()
                 val password = textInputPasswordRegister.text.toString().trim()
 
-                if (!checkInputFields(firstname, lastname, username, email, password)) return@setOnClickListener
+                if (!checkInputFields(
+                        firstname,
+                        lastname,
+                        username,
+                        email,
+                        password
+                    )
+                ) return@setOnClickListener
 
                 viewLifecycleOwner.lifecycleScope.launch {
-                    if(viewModel.registerUser(
+                    if (viewModel.registerUser(
                             firstname,
                             lastname,
                             username,
                             email,
                             password
-                        )){
+                        )
+                    ) {
                         nancyToastSuccess(requireContext(), getString(R.string.register_successful))
                         viewModel.setUserEmail(userEmail = email)
                         clearInputFields()
                         findNavController().navigate(RegisterFragmentDirections.actionRegisterFragmentToVerificationFragment())
-                    }
-                    else{
+                    } else {
                         nancyToastError(requireContext(), getString(R.string.register_failed))
                     }
                 }
@@ -63,24 +111,13 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
         }
     }
 
-    private fun observeChanges() {
-        binding.buttonBackRegister.setOnClickListener {
-            findNavController().popBackStack()
-        }
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.isLoading.collectLatest {
-                if(it){
-                    blockRegisterButton()
-                }
-                else{
-                    resetRegisterButton()
-                }
-            }
-        }
-    }
-
-    private fun checkInputFields(firstname: String, lastname: String, username: String, email: String, password: String): Boolean {
+    private fun checkInputFields(
+        firstname: String,
+        lastname: String,
+        username: String,
+        email: String,
+        password: String
+    ): Boolean {
 
         if (firstname.isEmpty() || lastname.isEmpty() || username.isEmpty() || email.isEmpty() || password.isEmpty()) {
             nancyToastWarning(requireContext(), getString(R.string.fill_all_input_fields))
@@ -108,69 +145,17 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
 
         if (!isEmailValid || passwordErrors.isNotEmpty()) return false
 
-        if (!binding.checkboxTerms.isChecked) {
+        if (!binding.checkboxTermsRegister.isChecked) {
+            binding.checkboxTermsRegister.setTextColor(requireContext().getColor(R.color.error))
+            binding.imageErrorCheckboxTermsRegister.isVisible = true
             nancyToastWarning(requireContext(), getString(R.string.please_accept_terms))
             return false
+        } else {
+            binding.checkboxTermsRegister.setTextColor(requireContext().getColor(R.color.eventify_on_background))
+            binding.imageErrorCheckboxTermsRegister.isVisible = false
         }
 
         return true
-    }
-//    private fun checkInputFields(firstname: String, lastname: String, username: String, email: String, password: String) : Boolean {
-//        if (firstname.isEmpty() || lastname.isEmpty() || username.isEmpty() || email.isEmpty() || password.isEmpty()) {
-//            nancyToastWarning(requireContext(), getString(R.string.fill_all_input_fields))
-//            return false
-//        }
-//        if (!isValidEmail(email)) {
-//            nancyToastError(requireContext(), getString(R.string.please_enter_valid_email))
-//            return false
-//        }
-//
-//        if (!password.contains("[a-z]".toRegex())) {
-//            nancyToastWarning(requireContext(), getString(R.string.password_should_contain_lowercase))
-//            return false
-//        }
-//        if (!password.contains("[A-Z]".toRegex())) {
-//            nancyToastWarning(requireContext(), getString(R.string.password_should_contain_uppercase))
-//            return false
-//        }
-//        if (!password.contains("[0-9]".toRegex())) {
-//            nancyToastWarning(requireContext(), getString(R.string.password_should_contain_digit))
-//            return false
-//        }
-//        if (!password.contains("[!\"#$%&'()*+,-./:;\\\\<=>?@\\[\\]^_`{|}~]".toRegex())) {
-//            nancyToastWarning(requireContext(), getString(R.string.password_should_contain_special_character))
-//            return false
-//        }
-//
-//        if (password.length < 8) {
-//            nancyToastWarning(requireContext(), getString(R.string.min_password_length_is_8))
-//            return false
-//        }
-//
-//        if (!binding.checkboxTerms.isChecked) {
-//            nancyToastWarning(requireContext(), getString(R.string.please_accept_terms))
-//            return false
-//        }
-//
-//        return true
-//    }
-
-    private fun blockRegisterButton() {
-        binding.progressBarRegister.visibility = View.VISIBLE
-        binding.buttonRegister.apply {
-            isEnabled = false
-            text = null
-            setBackgroundColor(requireContext().getColor(R.color.button_disabled))
-        }
-    }
-
-    private fun resetRegisterButton() {
-        binding.progressBarRegister.visibility = View.INVISIBLE
-        binding.buttonRegister.apply {
-            isEnabled = true
-            text = getString(R.string.register)
-            setBackgroundColor(requireContext().getColor(R.color.register))
-        }
     }
 
     private fun clearInputFields() {
@@ -180,7 +165,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
             textInputUsernameRegister.text = null
             textInputEmailRegister.text = null
             textInputPasswordRegister.text = null
-            checkboxTerms.isChecked = false
+            checkboxTermsRegister.isChecked = false
         }
     }
 
@@ -198,18 +183,18 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
             textInputUsernameRegister.addTextChangedListener(textWatcher)
             textInputEmailRegister.addTextChangedListener(textWatcher)
             textInputPasswordRegister.addTextChangedListener(textWatcher)
-            checkboxTerms.setOnCheckedChangeListener { _, _ -> checkAllFields() }
+            checkboxTermsRegister.setOnCheckedChangeListener { _, _ -> checkAllFields() }
         }
     }
 
     private fun checkAllFields() {
         val isAllFilled = binding.run {
             textInputFirstnameRegister.text!!.isNotBlank() &&
-                    textInputLastnameRegister.text!!.isNotBlank() &&
-                    textInputUsernameRegister.text!!.isNotBlank() &&
-                    textInputEmailRegister.text!!.isNotBlank() &&
-                    textInputPasswordRegister.text!!.isNotBlank() &&
-                    checkboxTerms.isChecked
+            textInputLastnameRegister.text!!.isNotBlank() &&
+            textInputUsernameRegister.text!!.isNotBlank() &&
+            textInputEmailRegister.text!!.isNotBlank() &&
+            textInputPasswordRegister.text!!.isNotBlank() &&
+            checkboxTermsRegister.isChecked
         }
         binding.buttonRegister.isEnabled = isAllFilled
     }

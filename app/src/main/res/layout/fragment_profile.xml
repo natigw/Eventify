@@ -515,7 +515,7 @@
             app:layout_constraintEnd_toEndOf="@id/guidelineProfile2"
             app:layout_constraintStart_toStartOf="@id/guidelineProfile1"
             app:layout_constraintTop_toBottomOf="@id/textFavoritesProfileTEXT"
-            tools:itemCount="10"
+            tools:itemCount="3"
             tools:listitem="@layout/sample_favorite" />
 
         <com.facebook.shimmer.ShimmerFrameLayout
@@ -562,7 +562,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/guidelineProfile2"
             app:layout_constraintStart_toStartOf="@id/guidelineProfile1"
-            app:layout_constraintTop_toBottomOf="@id/rvFavoritesProfile" />
+            app:layout_constraintTop_toBottomOf="@id/rvFavoritesProfile"
+            app:layout_constraintVertical_bias="1.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

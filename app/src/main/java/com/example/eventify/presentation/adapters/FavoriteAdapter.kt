@@ -2,6 +2,7 @@ package com.example.eventify.presentation.adapters
 
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.common.base.BaseAdapter
@@ -32,6 +33,9 @@ class FavoriteAdapter(
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(imageFavorite)
 
+            if (position == favorites.size - 1)
+                materialDividerFavorite.visibility = View.INVISIBLE
+
             buttonFavoriteAllDetails.setOnClickListener {
                 onClick(favItem.id)
             }
@@ -41,9 +45,6 @@ class FavoriteAdapter(
             cardFavorite.setOnClickListener {
                 onClick(favItem.id)
             }
-
-            if (position == favorites.size - 1)
-                materialDividerFavorite.visibility = View.INVISIBLE
         }
     }
 

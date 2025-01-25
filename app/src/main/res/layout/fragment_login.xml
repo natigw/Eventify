@@ -40,20 +40,45 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/textSloganLogin"
+        <ImageView
+            android:id="@+id/imageView7"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/outfit_regular"
-            android:text="@string/eventify_slogan"
-            android:textColor="@color/eventify_primary_helper"
-            android:textSize="28sp"
-            android:textStyle="italic"
-            android:textAlignment="center"
-            android:visibility="gone"
+            android:layout_marginTop="-16dp"
+            android:adjustViewBounds="true"
+            android:src="@mipmap/ic_launcher_foreground"
             app:layout_constraintEnd_toStartOf="@+id/guidelineLogin2"
             app:layout_constraintStart_toStartOf="@+id/guidelineLogin1"
-            app:layout_constraintTop_toTopOf="@id/guidelineLogin3" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.45" />
+
+        <TextView
+            android:id="@+id/textHeadingEventifyLogin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-55dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/eventify"
+            android:textAlignment="center"
+            android:textColor="@color/eventify_heading"
+            android:textSize="28sp"
+            app:layout_constraintEnd_toEndOf="@+id/guidelineLogin2"
+            app:layout_constraintStart_toStartOf="@+id/guidelineLogin1"
+            app:layout_constraintTop_toBottomOf="@+id/imageView7" />
+
+        <!--        <TextView-->
+        <!--            android:id="@+id/textSloganLogin"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:fontFamily="@font/outfit_regular"-->
+        <!--            android:text="@string/eventify_slogan"-->
+        <!--            android:textColor="@color/eventify_primary_helper"-->
+        <!--            android:textSize="28sp"-->
+        <!--            android:textStyle="italic"-->
+        <!--            android:textAlignment="center"-->
+        <!--            app:layout_constraintEnd_toStartOf="@+id/guidelineLogin2"-->
+        <!--            app:layout_constraintStart_toStartOf="@+id/guidelineLogin1"-->
+        <!--            app:layout_constraintTop_toTopOf="@id/guidelineLogin3" />-->
 
         <TextView
             android:id="@+id/textSignInTEXT"
@@ -62,17 +87,17 @@
             android:layout_marginTop="50dp"
             android:fontFamily="@font/inter_bold"
             android:text="@string/login"
-            android:textSize="32sp"
             android:textColor="@color/eventify_main_text"
+            android:textSize="32sp"
             app:layout_constraintEnd_toStartOf="@+id/guidelineLogin2"
             app:layout_constraintStart_toStartOf="@+id/guidelineLogin1"
-            app:layout_constraintTop_toBottomOf="@id/textSloganLogin" />
+            app:layout_constraintTop_toBottomOf="@id/textHeadingEventifyLogin" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayoutUsernameLogin"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="28dp"
             app:boxCornerRadiusBottomEnd="@dimen/eventify_input_field_corner_radius"
             app:boxCornerRadiusBottomStart="@dimen/eventify_input_field_corner_radius"
             app:boxCornerRadiusTopEnd="@dimen/eventify_input_field_corner_radius"
@@ -80,7 +105,8 @@
             app:boxStrokeColor="@color/login"
             app:boxStrokeWidth="1dp"
             app:boxStrokeWidthFocused="2dp"
-            app:hintTextColor="@color/login"
+            app:cursorColor="@color/login"
+            app:hintTextColor="@color/eventify_primary_helper"
             app:layout_constraintEnd_toEndOf="@id/guidelineLogin2"
             app:layout_constraintStart_toStartOf="@id/guidelineLogin1"
             app:layout_constraintTop_toBottomOf="@id/textSignInTEXT">
@@ -107,8 +133,9 @@
             app:boxStrokeColor="@color/login"
             app:boxStrokeWidth="1dp"
             app:boxStrokeWidthFocused="2dp"
+            app:cursorColor="@color/login"
             app:endIconMode="password_toggle"
-            app:hintTextColor="@color/login"
+            app:hintTextColor="@color/eventify_primary_helper"
             app:layout_constraintEnd_toEndOf="@+id/guidelineLogin2"
             app:layout_constraintStart_toStartOf="@+id/guidelineLogin1"
             app:layout_constraintTop_toBottomOf="@id/textInputLayoutUsernameLogin">
@@ -123,25 +150,30 @@
                 android:textSize="18sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/textForgotPasswordLogin"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonForgotPasswordLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/inter_regular"
+            android:layout_marginTop="2dp"
+            android:backgroundTint="@color/eventify_background_primary"
+            android:fontFamily="@font/outfit_regular"
+            android:minHeight="0dp"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="4dp"
             android:text="@string/forgot_password"
+            android:textColor="@color/eventify_on_background"
             android:textSize="16sp"
             app:layout_constraintEnd_toStartOf="@+id/guidelineLogin2"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPasswordLogin" />
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPasswordLogin"
+            app:rippleColor="?attr/colorControlHighlight" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonLogin"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:enabled="true"
-            android:allowClickWhenDisabled="true"
             android:backgroundTint="@color/login"
+            android:enabled="true"
             android:fontFamily="@font/inter_bold"
             android:minHeight="60dp"
             android:text="@string/login"
@@ -149,13 +181,14 @@
             app:cornerRadius="@dimen/eventify_large_button_corner_radius"
             app:layout_constraintEnd_toStartOf="@+id/guidelineLogin2"
             app:layout_constraintStart_toStartOf="@+id/guidelineLogin1"
-            app:layout_constraintTop_toBottomOf="@+id/textForgotPasswordLogin" />
+            app:layout_constraintTop_toBottomOf="@+id/buttonForgotPasswordLogin" />
 
         <ProgressBar
             android:id="@+id/progressBarLogin"
             style="?android:attr/progressBarStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:indeterminateTint="@color/gray_dark"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@+id/buttonLogin"
             app:layout_constraintEnd_toEndOf="@+id/buttonLogin"
@@ -177,14 +210,16 @@
             android:id="@+id/buttonGoogle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:minHeight="60dp"
             android:layout_marginHorizontal="12dp"
+            android:fontFamily="@font/inter_regular"
+            android:minHeight="60dp"
             android:text="@string/continue_with_google"
             android:textColor="@color/eventify_on_background"
             android:textSize="20sp"
-            android:fontFamily="@font/inter_regular"
             app:backgroundTint="@color/eventify_background_secondary"
             app:icon="@drawable/ic_google"
+            app:iconGravity="start"
+            app:iconPadding="-6dp"
             app:iconSize="24dp"
             app:iconTint="@null"
             app:layout_constraintEnd_toEndOf="@+id/buttonLogin"
@@ -201,6 +236,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="11dp"
             android:layout_marginBottom="11dp"
+            android:indeterminateTint="@color/gray_dark"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@+id/buttonGoogle"
             app:layout_constraintEnd_toEndOf="@+id/buttonGoogle"
@@ -211,16 +247,38 @@
             android:id="@+id/textDontHaveAccountLoginTEXT"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="32dp"
             android:fontFamily="@font/outfit_regular"
-            android:text="@string/don_t_have_an_account_register"
+            android:text="@string/don_t_have_an_account"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/guidelineLogin2"
-            app:layout_constraintStart_toStartOf="@+id/guidelineLogin1"
+            app:layout_constraintEnd_toStartOf="@+id/buttonRegisterLogin"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/buttonGoogle"
             app:layout_constraintVertical_bias="0.0" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonRegisterLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/eventify_background_primary"
+            android:fontFamily="@font/outfit_semibold"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="4dp"
+            android:text="@string/register"
+            android:textColor="@color/register"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@id/textDontHaveAccountLoginTEXT"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/textDontHaveAccountLoginTEXT"
+            app:layout_constraintTop_toTopOf="@id/textDontHaveAccountLoginTEXT"
+            app:rippleColor="?attr/colorControlHighlight" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

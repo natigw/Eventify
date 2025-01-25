@@ -60,23 +60,25 @@
             app:enterAnim="@anim/from_right"
             app:exitAnim="@anim/to_left"
             app:popEnterAnim="@anim/from_left"
-            app:popExitAnim="@anim/to_right"
-            app:popUpTo="@id/onboard_nav"
-            app:popUpToInclusive="true" />
+            app:popExitAnim="@anim/to_right" />
     </fragment>
     <fragment
         android:id="@+id/resetPasswordFragment"
         android:name="com.example.eventify.presentation.ui.fragments.auth.ResetPasswordFragment"
-        android:label="password_reset"
-        tools:layout="@layout/password_reset" />
+        android:label="fragment_password_reset"
+        tools:layout="@layout/fragment_password_reset" />
     <fragment
         android:id="@+id/verificationFragment"
         android:name="com.example.eventify.presentation.ui.fragments.auth.VerificationFragment"
-        android:label="verification_layout"
-        tools:layout="@layout/verification_layout" >
+        android:label="fragment_verification"
+        tools:layout="@layout/fragment_verification" >
         <action
             android:id="@+id/action_verificationFragment_to_loginFragment"
             app:destination="@id/loginFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left"
             app:popUpTo="@id/verificationFragment"
             app:popUpToInclusive="true" />
     </fragment>
