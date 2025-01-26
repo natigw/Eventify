@@ -87,23 +87,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         searchInputHandler()
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(this)
-        lifecycleScope.launch {
-            sharedViewModel.sharedRouteDestinationCoordinates
-                .debounce(800)
-                .filterNotNull()
-                .distinctUntilChanged()
-                .collectLatest { destinationCoordinates ->
-                    val marker = viewModel.findMarkerByLatLng(
-                        destinationCoordinates.latitude,
-                        destinationCoordinates.longitude
-                    )
-                    Log.e("Markerer",marker.toString())
-                    if(marker!=null){
-                        marker.showInfoWindow()
-                        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(marker.position.latitude, marker.position.longitude), 15f))
-                    }
-                }
-        }
+
     }
 
     override fun buttonListeners() {
@@ -111,6 +95,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         binding.backwardButton.setOnClickListener {
             binding.root.transitionToStart()
             animateSearchRV()
+            binding.notFoundView.animateToInvisible()
             binding.progressBar.animateToInvisible()
             binding.editTextText.hideKeyboard()
         }
@@ -124,6 +109,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 if(binding.root.currentState == R.id.end){
                     binding.root.transitionToStart()
                     animateSearchRV()
+                    binding.notFoundView.animateToInvisible()
                     binding.progressBar.animateToInvisible()
                     binding.editTextText.hideKeyboard()
                 }
@@ -180,6 +166,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             viewModel.searchState
                 .filterNotNull()
                 .collectLatest{
+                    binding.notFoundView.isVisible = it.isEmpty()
                     mapSearchAdapter.updateAdapter(it)
                 }
         }
@@ -190,6 +177,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 .debounce(1000)
                 .collectLatest {
                     if(it==""){
+                        binding.notFoundView.isVisible = false
                         mapSearchAdapter.updateAdapter(emptyList())
                     }
                     else{
@@ -205,6 +193,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 .filterNotNull()
                 .collectLatest {
                     binding.progressBar.isVisible = it
+                    binding.notFoundView.isVisible = !it
                     binding.searchRV.isVisible = !it
             }
         }
@@ -242,6 +231,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                         .setDuration(300)
                         .start()
                     binding.progressBar.animateToVisible()
+                    binding.notFoundView.animateToVisible()
                     binding.root.getTransition(R.id.myTransition).isEnabled = false
                 }
                 else if(currentId == R.id.start){
@@ -416,7 +406,23 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     }
                 }
         }
-
+        lifecycleScope.launch {
+            sharedViewModel.sharedRouteDestinationCoordinates
+                .debounce(800)
+                .filterNotNull()
+                .distinctUntilChanged()
+                .collectLatest { destinationCoordinates ->
+                    val marker = viewModel.findMarkerByLatLng(
+                        destinationCoordinates.latitude,
+                        destinationCoordinates.longitude
+                    )
+                    Log.e("Markerer",marker.toString())
+                    if(marker!=null){
+                        marker.showInfoWindow()
+                        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(marker.position.latitude, marker.position.longitude), 15f))
+                    }
+                }
+        }
         googleMap.setOnMarkerClickListener { marker ->
             googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(marker.position.latitude-0.005, marker.position.longitude), 15f))
             marker.showInfoWindow()
