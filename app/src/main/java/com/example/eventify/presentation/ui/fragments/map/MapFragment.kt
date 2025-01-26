@@ -93,6 +93,9 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
     override fun buttonListeners() {
         super.buttonListeners()
+        binding.cancelSearchButton.setOnClickListener{
+            binding.editTextText.text = null
+        }
         binding.backwardButton.setOnClickListener {
             binding.root.transitionToStart()
             animateSearchRV()
@@ -196,7 +199,9 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 .filterNotNull()
                 .collectLatest {
                     binding.progressBar.isVisible = it
-                    binding.notFoundView.isVisible = !it
+
+
+
                     binding.searchRV.isVisible = !it
             }
         }
