@@ -1,6 +1,5 @@
 package com.example.data.remote.repository
 
-import android.util.Log
 import com.example.common.utils.functions.dateFormatterIFYEAR_MNAMED_Comma_HM
 import com.example.common.utils.functions.randomDouble
 import com.example.common.utils.functions.roundDouble
@@ -10,8 +9,6 @@ import com.example.data.remote.model.venues.likeDislike.RequestLikeDislikeVenue
 import com.example.domain.model.places.AddCommentItem
 import com.example.domain.model.places.CommentItem
 import com.example.domain.model.places.SearchItem
-import com.example.domain.model.places.event.EventItem
-import com.example.domain.model.places.event.SearchEventItem
 import com.example.domain.model.places.venue.VenueDetailsItem
 import com.example.domain.model.places.venue.VenueItem
 import com.example.domain.repository.VenueRepository
@@ -34,8 +31,8 @@ class VenueRepositoryImpl @Inject constructor(
                             title = it.name,
                             imageLink = it.image1Link,
                             description = it.description,
-                            lat = it.lat,
-                            lng = it.lng
+                            lat = it.lat.toDouble(),
+                            lng = it.lng.toDouble()
                         )
                     }
                 }

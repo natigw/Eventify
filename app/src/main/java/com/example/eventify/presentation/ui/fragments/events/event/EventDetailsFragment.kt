@@ -1,14 +1,11 @@
 package com.example.eventify.presentation.ui.fragments.events.event
 
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
@@ -20,7 +17,6 @@ import com.example.common.utils.functions.getInstantTime
 import com.example.common.utils.functions.hideKeyboard
 import com.example.common.utils.functions.validateInputFieldEmpty
 import com.example.common.utils.nancyToastSuccess
-import com.example.common.utils.navigateWithAnimationLeftToRight
 import com.example.common.utils.navigateWithoutAnimation
 import com.example.common.utils.startShimmer
 import com.example.common.utils.stopShimmer
@@ -96,7 +92,6 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
             textInputLayoutWriteCommentEventDetails.visibility = View.INVISIBLE
             textInputEdittextAddCommentEvent.visibility = View.INVISIBLE
             buttonSendCommentEventDetails.visibility = View.INVISIBLE
-            textEventLikesText.visibility = View.INVISIBLE
         }
     }
     private fun makeViewsVisible(){
@@ -123,8 +118,6 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
             textEventDetailsCommentsText.visibility = View.VISIBLE
             textInputLayoutWriteCommentEventDetails.visibility = View.VISIBLE
             textInputEdittextAddCommentEvent.visibility = View.VISIBLE
-            buttonSendCommentEventDetails.visibility = View.VISIBLE
-            textEventLikesText.visibility = View.VISIBLE
         }
     }
 
@@ -308,6 +301,7 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
                 .filterNotNull()
                 .collectLatest {
                     binding.textNoCommentsTextEventDetails.isVisible = it.isEmpty()
+                    crossfadeAppear(binding.buttonSendCommentEventDetails,500)
                     commentAdapter.updateAdapter(it)
                 }
         }

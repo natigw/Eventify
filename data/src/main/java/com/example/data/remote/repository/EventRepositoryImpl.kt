@@ -45,13 +45,11 @@ class EventRepositoryImpl @Inject constructor(
                                 name = event.title,
                                 imageLink = event.posterImageLink,
                                 eventDateTime = if (event.start.substring(0, 5) == event.finish.substring(0, 5)) "${dateFormatter_RemoveDashes_YMDtoDMY(event.date.substring(0, 10))} • all the day" else "${dateFormatter_RemoveDashes_YMDtoDMY(event.date.substring(0, 10))} • ${event.start.substring(0, 5)}-${event.finish.substring(0, 5)}",
-                                lat = event.lat,
-                                lng = event.lng,
+                                lat = event.lat.toDouble(),
+                                lng = event.lng.toDouble(),
                                 isLiked = favs.contains(event.id)
                             )
                         }
-
-
                     }
                 }
 

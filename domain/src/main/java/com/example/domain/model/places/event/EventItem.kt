@@ -9,7 +9,7 @@ data class EventItem(
     val name : String,
     val imageLink : String?,
     val eventDateTime: String,
-    val lat : String,
-    val lng : String,
+    val lat : Double,
+    val lng : Double,
     var isLiked : Boolean
 ) : Parcelable

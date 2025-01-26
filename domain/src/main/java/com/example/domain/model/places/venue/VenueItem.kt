@@ -9,6 +9,6 @@ data class VenueItem(
     val title : String,
     val imageLink : String?,
     val description : String,
-    val lat : String,
-    val lng : String
+    val lat : Double,
+    val lng : Double
 ) : Parcelable

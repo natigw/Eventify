@@ -33,7 +33,7 @@ class EventDetailsViewModel @Inject constructor(
 
     val isLoadingComments = MutableStateFlow(true)
     val comments = MutableStateFlow<List<CommentItem>?>(null)
-    val lastLikedState = mutableListOf<Boolean>()
+    private val lastLikedState = mutableListOf<Boolean>()
 
 
     init {

@@ -12,6 +12,7 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.common.base.BaseFragment
+import com.example.common.utils.crossfadeAppear
 import com.example.common.utils.functions.dateFormatterIFYEAR_MNAMED_Comma_HM
 import com.example.common.utils.functions.getInstantTime
 import com.example.common.utils.functions.hideKeyboard
@@ -102,7 +103,6 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
             textVenueDetailsCommentsText.visibility = View.VISIBLE
             textInputLayoutWriteCommentVenueDetails.visibility = View.VISIBLE
             textInputAddCommentVenue.visibility = View.VISIBLE
-            buttonSendCommentVenueDetails.visibility = View.VISIBLE
         }
     }
 
@@ -237,6 +237,7 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
                 .filterNotNull()
                 .collect {
                     binding.textNoCommentsTextVenueDetails.isVisible = it.isEmpty()
+                    crossfadeAppear(binding.buttonSendCommentVenueDetails, 500)
                     commentAdapter.updateAdapter(it)
                 }
         }

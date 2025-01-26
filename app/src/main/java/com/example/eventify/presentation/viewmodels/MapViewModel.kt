@@ -10,6 +10,7 @@ import com.example.domain.model.places.venue.VenueItem
 import com.example.domain.repository.EventRepository
 import com.example.domain.repository.VenueRepository
 import com.example.eventify.NetworkUtils
+import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -26,9 +27,8 @@ class MapViewModel @Inject constructor(
     private val eventRepository: EventRepository
 ) : ViewModel() {
 
-
     val markerList = mutableListOf<Marker>()
-
+    var previousLocation: LatLng? = null
 
     val eventsState = MutableStateFlow<List<EventItem>?>(null)
     val venuesState = MutableStateFlow<List<VenueItem>?>(null)
@@ -44,9 +44,6 @@ class MapViewModel @Inject constructor(
         VENUES,
         EVENTS
     }
-
-
-
 
     init {
         getEvents()
@@ -110,7 +107,6 @@ class MapViewModel @Inject constructor(
             finally {
                 isLoading.update { false }
             }
-
         }
     }
 }

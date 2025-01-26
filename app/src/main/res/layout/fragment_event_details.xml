@@ -386,6 +386,7 @@
             android:layout_marginEnd="4dp"
             android:layout_marginBottom="4dp"
             android:contentDescription="@string/send"
+            android:visibility="invisible"
             app:icon="@drawable/ic_send"
             app:layout_constraintBottom_toBottomOf="@+id/textInputLayoutWriteCommentEventDetails"
             app:layout_constraintEnd_toEndOf="parent"

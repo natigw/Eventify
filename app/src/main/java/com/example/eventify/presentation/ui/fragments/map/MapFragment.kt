@@ -5,7 +5,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
 import android.content.res.Configuration
-import android.net.Uri
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -21,7 +20,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.common.base.BaseFragment
-import com.example.common.utils.crossfadeAppear
 import com.example.common.utils.nancyToastError
 import com.example.eventify.R
 import com.example.eventify.databinding.FragmentMapBinding
@@ -117,6 +115,10 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             binding.editTextText.hideKeyboard()
         }
 
+        binding.buttonLocationMap.setOnClickListener {
+            getMyLocation()
+        }
+
         requireActivity().onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 if(binding.root.currentState == R.id.end){
@@ -161,19 +163,15 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     private fun searchInputHandler(){
 
         binding.editTextText.addTextChangedListener(object : TextWatcher{
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-            }
-
-            override fun onTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-            }
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { }
+            override fun onTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) { }
 
             override fun afterTextChanged(s: Editable?) {
                 viewModel.inputState.update { s.toString() }
             }
         })
     }
+
 
 
     @OptIn(FlowPreview::class)
@@ -323,24 +321,25 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         googleMap.isMyLocationEnabled = true
         googleMap.uiSettings.isMyLocationButtonEnabled = false
 
-        binding.buttonLocationMap.setOnClickListener {
-            val fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext())
-            fusedLocationProviderClient.lastLocation.addOnSuccessListener { location ->
-                if (location != null) {
-                    currentLatLng = LatLng(location.latitude, location.longitude)
-                    //TODO oldugun yere pin de qoysun? deqiqlesdir
-                    addMarker(
-                        location.latitude,
-                        location.longitude,
-                        getString(R.string.you_are_here),
-                        BitmapDescriptorFactory.HUE_RED,
-                        0
-                    )
-                    googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng!!, 15f))
-                } else {
-                    val bakuCityCenter = LatLng(40.3791, 49.8468)
-                    googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(bakuCityCenter, 12f))
+        val fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext())
+        fusedLocationProviderClient.lastLocation.addOnSuccessListener { location ->
+            if (location != null) {
+                currentLatLng = LatLng(location.latitude, location.longitude)
+                viewModel.previousLocation?.latitude?.let {
+                    removeMarkersAtLocation(it, viewModel.previousLocation!!.longitude)
                 }
+                viewModel.previousLocation = currentLatLng
+                addMarker(
+                    viewModel.previousLocation!!.latitude,
+                    viewModel.previousLocation!!.longitude,
+                    getString(R.string.you_are_here),
+                    BitmapDescriptorFactory.HUE_RED,
+                    0
+                )
+                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng!!, 15f))
+            } else {
+                val bakuCityCenter = LatLng(40.3791, 49.8468)
+                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(bakuCityCenter, 12f))
             }
         }
     }
@@ -361,16 +360,6 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     }
 
 
-
-    private fun getProfilePictureUri(): Uri {
-        val uriImage = null//shprefProfilePicture.getString("profile_image_uri", null)
-        return if (uriImage == null) Uri.parse("android.resource://${requireActivity().packageName}/${R.drawable.usersample}")
-        else Uri.parse(uriImage)
-    }
-
-
-
-    @OptIn(FlowPreview::class)
     @SuppressLint("PotentialBehaviorOverride")
     override fun onMapReady(googleMap: GoogleMap) {
 
@@ -393,54 +382,40 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         }
 
 
-
-
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.venuesState
-                .filter { it != null }
+                .filterNotNull()
                 .collectLatest { venues ->
-                    venues!!.forEach {
-                        if (it.lat != "string") {  //it.lat != 0.0   //viewmodeli qosandan sonra bele olmalidi
+                    venues.forEach {
+                        if (it.lat != 0.0)
                             addMarker(
-                                lat = it.lat.toDouble(),
-                                lng = it.lng.toDouble(),
+                                lat = it.lat,
+                                lng = it.lng,
                                 title = it.title,
                                 hue = BitmapDescriptorFactory.HUE_AZURE,
-                                placeId = it.venueId
+                                placeId = it.venueId,
+                                placeType = "venue"
                             )
                         }
                     }
-                }
 
             viewModel.eventsState
-                .filter { it != null }
+                .filterNotNull()
                 .collectLatest { events ->
-                    events!!.forEach {
-                        if (it.lat != "string") {
+                    events.forEach {
+                        if (it.lat != 0.0) {
                             addMarker(
-                                lat = it.lat.toDouble(),
-                                lng = it.lng.toDouble(),
+                                lat = it.lat,
+                                lng = it.lng,
                                 title = it.name,
                                 hue = BitmapDescriptorFactory.HUE_RED,
                                 placeId = it.eventId,
                                 placeType = "event"
                             )
                         }
-
                     }
                 }
         }
-
-        addMarker(
-            40.38,
-            49.85,
-            "natig's custom event",
-            BitmapDescriptorFactory.HUE_GREEN,
-            12,
-            "event"
-        )
-
-        // Marker click listener
 
         googleMap.setOnMarkerClickListener { marker ->
             googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(marker.position.latitude-0.005, marker.position.longitude), 15f))
@@ -461,13 +436,12 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
 
         binding.buttonSwitchMode.setOnClickListener {
-            googleMap.mapType =
-                if (googleMap.mapType == GoogleMap.MAP_TYPE_HYBRID) GoogleMap.MAP_TYPE_NORMAL else GoogleMap.MAP_TYPE_HYBRID
+            googleMap.mapType = if (googleMap.mapType == GoogleMap.MAP_TYPE_HYBRID) GoogleMap.MAP_TYPE_NORMAL else GoogleMap.MAP_TYPE_HYBRID
         }
 
         googleMap.uiSettings.setAllGesturesEnabled(true)
-//        googleMap.uiSettings.isMyLocationButtonEnabled = false
-        getMyLocation()  //show user's current location
+        //googleMap.uiSettings.isMyLocationButtonEnabled = false
+        getMyLocation()
         applyDynamicMapStyle()
     }
 
