@@ -27,7 +27,9 @@
                android:alpha="0.0" />
        </KeyFrameSet>
         <OnSwipe motion:touchAnchorId="@+id/bottomCardView" />
-        <OnClick motion:targetId="@+id/searchButton" />
+        <OnClick
+            motion:targetId="@+id/searchButton"
+            motion:clickAction="transitionToEnd"/>
     </Transition>
 
     <ConstraintSet android:id="@+id/start">
