@@ -20,7 +20,7 @@ class PlacesFragment : BaseFragment<FragmentPlacesBinding>(FragmentPlacesBinding
     }
 
     private fun setTabLayoutMediator(){
-        val tabTitles = listOf(getString(R.string.events),getString(R.string.custom_events))
+        val tabTitles = listOf(getString(R.string.organizer_events),getString(R.string.custom_events))
 
         val fragmentList = arrayListOf(
             EventsFragment(),

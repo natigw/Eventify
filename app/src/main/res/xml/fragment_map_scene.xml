@@ -56,7 +56,7 @@
             android:layout_height="wrap_content"
             motion:layout_constraintTop_toBottomOf="@id/topCardView"
             motion:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="12dp" />
+            android:layout_marginTop="@dimen/eventify_heading_margin_top" />
         <Constraint
             android:id="@+id/imageHeadingBackgroundMap"
             motion:layout_constraintEnd_toEndOf="@id/textHeadingMap"
@@ -78,7 +78,7 @@
             android:layout_marginStart="16dp"
             motion:layout_constraintStart_toStartOf="@+id/bottomCardView"
             android:layout_marginTop="16dp"
-            motion:layout_constraintTop_toBottomOf="@+id/imageView4"
+            motion:layout_constraintTop_toBottomOf="@+id/imageDrawerElementMap"
             android:translationZ="8dp" />
     </ConstraintSet>
 
@@ -111,7 +111,7 @@
             android:layout_height="wrap_content"
             motion:layout_constraintTop_toBottomOf="@id/topCardView"
             motion:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="12dp" />
+            android:layout_marginTop="@dimen/eventify_heading_margin_top" />
         <Constraint
             android:id="@+id/imageHeadingBackgroundMap"
             motion:layout_constraintEnd_toEndOf="@id/textHeadingMap"
@@ -133,7 +133,7 @@
             android:layout_marginStart="16dp"
             motion:layout_constraintStart_toStartOf="@+id/bottomCardView"
             android:layout_marginTop="16dp"
-            motion:layout_constraintTop_toBottomOf="@+id/imageView4"
+            motion:layout_constraintTop_toBottomOf="@+id/imageDrawerElementMap"
             android:translationZ="8dp" />
     </ConstraintSet>
 </MotionScene>

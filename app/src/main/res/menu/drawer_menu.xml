@@ -7,7 +7,7 @@
         android:checkableBehavior="single">
         <item
             android:id="@+id/drawer_profile"
-            android:icon="@drawable/profile_icon_selected"
+            android:icon="@drawable/ic_profile_filled"
             android:title="@string/profile"/>
         <item
             android:id="@+id/drawer_referral"

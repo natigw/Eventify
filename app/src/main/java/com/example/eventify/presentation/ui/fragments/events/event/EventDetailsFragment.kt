@@ -1,5 +1,7 @@
 package com.example.eventify.presentation.ui.fragments.events.event
 
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
@@ -15,6 +17,7 @@ import com.example.common.base.BaseFragment
 import com.example.common.utils.crossfadeAppear
 import com.example.common.utils.functions.dateFormatterIFYEAR_MNAMED_Comma_HM
 import com.example.common.utils.functions.getInstantTime
+import com.example.common.utils.functions.hideKeyboard
 import com.example.common.utils.functions.validateInputFieldEmpty
 import com.example.common.utils.nancyToastSuccess
 import com.example.common.utils.navigateWithAnimationLeftToRight
@@ -181,12 +184,11 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
                 )
             }
             binding.textNoCommentsTextEventDetails.isVisible = false
-
-
-
             binding.textInputEdittextAddCommentEvent.text = null
+            binding.textInputLayoutWriteCommentEventDetails.editText?.setText("")
+            binding.textInputLayoutWriteCommentEventDetails.clearFocus()
+            hideKeyboard(binding.root)
         }
-
     }
 
     private fun setUI(eventDetailsItem: EventDetailsItem) {
@@ -209,13 +211,8 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
             buttonReadMoreEvents.post {
                 val layout = textEventDescription.layout
                 val lines = layout.lineCount
-                if (lines > 0) {
-                    if (layout.getEllipsisCount(lines - 1) > 0) {
-                        buttonReadMoreEvents.visibility = View.VISIBLE
-                    } else {
-                        buttonReadMoreEvents.visibility = View.GONE
-                    }
-                }
+                if (lines > 0)
+                    buttonReadMoreEvents.isVisible = layout.getEllipsisCount(lines - 1) > 0
             }
             var flagRead = true
             buttonReadMoreEvents.setOnClickListener {
@@ -225,7 +222,7 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
                     flagRead = false
                 } else {
                     buttonReadMoreEvents.text = getString(R.string.read_more)
-                    textEventDescription.maxLines = 3
+                    textEventDescription.maxLines = 5
                     flagRead = true
                 }
             }

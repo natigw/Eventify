@@ -96,7 +96,6 @@
                 style="?attr/materialIconButtonFilledTonalStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="-2dp"
                 android:backgroundTint="@color/eventify_background_secondary"
                 android:fontFamily="@font/inter_italic"
                 android:minHeight="24dp"
@@ -107,12 +106,13 @@
                 android:text="@string/all_details"
                 android:textColor="@color/eventify_primary_helper"
                 app:icon="@drawable/ic_back_ios_rotated"
+                app:iconGravity="end"
                 app:iconPadding="6dp"
                 app:iconSize="14dp"
                 app:iconTint="@color/eventify_primary_helper"
-                app:iconGravity="end"
+                app:layout_constraintBottom_toBottomOf="@id/textEventDateTime"
                 app:layout_constraintEnd_toEndOf="@id/guidelineSampleEvents2"
-                app:layout_constraintBottom_toBottomOf="@id/textEventDateTime" />
+                app:layout_constraintTop_toTopOf="@+id/textEventDateTime" />
 
             <com.google.android.material.divider.MaterialDivider
                 android:id="@+id/dividerEvent"

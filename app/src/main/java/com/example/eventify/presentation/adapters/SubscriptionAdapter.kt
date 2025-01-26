@@ -18,22 +18,22 @@ class SubscriptionAdapter(
     private var packages = arrayOf(   //TODO -> bu basqa layerde olmalidi? static ve inapp bir seydi
         SubscriptionData(
             name = "Base",
-            features = "Access to cultural events list\n\nCommunity contributions",    //[Feature1, Feature2, ..] ??
+            features = "Access to cultural events list\n\nAccess to some map functionalities\n\nCommunity contributions",    //[Feature1, Feature2, ..] ??
             priceMonthly = 0.0,
             priceAnnually = 0.0
         ),
-        SubscriptionData(
-            name = "Pro",
-            features = "Access to full map functionalities\n\nCommunity Contributions\n\nExclusive Deals\n\nPriority Support",
-            priceMonthly = 40.0,
-            priceAnnually = 40.0 * 12 - 80
-        ),
-        SubscriptionData(
-            name = "Enterprise",
-            features = "Access to full map functionalities\n\nCommunity Contributions\n\nExclusive Deals and Offers\n\nPriority Support\n\nEnterprise Event Offers\n\nAdvanced Statistics",
-            priceMonthly = 99.0,
-            priceAnnually = 99.0 * 12 - 200
-        )
+//        SubscriptionData(
+//            name = "Pro",
+//            features = "Access to full map functionalities\n\nCommunity Contributions\n\nExclusive Deals\n\nPriority Support",
+//            priceMonthly = 40.0,
+//            priceAnnually = 40.0 * 12 - 80
+//        ),
+//        SubscriptionData(
+//            name = "Enterprise",
+//            features = "Access to full map functionalities\n\nCommunity Contributions\n\nExclusive Deals and Offers\n\nPriority Support\n\nEnterprise Event Offers\n\nAdvanced Statistics",
+//            priceMonthly = 99.0,
+//            priceAnnually = 99.0 * 12 - 200
+//        )
     )
 
     override fun getItemCount(): Int {

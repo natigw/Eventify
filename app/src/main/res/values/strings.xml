@@ -41,18 +41,19 @@
     <string name="get_a_free_ticket">Get a free ticket!</string>
     <string name="referral_note">Note that to access and enjoy our exclusive rewards, an active subscription is mandatory.</string>
     <string name="invite_link_note">*Note that additional reward system will also be available soon.</string>
+    <string name="subscription_note">*Note that additional premium packages with extra features will also be available soon.</string>
     <string name="share_invite_link">Share your invite link*</string>
     <string name="copy_link">Copy link</string>
     <string name="share">Share</string>
     <string name="type_your_message">Type your message...</string>
     <string name="read_more">Read more</string>
     <string name="read_less">Read less</string>
-    <string name="venue_type">Venue type:</string>
+    <string name="venue_type_colon">Venue type:</string>
+    <string name="event_type_colon">Event type:</string>
     <string name="open_hours">Open hours:</string>
     <string name="likes">Likes:</string>
     <string name="show_location">show location</string>
     <string name="places">Places</string>
-    <string name="event_type_colon">Event type:</string>
     <string name="duration_colon">Duration:</string>
     <string name="date_colon">Date:</string>
     <string name="organizer_colon">Organizer:</string>
@@ -61,6 +62,7 @@
     <string name="events">Events</string>
     <string name="custom_events">User events</string>
     <string name="venue_details">Venue details</string>
+    <string name="event_details">Event details</string>
     <string name="buy_ticket">Buy ticket</string>
     <string name="register_failed">Register failed!</string>
     <string name="register_successful">Registration successful!</string>
@@ -199,5 +201,6 @@
     <string name="referral_congrats_1">Congratulations! You got a ticket for\ </string>
     <string name="referral_congrats_2">\ event. Please check your ticket box!</string>
     <string name="you_are_here">You are here</string>
-    <string name="no_apps_to_open_maps">No app found to open maps</string>
+    <string name="no_apps_to_open_maps">No app found to open maps.</string>
+    <string name="comment_pending">Pending...</string>
 </resources>

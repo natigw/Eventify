@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.eventify.R
 import com.example.common.base.BaseBottomSheetFragment
+import com.example.common.utils.nancyToastInfo
 import com.example.common.utils.nancyToastWarning
 import com.example.domain.model.places.event.EventDetailsItem
 import com.example.domain.model.places.venue.VenueDetailsItem
@@ -42,9 +43,8 @@ class MarkerDetailsBottomSheet : BaseBottomSheetFragment<BottomsheetMarkerDetail
         routeIntent()
     }
 
-    private fun routeIntent(){
+    private fun routeIntent() {
         binding.buttonShortestRouteMarkerDetails.setOnClickListener {
-
             val latitude = args.lat
             val longitude = args.lng
             val geoUri = "geo:$latitude,$longitude?q=$latitude,$longitude"
@@ -88,9 +88,12 @@ class MarkerDetailsBottomSheet : BaseBottomSheetFragment<BottomsheetMarkerDetail
     private fun setEventUI(eventDetails : EventDetailsItem){
         with(binding) {
             textVenueNameMarkerDetails.text = eventDetails.title
+            textVenueDetailsMarkerDetailsText.text = getString(R.string.event_details)
             textVenueDescriptionMarkerDetails.text = eventDetails.description
+            textVenueTypeMarkerDetailsText.text = getString(R.string.event_type)
             textVenueTypeMarkerDetails.text = eventDetails.eventType
-            VenueOpenHoursMarkerDetailsText.text = getString(R.string.event_duration_colon)
+            textVenueOpenHoursMarkerDetailsText.text = getString(R.string.event_duration_colon)
+            textVenueOpenHoursMarkerDetails.text = eventDetails.eventDurationHours
             ratingBarMarkerDetails.rating = eventDetails.rating.toFloat()
             textVenueLikeCountMarkerDetails.text = eventDetails.likeCount.toString()
             Glide.with(imageVenueMarkerDetails)
@@ -100,16 +103,13 @@ class MarkerDetailsBottomSheet : BaseBottomSheetFragment<BottomsheetMarkerDetail
                 .into(imageVenueMarkerDetails)
             buttonBuyTicketMarkerDetails.visibility = View.VISIBLE
             buttonShortestRouteMarkerDetails.text = getString(R.string.get_route)
-//            buttonShortestRouteMarkerDetails.setOnClickListener {
-//                viewLifecycleOwner.lifecycleScope.launch {
-//                    sharedViewModel.setRouteCoordinates(eventDetails.coordinates)
-//                    dismiss()
-//                }
-//            }
+            buttonBuyTicketMarkerDetails.setOnClickListener {
+                nancyToastInfo(requireContext(), "navigating to iticket.az") //TODO -> bunu browserde acilan et
+            }
         }
     }
 
-    fun setVenueUI(venueDetails : VenueDetailsItem){
+    private fun setVenueUI(venueDetails : VenueDetailsItem){
         with(binding) {
             textVenueNameMarkerDetails.text = venueDetails.title
             textVenueDescriptionMarkerDetails.text = venueDetails.description
@@ -122,15 +122,6 @@ class MarkerDetailsBottomSheet : BaseBottomSheetFragment<BottomsheetMarkerDetail
                 .placeholder(R.drawable.placeholder_venue)
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(imageVenueMarkerDetails)
-//            buttonShortestRouteMarkerDetails.setOnClickListener {
-//                viewLifecycleOwner.lifecycleScope.launch {
-//                    sharedViewModel.setRouteCoordinates(venueDetails.coordinates)
-//                    dismiss()
-//                }
-//            }
         }
     }
-
-
-
 }

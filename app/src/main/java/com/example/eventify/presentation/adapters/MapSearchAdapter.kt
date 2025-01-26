@@ -1,33 +1,36 @@
 package com.example.eventify.presentation.adapters
 
-import android.util.Log
 import com.example.common.base.BaseAdapter
 import com.example.domain.model.places.SearchItem
+import com.example.eventify.R
 import com.example.eventify.databinding.SearchItemBinding
 
 class MapSearchAdapter(
-    val onClick : (SearchItem)->Unit
-) : BaseAdapter<SearchItemBinding>(SearchItemBinding::inflate){
+    val onClick: (SearchItem) -> Unit
+) : BaseAdapter<SearchItemBinding>(SearchItemBinding::inflate) {
 
     private var searchItems = listOf<SearchItem>()
-
-    override fun onBindLight(binding: SearchItemBinding, position: Int) {
-        val currentItem = searchItems[position]
-        binding.titleTextView.text = currentItem.name
-        binding.root.setOnClickListener{
-            onClick(currentItem)
-        }
-    }
 
     override fun getItemCount(): Int {
         return searchItems.size
     }
 
-    fun updateAdapter(newData : List<SearchItem>){
-        Log.e("adapterDatam",newData.toString())
+    override fun onBindLight(binding: SearchItemBinding, position: Int) {
+
+        val currentItem = searchItems[position]
+
+        if (currentItem.placeType == "event")
+            binding.imageSearchIcon.setImageResource(R.drawable.ic_ticket)
+
+        binding.titleTextViewSearch.text = currentItem.name
+
+        binding.cardSearchResult.setOnClickListener {
+            onClick(currentItem)
+        }
+    }
+
+    fun updateAdapter(newData: List<SearchItem>) {
         searchItems = newData
         notifyDataSetChanged()
     }
-
-
 }

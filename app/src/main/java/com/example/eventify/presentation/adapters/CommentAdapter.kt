@@ -20,15 +20,10 @@ class CommentAdapter : BaseAdapter<SampleCommentBinding>(SampleCommentBinding::i
     override fun onBindLight(binding: SampleCommentBinding, position: Int) {
         val currentComment = comments[position]
         with(binding) {
-            textUsernameComments.text = currentComment.username
-            textContentComments.text = currentComment.content
-            textCommentDateComments.text = currentComment.date
-            if(currentComment.isPending){
-                isPendingTextView.isVisible = true
-            }
-            else{
-                isPendingTextView.visibility = View.GONE
-            }
+            textUsernameComment.text = currentComment.username
+            textContentComment.text = currentComment.content
+            textCommentDateComment.text = currentComment.date
+            textPendingStatusComment.isVisible = currentComment.isPending
         }
 
     }

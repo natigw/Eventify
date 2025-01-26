@@ -19,8 +19,22 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginHorizontal="12dp">
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineFavorite1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="@dimen/eventify_guideline_left_small" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineFavorite2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="@dimen/eventify_guideline_right_small" />
+
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imageFavorite"
@@ -31,7 +45,7 @@
                 android:scaleType="centerCrop"
                 android:src="@drawable/placeholder_event"
                 app:layout_constraintDimensionRatio="W,1:1"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@id/guidelineFavorite1"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintWidth_percent="0.25"
                 app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Medium" />
@@ -42,12 +56,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="-4dp"
+                android:maxLines="1"
                 android:ellipsize="end"
                 android:fontFamily="@font/inter_bold"
-                android:maxLines="1"
                 android:textColor="@color/eventify_main_text"
                 android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/guidelineFavorite2"
                 app:layout_constraintStart_toEndOf="@+id/imageFavorite"
                 app:layout_constraintTop_toTopOf="@+id/imageFavorite"
                 tools:text="Favorite name" />
@@ -60,7 +74,7 @@
                 android:fontFamily="@font/inter_regular"
                 android:maxLines="2"
                 android:textSize="15sp"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/textFavoriteName"
                 app:layout_constraintStart_toStartOf="@+id/textFavoriteName"
                 app:layout_constraintTop_toBottomOf="@id/textFavoriteName"
                 tools:text="Description" />
@@ -99,7 +113,7 @@
                 app:iconSize="14dp"
                 app:iconTint="@color/eventify_primary_helper"
                 app:layout_constraintBottom_toBottomOf="@+id/imageFavorite"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/guidelineFavorite2"
                 app:layout_constraintTop_toTopOf="@+id/textFavoriteDate" />
 
             <com.google.android.material.divider.MaterialDivider

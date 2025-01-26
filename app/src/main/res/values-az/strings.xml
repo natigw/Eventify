@@ -37,13 +37,14 @@
     <string name="get_a_free_ticket">Pulsuz bilet əldə et!</string>
     <string name="referral_note">Nəzərə alın ki, mükafatlardan istifadə etmək üçün aktiv abunəlik mütləqdir.</string>
     <string name="invite_link_note">*Nəzərə alın ki, əlavə mükafat sistemi də yaxın zamanda əlçatan olacaq.</string>
+    <string name="subscription_note">"*Nəzərə alın ki, əlavə funksionallıqlar üçün abunəlik paketləri də yaxın zamanda əlçatan olacaq."</string>
     <string name="share_invite_link">Dəvət linkini paylaşın</string>
     <string name="copy_link">Linki kopyala</string>
     <string name="share">Paylaş</string>
     <string name="type_your_message">Mesaj yazın...</string>
     <string name="read_more">Daha çox</string>
     <string name="read_less">Daha az</string>
-    <string name="venue_type">Məkanın tipi:</string>
+    <string name="venue_type_colon">Məkanın tipi:</string>
     <string name="open_hours">Xidmət göstərir:</string>
     <string name="likes">Bəyənilər:</string>
     <string name="show_location">xəritədə göstər</string>
@@ -53,9 +54,11 @@
     <string name="date_colon">Tarixi:</string>
     <string name="organizer_colon">Təşkilatçı:</string>
     <string name="published_colon">Dərc olunub:</string>
+    <string name="event_duration_colon">Tədbirin müddəti:</string>
     <string name="events">Tədbirlər</string>
     <string name="custom_events">İstifadəçi tədbirləri</string>
     <string name="venue_details">Məkan haqqında</string>
+    <string name="event_details">Tədbir haqqında</string>
     <string name="buy_ticket">Bilet al</string>
     <string name="register_failed">Qeydiyyat uğursuzdur!</string>
     <string name="register_successful">Qeydiyyat uğurludur!</string>
@@ -63,6 +66,7 @@
     <string name="check_email">Elektron poçtunuzu yoxlayın!</string>
     <string name="retry">Yenidən cəhd edin</string>
     <string name="network_connection_lost">İnternet bağlantısı yoxdur!</string>
+    <string name="get_route">İstiqamət</string>
     <string name="get_shortest_route">Ən yaxın marşrut</string>
     <string name="no_venues">Hələlik məkan yoxdur!</string>
     <string name="no_comments">Hələlik şərh yoxdur!</string>
@@ -185,4 +189,7 @@
     <string name="referral_congrats_2">\ üçün bilet əldə etmisiniz. Elektron poçtunuzu yoxlayın!</string>
     <string name="warning">Diqqət!</string>
     <string name="got_it">Oldu</string>
+    <string name="you_are_here">Siz buradasınız</string>
+    <string name="no_apps_to_open_maps">Xəritəni açmaq üçün tətbiq tapılmadı.</string>
+    <string name="comment_pending">Yüklənir...</string>
 </resources>

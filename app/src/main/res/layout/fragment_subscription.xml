@@ -42,12 +42,12 @@
             android:id="@+id/textHeadingSubs"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="@dimen/eventify_heading_margin_top"
             android:fontFamily="@font/inter_bold"
             android:text="@string/subscription"
             android:textAlignment="center"
             android:textColor="@color/eventify_heading"
-            android:textSize="28sp"
+            android:textSize="@dimen/eventify_heading_text_font_size"
             app:layout_constraintEnd_toStartOf="@+id/guidelineSubs2"
             app:layout_constraintStart_toStartOf="@+id/guidelineSubs1"
             app:layout_constraintTop_toTopOf="parent" />
@@ -124,14 +124,29 @@
             android:id="@+id/rvSubscriptions"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginVertical="12dp"
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="@id/textLinkNoteSubs"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/switchSubscription"
+            app:layout_constraintVertical_bias="0.0"
             tools:itemCount="3"
             tools:listitem="@layout/sample_subscription" />
+
+        <TextView
+            android:id="@+id/textLinkNoteSubs"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/outfit_regular"
+            android:text="@string/subscription_note"
+            android:textColor="@color/gray_helper_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/guidelineSubs2"
+            app:layout_constraintStart_toStartOf="@+id/guidelineSubs1"
+            app:layout_constraintVertical_bias="1.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

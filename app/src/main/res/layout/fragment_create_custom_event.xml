@@ -45,12 +45,12 @@
         android:id="@+id/textHeadingCreateCustomEvent"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="@dimen/eventify_heading_margin_top"
         android:fontFamily="@font/inter_bold"
         android:text="@string/create_your_event"
         android:textAlignment="center"
         android:textColor="@color/eventify_heading"
-        android:textSize="28sp"
+        android:textSize="@dimen/eventify_heading_text_font_size"
         app:layout_constraintEnd_toEndOf="@+id/guidelineCreateCustomEvent2"
         app:layout_constraintStart_toStartOf="@+id/guidelineCreateCustomEvent1"
         app:layout_constraintTop_toTopOf="parent" />
@@ -103,6 +103,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/inter_regular"
+            android:inputType="textPersonName"
             android:hint="@string/title"
             android:textSize="18sp" />
     </com.google.android.material.textfield.TextInputLayout>

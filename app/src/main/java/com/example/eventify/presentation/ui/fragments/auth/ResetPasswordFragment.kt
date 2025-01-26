@@ -10,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.common.base.BaseFragment
 import com.example.common.utils.blockButton
+import com.example.common.utils.functions.hideKeyboard
 import com.example.common.utils.functions.isValidEmail
 import com.example.common.utils.functions.validateInputFieldMeet
 import com.example.common.utils.nancyToastInfo
@@ -32,16 +33,18 @@ class ResetPasswordFragment : BaseFragment<FragmentPasswordResetBinding>(Fragmen
 
     override fun buttonListeners() {
         super.buttonListeners()
-        binding.buttonSendPasswordReset.setOnClickListener{
 
+        binding.buttonBackPasswordReset.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
+        binding.buttonSendPasswordReset.setOnClickListener{
             val email = binding.textInputEdittextPasswordReset.text.toString().trim()
             val isEmailValid = validateInputFieldMeet(binding.textInputLayoutPasswordReset, isValidEmail(email), getString(R.string.please_enter_valid_email))
             if (!isEmailValid)
                 return@setOnClickListener
+            hideKeyboard(binding.root)
             resetUserPassword(email)
-        }
-        binding.buttonBackPasswordReset.setOnClickListener {
-            findNavController().popBackStack()
         }
     }
 

@@ -37,16 +37,30 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="@dimen/eventify_guideline_right" />
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineProfileFavorites1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="@dimen/eventify_guideline_left_small" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineProfileFavorites2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="@dimen/eventify_guideline_right_small" />
+
         <TextView
             android:id="@+id/textHeadingProfile"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="@dimen/eventify_heading_margin_top"
             android:fontFamily="@font/inter_bold"
             android:text="@string/profile"
             android:textAlignment="center"
             android:textColor="@color/eventify_heading"
-            android:textSize="28sp"
+            android:textSize="@dimen/eventify_heading_text_font_size"
             app:layout_constraintEnd_toEndOf="@+id/guidelineProfile2"
             app:layout_constraintStart_toStartOf="@+id/guidelineProfile1"
             app:layout_constraintTop_toTopOf="parent" />
@@ -55,9 +69,10 @@
             android:id="@+id/imageUserProfilePictureProfile"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
-            android:src="@drawable/profile_icon_selected"
+            android:src="@drawable/ic_profile_filled"
             app:layout_constraintEnd_toEndOf="@id/guidelineProfile2"
             app:layout_constraintStart_toStartOf="@id/guidelineProfile1"
             app:layout_constraintTop_toBottomOf="@id/textHeadingProfile"
@@ -109,8 +124,8 @@
             android:layout_marginTop="8dp"
             app:cardBackgroundColor="@color/eventify_background_primary"
             app:cardCornerRadius="12dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guidelineProfileFavorites2"
+            app:layout_constraintStart_toStartOf="@id/guidelineProfileFavorites1"
             app:layout_constraintTop_toBottomOf="@id/textSeeAlsoTEXT"
             app:rippleColor="?attr/colorControlHighlight">
 
@@ -123,14 +138,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_constraintGuide_percent="@dimen/eventify_guideline_left" />
+                    app:layout_constraintGuide_percent="@dimen/eventify_guideline_left_small" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guidelineReferralCard2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_constraintGuide_percent="@dimen/eventify_guideline_right" />
+                    app:layout_constraintGuide_percent="@dimen/eventify_guideline_right_small" />
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/imageReferralIconProfile"
@@ -204,8 +219,8 @@
             android:layout_height="wrap_content"
             app:cardBackgroundColor="@color/eventify_background_primary"
             app:cardCornerRadius="12dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guidelineProfileFavorites2"
+            app:layout_constraintStart_toStartOf="@id/guidelineProfileFavorites1"
             app:layout_constraintTop_toBottomOf="@id/dividerSeeAlsoProfile"
             app:rippleColor="?attr/colorControlHighlight">
 
@@ -218,14 +233,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_constraintGuide_percent="@dimen/eventify_guideline_left" />
+                    app:layout_constraintGuide_percent="@dimen/eventify_guideline_left_small" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guidelineSubscriptionCard2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_constraintGuide_percent="@dimen/eventify_guideline_right" />
+                    app:layout_constraintGuide_percent="@dimen/eventify_guideline_right_small" />
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/imageSubscriptionIconProfile"
@@ -302,8 +317,8 @@
             android:layout_marginTop="8dp"
             app:cardBackgroundColor="@color/eventify_background_primary"
             app:cardCornerRadius="12dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guidelineProfileFavorites2"
+            app:layout_constraintStart_toStartOf="@id/guidelineProfileFavorites1"
             app:layout_constraintTop_toBottomOf="@id/textOptionsProfileTEXT"
             app:rippleColor="?attr/colorControlHighlight">
 
@@ -316,14 +331,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_constraintGuide_percent="@dimen/eventify_guideline_left" />
+                    app:layout_constraintGuide_percent="@dimen/eventify_guideline_left_small" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guidelineLanguageCard2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_constraintGuide_percent="@dimen/eventify_guideline_right" />
+                    app:layout_constraintGuide_percent="@dimen/eventify_guideline_right_small" />
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/imageLanguageIconProfile"
@@ -397,8 +412,8 @@
             android:layout_height="wrap_content"
             app:cardBackgroundColor="@color/eventify_background_primary"
             app:cardCornerRadius="12dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guidelineProfileFavorites2"
+            app:layout_constraintStart_toStartOf="@id/guidelineProfileFavorites1"
             app:layout_constraintTop_toBottomOf="@id/dividerOptionsProfile"
             app:rippleColor="?attr/colorControlHighlight">
 
@@ -411,14 +426,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_constraintGuide_percent="@dimen/eventify_guideline_left" />
+                    app:layout_constraintGuide_percent="@dimen/eventify_guideline_left_small" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guidelineThemeCard2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_constraintGuide_percent="@dimen/eventify_guideline_right" />
+                    app:layout_constraintGuide_percent="@dimen/eventify_guideline_right_small" />
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/imageThemeIconProfile"
@@ -507,13 +522,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:layout_marginStart="-12dp"
-            android:layout_marginEnd="-12dp"
             android:orientation="vertical"
             android:visibility="invisible"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintEnd_toEndOf="@id/guidelineProfile2"
-            app:layout_constraintStart_toStartOf="@id/guidelineProfile1"
+            app:layout_constraintEnd_toEndOf="@id/guidelineProfileFavorites2"
+            app:layout_constraintStart_toStartOf="@id/guidelineProfileFavorites1"
             app:layout_constraintTop_toBottomOf="@id/textFavoritesProfileTEXT"
             tools:itemCount="3"
             tools:listitem="@layout/sample_favorite" />

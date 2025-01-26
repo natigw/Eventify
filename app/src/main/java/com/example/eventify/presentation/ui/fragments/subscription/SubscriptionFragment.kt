@@ -2,6 +2,7 @@ package com.example.eventify.presentation.ui.fragments.subscription
 
 import androidx.activity.OnBackPressedCallback
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavOptions
@@ -33,6 +34,12 @@ class SubscriptionFragment : BaseFragment<FragmentSubscriptionBinding>(FragmentS
     override fun onViewCreatedLight() {
         observeChanges()
         setAdapters()
+
+
+
+        binding.textBillMonthly.isVisible = false
+        binding.textBillAnnually.isVisible = false
+        binding.switchSubscription.isVisible = false
 
     }
 

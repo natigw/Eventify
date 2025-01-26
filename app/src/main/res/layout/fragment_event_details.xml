@@ -37,11 +37,25 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="@dimen/eventify_guideline_right" />
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineEventComments1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="@dimen/eventify_guideline_left_small" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineEventComments2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="@dimen/eventify_guideline_right_small" />
+
         <TextView
             android:id="@+id/textEventName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="@dimen/eventify_heading_margin_top"
             android:ellipsize="marquee"
             android:fontFamily="@font/inter_bold"
             android:gravity="center"
@@ -49,7 +63,7 @@
             android:scrollHorizontally="true"
             android:singleLine="true"
             android:textColor="@color/eventify_main_text"
-            android:textSize="28sp"
+            android:textSize="@dimen/eventify_heading_text_font_size"
             app:layout_constraintStart_toStartOf="@id/guidelineEventDetails1"
             app:layout_constraintEnd_toEndOf="@+id/guidelineEventDetails2"
             app:layout_constraintTop_toTopOf="parent"
@@ -359,7 +373,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/inter_regular"
                 android:hint="@string/add_comment"
-                android:inputType="textEmailAddress"
+                android:inputType="textMultiLine"
                 android:textSize="16sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -381,12 +395,13 @@
             android:id="@+id/rvCommentsEventDetails"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginVertical="12dp"
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintEnd_toEndOf="@+id/guidelineEventDetails2"
-            app:layout_constraintStart_toStartOf="@+id/guidelineEventDetails1"
+            app:layout_constraintEnd_toEndOf="@+id/guidelineEventComments2"
+            app:layout_constraintStart_toStartOf="@+id/guidelineEventComments1"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayoutWriteCommentEventDetails"
+            app:layout_constraintBottom_toBottomOf="parent"
             tools:itemCount="10"
             tools:listitem="@layout/sample_comment" />
 

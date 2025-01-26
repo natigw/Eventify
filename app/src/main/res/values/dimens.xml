@@ -4,6 +4,15 @@
     <dimen name="eventify_large_button_corner_radius">12dp</dimen>
     <dimen name="eventify_input_field_corner_radius">12dp</dimen>
 
+    <dimen name="eventify_heading_text_font_size_small">26sp</dimen>
+    <dimen name="eventify_heading_text_font_size">28sp</dimen>
+    <dimen name="eventify_heading_text_font_size_large">32sp</dimen>
+
+    <dimen name="eventify_heading_margin_top">16dp</dimen>
+    <dimen name="eventify_bottomsheet_heading_margin_top">12dp</dimen>
+
+    <dimen name="eventify_guideline_left_small">0.025</dimen>
+    <dimen name="eventify_guideline_right_small">0.975</dimen>
     <dimen name="eventify_guideline_left">0.05</dimen>
     <dimen name="eventify_guideline_right">0.95</dimen>
     <dimen name="eventify_guideline_left_mid">0.06</dimen>

@@ -1,8 +1,6 @@
 package com.example.eventify.presentation.ui.fragments.venue
 
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
@@ -16,8 +14,8 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.common.base.BaseFragment
 import com.example.common.utils.functions.dateFormatterIFYEAR_MNAMED_Comma_HM
 import com.example.common.utils.functions.getInstantTime
+import com.example.common.utils.functions.hideKeyboard
 import com.example.common.utils.functions.validateInputFieldEmpty
-import com.example.common.utils.navigateWithAnimationLeftToRight
 import com.example.common.utils.startShimmer
 import com.example.common.utils.stopShimmer
 import com.example.domain.model.places.AddCommentItem
@@ -35,11 +33,9 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import java.time.Instant
 
 @AndroidEntryPoint
-class VenueDetailsFragment :
-    BaseFragment<FragmentVenueDetailsBinding>(FragmentVenueDetailsBinding::inflate) {
+class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentVenueDetailsBinding::inflate) {
 
     private val viewmodel by viewModels<VenueDetailsViewModel>()
     private val sharedViewModel: SharedViewModel by activityViewModels()
@@ -125,28 +121,27 @@ class VenueDetailsFragment :
                 return@setOnClickListener
             }
 
-
-
             viewmodel.addComment(
                 AddCommentItem(
                     content = comment,
                     placeId = args.venueId
                 )
             )
-            binding.textNoCommentsTextVenueDetails.isVisible = false
 
             viewmodel.userInfo?.let {
                 commentAdapter.addComment(
                     CommentItem(
-                        -1,
-                        -1,
-                        it.username,
-                        comment,
-                        dateFormatterIFYEAR_MNAMED_Comma_HM(getInstantTime()),
-                        true))
+                        ownerId = -1,
+                        commentId = -1,
+                        username = it.username,
+                        content = comment,
+                        date = dateFormatterIFYEAR_MNAMED_Comma_HM(getInstantTime()),
+                        isPending = true))
             }
-
+            binding.textNoCommentsTextVenueDetails.isVisible = false
             binding.textInputAddCommentVenue.text = null
+            binding.textInputLayoutWriteCommentVenueDetails.clearFocus()
+            hideKeyboard(binding.root)
         }
 
         binding.buttonBackVenue.setOnClickListener {
@@ -190,19 +185,11 @@ class VenueDetailsFragment :
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(imageVenue)
 
-
-            //TODO -> like olsun request atsin, icon fill ol sun, like count text bir dene artsin
-
             buttonReadMoreVenues.post {
                 val layout = textVenueDescription.layout
                 val lines = layout.lineCount
-                if (lines > 0) {
-                    if (layout.getEllipsisCount(lines - 1) > 0) {
-                        buttonReadMoreVenues.visibility = android.view.View.VISIBLE
-                    } else {
-                        buttonReadMoreVenues.visibility = android.view.View.GONE
-                    }
-                }
+                if (lines > 0)
+                    buttonReadMoreVenues.isVisible = layout.getEllipsisCount(lines - 1) > 0
             }
             var flagRead = true
             buttonReadMoreVenues.setOnClickListener {
@@ -212,7 +199,7 @@ class VenueDetailsFragment :
                     flagRead = false
                 } else {
                     buttonReadMoreVenues.text = getString(R.string.read_more)
-                    textVenueDescription.maxLines = 3
+                    textVenueDescription.maxLines = 5
                     flagRead = true
                 }
             }
