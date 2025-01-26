@@ -3,9 +3,11 @@ package com.example.eventify.presentation.viewmodels
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.domain.model.auth.UserData
 import com.example.domain.model.places.AddCommentItem
 import com.example.domain.model.places.CommentItem
 import com.example.domain.model.places.event.EventDetailsItem
+import com.example.domain.repository.AuthRepository
 import com.example.domain.repository.EventRepository
 import com.example.eventify.NetworkUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,10 +19,15 @@ import javax.inject.Inject
 
 @HiltViewModel
 class EventDetailsViewModel @Inject constructor(
-    private val eventRepository: EventRepository
+    private val eventRepository: EventRepository,
+    private val authRepository: AuthRepository
 ) : ViewModel() {
 
     val eventDetails = MutableStateFlow<EventDetailsItem?>(null)
+
+
+    val isCommentAdded = MutableStateFlow(false)
+    var userInfo : UserData? = null
 
     var likedState = MutableStateFlow<Boolean?>(null)
 
@@ -28,6 +35,10 @@ class EventDetailsViewModel @Inject constructor(
     val comments = MutableStateFlow<List<CommentItem>?>(null)
     val lastLikedState = mutableListOf<Boolean>()
 
+
+    init {
+        getUserData()
+    }
 
     fun getEventDetails(eventId: Int) {
         viewModelScope.launch {
@@ -74,9 +85,28 @@ class EventDetailsViewModel @Inject constructor(
         }
     }
 
-    suspend fun addComment(comment: AddCommentItem) : Boolean {
-        return viewModelScope.async {
-            eventRepository.addEventComment(comment)
-        }.await()
+    fun addComment(comment: AddCommentItem) {
+        viewModelScope.launch {
+            try {
+                val checkIfValid = NetworkUtils.handleInvalidAccessToken()
+                if(checkIfValid){
+                    val condition = eventRepository.addEventComment(comment)
+                    isCommentAdded.update {
+                        condition
+                    }
+                }
+            }
+            catch (_:Exception){}
+        }
+    }
+
+    private fun getUserData(){
+        viewModelScope.launch {
+            try {
+                val response = authRepository.getUserData()
+                userInfo = response
+            }
+            catch (_:Exception){}
+        }
     }
 }

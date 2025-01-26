@@ -13,6 +13,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.common.base.BaseFragment
 import com.example.common.utils.crossfadeAppear
+import com.example.common.utils.functions.dateFormatterIFYEAR_MNAMED_Comma_HM
+import com.example.common.utils.functions.getInstantTime
 import com.example.common.utils.functions.validateInputFieldEmpty
 import com.example.common.utils.nancyToastSuccess
 import com.example.common.utils.navigateWithAnimationLeftToRight
@@ -20,6 +22,7 @@ import com.example.common.utils.navigateWithoutAnimation
 import com.example.common.utils.startShimmer
 import com.example.common.utils.stopShimmer
 import com.example.domain.model.places.AddCommentItem
+import com.example.domain.model.places.CommentItem
 import com.example.domain.model.places.event.EventDetailsItem
 import com.example.eventify.R
 import com.example.eventify.databinding.FragmentEventDetailsBinding
@@ -158,18 +161,29 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
             if (!isCommentFilled) {
                 return@setOnClickListener
             }
-            viewLifecycleOwner.lifecycleScope.launch {
-                if(
-                    viewmodel.addComment(
-                        AddCommentItem(
-                            content = comment,
-                            placeId = args.eventId
-                        )
+
+            viewmodel.addComment(
+                AddCommentItem(
+                    content = comment,
+                    placeId = args.eventId
+                )
+            )
+            viewmodel.userInfo?.let {
+                commentAdapter.addComment(
+                    CommentItem(
+                        ownerId = -1,
+                        commentId = -1,
+                        username = it.username,
+                        content = comment,
+                        date = dateFormatterIFYEAR_MNAMED_Comma_HM(getInstantTime()),
+                        isPending = true
                     )
-                ){
-                    viewmodel.getComments(args.eventId)
-                }
+                )
             }
+            binding.textNoCommentsTextEventDetails.isVisible = false
+
+
+
             binding.textInputEdittextAddCommentEvent.text = null
         }
 
@@ -217,12 +231,14 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
             }
 
             buttonEventShowLocation.setOnClickListener {
-                sharedViewModel.setCoordinates(
-                    LatLng(
-                        eventDetailsItem.coordinates.latitude,
-                        eventDetailsItem.coordinates.longitude
+                viewLifecycleOwner.lifecycleScope.launch {
+                    sharedViewModel.setCoordinates(
+                        LatLng(
+                            eventDetailsItem.coordinates.latitude,
+                            eventDetailsItem.coordinates.longitude
+                        )
                     )
-                )
+                }
                 val bottomNavigationView = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
                 bottomNavigationView.selectedItemId = R.id.mapFragment
             }
@@ -266,6 +282,15 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
         viewLifecycleOwner.lifecycleScope.launch {
             viewmodel.isLoadingComments.collectLatest {
                 binding.progressBarCommentEventDetails.isVisible = it
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewmodel.isCommentAdded.collectLatest {
+                if(it){
+                    commentAdapter.updateComment()
+                    viewmodel.isCommentAdded.update { false }
+                }
             }
         }
 

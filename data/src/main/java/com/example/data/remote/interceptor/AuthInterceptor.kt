@@ -18,7 +18,8 @@ class AuthInterceptor @Inject constructor(
 
         val accessToken = sharedPrefUserTokens.getString("access_token","")
         val tokenType = "Bearer"
-        Log.e("MYInterceptor","url :  ${request.url()}")
+
+
         request = request.newBuilder()
             .addHeader("Authorization","$tokenType $accessToken")
             .build()

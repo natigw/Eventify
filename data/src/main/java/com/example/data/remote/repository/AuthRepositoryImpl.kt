@@ -81,10 +81,9 @@ class AuthRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun verifyUserToken(token: String): Boolean {
-
+    override suspend fun verifyUserToken(): Boolean {
         try {
-            val response = api.verifyUserToken(token)
+            val response = api.verifyUserToken()
 
             if(response.isSuccessful && response.body() != null){
                    return response.body()!!.isAuthenticated

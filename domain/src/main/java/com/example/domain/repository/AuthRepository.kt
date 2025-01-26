@@ -21,7 +21,6 @@ interface AuthRepository {
     ): SuccessfulUserTokenItem
 
     suspend fun verifyUserToken(
-        token: String
     ): Boolean
 
     suspend fun refreshAccessToken(

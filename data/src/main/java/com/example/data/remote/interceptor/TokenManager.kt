@@ -31,11 +31,23 @@ class TokenManager @Inject constructor(
         }
     }
 
+    suspend fun checkIfTokenValid() : Boolean{
+        try {
+            val response = authRepository.verifyUserToken()
+            return response
+        }
+        catch (e : Exception){
+            throw e
+        }
+    }
+
     fun setNewAccessToken(accessToken : String){
         sharedPrefUserTokens.edit{
             putString("access_token",accessToken)
         }
     }
+
+
 
     fun clearTokens(){
         sharedPrefUserTokens.edit().clear().apply()

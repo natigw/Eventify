@@ -14,6 +14,8 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.common.base.BaseFragment
+import com.example.common.utils.functions.dateFormatterIFYEAR_MNAMED_Comma_HM
+import com.example.common.utils.functions.getInstantTime
 import com.example.common.utils.functions.validateInputFieldEmpty
 import com.example.common.utils.navigateWithAnimationLeftToRight
 import com.example.common.utils.startShimmer
@@ -33,6 +35,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import java.time.Instant
 
 @AndroidEntryPoint
 class VenueDetailsFragment :
@@ -57,12 +60,6 @@ class VenueDetailsFragment :
         updateAdapters()
         setAdapters()
         observer()
-        lifecycleScope.launch {
-            viewmodel.isCommentAdded
-                .collectLatest {
-                    Toast.makeText(requireContext(), "HELLLOoo", Toast.LENGTH_SHORT).show()
-                }
-        }
     }
 
     override fun onPause() {
@@ -129,16 +126,25 @@ class VenueDetailsFragment :
             }
 
 
-            viewmodel.isCommentAdded.update { true }
 
-//            viewmodel.addComment(
-//                AddCommentItem(
-//                    content = comment,
-//                    placeId = args.venueId
-//                )
-//            )
+            viewmodel.addComment(
+                AddCommentItem(
+                    content = comment,
+                    placeId = args.venueId
+                )
+            )
+            binding.textNoCommentsTextVenueDetails.isVisible = false
 
-            commentAdapter.addComment(CommentItem(1,1,"Tural",comment,"",true))
+            viewmodel.userInfo?.let {
+                commentAdapter.addComment(
+                    CommentItem(
+                        -1,
+                        -1,
+                        it.username,
+                        comment,
+                        dateFormatterIFYEAR_MNAMED_Comma_HM(getInstantTime()),
+                        true))
+            }
 
             binding.textInputAddCommentVenue.text = null
         }
@@ -213,12 +219,15 @@ class VenueDetailsFragment :
 
             buttonVenueShowLocation.setOnClickListener {
                 venueDetailsItem.coordinates.latitude
-                sharedViewModel.setCoordinates(
-                    LatLng(
-                        venueDetailsItem.coordinates.latitude,
-                        venueDetailsItem.coordinates.longitude
+                viewLifecycleOwner.lifecycleScope.launch {
+                    sharedViewModel.setCoordinates(
+                        LatLng(
+                            venueDetailsItem.coordinates.latitude,
+                            venueDetailsItem.coordinates.longitude
+                        )
                     )
-                )
+
+                }
                 val bottomNavigationView =
                     requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
                 bottomNavigationView.selectedItemId = R.id.mapFragment
@@ -268,15 +277,15 @@ class VenueDetailsFragment :
             }
         }
 
-//        viewLifecycleOwner.lifecycleScope.launch {
-//            viewmodel.isCommentAdded
-//                .collectLatest {
-//                    Log.e("CommentState",it.toString())
-//                    if(it){
-//                        commentAdapter.updateComment()
-//                    }
-//                }
-//        }
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewmodel.isCommentAdded
+                .collectLatest {
+                    if(it){
+                        commentAdapter.updateComment()
+                    }
+                    viewmodel.isCommentAdded.update { false }
+                }
+        }
 
     }
 }

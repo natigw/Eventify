@@ -1,6 +1,7 @@
 package com.example.eventify.presentation.adapters
 
 import android.util.Log
+import android.view.View
 import androidx.core.view.isVisible
 import com.example.common.base.BaseAdapter
 import com.example.common.utils.functions.getLocalTime
@@ -25,6 +26,9 @@ class CommentAdapter : BaseAdapter<SampleCommentBinding>(SampleCommentBinding::i
             if(currentComment.isPending){
                 isPendingTextView.isVisible = true
             }
+            else{
+                isPendingTextView.visibility = View.GONE
+            }
         }
 
     }
@@ -43,14 +47,7 @@ class CommentAdapter : BaseAdapter<SampleCommentBinding>(SampleCommentBinding::i
     fun updateComment(){
         val oldCommentItem = comments[0]
         oldCommentItem.let{
-            val newCommentItem = CommentItem(
-                ownerId = it.ownerId,
-                commentId = it.commentId,
-                username = it.username,
-                content = it.content,
-                date = it.date,
-                isPending = !it.isPending
-            )
+            val newCommentItem = it.copy(isPending = !it.isPending)
             comments[0] = newCommentItem
         }
         notifyItemChanged(0)

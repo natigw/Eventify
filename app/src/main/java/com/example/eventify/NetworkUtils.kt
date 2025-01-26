@@ -35,17 +35,32 @@ object NetworkUtils {
 
 
     suspend fun handleInvalidAccessToken() : Boolean{
-
-        val newAccessToken = tokenManager.refreshToken()
-        if(newAccessToken != null){
-            tokenManager.setNewAccessToken(accessToken = newAccessToken)
-            return true
+        val checkIfValid =  try {
+            tokenManager.checkIfTokenValid()
         }
-        else{
+        catch (_:Exception){
             tokenManager.clearTokens()
             AppUtils.authChannel.trySend(RequestChannel.LOG_OUT)
         }
-        return false
+
+        if(checkIfValid == true){
+            return true
+        }
+        else if(checkIfValid == false){
+            val newAccessToken = tokenManager.refreshToken()
+            if(newAccessToken != null){
+                tokenManager.setNewAccessToken(accessToken = newAccessToken)
+                return true
+            }
+            else{
+                tokenManager.clearTokens()
+                AppUtils.authChannel.trySend(RequestChannel.LOG_OUT)
+            }
+            return false
+        }
+        else{
+            return false
+        }
     }
 
     fun handleLogout(context: Context) {

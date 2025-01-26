@@ -45,7 +45,6 @@ interface AuthAPI {
 
     @GET("/auth/verify-token")
     suspend fun verifyUserToken(
-        @Header("Authorization") token : String
     ): Response<ResponseVerifyToken>
 
     @POST("/auth/resend-verification")

@@ -22,6 +22,8 @@ class EventViewModel @Inject constructor(
 
     val eventLikeList = mutableListOf<Int>()
 
+    val isCommentAdded = MutableStateFlow(false)
+
     init {
         getEvents()
     }

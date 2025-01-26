@@ -25,6 +25,7 @@ class RetryInterceptor @Inject constructor() : Interceptor {
         var response = chain.proceed(request)
         val delay = 2000L
         val maxRetries = 3
+        Log.e("MYInterceptor", "url: ${request.url()} / attempt: $attempt")
 
         while (!response.isSuccessful && attempt < maxRetries) {
             Thread.sleep(delay)

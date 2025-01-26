@@ -42,6 +42,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.update
@@ -88,6 +89,23 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         searchInputHandler()
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(this)
+        lifecycleScope.launch {
+            sharedViewModel.sharedRouteDestinationCoordinates
+                .debounce(800)
+                .filterNotNull()
+                .distinctUntilChanged()
+                .collectLatest { destinationCoordinates ->
+                    val marker = viewModel.findMarkerByLatLng(
+                        destinationCoordinates.latitude,
+                        destinationCoordinates.longitude
+                    )
+                    Log.e("Markerer",marker.toString())
+                    if(marker!=null){
+                        marker.showInfoWindow()
+                        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(marker.position.latitude, marker.position.longitude), 15f))
+                    }
+                }
+        }
     }
 
     override fun buttonListeners() {
@@ -374,22 +392,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             )
         }
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            sharedViewModel.sharedRouteDestinationCoordinates
-                .debounce(800)
-                .filterNotNull()
-                .collectLatest { destinationCoordinates ->
-                    val marker = viewModel.findMarkerByLatLng(
-                        destinationCoordinates.latitude,
-                        destinationCoordinates.longitude
-                    )
-                    Log.e("Markerer",marker.toString())
-                    if(marker!=null){
-                        marker.showInfoWindow()
-                        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(marker.position.latitude, marker.position.longitude), 15f))
-                    }
-            }
-        }
+
 
 
         viewLifecycleOwner.lifecycleScope.launch {
