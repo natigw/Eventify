@@ -1,287 +1,290 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.ui.fragments.events.customEvent.CreateCustomEventFragment">
+    android:fillViewport="true">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineCreateCustomEvent1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="@dimen/eventify_guideline_left_mid" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.ui.fragments.events.customEvent.CreateCustomEventFragment">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineCreateCustomEvent2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="@dimen/eventify_guideline_right_mid" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineCreateCustomEvent4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.98" />
-
-    <Button
-        android:id="@+id/buttonBackCCE"
-        style="?attr/materialIconButtonFilledTonalStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="-16dp"
-        android:backgroundTint="@color/eventify_background_primary"
-        app:icon="@drawable/ic_back_arrow"
-        app:iconTint="@color/eventify_primary_helper"
-        app:iconSize="24dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textHeadingCreateCustomEvent"
-        app:layout_constraintStart_toStartOf="@id/guidelineCreateCustomEvent1"
-        app:layout_constraintTop_toTopOf="@id/textHeadingCreateCustomEvent" />
-
-    <TextView
-        android:id="@+id/textHeadingCreateCustomEvent"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/eventify_heading_margin_top"
-        android:fontFamily="@font/inter_bold"
-        android:text="@string/create_your_event"
-        android:textAlignment="center"
-        android:textColor="@color/eventify_heading"
-        android:textSize="@dimen/eventify_heading_text_font_size"
-        app:layout_constraintEnd_toEndOf="@+id/guidelineCreateCustomEvent2"
-        app:layout_constraintStart_toStartOf="@+id/guidelineCreateCustomEvent1"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/imagePictureCreateCustomEvent"
-        android:layout_width="180dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:adjustViewBounds="true"
-        android:scaleType="centerCrop"
-        android:src="@drawable/placeholder_event"
-        app:layout_constraintEnd_toEndOf="@id/guidelineCreateCustomEvent2"
-        app:layout_constraintStart_toStartOf="@id/guidelineCreateCustomEvent1"
-        app:layout_constraintTop_toBottomOf="@id/textHeadingCreateCustomEvent"
-        app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Medium" />
-
-    <ImageView
-        android:id="@+id/buttonAddPictureCreateCustomEvent"
-        android:layout_width="32dp"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:src="@drawable/ic_add"
-        app:layout_constraintBottom_toBottomOf="@id/imagePictureCreateCustomEvent"
-        app:layout_constraintEnd_toEndOf="@id/imagePictureCreateCustomEvent"
-        app:layout_constraintStart_toStartOf="@id/imagePictureCreateCustomEvent"
-        app:layout_constraintTop_toBottomOf="@id/imagePictureCreateCustomEvent"
-        app:tint="@color/eventify_primary" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayoutEventTitleCCE"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        app:boxCornerRadiusBottomEnd="@dimen/eventify_input_field_corner_radius"
-        app:boxCornerRadiusBottomStart="@dimen/eventify_input_field_corner_radius"
-        app:boxCornerRadiusTopEnd="@dimen/eventify_input_field_corner_radius"
-        app:boxCornerRadiusTopStart="@dimen/eventify_input_field_corner_radius"
-        app:boxStrokeColor="@color/input_field_stroke_color_primary"
-        app:boxStrokeWidth="1dp"
-        app:boxStrokeWidthFocused="2dp"
-        app:hintTextColor="@color/eventify_primary_helper"
-        app:cursorColor="@color/eventify_primary_helper"
-        app:layout_constraintStart_toStartOf="@id/guidelineCreateCustomEvent1"
-        app:layout_constraintEnd_toEndOf="@id/guidelineCreateCustomEvent2"
-        app:layout_constraintTop_toBottomOf="@id/imagePictureCreateCustomEvent">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textInputEdittextTitleCCE"
-            android:layout_width="match_parent"
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineCreateCustomEvent1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/inter_regular"
-            android:inputType="textPersonName"
-            android:hint="@string/title"
-            android:textSize="18sp" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="@dimen/eventify_guideline_left_mid" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayoutEventDescriptionCCE"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        app:boxCornerRadiusBottomEnd="@dimen/eventify_input_field_corner_radius"
-        app:boxCornerRadiusBottomStart="@dimen/eventify_input_field_corner_radius"
-        app:boxCornerRadiusTopEnd="@dimen/eventify_input_field_corner_radius"
-        app:boxCornerRadiusTopStart="@dimen/eventify_input_field_corner_radius"
-        app:boxStrokeColor="@color/input_field_stroke_color_primary"
-        app:boxStrokeWidth="1dp"
-        app:boxStrokeWidthFocused="2dp"
-        app:cursorColor="@color/eventify_primary_helper"
-        app:hintTextColor="@color/eventify_primary_helper"
-        app:layout_constraintStart_toStartOf="@id/guidelineCreateCustomEvent1"
-        app:layout_constraintEnd_toEndOf="@id/guidelineCreateCustomEvent2"
-        app:layout_constraintTop_toBottomOf="@id/textInputLayoutEventTitleCCE">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textInputEdittextDescriptionCCE"
-            android:layout_width="match_parent"
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineCreateCustomEvent2"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/inter_regular"
-            android:hint="@string/description"
-            android:inputType="textMultiLine"
-            android:textSize="18sp" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="@dimen/eventify_guideline_right_mid" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayoutEventTypeCCE"
-        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        app:boxStrokeColor="@color/input_field_stroke_color_primary"
-        app:boxStrokeWidth="1dp"
-        app:boxStrokeWidthFocused="2dp"
-        app:boxCornerRadiusTopStart="@dimen/eventify_input_field_corner_radius"
-        app:boxCornerRadiusTopEnd="@dimen/eventify_input_field_corner_radius"
-        app:boxCornerRadiusBottomStart="@dimen/eventify_input_field_corner_radius"
-        app:boxCornerRadiusBottomEnd="@dimen/eventify_input_field_corner_radius"
-        app:hintTextColor="@color/eventify_primary_helper"
-        app:cursorColor="@color/eventify_primary_helper"
-        app:layout_constraintStart_toStartOf="@+id/guidelineCreateCustomEvent1"
-        app:layout_constraintEnd_toEndOf="@id/guidelineCreateCustomEvent2"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEventDescriptionCCE">
-
-        <AutoCompleteTextView
-            android:id="@+id/autoCompleteTextEventType"
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/buttonBackCCE"
+            style="?attr/materialIconButtonFilledTonalStyle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/inter_regular"
-            android:hint="@string/event_type"
-            android:textSize="18sp"
-            android:inputType="none" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_marginStart="-16dp"
+            android:backgroundTint="@color/eventify_background_primary"
+            app:icon="@drawable/ic_back_arrow"
+            app:iconSize="24dp"
+            app:iconTint="@color/eventify_primary_helper"
+            app:layout_constraintBottom_toBottomOf="@+id/textHeadingCreateCustomEvent"
+            app:layout_constraintStart_toStartOf="@id/guidelineCreateCustomEvent1"
+            app:layout_constraintTop_toTopOf="@id/textHeadingCreateCustomEvent" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/buttonDatePickerCCE"
-        style="?attr/materialIconButtonFilledTonalStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginStart="-4dp"
-        android:backgroundTint="@color/eventify_primary"
-        android:fontFamily="@font/inter_bold"
-        android:minHeight="0dp"
-        android:paddingHorizontal="12dp"
-        android:paddingVertical="8dp"
-        android:text="@string/specify_event_date"
-        android:textColor="@color/eventify_on_primary"
-        app:cornerRadius="10dp"
-        app:icon="@drawable/ic_edit_calendar"
-        app:iconGravity="start"
-        app:iconPadding="8dp"
-        app:iconTint="@color/eventify_on_primary"
-        app:layout_constraintStart_toStartOf="@+id/guidelineCreateCustomEvent1"
-        app:layout_constraintTop_toBottomOf="@id/textInputLayoutEventTypeCCE" />
+        <TextView
+            android:id="@+id/textHeadingCreateCustomEvent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/eventify_heading_margin_top"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/create_your_event"
+            android:textAlignment="center"
+            android:textColor="@color/eventify_heading"
+            android:textSize="@dimen/eventify_heading_text_font_size"
+            app:layout_constraintEnd_toEndOf="@+id/guidelineCreateCustomEvent2"
+            app:layout_constraintStart_toStartOf="@+id/guidelineCreateCustomEvent1"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageErrorDateCCE"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_error"
-        android:visibility="invisible"
-        app:tint="@color/error"
-        app:layout_constraintBottom_toBottomOf="@+id/buttonDatePickerCCE"
-        app:layout_constraintStart_toEndOf="@+id/buttonDatePickerCCE"
-        app:layout_constraintTop_toTopOf="@+id/buttonDatePickerCCE" />
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imagePictureCreateCustomEvent"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/placeholder_event"
+            app:layout_constraintEnd_toEndOf="@id/guidelineCreateCustomEvent2"
+            app:layout_constraintStart_toStartOf="@id/guidelineCreateCustomEvent1"
+            app:layout_constraintTop_toBottomOf="@id/textHeadingCreateCustomEvent"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Medium" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/buttonTimePickerStartCCE"
-        style="?attr/materialIconButtonFilledTonalStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginStart="-4dp"
-        android:backgroundTint="@color/eventify_primary"
-        android:fontFamily="@font/inter_bold"
-        android:minHeight="0dp"
-        android:paddingHorizontal="12dp"
-        android:paddingVertical="8dp"
-        android:text="@string/specify_event_start_time"
-        android:textColor="@color/eventify_on_primary"
-        app:cornerRadius="10dp"
-        app:icon="@drawable/ic_time_start"
-        app:iconGravity="start"
-        app:iconPadding="8dp"
-        app:iconTint="@color/eventify_on_primary"
-        app:layout_constraintStart_toStartOf="@+id/guidelineCreateCustomEvent1"
-        app:layout_constraintTop_toBottomOf="@id/buttonDatePickerCCE" />
+        <ImageView
+            android:id="@+id/buttonAddPictureCreateCustomEvent"
+            android:layout_width="32dp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_add"
+            app:layout_constraintBottom_toBottomOf="@id/imagePictureCreateCustomEvent"
+            app:layout_constraintEnd_toEndOf="@id/imagePictureCreateCustomEvent"
+            app:layout_constraintStart_toStartOf="@id/imagePictureCreateCustomEvent"
+            app:layout_constraintTop_toBottomOf="@id/imagePictureCreateCustomEvent"
+            app:tint="@color/eventify_primary" />
 
-    <ImageView
-        android:id="@+id/imageErrorStartTimeCCE"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_error"
-        android:visibility="invisible"
-        app:tint="@color/error"
-        app:layout_constraintBottom_toBottomOf="@+id/buttonTimePickerStartCCE"
-        app:layout_constraintStart_toEndOf="@+id/buttonTimePickerStartCCE"
-        app:layout_constraintTop_toTopOf="@+id/buttonTimePickerStartCCE" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutEventTitleCCE"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            app:boxCornerRadiusBottomEnd="@dimen/eventify_input_field_corner_radius"
+            app:boxCornerRadiusBottomStart="@dimen/eventify_input_field_corner_radius"
+            app:boxCornerRadiusTopEnd="@dimen/eventify_input_field_corner_radius"
+            app:boxCornerRadiusTopStart="@dimen/eventify_input_field_corner_radius"
+            app:boxStrokeColor="@color/input_field_stroke_color_primary"
+            app:boxStrokeWidth="1dp"
+            app:boxStrokeWidthFocused="2dp"
+            app:cursorColor="@color/eventify_primary_helper"
+            app:hintTextColor="@color/eventify_primary_helper"
+            app:layout_constraintEnd_toEndOf="@id/guidelineCreateCustomEvent2"
+            app:layout_constraintStart_toStartOf="@id/guidelineCreateCustomEvent1"
+            app:layout_constraintTop_toBottomOf="@id/imagePictureCreateCustomEvent">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/buttonTimePickerFinishCCE"
-        style="?attr/materialIconButtonFilledTonalStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginStart="-4dp"
-        android:backgroundTint="@color/eventify_primary"
-        android:fontFamily="@font/inter_bold"
-        android:minHeight="0dp"
-        android:paddingHorizontal="12dp"
-        android:paddingVertical="8dp"
-        android:text="@string/specify_event_finish_time"
-        android:textColor="@color/eventify_on_primary"
-        app:cornerRadius="10dp"
-        app:icon="@drawable/ic_time_finish"
-        app:iconGravity="start"
-        app:iconPadding="8dp"
-        app:iconTint="@color/eventify_on_primary"
-        app:layout_constraintStart_toStartOf="@+id/guidelineCreateCustomEvent1"
-        app:layout_constraintTop_toBottomOf="@id/buttonTimePickerStartCCE" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textInputEdittextTitleCCE"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_regular"
+                android:hint="@string/title"
+                android:inputType="textPersonName"
+                android:textSize="18sp" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <ImageView
-        android:id="@+id/imageErrorFinishTimeCCE"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_error"
-        android:visibility="invisible"
-        app:tint="@color/error"
-        app:layout_constraintBottom_toBottomOf="@+id/buttonTimePickerFinishCCE"
-        app:layout_constraintStart_toEndOf="@+id/buttonTimePickerFinishCCE"
-        app:layout_constraintTop_toTopOf="@+id/buttonTimePickerFinishCCE" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutEventDescriptionCCE"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:boxCornerRadiusBottomEnd="@dimen/eventify_input_field_corner_radius"
+            app:boxCornerRadiusBottomStart="@dimen/eventify_input_field_corner_radius"
+            app:boxCornerRadiusTopEnd="@dimen/eventify_input_field_corner_radius"
+            app:boxCornerRadiusTopStart="@dimen/eventify_input_field_corner_radius"
+            app:boxStrokeColor="@color/input_field_stroke_color_primary"
+            app:boxStrokeWidth="1dp"
+            app:boxStrokeWidthFocused="2dp"
+            app:cursorColor="@color/eventify_primary_helper"
+            app:hintTextColor="@color/eventify_primary_helper"
+            app:layout_constraintEnd_toEndOf="@id/guidelineCreateCustomEvent2"
+            app:layout_constraintStart_toStartOf="@id/guidelineCreateCustomEvent1"
+            app:layout_constraintTop_toBottomOf="@id/textInputLayoutEventTitleCCE">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/buttonCreateCCE"
-        style="?attr/materialIconButtonFilledTonalStyle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/eventify_secondary"
-        android:fontFamily="@font/inter_bold"
-        android:text="@string/create_event"
-        android:textColor="@color/eventify_on_primary"
-        android:textSize="22sp"
-        app:cornerRadius="@dimen/eventify_large_button_corner_radius"
-        app:icon="@drawable/ic_success"
-        app:iconGravity="textStart"
-        app:iconPadding="8dp"
-        app:iconSize="22dp"
-        app:iconTint="@color/eventify_on_primary"
-        app:layout_constraintBottom_toBottomOf="@id/guidelineCreateCustomEvent4"
-        app:layout_constraintEnd_toEndOf="@id/guidelineCreateCustomEvent2"
-        app:layout_constraintStart_toStartOf="@id/guidelineCreateCustomEvent1" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textInputEdittextDescriptionCCE"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_regular"
+                android:hint="@string/description"
+                android:inputType="textMultiLine"
+                android:textSize="18sp" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutEventTypeCCE"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:boxCornerRadiusBottomEnd="@dimen/eventify_input_field_corner_radius"
+            app:boxCornerRadiusBottomStart="@dimen/eventify_input_field_corner_radius"
+            app:boxCornerRadiusTopEnd="@dimen/eventify_input_field_corner_radius"
+            app:boxCornerRadiusTopStart="@dimen/eventify_input_field_corner_radius"
+            app:boxStrokeColor="@color/input_field_stroke_color_primary"
+            app:boxStrokeWidth="1dp"
+            app:boxStrokeWidthFocused="2dp"
+            app:cursorColor="@color/eventify_primary_helper"
+            app:hintTextColor="@color/eventify_primary_helper"
+            app:layout_constraintEnd_toEndOf="@id/guidelineCreateCustomEvent2"
+            app:layout_constraintStart_toStartOf="@+id/guidelineCreateCustomEvent1"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEventDescriptionCCE">
+
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextEventType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_regular"
+                android:hint="@string/event_type"
+                android:inputType="none"
+                android:textSize="18sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonDatePickerCCE"
+            style="?attr/materialIconButtonFilledTonalStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="-4dp"
+            android:layout_marginTop="12dp"
+            android:backgroundTint="@color/eventify_primary"
+            android:fontFamily="@font/inter_bold"
+            android:minHeight="0dp"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="8dp"
+            android:text="@string/specify_event_date"
+            android:textColor="@color/eventify_on_primary"
+            app:cornerRadius="10dp"
+            app:icon="@drawable/ic_edit_calendar"
+            app:iconGravity="start"
+            app:iconPadding="8dp"
+            app:iconTint="@color/eventify_on_primary"
+            app:layout_constraintStart_toStartOf="@+id/guidelineCreateCustomEvent1"
+            app:layout_constraintTop_toBottomOf="@id/textInputLayoutEventTypeCCE" />
+
+        <ImageView
+            android:id="@+id/imageErrorDateCCE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_error"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/buttonDatePickerCCE"
+            app:layout_constraintStart_toEndOf="@+id/buttonDatePickerCCE"
+            app:layout_constraintTop_toTopOf="@+id/buttonDatePickerCCE"
+            app:tint="@color/error" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonTimePickerStartCCE"
+            style="?attr/materialIconButtonFilledTonalStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="-4dp"
+            android:layout_marginTop="4dp"
+            android:backgroundTint="@color/eventify_primary"
+            android:fontFamily="@font/inter_bold"
+            android:minHeight="0dp"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="8dp"
+            android:text="@string/specify_event_start_time"
+            android:textColor="@color/eventify_on_primary"
+            app:cornerRadius="10dp"
+            app:icon="@drawable/ic_time_start"
+            app:iconGravity="start"
+            app:iconPadding="8dp"
+            app:iconTint="@color/eventify_on_primary"
+            app:layout_constraintStart_toStartOf="@+id/guidelineCreateCustomEvent1"
+            app:layout_constraintTop_toBottomOf="@id/buttonDatePickerCCE" />
+
+        <ImageView
+            android:id="@+id/imageErrorStartTimeCCE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_error"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/buttonTimePickerStartCCE"
+            app:layout_constraintStart_toEndOf="@+id/buttonTimePickerStartCCE"
+            app:layout_constraintTop_toTopOf="@+id/buttonTimePickerStartCCE"
+            app:tint="@color/error" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonTimePickerFinishCCE"
+            style="?attr/materialIconButtonFilledTonalStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="-4dp"
+            android:layout_marginTop="4dp"
+            android:backgroundTint="@color/eventify_primary"
+            android:fontFamily="@font/inter_bold"
+            android:minHeight="0dp"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="8dp"
+            android:text="@string/specify_event_finish_time"
+            android:textColor="@color/eventify_on_primary"
+            app:cornerRadius="10dp"
+            app:icon="@drawable/ic_time_finish"
+            app:iconGravity="start"
+            app:iconPadding="8dp"
+            app:iconTint="@color/eventify_on_primary"
+            app:layout_constraintStart_toStartOf="@+id/guidelineCreateCustomEvent1"
+            app:layout_constraintTop_toBottomOf="@id/buttonTimePickerStartCCE" />
+
+        <ImageView
+            android:id="@+id/imageErrorFinishTimeCCE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_error"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/buttonTimePickerFinishCCE"
+            app:layout_constraintStart_toEndOf="@+id/buttonTimePickerFinishCCE"
+            app:layout_constraintTop_toTopOf="@+id/buttonTimePickerFinishCCE"
+            app:tint="@color/error" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonCreateCCE"
+            style="?attr/materialIconButtonFilledTonalStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/eventify_secondary"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/create_event"
+            android:textColor="@color/eventify_on_primary"
+            android:textSize="22sp"
+            app:cornerRadius="@dimen/eventify_large_button_corner_radius"
+            app:icon="@drawable/ic_success"
+            app:iconGravity="textStart"
+            app:iconPadding="8dp"
+            app:iconSize="22dp"
+            app:iconTint="@color/eventify_on_primary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guidelineCreateCustomEvent2"
+            app:layout_constraintStart_toStartOf="@id/guidelineCreateCustomEvent1"
+            app:layout_constraintTop_toBottomOf="@+id/buttonTimePickerFinishCCE"
+            app:layout_constraintVertical_bias="1.0" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

@@ -212,11 +212,10 @@
             android:id="@+id/buttonRegister"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
             android:layout_marginBottom="32dp"
-            android:enabled="false"
             android:allowClickWhenDisabled="true"
             android:backgroundTint="@color/register"
+            android:enabled="false"
             android:fontFamily="@font/inter_bold"
             android:minHeight="60dp"
             android:text="@string/register"
@@ -224,7 +223,9 @@
             app:cornerRadius="@dimen/eventify_large_button_corner_radius"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/guidelineRegister2"
-            app:layout_constraintStart_toStartOf="@+id/guidelineRegister1" />
+            app:layout_constraintStart_toStartOf="@+id/guidelineRegister1"
+            app:layout_constraintTop_toBottomOf="@+id/checkboxTermsRegister"
+            app:layout_constraintVertical_bias="1.0" />
 
         <ProgressBar
             android:id="@+id/progressBarRegister"
