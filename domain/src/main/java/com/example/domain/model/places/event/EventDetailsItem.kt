@@ -6,7 +6,7 @@ data class EventDetailsItem (
     val eventId: Int,
     val title: String,
     val description: String,
-    val imageLinks: List<Any>, //TODO string et
+    val imageLink: String,
     val eventType: String,
     val organizer: String,
     val publishingDate: String,

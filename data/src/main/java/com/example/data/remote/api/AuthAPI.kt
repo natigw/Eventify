@@ -1,20 +1,19 @@
 package com.example.data.remote.api
 
-import com.example.data.remote.model.register.RequestUserRegistration
-import com.example.data.remote.model.register.ResponseGetUserData
-import com.example.data.remote.model.register.ResponseUserRegistration
-import com.example.domain.model.auth.RequestResendVerification
-import com.example.data.remote.model.userToken.RequestResetPassword
-import com.example.data.remote.model.userToken.ResponseSuccessfulUserToken
-import com.example.data.remote.model.userToken.ResponseVerifyToken
+import com.example.data.remote.model.auth.register.RequestUserRegistration
+import com.example.data.remote.model.auth.register.ResponseGetUserData
+import com.example.data.remote.model.auth.register.ResponseUserRegistration
+import com.example.data.remote.model.auth.userToken.RequestResetPassword
+import com.example.data.remote.model.auth.userToken.ResponseSuccessfulUserToken
+import com.example.data.remote.model.auth.userToken.ResponseVerifyToken
 import com.example.data.remote.thirdpartyregister.RequestSignInWithGoogle
+import com.example.domain.model.auth.RequestResendVerification
 import com.example.domain.model.auth.SuccessfulUserTokenItem
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
-import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.Query
 
@@ -37,7 +36,7 @@ interface AuthAPI {
         @Field("client_secret") clientSecret: String? = null
     ): Response<ResponseSuccessfulUserToken>
 
-    @POST("/auth/token/refresh") // qardasimsan bu niye postdu
+    @POST("/auth/token/refresh")
     suspend fun refreshAccessToken(
         @Query("refresh_token") refreshToken : String
     ) : Response<ResponseSuccessfulUserToken>

@@ -55,7 +55,7 @@ class VenueRepositoryImpl @Inject constructor(
                         venueId = rawData.id,
                         title = rawData.name,
                         description = rawData.description,
-                        imageLinks = listOf(rawData.image1Link, rawData.image2Link, rawData.image3Link),
+                        imageLink = rawData.image1Link,
                         venueType = rawData.venueType.replace('_', ' ').replaceFirstChar { it.uppercaseChar() },
                         openHours = if (rawData.workHoursOpen.substring(0, 5) == rawData.workHoursClose.substring(0, 5)) "24 hours open" else "${rawData.workHoursOpen.substring(0, 5)} - ${rawData.workHoursClose.substring(0, 5)}",
                         likeCount = rawData.numLikes,
@@ -118,7 +118,7 @@ class VenueRepositoryImpl @Inject constructor(
 //        token: String,
 //        requestDeleteVenueComment: RequestDeleteVenueComment
 //    ) {
-//        TODO("Not yet implemented")
+//
 //    }
 
     override suspend fun likeVenue(venueId: Int) {

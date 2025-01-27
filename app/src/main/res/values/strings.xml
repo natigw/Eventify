@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name" translatable="false">Eventify</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="get_started">Get started</string>
     <string name="welcome_to">Welcome to</string>
     <string name="finish">Finish</string>
@@ -45,7 +43,7 @@
     <string name="share_invite_link">Share your invite link*</string>
     <string name="copy_link">Copy link</string>
     <string name="share">Share</string>
-    <string name="type_your_message">Type your message...</string>
+    <string name="type_your_message">Type your message…</string>
     <string name="read_more">Read more</string>
     <string name="read_less">Read less</string>
     <string name="venue_type_colon">Venue type:</string>
@@ -96,7 +94,7 @@
     <string name="something_went_wrong">Something went wrong!</string>
     <string name="something_went_wrong_colon">Something went wrong: </string>
     <string name="error_request">Something went wrong. Try again later.</string>
-    <string name="add_comment">Add a comment...</string>
+    <string name="add_comment">Add a comment…</string>
     <string name="comments">comments</string>
     <string name="all_details">all details</string>
     <string name="venue_details_colon">Venue details:</string>
@@ -139,7 +137,6 @@
     </string-array>
     <string name="navigating_help_page">[navigating to help page]</string>
     <string name="navigating_payment_screen">[navigating payment screen]</string>
-    <string name="navigating_buy_ticket">[buying ticket...]</string>
     <string name="type_main_text_first">Type main text first!</string>
     <string name="password_should_contain_lowercase">Password should contain lowercase letter(s)!</string>
     <string name="password_should_contain_uppercase">Password should contain uppercase letter(s)!</string>
@@ -210,5 +207,6 @@
     <string name="referral_congrats_2">\ event. Please check your ticket box!</string>
     <string name="you_are_here">You are here</string>
     <string name="no_apps_to_open_maps">No app found to open maps.</string>
-    <string name="comment_pending">Pending...</string>
+    <string name="comment_pending">Pending…</string>
+    <string name="unable_to_open_link">Unable to open the link.</string>
 </resources>

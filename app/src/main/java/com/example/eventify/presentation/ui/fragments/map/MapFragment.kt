@@ -2,14 +2,12 @@ package com.example.eventify.presentation.ui.fragments.map
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.inputmethod.EditorInfo
-import android.view.inputmethod.InputMethodManager
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.constraintlayout.motion.widget.MotionLayout
@@ -40,7 +38,6 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
-import com.google.android.play.integrity.internal.s
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.collectLatest
@@ -484,7 +481,6 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 //
 //        editProfileDrawer.setOnClickListener {
 //        nancyToastSuccess(requireContext(), getString(R.string.edit))
-//            //TODO -> edit screen
 //        }
 //
 //        navigationView.setNavigationItemSelectedListener { menuItem ->
@@ -507,19 +503,16 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 //                R.id.drawer_tickets -> {
 //                    drawerLayout.closeDrawer(GravityCompat.START)
 //                    //findNavController().navigate(R.id.)
-//                    //TODO -> current tickets
 //                    true
 //                }
 //                R.id.drawer_payment_history -> {
 //                    drawerLayout.closeDrawer(GravityCompat.START)
 //                    //findNavController().navigate(R.id.)
-//                    //TODO -> all previous payments and active tickets
 //                    true
 //                }
 //                R.id.drawer_settings -> {
 //                    drawerLayout.closeDrawer(GravityCompat.START)
 //                    //findNavController().navigate(R.id.)
-//                    //TODO -> profile info and edit screen
 //                    true
 //                }
 //                R.id.drawer_logout -> {

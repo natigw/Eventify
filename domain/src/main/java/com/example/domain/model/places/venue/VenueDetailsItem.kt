@@ -6,7 +6,7 @@ data class VenueDetailsItem (
     val venueId: Int,
     val title: String,
     val description: String,
-    val imageLinks: List<Any>, //TODO string et
+    val imageLink: String,
     val venueType: String,
     val openHours: String,
     val likeCount: Int,

@@ -3,11 +3,11 @@ package com.example.eventify.presentation.adapters
 import com.example.common.base.BaseAdapter
 import com.example.domain.model.places.SearchItem
 import com.example.eventify.R
-import com.example.eventify.databinding.SearchItemBinding
+import com.example.eventify.databinding.SampleSearchBinding
 
 class MapSearchAdapter(
     val onClick: (SearchItem) -> Unit
-) : BaseAdapter<SearchItemBinding>(SearchItemBinding::inflate) {
+) : BaseAdapter<SampleSearchBinding>(SampleSearchBinding::inflate) {
 
     private var searchItems = listOf<SearchItem>()
 
@@ -15,7 +15,7 @@ class MapSearchAdapter(
         return searchItems.size
     }
 
-    override fun onBindLight(binding: SearchItemBinding, position: Int) {
+    override fun onBindLight(binding: SampleSearchBinding, position: Int) {
 
         val currentItem = searchItems[position]
 

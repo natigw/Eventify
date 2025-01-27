@@ -16,7 +16,6 @@ class EventViewModel @Inject constructor(
 ) : ViewModel() {
 
     val events = MutableStateFlow<List<EventItem>?>(null)
-    val eventLikeList = mutableListOf<Int>()
 
     init {
         getEvents()

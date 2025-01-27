@@ -2,8 +2,8 @@ package com.example.data.remote.repository
 
 import android.util.Log
 import com.example.data.remote.api.AuthAPI
-import com.example.data.remote.model.register.RequestUserRegistration
-import com.example.data.remote.model.userToken.RequestResetPassword
+import com.example.data.remote.model.auth.register.RequestUserRegistration
+import com.example.data.remote.model.auth.userToken.RequestResetPassword
 import com.example.data.remote.thirdpartyregister.RequestSignInWithGoogle
 import com.example.domain.model.auth.RequestResendVerification
 import com.example.domain.model.auth.SuccessfulUserTokenItem

@@ -39,7 +39,7 @@
         android:layout_marginTop="@dimen/eventify_bottomsheet_heading_margin_top"
         android:fontFamily="@font/inter_bold"
         android:textAlignment="center"
-        android:textColor="@color/purple_dark_eventify"
+        android:textColor="@color/eventify_heading"
         android:textSize="@dimen/eventify_heading_text_font_size_small"
         app:layout_constraintEnd_toEndOf="@+id/guidelineMarkerDetails2"
         app:layout_constraintStart_toStartOf="@+id/guidelineMarkerDetails1"

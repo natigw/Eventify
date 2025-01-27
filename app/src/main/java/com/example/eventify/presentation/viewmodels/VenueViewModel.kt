@@ -1,6 +1,5 @@
 package com.example.eventify.presentation.viewmodels
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.model.places.venue.VenueItem
@@ -8,7 +7,6 @@ import com.example.domain.repository.VenueRepository
 import com.example.eventify.NetworkUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -36,9 +34,9 @@ class VenueViewModel @Inject constructor(
         }
     }
 
-    fun likeVenue(venueId: Int) {
-        viewModelScope.launch {
+//    fun likeVenue(venueId: Int) {
+//        viewModelScope.launch {
 //            venueRepository.
-        }
-    }
+//        }
+//    }
 }

@@ -16,7 +16,6 @@ class UserEventsViewModel @Inject constructor(
 ) : ViewModel() {
 
     val userEvents = MutableStateFlow<List<EventItem>?>(null)
-    val customEvents = MutableStateFlow<List<EventItem>?>(null)
 
     init {
         getUserEvents()

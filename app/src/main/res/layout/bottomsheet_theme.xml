@@ -39,7 +39,7 @@
         android:layout_marginTop="@dimen/eventify_bottomsheet_heading_margin_top"
         android:fontFamily="@font/inter_bold"
         android:text="@string/choose_theme"
-        android:textColor="@color/purple_dark_eventify"
+        android:textColor="@color/eventify_main_text"
         android:textSize="@dimen/eventify_heading_text_font_size"
         app:layout_constraintStart_toStartOf="@+id/guidelineThemeBSh1"
         app:layout_constraintTop_toBottomOf="@+id/imageDrawerElementThemeBSh" />

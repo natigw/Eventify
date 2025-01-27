@@ -3,21 +3,18 @@ package com.example.eventify.presentation.ui.fragments.map
 import android.content.Intent
 import android.net.Uri
 import android.view.View
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.common.base.BaseBottomSheetFragment
-import com.example.common.utils.nancyToastInfo
 import com.example.common.utils.nancyToastWarning
 import com.example.domain.model.places.event.EventDetailsItem
 import com.example.domain.model.places.venue.VenueDetailsItem
 import com.example.eventify.R
 import com.example.eventify.databinding.BottomsheetMarkerDetailsBinding
 import com.example.eventify.presentation.viewmodels.MarkerDetailsViewModel
-import com.example.eventify.presentation.viewmodels.SharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.filter
@@ -27,7 +24,6 @@ import kotlinx.coroutines.launch
 class MarkerDetailsBottomSheet : BaseBottomSheetFragment<BottomsheetMarkerDetailsBinding>(BottomsheetMarkerDetailsBinding::inflate) {
 
     private val viewModel by viewModels<MarkerDetailsViewModel>()
-    private val sharedViewModel by activityViewModels<SharedViewModel>()
 
     private val args by navArgs<MarkerDetailsBottomSheetArgs>()
 
@@ -91,14 +87,26 @@ class MarkerDetailsBottomSheet : BaseBottomSheetFragment<BottomsheetMarkerDetail
             ratingBarMarkerDetails.rating = eventDetails.rating.toFloat()
             textVenueLikeCountMarkerDetails.text = eventDetails.likeCount.toString()
             Glide.with(imageVenueMarkerDetails)
-                .load(eventDetails.imageLinks[0]) //TODO -> bunu multiple image et instagram kimi
+                .load(eventDetails.imageLink)
                 .placeholder(R.drawable.placeholder_venue)
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(imageVenueMarkerDetails)
             buttonBuyTicketMarkerDetails.visibility = View.VISIBLE
             buttonShortestRouteMarkerDetails.text = getString(R.string.get_route)
             buttonBuyTicketMarkerDetails.setOnClickListener {
-                nancyToastInfo(requireContext(), "navigating to iticket.az") //TODO -> bunu browserde acilan et
+                lifecycleScope.launch {
+                    try {
+                        val response = viewModel.getSearchDetails(eventDetails.title)
+                        val url = "https://iticket.az/events/${response.category}/${response.slug}"
+                        val intent = Intent(Intent.ACTION_VIEW).apply {
+                            data = Uri.parse(url)
+                        }
+                        startActivity(intent)
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                        nancyToastWarning(requireContext(), getString(R.string.unable_to_open_link))
+                    }
+                }
             }
         }
     }
@@ -112,7 +120,7 @@ class MarkerDetailsBottomSheet : BaseBottomSheetFragment<BottomsheetMarkerDetail
             ratingBarMarkerDetails.rating = venueDetails.rating.toFloat()
             textVenueLikeCountMarkerDetails.text = venueDetails.likeCount.toString()
             Glide.with(imageVenueMarkerDetails)
-                .load(venueDetails.imageLinks[0]) //TODO -> bunu multiple image et instagram kimi
+                .load(venueDetails.imageLink)
                 .placeholder(R.drawable.placeholder_venue)
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(imageVenueMarkerDetails)

@@ -5,7 +5,6 @@ import com.example.common.utils.functions.dateFormatter_RemoveDashes_YMDtoDMY
 import com.example.common.utils.functions.randomDouble
 import com.example.data.remote.api.EventAPI
 import com.example.data.remote.model.events.comment.addComment.RequestAddEventComment
-import com.example.data.remote.model.events.createEvent.RequestCreateCustomEvent
 import com.example.data.remote.model.events.likeDislike.RequestLikeDislikeEvent
 import com.example.domain.model.places.AddCommentItem
 import com.example.domain.model.places.CommentItem
@@ -14,15 +13,10 @@ import com.example.domain.model.places.SearchItem
 import com.example.domain.model.places.event.CreateCustomEventRequestItem
 import com.example.domain.model.places.event.EventDetailsItem
 import com.example.domain.model.places.event.EventItem
-import com.example.domain.model.places.event.FavEventItem
-import com.example.domain.model.places.event.SearchEventItem
 import com.example.domain.repository.EventRepository
 import com.google.android.gms.maps.model.LatLng
-import retrofit2.http.Query
 import java.time.Instant
 import javax.inject.Inject
-import kotlin.math.ln
-import kotlin.math.truncate
 
 class EventRepositoryImpl @Inject constructor(
     private val api: EventAPI
@@ -38,7 +32,7 @@ class EventRepositoryImpl @Inject constructor(
 
             if (response.isSuccessful && response.body() != null) {
                 response.body()!!.let { events->
-                    responseLiked.body()!!.let { favs->
+                    responseLiked.body()!!.let { favorites->
                         return events.map{ event->
                             EventItem(
                                 eventId = event.id,
@@ -47,7 +41,7 @@ class EventRepositoryImpl @Inject constructor(
                                 eventDateTime = if (event.start.substring(0, 5) == event.finish.substring(0, 5)) "${dateFormatter_RemoveDashes_YMDtoDMY(event.date.substring(0, 10))} • all the day" else "${dateFormatter_RemoveDashes_YMDtoDMY(event.date.substring(0, 10))} • ${event.start.substring(0, 5)}-${event.finish.substring(0, 5)}",
                                 lat = event.lat.toDouble(),
                                 lng = event.lng.toDouble(),
-                                isLiked = favs.contains(event.id)
+                                isLiked = favorites.contains(event.id)
                             )
                         }
                     }
@@ -71,9 +65,9 @@ class EventRepositoryImpl @Inject constructor(
                         eventId = rawData.event.id,
                         title = rawData.event.title,
                         description = rawData.event.description,
-                        imageLinks = listOf(rawData.event.posterImageLink),
+                        imageLink = rawData.event.posterImageLink,
                         eventType = rawData.event.eventType.replace('_', ' ').replaceFirstChar { it.uppercaseChar() },
-                        organizer = if (rawData.event.organizerId == 1) "Eventify Group" else "Organizer${rawData.event.organizerId}", //TODO -> backend
+                        organizer = if (rawData.event.organizerId == 1) "not specified" else "OrganizerId:${rawData.event.organizerId}",
                         eventDate = rawData.event.date.substring(0, 10),
                         publishingDate = "${rawData.event.createdAt.substring(0, 10)}, ${rawData.event.createdAt.substring(12)}",
                         eventDurationHours = if (rawData.event.start.substring(0, 5) == rawData.event.finish.substring(0, 5)) "all the day" else "${rawData.event.start.substring(0, 5)} - ${rawData.event.finish.substring(0, 5)}",
@@ -93,6 +87,7 @@ class EventRepositoryImpl @Inject constructor(
 
     override suspend fun createCustomEvent(requestCreateEvent: CreateCustomEventRequestItem) {
         try {
+//            if (successful..)
 //            api.createCustomEvent(
 //                RequestCreateCustomEvent(
 //                    title = requestCreateEvent.title,
@@ -109,7 +104,6 @@ class EventRepositoryImpl @Inject constructor(
         } catch (e: Exception) {
             e.printStackTrace()
         }
-        //TODO -> successful olub olmadigini check ele
     }
 
     override suspend fun getEventComments(eventId: Int): List<CommentItem> {
@@ -150,7 +144,6 @@ class EventRepositoryImpl @Inject constructor(
             e.printStackTrace()
             false
         }
-        //TODO -> successful olub olmadigini check ele
     }
 
     override suspend fun getFavEvents(): List<FavoriteItem> {

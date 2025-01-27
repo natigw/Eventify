@@ -51,7 +51,7 @@
         app:layout_constraintTop_toTopOf="@+id/guidelineVerification3"
         app:lottie_autoPlay="true"
         app:lottie_loop="false"
-        app:lottie_rawRes="@raw/last_try" />
+        app:lottie_rawRes="@raw/animation_verification_envelope" />
 
     <TextView
         android:id="@+id/textCheckInboxTEXT"

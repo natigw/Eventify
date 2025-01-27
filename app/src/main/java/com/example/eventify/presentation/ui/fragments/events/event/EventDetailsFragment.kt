@@ -1,5 +1,7 @@
 package com.example.eventify.presentation.ui.fragments.events.event
 
+import android.content.Intent
+import android.net.Uri
 import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
@@ -17,6 +19,7 @@ import com.example.common.utils.functions.getInstantTime
 import com.example.common.utils.hideKeyboard
 import com.example.common.utils.functions.validateInputFieldEmpty
 import com.example.common.utils.nancyToastSuccess
+import com.example.common.utils.nancyToastWarning
 import com.example.common.utils.navigateWithAnimationFade
 import com.example.common.utils.startShimmer
 import com.example.common.utils.stopShimmer
@@ -195,7 +198,7 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
             textEventDurationHours.text = eventDetailsItem.eventDurationHours
             textEventLikeCount.text = String.format(eventDetailsItem.likeCount.toString())
             Glide.with(imageEvent)
-                .load(eventDetailsItem.imageLinks[0])
+                .load(eventDetailsItem.imageLink)
                 .placeholder(R.drawable.placeholder_event)
                 .error(R.drawable.placeholder_event)
                 .transition(DrawableTransitionOptions.withCrossFade())
@@ -234,8 +237,23 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
             }
 
             buttonBuyTicketEventDetails.setOnClickListener {
-                nancyToastSuccess(requireContext(), getString(R.string.navigating_buy_ticket))
-                //TODO -> backendden
+                lifecycleScope.launch {
+                    viewmodel.eventDetails
+                        .filterNotNull()
+                        .collectLatest {
+                            try {
+                                val response = viewmodel.getSearchDetails(it.title)
+                                val url = "https://iticket.az/events/${response.category}/${response.slug}"
+                                val intent = Intent(Intent.ACTION_VIEW).apply {
+                                    data = Uri.parse(url)
+                                }
+                                startActivity(intent)
+                            } catch (e: Exception) {
+                                e.printStackTrace()
+                                nancyToastWarning(requireContext(), getString(R.string.unable_to_open_link))
+                            }
+                    }
+                }
             }
         }
     }
@@ -275,7 +293,6 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
                     commentAdapter.updateComment()
                     viewmodel.isCommentAdded.update { false }
                 }
-                //TODO -> venue detailsde viewmodel.isCommentAdded.update { false } bu burdadi  -> bax gor hansi sehvdi
             }
         }
 

@@ -1,5 +1,6 @@
 package com.example.eventify.presentation.ui.fragments.venue
 
+import android.util.Log
 import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
@@ -14,8 +15,8 @@ import com.example.common.base.BaseFragment
 import com.example.common.utils.crossfadeAppear
 import com.example.common.utils.functions.dateFormatterIFYEAR_MNAMED_Comma_HM
 import com.example.common.utils.functions.getInstantTime
-import com.example.common.utils.hideKeyboard
 import com.example.common.utils.functions.validateInputFieldEmpty
+import com.example.common.utils.hideKeyboard
 import com.example.common.utils.navigateWithAnimationFade
 import com.example.common.utils.startShimmer
 import com.example.common.utils.stopShimmer
@@ -161,7 +162,7 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
             textVenueOpenHours.text = venueDetailsItem.openHours
             textVenueLikeCount.text = venueDetailsItem.likeCount.toString()
             Glide.with(imageVenue)
-                .load(venueDetailsItem.imageLinks[0])
+                .load(venueDetailsItem.imageLink[0])
                 .placeholder(R.drawable.placeholder_venue)
                 .error(R.drawable.placeholder_venue)
                 .transition(DrawableTransitionOptions.withCrossFade())
@@ -189,12 +190,14 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
 
             buttonVenueShowLocation.setOnClickListener {
                 viewLifecycleOwner.lifecycleScope.launch {
+                    Log.e("turalin logu", "salam", )
                     sharedViewModel.setCoordinates(
                         LatLng(
                             venueDetailsItem.coordinates.latitude,
                             venueDetailsItem.coordinates.longitude
                         )
                     )
+                    Log.e("turalin logu", venueDetailsItem.coordinates.longitude.toString())
                 }
                 val bottomNavigationView = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
                 bottomNavigationView.selectedItemId = R.id.mapFragment
@@ -240,8 +243,8 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
                 .collectLatest {
                     if(it){
                         commentAdapter.updateComment()
+                        viewmodel.isCommentAdded.update { false }
                     }
-                    viewmodel.isCommentAdded.update { false }
                 }
         }
 

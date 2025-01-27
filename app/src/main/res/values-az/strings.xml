@@ -2,7 +2,6 @@
 <resources>
     <string name="get_started">Başlayaq</string>
     <string name="welcome_to">Xoş gəlmisiniz</string>
-    <string name="hello_blank_fragment">Salam boş fragment</string>
     <string name="finish">Bitir</string>
     <string name="login_unsuccessful">Giriş uğursuzdur</string>
     <string name="logout_successful">Çıxış uğurludur!</string>
@@ -41,7 +40,7 @@
     <string name="share_invite_link">Dəvət linkini paylaşın</string>
     <string name="copy_link">Linki kopyala</string>
     <string name="share">Paylaş</string>
-    <string name="type_your_message">Mesaj yazın...</string>
+    <string name="type_your_message">Mesaj yazın…</string>
     <string name="read_more">Daha çox</string>
     <string name="read_less">Daha az</string>
     <string name="venue_type_colon">Məkanın tipi:</string>
@@ -82,7 +81,7 @@
     <string name="subscription">Abunəlik</string>
     <string name="something_went_wrong_colon">"Nəsə yanlışlıq oldu: "</string>
     <string name="error_request">Vayy! Nəsə yanlışlıq oldu, yenidən cəhd edin!</string>
-    <string name="add_comment">Şərh əlavə edin...</string>
+    <string name="add_comment">Şərh əlavə edin…</string>
     <string name="comments">şərhlər</string>
     <string name="all_details">bütün detallar</string>
     <string name="venue_details_colon">Məkan detalları:</string>
@@ -142,14 +141,13 @@
     <string name="custom_event_creation_successful">İstifadəçi tədbiri uğurla yaradıldı!</string>
     <string name="custom_event_sent_for_review">İstifadəçi tədbiri baxış üçün redaksiyaya yönləndirildi!</string>
     <string name="no_image_selected">Heç bir şəkil seçilməyib!</string>
-    <string name="upload_failed_colon">"Yüləmə uğursuzdur: "</string>
+    <string name="upload_failed_colon">"Yükləmə uğursuzdur: "</string>
     <string name="image_upload_successful_colon">"Şəkil uğurla yükləndi: "</string>
     <string name="error_fetching_route">Marşrut yüklənə bilmədi!</string>
     <string name="location_permission_denied">Məkan icazəsi verilməyib!</string>
     <string name="enable_location_service">Zəhmət olmasa məkan servisini aktivləşdirin!</string>
     <string name="navigating_help_page">kömək səhifəsinə yönləndirilir</string>
     <string name="navigating_payment_screen">ödəniş səhifəsinə yönləndirilir</string>
-    <string name="navigating_buy_ticket">bilet al səhifəsinə yönləndirilir</string>
     <string name="please_enter_username">İstifadəçi adınızı daxil edin!</string>
     <string name="please_enter_password">Şifrənizi daxil edin!</string>
     <string name="verify_email">Hesabınızı təsdiqləyin!</string>
@@ -194,10 +192,11 @@
     <string name="got_it">Oldu</string>
     <string name="you_are_here">Siz buradasınız</string>
     <string name="no_apps_to_open_maps">Xəritəni açmaq üçün tətbiq tapılmadı.</string>
-    <string name="comment_pending">Yüklənir...</string>
+    <string name="comment_pending">Yüklənir…</string>
     <string name="base">Əsas</string>
     <string name="current_plan">Cari plan</string>
     <string name="try_">Yoxla</string>
     <string name="slash_year">/illik</string>
     <string name="slash_month">/aylıq</string>
+    <string name="unable_to_open_link">Linki açmaq mümkün olmadı.</string>
 </resources>
