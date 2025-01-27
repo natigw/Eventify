@@ -384,12 +384,13 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     }
                 }
         }
+
         viewLifecycleOwner.lifecycleScope.launch {
             sharedViewModel.sharedRouteDestinationCoordinates
                 .debounce(800)
                 .filterNotNull()
                 .distinctUntilChanged()
-                .collectLatest { destinationCoordinates ->
+                .collect { destinationCoordinates ->
                     val marker = viewModel.findMarkerByLatLng(
                         destinationCoordinates.latitude,
                         destinationCoordinates.longitude
@@ -398,9 +399,11 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     if(marker!=null){
                         marker.showInfoWindow()
                         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(marker.position.latitude, marker.position.longitude), 15f))
+                        sharedViewModel.sharedRouteDestinationCoordinates.resetReplayCache()
                     }
                 }
         }
+
         googleMap.setOnMarkerClickListener { marker ->
             googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(marker.position.latitude-0.005, marker.position.longitude), 15f))
             marker.showInfoWindow()
@@ -422,6 +425,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         getMyLocation()
         applyDynamicMapStyle()
     }
+        
 
     private fun applyDynamicMapStyle() {
         val themePreference = viewModel.sharedPrefTheme.getInt("theme", AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)

@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 
 class SharedViewModel : ViewModel() {
 
-    val sharedRouteDestinationCoordinates = MutableSharedFlow<LatLng>(replay = 0)
+    val sharedRouteDestinationCoordinates = MutableSharedFlow<LatLng>(replay = 1)
 
     var sharedCoordinates: PlaceCoordinates? = null
 
