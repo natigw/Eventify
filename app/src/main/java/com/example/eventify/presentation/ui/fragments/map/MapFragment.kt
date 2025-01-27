@@ -78,8 +78,6 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
     private fun startSearch() {
         crossfadeAppear(binding.searchRV, 300)
-        crossfadeAppear(binding.notFoundView, 300)
-        crossfadeAppear(binding.progressBar, 300)
         binding.textInputLayoutSearch.requestFocus()
         showKeyboard(binding.textInputEdittextSearch)
     }
@@ -183,6 +181,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 .collectLatest {
                     binding.progressBar.isVisible = it
                     binding.searchRV.isVisible = !it
+                    binding.notFoundView.isVisible = !it
             }
         }
     }
