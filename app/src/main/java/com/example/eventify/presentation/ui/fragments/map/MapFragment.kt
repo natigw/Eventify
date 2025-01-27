@@ -7,6 +7,7 @@ import android.content.res.Configuration
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatDelegate
@@ -23,6 +24,7 @@ import com.example.common.utils.crossfadeDisappear
 import com.example.common.utils.hideKeyboard
 import com.example.common.utils.nancyToastError
 import com.example.common.utils.showKeyboard
+import com.example.domain.model.places.SearchItem
 import com.example.eventify.R
 import com.example.eventify.databinding.FragmentMapBinding
 import com.example.eventify.presentation.adapters.MapSearchAdapter
@@ -126,7 +128,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
         binding.textInputEdittextSearch.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                viewModel.inputState.update { binding.textInputEdittextSearch.text.toString().trim() }
+                viewModel.inputState.tryEmit(binding.textInputEdittextSearch.text.toString().trim())
                 binding.textInputLayoutSearch.clearFocus()
                 hideKeyboard(binding.textInputEdittextSearch)
                 true
@@ -139,12 +141,10 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             override fun onTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) { }
 
             override fun afterTextChanged(s: Editable?) {
-                viewModel.inputState.update { s.toString() }
+                viewModel.inputState.tryEmit(s.toString())
             }
         })
     }
-
-
 
     @OptIn(FlowPreview::class)
     private fun observer(){
@@ -152,8 +152,21 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             viewModel.searchState
                 .filterNotNull()
                 .collectLatest{
-                    binding.notFoundView.isVisible = it.isEmpty()
-                    mapSearchAdapter.updateAdapter(it)
+                    if(it.getOrNull(0)?.placeId!=-1){
+                        binding.root.getConstraintSet(R.id.end).apply {
+                            if(it.isEmpty()){
+                                this.setVisibility(R.id.notFoundView, View.VISIBLE)
+                            }
+                            else{
+                                this.setVisibility(R.id.notFoundView,View.INVISIBLE)
+                            }
+                            binding.notFoundView.refreshDrawableState()
+
+                        }
+                        mapSearchAdapter.updateAdapter(it)
+                    }
+
+                    viewModel.searchState.update { listOf(SearchItem(-1,"","","","")) }
                 }
         }
 
@@ -163,10 +176,13 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 .debounce(1000)
                 .collectLatest {
                     if(it==""){
-                        binding.notFoundView.isVisible = false
+                        binding.root.getConstraintSet(R.id.end).apply {
+                            this.setVisibility(R.id.notFoundView,View.INVISIBLE)
+                            binding.notFoundView.requestLayout()
+                        }
                         mapSearchAdapter.updateAdapter(emptyList())
                     }
-                    else{
+                    else {
                         viewModel.searchPlaces(it)
                     }
             }
@@ -176,9 +192,30 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             viewModel.isLoading
                 .filterNotNull()
                 .collectLatest {
-                    binding.progressBar.isVisible = it
+                    binding.root.getConstraintSet(R.id.end).apply {
+                        if(it){
+                            this.setVisibility(R.id.progressBar, View.VISIBLE)
+                        }
+                        else{
+                            this.setVisibility(R.id.progressBar,View.INVISIBLE)
+                        }
+                        binding.progressBar.refreshDrawableState()
+                    }
+
+                    binding.root.getConstraintSet(R.id.end).apply {
+                        if(!it){
+                            if(viewModel.searchState.value?.isEmpty() == false){
+                                this.setVisibility(R.id.notFoundView, View.INVISIBLE)
+                            }
+
+                        }
+                        else{
+                            this.setVisibility(R.id.notFoundView, View.INVISIBLE)
+                        }
+                        binding.root.requestLayout()
+                    }
+
                     binding.searchRV.isVisible = !it
-                    binding.notFoundView.isVisible = !it
             }
         }
     }
@@ -401,19 +438,24 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         }
 
         googleMap.setOnMarkerClickListener { marker ->
-            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(marker.position.latitude-0.005, marker.position.longitude), 15f))
-            marker.showInfoWindow()
-            val tags = marker.tag as List<*>
-            val placeId = tags[0] as Int
-            val placeType = tags[1] as String
-            placeId.let {
-                findNavController().navigate(MapFragmentDirections.actionMapFragmentToMarkerDetailsBottomSheet(
-                    placeId,
-                    placeType,
-                    marker.position.latitude.toString(),
-                    marker.position.longitude.toString())
-                )
+
+            val currentMarker = viewModel.currentLocation
+            if(!(marker.position.latitude == currentMarker?.latitude && marker.position.longitude == currentMarker.longitude)){
+                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(marker.position.latitude-0.005, marker.position.longitude), 15f))
+                marker.showInfoWindow()
+                val tags = marker.tag as List<*>
+                val placeId = tags[0] as Int
+                val placeType = tags[1] as String
+                placeId.let {
+                    findNavController().navigate(MapFragmentDirections.actionMapFragmentToMarkerDetailsBottomSheet(
+                        placeId,
+                        placeType,
+                        marker.position.latitude.toString(),
+                        marker.position.longitude.toString())
+                    )
+                }
             }
+
             true
         }
 

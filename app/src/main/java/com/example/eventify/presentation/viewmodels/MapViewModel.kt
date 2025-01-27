@@ -13,7 +13,9 @@ import com.example.eventify.NetworkUtils
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -34,10 +36,14 @@ class MapViewModel @Inject constructor(
     val venuesState = MutableStateFlow<List<VenueItem>?>(null)
 
     val searchState = MutableStateFlow<List<SearchItem>?>(null)
-    val inputState = MutableStateFlow<String?>(null)
+
+    val inputState = MutableSharedFlow<String>(replay = 1)
+
     val isLoading = MutableStateFlow<Boolean?>(null)
 
     private val searchItems = mutableListOf<SearchItem>()
+
+    val notFoundState = MutableStateFlow<Boolean?>(null)
 
     enum class Filter{
         ALL,
