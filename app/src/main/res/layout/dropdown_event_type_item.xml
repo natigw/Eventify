@@ -1,8 +1,10 @@
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/textEventTypeDropdown"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="typpee"
-    android:textSize="18sp"
+    android:background="@color/eventify_background_primary"
     android:fontFamily="@font/inter_regular"
-    android:padding="14dp"/>
+    android:padding="14dp"
+    android:textSize="18sp"
+    tools:text="event type" />

@@ -1,8 +1,6 @@
 package com.example.eventify.presentation.adapters
 
 import android.view.View
-import android.view.ViewGroup
-import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.common.base.BaseAdapter

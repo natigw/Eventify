@@ -32,12 +32,17 @@ fun dateFormatterIFYEAR_MNAMED_Comma_HM(inputDate: Instant): String {
     val timeInZone = instantTimeConverter(inputDate)
 
     val currentYear = ZonedDateTime.now(ZoneId.systemDefault()).year
-    val formattedDate = if (timeInZone.year == currentYear) {
+    val currentDay = ZonedDateTime.now(ZoneId.systemDefault()).dayOfYear
+
+    val formattedDate = if (timeInZone.year != currentYear) {
+        //format as "20 Jan 2023, 21:39"
+        timeInZone.format(DateTimeFormatter.ofPattern("dd MMM yyyy, HH:mm"))
+    } else if (timeInZone.dayOfYear != currentDay) {
         //format as "Jan 20, 21:39"
         timeInZone.format(DateTimeFormatter.ofPattern("MMM dd, HH:mm"))
     } else {
-        //format as "20 Jan 2023, 21:39"
-        timeInZone.format(DateTimeFormatter.ofPattern("dd MMM yyyy, HH:mm"))
+        //format as "21:39"
+        timeInZone.format(DateTimeFormatter.ofPattern("HH:mm"))
     }
     return formattedDate
 }

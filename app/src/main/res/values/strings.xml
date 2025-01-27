@@ -71,7 +71,7 @@
     <string name="get_route">Get route</string>
     <string name="get_shortest_route">Get shortest route</string>
     <string name="no_events">No events yet!</string>
-    <string name="no_custom_events">No user events yet!</string>
+    <string name="no_user_events">No user events yet!</string>
     <string name="no_venues">No venues yet!</string>
     <string name="no_comments">No comments yet!</string>
     <string name="no_favorites">No favorites yet!</string>
@@ -84,7 +84,14 @@
     <string name="tickets">Tickets</string>
     <string name="chat">Chat</string>
     <string name="subscription">Subscription</string>
+    <string name="base">Base</string>
+    <string name="base_package_features">Access to cultural events list\n\nAccess to some map functionalities\n\nCommunity contributions</string>
     <string name="free">Free</string>
+    <string name="current_plan">Current plan</string>
+    <string name="try_">Try</string>
+    <string name="slash_year">/year</string>
+    <string name="slash_month">/month</string>
+    <string name="save">Save</string>
     <string name="done">Done</string>
     <string name="something_went_wrong">Something went wrong!</string>
     <string name="something_went_wrong_colon">Something went wrong: </string>
@@ -158,6 +165,7 @@
     <string name="finish_time_cannot_be_earlier">Finish time cannot be earlier than start time!</string>
     <string name="picture_upload_successful">Picture upload successful!</string>
     <string name="custom_event_creation_successful">Custom user event has been created successfully!</string>
+    <string name="custom_event_sent_for_review">Custom user event has been sent to be reviewed!</string>
     <string name="no_image_selected">No image selected!</string>
     <string name="upload_failed_colon">Upload failed:</string>
     <string name="image_upload_successful_colon">Image uploaded successfully:</string>

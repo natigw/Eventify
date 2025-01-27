@@ -2,12 +2,14 @@ package com.example.eventify.presentation.ui.fragments.map
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.constraintlayout.motion.widget.MotionLayout
@@ -38,6 +40,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.play.integrity.internal.s
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.collectLatest
@@ -51,12 +54,9 @@ import kotlinx.coroutines.launch
 class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate), OnMapReadyCallback {
 
     private val viewModel by viewModels<MapViewModel>()
-
-    private val locationPermissionRequestCode = 1
-
     private val sharedViewModel by activityViewModels<SharedViewModel>()
 
-//    private val args by navArgs<TestMapFragmentArgs>()
+    private val locationPermissionRequestCode = 1
 
     private lateinit var googleMap: GoogleMap
 
@@ -72,10 +72,24 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         val marker = viewModel.findMarkerByLatLng(it.lat.toDouble(),it.lng.toDouble())
         marker?.showInfoWindow()
         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(it.lat.toDouble()-0.005, it.lng.toDouble()), 15f))
+
+        endSearch()
+    }
+
+    private fun startSearch() {
+        crossfadeAppear(binding.searchRV, 300)
+        crossfadeAppear(binding.notFoundView, 300)
+        crossfadeAppear(binding.progressBar, 300)
+        binding.textInputLayoutSearch.requestFocus()
+        showKeyboard(binding.textInputEdittextSearch)
+    }
+    private fun endSearch() {
         binding.root.transitionToStart()
-        crossfadeDisappear(binding.searchRV, duration = 300)
+        crossfadeDisappear(binding.searchRV, 300)
+        crossfadeDisappear(binding.notFoundView, 300)
         crossfadeDisappear(binding.progressBar, 300)
-        binding.editTextText.clearFocus()
+        binding.textInputLayoutSearch.clearFocus()
+        hideKeyboard(binding.textInputLayoutSearch)
     }
 
 
@@ -86,7 +100,6 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         searchInputHandler()
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(this)
-
     }
 
     override fun buttonListeners() {
@@ -95,46 +108,38 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         binding.buttonLocationMap.setOnClickListener {
             getMyLocation()
         }
-
         binding.buttonSwitchMode.setOnClickListener {
             googleMap.mapType = if (googleMap.mapType == GoogleMap.MAP_TYPE_HYBRID) GoogleMap.MAP_TYPE_NORMAL else GoogleMap.MAP_TYPE_HYBRID
         }
 
-        binding.cancelSearchButton.setOnClickListener{
-            binding.editTextText.text = null
-        }
-
         binding.backwardButton.setOnClickListener {
-            binding.root.transitionToStart()
-            crossfadeDisappear(binding.searchRV, duration = 300)
-            crossfadeDisappear(binding.notFoundView, 300)
-            crossfadeDisappear(binding.progressBar, 300)
-            binding.editTextText.clearFocus()
-            hideKeyboard(binding.editTextText)
+            endSearch()
         }
-
         requireActivity().onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                if(binding.root.currentState == R.id.end){
-                    binding.root.transitionToStart()
-                    crossfadeDisappear(binding.searchRV, duration = 300)
-                    crossfadeDisappear(binding.notFoundView, 300)
-                    crossfadeDisappear(binding.progressBar, 300)
-                    binding.editTextText.clearFocus()
-                }
-                else{
+                if (binding.root.currentState == R.id.end)
+                    endSearch()
+                else
                     requireActivity().finish()
-                }
             }
         })
     }
 
 
     private fun searchInputHandler(){
-        binding.editTextText.imeOptions = EditorInfo.IME_ACTION_SEARCH
+        binding.textInputEdittextSearch.imeOptions = EditorInfo.IME_ACTION_SEARCH
 
-
-        binding.editTextText.addTextChangedListener(object : TextWatcher{
+        binding.textInputEdittextSearch.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                viewModel.inputState.update { binding.textInputEdittextSearch.text.toString().trim() }
+                binding.textInputLayoutSearch.clearFocus()
+                hideKeyboard(binding.textInputEdittextSearch)
+                true
+            } else {
+                false
+            }
+        }
+        binding.textInputEdittextSearch.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { }
             override fun onTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) { }
 
@@ -177,9 +182,6 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 .filterNotNull()
                 .collectLatest {
                     binding.progressBar.isVisible = it
-
-
-
                     binding.searchRV.isVisible = !it
             }
         }
@@ -210,15 +212,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
             override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
                 if(currentId == R.id.end) {
-                    showKeyboard(binding.editTextText)
-                    binding.editTextText.requestFocus()
-                    binding.searchRV.isVisible = true
-                    binding.searchRV.animate()
-                        .alpha(1f)
-                        .setDuration(300)
-                        .start()
-                    crossfadeAppear(binding.notFoundView, 300)
-                    crossfadeAppear(binding.progressBar, 300)
+                    startSearch()
                     binding.root.getTransition(R.id.myTransition).isEnabled = false
                 }
                 else if(currentId == R.id.start){
@@ -233,7 +227,6 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 progress: Float
             ) {
                 Log.e("triggerId",triggerId.toString())
-
             }
 
         })
@@ -391,7 +384,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     }
                 }
         }
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             sharedViewModel.sharedRouteDestinationCoordinates
                 .debounce(800)
                 .filterNotNull()

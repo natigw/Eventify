@@ -1,6 +1,5 @@
 package com.example.eventify.presentation.viewmodels
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.model.auth.UserData
@@ -11,7 +10,6 @@ import com.example.domain.repository.AuthRepository
 import com.example.domain.repository.VenueRepository
 import com.example.eventify.NetworkUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -29,7 +27,6 @@ class VenueDetailsViewModel @Inject constructor(
 
     var userInfo : UserData? = null
 
-    val isLoadingComments = MutableStateFlow(true)
     val commentsState = MutableStateFlow<List<CommentItem>?>(null)
 
 
@@ -52,7 +49,6 @@ class VenueDetailsViewModel @Inject constructor(
             try {
                 val response = venueRepository.getVenueComments(venueId)
                 commentsState.emit(response)
-                isLoadingComments.update { false }
             }
             catch (_:Exception){}
         }

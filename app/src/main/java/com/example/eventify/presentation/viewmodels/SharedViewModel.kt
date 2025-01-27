@@ -5,8 +5,6 @@ import androidx.lifecycle.ViewModel
 import com.example.domain.model.places.PlaceCoordinates
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.update
 
 class SharedViewModel : ViewModel() {
 
@@ -17,12 +15,9 @@ class SharedViewModel : ViewModel() {
 
     var eventsRVState : Parcelable? = null
     var venuesRVState : Parcelable? = null
+
     suspend fun setCoordinates(latLng: LatLng) {
         sharedRouteDestinationCoordinates.emit(latLng)
-    }
-
-    suspend fun setRouteCoordinates(routeCoordinates: LatLng) {
-        sharedRouteDestinationCoordinates.emit(routeCoordinates)
     }
 
 }

@@ -7,8 +7,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.common.base.BaseFragment
 import com.example.common.utils.blockButton
-import com.example.common.utils.hideKeyboard
 import com.example.common.utils.functions.validateInputFieldEmpty
+import com.example.common.utils.hideKeyboard
 import com.example.common.utils.nancyToastSuccess
 import com.example.common.utils.nancyToastWarning
 import com.example.common.utils.resetButton
@@ -18,7 +18,6 @@ import com.example.eventify.R
 import com.example.eventify.databinding.FragmentLoginBinding
 import com.example.eventify.presentation.ui.activities.MainActivity
 import com.example.eventify.presentation.viewmodels.LoginViewModel
-import com.example.eventify.test.TestActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.filter
@@ -87,7 +86,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         }
 
         binding.buttonTest.setOnClickListener {
-            navigateToTestActivity()
+            findNavController().navigate(R.id.test1Fragment)
         }
     }
 
@@ -146,12 +145,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
 
     private fun navigateToMainActivity() {
         val intent = Intent(requireContext(), MainActivity::class.java)
-        startActivity(intent)
-        requireActivity().finish()
-    }
-
-    private fun navigateToTestActivity() {
-        val intent = Intent(requireContext(), TestActivity::class.java)
         startActivity(intent)
         requireActivity().finish()
     }

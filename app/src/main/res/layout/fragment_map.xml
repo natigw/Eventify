@@ -243,7 +243,7 @@
                 android:id="@+id/textSelectPlaceMap"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="12dp"
                 android:layout_marginTop="24dp"
                 android:fontFamily="@font/inter_bold"
                 android:text="@string/select_place"
@@ -262,43 +262,43 @@
                 app:icon="@drawable/ic_back_arrow"
                 app:iconSize="24dp"
                 app:iconTint="@color/eventify_main_text"
-                app:layout_constraintBottom_toBottomOf="@id/searchBarMap"
+                app:layout_constraintBottom_toBottomOf="@id/textInputLayoutSearch"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/textSelectPlaceMap" />
 
-            <LinearLayout
-                android:id="@+id/searchBarMap"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutSearch"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="18dp"
                 android:layout_marginBottom="24dp"
-                android:background="@drawable/bg_edit_text"
-                android:orientation="horizontal"
+                app:boxCornerRadiusBottomEnd="@dimen/eventify_input_field_corner_radius"
+                app:boxCornerRadiusBottomStart="@dimen/eventify_input_field_corner_radius"
+                app:boxCornerRadiusTopEnd="@dimen/eventify_input_field_corner_radius"
+                app:boxCornerRadiusTopStart="@dimen/eventify_input_field_corner_radius"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
+                app:boxBackgroundColor="@color/gray_search_box"
+                app:cursorColor="@color/gray_dark"
+                app:hintEnabled="false"
+                app:endIconMode="clear_text"
+                app:endIconTint="@color/gray_dark"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textSelectPlaceMap"
                 app:layout_constraintTop_toBottomOf="@+id/textSelectPlaceMap">
 
-                <EditText
-                    android:id="@+id/editTextText"
-                    android:layout_width="wrap_content"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/textInputEdittextSearch"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="20"
-                    android:background="@drawable/bg_edit_text"
-                    android:ems="10"
+                    android:padding="12dp"
+                    android:fontFamily="@font/inter_regular"
                     android:hint="@string/search"
-                    android:inputType="text"
-                    android:padding="8dp" />
-
-                <ImageView
-                    android:id="@+id/cancelSearchButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_marginEnd="4dp"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/ic_cancel" />
-            </LinearLayout>
+                    android:inputType="textPersonName"
+                    android:textSize="16sp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

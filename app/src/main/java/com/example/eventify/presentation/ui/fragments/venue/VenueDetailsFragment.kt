@@ -111,11 +111,7 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
 
         binding.buttonSendCommentVenueDetails.setOnClickListener {
             val comment = binding.textInputAddCommentVenue.text.toString().trim()
-            val isCommentFilled = validateInputFieldEmpty(
-                binding.textInputLayoutWriteCommentVenueDetails,
-                comment,
-                getString(R.string.please_enter_comment)
-            )
+            val isCommentFilled = validateInputFieldEmpty(binding.textInputLayoutWriteCommentVenueDetails, comment, getString(R.string.please_enter_comment))
 
             if (!isCommentFilled) {
                 return@setOnClickListener
@@ -177,21 +173,21 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
                 if (lines > 0)
                     buttonReadMoreVenues.isVisible = layout.getEllipsisCount(lines - 1) > 0
             }
-            var flagRead = true
+            var flagReadMore = true
             buttonReadMoreVenues.setOnClickListener {
-                if (flagRead) {
-                    textVenueDescription.maxLines = Integer.MAX_VALUE
+                if (flagReadMore) {
                     buttonReadMoreVenues.text = getString(R.string.read_less)
-                    flagRead = false
+                    textVenueDescription.maxLines = Integer.MAX_VALUE
+                    flagReadMore = false
                 } else {
                     buttonReadMoreVenues.text = getString(R.string.read_more)
                     textVenueDescription.maxLines = 5
-                    flagRead = true
+                    flagReadMore = true
                 }
             }
 
+
             buttonVenueShowLocation.setOnClickListener {
-                venueDetailsItem.coordinates.latitude
                 viewLifecycleOwner.lifecycleScope.launch {
                     sharedViewModel.setCoordinates(
                         LatLng(
@@ -199,7 +195,6 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
                             venueDetailsItem.coordinates.longitude
                         )
                     )
-
                 }
                 val bottomNavigationView = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
                 bottomNavigationView.selectedItemId = R.id.mapFragment
@@ -213,15 +208,11 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
 
     private fun updateAdapters() {
         viewLifecycleOwner.lifecycleScope.launch {
-            viewmodel.isLoadingComments.collectLatest {
-                binding.progressBarCommentVenueDetails.isVisible = it
-            }
-        }
-        viewLifecycleOwner.lifecycleScope.launch {
             viewmodel.commentsState
                 .filterNotNull()
                 .collect {
                     binding.textNoCommentsTextVenueDetails.isVisible = it.isEmpty()
+                    binding.progressBarCommentVenueDetails.isVisible = false
                     crossfadeAppear(binding.buttonSendCommentVenueDetails, 500)
                     commentAdapter.updateAdapter(it)
                 }
@@ -242,12 +233,6 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
                     makeViewsVisible()
                     setUI(it)
                 }
-        }
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewmodel.isLoadingComments.collectLatest {
-                binding.progressBarCommentVenueDetails.isVisible = it
-            }
         }
 
         viewLifecycleOwner.lifecycleScope.launch {

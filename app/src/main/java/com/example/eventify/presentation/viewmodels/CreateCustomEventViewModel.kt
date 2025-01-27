@@ -1,9 +1,12 @@
 package com.example.eventify.presentation.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.domain.repository.EventRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.LocalTime
 import javax.inject.Inject
@@ -17,7 +20,13 @@ class CreateCustomEventViewModel @Inject constructor(
     val pickedStartTime = MutableStateFlow<LocalTime?>(null)
     val pickedFinishTime = MutableStateFlow<LocalTime?>(null)
 
-    fun createCustomEvent() {
+    private fun createCustomEvent() {
+        viewModelScope.launch {
+            try {
 
+            } catch (e: Exception) {
+                Log.e("network event", e.toString())
+            }
+        }
     }
 }

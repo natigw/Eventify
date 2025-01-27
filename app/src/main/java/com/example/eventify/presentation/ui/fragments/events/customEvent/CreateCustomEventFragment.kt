@@ -50,7 +50,6 @@ class CreateCustomEventFragment : BaseFragment<FragmentCreateCustomEventBinding>
                     .placeholder(R.drawable.placeholder_event)
                     .transition(DrawableTransitionOptions.withCrossFade())
                     .into(binding.imagePictureCreateCustomEvent)
-                nancyToastSuccess(requireContext(), getString(R.string.picture_upload_successful))
             } else {
                 Log.d("PhotoPicker", "No media selected")
             }
@@ -132,7 +131,8 @@ class CreateCustomEventFragment : BaseFragment<FragmentCreateCustomEventBinding>
                 nancyToastWarning(requireContext(), getString(R.string.please_specify_event_all_timing_details))
                 return@setOnClickListener
             }
-            nancyToastSuccess(requireContext(), getString(R.string.custom_event_creation_successful))
+            //nancyToastSuccess(requireContext(), getString(R.string.custom_event_creation_successful))
+            nancyToastSuccess(requireContext(), getString(R.string.custom_event_sent_for_review))
             navigateWithAnimationFade(findNavController(), destination = R.id.placesFragment, popUpTo = R.id.createCustomEventFragment)
         }
     }
@@ -180,6 +180,7 @@ class CreateCustomEventFragment : BaseFragment<FragmentCreateCustomEventBinding>
             .setHour(if (isStart) currentHour else viewmodel.pickedStartTime.value!!.plusHours(2).hour)
             .setMinute(if (isStart) currentMinute else viewmodel.pickedStartTime.value!!.plusHours(2).minute)
             .setTitleText(getString(if (isStart) R.string.event_start_time else R.string.event_finish_time))
+            .setTheme(R.style.MaterialTimeTheme)
             .build()
 
         timePicker.show(parentFragmentManager, "timePicker")
@@ -246,4 +247,4 @@ class CreateCustomEventFragment : BaseFragment<FragmentCreateCustomEventBinding>
     }
 }
 
-//NOTE: IF USER CANNOT TO SET AN EVENT THAT WILL CONTINUE LATE NIGHT (AFTER 00:00)
+//NOTE: USER CANNOT SET AN EVENT THAT WILL CONTINUE LATE NIGHT (AFTER 00:00)

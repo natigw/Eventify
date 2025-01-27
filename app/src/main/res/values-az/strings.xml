@@ -46,7 +46,7 @@
     <string name="read_less">Daha az</string>
     <string name="venue_type_colon">Məkanın tipi:</string>
     <string name="open_hours">Xidmət göstərir:</string>
-    <string name="likes">Bəyənilər:</string>
+    <string name="likes">Bəyənilib:</string>
     <string name="show_location">xəritədə göstər</string>
     <string name="places">Yerlər</string>
     <string name="event_type_colon">Tədbirin tipi:</string>
@@ -94,6 +94,7 @@
     <string name="create_your_event">Öz tədbirinizi yaradın</string>
     <string name="change_language">Tətbiqin dilini dəyişin</string>
     <string name="login_successful">Giriş uğurludur</string>
+    <string name="save">Qənaət:</string>
     <string name="done">Tamamlanıb</string>
     <string name="something_went_wrong">Vayy! Nəsə yanlışlıq oldu!</string>
     <string name="create_event">Tədbir yarat</string>
@@ -139,6 +140,7 @@
     <string name="finish_time_cannot_be_earlier">Bitmə vaxtı daha əvvəl ola bilməz!</string>
     <string name="picture_upload_successful">Şəkil uğurla yükləndi!</string>
     <string name="custom_event_creation_successful">İstifadəçi tədbiri uğurla yaradıldı!</string>
+    <string name="custom_event_sent_for_review">İstifadəçi tədbiri baxış üçün redaksiyaya yönləndirildi!</string>
     <string name="no_image_selected">Heç bir şəkil seçilməyib!</string>
     <string name="upload_failed_colon">"Yüləmə uğursuzdur: "</string>
     <string name="image_upload_successful_colon">"Şəkil uğurla yükləndi: "</string>
@@ -170,12 +172,13 @@
     <string name="search">Axtarın</string>
     <string name="connection_lost_retry">Bağlantı yoxdur! Yenidən cəhd edin!</string>
     <string name="no_events">Hələlik tədbir yoxdur!</string>
-    <string name="no_custom_events">Hələlik istifadəçi tədbiri yoxdur!</string>
+    <string name="no_user_events">Hələlik istifadəçi tədbiri yoxdur!</string>
     <string name="send_verification">Sizə email gəlmədi?</string>
     <string name="click_to_resend">Yenidən göndər.</string>
     <string name="wrong_email">Yanlış email ünvan?</string>
     <string name="click_to_register">Qeydiyyat üçün kliklə.</string>
     <string name="continue_with_google">Google ilə davam edin</string>
+    <string name="base_package_features">Bütün mədəni tədbirlərin siyahısı</string>
     <string name="free">Pulsuz</string>
     <string name="options">Tənzimləmələr:</string>
     <string name="language">Tətbiqin dili</string>
@@ -192,4 +195,9 @@
     <string name="you_are_here">Siz buradasınız</string>
     <string name="no_apps_to_open_maps">Xəritəni açmaq üçün tətbiq tapılmadı.</string>
     <string name="comment_pending">Yüklənir...</string>
+    <string name="base">Əsas</string>
+    <string name="current_plan">Cari plan</string>
+    <string name="try_">Yoxla</string>
+    <string name="slash_year">/illik</string>
+    <string name="slash_month">/aylıq</string>
 </resources>

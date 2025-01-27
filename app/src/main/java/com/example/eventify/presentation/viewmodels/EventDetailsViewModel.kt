@@ -11,7 +11,6 @@ import com.example.domain.repository.AuthRepository
 import com.example.domain.repository.EventRepository
 import com.example.eventify.NetworkUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -27,12 +26,10 @@ class EventDetailsViewModel @Inject constructor(
 
 
     val isCommentAdded = MutableStateFlow(false)
+    val comments = MutableStateFlow<List<CommentItem>?>(null)
     var userInfo : UserData? = null
 
     var likedState = MutableStateFlow<Boolean?>(null)
-
-    val isLoadingComments = MutableStateFlow(true)
-    val comments = MutableStateFlow<List<CommentItem>?>(null)
     private val lastLikedState = mutableListOf<Boolean>()
 
 
@@ -74,7 +71,6 @@ class EventDetailsViewModel @Inject constructor(
             try {
                 val response = eventRepository.getEventComments(eventId)
                 comments.emit(response)
-                isLoadingComments.update { false }
             }catch (_:Exception){}
         }
     }
@@ -91,9 +87,7 @@ class EventDetailsViewModel @Inject constructor(
                 val checkIfValid = NetworkUtils.handleInvalidAccessToken()
                 if(checkIfValid){
                     val condition = eventRepository.addEventComment(comment)
-                    isCommentAdded.update {
-                        condition
-                    }
+                    isCommentAdded.update { condition }
                 }
             }
             catch (_:Exception){}

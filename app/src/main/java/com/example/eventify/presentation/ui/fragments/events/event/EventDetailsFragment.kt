@@ -270,17 +270,12 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
-            viewmodel.isLoadingComments.collectLatest {
-                binding.progressBarCommentEventDetails.isVisible = it
-            }
-        }
-
-        viewLifecycleOwner.lifecycleScope.launch {
             viewmodel.isCommentAdded.collectLatest {
                 if(it){
                     commentAdapter.updateComment()
                     viewmodel.isCommentAdded.update { false }
                 }
+                //TODO -> venue detailsde viewmodel.isCommentAdded.update { false } bu burdadi  -> bax gor hansi sehvdi
             }
         }
 
@@ -292,15 +287,11 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
 
     private fun updateAdapters() {
         viewLifecycleOwner.lifecycleScope.launch {
-            viewmodel.isLoadingComments.collectLatest {
-                binding.progressBarCommentEventDetails.isVisible = it
-            }
-        }
-        viewLifecycleOwner.lifecycleScope.launch {
             viewmodel.comments
                 .filterNotNull()
                 .collectLatest {
                     binding.textNoCommentsTextEventDetails.isVisible = it.isEmpty()
+                    binding.progressBarCommentEventDetails.isVisible = false
                     crossfadeAppear(binding.buttonSendCommentEventDetails,500)
                     commentAdapter.updateAdapter(it)
                 }

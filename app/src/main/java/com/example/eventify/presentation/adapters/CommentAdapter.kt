@@ -1,11 +1,8 @@
 package com.example.eventify.presentation.adapters
 
 import android.util.Log
-import android.view.View
 import androidx.core.view.isVisible
 import com.example.common.base.BaseAdapter
-import com.example.common.utils.functions.getLocalTime
-import com.example.domain.model.places.AddCommentItem
 import com.example.domain.model.places.CommentItem
 import com.example.eventify.databinding.SampleCommentBinding
 

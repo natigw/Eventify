@@ -10,7 +10,7 @@ import com.example.common.utils.stopShimmer
 import com.example.eventify.databinding.FragmentUserEventsBinding
 import com.example.eventify.presentation.adapters.EventAdapter
 import com.example.eventify.presentation.ui.fragments.events.PlacesFragmentDirections
-import com.example.eventify.presentation.viewmodels.EventViewModel
+import com.example.eventify.presentation.viewmodels.UserEventsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.filterNotNull
@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class UserEventsFragment : BaseFragment<FragmentUserEventsBinding>(FragmentUserEventsBinding::inflate) {
 
-    private val viewmodel by viewModels<EventViewModel>()
+    private val viewmodel by viewModels<UserEventsViewModel>()
 
     private val eventAdapter = EventAdapter(
         onLike = {
@@ -35,8 +35,8 @@ class UserEventsFragment : BaseFragment<FragmentUserEventsBinding>(FragmentUserE
 
     override fun onResume() {
         super.onResume()
-        if (viewmodel.events.value == null)
-            startShimmer(binding.shimmerCustomEvents)
+        if (viewmodel.userEvents.value == null)
+            startShimmer(binding.shimmerUserEvents)
     }
 
     override fun onViewCreatedLight() {
@@ -46,7 +46,7 @@ class UserEventsFragment : BaseFragment<FragmentUserEventsBinding>(FragmentUserE
 
     override fun onPause() {
         super.onPause()
-        stopShimmer(binding.shimmerCustomEvents)
+        stopShimmer(binding.shimmerUserEvents)
     }
 
     override fun buttonListeners() {
@@ -57,16 +57,16 @@ class UserEventsFragment : BaseFragment<FragmentUserEventsBinding>(FragmentUserE
     }
 
     private fun setAdapters() {
-        binding.rvCustomEvents.adapter = eventAdapter
+        binding.rvUserEvents.adapter = eventAdapter
     }
 
     private fun updateAdapters() {
         viewLifecycleOwner.lifecycleScope.launch {
-            viewmodel.events
+            viewmodel.userEvents
                 .filterNotNull()
                 .collectLatest {
-                    binding.textNoCustomEventsTEXT.isVisible = it.isEmpty()
-                    stopShimmer(binding.shimmerCustomEvents)
+                    binding.textNoUserEventsTEXT.isVisible = it.isEmpty()
+                    stopShimmer(binding.shimmerUserEvents)
                     eventAdapter.updateAdapter(it)
                 }
         }

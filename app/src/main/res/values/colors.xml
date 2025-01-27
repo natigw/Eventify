@@ -6,6 +6,7 @@
     <color name="gray">#BABABA</color>
     <color name="gray_dark">#666666</color>
     <color name="gray_darkest">#3A3A3A</color>
+    <color name="gray_search_box">#EBEBEB</color>
     <color name="transparent">@android:color/transparent</color>
 
     <color name="eventify_background_primary">#F6F6F6</color>    <!--light gray-->

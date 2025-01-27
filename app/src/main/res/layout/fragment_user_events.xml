@@ -8,14 +8,14 @@
     tools:context=".presentation.ui.fragments.events.customEvent.UserEventsFragment">
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineCustomEvents1"
+        android:id="@+id/guidelineUserEvents1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="@dimen/eventify_guideline_left" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineCustomEvents2"
+        android:id="@+id/guidelineUserEvents2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -31,19 +31,19 @@
         android:fontFamily="@font/inter_bold"
         android:text="@string/create_your_event"
         android:textColor="@color/eventify_primary"
-        android:textSize="18sp"
-        app:cornerRadius="12dp"
+        android:textSize="20sp"
+        app:cornerRadius="@dimen/eventify_large_button_corner_radius"
         app:icon="@drawable/ic_create_custom_event"
         app:iconGravity="textStart"
         app:iconPadding="8dp"
         app:iconSize="20dp"
         app:iconTint="@color/eventify_primary"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineCustomEvents2"
-        app:layout_constraintStart_toStartOf="@+id/guidelineCustomEvents1"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineUserEvents2"
+        app:layout_constraintStart_toStartOf="@+id/guidelineUserEvents1"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvCustomEvents"
+        android:id="@+id/rvUserEvents"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="4dp"
@@ -57,12 +57,12 @@
         tools:listitem="@layout/sample_event" />
 
     <com.facebook.shimmer.ShimmerFrameLayout
-        android:id="@+id/shimmerCustomEvents"
+        android:id="@+id/shimmerUserEvents"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        app:layout_constraintEnd_toEndOf="@id/guidelineCustomEvents2"
-        app:layout_constraintStart_toStartOf="@id/guidelineCustomEvents1"
+        app:layout_constraintEnd_toEndOf="@id/guidelineUserEvents2"
+        app:layout_constraintStart_toStartOf="@id/guidelineUserEvents1"
         app:layout_constraintTop_toBottomOf="@id/buttonCreateCustomEvent" >
 
         <LinearLayout
@@ -78,16 +78,16 @@
     </com.facebook.shimmer.ShimmerFrameLayout>
 
     <TextView
-        android:id="@+id/textNoCustomEventsTEXT"
+        android:id="@+id/textNoUserEventsTEXT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/inter_italic"
-        android:text="@string/no_custom_events"
+        android:text="@string/no_user_events"
         android:textColor="@color/eventify_main_text"
         android:textSize="20sp"
         android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="@id/guidelineCustomEvents2"
-        app:layout_constraintStart_toStartOf="@id/guidelineCustomEvents1"
+        app:layout_constraintEnd_toEndOf="@id/guidelineUserEvents2"
+        app:layout_constraintStart_toStartOf="@id/guidelineUserEvents1"
         app:layout_constraintTop_toTopOf="@id/buttonCreateCustomEvent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 

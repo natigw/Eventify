@@ -1,27 +1,18 @@
 package com.example.eventify.test
 
 import android.Manifest
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Color.alpha
 import android.net.Uri
-import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
-import android.view.View
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat.animate
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.common.base.BaseFragment
-import com.example.common.utils.NancyToast
-import com.example.common.utils.crossfadeAppear
-import com.example.common.utils.crossfadeDisappear
 import com.example.common.utils.nancyToastError
 import com.example.common.utils.nancyToastSuccess
 import com.example.data.remote.api.EventAPI
@@ -33,10 +24,7 @@ import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer
 import com.google.gson.JsonElement
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -54,14 +42,11 @@ class Test1Fragment : BaseFragment<FragmentTest1Binding>(FragmentTest1Binding::i
     lateinit var api: EventAPI
 
 
-
     override fun onViewCreatedLight() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            delay(2000)
-            crossfadeAppear(binding.imageView5, 3000)
-            delay(2000)
-            crossfadeDisappear(binding.progressBar)
-        }
+
+
+
+
 
 
         if (ContextCompat.checkSelfPermission(

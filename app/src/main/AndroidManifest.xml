@@ -26,10 +26,6 @@
             android:value="${MAPS_API_KEY}" />
 
         <activity
-            android:name=".test.TestActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".presentation.ui.activities.NetworkLostActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
@@ -47,6 +43,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-    </application>
 
+    </application>
 </manifest>

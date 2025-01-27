@@ -20,21 +20,22 @@
     <!-- CUSTOM DATE PICKER THEME -->
     <style name="MaterialCalendarTheme" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
         <item name="colorOnPrimary">@color/eventify_on_primary</item>
-        <item name="colorPrimary">@color/purple_dark_eventify</item>
-        <item name="colorSurface">@color/green_light_eventify</item>
+        <item name="colorPrimary">@color/eventify_heading</item>
+        <item name="colorSurface">@color/card_color_eventify</item>
+        <item name="fontFamily">@font/inter_regular</item>
     </style>
 
     <!-- CUSTOM TIME PICKER THEME -->
-<!--    <style name="MaterialTime" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">-->
-<!--        <item name="colorOnPrimary">@color/eventify_on_primary</item>-->
-<!--        <item name="colorPrimary">@color/purple_dark_eventify</item>-->
-<!--        <item name="colorSurface">@color/green_light_eventify</item>-->
-<!--    </style>-->
+    <style name="MaterialTimeTheme" parent="ThemeOverlay.Material3.MaterialTimePicker">
+        <item name="colorOnPrimary">@color/eventify_on_primary</item>
+        <item name="colorPrimary">@color/eventify_heading</item>
+        <item name="fontFamily">@font/inter_regular</item>
+    </style>
 
 
     <!-- CUSTOM ALERT DIALOG THEME -->
     <style name="CustomAlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
-        <item name="android:background">@color/purple_dark_eventify</item>
+        <item name="android:background">@color/eventify_heading</item>
     </style>
     <style name="MaterialAlertDialog.App.Title.Text" parent="MaterialAlertDialog.Material3.Title.Text">
         <item name="android:textColor">@color/eventify_on_primary</item>

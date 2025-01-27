@@ -78,5 +78,10 @@
             app:popUpTo="@id/verificationFragment"
             app:popUpToInclusive="true" />
     </fragment>
+    <fragment
+        android:id="@+id/test1Fragment"
+        android:name="com.example.eventify.test.Test1Fragment"
+        android:label="fragment_test1"
+        tools:layout="@layout/fragment_test1" />
 
 </navigation>
