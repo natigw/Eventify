@@ -26,15 +26,12 @@ class EventsFragment : BaseFragment<FragmentEventsBinding>(FragmentEventsBinding
     private val viewModel by viewModels<EventViewModel>()
     private val sharedViewModel by activityViewModels<SharedViewModel>()
 
-
     private val eventAdapter = EventAdapter(
         onLike = {
             viewModel.likeEvent(it)
         },
         onClick = {
-            findNavController().navigate(
-                PlacesFragmentDirections.actionPlacesFragmentToEventDetailsFragment(it, false)
-            )
+            findNavController().navigate(PlacesFragmentDirections.actionPlacesFragmentToEventDetailsFragment(it, false))
             sharedViewModel.eventsRVState = binding.rvEvents.layoutManager?.onSaveInstanceState()
         }
 

@@ -2,15 +2,13 @@ package com.example.eventify.presentation.ui.fragments.auth
 
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.View
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.common.base.BaseFragment
 import com.example.common.utils.blockButton
-import com.example.common.utils.functions.hideKeyboard
+import com.example.common.utils.hideKeyboard
 import com.example.common.utils.functions.isValidEmail
 import com.example.common.utils.functions.validateInputFieldMeet
 import com.example.common.utils.nancyToastError

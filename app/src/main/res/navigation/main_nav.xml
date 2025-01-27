@@ -5,108 +5,21 @@
     android:id="@+id/main_nav"
     app:startDestination="@id/mapFragment">
 
-
     <fragment
-        android:id="@+id/venuesFragment"
-        android:name="com.example.eventify.presentation.ui.fragments.venue.VenuesFragment"
-        android:label="fragment_venues"
-        tools:layout="@layout/fragment_venues" >
-
+        android:id="@+id/mapFragment"
+        android:name="com.example.eventify.presentation.ui.fragments.map.MapFragment"
+        android:label="fragment_map"
+        tools:layout="@layout/fragment_map">
         <action
-            android:id="@+id/action_venuesFragment_to_venueDetailsFragment"
-            app:destination="@id/venueDetailsFragment"
-            app:enterAnim="@anim/from_right"
-            app:exitAnim="@anim/to_left"
-            app:popEnterAnim="@anim/from_left"
-            app:popExitAnim="@anim/to_right"
-            app:popUpTo="@+id/venuesFragment"
-            app:popUpToInclusive="true" />
+            android:id="@+id/action_mapFragment_to_markerDetailsBottomSheet"
+            app:destination="@id/markerDetailsBottomSheet" />
     </fragment>
 
-
-    <fragment
-        android:id="@+id/profileFragment"
-        android:name="com.example.eventify.presentation.ui.fragments.profile.ProfileFragment"
-        android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" >
-        <action
-            android:id="@+id/action_profileFragment_to_eventDetailsFragment"
-            app:destination="@id/eventDetailsFragment"
-            app:popUpTo="@+id/profileFragment"
-            app:popUpToInclusive="true"/>
-        <action
-            android:id="@+id/action_profileFragment_to_languageBottomSheet"
-            app:destination="@id/languageBottomSheet" />
-        <action
-            android:id="@+id/action_profileFragment_to_themeBottomSheet"
-            app:destination="@id/themeBottomSheet" />
-        <action
-            android:id="@+id/action_profileFragment_to_subscriptionFragment"
-            app:destination="@id/subscriptionFragment"
-            app:enterAnim="@anim/from_right"
-            app:exitAnim="@anim/to_left"
-            app:popEnterAnim="@anim/from_left"
-            app:popExitAnim="@anim/to_right"
-            app:popUpTo="@+id/profileFragment"
-            app:popUpToInclusive="true"/>
-        <action
-            android:id="@+id/action_profileFragment_to_referralFragment"
-            app:destination="@id/referralFragment"
-            app:enterAnim="@anim/from_right"
-            app:exitAnim="@anim/to_left"
-            app:popEnterAnim="@anim/from_left"
-            app:popExitAnim="@anim/to_right"
-            app:popUpTo="@id/profileFragment"
-            app:popUpToInclusive="true"/>
-    </fragment>
-
-
-    <fragment
-        android:id="@+id/referralFragment"
-        android:name="com.example.eventify.presentation.ui.fragments.referral.ReferralFragment"
-        android:label="ReferralFragment"
-        tools:layout="@layout/fragment_referral" />
-
-
-    <fragment
-        android:id="@+id/eventsFragment"
-        android:name="com.example.eventify.presentation.ui.fragments.events.event.EventsFragment"
-        android:label="fragment_events"
-        tools:layout="@layout/fragment_events" />
-    <fragment
-        android:id="@+id/placesFragment"
-        android:name="com.example.eventify.presentation.ui.fragments.events.PlacesFragment"
-        android:label="fragment_places"
-        tools:layout="@layout/fragment_places" >
-        <action
-            android:id="@+id/action_placesFragment_to_eventsFragment"
-            app:destination="@id/eventsFragment"
-            app:enterAnim="@android:anim/fade_in" />
-        <action
-            android:id="@+id/action_placesFragment_to_eventDetailsFragment"
-            app:destination="@id/eventDetailsFragment"
-            app:enterAnim="@anim/from_right"
-            app:exitAnim="@anim/to_left"
-            app:popEnterAnim="@anim/from_left"
-            app:popExitAnim="@anim/to_right"
-            app:popUpTo="@+id/placesFragment"
-            app:popUpToInclusive="true"
-            />
-        <action
-            android:id="@+id/action_placesFragment_to_createCustomEventFragment"
-            app:destination="@id/createCustomEventFragment"
-            app:enterAnim="@anim/from_right"
-            app:exitAnim="@anim/to_left"
-            app:popEnterAnim="@anim/from_left"
-            app:popExitAnim="@anim/to_right"
-            app:popUpTo="@id/placesFragment"
-            app:popUpToInclusive="true" />
-    </fragment>
     <dialog
         android:id="@+id/markerDetailsBottomSheet"
         android:name="com.example.eventify.presentation.ui.fragments.map.MarkerDetailsBottomSheet"
         android:label="bottomsheet_marker_details"
-        tools:layout="@layout/bottomsheet_marker_details" >
+        tools:layout="@layout/bottomsheet_marker_details">
         <argument
             android:name="placeId"
             app:argType="integer" />
@@ -120,27 +33,86 @@
             android:name="lng"
             app:argType="string" />
     </dialog>
+
+
+
     <fragment
-        android:id="@+id/mapFragment"
-        android:name="com.example.eventify.presentation.ui.fragments.map.MapFragment"
-        android:label="fragment_map"
-        tools:layout="@layout/fragment_map" >
+        android:id="@+id/placesFragment"
+        android:name="com.example.eventify.presentation.ui.fragments.events.PlacesFragment"
+        android:label="fragment_places"
+        tools:layout="@layout/fragment_places">
         <action
-            android:id="@+id/action_mapFragment_to_markerDetailsBottomSheet"
-            app:destination="@id/markerDetailsBottomSheet" />
+            android:id="@+id/action_placesFragment_to_createCustomEventFragment"
+            app:destination="@id/createCustomEventFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right"
+            app:popUpTo="@id/placesFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_placesFragment_to_eventDetailsFragment"
+            app:destination="@id/eventDetailsFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right"
+            app:popUpTo="@+id/placesFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
-        android:id="@+id/subscriptionFragment"
-        android:name="com.example.eventify.presentation.ui.fragments.subscription.SubscriptionFragment"
-        android:label="SubscriptionFragment"
-        tools:layout="@layout/fragment_subscription" />
+        android:id="@+id/createCustomEventFragment"
+        android:name="com.example.eventify.presentation.ui.fragments.events.customEvent.CreateCustomEventFragment"
+        android:label="fragment_create_custom_event"
+        tools:layout="@layout/fragment_create_custom_event" />
 
     <fragment
-        android:id="@+id/chatFragment"
-        android:name="com.example.eventify.presentation.ui.fragments.chat.ChatFragment"
-        android:label="fragment_chat"
-        tools:layout="@layout/fragment_chat" />
+        android:id="@+id/eventsFragment"
+        android:name="com.example.eventify.presentation.ui.fragments.events.event.EventsFragment"
+        android:label="fragment_events"
+        tools:layout="@layout/fragment_events" />
+
+    <fragment
+        android:id="@+id/userEventsFragment"
+        android:name="com.example.eventify.presentation.ui.fragments.events.customEvent.UserEventsFragment"
+        android:label="fragment_custom_events"
+        tools:layout="@layout/fragment_user_events" />
+
+    <fragment
+        android:id="@+id/eventDetailsFragment"
+        android:name="com.example.eventify.presentation.ui.fragments.events.event.EventDetailsFragment"
+        android:label="EventDetailsFragment"
+        tools:layout="@layout/fragment_event_details">
+        <argument
+            android:name="eventId"
+            app:argType="integer" />
+        <argument
+            android:name="comingProfile"
+            android:defaultValue="false"
+            app:argType="boolean" />
+        <action
+            android:id="@+id/action_eventDetailsFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
+    </fragment>
+
+
+
+    <fragment
+        android:id="@+id/venuesFragment"
+        android:name="com.example.eventify.presentation.ui.fragments.venue.VenuesFragment"
+        android:label="fragment_venues"
+        tools:layout="@layout/fragment_venues">
+        <action
+            android:id="@+id/action_venuesFragment_to_venueDetailsFragment"
+            app:destination="@id/venueDetailsFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right"
+            app:popUpTo="@+id/venuesFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 
     <fragment
         android:id="@+id/venueDetailsFragment"
@@ -155,40 +127,79 @@
             app:destination="@id/mapFragment" />
     </fragment>
 
+
+
     <fragment
-        android:id="@+id/eventDetailsFragment"
-        android:name="com.example.eventify.presentation.ui.fragments.events.event.EventDetailsFragment"
-        android:label="EventDetailsFragment"
-        tools:layout="@layout/fragment_event_details">
-        <argument
-            android:name="eventId"
-            app:argType="integer" />
+        android:id="@+id/profileFragment"
+        android:name="com.example.eventify.presentation.ui.fragments.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile">
         <action
-            android:id="@+id/action_eventDetailsFragment_to_mapFragment"
-            app:destination="@id/mapFragment" />
-        <argument
-            android:name="comingProfile"
-            app:argType="boolean"
-            android:defaultValue="false" />
+            android:id="@+id/action_profileFragment_to_languageBottomSheet"
+            app:destination="@id/languageBottomSheet" />
+        <action
+            android:id="@+id/action_profileFragment_to_themeBottomSheet"
+            app:destination="@id/themeBottomSheet" />
+        <action
+            android:id="@+id/action_profileFragment_to_subscriptionFragment"
+            app:destination="@id/subscriptionFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right"
+            app:popUpTo="@+id/profileFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_profileFragment_to_referralFragment"
+            app:destination="@id/referralFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right"
+            app:popUpTo="@id/profileFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_profileFragment_to_eventDetailsFragment"
+            app:destination="@id/eventDetailsFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right"
+            app:popUpTo="@id/profileFragment"
+            app:popUpToInclusive="true" />
     </fragment>
+
+
     <fragment
-        android:id="@+id/customEventsFragment"
-        android:name="com.example.eventify.presentation.ui.fragments.events.customEvent.CustomEventsFragment"
-        android:label="fragment_custom_events"
-        tools:layout="@layout/fragment_custom_events" />
+        android:id="@+id/referralFragment"
+        android:name="com.example.eventify.presentation.ui.fragments.referral.ReferralFragment"
+        android:label="ReferralFragment"
+        tools:layout="@layout/fragment_referral" />
+
     <fragment
-        android:id="@+id/createCustomEventFragment"
-        android:name="com.example.eventify.presentation.ui.fragments.events.customEvent.CreateCustomEventFragment"
-        android:label="fragment_create_custom_event"
-        tools:layout="@layout/fragment_create_custom_event" />
+        android:id="@+id/subscriptionFragment"
+        android:name="com.example.eventify.presentation.ui.fragments.subscription.SubscriptionFragment"
+        android:label="SubscriptionFragment"
+        tools:layout="@layout/fragment_subscription" />
+
     <dialog
         android:id="@+id/languageBottomSheet"
         android:name="com.example.eventify.presentation.ui.fragments.profile.LanguageBottomSheet"
         android:label="bottomsheet_language"
         tools:layout="@layout/bottomsheet_language" />
+
     <dialog
         android:id="@+id/themeBottomSheet"
         android:name="com.example.eventify.presentation.ui.fragments.profile.ThemeBottomSheet"
         android:label="bottomsheet_theme"
         tools:layout="@layout/bottomsheet_theme" />
+
+
+
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.example.eventify.presentation.ui.fragments.chat.ChatFragment"
+        android:label="fragment_chat"
+        tools:layout="@layout/fragment_chat" />
+
 </navigation>

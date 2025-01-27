@@ -3,15 +3,11 @@ package com.example.eventify.presentation.ui.fragments.events.customEvent
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.example.common.base.BaseFragment
-import com.example.common.utils.navigateWithAnimationLeftToRight
-import com.example.common.utils.navigateWithAnimationRightToLeft
 import com.example.common.utils.startShimmer
 import com.example.common.utils.stopShimmer
-import com.example.eventify.R
-import com.example.eventify.databinding.FragmentCustomEventsBinding
+import com.example.eventify.databinding.FragmentUserEventsBinding
 import com.example.eventify.presentation.adapters.EventAdapter
 import com.example.eventify.presentation.ui.fragments.events.PlacesFragmentDirections
 import com.example.eventify.presentation.viewmodels.EventViewModel
@@ -21,12 +17,13 @@ import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class CustomEventsFragment : BaseFragment<FragmentCustomEventsBinding>(FragmentCustomEventsBinding::inflate) {
+class UserEventsFragment : BaseFragment<FragmentUserEventsBinding>(FragmentUserEventsBinding::inflate) {
 
     private val viewmodel by viewModels<EventViewModel>()
 
     private val eventAdapter = EventAdapter(
         onLike = {
+            //TODO -> backend user eventleri ayirandan sora ayrica like qos
 //            viewLifecycleOwner.lifecycleScope.launch {
 //                viewmodel.likeEvent(it)
 //            }
@@ -57,10 +54,6 @@ class CustomEventsFragment : BaseFragment<FragmentCustomEventsBinding>(FragmentC
         binding.buttonCreateCustomEvent.setOnClickListener {
             findNavController().navigate(PlacesFragmentDirections.actionPlacesFragmentToCreateCustomEventFragment())
         }
-        //TODO
-//        binding.buttonCreateCustomEvent.setOnClickListener{
-//            navigateWithAnimationRightToLeft(findNavController(), destination = R.id.createCustomEventFragment, popUpTo = R.id.placesFragment)
-//        }
     }
 
     private fun setAdapters() {

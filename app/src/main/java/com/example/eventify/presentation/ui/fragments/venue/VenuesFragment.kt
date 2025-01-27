@@ -25,9 +25,7 @@ class VenuesFragment : BaseFragment<FragmentVenuesBinding>(FragmentVenuesBinding
 
     private val venueAdapter = VenueAdapter(
         onClick = {
-            findNavController().navigate(
-                VenuesFragmentDirections.actionVenuesFragmentToVenueDetailsFragment(it.venueId)
-            )
+            findNavController().navigate(VenuesFragmentDirections.actionVenuesFragmentToVenueDetailsFragment(it.venueId))
             sharedViewModel.venuesRVState = binding.rvVenues.layoutManager?.onSaveInstanceState()
         }
     )

@@ -2,15 +2,12 @@ package com.example.eventify.presentation.ui.fragments.map
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import android.view.View
 import android.view.inputmethod.EditorInfo
-import android.view.inputmethod.InputMethodManager
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.constraintlayout.motion.widget.MotionLayout
@@ -21,7 +18,11 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.common.base.BaseFragment
+import com.example.common.utils.crossfadeAppear
+import com.example.common.utils.crossfadeDisappear
+import com.example.common.utils.hideKeyboard
 import com.example.common.utils.nancyToastError
+import com.example.common.utils.showKeyboard
 import com.example.eventify.R
 import com.example.eventify.databinding.FragmentMapBinding
 import com.example.eventify.presentation.adapters.MapSearchAdapter
@@ -42,7 +43,6 @@ import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -60,11 +60,9 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
     private lateinit var googleMap: GoogleMap
 
-    private var currentLatLng: LatLng? = null
-
     private val markers = mutableListOf<Marker>()
 
-    private val mapSearchAdapter = MapSearchAdapter{
+    private val mapSearchAdapter = MapSearchAdapter {
         findNavController().navigate(MapFragmentDirections.actionMapFragmentToMarkerDetailsBottomSheet(
             placeId = it.placeId,
             placeType = it.placeType,
@@ -75,9 +73,9 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         marker?.showInfoWindow()
         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(it.lat.toDouble()-0.005, it.lng.toDouble()), 15f))
         binding.root.transitionToStart()
-        animateSearchRV()
-        binding.progressBar.animateToInvisible()
-        binding.editTextText.hideKeyboard()
+        crossfadeDisappear(binding.searchRV, duration = 300)
+        crossfadeDisappear(binding.progressBar, 300)
+        binding.editTextText.clearFocus()
     }
 
 
@@ -93,29 +91,36 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
     override fun buttonListeners() {
         super.buttonListeners()
-        binding.cancelSearchButton.setOnClickListener{
-            binding.editTextText.text = null
-        }
-        binding.backwardButton.setOnClickListener {
-            binding.root.transitionToStart()
-            animateSearchRV()
-            binding.notFoundView.animateToInvisible()
-            binding.progressBar.animateToInvisible()
-            binding.editTextText.hideKeyboard()
-        }
 
         binding.buttonLocationMap.setOnClickListener {
             getMyLocation()
+        }
+
+        binding.buttonSwitchMode.setOnClickListener {
+            googleMap.mapType = if (googleMap.mapType == GoogleMap.MAP_TYPE_HYBRID) GoogleMap.MAP_TYPE_NORMAL else GoogleMap.MAP_TYPE_HYBRID
+        }
+
+        binding.cancelSearchButton.setOnClickListener{
+            binding.editTextText.text = null
+        }
+
+        binding.backwardButton.setOnClickListener {
+            binding.root.transitionToStart()
+            crossfadeDisappear(binding.searchRV, duration = 300)
+            crossfadeDisappear(binding.notFoundView, 300)
+            crossfadeDisappear(binding.progressBar, 300)
+            binding.editTextText.clearFocus()
+            hideKeyboard(binding.editTextText)
         }
 
         requireActivity().onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 if(binding.root.currentState == R.id.end){
                     binding.root.transitionToStart()
-                    animateSearchRV()
-                    binding.notFoundView.animateToInvisible()
-                    binding.progressBar.animateToInvisible()
-                    binding.editTextText.hideKeyboard()
+                    crossfadeDisappear(binding.searchRV, duration = 300)
+                    crossfadeDisappear(binding.notFoundView, 300)
+                    crossfadeDisappear(binding.progressBar, 300)
+                    binding.editTextText.clearFocus()
                 }
                 else{
                     requireActivity().finish()
@@ -123,32 +128,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             }
         })
     }
-    fun View.hideKeyboard() {
-        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(windowToken, 0)
-        binding.editTextText.clearFocus()
-    }
 
-    fun showKeyboard(){
-        val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.showSoftInput(binding.editTextText, InputMethodManager.SHOW_IMPLICIT)
-        binding.editTextText.requestFocus()
-    }
-
-    fun animateSearchRV(){
-        binding.searchRV.animate()
-            .alpha(0f)
-            .setDuration(300)
-            .start()
-    }
-
-    fun View.animateToInvisible(){
-        animate().alpha(0f).setDuration(300).start()
-    }
-
-    fun View.animateToVisible(){
-        animate().alpha(1f).setDuration(300).start()
-    }
 
     private fun searchInputHandler(){
         binding.editTextText.imeOptions = EditorInfo.IME_ACTION_SEARCH
@@ -192,8 +172,6 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             }
         }
 
-
-
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.isLoading
                 .filterNotNull()
@@ -231,15 +209,16 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             }
 
             override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
-                if(currentId == R.id.end){
-                    showKeyboard()
+                if(currentId == R.id.end) {
+                    showKeyboard(binding.editTextText)
+                    binding.editTextText.requestFocus()
                     binding.searchRV.isVisible = true
                     binding.searchRV.animate()
                         .alpha(1f)
                         .setDuration(300)
                         .start()
-                    binding.progressBar.animateToVisible()
-                    binding.notFoundView.animateToVisible()
+                    crossfadeAppear(binding.notFoundView, 300)
+                    crossfadeAppear(binding.progressBar, 300)
                     binding.root.getTransition(R.id.myTransition).isEnabled = false
                 }
                 else if(currentId == R.id.start){
@@ -322,20 +301,22 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         val fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext())
         fusedLocationProviderClient.lastLocation.addOnSuccessListener { location ->
             if (location != null) {
-                currentLatLng = LatLng(location.latitude, location.longitude)
-                viewModel.previousLocation?.latitude?.let {
-                    removeMarkersAtLocation(it, viewModel.previousLocation!!.longitude)
+                viewModel.currentLocation?.let {
+                    removeMarkersAtLocation(viewModel.currentLocation!!.latitude, viewModel.currentLocation!!.longitude)
                 }
-                viewModel.previousLocation = currentLatLng
                 addMarker(
-                    viewModel.previousLocation!!.latitude,
-                    viewModel.previousLocation!!.longitude,
+                    location.latitude,
+                    location.longitude,
                     getString(R.string.you_are_here),
                     BitmapDescriptorFactory.HUE_RED,
                     0
                 )
-                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng!!, 15f))
+                viewModel.currentLocation = LatLng(location.latitude, location.longitude)
+                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(viewModel.currentLocation!!, 15f))
             } else {
+                viewModel.currentLocation?.let {
+                    removeMarkersAtLocation(viewModel.currentLocation!!.latitude, viewModel.currentLocation!!.longitude)
+                }
                 val bakuCityCenter = LatLng(40.3791, 49.8468)
                 googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(bakuCityCenter, 12f))
             }
@@ -358,15 +339,11 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     }
 
 
+    @OptIn(FlowPreview::class)
     @SuppressLint("PotentialBehaviorOverride")
     override fun onMapReady(googleMap: GoogleMap) {
 
         this.googleMap = googleMap
-
-//        googleMap.setOnMapLoadedCallback {
-//            crossfadeAppear(binding.map)
-//        }
-
 
         sharedViewModel.sharedCoordinates?.let {
             removeMarkersAtLocation(it.lat, it.long)
@@ -448,13 +425,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             true
         }
 
-
-        binding.buttonSwitchMode.setOnClickListener {
-            googleMap.mapType = if (googleMap.mapType == GoogleMap.MAP_TYPE_HYBRID) GoogleMap.MAP_TYPE_NORMAL else GoogleMap.MAP_TYPE_HYBRID
-        }
-
         googleMap.uiSettings.setAllGesturesEnabled(true)
-        //googleMap.uiSettings.isMyLocationButtonEnabled = false
         getMyLocation()
         applyDynamicMapStyle()
     }
@@ -472,7 +443,6 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     R.raw.map_daylight
             }
         }
-
         try {
             val success = googleMap.setMapStyle(
                 MapStyleOptions.loadRawResourceStyle(requireContext(), styleResId)
@@ -485,6 +455,8 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         }
     }
 }
+
+
 
 //    private fun setDrawer() {
 //

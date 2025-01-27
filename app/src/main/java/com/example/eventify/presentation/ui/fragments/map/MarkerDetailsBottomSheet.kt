@@ -3,31 +3,25 @@ package com.example.eventify.presentation.ui.fragments.map
 import android.content.Intent
 import android.net.Uri
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.example.eventify.R
 import com.example.common.base.BaseBottomSheetFragment
 import com.example.common.utils.nancyToastInfo
 import com.example.common.utils.nancyToastWarning
 import com.example.domain.model.places.event.EventDetailsItem
 import com.example.domain.model.places.venue.VenueDetailsItem
+import com.example.eventify.R
 import com.example.eventify.databinding.BottomsheetMarkerDetailsBinding
-import com.example.domain.repository.EventRepository
-import com.example.domain.repository.VenueRepository
 import com.example.eventify.presentation.viewmodels.MarkerDetailsViewModel
 import com.example.eventify.presentation.viewmodels.SharedViewModel
-import com.google.android.gms.maps.model.LatLng
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
-import java.net.URI
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MarkerDetailsBottomSheet : BaseBottomSheetFragment<BottomsheetMarkerDetailsBinding>(BottomsheetMarkerDetailsBinding::inflate) {

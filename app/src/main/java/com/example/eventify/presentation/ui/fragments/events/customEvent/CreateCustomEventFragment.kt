@@ -20,8 +20,7 @@ import com.example.common.utils.functions.validateInputFieldEmpty
 import com.example.common.utils.nancyToastError
 import com.example.common.utils.nancyToastSuccess
 import com.example.common.utils.nancyToastWarning
-import com.example.common.utils.navigateWithAnimationLeftToRight
-import com.example.common.utils.navigateWithoutAnimation
+import com.example.common.utils.navigateWithAnimationFade
 import com.example.eventify.R
 import com.example.eventify.databinding.FragmentCreateCustomEventBinding
 import com.example.eventify.presentation.viewmodels.CreateCustomEventViewModel
@@ -73,18 +72,19 @@ class CreateCustomEventFragment : BaseFragment<FragmentCreateCustomEventBinding>
 
         requireActivity().onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                navigateWithAnimationLeftToRight(findNavController(), R.id.customEventsFragment, R.id.createCustomEventFragment)
+                navigateWithAnimationFade(findNavController(), R.id.placesFragment, R.id.createCustomEventFragment)
             }
         })
 
         binding.buttonBackCCE.setOnClickListener {
-            navigateWithAnimationLeftToRight(findNavController(), R.id.customEventsFragment, R.id.createCustomEventFragment)
+            navigateWithAnimationFade(findNavController(), R.id.placesFragment, R.id.createCustomEventFragment)
         }
+
         binding.buttonAddPictureCreateCustomEvent.setOnClickListener {
             try {
                 pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
             } catch (e: Exception) {
-                Log.e("PhotoPicker", "PHOTOPICKER FAILED!")
+                Log.e("PhotoPicker", "PHOTO PICKER FAILED!")
                 nancyToastError(requireContext(), getString(R.string.something_went_wrong))
             }
         }
@@ -133,7 +133,7 @@ class CreateCustomEventFragment : BaseFragment<FragmentCreateCustomEventBinding>
                 return@setOnClickListener
             }
             nancyToastSuccess(requireContext(), getString(R.string.custom_event_creation_successful))
-            findNavController().popBackStack()
+            navigateWithAnimationFade(findNavController(), destination = R.id.placesFragment, popUpTo = R.id.createCustomEventFragment)
         }
     }
 

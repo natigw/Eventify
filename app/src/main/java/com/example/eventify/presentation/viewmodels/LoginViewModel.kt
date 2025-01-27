@@ -1,19 +1,14 @@
 package com.example.eventify.presentation.viewmodels
 
 import android.content.SharedPreferences
-import android.system.Os.remove
 import android.util.Log
 import androidx.core.content.edit
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.findViewTreeViewModelStoreOwner
-import androidx.lifecycle.viewModelScope
 import com.example.domain.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Named
@@ -29,7 +24,7 @@ class LoginViewModel @Inject constructor(
 
     val isLoading = MutableStateFlow<Boolean?>(null)
     val isLoadingGoogle = MutableStateFlow<Boolean?>(null)
-    val errorMessagesState = MutableStateFlow<String?>(null)
+    private val errorMessagesState = MutableStateFlow<String?>(null)
 
     suspend fun loginUser(username : String, password : String) : Boolean {
         return withContext(Dispatchers.IO){
@@ -44,7 +39,6 @@ class LoginViewModel @Inject constructor(
                     putString("refresh_token",response.refreshToken)
                     putString("token_type",response.tokenType)
                 }
-                removeVerifiedUserEmail()
                 true
             }
             catch (e : Exception){
@@ -80,13 +74,6 @@ class LoginViewModel @Inject constructor(
             finally {
                 isLoadingGoogle.update { false }
             }
-        }
-    }
-
-    private fun removeVerifiedUserEmail(){
-        sharedPrefOnBoard.edit {
-            remove("userEmail")
-            remove("isAuthorized")
         }
     }
 }

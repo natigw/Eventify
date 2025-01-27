@@ -18,6 +18,7 @@ import com.example.eventify.presentation.viewmodels.VerificationViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -89,9 +90,9 @@ class VerificationFragment : BaseFragment<FragmentVerificationBinding>(FragmentV
     private fun observer() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.isLoading
-                .filter { it != null }
+                .filterNotNull()
                 .collectLatest {
-                    if (it!!) {
+                    if (it) {
                         blockButton(
                             progressBar = binding.progressBarVerification,
                             button = binding.buttonContinueVerification
@@ -108,9 +109,9 @@ class VerificationFragment : BaseFragment<FragmentVerificationBinding>(FragmentV
         }
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.resendVerificationState
-                .filter { it != null }
+                .filterNotNull()
                 .collectLatest {
-                    if (it!!) {
+                    if (it) {
                         binding.textResendVerification.isClickable = false
                         binding.textResendVerification.isFocusable = false
                     } else {

@@ -6,7 +6,6 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
@@ -15,8 +14,9 @@ import com.example.common.base.BaseFragment
 import com.example.common.utils.crossfadeAppear
 import com.example.common.utils.functions.dateFormatterIFYEAR_MNAMED_Comma_HM
 import com.example.common.utils.functions.getInstantTime
-import com.example.common.utils.functions.hideKeyboard
+import com.example.common.utils.hideKeyboard
 import com.example.common.utils.functions.validateInputFieldEmpty
+import com.example.common.utils.navigateWithAnimationFade
 import com.example.common.utils.startShimmer
 import com.example.common.utils.stopShimmer
 import com.example.domain.model.places.AddCommentItem
@@ -145,28 +145,14 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
         }
 
         binding.buttonBackVenue.setOnClickListener {
-            findNavController().navigate(
-                R.id.venuesFragment,
-                null,
-                NavOptions.Builder()
-                    .setPopUpTo(R.id.venueDetailsFragment,true)
-                    .build()
-                )
-
-
+            navigateWithAnimationFade(findNavController(), destination = R.id.venuesFragment, popUpTo = R.id.venueDetailsFragment)
         }
 
         requireActivity().onBackPressedDispatcher.addCallback(
             this,
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
-                    findNavController().navigate(
-                        R.id.venuesFragment,
-                        null,
-                        NavOptions.Builder()
-                            .setPopUpTo(R.id.venueDetailsFragment,true)
-                            .build()
-                    )
+                    navigateWithAnimationFade(findNavController(), destination = R.id.venuesFragment, popUpTo = R.id.venueDetailsFragment)
                 }
             })
     }
@@ -215,8 +201,7 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
                     )
 
                 }
-                val bottomNavigationView =
-                    requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+                val bottomNavigationView = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
                 bottomNavigationView.selectedItemId = R.id.mapFragment
             }
         }

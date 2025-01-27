@@ -5,10 +5,10 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.example.common.base.BaseFragment
 import com.example.common.utils.nancyToastSuccess
+import com.example.common.utils.navigateWithAnimationFade
 import com.example.eventify.R
 import com.example.eventify.databinding.FragmentSubscriptionBinding
 import com.example.eventify.presentation.adapters.SubscriptionAdapter
@@ -36,31 +36,26 @@ class SubscriptionFragment : BaseFragment<FragmentSubscriptionBinding>(FragmentS
         setAdapters()
 
 
-
+        //TEMPORARILY INVISIBLE
         binding.textBillMonthly.isVisible = false
         binding.textBillAnnually.isVisible = false
         binding.switchSubscription.isVisible = false
-
     }
 
     override fun buttonListeners() {
         super.buttonListeners()
-        binding.buttonBackSubs.setOnClickListener {
-            findNavController().popBackStack()
-        }
+
         binding.switchSubscription.setOnClickListener {
             viewmodel.changeSwitchState()
+        }
+        binding.buttonBackSubs.setOnClickListener {
+            navigateWithAnimationFade(findNavController(), destination = R.id.profileFragment, popUpTo = R.id.subscriptionFragment)
         }
         requireActivity().onBackPressedDispatcher.addCallback(
             this,
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
-                    findNavController().navigate(
-                        R.id.profileFragment,
-                        null,
-                        NavOptions.Builder()
-                            .setPopUpTo(R.id.subscriptionFragment,true).build())
-
+                    navigateWithAnimationFade(findNavController(), destination = R.id.profileFragment, popUpTo = R.id.subscriptionFragment)
                 }
             }
         )

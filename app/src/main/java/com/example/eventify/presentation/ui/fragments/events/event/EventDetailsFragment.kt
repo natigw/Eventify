@@ -14,10 +14,10 @@ import com.example.common.base.BaseFragment
 import com.example.common.utils.crossfadeAppear
 import com.example.common.utils.functions.dateFormatterIFYEAR_MNAMED_Comma_HM
 import com.example.common.utils.functions.getInstantTime
-import com.example.common.utils.functions.hideKeyboard
+import com.example.common.utils.hideKeyboard
 import com.example.common.utils.functions.validateInputFieldEmpty
 import com.example.common.utils.nancyToastSuccess
-import com.example.common.utils.navigateWithoutAnimation
+import com.example.common.utils.navigateWithAnimationFade
 import com.example.common.utils.startShimmer
 import com.example.common.utils.stopShimmer
 import com.example.domain.model.places.AddCommentItem
@@ -135,17 +135,17 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
 
         binding.buttonBackEventDetails.setOnClickListener {
             if(args.comingProfile)
-                navigateWithoutAnimation(findNavController(), R.id.profileFragment, R.id.placesFragment)
+                navigateWithAnimationFade(findNavController(), R.id.profileFragment, R.id.eventDetailsFragment)
             else
-                navigateWithoutAnimation(findNavController(), R.id.placesFragment)
+                navigateWithAnimationFade(findNavController(), R.id.placesFragment, R.id.eventDetailsFragment)
         }
 
         requireActivity().onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 if(args.comingProfile)
-                    navigateWithoutAnimation(findNavController(), R.id.profileFragment, R.id.placesFragment)
+                    navigateWithAnimationFade(findNavController(), R.id.profileFragment, R.id.eventDetailsFragment)
                 else
-                    navigateWithoutAnimation(findNavController(), R.id.placesFragment)
+                    navigateWithAnimationFade(findNavController(), R.id.placesFragment, R.id.eventDetailsFragment)
             }
         })
 

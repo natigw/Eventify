@@ -28,7 +28,7 @@ class MapViewModel @Inject constructor(
 ) : ViewModel() {
 
     val markerList = mutableListOf<Marker>()
-    var previousLocation: LatLng? = null
+    var currentLocation: LatLng? = null
 
     val eventsState = MutableStateFlow<List<EventItem>?>(null)
     val venuesState = MutableStateFlow<List<VenueItem>?>(null)

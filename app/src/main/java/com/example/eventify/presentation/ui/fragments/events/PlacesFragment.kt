@@ -2,15 +2,11 @@ package com.example.eventify.presentation.ui.fragments.events
 
 import com.example.eventify.R
 import com.example.common.base.BaseFragment
-import com.example.data.remote.api.VenueAPI
-import com.example.data.remote.interceptor.TokenManager
-import com.example.domain.repository.AuthRepository
 import com.example.eventify.databinding.FragmentPlacesBinding
-import com.example.eventify.presentation.ui.fragments.events.customEvent.CustomEventsFragment
+import com.example.eventify.presentation.ui.fragments.events.customEvent.UserEventsFragment
 import com.example.eventify.presentation.ui.fragments.events.event.EventsFragment
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class PlacesFragment : BaseFragment<FragmentPlacesBinding>(FragmentPlacesBinding::inflate) {
@@ -24,7 +20,7 @@ class PlacesFragment : BaseFragment<FragmentPlacesBinding>(FragmentPlacesBinding
 
         val fragmentList = arrayListOf(
             EventsFragment(),
-            CustomEventsFragment()
+            UserEventsFragment()
         )
         val placesViewPagerAdapter = PlacesViewPagerAdapter(fragmentList, requireActivity().supportFragmentManager,lifecycle)
         binding.viewPagerPlaces.adapter = placesViewPagerAdapter
@@ -32,5 +28,4 @@ class PlacesFragment : BaseFragment<FragmentPlacesBinding>(FragmentPlacesBinding
             tab.text = tabTitles[position]
         }.attach()
     }
-
 }

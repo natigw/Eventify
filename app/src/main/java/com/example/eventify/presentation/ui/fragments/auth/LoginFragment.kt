@@ -1,22 +1,13 @@
 package com.example.eventify.presentation.ui.fragments.auth
 
 import android.content.Intent
-import android.view.View
-import android.widget.EditText
-import android.widget.TextView
-import androidx.appcompat.content.res.AppCompatResources
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.startActivity
-import androidx.core.view.isVisible
 import androidx.credentials.CredentialManager
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.common.base.BaseFragment
 import com.example.common.utils.blockButton
-import com.example.common.utils.functions.hideKeyboard
+import com.example.common.utils.hideKeyboard
 import com.example.common.utils.functions.validateInputFieldEmpty
 import com.example.common.utils.nancyToastSuccess
 import com.example.common.utils.nancyToastWarning
@@ -40,7 +31,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
 
     override fun onViewCreatedLight() {
         observer()
-        checkUser()
     }
 
     override fun buttonListeners() {
@@ -98,16 +88,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
 
         binding.buttonTest.setOnClickListener {
             navigateToTestActivity()
-        }
-    }
-
-    private fun checkUser() {
-        val userEmail = viewModel.sharedPrefUserTokens.getString("userEmail", null)
-        val condition = viewModel.sharedPrefUserTokens.getBoolean("isAuthorized", false)
-        if (userEmail != null && !condition) {
-            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToVerificationFragment())
-        } else {
-            binding.textInputUsernameLogin.setText(userEmail)
         }
     }
 

@@ -1,16 +1,12 @@
 package com.example.eventify.presentation.ui.fragments.auth
 
-import android.content.Context
 import android.util.Log
-import android.view.View
-import android.widget.Button
-import android.widget.ProgressBar
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.common.base.BaseFragment
 import com.example.common.utils.blockButton
-import com.example.common.utils.functions.hideKeyboard
+import com.example.common.utils.hideKeyboard
 import com.example.common.utils.functions.isValidEmail
 import com.example.common.utils.functions.validateInputFieldMeet
 import com.example.common.utils.nancyToastInfo

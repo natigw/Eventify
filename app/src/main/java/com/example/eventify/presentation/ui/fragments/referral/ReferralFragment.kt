@@ -6,12 +6,10 @@ import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.example.common.base.BaseFragment
 import com.example.common.utils.functions.copyToClipboard
-import com.example.common.utils.navigateWithAnimationLeftToRight
-import com.example.common.utils.navigateWithAnimationRightToLeft
+import com.example.common.utils.navigateWithAnimationFade
 import com.example.eventify.R
 import com.example.eventify.databinding.FragmentReferralBinding
 import com.example.eventify.presentation.viewmodels.ReferralViewModel
@@ -76,24 +74,13 @@ class ReferralFragment : BaseFragment<FragmentReferralBinding>(FragmentReferralB
         super.buttonListeners()
 
         binding.buttonBackReferral.setOnClickListener {
-            navigateWithAnimationLeftToRight(findNavController(),R.id.profileFragment, R.id.referralFragment)
+            navigateWithAnimationFade(findNavController(), destination = R.id.profileFragment, popUpTo = R.id.referralFragment)
         }
         requireActivity().onBackPressedDispatcher.addCallback(
             this,
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
-//                    navigateWithAnimationLeftToRight(findNavController(), R.id.profileFragment, R.id.referralFragment)
-                    findNavController().navigate(
-                        R.id.profileFragment,
-                        null,
-                        NavOptions.Builder()
-                            .setEnterAnim(R.anim.from_left)
-                            .setExitAnim(R.anim.to_right)
-                            .setPopEnterAnim(R.anim.fade_in)
-                            .setPopExitAnim(R.anim.fade_out)
-                            .setPopUpTo(R.id.referralFragment, true)
-                            .build()
-                    )
+                    navigateWithAnimationFade(findNavController(), destination = R.id.profileFragment, popUpTo = R.id.referralFragment)
                 }
             }
         )
