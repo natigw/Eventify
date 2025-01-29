@@ -18,6 +18,7 @@ import com.example.eventify.presentation.viewmodels.MarkerDetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -53,17 +54,17 @@ class MarkerDetailsBottomSheet : BaseBottomSheetFragment<BottomsheetMarkerDetail
     private fun observer(){
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.eventDetails
-                .filter { it!=null }
+                .filterNotNull()
                 .collectLatest {
-                    setEventUI(it!!)
+                    setEventUI(it)
             }
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.venueDetails
-                .filter { it!=null }
+                .filterNotNull()
                 .collectLatest {
-                    setVenueUI(it!!)
+                    setVenueUI(it)
             }
         }
     }
@@ -94,7 +95,7 @@ class MarkerDetailsBottomSheet : BaseBottomSheetFragment<BottomsheetMarkerDetail
             buttonBuyTicketMarkerDetails.visibility = View.VISIBLE
             buttonShortestRouteMarkerDetails.text = getString(R.string.get_route)
             buttonBuyTicketMarkerDetails.setOnClickListener {
-                lifecycleScope.launch {
+                viewLifecycleOwner.lifecycleScope.launch {
                     try {
                         val response = viewModel.getSearchDetails(eventDetails.title)
                         val url = "https://iticket.az/events/${response.category}/${response.slug}"

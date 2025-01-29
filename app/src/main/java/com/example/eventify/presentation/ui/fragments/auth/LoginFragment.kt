@@ -20,7 +20,7 @@ import com.example.eventify.presentation.ui.activities.MainActivity
 import com.example.eventify.presentation.viewmodels.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -84,18 +84,14 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                 }
             }
         }
-
-        binding.buttonTest.setOnClickListener {
-            findNavController().navigate(R.id.test1Fragment)
-        }
     }
 
     private fun observer() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.isLoadingGoogle
-                .filter { it != null }
+                .filterNotNull()
                 .collectLatest {
-                    if (it!!)
+                    if (it)
                         blockButton(
                             progressBar = binding.progressBarGoogle,
                             button = binding.buttonGoogle
@@ -112,10 +108,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.isLoading
-                .filter { it != null }
+                .filterNotNull()
                 .collectLatest {
                     with(binding) {
-                        if (it!!) {
+                        if (it) {
                             blockButton(
                                 progressBar = progressBarLogin,
                                 button = buttonLogin

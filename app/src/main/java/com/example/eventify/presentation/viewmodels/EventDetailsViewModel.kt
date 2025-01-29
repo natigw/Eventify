@@ -12,7 +12,7 @@ import com.example.domain.model.places.event.EventDetailsItem
 import com.example.domain.repository.AuthRepository
 import com.example.domain.repository.EventRepository
 import com.example.eventify.NetworkUtils
-import com.example.eventify.presentation.viewmodels.MarkerDetailsViewModel.ITicketRetrofitInstance.api
+import com.example.eventify.presentation.viewmodels.EventDetailsViewModel.ITicketRetrofitInstance.api
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
@@ -27,7 +27,7 @@ class EventDetailsViewModel @Inject constructor(
     private val authRepository: AuthRepository
 ) : ViewModel() {
 
-    object ITicketRetrofitInstance {
+    private object ITicketRetrofitInstance {
         val api: ITicketAPI by lazy {
             Retrofit.Builder()
                 .baseUrl("https://api.iticket.az/en/v5/")

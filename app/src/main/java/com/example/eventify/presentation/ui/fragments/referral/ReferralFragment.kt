@@ -25,7 +25,6 @@ class ReferralFragment : BaseFragment<FragmentReferralBinding>(FragmentReferralB
 
     override fun onViewCreatedLight() {
 
-
         binding.card1Referral.visibility = View.GONE
 
 
@@ -39,10 +38,8 @@ class ReferralFragment : BaseFragment<FragmentReferralBinding>(FragmentReferralB
                     .filter { it.isNotEmpty() }
                     .collectLatest {
                         chosenEvent = it.random().name
-                        binding.textGetTicketDescriptionReferral.text =
-                            getString(R.string.referral_description_1)+"${3 - numberOfLinkSent}"+getString(R.string.referral_description_2)+"$chosenEvent"+getString(R.string.referral_description_3)
-                        binding.textGetTicketDescriptionReferral.text =
-                            getString(R.string.referral_congrats_1)+"$chosenEvent"+getString(R.string.referral_congrats_2)
+                        binding.textGetTicketDescriptionReferral.text = getString(R.string.referral_description_1)+"${3 - numberOfLinkSent}"+getString(R.string.referral_description_2)+"$chosenEvent"+getString(R.string.referral_description_3)
+                        binding.textGetTicketDescriptionReferral.text = getString(R.string.referral_congrats_1)+"$chosenEvent"+getString(R.string.referral_congrats_2)
                     }
 
                 binding.progressReferral.progress = 33 * numberOfLinkSent

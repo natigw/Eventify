@@ -2,8 +2,8 @@ package com.example.eventify.presentation.ui.fragments.events.event
 
 import android.content.Intent
 import android.net.Uri
-import android.view.View
 import androidx.activity.OnBackPressedCallback
+import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -14,11 +14,11 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.common.base.BaseFragment
 import com.example.common.utils.crossfadeAppear
+import com.example.common.utils.crossfadeDisappear
 import com.example.common.utils.functions.dateFormatterIFYEAR_MNAMED_Comma_HM
 import com.example.common.utils.functions.getInstantTime
-import com.example.common.utils.hideKeyboard
 import com.example.common.utils.functions.validateInputFieldEmpty
-import com.example.common.utils.nancyToastSuccess
+import com.example.common.utils.hideKeyboard
 import com.example.common.utils.nancyToastWarning
 import com.example.common.utils.navigateWithAnimationFade
 import com.example.common.utils.startShimmer
@@ -50,10 +50,8 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
 
     override fun onResume() {
         super.onResume()
-        if (viewmodel.eventDetails.value == null) {
-            makeViewsInvisible()
-            startShimmer(binding.shimmerEventDetails)
-        }
+        if (viewmodel.eventDetails.value == null)
+            changeViewsVisibility(true)
     }
 
     override fun onViewCreatedLight() {
@@ -65,62 +63,46 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
 
     override fun onPause() {
         super.onPause()
-        stopShimmer(binding.shimmerEventDetails)
-        makeViewsVisible()
+        changeViewsVisibility(false)
     }
 
-    private fun makeViewsInvisible(){
-        with(binding) {
-            buttonBackEventDetails.visibility = View.INVISIBLE
-            textEventName.visibility = View.INVISIBLE
-            imageEvent.visibility = View.INVISIBLE
-            buttonLikeEvent.visibility = View.INVISIBLE
-            textEventDetailsText.visibility = View.INVISIBLE
-            textEventDescription.visibility = View.INVISIBLE
-            textEventTypeText.visibility = View.INVISIBLE
-            textEventType.visibility = View.INVISIBLE
-            textEventOrganizerText.visibility = View.INVISIBLE
-            textEventOrganizer.visibility = View.INVISIBLE
-            textEventDateText.visibility = View.INVISIBLE
-            textEventDate.visibility = View.INVISIBLE
-            textEventDurationHoursText.visibility = View.INVISIBLE
-            textEventDurationHours.visibility = View.INVISIBLE
-            textEventPublishedText.visibility = View.INVISIBLE
-            textEventPublished.visibility = View.INVISIBLE
-            textEventLikesText.visibility = View.INVISIBLE
-            textEventLikeCount.visibility = View.INVISIBLE
-            buttonEventShowLocation.visibility = View.INVISIBLE
-            buttonBuyTicketEventDetails.visibility = View.INVISIBLE
-            textEventDetailsCommentsText.visibility = View.INVISIBLE
-            textInputLayoutWriteCommentEventDetails.visibility = View.INVISIBLE
-            textInputEdittextAddCommentEvent.visibility = View.INVISIBLE
-            buttonSendCommentEventDetails.visibility = View.INVISIBLE
+    private fun changeViewsVisibility(makeInvisible: Boolean) {
+
+        if (makeInvisible) {
+            startShimmer(binding.shimmerEventDetails)
+            if (viewmodel.likedState.value == null)
+                binding.buttonLikeEvent.isInvisible = true
+            if (viewmodel.comments.value == null)
+                binding.buttonSendCommentEventDetails.isInvisible = true
+        } else {
+            stopShimmer(binding.shimmerEventDetails)
+            if (viewmodel.comments.value == null)
+                crossfadeAppear(binding.progressBarCommentEventDetails, 1000)
         }
-    }
-    private fun makeViewsVisible(){
+
         with(binding) {
-            buttonBackEventDetails.visibility = View.VISIBLE
-            textEventName.visibility = View.VISIBLE
-            imageEvent.visibility = View.VISIBLE
-            textEventDetailsText.visibility = View.VISIBLE
-            textEventDescription.visibility = View.VISIBLE
-            textEventTypeText.visibility = View.VISIBLE
-            textEventType.visibility = View.VISIBLE
-            textEventOrganizerText.visibility = View.VISIBLE
-            textEventOrganizer.visibility = View.VISIBLE
-            textEventDateText.visibility = View.VISIBLE
-            textEventDate.visibility = View.VISIBLE
-            textEventDurationHoursText.visibility = View.VISIBLE
-            textEventDurationHours.visibility = View.VISIBLE
-            textEventPublishedText.visibility = View.VISIBLE
-            textEventPublished.visibility = View.VISIBLE
-            textEventLikesText.visibility = View.VISIBLE
-            textEventLikeCount.visibility = View.VISIBLE
-            buttonEventShowLocation.visibility = View.VISIBLE
-            buttonBuyTicketEventDetails.visibility = View.VISIBLE
-            textEventDetailsCommentsText.visibility = View.VISIBLE
-            textInputLayoutWriteCommentEventDetails.visibility = View.VISIBLE
-            textInputEdittextAddCommentEvent.visibility = View.VISIBLE
+            buttonBackEventDetails.isInvisible = makeInvisible
+            textEventName.isInvisible = makeInvisible
+            imageEvent.isInvisible = makeInvisible
+            textEventDetailsText.isInvisible = makeInvisible
+            textEventDescription.isInvisible = makeInvisible
+            textEventTypeText.isInvisible = makeInvisible
+            textEventType.isInvisible = makeInvisible
+            textEventOrganizerText.isInvisible = makeInvisible
+            textEventOrganizer.isInvisible = makeInvisible
+            textEventDateText.isInvisible = makeInvisible
+            textEventDate.isInvisible = makeInvisible
+            textEventDurationHoursText.isInvisible = makeInvisible
+            textEventDurationHours.isInvisible = makeInvisible
+            textEventPublishedText.isInvisible = makeInvisible
+            textEventPublished.isInvisible = makeInvisible
+            textEventLikesText.isInvisible = makeInvisible
+            textEventLikeCount.isInvisible = makeInvisible
+            buttonEventShowLocation.isInvisible = makeInvisible
+            buttonBuyTicketEventDetails.isInvisible = makeInvisible
+            textEventDetailsCommentsText.isInvisible = makeInvisible
+            textInputLayoutWriteCommentEventDetails.isInvisible = makeInvisible
+            textInputEdittextAddCommentEvent.isInvisible = makeInvisible
         }
     }
 
@@ -237,7 +219,7 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
             }
 
             buttonBuyTicketEventDetails.setOnClickListener {
-                lifecycleScope.launch {
+                viewLifecycleOwner.lifecycleScope.launch {
                     viewmodel.eventDetails
                         .filterNotNull()
                         .collectLatest {
@@ -281,8 +263,7 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
             viewmodel.eventDetails
                 .filterNotNull()
                 .collectLatest {
-                    stopShimmer(binding.shimmerEventDetails)
-                    makeViewsVisible()
+                    changeViewsVisibility(false)
                     setUI(it)
                 }
         }
@@ -295,7 +276,6 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
                 }
             }
         }
-
     }
 
     private fun setAdapters() {
@@ -308,7 +288,8 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>(FragmentE
                 .filterNotNull()
                 .collectLatest {
                     binding.textNoCommentsTextEventDetails.isVisible = it.isEmpty()
-                    binding.progressBarCommentEventDetails.isVisible = false
+                    binding.rvCommentsEventDetails.isVisible = it.isNotEmpty()
+                    crossfadeDisappear(binding.progressBarCommentEventDetails, 300, true)
                     crossfadeAppear(binding.buttonSendCommentEventDetails,500)
                     commentAdapter.updateAdapter(it)
                 }

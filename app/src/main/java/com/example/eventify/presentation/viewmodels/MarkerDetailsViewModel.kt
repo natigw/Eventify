@@ -23,7 +23,7 @@ class MarkerDetailsViewModel @Inject constructor(
     private val eventRepository: EventRepository
 ) : ViewModel() {
 
-    object ITicketRetrofitInstance {
+    private object ITicketRetrofitInstance {
         val api: ITicketAPI by lazy {
             Retrofit.Builder()
                 .baseUrl("https://api.iticket.az/en/v5/")

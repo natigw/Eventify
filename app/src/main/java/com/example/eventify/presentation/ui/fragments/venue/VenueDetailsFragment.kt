@@ -1,8 +1,7 @@
 package com.example.eventify.presentation.ui.fragments.venue
 
-import android.util.Log
-import android.view.View
 import androidx.activity.OnBackPressedCallback
+import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -13,6 +12,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.common.base.BaseFragment
 import com.example.common.utils.crossfadeAppear
+import com.example.common.utils.crossfadeDisappear
 import com.example.common.utils.functions.dateFormatterIFYEAR_MNAMED_Comma_HM
 import com.example.common.utils.functions.getInstantTime
 import com.example.common.utils.functions.validateInputFieldEmpty
@@ -47,10 +47,8 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
 
     override fun onResume() {
         super.onResume()
-        if (viewmodel.venueDetails.value == null) {
-            makeViewsInvisible()
-            startShimmer(binding.shimmerVenueDetails)
-        }
+        if (viewmodel.venueDetails.value == null)
+            changeViewsVisibility(true)
     }
 
     override fun onViewCreatedLight() {
@@ -62,48 +60,37 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
 
     override fun onPause() {
         super.onPause()
-        stopShimmer(binding.shimmerVenueDetails)
-        makeViewsVisible()
+        changeViewsVisibility(false)
     }
 
-    private fun makeViewsInvisible() {
-        with(binding) {
-            buttonBackVenue.visibility = View.INVISIBLE
-            textVenueName.visibility = View.INVISIBLE
-            imageVenue.visibility = View.INVISIBLE
-            textVenueDetailsText.visibility = View.INVISIBLE
-            textVenueDescription.visibility = View.INVISIBLE
-            textVenueTypeText.visibility = View.INVISIBLE
-            textVenueType.visibility = View.INVISIBLE
-            textVenueOpenHoursText.visibility = View.INVISIBLE
-            textVenueOpenHours.visibility = View.INVISIBLE
-            textVenueLikesText.visibility = View.INVISIBLE
-            textVenueLikeCount.visibility = View.INVISIBLE
-            buttonVenueShowLocation.visibility = View.INVISIBLE
-            textVenueDetailsCommentsText.visibility = View.INVISIBLE
-            textInputLayoutWriteCommentVenueDetails.visibility = View.INVISIBLE
-            textInputAddCommentVenue.visibility = View.INVISIBLE
-            buttonSendCommentVenueDetails.visibility = View.INVISIBLE
+    private fun changeViewsVisibility(makeInvisible: Boolean) {
+
+        if (makeInvisible) {
+            startShimmer(binding.shimmerVenueDetails)
+            if (viewmodel.commentsState.value == null)
+                binding.buttonSendCommentVenueDetails.isInvisible = true
+        } else {
+            stopShimmer(binding.shimmerVenueDetails)
+            if (viewmodel.commentsState.value == null)
+                crossfadeAppear(binding.progressBarCommentVenueDetails, 1000)
         }
-    }
 
-    private fun makeViewsVisible() {
         with(binding) {
-            buttonBackVenue.visibility = View.VISIBLE
-            textVenueName.visibility = View.VISIBLE
-            imageVenue.visibility = View.VISIBLE
-            textVenueDetailsText.visibility = View.VISIBLE
-            textVenueDescription.visibility = View.VISIBLE
-            textVenueTypeText.visibility = View.VISIBLE
-            textVenueType.visibility = View.VISIBLE
-            textVenueOpenHoursText.visibility = View.VISIBLE
-            textVenueOpenHours.visibility = View.VISIBLE
-            textVenueLikesText.visibility = View.VISIBLE
-            textVenueLikeCount.visibility = View.VISIBLE
-            buttonVenueShowLocation.visibility = View.VISIBLE
-            textVenueDetailsCommentsText.visibility = View.VISIBLE
-            textInputLayoutWriteCommentVenueDetails.visibility = View.VISIBLE
-            textInputAddCommentVenue.visibility = View.VISIBLE
+            buttonBackVenue.isInvisible = makeInvisible
+            textVenueName.isInvisible = makeInvisible
+            imageVenue.isInvisible = makeInvisible
+            textVenueDetailsText.isInvisible = makeInvisible
+            textVenueDescription.isInvisible = makeInvisible
+            textVenueTypeText.isInvisible = makeInvisible
+            textVenueType.isInvisible = makeInvisible
+            textVenueOpenHoursText.isInvisible = makeInvisible
+            textVenueOpenHours.isInvisible = makeInvisible
+            textVenueLikesText.isInvisible = makeInvisible
+            textVenueLikeCount.isInvisible = makeInvisible
+            buttonVenueShowLocation.isInvisible = makeInvisible
+            textVenueDetailsCommentsText.isInvisible = makeInvisible
+            textInputLayoutWriteCommentVenueDetails.isInvisible = makeInvisible
+            textInputAddCommentVenue.isInvisible = makeInvisible
         }
     }
 
@@ -160,7 +147,7 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
             textVenueDescription.text = venueDetailsItem.description
             textVenueType.text = venueDetailsItem.venueType
             textVenueOpenHours.text = venueDetailsItem.openHours
-            textVenueLikeCount.text = venueDetailsItem.likeCount.toString()
+            textVenueLikeCount.text = String.format(venueDetailsItem.likeCount.toString())
             Glide.with(imageVenue)
                 .load(venueDetailsItem.imageLink[0])
                 .placeholder(R.drawable.placeholder_venue)
@@ -190,14 +177,12 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
 
             buttonVenueShowLocation.setOnClickListener {
                 viewLifecycleOwner.lifecycleScope.launch {
-                    Log.e("turalin logu", "salam", )
                     sharedViewModel.setCoordinates(
                         LatLng(
                             venueDetailsItem.coordinates.latitude,
                             venueDetailsItem.coordinates.longitude
                         )
                     )
-                    Log.e("turalin logu", venueDetailsItem.coordinates.longitude.toString())
                 }
                 val bottomNavigationView = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
                 bottomNavigationView.selectedItemId = R.id.mapFragment
@@ -215,7 +200,8 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
                 .filterNotNull()
                 .collect {
                     binding.textNoCommentsTextVenueDetails.isVisible = it.isEmpty()
-                    binding.progressBarCommentVenueDetails.isVisible = false
+                    binding.rvCommentsVenueDetails.isVisible = it.isNotEmpty()
+                    crossfadeDisappear(binding.progressBarCommentVenueDetails, 300, true)
                     crossfadeAppear(binding.buttonSendCommentVenueDetails, 500)
                     commentAdapter.updateAdapter(it)
                 }
@@ -224,7 +210,6 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
 
     private fun observer() {
 
-
         viewmodel.getComments(args.venueId)
         viewmodel.getVenueDetails(args.venueId)
 
@@ -232,8 +217,7 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
             viewmodel.venueDetails
                 .filterNotNull()
                 .collectLatest {
-                    stopShimmer(binding.shimmerVenueDetails)
-                    makeViewsVisible()
+                    changeViewsVisibility(false)
                     setUI(it)
                 }
         }
