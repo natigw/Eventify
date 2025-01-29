@@ -213,27 +213,27 @@
             app:layout_constraintTop_toTopOf="@id/textVenueOpenHoursTextShimmer"
             app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small" />
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/textVenueLikesTextShimmer"
-            android:layout_width="50dp"
-            android:layout_height="16dp"
-            android:layout_marginTop="11.5dp"
-            android:adjustViewBounds="true"
-            android:background="@color/shimmer_gray"
-            app:layout_constraintStart_toStartOf="@id/textVenueOpenHoursTextShimmer"
-            app:layout_constraintTop_toBottomOf="@+id/textVenueOpenHoursTextShimmer"
-            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small" />
+<!--        <com.google.android.material.imageview.ShapeableImageView-->
+<!--            android:id="@+id/textVenueLikesTextShimmer"-->
+<!--            android:layout_width="50dp"-->
+<!--            android:layout_height="16dp"-->
+<!--            android:layout_marginTop="11.5dp"-->
+<!--            android:adjustViewBounds="true"-->
+<!--            android:background="@color/shimmer_gray"-->
+<!--            app:layout_constraintStart_toStartOf="@id/textVenueOpenHoursTextShimmer"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/textVenueOpenHoursTextShimmer"-->
+<!--            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small" />-->
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/textVenueLikesShimmer"
-            android:layout_width="40dp"
-            android:layout_height="16dp"
-            android:layout_marginStart="12dp"
-            android:adjustViewBounds="true"
-            android:background="@color/shimmer_gray"
-            app:layout_constraintStart_toEndOf="@id/textVenueLikesTextShimmer"
-            app:layout_constraintTop_toTopOf="@id/textVenueLikesTextShimmer"
-            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small" />
+<!--        <com.google.android.material.imageview.ShapeableImageView-->
+<!--            android:id="@+id/textVenueLikesShimmer"-->
+<!--            android:layout_width="40dp"-->
+<!--            android:layout_height="16dp"-->
+<!--            android:layout_marginStart="12dp"-->
+<!--            android:adjustViewBounds="true"-->
+<!--            android:background="@color/shimmer_gray"-->
+<!--            app:layout_constraintStart_toEndOf="@id/textVenueLikesTextShimmer"-->
+<!--            app:layout_constraintTop_toTopOf="@id/textVenueLikesTextShimmer"-->
+<!--            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small" />-->
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonVenueDetailsShowLocationShimmer"
@@ -248,7 +248,7 @@
             app:cornerRadius="@dimen/eventify_large_button_corner_radius"
             app:layout_constraintEnd_toEndOf="@id/guidelineVenueDetailsShimmer2"
             app:layout_constraintStart_toStartOf="@id/guidelineVenueDetailsShimmer1"
-            app:layout_constraintTop_toBottomOf="@+id/textVenueLikesTextShimmer" />
+            app:layout_constraintTop_toBottomOf="@+id/textVenueOpenHoursTextShimmer" />
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/textVenueDetailsCommentsTextShimmer"

@@ -25,10 +25,7 @@ class EventRepositoryImpl @Inject constructor(
     override suspend fun getEvents(): List<EventItem> {
         try {
             val response = api.getAllEvents()
-
             val responseLiked = api.getFavEventIDs()
-
-
 
             if (response.isSuccessful && response.body() != null) {
                 response.body()!!.let { events->

@@ -7,8 +7,6 @@ import com.example.domain.model.places.SearchItem
 import com.example.domain.model.places.event.CreateCustomEventRequestItem
 import com.example.domain.model.places.event.EventDetailsItem
 import com.example.domain.model.places.event.EventItem
-import com.example.domain.model.places.event.FavEventItem
-import com.example.domain.model.places.event.SearchEventItem
 
 interface EventRepository {
     suspend fun getEvents(): List<EventItem>

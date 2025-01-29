@@ -212,27 +212,27 @@
             app:layout_constraintTop_toTopOf="@id/textVenueOpenHoursText"
             tools:text="09:00 - 23:00" />
 
-        <TextView
-            android:id="@+id/textVenueLikesText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:fontFamily="@font/inter_regular"
-            android:text="@string/likes"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="@id/textVenueOpenHoursText"
-            app:layout_constraintTop_toBottomOf="@+id/textVenueOpenHoursText" />
+<!--        <TextView-->
+<!--            android:id="@+id/textVenueLikesText"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="4dp"-->
+<!--            android:fontFamily="@font/inter_regular"-->
+<!--            android:text="@string/likes"-->
+<!--            android:textSize="16sp"-->
+<!--            app:layout_constraintStart_toStartOf="@id/textVenueOpenHoursText"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/textVenueOpenHoursText" />-->
 
-        <TextView
-            android:id="@+id/textVenueLikeCount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
-            android:fontFamily="@font/inter_light_italic"
-            android:textSize="16sp"
-            app:layout_constraintStart_toEndOf="@id/textVenueLikesText"
-            app:layout_constraintTop_toTopOf="@id/textVenueLikesText"
-            tools:text="12" />
+<!--        <TextView-->
+<!--            android:id="@+id/textVenueLikeCount"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="6dp"-->
+<!--            android:fontFamily="@font/inter_light_italic"-->
+<!--            android:textSize="16sp"-->
+<!--            app:layout_constraintStart_toEndOf="@id/textVenueLikesText"-->
+<!--            app:layout_constraintTop_toTopOf="@id/textVenueLikesText"-->
+<!--            tools:text="12" />-->
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonVenueShowLocation"
@@ -253,7 +253,7 @@
             app:iconTint="@color/eventify_primary"
             app:layout_constraintEnd_toEndOf="@id/guidelineVenueDetails2"
             app:layout_constraintStart_toStartOf="@id/guidelineVenueDetails1"
-            app:layout_constraintTop_toBottomOf="@+id/textVenueLikesText" />
+            app:layout_constraintTop_toBottomOf="@+id/textVenueOpenHoursText" />
 
         <TextView
             android:id="@+id/textVenueDetailsCommentsText"

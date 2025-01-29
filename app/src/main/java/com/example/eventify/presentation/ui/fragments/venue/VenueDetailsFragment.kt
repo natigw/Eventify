@@ -85,8 +85,8 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
             textVenueType.isInvisible = makeInvisible
             textVenueOpenHoursText.isInvisible = makeInvisible
             textVenueOpenHours.isInvisible = makeInvisible
-            textVenueLikesText.isInvisible = makeInvisible
-            textVenueLikeCount.isInvisible = makeInvisible
+            //textVenueLikesText.isInvisible = makeInvisible
+            //textVenueLikeCount.isInvisible = makeInvisible
             buttonVenueShowLocation.isInvisible = makeInvisible
             textVenueDetailsCommentsText.isInvisible = makeInvisible
             textInputLayoutWriteCommentVenueDetails.isInvisible = makeInvisible
@@ -147,9 +147,9 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
             textVenueDescription.text = venueDetailsItem.description
             textVenueType.text = venueDetailsItem.venueType
             textVenueOpenHours.text = venueDetailsItem.openHours
-            textVenueLikeCount.text = String.format(venueDetailsItem.likeCount.toString())
+            //textVenueLikeCount.text = String.format(venueDetailsItem.likeCount.toString())
             Glide.with(imageVenue)
-                .load(venueDetailsItem.imageLink[0])
+                .load(venueDetailsItem.imageLink)
                 .placeholder(R.drawable.placeholder_venue)
                 .error(R.drawable.placeholder_venue)
                 .transition(DrawableTransitionOptions.withCrossFade())
@@ -231,6 +231,5 @@ class VenueDetailsFragment : BaseFragment<FragmentVenueDetailsBinding>(FragmentV
                     }
                 }
         }
-
     }
 }
