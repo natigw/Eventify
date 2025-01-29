@@ -286,5 +286,16 @@
             app:layout_constraintTop_toBottomOf="@+id/buttonTimePickerFinishCCE"
             app:layout_constraintVertical_bias="1.0" />
 
+        <Button
+            android:id="@+id/buttonUploadImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="add image"
+            android:backgroundTint="@color/transparent"
+            android:textColor="@color/transparent"
+            app:layout_constraintEnd_toEndOf="@+id/imagePictureCreateCustomEvent"
+            app:layout_constraintStart_toStartOf="@+id/imagePictureCreateCustomEvent"
+            app:layout_constraintTop_toTopOf="@+id/buttonAddPictureCreateCustomEvent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

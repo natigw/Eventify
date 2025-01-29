@@ -1,10 +1,15 @@
 package com.example.eventify.presentation.ui.fragments.events.customEvent
 
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
 import android.icu.util.Calendar
+import android.net.Uri
 import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -21,6 +26,7 @@ import com.example.common.utils.nancyToastError
 import com.example.common.utils.nancyToastSuccess
 import com.example.common.utils.nancyToastWarning
 import com.example.common.utils.navigateWithAnimationFade
+import com.example.data.remote.api.EventAPI
 import com.example.eventify.R
 import com.example.eventify.databinding.FragmentCreateCustomEventBinding
 import com.example.eventify.presentation.viewmodels.CreateCustomEventViewModel
@@ -30,14 +36,26 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import java.io.File
+import java.net.URLConnection
 import java.time.LocalDate
 import java.time.LocalTime
+import javax.inject.Inject
+
 
 @AndroidEntryPoint
 class CreateCustomEventFragment : BaseFragment<FragmentCreateCustomEventBinding>(FragmentCreateCustomEventBinding::inflate) {
+
+    @Inject
+    lateinit var api: EventAPI
 
     private val viewmodel by viewModels<CreateCustomEventViewModel>()
 
@@ -64,7 +82,69 @@ class CreateCustomEventFragment : BaseFragment<FragmentCreateCustomEventBinding>
 
     override fun onViewCreatedLight() {
         viewModelObserver()
+
+        binding.buttonUploadImage.setOnClickListener {
+            val intent = Intent(Intent.ACTION_GET_CONTENT)
+            intent.type = "image/*"
+            startActivityForResult(intent, 10)
+        }
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == 10 && resultCode == Activity.RESULT_OK && data != null) {
+            val uri: Uri = data.data!!
+            val file = uriToFile(requireContext(), uri)
+            uploadFile(file)
+        }
+    }
+
+    private fun uploadFile(file: File) {
+        val mimeType = getMimeType(file)
+        val requestBody = file.asRequestBody(mimeType.toMediaTypeOrNull())
+        val multipartBody = MultipartBody.Part.createFormData("file", file.name, requestBody) // Ensure correct field name
+
+        lifecycleScope.launch(Dispatchers.IO) {
+            try {
+                val response = api.uploadFileAndGetLink("events", multipartBody)
+                if (response.isSuccessful) {
+                    val imageLink = response.body()
+                    withContext(Dispatchers.Main) {
+                        Glide.with(binding.imagePictureCreateCustomEvent)
+                            .load(imageLink)
+                            .placeholder(R.drawable.placeholder_event)
+                            .error(R.drawable.placeholder_venue)
+                            .transition(DrawableTransitionOptions.withCrossFade())
+                            .into(binding.imagePictureCreateCustomEvent)
+                    }
+                    Log.d("Upload", "Raw Response: $imageLink")
+                } else {
+                    val errorMsg = response.errorBody()?.string() ?: "Unknown error"
+                    Log.e("Upload", "Upload failed! Code: ${response.code()}, Error: $errorMsg")
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(requireContext(), "Error: ${e.localizedMessage}", Toast.LENGTH_SHORT).show()
+                    Log.e("Upload", "Exception: ${e.message}", e)
+                }
+            }
+        }
+    }
+
+    private fun getMimeType(file: File): String {
+        return URLConnection.guessContentTypeFromName(file.name) ?: "image/jpeg"
+    }
+
+    private fun uriToFile(context: Context, uri: Uri): File {
+        val inputStream = context.contentResolver.openInputStream(uri)!!
+        val file = File(context.cacheDir, "upload_image.jpg")
+        file.outputStream().use { outputStream -> inputStream.copyTo(outputStream) }
+        return file
+    }
+
+
+
 
     override fun buttonListeners() {
         super.buttonListeners()

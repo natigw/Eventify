@@ -1,6 +1,5 @@
 package com.example.data.remote.api
 
-import com.example.data.remote.model.events.FileUploadGetLinkResponse
 import com.example.data.remote.model.events.allEvents.ResponseAllEvents
 import com.example.data.remote.model.events.comment.addComment.RequestAddEventComment
 import com.example.data.remote.model.events.comment.commentDetails.ResponseEventCommentDetails
@@ -91,8 +90,9 @@ interface EventAPI {
     @POST("/files")
     suspend fun uploadFileAndGetLink(
         @Query("destination")
-        destination: String, //= "events",
+        destination: String,
         @Part
         fileUploadBody: MultipartBody.Part
-    ) : Response<FileUploadGetLinkResponse>
+    ): Response<String>
+
 }

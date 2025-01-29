@@ -15,6 +15,7 @@ import com.example.domain.model.places.event.EventDetailsItem
 import com.example.domain.model.places.event.EventItem
 import com.example.domain.repository.EventRepository
 import com.google.android.gms.maps.model.LatLng
+import okhttp3.MultipartBody
 import java.time.Instant
 import javax.inject.Inject
 
@@ -211,6 +212,16 @@ class EventRepositoryImpl @Inject constructor(
             else{
                 throw Exception(response.errorBody()?.string())
             }
+        }
+        catch (e : Exception){
+            throw e
+        }
+    }
+
+    override suspend fun uploadFileAndGetLink(multipartBody: MultipartBody.Part): String {
+        try {
+            val response = api.uploadFileAndGetLink(destination = "events", multipartBody)
+            return response.body()!!
         }
         catch (e : Exception){
             throw e

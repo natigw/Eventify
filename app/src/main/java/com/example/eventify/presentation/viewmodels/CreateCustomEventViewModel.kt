@@ -7,6 +7,7 @@ import com.example.domain.repository.EventRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
+import okhttp3.MultipartBody
 import java.time.LocalDate
 import java.time.LocalTime
 import javax.inject.Inject
@@ -24,6 +25,16 @@ class CreateCustomEventViewModel @Inject constructor(
         viewModelScope.launch {
             try {
 
+            } catch (e: Exception) {
+                Log.e("network event", e.toString())
+            }
+        }
+    }
+
+    fun getLinkImageUpload(multipartBodyPart: MultipartBody.Part) {
+        viewModelScope.launch {
+            try {
+                eventRepository.uploadFileAndGetLink(multipartBodyPart)
             } catch (e: Exception) {
                 Log.e("network event", e.toString())
             }

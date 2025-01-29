@@ -7,6 +7,7 @@ import com.example.domain.model.places.SearchItem
 import com.example.domain.model.places.event.CreateCustomEventRequestItem
 import com.example.domain.model.places.event.EventDetailsItem
 import com.example.domain.model.places.event.EventItem
+import okhttp3.MultipartBody
 
 interface EventRepository {
     suspend fun getEvents(): List<EventItem>
@@ -31,5 +32,7 @@ interface EventRepository {
     suspend fun likeEvent(eventId: Int)
 
     suspend fun searchEvent(query: String) : List<SearchItem>
+
+    suspend fun uploadFileAndGetLink(multipartBody: MultipartBody.Part): String
 
 }
