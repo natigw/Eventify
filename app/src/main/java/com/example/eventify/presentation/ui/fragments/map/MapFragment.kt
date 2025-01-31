@@ -85,47 +85,6 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         searchInputHandler()
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(this)
-        testingUses()
-    }
-
-
-
-    fun testingUses(){
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.isLoading
-                .filterNotNull()
-                .collectLatest {
-                    binding.root.getConstraintSet(R.id.end).apply {
-                        if(it){
-                            this.setVisibility(R.id.progressBar, View.VISIBLE)
-                        }
-                        else{
-                            this.setVisibility(R.id.progressBar,View.INVISIBLE)
-                        }
-                        binding.progressBar.refreshDrawableState()
-                    }
-                    binding.searchRV.isVisible = !it
-                }
-        }
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.notFoundState
-                .filterNotNull()
-                .collectLatest {
-                    if(it){
-                        binding.root.getConstraintSet(R.id.end).apply {
-                            this.setVisibility(R.id.notFoundView,View.VISIBLE)
-                        }
-                    }
-                    else{
-                        binding.root.getConstraintSet(R.id.end).apply {
-                            this.setVisibility(R.id.notFoundView,View.INVISIBLE)
-                        }
-                    }
-                    binding.root.requestLayout()
-            }
-        }
-
     }
 
 
@@ -239,7 +198,40 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             }
         }
 
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.isLoading
+                .filterNotNull()
+                .collectLatest {
+                    binding.root.getConstraintSet(R.id.end).apply {
+                        if(it){
+                            this.setVisibility(R.id.progressBar, View.VISIBLE)
+                        }
+                        else{
+                            this.setVisibility(R.id.progressBar,View.INVISIBLE)
+                        }
+                        binding.progressBar.refreshDrawableState()
+                    }
+                    binding.searchRV.isVisible = !it
+                }
+        }
 
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.notFoundState
+                .filterNotNull()
+                .collectLatest {
+                    if(it){
+                        binding.root.getConstraintSet(R.id.end).apply {
+                            this.setVisibility(R.id.notFoundView,View.VISIBLE)
+                        }
+                    }
+                    else{
+                        binding.root.getConstraintSet(R.id.end).apply {
+                            this.setVisibility(R.id.notFoundView,View.INVISIBLE)
+                        }
+                    }
+                    binding.root.requestLayout()
+                }
+        }
     }
 
     private fun setAdapters(){
