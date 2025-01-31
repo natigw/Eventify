@@ -24,19 +24,12 @@ class OnBoardingActivity : BaseActivity<ActivityOnBoardingBinding>(ActivityOnBoa
     }
 
     private fun checkIfUserLoggedIn() {
-        val refreshToken = viewModel.getRefreshToken()
-        if (refreshToken != null) {
-            val condition = viewModel.checkRefreshTokenIsValid(refreshToken)
-            if (condition) {
-                Intent(this, MainActivity::class.java).also {
-                    startActivity(it)
-                }
-                finish()
-            } else {
-                viewModel.clearTokens()
+        val tokenValidity = viewModel.checkUser()
+        if(tokenValidity!=null){
+            Intent(this,MainActivity::class.java).also {
+                startActivity(it)
             }
-        } else {
-            viewModel.clearTokens()
+            finish()
         }
     }
 

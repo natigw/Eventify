@@ -45,6 +45,7 @@ import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -75,9 +76,63 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         endSearch()
     }
 
+
+
+    override fun onViewCreatedLight() {
+        setAdapters()
+        motionLayout()
+        observer()
+        searchInputHandler()
+        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
+        mapFragment?.getMapAsync(this)
+        testingUses()
+    }
+
+
+
+    fun testingUses(){
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.isLoading
+                .filterNotNull()
+                .collectLatest {
+                    binding.root.getConstraintSet(R.id.end).apply {
+                        if(it){
+                            this.setVisibility(R.id.progressBar, View.VISIBLE)
+                        }
+                        else{
+                            this.setVisibility(R.id.progressBar,View.INVISIBLE)
+                        }
+                        binding.progressBar.refreshDrawableState()
+                    }
+                    binding.searchRV.isVisible = !it
+                }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.notFoundState
+                .filterNotNull()
+                .collectLatest {
+                    if(it){
+                        binding.root.getConstraintSet(R.id.end).apply {
+                            this.setVisibility(R.id.notFoundView,View.VISIBLE)
+                        }
+                    }
+                    else{
+                        binding.root.getConstraintSet(R.id.end).apply {
+                            this.setVisibility(R.id.notFoundView,View.INVISIBLE)
+                        }
+                    }
+                    binding.root.requestLayout()
+            }
+        }
+
+    }
+
+
     private fun startSearch() {
         crossfadeAppear(binding.searchRV, 300)
         binding.textInputLayoutSearch.requestFocus()
+        crossfadeAppear(binding.notFoundView, duration = 300)
         showKeyboard(binding.textInputEdittextSearch)
     }
     private fun endSearch() {
@@ -90,14 +145,6 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     }
 
 
-    override fun onViewCreatedLight() {
-        setAdapters()
-        motionLayout()
-        observer()
-        searchInputHandler()
-        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
-        mapFragment?.getMapAsync(this)
-    }
 
     override fun buttonListeners() {
         super.buttonListeners()
@@ -142,6 +189,10 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
             override fun afterTextChanged(s: Editable?) {
                 viewModel.inputState.tryEmit(s.toString())
+                binding.root.getConstraintSet(R.id.end).apply {
+                    this.setVisibility(R.id.notFoundView,View.INVISIBLE)
+                    binding.root.requestLayout()
+                }
             }
         })
     }
@@ -160,7 +211,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                             else{
                                 this.setVisibility(R.id.notFoundView,View.INVISIBLE)
                             }
-                            binding.notFoundView.refreshDrawableState()
+                            binding.root.requestLayout()
 
                         }
                         mapSearchAdapter.updateAdapter(it)
@@ -188,36 +239,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             }
         }
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.isLoading
-                .filterNotNull()
-                .collectLatest {
-                    binding.root.getConstraintSet(R.id.end).apply {
-                        if(it){
-                            this.setVisibility(R.id.progressBar, View.VISIBLE)
-                        }
-                        else{
-                            this.setVisibility(R.id.progressBar,View.INVISIBLE)
-                        }
-                        binding.progressBar.refreshDrawableState()
-                    }
 
-                    binding.root.getConstraintSet(R.id.end).apply {
-                        if(!it){
-                            if(viewModel.searchState.value?.isEmpty() == false){
-                                this.setVisibility(R.id.notFoundView, View.INVISIBLE)
-                            }
-
-                        }
-                        else{
-                            this.setVisibility(R.id.notFoundView, View.INVISIBLE)
-                        }
-                        binding.root.requestLayout()
-                    }
-
-                    binding.searchRV.isVisible = !it
-            }
-        }
     }
 
     private fun setAdapters(){

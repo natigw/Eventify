@@ -105,7 +105,16 @@ class MapViewModel @Inject constructor(
                 }
 
                 Log.e("RealItems",searchItems.size.toString())
+
+                if(searchItems.isEmpty()){
+                    notFoundState.update { true }
+                }
+                else{
+                    notFoundState.update { false }
+                }
+
                 searchState.update { searchItems.toList() }
+
             }
             catch (_:Exception){
 

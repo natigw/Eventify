@@ -5,6 +5,7 @@ import androidx.core.content.edit
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.repository.AuthRepository
+import com.example.eventify.NetworkUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -20,10 +21,7 @@ class OnBoardingViewModel @Inject constructor(
     fun checkRefreshTokenIsValid(refreshToken : String) : Boolean{
         return try {
             viewModelScope.launch {
-                val response = authRepository.refreshAccessToken(refreshToken)
-                sharedPrefToken.edit {
-                    putString("access_token",response.accessToken)
-                }
+                NetworkUtils.handleInvalidAccessToken()
             }
             true
         }
@@ -33,8 +31,8 @@ class OnBoardingViewModel @Inject constructor(
         }
     }
 
-    fun getRefreshToken() : String?{
-        return sharedPrefToken.getString("refresh_token",null)
+    fun checkUser() : String?{
+        return sharedPrefToken.getString("access_token",null)
     }
 
     fun clearTokens(){
