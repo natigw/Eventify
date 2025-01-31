@@ -59,6 +59,7 @@ object NetworkUtils {
             return false
         }
         else{
+            tokenManager.clearTokens()
             return false
         }
     }

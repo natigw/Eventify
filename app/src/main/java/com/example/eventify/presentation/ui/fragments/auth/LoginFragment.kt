@@ -45,8 +45,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                     requireContext()
                 )
                 if (viewModel.linkGoogleAccount()) {
-                    navigateToMainActivity()
                     nancyToastSuccess(requireContext(), getString(R.string.login_successful))
+                    navigateToMainActivity()
                 }
                 else{
                     nancyToastWarning(requireContext(), getString(R.string.login_unsuccessful))
@@ -91,18 +91,22 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             viewModel.isLoadingGoogle
                 .filterNotNull()
                 .collectLatest {
-                    if (it)
+                    if (it){
                         blockButton(
-                            progressBar = binding.progressBarGoogle,
-                            button = binding.buttonGoogle
+                            progressBar = binding.progressBarLogin,
+                            button = binding.buttonLogin
                         )
-                    else
+                        binding.buttonGoogle.isEnabled = false
+                    }
+                    else {
                         resetButton(
                             progressBar = binding.progressBarGoogle,
                             button = binding.buttonGoogle,
                             buttonText = getString(R.string.continue_with_google),
                             buttonColor = requireContext().getColor(R.color.eventify_background_secondary)
                         )
+                        binding.buttonGoogle.isEnabled = true
+                    }
                 }
         }
 

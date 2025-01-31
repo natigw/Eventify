@@ -50,7 +50,9 @@ class TokenManager @Inject constructor(
 
 
     fun clearTokens(){
-        sharedPrefUserTokens.edit().clear().apply()
+        sharedPrefUserTokens.edit {
+            clear()
+        }
     }
 
 }

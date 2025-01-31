@@ -1,6 +1,7 @@
 package com.example.data.remote.interceptor
 
 import android.content.SharedPreferences
+import android.net.Network
 import android.util.Log
 import com.example.common.utils.AppUtils
 import com.example.common.utils.RequestChannel
@@ -16,9 +17,12 @@ class AuthInterceptor @Inject constructor(
     override fun intercept(chain: Interceptor.Chain): Response {
         var request = chain.request()
 
-        val accessToken = sharedPrefUserTokens.getString("access_token","")
+        val accessToken = sharedPrefUserTokens.getString("access_token",null)
         val tokenType = "Bearer"
 
+        if(accessToken==null){
+            AppUtils.authChannel.trySend(RequestChannel.LOG_OUT)
+        }
 
         request = request.newBuilder()
             .addHeader("Authorization","$tokenType $accessToken")
@@ -26,9 +30,7 @@ class AuthInterceptor @Inject constructor(
 
 
         val response = chain.proceed(request)
-        if(response.code() == 401){
-            AppUtils.authChannel.trySend(RequestChannel.ON_401_ERROR)
-        }
+
 
         return response
     }
