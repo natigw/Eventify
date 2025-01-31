@@ -121,7 +121,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
                     favoritesAdapter.updateAdapter(it)
                     crossfadeAppear(binding.rvFavoritesProfile)
                     stopShimmerGone(binding.shimmerFavoriteProfile)
-                    binding.buttonLogoutProfile.visibility = View.VISIBLE
+                    binding.buttonLogoutProfile.isVisible = true
                 }
         }
     }

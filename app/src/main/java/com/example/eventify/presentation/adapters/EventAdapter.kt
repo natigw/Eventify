@@ -1,6 +1,6 @@
 package com.example.eventify.presentation.adapters
 
-import android.view.View
+import androidx.core.view.isInvisible
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.common.base.BaseAdapter
@@ -36,7 +36,7 @@ class EventAdapter(
             }
 
             if (position == events.size - 1)
-                dividerEvent.visibility = View.INVISIBLE
+                dividerEvent.isInvisible = true
 
             cardEvent.setOnClickListener {
                 onClick(event.eventId)

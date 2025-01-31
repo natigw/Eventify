@@ -1,6 +1,7 @@
 package com.example.eventify.presentation.adapters
 
 import android.view.View
+import androidx.core.view.isInvisible
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.common.base.BaseAdapter
@@ -33,7 +34,7 @@ class VenueAdapter(
                 .into(imageVenue)
 
             if (position == venues.size-1)
-                dividerVenue.visibility = View.INVISIBLE
+                dividerVenue.isInvisible = true
 
             cardVenue.setOnClickListener{
                 onClick(venue)

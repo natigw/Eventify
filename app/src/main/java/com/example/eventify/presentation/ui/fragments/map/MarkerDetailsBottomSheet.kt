@@ -3,6 +3,7 @@ package com.example.eventify.presentation.ui.fragments.map
 import android.content.Intent
 import android.net.Uri
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
@@ -92,7 +93,7 @@ class MarkerDetailsBottomSheet : BaseBottomSheetFragment<BottomsheetMarkerDetail
                 .placeholder(R.drawable.placeholder_venue)
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(imageVenueMarkerDetails)
-            buttonBuyTicketMarkerDetails.visibility = View.VISIBLE
+            buttonBuyTicketMarkerDetails.isVisible = true
             buttonShortestRouteMarkerDetails.text = getString(R.string.get_route)
             buttonBuyTicketMarkerDetails.setOnClickListener {
                 viewLifecycleOwner.lifecycleScope.launch {
