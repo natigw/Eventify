@@ -100,10 +100,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                     }
                     else {
                         resetButton(
-                            progressBar = binding.progressBarGoogle,
-                            button = binding.buttonGoogle,
-                            buttonText = getString(R.string.continue_with_google),
-                            buttonColor = requireContext().getColor(R.color.eventify_background_secondary)
+                            progressBar = binding.progressBarLogin,
+                            button = binding.buttonLogin,
+                            buttonText = getString(R.string.login),
+                            buttonColor = requireContext().getColor(R.color.login)
                         )
                         binding.buttonGoogle.isEnabled = true
                     }
