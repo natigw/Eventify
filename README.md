@@ -1,3 +1,34 @@
+# Eventify - a dynamic event viewer app
+
+## Overview
+Eventify is a mobile application that allows users to discover, create, and manage events seamlessly. The app provides a platform for users to explore nearby events and venues, get shortest directions or ticket information, create their events and so on.
+
+## Features
+- 🗺 **Interactive Map** – View event locations and navigate using an in-app map.
+- 🔍 **Discover Events** – Browse and search for events by category, location, and date.
+- 💬 **Commenting** – Users can leave comments and reviews on events and venues.
+- ✏️ **Create Custom Events** – Users can create and manage their own events, set details like date, time, location, and share them with others.
+- 🎟 **Ticketing** – Easy access to official ticket details and sales for events.
+- 👤 **User Profiles** – Create and customize your profile with preferences and save events.
+- 🌐 **Multi-Language Support** – Supports several languages for a global audience.
+- 🔑 **Google Authentication** – Users can easily log in or register using their Google accounts for a seamless experience.
+
+## Technologies Used
+- MVVM with Clean Architecture
+- Material Design 3 elements
+- Google Maps API integration
+- Google Authentication
+- Coroutines & Flows (StateFlow, SharedFlow)
+- Hilt for Dependency Injection
+- Retrofit2, OkHttp3
+- Interceptor for request management
+- Local storage management
+- Dynamic user preferences - theming and language support
+- NancyToast - Custom pop-up message library
+- Custom alert dialog for in-app notifications
+- MotionLayout in search screen
+- Shimmer placeholder, Glide libraries
+- Custom animations for seamless experience
 
 ## Screenshots
 <table>
