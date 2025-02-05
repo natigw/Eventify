@@ -14,13 +14,12 @@
   </tr>
   <tr>
     <td><img src="https://github.com/user-attachments/assets/544dc383-1ce6-4990-ab2e-b516a2456b8c" width="200"/></td>
-    <td><img src="https://github.com/user-attachments/assets/62904da0-1602-4066-81c1-6ee18e2df585" width="200"/></td>
+    <td><img src="https://github.com/user-attachments/assets/9c158dd3-3881-4198-8a27-762d6e32e2f4" width="200"/></td>
+    <td><img src="https://github.com/user-attachments/assets/01023bef-ae9d-43ac-ad54-b5cc10d03e26" width="200"/></td>
   </tr>
   <tr>
     <td><img src="https://github.com/user-attachments/assets/4c08be89-f6b8-4014-83f8-59200e789ddc" width="200"/></td>
     <td><img src="https://github.com/user-attachments/assets/2b507166-8553-4d86-951e-46ad040d1079" width="200"/></td>
-    <td><img src="https://github.com/user-attachments/assets/9c158dd3-3881-4198-8a27-762d6e32e2f4" width="200"/></td>
-    <td><img src="https://github.com/user-attachments/assets/01023bef-ae9d-43ac-ad54-b5cc10d03e26" width="200"/></td>
   </tr>
   <tr>
     <td><img src="https://github.com/user-attachments/assets/74ee31cf-7bbb-47bd-a9b7-f2bdd0524033" width="200"/></td>
@@ -29,14 +28,10 @@
   <tr>
     <td><img src="https://github.com/user-attachments/assets/8d52fdae-795b-4acc-bc3c-bad5afa9fc57" width="200"/></td>
     <td><img src="https://github.com/user-attachments/assets/673a7fc5-af97-48d4-835d-db04a297621c" width="200"/></td>
+  </tr>
+  <tr>
     <td><img src="https://github.com/user-attachments/assets/a9364cdc-74f6-4262-8222-dcc238f14aed" width="200"/></td>
     <td><img src="https://github.com/user-attachments/assets/f47c704e-ffac-427a-afe9-7b647ddbb89d" width="200"/></td>
+    <td><img src="https://github.com/user-attachments/assets/62904da0-1602-4066-81c1-6ee18e2df585" width="200"/></td>
   </tr>
-</table>
-
-
-![Screenshot_20250206_004730_Eventify](https://github.com/user-attachments/assets/8d52fdae-795b-4acc-bc3c-bad5afa9fc57)
-![Screenshot_20250206_004630_Eventify](https://github.com/user-attachments/assets/673a7fc5-af97-48d4-835d-db04a297621c)
-![Screenshot_20250206_010815_Eventify](https://github.com/user-attachments/assets/a9364cdc-74f6-4262-8222-dcc238f14aed)
-![Screenshot_20250206_010944_Eventify](https://github.com/user-attachments/assets/f47c704e-ffac-427a-afe9-7b647ddbb89d)
-![Screenshot_20250206_005537_Eventify](https://github.com/user-attachments/assets/62904da0-1602-4066-81c1-6ee18e2df585)
+</table>=
