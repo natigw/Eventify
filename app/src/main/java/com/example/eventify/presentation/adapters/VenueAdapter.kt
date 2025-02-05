@@ -1,6 +1,5 @@
 package com.example.eventify.presentation.adapters
 
-import android.view.View
 import androidx.core.view.isInvisible
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
@@ -21,8 +20,7 @@ class VenueAdapter(
 
     override fun onBindLight(binding: SampleVenueBinding, position: Int) {
         val venue = venues[position]
-//        binding.venues = venue  // Bind the data
-//        binding.executePendingBindings()  // Ensure immediate binding updates
+
         with(binding) {
             textVenueName.text = venue.title
             textVenueDescription.text = venue.description

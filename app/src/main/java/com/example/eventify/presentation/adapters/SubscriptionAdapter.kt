@@ -1,7 +1,6 @@
 package com.example.eventify.presentation.adapters
 
 import android.annotation.SuppressLint
-import android.view.View
 import androidx.core.view.isGone
 import com.example.common.base.BaseAdapter
 import com.example.common.utils.crossfadeAppear

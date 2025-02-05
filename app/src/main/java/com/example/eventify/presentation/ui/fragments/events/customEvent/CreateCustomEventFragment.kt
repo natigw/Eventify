@@ -105,7 +105,7 @@ class CreateCustomEventFragment : BaseFragment<FragmentCreateCustomEventBinding>
         val requestBody = file.asRequestBody(mimeType.toMediaTypeOrNull())
         val multipartBody = MultipartBody.Part.createFormData("file", file.name, requestBody) // Ensure correct field name
 
-        lifecycleScope.launch(Dispatchers.IO) {
+        viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
             try {
                 val response = api.uploadFileAndGetLink("events", multipartBody)
                 if (response.isSuccessful) {

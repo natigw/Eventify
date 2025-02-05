@@ -1,6 +1,5 @@
 package com.example.eventify.presentation.ui.fragments.profile
 
-import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
