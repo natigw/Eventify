@@ -54,12 +54,11 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             }
         }
 
-        binding.buttonRegisterLogin.setOnClickListener {
-            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRegisterFragment())
-        }
-
         binding.buttonForgotPasswordLogin.setOnClickListener {
             findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToResetPasswordFragment())
+        }
+        binding.buttonRegisterLogin.setOnClickListener {
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRegisterFragment())
         }
 
         binding.buttonLogin.setOnClickListener {
@@ -67,8 +66,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             val username = binding.textInputUsernameLogin.text.toString().trim()
             val password = binding.textInputPasswordLogin.text.toString().trim()
 
-            val isUsernameFilled = validateInputFieldEmpty(binding.textInputLayoutUsernameLogin, username, getString(R.string.please_enter_username))
             val isPasswordFilled = validateInputFieldEmpty(binding.textInputLayoutPasswordLogin, password, getString(R.string.please_enter_password))
+            val isUsernameFilled = validateInputFieldEmpty(binding.textInputLayoutUsernameLogin, username, getString(R.string.please_enter_username))
 
             if (!(isUsernameFilled and isPasswordFilled)) {
                 return@setOnClickListener
@@ -91,21 +90,23 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             viewModel.isLoadingGoogle
                 .filterNotNull()
                 .collectLatest {
-                    if (it){
-                        blockButton(
-                            progressBar = binding.progressBarLogin,
-                            button = binding.buttonLogin
-                        )
-                        binding.buttonGoogle.isEnabled = false
-                    }
-                    else {
-                        resetButton(
-                            progressBar = binding.progressBarLogin,
-                            button = binding.buttonLogin,
-                            buttonText = getString(R.string.login),
-                            buttonColor = requireContext().getColor(R.color.login)
-                        )
-                        binding.buttonGoogle.isEnabled = true
+                    with(binding) {
+                        if (it) {
+                            blockButton(
+                                progressBar = progressBarGoogle,
+                                button = buttonGoogle
+                            )
+                            textInputLayoutUsernameLogin.clearFocus()
+                            textInputLayoutPasswordLogin.clearFocus()
+                            hideKeyboard(binding.root)
+                        } else {
+                            resetButton(
+                                progressBar = progressBarGoogle,
+                                button = buttonGoogle,
+                                buttonText = getString(R.string.continue_with_google),
+                                buttonColor = requireContext().getColor(R.color.eventify_background_secondary)
+                            )
+                        }
                     }
                 }
         }

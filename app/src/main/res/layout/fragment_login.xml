@@ -191,7 +191,7 @@
             android:id="@+id/textOrTEXT"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/inter_regular"
+            android:fontFamily="@font/outfit_regular"
             android:text="@string/or"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="@+id/buttonLogin"
