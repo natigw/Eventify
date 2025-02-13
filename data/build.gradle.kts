@@ -12,7 +12,6 @@ android {
     defaultConfig {
         minSdk = 26
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
 
@@ -36,6 +35,9 @@ android {
 
 dependencies {
 
+    implementation(project(":common"))
+    implementation(project(":domain"))
+
     //retrofit
     implementation(libs.retrofit2.retrofit)
     implementation(libs.converter.gson)
@@ -47,13 +49,7 @@ dependencies {
     implementation(libs.firebase.auth)
     kapt(libs.hilt.android.compiler)
 
-    implementation(project(":common"))
-    implementation(project(":domain"))
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
 }

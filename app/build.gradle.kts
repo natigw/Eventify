@@ -3,12 +3,11 @@ import java.util.Properties
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    id("kotlin-kapt")
-    id("com.google.dagger.hilt.android")
-    id("kotlin-parcelize")
     alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin)
+    id("kotlin-kapt")
+    id("kotlin-parcelize")
     id("androidx.navigation.safeargs.kotlin")
-
+    id("com.google.dagger.hilt.android")
     id("com.google.gms.google-services")
 }
 
@@ -61,55 +60,55 @@ android {
 }
 
 dependencies {
-    implementation(platform("com.google.firebase:firebase-bom:33.7.0"))
-    implementation("com.google.firebase:firebase-auth")
-    implementation("com.google.android.gms:play-services-auth:21.2.0")
+
+    //firebase
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.google.firebase.auth)
+    implementation(libs.play.services.auth)
 
     //credentials
     implementation (libs.androidx.credentials)
     implementation (libs.credentials.play.services.auth)
     implementation (libs.googleid)
 
-    //dots indicator
-    implementation(libs.dotsindicator)
-
     //hilt
     implementation(libs.hilt.android)
-    implementation(libs.play.services.maps)
-    implementation(libs.play.services.location)
-    implementation(libs.androidx.legacy.support.v4)
-    implementation(project(":data"))
     kapt(libs.hilt.android.compiler)
 
     //glide
     implementation(libs.github.glide)
 
+    //shimmer
+    implementation(libs.shimmer)
+
     //palette
     implementation(libs.androidx.palette)
 
-
-    // Gson for JSON parsing
-    implementation(libs.gson)
-
-    //retrofit
-    implementation(libs.retrofit2.retrofit)
-    implementation(libs.converter.gson)
-    // OkHttp
-    implementation(libs.okhttp)
-
-    implementation(libs.android.maps.utils)
-
+    //dots indicator
+    implementation(libs.dotsindicator)
 
     //lottie
     implementation(libs.lottie)
     implementation(libs.dotlottie.android)
 
-    //shimmer - facebook
-    implementation(libs.shimmer)
+    // OkHttp
+    implementation(libs.okhttp)
+    // Retrofit
+    implementation(libs.retrofit2.retrofit)
+    implementation(libs.converter.gson)
+    // Gson for JSON parsing
+    implementation(libs.gson)
+
+    //maps
+    implementation(libs.android.maps.utils)
+    implementation(libs.play.services.maps)
+    implementation(libs.play.services.location)
+    implementation(libs.androidx.legacy.support.v4)
 
     implementation(project(":common"))
     implementation(project(":domain"))
     implementation(project(":features:test"))
+    implementation(project(":data"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
